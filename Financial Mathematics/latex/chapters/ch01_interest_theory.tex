@@ -1,0 +1,774 @@
+\chapter{Introduction to Financial Mathematics}
+\label{ch:intro_financial_mathematics}
+
+% ==============================================================================
+% 1.1 Simple Interest & Linear Accumulation
+% ==============================================================================
+\section{Time Value of Money \& Simple Interest Fundamentals}
+\lecturedate{13/08/2026}
+
+\begin{definition}{Simple Interest \& Accrued Amount}{simple_interest_def}
+Let $P$ represent the initial \textbf{Principal} invested or borrowed, $R$ the \textbf{nominal annual rate of interest} expressed as a percentage ($R\%$ per annum), and $T$ the \textbf{time horizon} expressed in years.
+
+The \textbf{Simple Interest} ($\SI$) generated is linear in time and principal:
+\begin{equation}
+    \SI = \frac{P \times R \times T}{100} = P \cdot r \cdot T
+\end{equation}
+where $r = \frac{R}{100}$ is the effective decimal interest rate per year.
+
+The \textbf{Total Accrued Amount} ($A$ or $\FV$) at the end of duration $T$ is given by:
+\begin{equation}
+    A = P + \SI = P(1 + r T)
+\end{equation}
+\end{definition}
+
+\begin{formulabox}[Time Conversion Rules for Fractional Periods]
+When the time period is given in units other than full years:
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Days to Years (Exact Year):} $T = \dfrac{\text{Number of Days}}{365}$
+    \item \textbf{Weeks to Years:} $T = \dfrac{\text{Number of Weeks}}{52}$
+    \item \textbf{Months to Years:} $T = \dfrac{\text{Number of Months}}{12}$
+\end{itemize}
+\end{formulabox}
+
+\begin{remarkbox}[Additivity of Simple Interest]
+Under simple interest, the interest earned in each period depends only on the original principal $P$ and not on previously accrued interest (i.e., interest does not compound). Consequently, over multiple disjoint consecutive time periods $[0, t_1], [t_1, t_2], \dots, [t_{k-1}, t_k]$ with respective rates $R_1, R_2, \dots, R_k$, the total simple interest is strictly additive:
+\begin{equation}
+    \SI_{\text{total}} = \sum_{j=1}^{k} \frac{P \times R_j \times \Delta t_j}{100}
+\end{equation}
+\end{remarkbox}
+
+\begin{example}{Basic Simple Interest and Total Amount}{basic_si}
+\textbf{Problem:} \\
+Find the simple interest and the total amount to be paid on a principal sum of \inr 15,000 at an interest rate of $5\%$ per annum after $2$ years.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Principal ($P$) = \inr 15,000
+    \item Rate ($R$) = $5\%$ per annum
+    \item Time ($T$) = $2$ years
+\end{itemize}
+
+\textbf{Step-by-Step Calculation:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Simple Interest ($\SI$):}
+    \begin{align*}
+        \SI &= \frac{P \times R \times T}{100} = \frac{15{,}000 \times 5 \times 2}{100} = \inr 1{,}500
+    \end{align*}
+    
+    \item \textbf{Total Amount ($A$):}
+    \begin{align*}
+        A &= P + \SI = 15{,}000 + 1{,}500 = \inr 16{,}500
+    \end{align*}
+\end{enumerate}
+
+\textbf{Final Result:}
+\begin{center}
+    $\SI = \mathbf{\inr 1{,}500}, \quad A = \mathbf{\inr 16{,}500}$
+\end{center}
+\end{example}
+
+\begin{example}{Fractional Period in Days (Exact Day Count)}{si_days}
+\textbf{Problem:} \\
+Find the simple interest and accumulated amount on a principal of \rs 25,000 at an annual rate of $5\%$ for a duration of $219$ days.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Principal ($P$) = \rs 25,000
+    \item Rate ($R$) = $5\%$ p.a.
+    \item Time ($T$) = $219$ days $= \dfrac{219}{365}\text{ years} = 0.6\text{ years}$
+\end{itemize}
+
+\textbf{Calculation:}
+\begin{align*}
+    \SI &= \frac{P \times R \times T}{100} = \frac{25{,}000 \times 5 \times \frac{219}{365}}{100} = \frac{25{,}000 \times 5 \times 0.6}{100} = \rs 750
+\end{align*}
+
+\textbf{Total Amount:}
+\begin{equation*}
+    A = P + \SI = 25{,}000 + 750 = \rs 25{,}750
+\end{equation*}
+
+\textbf{Final Result:}
+\begin{center}
+    $\SI = \mathbf{\rs 750}, \quad A = \mathbf{\rs 25{,}750}$
+\end{center}
+\end{example}
+
+\begin{example}{Fractional Period in Weeks}{si_weeks}
+\textbf{Problem:} \\
+Find the simple interest and accumulated amount on a principal of \rs 25,000 at an annual rate of $5\%$ for a period of $20$ weeks.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Principal ($P$) = \rs 25,000
+    \item Rate ($R$) = $5\%$ p.a.
+    \item Time ($T$) = $20\text{ weeks} = \dfrac{20}{52}\text{ years} = \dfrac{5}{13}\text{ years}$
+\end{itemize}
+
+\textbf{Calculation:}
+\begin{align*}
+    \SI &= \frac{P \times R \times T}{100} = \frac{25{,}000 \times 5 \times \frac{20}{52}}{100} = \frac{1{,}250 \times 20}{52} \approx \rs 480.77
+\end{align*}
+
+\textbf{Total Amount:}
+\begin{equation*}
+    A = P + \SI = 25{,}000 + 480.77 = \rs 25{,}480.77
+\end{equation*}
+
+\textbf{Final Result:}
+\begin{center}
+    $\SI = \mathbf{\rs 480.77}, \quad A = \mathbf{\rs 25{,}480.77}$
+\end{center}
+\end{example}
+
+\begin{example}{Year-by-Year Multi-Period Breakdown}{si_multiyear}
+\textbf{Problem:} \\
+A principal amount of \rs 1,00,000 is invested at a rate of $10\%$ simple interest per annum for $3$ years. Calculate the simple interest generated individually for the 1st year, 2nd year, and 3rd year, and compute the total accrued amount.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Principal ($P$) = \rs 1,00,000
+    \item Rate ($R$) = $10\%$ p.a.
+    \item Total Horizon ($T$) = $3$ years
+\end{itemize}
+
+\textbf{Year-Wise Computation:}
+Because simple interest is non-compounding, the interest generated in any single $1$-year increment ($\Delta t = 1$) remains invariant:
+\begin{align*}
+    \text{Year 1: } \SI_1 &= \frac{1{,}00{,}000 \times 10 \times 1}{100} = \rs 10{,}000 \\
+    \text{Year 2: } \SI_2 &= \frac{1{,}00{,}000 \times 10 \times 1}{100} = \rs 10{,}000 \\
+    \text{Year 3: } \SI_3 &= \frac{1{,}00{,}000 \times 10 \times 1}{100} = \rs 10{,}000
+\end{align*}
+
+\textbf{Aggregate Interest and Terminal Amount:}
+\begin{align*}
+    \SI_{\text{total}} &= \SI_1 + \SI_2 + \SI_3 = 10{,}000 + 10{,}000 + 10{,}000 = \rs 30{,}000 \\
+    A &= P + \SI_{\text{total}} = 1{,}00{,}000 + 30{,}000 = \rs 1{,}30{,}000
+\end{align*}
+
+\textbf{Final Summary Table:}
+\begin{center}
+\small
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Period} & \textbf{Principal (\rs)} & \textbf{Interest (\rs)} & \textbf{Accrued Amount (\rs)} \\
+\midrule
+Year 1 & 1,00,000 & 10,000 & 1,10,000 \\
+Year 2 & 1,00,000 & 10,000 & 1,20,000 \\
+Year 3 & 1,00,000 & 10,000 & 1,30,000 \\
+\midrule
+\textbf{Total} & \textbf{---} & \textbf{30,000} & \textbf{1,30,000} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{example}
+
+\begin{example}{Inverse Problem: Tiered Rate Schedule}{si_tiered_rates}
+\textbf{Problem:} \\
+A total simple interest of \rs 2,500 is earned by investing an unknown sum of money ($P$) for a total duration of $13$ years under a tiered rate structure:
+\begin{itemize}[noitemsep]
+    \item $4\%$ p.a. for the first $3$ years
+    \item $5\%$ p.a. for the next $4$ years
+    \item $8\%$ p.a. for the remaining period beyond $7$ years
+\end{itemize}
+Determine the initial principal sum invested.
+
+\tcbline
+\textbf{Interval Breakdown:}
+Let $P$ denote the unknown principal sum. The total horizon of $T = 13$ years is decomposed into:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Interval 1:} $T_1 = 3$ years, $R_1 = 4\%$
+    \begin{equation*}
+        \SI_1 = \frac{P \times 4 \times 3}{100} = 0.12\,P
+    \end{equation*}
+    \item \textbf{Interval 2:} $T_2 = 4$ years, $R_2 = 5\%$
+    \begin{equation*}
+        \SI_2 = \frac{P \times 5 \times 4}{100} = 0.20\,P
+    \end{equation*}
+    \item \textbf{Interval 3:} $T_3 = 13 - (3 + 4) = 6$ years, $R_3 = 8\%$
+    \begin{equation*}
+        \SI_3 = \frac{P \times 8 \times 6}{100} = 0.48\,P
+    \end{equation*}
+\end{enumerate}
+
+\textbf{Linear Formulation and Algebraic Solution:}
+The cumulative interest satisfies:
+\begin{align*}
+    \SI_{\text{total}} &= \SI_1 + \SI_2 + \SI_3 \\
+    2{,}500 &= 0.12\,P + 0.20\,P + 0.48\,P \\
+    2{,}500 &= 0.80\,P \\
+    \implies P &= \frac{2{,}500}{0.80} = \mathbf{\rs 3{,}125}
+\end{align*}
+
+\textbf{Final Result:}
+The initial principal sum invested is $\mathbf{\rs 3{,}125}$.
+\end{example}
+
+% ==============================================================================
+% 1.2 Theory of Compound Interest & Exponential Growth/Decay
+% ==============================================================================
+\section{Theory of Compound Interest \& Growth/Decay Models}
+\lecturedate{17/08/2026}
+
+\begin{definition}{Compound Interest \& Terminal Value}{compound_interest_def}
+Under \textbf{Compound Interest}, interest accrued at the end of each compounding period is added to the principal to form the new principal base for subsequent periods (interest on interest).
+
+For a principal $P$ invested at a nominal annual interest rate of $R\%$ ($r = R/100$) for $n$ years compounded annually, the terminal accumulated amount ($A$ or $\FV$) is:
+\begin{equation}
+    A = P\left(1 + \frac{R}{100}\right)^n = P(1 + r)^n
+\end{equation}
+The total \textbf{Compound Interest} ($\CI$) generated over the horizon is:
+\begin{equation}
+    \CI = A - P = P\left[\left(1 + \frac{R}{100}\right)^n - 1\right] = P\left[(1 + r)^n - 1\right]
+\end{equation}
+\end{definition}
+
+\begin{formulabox}[Exponential Growth and Decay / Depreciation Curves]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Compound Growth / Appreciation:} If a quantity grows at constant annual percentage rate $r = R/100$:
+    \begin{equation}
+        A(n) = P(1 + r)^n
+    \end{equation}
+    \item \textbf{Compound Decay / Reducing Balance Depreciation:} If an asset or demographic metric depreciates at annual rate $d = R/100$:
+    \begin{equation}
+        A(n) = P(1 - d)^n
+    \end{equation}
+    The \textbf{Compound Depreciation} (total value reduction) over $n$ periods is:
+    \begin{equation}
+        \text{Total Depreciation} = P - A(n) = P\left[1 - (1 - d)^n\right]
+    \end{equation}
+    \item \textbf{Varying Multi-Year Growth/Decay Factors:} For sequential periods with rates $r_1, r_2, \dots, r_k$:
+    \begin{equation}
+        A_k = P \cdot (1 \pm r_1)(1 \pm r_2)\cdots(1 \pm r_k)
+    \end{equation}
+\end{itemize}
+\end{formulabox}
+
+\begin{example}{Annual Compounding of Interest}{ci_annual}
+\textbf{Problem:} \\
+Find the compound interest ($\CI$) on a principal sum of \rs 12,600 for $2$ years at an annual interest rate of $10\%$, compounded annually.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Principal ($P$) = \rs 12,600
+    \item Rate ($R$) = $10\%$ per annum
+    \item Horizon ($n$) = $2$ years (compounded annually)
+\end{itemize}
+
+\textbf{Step-by-Step Calculation:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Terminal Accumulated Amount ($A$):}
+    \begin{align*}
+        A &= P\left(1 + \frac{R}{100}\right)^n \\
+        A &= 12{,}600\left(1 + \frac{10}{100}\right)^2 = 12{,}600(1.10)^2 \\
+        A &= 12{,}600 \times 1.21 = \rs 15{,}246
+    \end{align*}
+    
+    \item \textbf{Compound Interest ($\CI$):}
+    \begin{align*}
+        \CI &= A - P \\
+        \CI &= 15{,}246 - 12{,}600 = \rs 2{,}646
+    \end{align*}
+\end{enumerate}
+
+\textbf{Final Result:}
+\begin{center}
+    $\text{Accumulated Amount } A = \mathbf{\rs 15{,}246}, \quad \CI = \mathbf{\rs 2{,}646}$
+\end{center}
+\end{example}
+
+\begin{example}{Compound Depreciation of an Asset (Reducing Balance)}{ci_depreciation}
+\textbf{Problem:} \\
+A television set was purchased for \rs 21,100. The asset depreciates in market value at a constant rate of $5\%$ per annum. Determine the residual book value of the TV after $3$ years and compute the total compound depreciation incurred.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Initial Purchase Value ($P$) = \rs 21,100
+    \item Annual Rate of Depreciation ($d$) = $5\%$ per annum
+    \item Horizon ($n$) = $3$ years
+\end{itemize}
+
+\textbf{Calculation:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Residual Value after 3 Years ($A$):}
+    \begin{align*}
+        A &= P\left(1 - \frac{d}{100}\right)^n \\
+        A &= 21{,}100\left(1 - \frac{5}{100}\right)^3 = 21{,}100(0.95)^3 \\
+        A &= 21{,}100 \times 0.857375 = \rs 18{,}091.6125 \approx \rs 18{,}091.61
+    \end{align*}
+    
+    \item \textbf{Total Compound Depreciation:}
+    \begin{align*}
+        \text{Total Depreciation} &= P - A \\
+        &= 21{,}100 - 18{,}091.61 = \rs 3{,}008.39
+    \end{align*}
+\end{enumerate}
+
+\textbf{Final Result:}
+\begin{center}
+    $\text{Residual Value after 3 Years} = \mathbf{\rs 18{,}091.61}, \quad \text{Compound Depreciation} = \mathbf{\rs 3{,}008.39}$
+\end{center}
+\end{example}
+
+\begin{example}{Sub-Annual Compounding: Semi-Annual Conversion}{ci_half_yearly}
+\textbf{Problem:} \\
+Find the compound interest and accumulated amount on a principal of \rs 48,000 for $1$ year at an annual nominal rate of $8\%$, compounded half-yearly.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Principal ($P$) = \rs 48,000
+    \item Nominal Annual Rate ($R$) = $8\%$ p.a.
+    \item Horizon ($n$) = $1$ year
+    \item Compounding Frequency ($m$) = $2$ periods per year (half-yearly)
+\end{itemize}
+
+\textbf{Parameter Conversions:}
+\begin{itemize}[noitemsep]
+    \item Periodic Interest Rate: $i_{\text{periodic}} = \dfrac{R}{m} = \dfrac{8\%}{2} = 4\% = 0.04$
+    \item Total Compounding Cycles: $N = n \times m = 1 \times 2 = 2\text{ periods}$
+\end{itemize}
+
+\textbf{Calculation:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Accumulated Terminal Amount ($A$):}
+    \begin{align*}
+        A &= P\left(1 + \frac{R/m}{100}\right)^{n \cdot m} \\
+        A &= 48{,}000\left(1 + \frac{4}{100}\right)^2 = 48{,}000(1.04)^2 \\
+        A &= 48{,}000 \times 1.0816 = \rs 51{,}916.80
+    \end{align*}
+    
+    \item \textbf{Compound Interest ($\CI$):}
+    \begin{align*}
+        \CI &= A - P \\
+        \CI &= 51{,}916.80 - 48{,}000 = \rs 3{,}916.80
+    \end{align*}
+\end{enumerate}
+
+\textbf{Final Result:}
+\begin{center}
+    $\text{Terminal Amount } A = \mathbf{\rs 51{,}916.80}, \quad \CI = \mathbf{\rs 3{,}916.80}$
+\end{center}
+\end{example}
+
+\begin{example}{Demographic Modeling: Inverse Tiered Population Decay}{ci_population_decay}
+\textbf{Problem:} \\
+The population of a town decreases every year due to migration, economic shifts, and unemployment. The present population is $6{,}31{,}680$. The rate of migration was $4\%$ during the past year and $6\%$ during the year preceding that. Determine what the population was $2$ years ago.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Current Population ($A_2$) = $6{,}31{,}680$
+    \item Rate of reduction in Year 1 (two years ago, $d_1$) = $6\%$
+    \item Rate of reduction in Year 2 (last year, $d_2$) = $4\%$
+    \item Let the initial population $2$ years ago $= P$
+\end{itemize}
+
+\textbf{Algebraic Formulation \& Solution:}
+Applying sequential geometric reduction factors:
+\begin{align*}
+    P \times \left(1 - \frac{d_1}{100}\right) \times \left(1 - \frac{d_2}{100}\right) &= A_2 \\
+    P \times \left(1 - \frac{6}{100}\right) \times \left(1 - \frac{4}{100}\right) &= 6{,}31{,}680 \\
+    P \times 0.94 \times 0.96 &= 6{,}31{,}680 \\
+    P \times 0.9024 &= 6{,}31{,}680
+\end{align*}
+
+Solving for initial population $P$:
+\begin{equation*}
+    P = \frac{6{,}31{,}680}{0.9024} = \mathbf{7{,}00{,}000}
+\end{equation*}
+
+\textbf{Final Result:}
+The town population $2$ years ago was $\mathbf{7{,}00{,}000}$.
+\end{example}
+
+% ==============================================================================
+% 1.3 Methods of Analysis
+% ==============================================================================
+\section{Methods of Analysis}
+\lecturedate{17/08/2026}
+
+There are two primary methods of financial time-value analysis:
+\begin{enumerate}[noitemsep]
+    \item \textbf{Compounding}
+    \item \textbf{Discounting}
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% 1.3.1 Compounding
+% ------------------------------------------------------------------------------
+\subsection{Compounding}
+
+\begin{formulabox}[Compounding over Single and Multiple Conversion Periods]
+\paragraph{a. Compounding of Interest over $n$ Years}
+\begin{equation}
+    \text{Future Value } (\FV) = P(1 + R)^n
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $P = \text{Principal amount}$
+    \item $R = \text{Annual rate of interest}$ (in decimal $r = R/100$)
+    \item $n = \text{Number of years}$
+\end{itemize}
+
+\vspace{0.6em}
+\paragraph{b. Multiple Compounding Periods}
+\begin{equation}
+    \text{Future Value } (\FV) = P\left(1 + \frac{R}{m}\right)^{n \cdot m}
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $P = \text{Principal amount}$
+    \item $R = \text{Nominal annual rate of interest}$
+    \item $n = \text{Number of years}$
+    \item $m = \text{Frequency of compounding per annum}$
+    \item $n \cdot m = \text{Total number of conversion periods}$
+    \item $\dfrac{R}{m} = \text{Periodic interest rate per conversion period}$
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{24/08/2026}
+\begin{example}{Multi-Frequency Compounding Comparison}{ex_multi_freq_compounding}
+\textbf{Problem:}
+Calculate the maturity amount if $\inr 2{,}00{,}000$ is invested for $2$ years at a nominal interest rate of $12\%$ per annum compounded:
+\begin{enumerate*}[label=(\alph*), itemjoin=\quad]
+    \item Annually
+    \item Semi-annually
+    \item Quarterly
+    \item Monthly
+\end{enumerate*}
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Principal ($P$) = $\inr 2{,}00{,}000$
+    \item Nominal Rate ($r$) = $12\%$ p.a. $= 0.12$
+    \item Time Horizon ($t$) = $2$ years
+\end{itemize}
+
+\textbf{General Compounding Formula:}
+\begin{equation*}
+    A = P \left(1 + \frac{r}{m}\right)^{m \cdot t}
+\end{equation*}
+
+\textbf{Detailed Step-by-Step Calculations:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Compounded Annually ($m = 1$):}
+    \begin{align*}
+        A &= 2{,}00{,}000 \times \left(1 + \frac{0.12}{1}\right)^{1 \times 2} = 2{,}00{,}000 \times (1.12)^2 \\
+        &= 2{,}00{,}000 \times 1.2544 = \mathbf{\inr 2{,}50{,}880.00}
+    \end{align*}
+
+    \item \textbf{Compounded Semi-Annually ($m = 2$):}
+    \begin{align*}
+        A &= 2{,}00{,}000 \times \left(1 + \frac{0.12}{2}\right)^{2 \times 2} = 2{,}00{,}000 \times (1.06)^4 \\
+        &= 2{,}00{,}000 \times 1.26247696 = \mathbf{\inr 2{,}52{,}495.39}
+    \end{align*}
+
+    \item \textbf{Compounded Quarterly ($m = 4$):}
+    \begin{align*}
+        A &= 2{,}00{,}000 \times \left(1 + \frac{0.12}{4}\right)^{4 \times 2} = 2{,}00{,}000 \times (1.03)^8 \\
+        &= 2{,}00{,}000 \times 1.26677008 = \mathbf{\inr 2{,}53{,}354.02}
+    \end{align*}
+
+    \item \textbf{Compounded Monthly ($m = 12$):}
+    \begin{align*}
+        A &= 2{,}00{,}000 \times \left(1 + \frac{0.12}{12}\right)^{12 \times 2} = 2{,}00{,}000 \times (1.01)^{24} \\
+        &= 2{,}00{,}000 \times 1.26973465 = \mathbf{\inr 2{,}53{,}946.93}
+    \end{align*}
+\end{enumerate}
+
+\tcbline
+\textbf{Summary Comparison Table:}
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Frequency} & \textbf{Periods ($m$)} & \textbf{Periodic Rate ($r/m$)} & \textbf{Cycles ($m \cdot t$)} & \textbf{Maturity Amount ($A$)} \\
+\midrule
+Annually & $1$ & $12.00\%$ & $2$ & $\mathbf{\inr 2{,}50{,}880.00}$ \\
+Semi-annually & $2$ & $6.00\%$ & $4$ & $\mathbf{\inr 2{,}52{,}495.39}$ \\
+Quarterly & $4$ & $3.00\%$ & $8$ & $\mathbf{\inr 2{,}53{,}354.02}$ \\
+Monthly & $12$ & $1.00\%$ & $24$ & $\mathbf{\inr 2{,}53{,}946.93}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{example}
+
+\begin{formulabox}[Effective Rate of Interest (ERI)]
+\paragraph{c. Effective Rate of Interest (ERI)}
+Annually compounded rate of interest that is equivalent to an annual interest rate compounded more than once per year:
+\begin{equation}
+    \ERI = \left(1 + \frac{R}{m}\right)^m - 1
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $\ERI = \text{Effective rate of interest}$
+    \item $R = \text{Nominal rate of interest}$
+    \item $m = \text{Frequency of compounding per year}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Doubling Period Formulations]
+\paragraph{d. Doubling Period} \hfill {\scriptsize\color{navyblue}\textsf{[Lecture: 18/08/2026]}} \\
+The \textbf{Doubling Period} is the time required for an investment to double its principal amount at a given rate of interest.
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Continuous Compounding Basis:} Based on the natural logarithm of 2:
+    \begin{equation}
+        \ln(2) \approx 0.693 \quad (69.3\%)
+    \end{equation}
+
+    \item \textbf{Rule of 72 (Standard Practical Thumb Rule):}
+    \begin{align}
+        \text{Doubling Period} &= \frac{72}{\text{Rate of Interest } (R)} \\[0.4em]
+        \text{Rate of Interest } (R) &= \frac{72}{\text{Doubling Period}}
+    \end{align}
+
+    \item \textbf{Rule of 69 (Refined Discrete Compounding Approximation):}
+    \begin{equation}
+        \text{Doubling Period} = 0.35 + \frac{69}{R}
+    \end{equation}
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{25/08/2026}
+\begin{example}{Determination of Interest Rate using Rule of 72}{ex_rule_72}
+\textbf{Problem:}
+Calculate the rate of interest if the doubling period of an investment is:
+\begin{enumerate*}[label=(\alph*), itemjoin=\qquad]
+    \item $4$ years
+    \item $6$ years
+\end{enumerate*}
+
+\tcbline
+\textbf{Formula:}
+\begin{equation*}
+    \text{Rate of Interest } (R) = \frac{72}{\text{Doubling Period}}
+\end{equation*}
+
+\textbf{Calculations:}
+\begin{enumerate}[leftmargin=*]
+    \item For a doubling period of $4$ years:
+    \begin{equation*}
+        R = \frac{72}{4} = \mathbf{18\% \text{ p.a.}}
+    \end{equation*}
+
+    \item For a doubling period of $6$ years:
+    \begin{equation*}
+        R = \frac{72}{6} = \mathbf{12\% \text{ p.a.}}
+    \end{equation*}
+\end{enumerate}
+\end{example}
+
+\lecturedate{25/08/2026}
+\begin{example}{Determination of Doubling Period using Rule of 69}{ex_rule_69}
+\textbf{Problem:}
+Calculate the doubling period using the Rule of 69 if the annual rate of interest is:
+\begin{enumerate*}[label=(\alph*), itemjoin=\qquad]
+    \item $6\%$
+    \item $9\%$
+    \item $12\%$
+\end{enumerate*}
+
+\tcbline
+\textbf{Formula:}
+\begin{equation*}
+    \text{Doubling Period} = 0.35 + \frac{69}{R}
+\end{equation*}
+
+\textbf{Calculations:}
+\begin{enumerate}[leftmargin=*]
+    \item If interest rate is $R = 6\%$:
+    \begin{equation*}
+        \text{Doubling Period} = 0.35 + \frac{69}{6} = 0.35 + 11.50 = \mathbf{11.85 \text{ years}}
+    \end{equation*}
+
+    \item If interest rate is $R = 9\%$:
+    \begin{equation*}
+        \text{Doubling Period} = 0.35 + \frac{69}{9} = 0.35 + 7.667 = \mathbf{8.02 \text{ years}}
+    \end{equation*}
+
+    \item If interest rate is $R = 12\%$:
+    \begin{equation*}
+        \text{Doubling Period} = 0.35 + \frac{69}{12} = 0.35 + 5.75 = \mathbf{6.10 \text{ years}}
+    \end{equation*}
+\end{enumerate}
+\end{example}
+
+\begin{formulabox}[Compound Value of Series of Payments \& Annuities]
+\paragraph{e. Compound Value of a Series of Payments}
+For an uneven stream of payments $P_t$ invested across horizon $n$:
+\begin{equation}
+    \text{Compound Value } (\FV) = \sum_{t=1}^{n} P_t (1 + R)^{n - t}
+\end{equation}
+
+\vspace{0.6em}
+\paragraph{f. Compound Value of an Annuity}
+For a sequence of equal constant periodic cash flows $A$ invested at interest rate $R$ over duration $n$:
+\begin{equation}
+    \FV \text{ of Annuity} = A \times \left[ \frac{(1 + R)^n - 1}{R} \right] = A \cdot \CVAF(R, n)
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $A = \text{Constant periodic cash flow or annuity amount}$
+    \item $R = \text{Rate of interest per period}$
+    \item $n = \text{Number of years or duration of the annuity}$
+    \item $\CVAF(R, n) = \text{Compound Value Annuity Factor} = \dfrac{(1+R)^n - 1}{R}$
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{25/08/2026}
+\begin{example}{Compound Value of an Uneven Series of Payments}{ex_series_payments}
+\textbf{Problem:}
+Calculate the Future Value ($\FV$) of the following series of payments made at the end of each year over a $4$-year investment horizon at an interest rate of $R = 9\%$ per annum:
+\begin{itemize}[noitemsep]
+    \item $P_1 = \inr 1{,}500$ at the end of the 1st year
+    \item $P_2 = \inr 3{,}000$ at the end of the 2nd year
+    \item $P_3 = \inr 4{,}500$ at the end of the 3rd year
+    \item $P_4 = \inr 6{,}000$ at the end of the 4th year
+\end{itemize}
+
+\tcbline
+\textbf{Analytical Formulation:}
+Payments deposited at the end of year $t$ earn compound interest for $(n - t)$ remaining years until the terminal horizon $n = 4$:
+\begin{equation*}
+    \FV = \sum_{t=1}^{4} P_t (1 + R)^{4 - t} = P_1(1+R)^3 + P_2(1+R)^2 + P_3(1+R)^1 + P_4(1+R)^0
+\end{equation*}
+
+\textbf{Step-by-Step Payment Accumulation:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{1st Payment ($\inr 1{,}500$):} Invested for $4 - 1 = 3$ years:
+    \begin{equation*}
+        \FV_1 = 1{,}500 \times (1 + 0.09)^3 = 1{,}500 \times 1.295029 = \mathbf{\inr 1{,}942.55}
+    \end{equation*}
+
+    \item \textbf{2nd Payment ($\inr 3{,}000$):} Invested for $4 - 2 = 2$ years:
+    \begin{equation*}
+        \FV_2 = 3{,}000 \times (1 + 0.09)^2 = 3{,}000 \times 1.188100 = \mathbf{\inr 3{,}564.30}
+    \end{equation*}
+
+    \item \textbf{3rd Payment ($\inr 4{,}500$):} Invested for $4 - 3 = 1$ year:
+    \begin{equation*}
+        \FV_3 = 4{,}500 \times (1 + 0.09)^1 = 4{,}500 \times 1.090000 = \mathbf{\inr 4{,}905.00}
+    \end{equation*}
+
+    \item \textbf{4th Payment ($\inr 6{,}000$):} Invested for $4 - 4 = 0$ years (at terminal date):
+    \begin{equation*}
+        \FV_4 = 6{,}000 \times (1 + 0.09)^0 = 6{,}000 \times 1.000000 = \mathbf{\inr 6{,}000.00}
+    \end{equation*}
+\end{itemize}
+
+\tcbline
+\textbf{Compound Value Factor (CVAF) Summary Table:}
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Year ($t$)} & \textbf{Payment ($P_t$)} & \textbf{Horizon ($4 - t$)} & \textbf{Factor $(1.09)^{4-t}$} & \textbf{Compound Value ($\FV_t$)} \\
+\midrule
+1 & $\inr 1{,}500$ & $3\text{ yrs}$ & $1.295029$ & $\inr 1{,}942.55$ \\
+2 & $\inr 3{,}000$ & $2\text{ yrs}$ & $1.188100$ & $\inr 3{,}564.30$ \\
+3 & $\inr 4{,}500$ & $1\text{ yr}$ & $1.090000$ & $\inr 4{,}905.00$ \\
+4 & $\inr 6{,}000$ & $0\text{ yrs}$ & $1.000000$ & $\inr 6{,}000.00$ \\
+\midrule
+\multicolumn{4}{l}{\textbf{Total Terminal Future Value ($\FV$):}} & $\mathbf{\inr 16{,}411.85}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Final Result:}
+The aggregate compound value of the series of payments at the end of $4$ years is $\mathbf{\inr 16{,}411.85}$.
+\end{example}
+
+% ------------------------------------------------------------------------------
+% 1.3.2 Discounting & Present Value Techniques
+% ------------------------------------------------------------------------------
+\subsection{Discounting \& Present Value Techniques}
+\lecturedate{18/08/2026}
+
+\begin{formulabox}[Present Value of Lump Sum \& Series of Cash Flows]
+\paragraph{a. Present Value of a Lump Sum}
+\begin{equation}
+    \PV = \FV \times \frac{1}{(1 + R)^n} = \FV \cdot (1 + R)^{-n}
+\end{equation}
+
+\vspace{0.4em}
+\paragraph{b. Present Value of a Series of Cash Flows}
+\begin{equation}
+    \PV = \sum_{t=1}^{n} \frac{\text{Cash Inflow}_t}{(1 + R)^t} = \sum_{t=1}^{n} \text{Cash Inflow}_t \times (1 + R)^{-t}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}[Present Value of Annuities (Ordinary Annuity vs. Annuity Due)]
+\paragraph{c. Present Value of an Annuity (Ordinary Annuity -- Period-End Payments)}
+\begin{equation}
+    \PV \text{ of Annuity} = \text{Annuity Amount } (A) \times \left[ \frac{1 - (1 + R)^{-n}}{R} \right] = A \times \PVAF(R, n)
+\end{equation}
+
+\vspace{0.4em}
+\paragraph{d. Present Value of Annuity Due (Period-Beginning Payments)}
+\begin{equation}
+    \PV \text{ of Annuity Due} = \text{Annuity Amount } (A) \times \PVAF(R, n) \times (1 + R)
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}[Present Value of Perpetuities (Constant vs. Growing)]
+\paragraph{e. Present Value of a Perpetuity (Constant Perpetuity -- Infinite Horizon)}
+\begin{equation}
+    \PV \text{ of Constant Perpetuity} = \frac{C}{R}
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $C = \text{Constant periodic cash inflow}$
+    \item $R = \text{Interest / discount rate per payment period}$
+\end{itemize}
+
+\vspace{0.4em}
+\paragraph{f. Present Value of a Growing Perpetuity}
+For cash flows growing at a constant rate $G$ indefinitely (with $R > G$):
+\begin{equation}
+    \PV \text{ of Growing Perpetuity} = \frac{C_1}{R - G}
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $C_1 = \text{Cash inflow in the first period}$
+    \item $R = \text{Discount rate per period}$
+    \item $G = \text{Constant growth rate in cash flow per period}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Growing Annuity \& Sinking Fund Accumulation]
+\paragraph{g. Present Value of a Growing Annuity (Finite Horizon $n$)}
+For a stream of $n$ periodic cash flows growing at rate $G$ per period (with $R \neq G$):
+\begin{equation}
+    \PV \text{ of Growing Annuity} = \frac{C_1}{R - G} \left[ 1 - \left(\frac{1 + G}{1 + R}\right)^n \right]
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $C_1 = \text{Cash flow at period 1}$
+    \item $R = \text{Discount rate per period}$
+    \item $G = \text{Growth rate per period}$
+    \item $n = \text{Life / duration of the annuity}$
+\end{itemize}
+
+\vspace{0.4em}
+\paragraph{h. Sinking Fund (S.F.) Accumulation}
+A sinking fund is an accumulating reserve established by investing periodic installments to meet a target future liability:
+\begin{equation}
+    \text{Accumulated Fund } (\FV) = \text{S.F. Instalment } (A) \times \left[ \frac{(1 + R)^n - 1}{R} \right]
+\end{equation}
+The required periodic installment is given by:
+\begin{equation}
+    \text{S.F. Instalment } (A) = \frac{\text{Target Future Fund} \times R}{(1 + R)^n - 1}
+\end{equation}
+\end{formulabox}

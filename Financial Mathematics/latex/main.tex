@@ -1,0 +1,39 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% Input Preamble Configurations
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. University Title / Cover Page
+% ------------------------------------------------------------------------------
+\input{preamble/titlepage.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Official Course Syllabus
+% ------------------------------------------------------------------------------
+\pagenumbering{roman}
+\input{preamble/syllabus.tex}
+
+% ------------------------------------------------------------------------------
+% 3. Table of Contents
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% 4. Course Chapters (Continuous Notes Flow)
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\input{chapters/ch01_interest_theory.tex}
+
+% Future course chapters will start on new pages via \chapter{}
+% \input{chapters/ch02_valuation_of_financial_instruments.tex}
+% \input{chapters/ch03_financial_ratios_and_cash_flow.tex}
+% \input{chapters/ch04_risk_return_portfolio_mathematics.tex}
+% \input{chapters/ch05_advanced_topics_and_applications.tex}
+
+\end{document}

@@ -1,0 +1,46 @@
+% ==============================================================================
+% Mathematical & Financial Macros
+% ==============================================================================
+
+% Currency Macros (work seamlessly in both text and math mode)
+\newcommand{\inr}{\text{Rs.}\,}
+\newcommand{\rs}{\text{Rs.}\,}
+\newcommand{\usd}{\text{\$}\,}
+\newcommand{\eur}{\text{€}\,}
+
+% Actuarial & Cash Flow Notation
+\newcommand{\actuarialangle}[1]{\overline{#1|}}
+\newcommand{\annimmediate}[2]{a_{\actuarialangle{#1} #2}}
+\newcommand{\anndue}[2]{\ddot{a}_{\actuarialangle{#1} #2}}
+\newcommand{\accumimmediate}[2]{s_{\actuarialangle{#1} #2}}
+\newcommand{\accumdue}[2]{\ddot{s}_{\actuarialangle{#1} #2}}
+
+% Quantitative Probability & Expectation
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\EQ}{\mathbb{E}^{\mathbb{Q}}}
+\newcommand{\EP}{\mathbb{E}^{\mathbb{P}}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Filt}{\mathcal{F}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+
+% Financial Operators & Functions
+\newcommand{\PV}{\operatorname{PV}}
+\newcommand{\FV}{\operatorname{FV}}
+\newcommand{\NPV}{\operatorname{NPV}}
+\newcommand{\IRR}{\operatorname{IRR}}
+\providecommand{\SI}{\operatorname{SI}}
+\providecommand{\CI}{\operatorname{CI}}
+\providecommand{\ERI}{\operatorname{ERI}}
+\providecommand{\EAR}{\operatorname{EAR}}
+\providecommand{\PVAF}{\operatorname{PVAF}}
+\providecommand{\CVAF}{\operatorname{CVAF}}
+
+% Differentials and Calculus
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\diff}[2]{\frac{\dd #1}{\dd #2}}
+\newcommand{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
+
+% Lecture Date Tag
+\newcommand{\lecturedate}[1]{\marginpar{\raggedright\scriptsize\color{navyblue}\textbf{Lecture}\\\textsf{#1}}}

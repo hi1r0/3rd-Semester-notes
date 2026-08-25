@@ -1,0 +1,62 @@
+% ==============================================================================
+% Packages Configuration
+% ==============================================================================
+
+% Encoding and Typography
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{textcomp}
+
+% Math packages
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{bm}
+
+% Layout & Page Geometry
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[inline]{enumitem}
+
+% Colorful boxes and graphics
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, theorems, breakable}
+\usepackage{xcolor}
+
+% Tables and Formatting
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Hyperlinks & Cross-Referencing
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Color definitions
+\definecolor{navyblue}{RGB}{27, 54, 93}
+\definecolor{darkteal}{RGB}{13, 92, 58}
+\definecolor{amber}{RGB}{180, 83, 9}
+\definecolor{charcoal}{RGB}{40, 44, 52}
+\definecolor{lightgraybg}{RGB}{248, 249, 250}
+\definecolor{boxborder}{RGB}{220, 224, 230}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    citecolor=darkteal,
+    urlcolor=navyblue,
+    pdfauthor={MSQF Student},
+    pdftitle={Financial Mathematics Lecture Notes}
+}
+
+% Header & Footer styling
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{charcoal}\nouppercase{\leftmark}}
+\fancyhead[R]{\small\color{navyblue}\textbf{Financial Mathematics}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}

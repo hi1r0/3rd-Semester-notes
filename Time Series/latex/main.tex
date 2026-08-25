@@ -1,0 +1,40 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% Input Preamble Configurations
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. University Title / Cover Page
+% ------------------------------------------------------------------------------
+\pagenumbering{alph}
+\input{preamble/titlepage.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Official Course Syllabus
+% ------------------------------------------------------------------------------
+\pagenumbering{roman}
+\input{preamble/syllabus.tex}
+
+% ------------------------------------------------------------------------------
+% 3. Table of Contents
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% 4. Course Chapters (Continuous Notes Flow)
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\input{chapters/ch01_intro_time_series.tex}
+
+% Future course chapters will start on new pages via \chapter{}
+% \input{chapters/ch02_smoothing_and_univariate_models.tex}
+% \input{chapters/ch03_multivariate_and_cointegration.tex}
+% \input{chapters/ch04_volatility_modeling.tex}
+% \input{chapters/ch05_forecast_evaluation_and_applications.tex}
+
+\end{document}
