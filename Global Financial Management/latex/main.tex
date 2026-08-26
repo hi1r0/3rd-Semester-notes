@@ -1,0 +1,37 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% Input Preamble Configurations
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. University Title / Cover Page
+% ------------------------------------------------------------------------------
+\input{preamble/titlepage.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Official Course Syllabus
+% ------------------------------------------------------------------------------
+\pagenumbering{roman}
+\input{preamble/syllabus.tex}
+
+% ------------------------------------------------------------------------------
+% 3. Table of Contents
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% 4. Course Chapters (Continuous Notes Flow)
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+% \input{chapters/ch01_international_finance_overview.tex}
+% \input{chapters/ch02_foreign_exchange_market.tex}
+% \input{chapters/ch03_fx_exposure_and_management.tex}
+% \input{chapters/ch04_multinational_financial_management.tex}
+% \input{chapters/ch05_financing_foreign_operations.tex}
+
+\end{document}
