@@ -23,3 +23,7 @@ desktop.ini
 # Temporary files
 *.tmp
 *~
+
+# Word lock files
+~$*
+
