@@ -8,11 +8,73 @@
 \lecturedate{18/08/2026}
 
 % ------------------------------------------------------------------------------
+% TikZ Flowchart 1: The Five Arms of the World Bank Group
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        rootnode/.style={rectangle, rounded corners=4pt, draw=navyblue, fill=softblue, line width=1pt, text=navyblue, font=\bfseries\sffamily, align=center, inner sep=7pt, minimum width=4.5cm},
+        armnode/.style={rectangle, rounded corners=3pt, draw=charcoal!70, fill=white, line width=0.8pt, font=\sffamily\footnotesize, align=left, inner sep=5pt, minimum width=2.8cm, minimum height=1.9cm, text width=2.7cm},
+        linkline/.style={-{Stealth[length=5pt]}, draw=navyblue!80, line width=0.9pt}
+    ]
+        % Root
+        \node[rootnode] (wbg) at (0, 0) {\textbf{World Bank Group (WBG)}\\\scriptsize International Development Architecture};
+
+        % 5 Arms Nodes
+        \node[armnode, below left=1.2cm and 4.2cm of wbg] (ibrd) {
+            {\color{navyblue}\textbf{IBRD}}\\[0.2em]
+            \tiny $\bullet$ 189 Countries\\
+            $\bullet$ Largest Dev Bank\\
+            $\bullet$ Loans \& Guarantees
+        };
+
+        \node[armnode, below left=1.2cm and 1.2cm of wbg] (ida) {
+            {\color{darkteal}\textbf{IDA (1960)}}\\[0.2em]
+            \tiny $\bullet$ 174 Countries\\
+            $\bullet$ Dev Assistance\\
+            $\bullet$ Poverty Reduction
+        };
+
+        \node[armnode, below=1.2cm of wbg] (ifc) {
+            {\color{amber!90!black}\textbf{IFC (1956)}}\\[0.2em]
+            \tiny $\bullet$ Private Sector Growth\\
+            $\bullet$ Loans \& Equity\\
+            $\bullet$ Capital Mobilization
+        };
+
+        \node[armnode, below right=1.2cm and 1.2cm of wbg] (miga) {
+            {\color{navyblue}\textbf{MIGA (1988)}}\\[0.2em]
+            \tiny $\bullet$ 29 Countries\\
+            $\bullet$ Political Risk / War\\
+            $\bullet$ Support FDI
+        };
+
+        \node[armnode, below right=1.2cm and 4.2cm of wbg] (icsid) {
+            {\color{charcoal}\textbf{ICSID (1966)}}\\[0.2em]
+            \tiny $\bullet$ 143 Countries\\
+            $\bullet$ Dispute Settlement\\
+            $\bullet$ 159 Disputes (2021)
+        };
+
+        % Connectors
+        \draw[linkline] (wbg.south) -| (ibrd.north);
+        \draw[linkline] (wbg.south) -| (ida.north);
+        \draw[linkline] (wbg.south) -- (ifc.north);
+        \draw[linkline] (wbg.south) -| (miga.north);
+        \draw[linkline] (wbg.south) -| (icsid.north);
+    \end{tikzpicture}%
+    }
+    \caption{Constituent Institutions of the World Bank Group}
+    \label{fig:wbg_arms}
+\end{figure}
+
+% ------------------------------------------------------------------------------
 \subsection{1. IBRD (International Bank for Reconstruction and Development)}
 \begin{formulabox}[Institutional Profile: IBRD]
 \begin{itemize}[leftmargin=*, noitemsep]
     \item World's largest Development Bank.
-    \item \textbf{Membership:} 189 member countries in this organisation.
+    \item \textbf{Membership:} 189 countries member in this organisation.
 \end{itemize}
 \end{formulabox}
 
@@ -29,7 +91,7 @@
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Established:} Formed in 1960.
     \item \textbf{Purpose:} Development assistance and poverty reduction.
-    \item \textbf{Membership:} 174 member countries.
+    \item \textbf{Membership:} 174 Member of countries.
 \end{itemize}
 \end{formulabox}
 
@@ -47,10 +109,10 @@
     \item To encourage private sector growth in developing countries.
 \end{itemize}
 
-\noindent\textbf{Objectives:}
+\noindent\textbf{Objective:}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Investment money:} Provide loans and equity investment.
-    \item \textbf{Mobilize capital:} Through commercial banks.
+    \item \textbf{Mobilize capital:} Through commercial bank.
     \item \textbf{Provide advice:} Related to better policies, high environmental and social standards.
 \end{itemize}
 
@@ -59,7 +121,7 @@
 \begin{formulabox}[Institutional Profile: MIGA]
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Established:} Established in 1988.
-    \item \textbf{Membership:} 29 member countries in this organisation.
+    \item \textbf{Membership:} 29 countries are member in this organisation.
 \end{itemize}
 \end{formulabox}
 
@@ -68,10 +130,10 @@
     \item MIGA covers political risk like war.
 \end{itemize}
 
-\noindent\textbf{Objectives:}
+\noindent\textbf{Objective:}
 \begin{itemize}[leftmargin=*]
-    \item Support economic growth by encouraging FDI (Foreign Direct Investment).
-    \item Provides advisory services to help developing countries.
+    \item Support economic growth by encouraging FDI.
+    \item Provides advisory services to help the developing countries.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -79,8 +141,8 @@
 \begin{formulabox}[Institutional Profile: ICSID]
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Established:} Established on 1966.
-    \item \textbf{Membership:} 143 Member countries.
-    \item \textbf{Case Registration:} Total disputes registered in 2021: almost 159 investment-related disputes.
+    \item \textbf{Membership:} It had 143 Member countries.
+    \item \textbf{Disputes:} Total disputes registered on 2021, almost 159 investment related disputes.
 \end{itemize}
 \end{formulabox}
 
@@ -98,7 +160,7 @@
     \item Energy
     \item Environment
     \item Financial sector
-    \item SWIFT system
+    \item Swift system
     \item Health, nutrition
     \item Information, telecommunication
     \item Law and justice
@@ -113,6 +175,52 @@
 % ------------------------------------------------------------------------------
 \subsection{2. Fund Related Operations}
 
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2: Fund Related Operations
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        block/.style={rectangle, rounded corners=3pt, draw=navyblue, fill=softblue, line width=0.8pt, font=\sffamily\footnotesize, align=center, inner sep=6pt},
+        subblock/.style={rectangle, rounded corners=3pt, draw=darkteal, fill=softgreen, line width=0.8pt, font=\sffamily\scriptsize, align=center, inner sep=5pt},
+        actionblock/.style={rectangle, rounded corners=3pt, draw=amber!90!black, fill=softamber, line width=0.8pt, font=\sffamily\scriptsize, align=left, inner sep=5pt},
+        flowarrow/.style={-{Stealth[length=5pt]}, draw=navyblue!80, line width=0.9pt}
+    ]
+        % Generation Layer
+        \node[block, minimum width=13cm] (gen) at (0, 0) {\textbf{Fund Generation Sources}\\\footnotesize IBRD \quad $\bullet$ \quad IDA \quad $\bullet$ \quad World Bank Treasury};
+
+        % Channels
+        \node[subblock, below left=0.9cm and 0.5cm of gen, text width=5.5cm] (loans) {
+            \textbf{Through Loans}\\[0.2em]
+            $\bullet$ Investment Loans\\
+            $\bullet$ Development Policy Loans
+        };
+
+        \node[subblock, below right=0.9cm and 0.5cm of gen, text width=5.5cm] (grants) {
+            \textbf{Grants \& Relief Facilities}\\[0.2em]
+            $\bullet$ Provide Grants\\
+            $\bullet$ Provide Relief on Debt
+        };
+
+        % Deployment Initiatives Layer
+        \node[actionblock, below=0.8cm of $(loans.south)!0.5!(grants.south)$, text width=12.2cm] (initiatives) {
+            \textbf{Targeted Implementation Programs \& Initiatives:}\\[0.3em]
+            $\bullet$ For improving sanitation and water supply \hfill $\bullet$ HIV and AIDS pandemic\\
+            $\bullet$ Support of vaccination or immunisation program \hfill $\bullet$ Initiate to cut the greenhouse effect
+        };
+
+        % Arrows
+        \draw[flowarrow] (gen.south -| loans.north) -- (loans.north);
+        \draw[flowarrow] (gen.south -| grants.north) -- (grants.north);
+        \draw[flowarrow] (loans.south) -- (loans.south |- initiatives.north);
+        \draw[flowarrow] (grants.south) -- (grants.south |- initiatives.north);
+    \end{tikzpicture}%
+    }
+    \caption{World Bank Fund Related Operations Flowchart}
+    \label{fig:wb_funds_flowchart}
+\end{figure}
+
 \noindent\textbf{Fund Generation:}
 \begin{itemize}[leftmargin=*]
     \item IBRD
@@ -126,14 +234,14 @@
     \item Development policy loans
 \end{itemize}
 
-\noindent\textbf{Grants, Debt Relief \& Targeted Programs:}
+\noindent\textbf{Grants, Relief, and Targeted Initiatives:}
 \begin{itemize}[leftmargin=*]
     \item Provide grants
     \item Provide relief on debt
     \item For improving sanitation and water supply
     \item Support of vaccination or immunisation program
     \item HIV and AIDS pandemic
-    \item Initiate to cut the greenhouse effect
+    \item Initiate to cut the green house effect
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -157,11 +265,61 @@
 \section{Governance and Bank Related Activities}
 \lecturedate{24/08/2026}
 
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 3: Governance & Bank Activities
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        govnode/.style={rectangle, rounded corners=3pt, draw=navyblue, fill=softblue, line width=0.9pt, font=\sffamily\footnotesize, align=center, inner sep=6pt, text width=11.5cm},
+        sharenode/.style={rectangle, rounded corners=3pt, draw=amber!90!black, fill=softamber, line width=0.8pt, font=\sffamily\footnotesize, align=center, inner sep=5pt, text width=11.5cm},
+        presnode/.style={rectangle, rounded corners=3pt, draw=darkteal, fill=softgreen, line width=0.8pt, font=\sffamily\footnotesize, align=center, inner sep=5pt, text width=11.5cm},
+        actnode/.style={rectangle, rounded corners=3pt, draw=charcoal!70, fill=white, line width=0.8pt, font=\sffamily\footnotesize, align=left, inner sep=6pt, text width=11.5cm},
+        flowline/.style={-{Stealth[length=5pt]}, draw=navyblue!80, line width=0.9pt}
+    ]
+        % Tier 1: Board of Governors
+        \node[govnode] (gov) at (0, 0) {
+            \textbf{Ministry of Finance Representation}\\[0.1em]
+            \scriptsize Representative of World Bank $\cdot$ Meetings held once in a year
+        };
+
+        % Tier 2: Largest Shareholders
+        \node[sharenode, below=0.5cm of gov] (shares) {
+            \textbf{Largest Shareholders (Top 5)}\\[0.1em]
+            \scriptsize US \quad $\bullet$ \quad UK \quad $\bullet$ \quad France \quad $\bullet$ \quad Japan \quad $\bullet$ \quad Germany
+        };
+
+        % Tier 3: Election of President
+        \node[presnode, below=0.5cm of shares] (pres) {
+            \textbf{Leadership \& Executive Mandate}\\[0.1em]
+            \scriptsize President is elected by Board of Governors of the 5 shareholders
+        };
+
+        % Tier 4: Core Activities
+        \node[actnode, below=0.5cm of pres] (acts) {
+            \textbf{Bank Related Activities \& Core Decision-Making:}\\[0.3em]
+            \footnotesize
+            $\bullet$ \textbf{Approval of loans} \hfill $\bullet$ \textbf{Country assistance strategy}\\
+            $\bullet$ \textbf{Approve guarantee} \hfill $\bullet$ \textbf{Borrowing and financial decisions}\\
+            $\bullet$ \textbf{New policies}
+        };
+
+        % Connectors
+        \draw[flowline] (gov) -- (shares);
+        \draw[flowline] (shares) -- (pres);
+        \draw[flowline] (pres) -- (acts);
+    \end{tikzpicture}%
+    }
+    \caption{World Bank Governance Structure and Core Activities}
+    \label{fig:wb_governance_flowchart}
+\end{figure}
+
 \subsection{1. Governance \& Representation}
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Representative:} Ministry of Finance is the representative of World Bank, held once in a year.
-    \item \textbf{Largest Shareholders:} US, UK, France, Japan, Germany.
-    \item \textbf{President Election:} President is elected by board of governors of 5 shareholders.
+    \item Ministry of finance is the representative of world bank held once in a year.
+    \item \textbf{Largest shareholder:} US, UK, France, Japan, Germany.
+    \item President is elected by board of governors of 5 shareholders.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
