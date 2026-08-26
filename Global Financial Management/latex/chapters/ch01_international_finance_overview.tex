@@ -12,59 +12,72 @@
 % ------------------------------------------------------------------------------
 \begin{figure}[htbp]
     \centering
-    \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[
-        rootnode/.style={rectangle, rounded corners=4pt, draw=navyblue, fill=softblue, line width=1pt, text=navyblue, font=\bfseries\sffamily, align=center, inner sep=7pt, minimum width=4.5cm},
-        armnode/.style={rectangle, rounded corners=3pt, draw=charcoal!70, fill=white, line width=0.8pt, font=\sffamily\footnotesize, align=left, inner sep=5pt, minimum width=2.8cm, minimum height=1.9cm, text width=2.7cm},
-        linkline/.style={-{Stealth[length=5pt]}, draw=navyblue!80, line width=0.9pt}
+        rootbox/.style={
+            rectangle, rounded corners=5pt,
+            draw=navyblue, fill=softblue,
+            line width=1.1pt, text=navyblue,
+            font=\bfseries\sffamily, align=center,
+            inner sep=8pt, minimum width=8cm
+        },
+        cardbox/.style={
+            rectangle, rounded corners=4pt,
+            draw=charcoal!60, fill=white,
+            line width=0.8pt, font=\sffamily,
+            align=left, inner sep=6pt,
+            text width=6.2cm, minimum height=1.65cm
+        },
+        linkarrow/.style={
+            -{Stealth[length=5pt]}, draw=navyblue!85, line width=1pt
+        }
     ]
-        % Root
-        \node[rootnode] (wbg) at (0, 0) {\textbf{World Bank Group (WBG)}\\\scriptsize International Development Architecture};
-
-        % 5 Arms Nodes
-        \node[armnode, below left=1.2cm and 4.2cm of wbg] (ibrd) {
-            {\color{navyblue}\textbf{IBRD}}\\[0.2em]
-            \tiny $\bullet$ 189 Countries\\
-            $\bullet$ Largest Dev Bank\\
-            $\bullet$ Loans \& Guarantees
+        % Root Node (Center Top)
+        \node[rootbox] (wbg) at (0, 0) {
+            World Bank Group (WBG)\\[0.15em]
+            \footnotesize\normalfont International Financial \& Development Architecture
         };
 
-        \node[armnode, below left=1.2cm and 1.2cm of wbg] (ida) {
-            {\color{darkteal}\textbf{IDA (1960)}}\\[0.2em]
-            \tiny $\bullet$ 174 Countries\\
-            $\bullet$ Dev Assistance\\
-            $\bullet$ Poverty Reduction
+        % Tier 1: Sovereign Lending Arm
+        \node[cardbox, draw=navyblue, fill=lightgraybg] (ibrd) at (-3.6, -1.8) {
+            {\color{navyblue}\textbf{IBRD (Est. 1944)}}\\[0.15em]
+            \scriptsize $\bullet$ World's largest Development Bank (189 member countries)\\
+            $\bullet$ Loans, Guarantees \& Risk management products
         };
 
-        \node[armnode, below=1.2cm of wbg] (ifc) {
-            {\color{amber!90!black}\textbf{IFC (1956)}}\\[0.2em]
-            \tiny $\bullet$ Private Sector Growth\\
-            $\bullet$ Loans \& Equity\\
-            $\bullet$ Capital Mobilization
+        \node[cardbox, draw=darkteal, fill=lightgraybg] (ida) at (3.6, -1.8) {
+            {\color{darkteal}\textbf{IDA (Est. 1960)}}\\[0.15em]
+            \scriptsize $\bullet$ 174 Member countries\\
+            $\bullet$ Purpose: Development assistance \& poverty reduction
         };
 
-        \node[armnode, below right=1.2cm and 1.2cm of wbg] (miga) {
-            {\color{navyblue}\textbf{MIGA (1988)}}\\[0.2em]
-            \tiny $\bullet$ 29 Countries\\
-            $\bullet$ Political Risk / War\\
-            $\bullet$ Support FDI
+        % Tier 2: Private Sector & Risk Guarantees
+        \node[cardbox, draw=amber!90!black, fill=lightgraybg] (ifc) at (-3.6, -3.8) {
+            {\color{amber!90!black}\textbf{IFC (Est. 1956)}}\\[0.15em]
+            \scriptsize $\bullet$ End extreme poverty \& encourage private sector growth\\
+            $\bullet$ Provide loans, equity investment \& mobilize capital
         };
 
-        \node[armnode, below right=1.2cm and 4.2cm of wbg] (icsid) {
-            {\color{charcoal}\textbf{ICSID (1966)}}\\[0.2em]
-            \tiny $\bullet$ 143 Countries\\
-            $\bullet$ Dispute Settlement\\
-            $\bullet$ 159 Disputes (2021)
+        \node[cardbox, draw=navyblue!80, fill=lightgraybg] (miga) at (3.6, -3.8) {
+            {\color{navyblue!80}\textbf{MIGA (Est. 1988)}}\\[0.15em]
+            \scriptsize $\bullet$ 29 Member countries\\
+            $\bullet$ Covers political risk (war) \& supports FDI growth
         };
 
-        % Connectors
-        \draw[linkline] (wbg.south) -| (ibrd.north);
-        \draw[linkline] (wbg.south) -| (ida.north);
-        \draw[linkline] (wbg.south) -- (ifc.north);
-        \draw[linkline] (wbg.south) -| (miga.north);
-        \draw[linkline] (wbg.south) -| (icsid.north);
-    \end{tikzpicture}%
-    }
+        % Tier 3: Dispute Settlement Facility
+        \node[cardbox, draw=charcoal, fill=lightgraybg] (icsid) at (0, -5.8) {
+            \centering
+            {\color{charcoal}\textbf{ICSID (Est. 1966)}}\\[0.15em]
+            \scriptsize $\bullet$ 143 Member countries \quad $\bullet$ 159 Disputes registered (2021)
+        };
+
+        % Orthogonal Connectors
+        \draw[linkarrow] (wbg.south) ++(-2, 0) -- (ibrd.north);
+        \draw[linkarrow] (wbg.south) ++(2, 0) -- (ida.north);
+        \draw[linkarrow] (ibrd.south) -- (ifc.north);
+        \draw[linkarrow] (ida.south) -- (miga.north);
+        \draw[linkarrow] (ifc.south) |- (icsid.west);
+        \draw[linkarrow] (miga.south) |- (icsid.east);
+    \end{tikzpicture}
     \caption{Constituent Institutions of the World Bank Group}
     \label{fig:wbg_arms}
 \end{figure}
@@ -146,6 +159,8 @@
 \end{itemize}
 \end{formulabox}
 
+\newpage
+
 % ==============================================================================
 % Lecture 2: 21/08/2026
 % ==============================================================================
@@ -180,43 +195,62 @@
 % ------------------------------------------------------------------------------
 \begin{figure}[htbp]
     \centering
-    \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[
-        block/.style={rectangle, rounded corners=3pt, draw=navyblue, fill=softblue, line width=0.8pt, font=\sffamily\footnotesize, align=center, inner sep=6pt},
-        subblock/.style={rectangle, rounded corners=3pt, draw=darkteal, fill=softgreen, line width=0.8pt, font=\sffamily\scriptsize, align=center, inner sep=5pt},
-        actionblock/.style={rectangle, rounded corners=3pt, draw=amber!90!black, fill=softamber, line width=0.8pt, font=\sffamily\scriptsize, align=left, inner sep=5pt},
-        flowarrow/.style={-{Stealth[length=5pt]}, draw=navyblue!80, line width=0.9pt}
+        headerbox/.style={
+            rectangle, rounded corners=4pt,
+            draw=navyblue, fill=softblue,
+            line width=1pt, font=\sffamily\footnotesize,
+            align=center, inner sep=6pt, text width=11cm
+        },
+        channelbox/.style={
+            rectangle, rounded corners=4pt,
+            draw=darkteal, fill=softgreen,
+            line width=0.8pt, font=\sffamily\footnotesize,
+            align=left, inner sep=6pt, text width=5.1cm, minimum height=1.5cm
+        },
+        impactbox/.style={
+            rectangle, rounded corners=4pt,
+            draw=amber!90!black, fill=softamber,
+            line width=0.8pt, font=\sffamily\footnotesize,
+            align=left, inner sep=7pt, text width=11cm
+        },
+        flowline/.style={
+            -{Stealth[length=5pt]}, draw=navyblue!80, line width=1pt
+        }
     ]
-        % Generation Layer
-        \node[block, minimum width=13cm] (gen) at (0, 0) {\textbf{Fund Generation Sources}\\\footnotesize IBRD \quad $\bullet$ \quad IDA \quad $\bullet$ \quad World Bank Treasury};
+        % Tier 1: Sources (Top)
+        \node[headerbox] (gen) at (0, 0) {
+            \textbf{Fund Generation Sources}\\[0.15em]
+            \footnotesize IBRD \quad $\bullet$ \quad IDA \quad $\bullet$ \quad World Bank Treasury
+        };
 
-        % Channels
-        \node[subblock, below left=0.9cm and 0.5cm of gen, text width=5.5cm] (loans) {
+        % Tier 2: Lending & Grants (Middle)
+        \node[channelbox] (loans) at (-3.1, -1.8) {
             \textbf{Through Loans}\\[0.2em]
-            $\bullet$ Investment Loans\\
+            \scriptsize $\bullet$ Investment Loans\\
             $\bullet$ Development Policy Loans
         };
 
-        \node[subblock, below right=0.9cm and 0.5cm of gen, text width=5.5cm] (grants) {
-            \textbf{Grants \& Relief Facilities}\\[0.2em]
-            $\bullet$ Provide Grants\\
+        \node[channelbox, draw=darkteal!90!black] (grants) at (3.1, -1.8) {
+            \textbf{Grants \& Relief}\\[0.2em]
+            \scriptsize $\bullet$ Provide Grants\\
             $\bullet$ Provide Relief on Debt
         };
 
-        % Deployment Initiatives Layer
-        \node[actionblock, below=0.8cm of $(loans.south)!0.5!(grants.south)$, text width=12.2cm] (initiatives) {
-            \textbf{Targeted Implementation Programs \& Initiatives:}\\[0.3em]
-            $\bullet$ For improving sanitation and water supply \hfill $\bullet$ HIV and AIDS pandemic\\
+        % Tier 3: Implementation Programs (Bottom)
+        \node[impactbox] (impact) at (0, -3.8) {
+            \textbf{Targeted Implementation Programs \& Initiatives:}\\[0.25em]
+            \scriptsize
+            $\bullet$ For improving sanitation and water supply \hfill $\bullet$ HIV and AIDS pandemic\\[0.1em]
             $\bullet$ Support of vaccination or immunisation program \hfill $\bullet$ Initiate to cut the greenhouse effect
         };
 
-        % Arrows
-        \draw[flowarrow] (gen.south -| loans.north) -- (loans.north);
-        \draw[flowarrow] (gen.south -| grants.north) -- (grants.north);
-        \draw[flowarrow] (loans.south) -- (loans.south |- initiatives.north);
-        \draw[flowarrow] (grants.south) -- (grants.south |- initiatives.north);
-    \end{tikzpicture}%
-    }
+        % Direct cleanly-attached connections
+        \draw[flowline] (gen.south) ++(-3.1, 0) -- (loans.north);
+        \draw[flowline] (gen.south) ++(3.1, 0) -- (grants.north);
+        \draw[flowline] (loans.south) -- ++(0, -0.3) -| ($(impact.north) + (-3.1, 0)$);
+        \draw[flowline] (grants.south) -- ++(0, -0.3) -| ($(impact.north) + (3.1, 0)$);
+    \end{tikzpicture}
     \caption{World Bank Fund Related Operations Flowchart}
     \label{fig:wb_funds_flowchart}
 \end{figure}
@@ -259,6 +293,8 @@
     \item Global and regional programs
 \end{itemize}
 
+\newpage
+
 % ==============================================================================
 % Lecture 3: 24/08/2026
 % ==============================================================================
@@ -270,47 +306,49 @@
 % ------------------------------------------------------------------------------
 \begin{figure}[htbp]
     \centering
-    \resizebox{0.95\textwidth}{!}{%
     \begin{tikzpicture}[
-        govnode/.style={rectangle, rounded corners=3pt, draw=navyblue, fill=softblue, line width=0.9pt, font=\sffamily\footnotesize, align=center, inner sep=6pt, text width=11.5cm},
-        sharenode/.style={rectangle, rounded corners=3pt, draw=amber!90!black, fill=softamber, line width=0.8pt, font=\sffamily\footnotesize, align=center, inner sep=5pt, text width=11.5cm},
-        presnode/.style={rectangle, rounded corners=3pt, draw=darkteal, fill=softgreen, line width=0.8pt, font=\sffamily\footnotesize, align=center, inner sep=5pt, text width=11.5cm},
-        actnode/.style={rectangle, rounded corners=3pt, draw=charcoal!70, fill=white, line width=0.8pt, font=\sffamily\footnotesize, align=left, inner sep=6pt, text width=11.5cm},
-        flowline/.style={-{Stealth[length=5pt]}, draw=navyblue!80, line width=0.9pt}
+        govstep/.style={
+            rectangle, rounded corners=4pt,
+            draw=navyblue, fill=softblue,
+            line width=0.9pt, font=\sffamily\footnotesize,
+            align=left, inner sep=7pt, text width=11.5cm
+        },
+        steparrow/.style={
+            -{Stealth[length=5pt]}, draw=navyblue!80, line width=1pt
+        }
     ]
-        % Tier 1: Board of Governors
-        \node[govnode] (gov) at (0, 0) {
-            \textbf{Ministry of Finance Representation}\\[0.1em]
-            \scriptsize Representative of World Bank $\cdot$ Meetings held once in a year
+        % Stage 1
+        \node[govstep] (s1) at (0, 0) {
+            {\color{navyblue}\textbf{1. Sovereign Representation}}\\[0.15em]
+            \scriptsize $\bullet$ Ministry of Finance is the representative of World Bank (meetings held once in a year)
         };
 
-        % Tier 2: Largest Shareholders
-        \node[sharenode, below=0.5cm of gov] (shares) {
-            \textbf{Largest Shareholders (Top 5)}\\[0.1em]
-            \scriptsize US \quad $\bullet$ \quad UK \quad $\bullet$ \quad France \quad $\bullet$ \quad Japan \quad $\bullet$ \quad Germany
+        % Stage 2
+        \node[govstep, draw=amber!90!black, fill=softamber, below=0.6cm of s1] (s2) {
+            {\color{amber!90!black}\textbf{2. Key Shareholding Structure}}\\[0.15em]
+            \scriptsize $\bullet$ \textbf{Largest Shareholders:} US \quad $\bullet$ \quad UK \quad $\bullet$ \quad France \quad $\bullet$ \quad Japan \quad $\bullet$ \quad Germany
         };
 
-        % Tier 3: Election of President
-        \node[presnode, below=0.5cm of shares] (pres) {
-            \textbf{Leadership \& Executive Mandate}\\[0.1em]
-            \scriptsize President is elected by Board of Governors of the 5 shareholders
+        % Stage 3
+        \node[govstep, draw=darkteal, fill=softgreen, below=0.6cm of s2] (s3) {
+            {\color{darkteal}\textbf{3. Executive Leadership}}\\[0.15em]
+            \scriptsize $\bullet$ President is elected by board of governors of 5 shareholders
         };
 
-        % Tier 4: Core Activities
-        \node[actnode, below=0.5cm of pres] (acts) {
-            \textbf{Bank Related Activities \& Core Decision-Making:}\\[0.3em]
-            \footnotesize
+        % Stage 4
+        \node[govstep, draw=charcoal!70, fill=white, below=0.6cm of s3] (s4) {
+            {\color{charcoal}\textbf{4. Bank Related Activities \& Core Functions}}\\[0.25em]
+            \scriptsize
             $\bullet$ \textbf{Approval of loans} \hfill $\bullet$ \textbf{Country assistance strategy}\\
             $\bullet$ \textbf{Approve guarantee} \hfill $\bullet$ \textbf{Borrowing and financial decisions}\\
             $\bullet$ \textbf{New policies}
         };
 
-        % Connectors
-        \draw[flowline] (gov) -- (shares);
-        \draw[flowline] (shares) -- (pres);
-        \draw[flowline] (pres) -- (acts);
-    \end{tikzpicture}%
-    }
+        % Direct Vertical Flow Connectors
+        \draw[steparrow] (s1.south) -- (s2.north);
+        \draw[steparrow] (s2.south) -- (s3.north);
+        \draw[steparrow] (s3.south) -- (s4.north);
+    \end{tikzpicture}
     \caption{World Bank Governance Structure and Core Activities}
     \label{fig:wb_governance_flowchart}
 \end{figure}
