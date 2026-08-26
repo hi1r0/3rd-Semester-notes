@@ -10,7 +10,9 @@
 % ------------------------------------------------------------------------------
 % 1. University Title / Cover Page
 % ------------------------------------------------------------------------------
+\hypersetup{pageanchor=false}
 \input{preamble/titlepage.tex}
+\hypersetup{pageanchor=true}
 
 % ------------------------------------------------------------------------------
 % 2. Official Course Syllabus
@@ -28,7 +30,9 @@
 % 4. Course Chapters (Continuous Notes Flow)
 % ------------------------------------------------------------------------------
 \pagenumbering{arabic}
-% \input{chapters/ch01_international_finance_overview.tex}
+\input{chapters/ch01_international_finance_overview.tex}
+
+% Future course chapters will start on new pages via \chapter{}
 % \input{chapters/ch02_foreign_exchange_market.tex}
 % \input{chapters/ch03_fx_exposure_and_management.tex}
 % \input{chapters/ch04_multinational_financial_management.tex}
