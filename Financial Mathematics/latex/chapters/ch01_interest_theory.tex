@@ -604,26 +604,12 @@ Calculate the doubling period using the Rule of 69 if the annual rate of interes
 \end{enumerate}
 \end{example}
 
-\begin{formulabox}[Compound Value of Series of Payments \& Annuities]
+\begin{formulabox}[Compound Value of a Series of Payments]
 \paragraph{e. Compound Value of a Series of Payments}
 For an uneven stream of payments $P_t$ invested across horizon $n$:
 \begin{equation}
     \text{Compound Value } (\FV) = \sum_{t=1}^{n} P_t (1 + R)^{n - t}
 \end{equation}
-
-\vspace{0.6em}
-\paragraph{f. Compound Value of an Annuity}
-For a sequence of equal constant periodic cash flows $A$ invested at interest rate $R$ over duration $n$:
-\begin{equation}
-    \FV \text{ of Annuity} = A \times \left[ \frac{(1 + R)^n - 1}{R} \right] = A \cdot \CVAF(R, n)
-\end{equation}
-where:
-\begin{itemize}[noitemsep]
-    \item $A = \text{Constant periodic cash flow or annuity amount}$
-    \item $R = \text{Rate of interest per period}$
-    \item $n = \text{Number of years or duration of the annuity}$
-    \item $\CVAF(R, n) = \text{Compound Value Annuity Factor} = \dfrac{(1+R)^n - 1}{R}$
-\end{itemize}
 \end{formulabox}
 
 \lecturedate{25/08/2026}
@@ -690,6 +676,88 @@ Payments deposited at the end of year $t$ earn compound interest for $(n - t)$ r
 The aggregate compound value of the series of payments at the end of $4$ years is $\mathbf{\inr 16{,}411.85}$.
 \end{example}
 
+\begin{formulabox}[Compound Value of an Annuity]
+\paragraph{f. Compound Value of an Annuity}
+For a sequence of equal constant periodic cash flows $A$ invested at interest rate $R$ over duration $n$:
+\begin{equation}
+    \FV \text{ of Annuity} = A \times \left[ \frac{(1 + R)^n - 1}{R} \right] = A \cdot \CVAF(R, n)
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $A = \text{Constant periodic cash flow or annuity amount}$
+    \item $R = \text{Periodic interest rate}$
+    \item $n = \text{Total number of compounding annuity conversion periods}$
+    \item $\CVAF(R, n) = \text{Compound Value Annuity Factor} = \dfrac{(1+R)^n - 1}{R}$
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{27/08/2026}
+\begin{example}{Compound Value of an Annual Annuity}{ex_annual_annuity_fv}
+\textbf{Problem:}
+Calculate the maturity value (Future Value) of an annuity if $\inr 20{,}000$ is paid annually for $7$ years at an interest rate of $12\%$ per annum compounded annually.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Periodic Annuity Flow ($A$) = $\inr 20{,}000$
+    \item Duration ($n$) = $7$ years
+    \item Interest Rate ($R$) = $12\%$ p.a. $= 0.12$
+\end{itemize}
+
+\textbf{Analytical Solution:}
+\begin{equation*}
+    \FV = A \times \left[ \frac{(1 + R)^n - 1}{R} \right] = 20{,}000 \times \left[ \frac{(1 + 0.12)^7 - 1}{0.12} \right]
+\end{equation*}
+Evaluating the compounding power factor $(1.12)^7 \approx 2.2106814$:
+\begin{align*}
+    \FV &= 20{,}000 \times \left[ \frac{2.2106814 - 1}{0.12} \right] = 20{,}000 \times \left[ \frac{1.2106814}{0.12} \right] \\
+    &= 20{,}000 \times 10.089012 = \mathbf{\inr 2{,}01{,}780.24}
+\end{align*}
+
+\textbf{Table Approximation Note:}
+Using standard 3-decimal compound annuity factor tables ($\CVAF(12\%, 7) \approx 10.089$ or rounded value $10.090$):
+\begin{equation*}
+    \FV \approx 20{,}000 \times 10.090 = \mathbf{\inr 2{,}01{,}800.00}
+\end{equation*}
+
+\textbf{Final Result:}
+The maturity accumulated value of the annuity after $7$ years is $\mathbf{\inr 2{,}01{,}780.24}$ (approx. $\mathbf{\inr 2{,}01{,}800.00}$).
+\end{example}
+
+\lecturedate{27/08/2026}
+\begin{example}{Maturity Value of Monthly Recurring Deposit Annuity}{ex_recurring_deposit}
+\textbf{Problem:}
+Bhuvanesh pays a monthly installment of $\inr 2{,}000$ towards a recurring deposit with a financier. The rate of interest is $6\%$ per annum compounded monthly. What is the maturity value of this recurring deposit after $10$ months?
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Monthly Deposit ($A$) = $\inr 2{,}000$
+    \item Nominal Annual Rate ($R$) = $6\%$ p.a.
+    \item Periodic Monthly Rate ($i$) = $\dfrac{6\%}{12} = 0.5\% = 0.005$
+    \item Total Number of Monthly Instalments ($n$) = $10$ months
+\end{itemize}
+
+\textbf{Analytical Solution:}
+\begin{equation*}
+    \FV = A \times \left[ \frac{(1 + i)^n - 1}{i} \right] = 2{,}000 \times \left[ \frac{(1 + 0.005)^{10} - 1}{0.005} \right]
+\end{equation*}
+Evaluating $(1.005)^{10} \approx 1.05114013$:
+\begin{align*}
+    \FV &= 2{,}000 \times \left[ \frac{1.05114013 - 1}{0.005} \right] = 2{,}000 \times \left[ \frac{0.05114013}{0.005} \right] \\
+    &= 2{,}000 \times 10.228026 = \mathbf{\inr 20{,}456.05}
+\end{align*}
+
+\textbf{Approximation Note:}
+Using standard recurring deposit financial tables ($\CVAF(0.5\%, 10) \approx 10.22$):
+\begin{equation*}
+    \FV \approx 2{,}000 \times 10.22 = \mathbf{\inr 20{,}440.00}
+\end{equation*}
+
+\textbf{Final Result:}
+The maturity value of the recurring deposit after $10$ months is $\mathbf{\inr 20{,}456.05}$ (approx. $\mathbf{\inr 20{,}440.00}$).
+\end{example}
+
 % ------------------------------------------------------------------------------
 % 1.3.2 Discounting & Present Value Techniques
 % ------------------------------------------------------------------------------
@@ -698,16 +766,76 @@ The aggregate compound value of the series of payments at the end of $4$ years i
 
 \begin{formulabox}[Present Value of Lump Sum \& Series of Cash Flows]
 \paragraph{a. Present Value of a Lump Sum}
+The present value ($\PV$) of a single future cash flow $\FV$ discounted across $n$ periods at rate $R$:
 \begin{equation}
-    \PV = \FV \times \frac{1}{(1 + R)^n} = \FV \cdot (1 + R)^{-n}
+    \PV = \FV \times \frac{1}{(1 + R)^n} = \FV \cdot (1 + R)^{-n} = \FV \cdot \text{PVF}(R, n)
 \end{equation}
 
 \vspace{0.4em}
 \paragraph{b. Present Value of a Series of Cash Flows}
+For an uneven sequence of future cash inflows $\text{CF}_t$ received across periods $t = 1, 2, \dots, n$:
 \begin{equation}
-    \PV = \sum_{t=1}^{n} \frac{\text{Cash Inflow}_t}{(1 + R)^t} = \sum_{t=1}^{n} \text{Cash Inflow}_t \times (1 + R)^{-t}
+    \PV = \sum_{t=1}^{n} \frac{\text{CF}_t}{(1 + R)^t} = \sum_{t=1}^{n} \text{CF}_t \times (1 + R)^{-t}
 \end{equation}
 \end{formulabox}
+
+\lecturedate{27/08/2026}
+\begin{example}{Present Value of a Single Future Lump Sum}{ex_pv_lump_sum}
+\textbf{Problem:}
+Find the present value of $\inr 10{,}000$ receivable after $4$ years at an interest rate of $12\%$ per annum. (The PV factor in the standard table for $12\%$ and $4$ years is $0.6355$).
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Future Value ($\FV$) = $\inr 10{,}000$
+    \item Duration ($n$) = $4$ years
+    \item Discount Rate ($R$) = $12\%$ p.a. $= 0.12$
+\end{itemize}
+
+\textbf{Calculation:}
+\begin{equation*}
+    \PV = \FV \times \frac{1}{(1 + R)^n} = 10{,}000 \times \frac{1}{(1 + 0.12)^4} = 10{,}000 \times \frac{1}{1.573519}
+\end{equation*}
+\begin{equation*}
+    \PV = 10{,}000 \times 0.635518 = \mathbf{\inr 6{,}355.18}
+\end{equation*}
+
+\textbf{Using 3-Decimal Table Factor ($0.635$):}
+\begin{equation*}
+    \PV = 10{,}000 \times 0.635 = \mathbf{\inr 6{,}350.00}
+\end{equation*}
+
+\textbf{Final Result:}
+The present value of $\inr 10{,}000$ receivable after $4$ years is $\mathbf{\inr 6{,}355.18}$ (or $\mathbf{\inr 6{,}350.00}$ using table factor).
+\end{example}
+
+\lecturedate{27/08/2026}
+\begin{example}{Construction of Present Value Factor Schedule (12\% p.a.)}{ex_pv_schedule}
+\textbf{Problem:}
+Calculate the Present Value Factors ($\text{PVF}$) at an interest rate of $12\%$ per annum for a period of $5$ years.
+
+\tcbline
+\textbf{Formula:}
+\begin{equation*}
+    \text{PVF}(12\%, n) = \frac{1}{(1 + 0.12)^n} = (1.12)^{-n}
+\end{equation*}
+
+\textbf{Schedule of Discount Factors:}
+\begin{center}
+\small
+\begin{tabular}{ccc}
+\toprule
+\textbf{Year ($n$)} & \textbf{Mathematical Computation} & \textbf{Present Value Factor ($\text{PVF}$)} \\
+\midrule
+1 & $\dfrac{1}{(1.12)^1} = \dfrac{1}{1.120000}$ & $\mathbf{0.8929}$ \\[0.5em]
+2 & $\dfrac{1}{(1.12)^2} = \dfrac{1}{1.254400}$ & $\mathbf{0.7972}$ \\[0.5em]
+3 & $\dfrac{1}{(1.12)^3} = \dfrac{1}{1.404928}$ & $\mathbf{0.7118}$ \\[0.5em]
+4 & $\dfrac{1}{(1.12)^4} = \dfrac{1}{1.573519}$ & $\mathbf{0.6355}$ \\[0.5em]
+5 & $\dfrac{1}{(1.12)^5} = \dfrac{1}{1.762342}$ & $\mathbf{0.5674}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{example}
 
 \begin{formulabox}[Present Value of Annuities (Ordinary Annuity vs. Annuity Due)]
 \paragraph{c. Present Value of an Annuity (Ordinary Annuity -- Period-End Payments)}
@@ -721,6 +849,91 @@ The aggregate compound value of the series of payments at the end of $4$ years i
     \PV \text{ of Annuity Due} = \text{Annuity Amount } (A) \times \PVAF(R, n) \times (1 + R)
 \end{equation}
 \end{formulabox}
+
+\lecturedate{27/08/2026}
+\begin{example}{Present Value of an Ordinary Annuity Stream}{ex_pv_ordinary_annuity}
+\textbf{Problem:}
+Raja has entered into an agreement that will fetch him $\inr 60{,}000$ per annum for the next $4$ years. Calculate the present value of these future cash inflows at a discount rate of $20\%$ per annum.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Annual Cash Inflow ($A$) = $\inr 60{,}000$
+    \item Horizon ($n$) = $4$ years
+    \item Discount Rate ($R$) = $20\%$ p.a. $= 0.20$
+\end{itemize}
+
+\textbf{Method 1: Year-by-Year Cash Flow Discounting Table}
+\begin{center}
+\small
+\begin{tabular}{cccc}
+\toprule
+\textbf{Year ($t$)} & \textbf{Cash Inflow ($\text{CF}_t$)} & \textbf{PV Factor at 20\%: $\dfrac{1}{(1.20)^t}$} & \textbf{Present Value ($\PV_t$)} \\
+\midrule
+1 & $\inr 60{,}000$ & $\dfrac{1}{(1.20)^1} = 0.833333$ & $\inr 50{,}000.00$ \\[0.4em]
+2 & $\inr 60{,}000$ & $\dfrac{1}{(1.20)^2} = 0.694444$ & $\inr 41{,}666.67$ \\[0.4em]
+3 & $\inr 60{,}000$ & $\dfrac{1}{(1.20)^3} = 0.578704$ & $\inr 34{,}722.22$ \\[0.4em]
+4 & $\inr 60{,}000$ & $\dfrac{1}{(1.20)^4} = 0.482253$ & $\inr 28{,}935.19$ \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total Aggregate Present Value ($\PV$):}} & $\mathbf{\inr 1{,}55{,}324.08}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Method 2: Analytical PVAF Closed-Form Formula}
+\begin{align*}
+    \PV &= A \times \left[ \frac{1 - (1 + R)^{-n}}{R} \right] = 60{,}000 \times \left[ \frac{1 - (1.20)^{-4}}{0.20} \right] \\
+    &= 60{,}000 \times \left[ \frac{1 - 0.482253}{0.20} \right] = 60{,}000 \times \left[ \frac{0.517747}{0.20} \right] \\
+    &= 60{,}000 \times 2.588735 = \mathbf{\inr 1{,}55{,}324.08}
+\end{align*}
+
+\textbf{Table Factor Approximation Note:}
+Using standard Present Value Annuity Table factor for $4$ years at $20\%$ ($\PVAF(20\%, 4) \approx 2.589$):
+\begin{equation*}
+    \PV \approx 60{,}000 \times 2.589 = \mathbf{\inr 1{,}55{,}340.00}
+\end{equation*}
+
+\textbf{Final Result:}
+The present value of Raja's annuity agreement is $\mathbf{\inr 1{,}55{,}324.08}$ (or $\mathbf{\inr 1{,}55{,}340.00}$ using 3-decimal table factor).
+\end{example}
+
+\lecturedate{28/08/2026}
+\begin{example}{Present Value of an Annuity Due}{ex_annuity_due_pv}
+\textbf{Problem:}
+Mr. Thanay expects to receive $\inr 20{,}000$ at the \textbf{beginning} of each year for $4$ years. Calculate the present value of this annuity due assuming an annual interest rate of $9\%$.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Annual Instalment ($A$) = $\inr 20{,}000$
+    \item Horizon ($n$) = $4$ payments made at $t = 0, 1, 2, 3$
+    \item Discount Rate ($R$) = $9\%$ p.a. $= 0.09$
+\end{itemize}
+
+\textbf{Method 1: Year-by-Year Discounting of Beginning-of-Year Receipts}
+Because payments occur at the beginning of each year, the first payment is received at $t = 0$ (no discounting):
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Beginning of Year 1 ($t = 0$):} $\PV_0 = \inr 20{,}000$
+    \item \textbf{Beginning of Year 2 ($t = 1$):} $\PV_1 = \dfrac{20{,}000}{(1.09)^1} = \inr 18{,}348.62$
+    \item \textbf{Beginning of Year 3 ($t = 2$):} $\PV_2 = \dfrac{20{,}000}{(1.09)^2} = \inr 16{,}833.60$
+    \item \textbf{Beginning of Year 4 ($t = 3$):} $\PV_3 = \dfrac{20{,}000}{(1.09)^3} = \inr 15{,}443.67$
+\end{itemize}
+Summing all individual present values:
+\begin{align*}
+    \PV_{\text{due}} &= 20{,}000.00 + 18{,}348.62 + 16{,}833.60 + 15{,}443.67 = \mathbf{\inr 70{,}625.89}
+\end{align*}
+
+\textbf{Method 2: Annuity Due Analytical Formula}
+\begin{align*}
+    \PV_{\text{due}} &= A \times \left[ \frac{1 - (1 + R)^{-n}}{R} \right] \times (1 + R) \\
+    &= 20{,}000 \times \left[ \frac{1 - (1.09)^{-4}}{0.09} \right] \times 1.09 \\
+    &= 20{,}000 \times \left[ \frac{1 - 0.708425}{0.09} \right] \times 1.09 \\
+    &= 20{,}000 \times 3.239720 \times 1.09 = \mathbf{\inr 70{,}625.89} \approx \mathbf{\inr 70{,}626.00}
+\end{align*}
+
+\textbf{Final Result:}
+The present value of Mr. Thanay's annuity due is $\mathbf{\inr 70{,}625.89}$ (approx. $\mathbf{\inr 70{,}626.00}$).
+\end{example}
 
 \begin{formulabox}[Present Value of Perpetuities (Constant vs. Growing)]
 \paragraph{e. Present Value of a Perpetuity (Constant Perpetuity -- Infinite Horizon)}
@@ -747,7 +960,7 @@ where:
 \end{itemize}
 \end{formulabox}
 
-\begin{formulabox}[Growing Annuity \& Sinking Fund Accumulation]
+\begin{formulabox}[Present Value of a Growing Annuity]
 \paragraph{g. Present Value of a Growing Annuity (Finite Horizon $n$)}
 For a stream of $n$ periodic cash flows growing at rate $G$ per period (with $R \neq G$):
 \begin{equation}
@@ -760,8 +973,62 @@ where:
     \item $G = \text{Growth rate per period}$
     \item $n = \text{Life / duration of the annuity}$
 \end{itemize}
+\end{formulabox}
 
-\vspace{0.4em}
+\lecturedate{28/08/2026}
+\begin{example}{Present Value of a Growing Annuity Stream}{ex_growing_annuity_pv}
+\textbf{Problem:}
+Mr. Deva has rented out a commercial shop for $4$ years at an initial annual rent of $\inr 12{,}000$. The tenant has agreed to an escalation clause where the rent increases by $10\%$ every year. If the required rate of return (discount rate) is $8\%$, find the present value of the expected series of rental payments.
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Initial First-Year Rent ($C_1$) = $\inr 12{,}000$
+    \item Lease Duration ($n$) = $4$ years
+    \item Annual Rent Escalation Rate ($G$) = $10\% = 0.10$
+    \item Discount Rate ($R$) = $8\% = 0.08$
+\end{itemize}
+
+\textbf{Method 1: Year-by-Year Escalated Cash Flow Discounting Table}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Year 1:} Cash Flow $C_1 = \inr 12{,}000$
+    \begin{equation*}
+        \PV_1 = \frac{12{,}000}{(1.08)^1} = \frac{12{,}000}{1.08} = \mathbf{\inr 11{,}111.11}
+    \end{equation*}
+
+    \item \textbf{Year 2:} Cash Flow $C_2 = 12{,}000 \times (1 + 0.10) = \inr 13{,}200$
+    \begin{equation*}
+        \PV_2 = \frac{13{,}200}{(1.08)^2} = \frac{13{,}200}{1.1664} = \mathbf{\inr 11{,}316.87}
+    \end{equation*}
+
+    \item \textbf{Year 3:} Cash Flow $C_3 = 13{,}200 \times (1 + 0.10) = \inr 14{,}520$
+    \begin{equation*}
+        \PV_3 = \frac{14{,}520}{(1.08)^3} = \frac{14{,}520}{1.259712} = \mathbf{\inr 11{,}526.54}
+    \end{equation*}
+
+    \item \textbf{Year 4:} Cash Flow $C_4 = 14{,}520 \times (1 + 0.10) = \inr 15{,}972$
+    \begin{equation*}
+        \PV_4 = \frac{15{,}972}{(1.08)^4} = \frac{15{,}972}{1.360489} = \mathbf{\inr 11{,}740.16}
+    \end{equation*}
+\end{itemize}
+Summing all discounted cash inflows:
+\begin{equation*}
+    \PV = 11{,}111.11 + 11{,}316.87 + 11{,}526.54 + 11{,}740.16 = \mathbf{\inr 45{,}694.68}
+\end{equation*}
+
+\textbf{Method 2: Growing Annuity Analytical Closed-Form Formula}
+When growth rate $G > R$:
+\begin{align*}
+    \PV &= \frac{C_1}{G - R} \left[ \left(\frac{1 + G}{1 + R}\right)^n - 1 \right] = \frac{12{,}000}{0.10 - 0.08} \left[ \left(\frac{1.10}{1.08}\right)^4 - 1 \right] \\
+    &= \frac{12{,}000}{0.02} \left[ (1.0185185)^4 - 1 \right] = 6{,}00{,}000 \times [1.0761578 - 1] \\
+    &= 6{,}00{,}000 \times 0.0761578 = \mathbf{\inr 45{,}694.68}
+\end{align*}
+
+\textbf{Final Result:}
+The present value of the $4$-year escalating rental stream is $\mathbf{\inr 45{,}694.68}$.
+\end{example}
+
+\begin{formulabox}[Sinking Fund (S.F.) Accumulation \& Periodic Instalment]
 \paragraph{h. Sinking Fund (S.F.) Accumulation}
 A sinking fund is an accumulating reserve established by investing periodic installments to meet a target future liability:
 \begin{equation}
