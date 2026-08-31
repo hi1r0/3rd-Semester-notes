@@ -935,34 +935,109 @@ Summing all individual present values:
 The present value of Mr. Thanay's annuity due is $\mathbf{\inr 70{,}625.89}$ (approx. $\mathbf{\inr 70{,}626.00}$).
 \end{example}
 
-\begin{formulabox}[Present Value of Perpetuities (Constant vs. Growing)]
+\begin{formulabox}[Present Value of a Constant Perpetuity]
 \paragraph{e. Present Value of a Perpetuity (Constant Perpetuity -- Infinite Horizon)}
+A \textbf{Perpetuity} is an annuity whose periodic cash flows continue indefinitely. The present value of a constant perpetual stream of cash flows $C$ discounted at rate $R$ per period is:
 \begin{equation}
     \PV \text{ of Constant Perpetuity} = \frac{C}{R}
 \end{equation}
 where:
 \begin{itemize}[noitemsep]
-    \item $C = \text{Constant periodic cash inflow}$
-    \item $R = \text{Interest / discount rate per payment period}$
+    \item $C = \text{Constant periodic cash inflow (e.g. annual coupon, preferred dividend)}$
+    \item $R = \text{Discount / capitalization rate per payment period}$
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{31/08/2026}
+\begin{example}{Valuation of Preference Shares as a Constant Perpetuity}{ex_preference_share_pv}
+\textbf{Problem:}
+A company has issued $10\%$ preference shares with a face value of $\inr 100$ each. What would be the fair market price (Present Value) of the preference share if the required rate of return for the investor is $8\%$ per annum?
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Face Value of Preference Share = $\inr 100$
+    \item Annual Preference Dividend Rate = $10\%$
+    \item Constant Annual Dividend ($C$) = $10\% \times \inr 100 = \inr 10.00$
+    \item Required Rate of Return / Discount Rate ($R$) = $8\% = 0.08$
 \end{itemize}
 
-\vspace{0.4em}
+\textbf{Analytical Solution:}
+Since preference shares pay a constant periodic dividend indefinitely without a specified maturity date, their value is given by the constant perpetuity formula:
+\begin{equation*}
+    \PV = \frac{C}{R} = \frac{10}{0.08} = \mathbf{\inr 125.00}
+\end{equation*}
+
+\textbf{Conclusion:}
+The investor will be willing to pay up to $\mathbf{\inr 125.00}$ to purchase the preference share to earn a $10\%$ dividend on its face value at their required $8\%$ yield.
+\end{example}
+
+\lecturedate{31/08/2026}
+\begin{example}{Present Value of a Perpetual Cash Flow Stream}{ex_constant_perpetuity_pv}
+\textbf{Problem:}
+Let us assume that an investor expects a perpetual annual sum of $\inr 500$ from an investment. What is the present value of this perpetuity if the benchmark interest rate is $10\%$ per annum?
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Perpetual Annual Cash Inflow ($C$) = $\inr 500$
+    \item Discount Rate ($R$) = $10\% = 0.10$
+\end{itemize}
+
+\textbf{Analytical Calculation:}
+\begin{equation*}
+    \PV = \frac{C}{R} = \frac{500}{0.10} = \mathbf{\inr 5{,}000.00}
+\end{equation*}
+
+\textbf{Final Result:}
+The present value of the perpetual $\inr 500$ annual cash stream at $10\%$ discount rate is $\mathbf{\inr 5{,}000.00}$.
+\end{example}
+
+\begin{formulabox}[Present Value of a Growing Perpetuity]
 \paragraph{f. Present Value of a Growing Perpetuity}
-For cash flows growing at a constant rate $G$ indefinitely (with $R > G$):
+A \textbf{Growing Perpetuity} is an infinite stream of periodic cash flows that grow at a constant compound rate $G$ per period. When the discount rate exceeds the growth rate ($R > G$):
 \begin{equation}
     \PV \text{ of Growing Perpetuity} = \frac{C_1}{R - G}
 \end{equation}
 where:
 \begin{itemize}[noitemsep]
-    \item $C_1 = \text{Cash inflow in the first period}$
-    \item $R = \text{Discount rate per period}$
-    \item $G = \text{Constant growth rate in cash flow per period}$
+    \item $C_1 = \text{Expected cash inflow at the end of the first period}$
+    \item $R = \text{Discount rate / required rate of return per period}$
+    \item $G = \text{Constant compound growth rate of cash flows per period}$
+    \item \textbf{Condition for Convergence:} $R > G$ (if $R \le G$, the present value diverges to infinity).
 \end{itemize}
 \end{formulabox}
 
+\lecturedate{31/08/2026}
+\begin{example}{Valuation of a Growing Dividend Stream (Gordon Growth Perpetuity)}{ex_growing_dividend_perpetuity}
+\textbf{Problem:}
+A company is expected to declare a dividend of $\inr 4.00$ at the end of the 1st year from now ($C_1$), and this dividend is projected to grow at a constant annual rate of $5\%$ indefinitely. What is the present value of this perpetual dividend stream if the investor's required rate of return is $10\%$ per annum?
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item First-Year Dividend ($C_1$) = $\inr 4.00$
+    \item Constant Annual Dividend Growth Rate ($G$) = $5\% = 0.05$
+    \item Required Rate of Return / Discount Rate ($R$) = $10\% = 0.10$
+\end{itemize}
+
+\textbf{Convergence Check:}
+Since $R = 0.10 > G = 0.05$, the finite valuation condition ($R > G$) is satisfied.
+
+\textbf{Analytical Solution:}
+Applying the growing perpetuity (Gordon growth) formula:
+\begin{align*}
+    \PV &= \frac{C_1}{R - G} = \frac{4}{0.10 - 0.05} \\
+    &= \frac{4}{0.05} = \mathbf{\inr 80.00}
+\end{align*}
+
+\textbf{Final Result:}
+The present value (fair market price) of the perpetual growing dividend stream is $\mathbf{\inr 80.00}$.
+\end{example}
+
 \begin{formulabox}[Present Value of a Growing Annuity]
 \paragraph{g. Present Value of a Growing Annuity (Finite Horizon $n$)}
-For a stream of $n$ periodic cash flows growing at rate $G$ per period (with $R \neq G$):
+For a stream of $n$ periodic cash flows growing at rate $G$ per period across a finite horizon (with $R \neq G$):
 \begin{equation}
     \PV \text{ of Growing Annuity} = \frac{C_1}{R - G} \left[ 1 - \left(\frac{1 + G}{1 + R}\right)^n \right]
 \end{equation}
@@ -1030,12 +1105,56 @@ The present value of the $4$-year escalating rental stream is $\mathbf{\inr 45{,
 
 \begin{formulabox}[Sinking Fund (S.F.) Accumulation \& Periodic Instalment]
 \paragraph{h. Sinking Fund (S.F.) Accumulation}
-A sinking fund is an accumulating reserve established by investing periodic installments to meet a target future liability:
+A \textbf{Sinking Fund} is a dedicated reserve established by investing equal periodic installments at compound interest to accumulate a targeted future capital sum (e.g. to redeem debentures or replace capital equipment):
 \begin{equation}
-    \text{Accumulated Fund } (\FV) = \text{S.F. Instalment } (A) \times \left[ \frac{(1 + R)^n - 1}{R} \right]
+    \text{Accumulated Target Fund } (\FV) = \text{S.F. Instalment } (A) \times \left[ \frac{(1 + R)^n - 1}{R} \right] = A \cdot \CVAF(R, n)
 \end{equation}
-The required periodic installment is given by:
+The required periodic installment $A$ is given by:
 \begin{equation}
-    \text{S.F. Instalment } (A) = \frac{\text{Target Future Fund} \times R}{(1 + R)^n - 1}
+    \text{S.F. Instalment } (A) = \frac{\text{Target Future Fund} \times R}{(1 + R)^n - 1} = \frac{\text{Target Future Fund}}{\CVAF(R, n)}
 \end{equation}
 \end{formulabox}
+
+\lecturedate{31/08/2026}
+\begin{example}{Determination of Annual Sinking Fund Instalment}{ex_sinking_fund_instalment}
+\textbf{Problem:}
+An amount of $\inr 2{,}00{,}000$ is required at the end of $5$ years from now to repay a debenture liability. What amount should be accumulated (invested) at the end of each year at an annual interest rate of $12\%$ so that the fund reaches $\inr 2{,}00{,}000$ after $5$ years?
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Target Future Liability ($\FV$) = $\inr 2{,}00{,}000$
+    \item Accumulation Horizon ($n$) = $5$ years
+    \item Annual Rate of Interest ($R$) = $12\%$ p.a. $= 0.12$
+\end{itemize}
+
+\textbf{Analytical Solution:}
+Let $A$ denote the required annual sinking fund installment deposited at the end of each year:
+\begin{equation*}
+    \FV = A \times \left[ \frac{(1 + R)^n - 1}{R} \right] \implies A = \frac{\FV \times R}{(1 + R)^n - 1}
+\end{equation*}
+Evaluating the compound annuity accumulation factor $\CVAF(12\%, 5)$:
+\begin{align*}
+    (1.12)^5 &\approx 1.76234168 \\[0.3em]
+    \CVAF(12\%, 5) &= \frac{1.76234168 - 1}{0.12} = \frac{0.76234168}{0.12} \approx 6.352847
+\end{align*}
+Solving for the annual sinking fund installment $A$:
+\begin{equation*}
+    A = \frac{2{,}00{,}000}{6.352847} = \mathbf{\inr 31{,}481.95}
+\end{equation*}
+
+\textbf{Table Approximation Notes:}
+\begin{itemize}[leftmargin=*]
+    \item Using standard 3-decimal Compound Value Annuity Factor tables ($\CVAF(12\%, 5) \approx 6.353$):
+    \begin{equation*}
+        A \approx \frac{2{,}00{,}000}{6.353} = \mathbf{\inr 31{,}481.19}
+    \end{equation*}
+    \item Using standard Sinking Fund Factor tables ($\text{SFF}(12\%, 5) = \dfrac{1}{\CVAF} \approx 0.15741$):
+    \begin{equation*}
+        A = 2{,}00{,}000 \times 0.15741 = \mathbf{\inr 31{,}482.00}
+    \end{equation*}
+\end{itemize}
+
+\textbf{Final Result:}
+The required annual sinking fund installment to be invested each year is $\mathbf{\inr 31{,}481.95}$ (approx. $\mathbf{\inr 31{,}482.00}$).
+\end{example}

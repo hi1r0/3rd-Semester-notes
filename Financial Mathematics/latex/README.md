@@ -27,7 +27,7 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
     - Present Value of Ordinary Annuities ($\PVAF$) and Annuities Due.
     - Constant Perpetuities ($C/R$) & Growing Perpetuities ($C_1/(R-G)$).
     - Finite Growing Annuity streams & Sinking Fund ($\text{S.F.}$) reserve accumulations.
-    - *Solved Examples:* `1.3.7` to `1.3.11` (*Lectures: 18/08/2026, 27/08/2026, 28/08/2026*).
+    - *Solved Examples:* `1.3.7` to `1.3.15` (*Lectures: 18/08/2026, 27/08/2026, 28/08/2026, 31/08/2026*).
 
 ---
 
@@ -43,7 +43,7 @@ latex/
 │   ├── syllabus.tex               # Pondicherry University syllabus page
 │   └── titlepage.tex              # Formal cover page
 ├── chapters/
-│   └── ch01_interest_theory.tex   # Chapter 1: Interest Theory (Lectures: 13/08 – 28/08/2026)
+│   └── ch01_interest_theory.tex   # Chapter 1: Interest Theory (Lectures: 13/08 – 31/08/2026)
 ├── figures/                       # Department & University logos
 └── README.md                      # Documentation & compilation instructions
 ```
