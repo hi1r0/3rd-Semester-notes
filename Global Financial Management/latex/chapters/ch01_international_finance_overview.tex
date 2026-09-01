@@ -411,14 +411,14 @@ The \textbf{International Monetary Fund (IMF)} was established in \textbf{1944} 
             draw=navyblue, fill=softblue,
             line width=1.2pt, text=navyblue,
             font=\bfseries\sffamily, align=center,
-            inner sep=8pt, text width=11.5cm, minimum height=1.2cm
+            inner sep=8pt, text width=12cm, minimum height=1.3cm
         },
         imfcard/.style={
             rectangle, rounded corners=5pt,
             draw=charcoal!60, fill=white,
             line width=0.9pt, font=\sffamily,
-            align=left, inner sep=7pt,
-            text width=5.6cm, minimum height=1.8cm
+            align=left, inner sep=8pt,
+            text width=5.7cm, minimum height=1.8cm
         },
         arrowline/.style={
             -{Stealth[length=6pt, width=4pt]},
@@ -427,51 +427,50 @@ The \textbf{International Monetary Fund (IMF)} was established in \textbf{1944} 
     ]
         % Root Node
         \node[imfroot] (root) at (0, 0) {
-            \large International Monetary Fund (IMF) — Est. 1944\\[0.2em]
-            \footnotesize\normalfont Core Mission: Promote International Monetary Cooperation (PIMC) $\bullet$ Sustainable Growth $\bullet$ Global Prosperity
+            \large International Monetary Fund (IMF) — Est. 1944\\[0.25em]
+            \footnotesize\normalfont Core Mission: Promote International Monetary Cooperation $\bullet$ Sustainable Growth $\bullet$ Prosperity
         };
 
-        % Left Tier
-        \node[imfcard, draw=navyblue, fill=lightgraybg] (c1) at (-3.4, -2.2) {
+        % Tier 1
+        \node[imfcard, draw=navyblue, fill=lightgraybg] (c1) at (-3.4, -2.3) {
             {\color{navyblue}\textbf{\small 1. Monetary Cooperation}}\\[0.2em]
-            \scriptsize $\bullet$ Promote International Monetary Cooperation (PIMC)\\
-            \scriptsize $\bullet$ Forum for policy consultation
+            \scriptsize $\bullet$ Promote monetary cooperation (PIMC)\\
+            \scriptsize $\bullet$ Multilateral policy dialogue \& advice
         };
 
-        \node[imfcard, draw=darkteal, fill=lightgraybg] (c2) at (3.4, -2.2) {
+        \node[imfcard, draw=darkteal, fill=lightgraybg] (c2) at (3.4, -2.3) {
             {\color{darkteal}\textbf{\small 2. Trade Facilitation}}\\[0.2em]
-            \scriptsize $\bullet$ Facilitate balanced growth of international trade\\
-            \scriptsize $\bullet$ Promote real income expansion
+            \scriptsize $\bullet$ Facilitate balanced trade growth\\
+            \scriptsize $\bullet$ Expand employment and real income
         };
 
-        % Middle Tier
-        \node[imfcard, draw=amber!90!black, fill=lightgraybg] (c3) at (-3.4, -4.6) {
+        % Tier 2
+        \node[imfcard, draw=amber!90!black, fill=lightgraybg] (c3) at (-3.4, -4.7) {
             {\color{amber!90!black}\textbf{\small 3. Exchange Rate Stability}}\\[0.2em]
-            \scriptsize $\bullet$ Promote exchange stability\\
-            \scriptsize $\bullet$ Maintain orderly exchange arrangements\\
-            \scriptsize $\bullet$ Avoid competitive depreciations
+            \scriptsize $\bullet$ Promote orderly exchange arrangements\\
+            \scriptsize $\bullet$ Avoid competitive currency devaluations
         };
 
-        \node[imfcard, draw=navyblue!80, fill=lightgraybg] (c4) at (3.4, -4.6) {
+        \node[imfcard, draw=navyblue!80, fill=lightgraybg] (c4) at (3.4, -4.7) {
             {\color{navyblue!80}\textbf{\small 4. Multilateral Payments}}\\[0.2em]
-            \scriptsize $\bullet$ Establish multilateral payment system\\
-            \scriptsize $\bullet$ Eliminate foreign exchange restrictions
+            \scriptsize $\bullet$ Establish multilateral payment systems\\
+            \scriptsize $\bullet$ Eliminate forex trade restrictions
         };
 
-        % Bottom Tier
-        \node[imfcard, draw=charcoal, fill=lightgraybg] (c5) at (-3.4, -7.0) {
+        % Tier 3
+        \node[imfcard, draw=charcoal, fill=lightgraybg] (c5) at (-3.4, -7.1) {
             {\color{charcoal}\textbf{\small 5. Financial Assistance}}\\[0.2em]
             \scriptsize $\bullet$ Provide balance of payments support\\
-            \scriptsize $\bullet$ Temporary financial safety net
+            \scriptsize $\bullet$ Temporary macroeconomic safety net
         };
 
-        \node[imfcard, draw=navyblue!70!black, fill=lightgraybg] (c6) at (3.4, -7.0) {
+        \node[imfcard, draw=navyblue!70!black, fill=lightgraybg] (c6) at (3.4, -7.1) {
             {\color{navyblue!70!black}\textbf{\small 6. Sustainable Growth}}\\[0.2em]
-            \scriptsize $\bullet$ Structural policy support\\
+            \scriptsize $\bullet$ Support structural policy reforms\\
             \scriptsize $\bullet$ Foster poverty reduction \& stability
         };
 
-        % Connectors
+        % Clean Straight Lines
         \draw[arrowline] (root.south -| c1.north) -- (c1.north);
         \draw[arrowline] (root.south -| c2.north) -- (c2.north);
         \draw[arrowline] (c1.south) -- (c3.north);
@@ -546,21 +545,21 @@ The \textbf{Balance of Payments (BOP)} is a systematic statistical record of all
 % ------------------------------------------------------------------------------
 \begin{figure}[htbp]
     \centering
-    \resizebox{0.95\textwidth}{!}{%
+    \resizebox{0.96\textwidth}{!}{%
     \begin{tikzpicture}[
         boproot/.style={
             rectangle, rounded corners=6pt,
             draw=navyblue, fill=softblue,
             line width=1.2pt, text=navyblue,
             font=\bfseries\sffamily, align=center,
-            inner sep=8pt, text width=11.5cm, minimum height=1.2cm
+            inner sep=8pt, text width=12.2cm, minimum height=1.2cm
         },
         bopbranch/.style={
             rectangle, rounded corners=5pt,
             draw=charcoal!70, fill=white,
             line width=0.9pt, font=\sffamily,
-            align=left, inner sep=7pt,
-            text width=3.8cm, minimum height=3.2cm
+            align=left, inner sep=8pt,
+            text width=4.0cm, minimum height=3.0cm
         },
         arrowline/.style={
             -{Stealth[length=6pt, width=4pt]},
@@ -574,29 +573,28 @@ The \textbf{Balance of Payments (BOP)} is a systematic statistical record of all
         };
 
         % 3 Accounts
-        \node[bopbranch, draw=navyblue, fill=lightgraybg] (cur) at (-4.2, -3.2) {
-            {\color{navyblue}\textbf{\normalsize 1. Current Account}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{Goods:} Merchandise trade\\
-            \scriptsize $\bullet$ \textbf{Services:} Travel, IT, transport\\
-            \scriptsize $\bullet$ \textbf{Primary Income:} Dividends, interest, compensation\\
-            \scriptsize $\bullet$ \textbf{Transfers:} Remittances, gifts
+        \node[bopbranch, draw=navyblue, fill=lightgraybg] (cur) at (-4.4, -2.9) {
+            {\color{navyblue}\textbf{\normalsize 1. Current Account}}\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Goods:} Visible merchandise\\
+            \scriptsize $\bullet$ \textbf{Services:} IT, travel \& shipping\\
+            \scriptsize $\bullet$ \textbf{Income:} Dividends \& wages\\
+            \scriptsize $\bullet$ \textbf{Transfers:} Remittances \& aid
         };
 
-        \node[bopbranch, draw=darkteal, fill=lightgraybg] (cap) at (0, -3.2) {
-            {\color{darkteal}\textbf{\normalsize 2. Capital Account}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{Capital Transfers:}\\
-            \scriptsize \quad Debt forgiveness, migrant assets\\
+        \node[bopbranch, draw=darkteal, fill=lightgraybg] (cap) at (0, -2.9) {
+            {\color{darkteal}\textbf{\normalsize 2. Capital Account}}\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Debt Relief \& Transfers}\\
+            \scriptsize $\bullet$ \textbf{Fixed Asset Transfers}\\
             \scriptsize $\bullet$ \textbf{Non-Produced Assets:}\\
-            \scriptsize \quad Trademarks, patents, land\\
-            \scriptsize $\bullet$ \textbf{Fixed Asset Ownership:}
+            \scriptsize \quad Patents, trademarks \& leases
         };
 
-        \node[bopbranch, draw=amber!90!black, fill=lightgraybg] (fin) at (4.2, -3.2) {
-            {\color{amber!90!black}\textbf{\normalsize 3. Financial Account}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{FDI:} Direct enterprise equity\\
-            \scriptsize $\bullet$ \textbf{FPI:} Stocks, debt, portfolio\\
-            \scriptsize $\bullet$ \textbf{Other Investment:} Loans\\
-            \scriptsize $\bullet$ \textbf{Reserve Assets:} Forex changes
+        \node[bopbranch, draw=amber!90!black, fill=lightgraybg] (fin) at (4.4, -2.9) {
+            {\color{amber!90!black}\textbf{\normalsize 3. Financial Account}}\\[0.25em]
+            \scriptsize $\bullet$ \textbf{FDI:} Foreign direct equity\\
+            \scriptsize $\bullet$ \textbf{FPI:} Equities \& debt bonds\\
+            \scriptsize $\bullet$ \textbf{Loans:} External bank credits\\
+            \scriptsize $\bullet$ \textbf{Reserves:} Central bank forex
         };
 
         % Connectors
@@ -616,14 +614,14 @@ The Balance of Payments is structured into three primary interrelated accounts:
     \begin{itemize}[noitemsep]
         \item \textbf{Export and Import of Goods:} Visible / merchandise trade balance.
         \item \textbf{Export and Import of Services:} Invisible trade (software services, banking, shipping, tourism).
-        \item \textbf{Primary Income:} Cross-border investment returns (dividends, interest receipts/payments) and employee compensation.
+        \item \textbf{Primary Income (Investment Returns):} Cross-border investment returns (dividends, interest receipts/payments) and employee wages.
         \item \textbf{Current Transfers (Secondary Income):} Unrequited unilateral flows including personal remittances, grants, donations, and gifts.
     \end{itemize}
 
     \item \textbf{Capital Account:} Records net international capital transfers and non-financial asset movements:
     \begin{itemize}[noitemsep]
         \item \textbf{Capital Transfers:} Debt forgiveness, sovereign grants, and migrant asset transfers.
-        \item \textbf{Transfer of Ownership of Fixed Assets:} Cross-border transfers of government/institutional fixed property.
+        \item \textbf{Transfer of Fixed Asset Ownership:} Cross-border transfers of sovereign or institutional fixed assets.
         \item \textbf{Acquisition / Disposal of Non-Produced, Non-Financial Assets:} Rights to natural resources, patents, trademarks, brand leases, and copyrights.
     \end{itemize}
 
@@ -660,35 +658,35 @@ The Balance of Payments is structured into three primary interrelated accounts:
             rectangle, rounded corners=5pt,
             draw=amber!90!black, fill=softamber,
             line width=0.9pt, font=\sffamily,
-            align=left, inner sep=8pt, text width=5.8cm
+            align=left, inner sep=8pt, text width=6.2cm, minimum height=3.8cm
         },
         measurebox/.style={
             rectangle, rounded corners=5pt,
             draw=darkteal, fill=softgreen,
             line width=0.9pt, font=\sffamily,
-            align=left, inner sep=8pt, text width=5.8cm
+            align=left, inner sep=8pt, text width=6.2cm, minimum height=3.8cm
         }
     ]
         % Left: Causes
-        \node[causebox] (c_box) at (-3.4, 0) {
+        \node[causebox] (c_box) at (-3.5, 0) {
             {\color{amber!90!black}\textbf{\normalsize Causes of BOP Deficit}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{Excessive Imports:} Consumer \& capital goods surge\\
-            \scriptsize $\bullet$ \textbf{Decline in Exports:} Loss of global competitiveness\\
-            \scriptsize $\bullet$ \textbf{Domestic Inflation:} Escalating export price index\\
-            \scriptsize $\bullet$ \textbf{High Foreign Debt:} Heavy debt servicing outflows\\
-            \scriptsize $\bullet$ \textbf{Capital Outflows:} Sudden flight to safety / exit\\
-            \scriptsize $\bullet$ \textbf{Instability:} Political \& macroeconomic crises
+            \scriptsize $\bullet$ \textbf{Excessive Imports:} Surge in foreign goods\\
+            \scriptsize $\bullet$ \textbf{Decline in Exports:} Fall in competitiveness\\
+            \scriptsize $\bullet$ \textbf{Domestic Inflation:} Higher export pricing\\
+            \scriptsize $\bullet$ \textbf{High Foreign Debt:} Heavy debt servicing\\
+            \scriptsize $\bullet$ \textbf{Capital Outflows:} Rapid flight to safety\\
+            \scriptsize $\bullet$ \textbf{Instability:} Macroeconomic uncertainty
         };
 
         % Right: Measures
-        \node[measurebox] (m_box) at (3.4, 0) {
+        \node[measurebox] (m_box) at (3.5, 0) {
             {\color{darkteal}\textbf{\normalsize Measures to Correct Deficit}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{Export Promotion:} Subsidies, SEZs, diversification\\
-            \scriptsize $\bullet$ \textbf{Import Restrictions:} Tariffs, quotas, compression\\
-            \scriptsize $\bullet$ \textbf{Attract Capital:} FDI \& portfolio incentives\\
-            \scriptsize $\bullet$ \textbf{Forex Reserves:} Prudent Central Bank intervention\\
-            \scriptsize $\bullet$ \textbf{Monetary \& Fiscal Policy:} Interest rate \& budget discipline\\
-            \scriptsize $\bullet$ \textbf{Exchange Rate:} Depreciation / devaluation
+            \scriptsize $\bullet$ \textbf{Export Promotion:} Subsidies, SEZ incentives\\
+            \scriptsize $\bullet$ \textbf{Import Restrictions:} Tariffs, quotas, licenses\\
+            \scriptsize $\bullet$ \textbf{Attract Capital:} Incentivize FDI \& portfolio\\
+            \scriptsize $\bullet$ \textbf{Forex Reserves:} Central Bank intervention\\
+            \scriptsize $\bullet$ \textbf{Monetary \& Fiscal Policy:} Demand control\\
+            \scriptsize $\bullet$ \textbf{Exchange Policy:} Controlled depreciation
         };
     \end{tikzpicture}%
     }

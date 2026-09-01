@@ -44,7 +44,7 @@ Comprehensive course notes, lecture materials, presentations, and LaTeX study do
 
 ## 🛠️ Building LaTeX Notes
 
-To compile the LaTeX notes in `Financial Mathematics/latex` or `Time Series/latex`:
+To compile the LaTeX notes in `Financial Mathematics/latex`, `Global Financial Management/latex`, or `Time Series/latex`:
 
 ```bash
 pdflatex main.tex
