@@ -1158,3 +1158,52 @@ Solving for the annual sinking fund installment $A$:
 \textbf{Final Result:}
 The required annual sinking fund installment to be invested each year is $\mathbf{\inr 31{,}481.95}$ (approx. $\mathbf{\inr 31{,}482.00}$).
 \end{example}
+
+\lecturedate{01/09/2026}
+\begin{example}{Annuity Due Sinking Fund Accumulation (T Limited Debenture Redemption)}{ex_sinking_fund_annuity_due}
+\textbf{Problem:}
+T Limited is creating a sinking fund to redeem its debentures of $\inr 40{,}00{,}000$ issued on April 5, 2008 and maturing on April 4, 2020. The first annual payment to the fund will be made on April 5, 2008 (at the beginning of each operating year). The company will make equal annual payments and expects that the fund will earn an interest rate of $14\%$ per annum. How much will be the amount of the annual sinking fund payment?
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Target Sinking Fund Liability ($\FV$) = $\inr 40{,}00{,}000$
+    \item Debenture Issue Date: April 5, 2008 \qquad Maturity Date: April 4, 2020
+    \item Total Duration ($n$) = $2020 - 2008 = 12$ years
+    \item Payment Schedule: Beginning of each year (Annuity Due) $\implies 12$ equal annual instalments
+    \item Annual Rate of Return ($R$) = $14\%$ p.a. $= 0.14$
+\end{itemize}
+
+\textbf{Mathematical Formulation (Annuity Due Sinking Fund Accumulation):}
+Because payments are deposited at the \textbf{beginning} of each year, every periodic instalment compounds for one additional year throughout the investment horizon:
+\begin{equation*}
+    \FV = \text{Instalment } (A) \times \left[ \frac{(1 + R)^n - 1}{R} \right] \times (1 + R) = A \cdot \CVAF(R, n) \cdot (1 + R)
+\end{equation*}
+
+\textbf{Step-by-Step Analytical Calculation:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Step 1: Compute the Base Growth Factor $(1 + R)^n$:}
+    \begin{equation*}
+        (1 + R)^{12} = (1.14)^{12} \approx 4.81790581
+    \end{equation*}
+
+    \item \textbf{Step 2: Evaluate the Ordinary Compound Value Annuity Factor $\CVAF(14\%, 12)$:}
+    \begin{equation*}
+        \CVAF(14\%, 12) = \frac{(1.14)^{12} - 1}{0.14} = \frac{4.81790581 - 1}{0.14} = \frac{3.81790581}{0.14} \approx 27.2707558
+    \end{equation*}
+
+    \item \textbf{Step 3: Adjust for Annuity Due Timing by Multiplying with $(1 + R)$:}
+    \begin{equation*}
+        \text{Annuity Due Accumulation Factor} = 27.2707558 \times 1.14 = \mathbf{31.0886616}
+    \end{equation*}
+
+    \item \textbf{Step 4: Solve for the Required Periodic Instalment ($A$):}
+    \begin{align*}
+        40{,}00{,}000 &= A \times 31.0886616 \\[0.3em]
+        A &= \frac{40{,}00{,}000}{31.0886616} = \mathbf{\inr 1{,}28{,}664.31}
+    \end{align*}
+\end{enumerate}
+
+\textbf{Final Result:}
+The required annual sinking fund instalment deposited at the beginning of each year is $\mathbf{\inr 1{,}28{,}664.31}$.
+\end{example}

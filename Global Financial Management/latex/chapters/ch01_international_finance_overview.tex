@@ -386,3 +386,334 @@
     \item Country assistance strategy
     \item Borrowing and financial decisions
 \end{itemize}
+
+\newpage
+
+% ==============================================================================
+% Lecture 4: 31/08/2026
+% ==============================================================================
+\section{International Monetary Fund (IMF) \& Sustainable Development Goals}
+\lecturedate{31/08/2026}
+
+\begin{formulabox}[Institutional Profile: International Monetary Fund (IMF)]
+The \textbf{International Monetary Fund (IMF)} was established in \textbf{1944} at the Bretton Woods Conference to foster global monetary cooperation, secure financial stability, facilitate international trade, promote high employment and sustainable economic growth, and reduce poverty around the world.
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 4: IMF Architecture & Objectives
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        imfroot/.style={
+            rectangle, rounded corners=6pt,
+            draw=navyblue, fill=softblue,
+            line width=1.2pt, text=navyblue,
+            font=\bfseries\sffamily, align=center,
+            inner sep=8pt, text width=11.5cm, minimum height=1.2cm
+        },
+        imfcard/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!60, fill=white,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=7pt,
+            text width=5.6cm, minimum height=1.8cm
+        },
+        arrowline/.style={
+            -{Stealth[length=6pt, width=4pt]},
+            draw=navyblue!80, line width=1pt
+        }
+    ]
+        % Root Node
+        \node[imfroot] (root) at (0, 0) {
+            \large International Monetary Fund (IMF) — Est. 1944\\[0.2em]
+            \footnotesize\normalfont Core Mission: Promote International Monetary Cooperation (PIMC) $\bullet$ Sustainable Growth $\bullet$ Global Prosperity
+        };
+
+        % Left Tier
+        \node[imfcard, draw=navyblue, fill=lightgraybg] (c1) at (-3.4, -2.2) {
+            {\color{navyblue}\textbf{\small 1. Monetary Cooperation}}\\[0.2em]
+            \scriptsize $\bullet$ Promote International Monetary Cooperation (PIMC)\\
+            \scriptsize $\bullet$ Forum for policy consultation
+        };
+
+        \node[imfcard, draw=darkteal, fill=lightgraybg] (c2) at (3.4, -2.2) {
+            {\color{darkteal}\textbf{\small 2. Trade Facilitation}}\\[0.2em]
+            \scriptsize $\bullet$ Facilitate balanced growth of international trade\\
+            \scriptsize $\bullet$ Promote real income expansion
+        };
+
+        % Middle Tier
+        \node[imfcard, draw=amber!90!black, fill=lightgraybg] (c3) at (-3.4, -4.6) {
+            {\color{amber!90!black}\textbf{\small 3. Exchange Rate Stability}}\\[0.2em]
+            \scriptsize $\bullet$ Promote exchange stability\\
+            \scriptsize $\bullet$ Maintain orderly exchange arrangements\\
+            \scriptsize $\bullet$ Avoid competitive depreciations
+        };
+
+        \node[imfcard, draw=navyblue!80, fill=lightgraybg] (c4) at (3.4, -4.6) {
+            {\color{navyblue!80}\textbf{\small 4. Multilateral Payments}}\\[0.2em]
+            \scriptsize $\bullet$ Establish multilateral payment system\\
+            \scriptsize $\bullet$ Eliminate foreign exchange restrictions
+        };
+
+        % Bottom Tier
+        \node[imfcard, draw=charcoal, fill=lightgraybg] (c5) at (-3.4, -7.0) {
+            {\color{charcoal}\textbf{\small 5. Financial Assistance}}\\[0.2em]
+            \scriptsize $\bullet$ Provide balance of payments support\\
+            \scriptsize $\bullet$ Temporary financial safety net
+        };
+
+        \node[imfcard, draw=navyblue!70!black, fill=lightgraybg] (c6) at (3.4, -7.0) {
+            {\color{navyblue!70!black}\textbf{\small 6. Sustainable Growth}}\\[0.2em]
+            \scriptsize $\bullet$ Structural policy support\\
+            \scriptsize $\bullet$ Foster poverty reduction \& stability
+        };
+
+        % Connectors
+        \draw[arrowline] (root.south -| c1.north) -- (c1.north);
+        \draw[arrowline] (root.south -| c2.north) -- (c2.north);
+        \draw[arrowline] (c1.south) -- (c3.north);
+        \draw[arrowline] (c2.south) -- (c4.north);
+        \draw[arrowline] (c3.south) -- (c5.north);
+        \draw[arrowline] (c4.south) -- (c6.north);
+    \end{tikzpicture}%
+    }
+    \caption{Core Strategic Objectives of the International Monetary Fund}
+    \label{fig:imf_objectives}
+\end{figure}
+
+\subsection{1. Core Objectives of the IMF}
+The International Monetary Fund operates under six foundational statutory objectives:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Promote International Monetary Cooperation (PIMC):} Providing the primary institutional machinery for consultation, dialogue, and collaboration on international monetary problems.
+    \item \textbf{Facilitate International Trade:} Promoting the expansion and balanced growth of international trade, contributing to high levels of employment and real income generation.
+    \item \textbf{Promote Exchange Rate Stability:} Maintaining orderly exchange arrangements among member states and avoiding competitive exchange depreciation.
+    \item \textbf{Establish Multilateral Payment Systems:} Assisting in establishing a multilateral system of payments for current transactions and eliminating foreign exchange restrictions that hamper world trade.
+    \item \textbf{Provide Financial Assistance:} Making its general resources temporarily available under adequate safeguards to members facing balance of payments disequilibria.
+    \item \textbf{Support Sustainable Economic Growth:} Helping countries design and implement resilient macroeconomic policies to foster prosperity and poverty reduction.
+\end{enumerate}
+
+\subsection{2. United Nations Sustainable Development Goals (SDGs)}
+The global macroeconomic architecture collaborates closely with international institutions to achieve the \textbf{17 Sustainable Development Goals (SDGs)} adopted by the United Nations:
+
+\begin{table}[htbp]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\textwidth}{rlX}
+        \toprule
+        \textbf{\#} & \textbf{Goal Name} & \textbf{Core Focus Area} \\
+        \midrule
+        \textbf{SDG 1} & \textbf{No Poverty} & End poverty in all its forms everywhere. \\
+        \textbf{SDG 2} & \textbf{Zero Hunger} & End hunger, achieve food security, and promote sustainable agriculture. \\
+        \textbf{SDG 3} & \textbf{Good Health \& Well-Being} & Ensure healthy lives and promote well-being for all at all ages. \\
+        \textbf{SDG 4} & \textbf{Quality Education} & Ensure inclusive, equitable education and promote lifelong learning. \\
+        \textbf{SDG 5} & \textbf{Gender Equality} & Achieve gender equality and empower all women and girls. \\
+        \textbf{SDG 6} & \textbf{Clean Water \& Sanitation} & Ensure availability and sustainable management of water and sanitation. \\
+        \textbf{SDG 7} & \textbf{Affordable \& Clean Energy} & Ensure access to affordable, reliable, sustainable modern energy. \\
+        \textbf{SDG 8} & \textbf{Decent Work \& Growth} & Promote sustained, inclusive economic growth and decent work. \\
+        \textbf{SDG 9} & \textbf{Industry \& Infrastructure} & Build resilient infrastructure, foster innovation and industrialization. \\
+        \textbf{SDG 10} & \textbf{Reduced Inequalities} & Reduce income and opportunity inequality within and among countries. \\
+        \textbf{SDG 11} & \textbf{Sustainable Cities} & Make cities and human settlements inclusive, safe, and resilient. \\
+        \textbf{SDG 12} & \textbf{Responsible Consumption} & Ensure sustainable consumption and production patterns. \\
+        \textbf{SDG 13} & \textbf{Climate Action} & Take urgent action to combat climate change and its impacts. \\
+        \textbf{SDG 14} & \textbf{Life Below Water} & Conserve and sustainably use oceans, seas, and marine resources. \\
+        \textbf{SDG 15} & \textbf{Life on Land} & Protect, restore, and promote sustainable terrestrial ecosystems. \\
+        \textbf{SDG 16} & \textbf{Peace, Justice \& Institutions} & Promote peaceful, inclusive societies and build accountable institutions. \\
+        \textbf{SDG 17} & \textbf{Partnerships for the Goals} & Strengthen the means of implementation and global partnerships. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{The 17 United Nations Sustainable Development Goals (SDGs)}
+    \label{tab:sdgs_summary}
+\end{table}
+
+\newpage
+
+% ==============================================================================
+% Lecture 5: 01/09/2026
+% ==============================================================================
+\section{Balance of Payments (BOP) \& IMF Macroeconomic Functions}
+\lecturedate{01/09/2026}
+
+\begin{definition}{Balance of Payments (BOP)}{bop_def}
+The \textbf{Balance of Payments (BOP)} is a systematic statistical record of all economic and financial transactions conducted between the \textbf{residents} of a country and the \textbf{rest of the world} during a specified time period (typically a quarter or a financial year).
+\end{definition}
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 5: Balance of Payments Architecture
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        boproot/.style={
+            rectangle, rounded corners=6pt,
+            draw=navyblue, fill=softblue,
+            line width=1.2pt, text=navyblue,
+            font=\bfseries\sffamily, align=center,
+            inner sep=8pt, text width=11.5cm, minimum height=1.2cm
+        },
+        bopbranch/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!70, fill=white,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=7pt,
+            text width=3.8cm, minimum height=3.2cm
+        },
+        arrowline/.style={
+            -{Stealth[length=6pt, width=4pt]},
+            draw=navyblue!80, line width=1pt
+        }
+    ]
+        % Root
+        \node[boproot] (root) at (0, 0) {
+            \large Structure of Balance of Payments (BOP)\\[0.2em]
+            \footnotesize\normalfont Double-Entry Accounting of All International Economic Transactions
+        };
+
+        % 3 Accounts
+        \node[bopbranch, draw=navyblue, fill=lightgraybg] (cur) at (-4.2, -3.2) {
+            {\color{navyblue}\textbf{\normalsize 1. Current Account}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Goods:} Merchandise trade\\
+            \scriptsize $\bullet$ \textbf{Services:} Travel, IT, transport\\
+            \scriptsize $\bullet$ \textbf{Primary Income:} Dividends, interest, compensation\\
+            \scriptsize $\bullet$ \textbf{Transfers:} Remittances, gifts
+        };
+
+        \node[bopbranch, draw=darkteal, fill=lightgraybg] (cap) at (0, -3.2) {
+            {\color{darkteal}\textbf{\normalsize 2. Capital Account}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Capital Transfers:}\\
+            \scriptsize \quad Debt forgiveness, migrant assets\\
+            \scriptsize $\bullet$ \textbf{Non-Produced Assets:}\\
+            \scriptsize \quad Trademarks, patents, land\\
+            \scriptsize $\bullet$ \textbf{Fixed Asset Ownership:}
+        };
+
+        \node[bopbranch, draw=amber!90!black, fill=lightgraybg] (fin) at (4.2, -3.2) {
+            {\color{amber!90!black}\textbf{\normalsize 3. Financial Account}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{FDI:} Direct enterprise equity\\
+            \scriptsize $\bullet$ \textbf{FPI:} Stocks, debt, portfolio\\
+            \scriptsize $\bullet$ \textbf{Other Investment:} Loans\\
+            \scriptsize $\bullet$ \textbf{Reserve Assets:} Forex changes
+        };
+
+        % Connectors
+        \draw[arrowline] (root.south -| cur.north) -- (cur.north);
+        \draw[arrowline] (root.south) -- (cap.north);
+        \draw[arrowline] (root.south -| fin.north) -- (fin.north);
+    \end{tikzpicture}%
+    }
+    \caption{Constituent Accounts of the Balance of Payments Framework}
+    \label{fig:bop_structure}
+\end{figure}
+
+\subsection{1. Structure \& Components of BOP Accounts}
+The Balance of Payments is structured into three primary interrelated accounts:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Current Account:} Records trade in goods and services, investment income, and unilateral transfers:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Export and Import of Goods:} Visible / merchandise trade balance.
+        \item \textbf{Export and Import of Services:} Invisible trade (software services, banking, shipping, tourism).
+        \item \textbf{Primary Income:} Cross-border investment returns (dividends, interest receipts/payments) and employee compensation.
+        \item \textbf{Current Transfers (Secondary Income):} Unrequited unilateral flows including personal remittances, grants, donations, and gifts.
+    \end{itemize}
+
+    \item \textbf{Capital Account:} Records net international capital transfers and non-financial asset movements:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Capital Transfers:} Debt forgiveness, sovereign grants, and migrant asset transfers.
+        \item \textbf{Transfer of Ownership of Fixed Assets:} Cross-border transfers of government/institutional fixed property.
+        \item \textbf{Acquisition / Disposal of Non-Produced, Non-Financial Assets:} Rights to natural resources, patents, trademarks, brand leases, and copyrights.
+    \end{itemize}
+
+    \item \textbf{Financial Account:} Records international transactions in financial assets and liabilities:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Foreign Direct Investment (FDI):} Long-term controlling equity investments in foreign enterprises ($>10\%$ voting power).
+        \item \textbf{Foreign Portfolio Investment (FPI):} Cross-border investments in equity shares, corporate debt, and sovereign bonds for yield rather than managerial control.
+        \item \textbf{Other Investments:} Commercial bank lending, official bilateral loans, and trade credits.
+        \item \textbf{Changes in Foreign Exchange Reserves:} Official reserve asset transactions managed by the Central Bank to stabilize the currency.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{2. BOP Disequilibrium: Surplus vs. Deficit}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{BOP Surplus:} Occurs when autonomous international receipts exceed total autonomous payments:
+    \begin{align}
+        \text{Total Receipts} &> \text{Total Payments} \notag\\
+        &\implies \text{Net Inflow of Foreign Currency / Reserve Accumulation}
+    \end{align}
+    \item \textbf{BOP Deficit:} Occurs when autonomous international payments exceed total receipts:
+    \begin{align}
+        \text{Total Payments} &> \text{Total Receipts} \notag\\
+        &\implies \text{Net Outflow of Reserves / External Debt Expansion}
+    \end{align}
+\end{itemize}
+
+\subsection{3. Causes and Remedial Measures for BOP Deficits}
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        causebox/.style={
+            rectangle, rounded corners=5pt,
+            draw=amber!90!black, fill=softamber,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=8pt, text width=5.8cm
+        },
+        measurebox/.style={
+            rectangle, rounded corners=5pt,
+            draw=darkteal, fill=softgreen,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=8pt, text width=5.8cm
+        }
+    ]
+        % Left: Causes
+        \node[causebox] (c_box) at (-3.4, 0) {
+            {\color{amber!90!black}\textbf{\normalsize Causes of BOP Deficit}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Excessive Imports:} Consumer \& capital goods surge\\
+            \scriptsize $\bullet$ \textbf{Decline in Exports:} Loss of global competitiveness\\
+            \scriptsize $\bullet$ \textbf{Domestic Inflation:} Escalating export price index\\
+            \scriptsize $\bullet$ \textbf{High Foreign Debt:} Heavy debt servicing outflows\\
+            \scriptsize $\bullet$ \textbf{Capital Outflows:} Sudden flight to safety / exit\\
+            \scriptsize $\bullet$ \textbf{Instability:} Political \& macroeconomic crises
+        };
+
+        % Right: Measures
+        \node[measurebox] (m_box) at (3.4, 0) {
+            {\color{darkteal}\textbf{\normalsize Measures to Correct Deficit}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Export Promotion:} Subsidies, SEZs, diversification\\
+            \scriptsize $\bullet$ \textbf{Import Restrictions:} Tariffs, quotas, compression\\
+            \scriptsize $\bullet$ \textbf{Attract Capital:} FDI \& portfolio incentives\\
+            \scriptsize $\bullet$ \textbf{Forex Reserves:} Prudent Central Bank intervention\\
+            \scriptsize $\bullet$ \textbf{Monetary \& Fiscal Policy:} Interest rate \& budget discipline\\
+            \scriptsize $\bullet$ \textbf{Exchange Rate:} Depreciation / devaluation
+        };
+    \end{tikzpicture}%
+    }
+    \caption{Macroeconomic Dynamics: Causes and Policy Correctives for BOP Deficit}
+    \label{fig:bop_deficit_dynamics}
+\end{figure}
+
+\subsection{4. Major Core Functions of the IMF}
+The International Monetary Fund executes its mandate through three fundamental pillars of macroeconomic intervention:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Surveillance (Economic Health Monitoring):}
+    \begin{itemize}[noitemsep]
+        \item Conducts bilateral Article IV consultations with member nations.
+        \item Monitors global, regional, and national economic policies, exchange rate regimes, and systemic financial vulnerabilities.
+    \end{itemize}
+
+    \item \textbf{Financial Assistance (Lending):}
+    \begin{itemize}[noitemsep]
+        \item Provides balance of payments crisis loans and precautionary credit lines to countries facing external liquidity shocks.
+        \item Conditions loans on economic stabilization programs and structural policy reforms.
+    \end{itemize}
+
+    \item \textbf{Capacity Development (Technical Assistance \& Training):}
+    \begin{itemize}[noitemsep]
+        \item Delivers specialized capacity building and advisory services to central banks, ministries of finance, and statistical agencies.
+        \item Modernizes tax administration, monetary policy frameworks, banking supervision, and macroeconomic data systems.
+    \end{itemize}
+\end{enumerate}

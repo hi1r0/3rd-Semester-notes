@@ -1,0 +1,1426 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==============================================================================
+% Packages & Configuration
+% ==============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage{booktabs, tabularx, array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+% Color Definitions
+\definecolor{codegreen}{rgb}{0.13, 0.55, 0.13}
+\definecolor{codegray}{rgb}{0.45, 0.45, 0.45}
+\definecolor{codepurple}{rgb}{0.55, 0.10, 0.75}
+\definecolor{codeblue}{rgb}{0.08, 0.28, 0.65}
+\definecolor{backcolour}{rgb}{0.97, 0.98, 0.99}
+\definecolor{headerblue}{rgb}{0.11, 0.22, 0.38}
+\definecolor{rulecolor}{rgb}{0.85, 0.88, 0.92}
+
+% Python Listings Configuration (Clean Copy-Paste Friendly)
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{rulecolor},
+    linewidth=\linewidth,
+    xleftmargin=10pt,
+    xrightmargin=10pt,
+    framexleftmargin=8pt,
+    framexrightmargin=8pt,
+    framextopmargin=6pt,
+    framexbottommargin=6pt
+}
+\lstset{style=pythonstyle}
+
+% Hyperlink Setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=headerblue,
+    citecolor=codeblue,
+    urlcolor=codeblue,
+    pdftitle={MSQF 536: Machine Learning Techniques - Unit I Assignment Answers},
+    pdfauthor={N Rohit Vedhanandh}
+}
+
+% Header and Footer Styling
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{headerblue}\textbf{MSQF 536: Machine Learning Techniques}}
+\fancyhead[R]{\small\color{gray}Unit I Assignment Answers}
+\fancyfoot[L]{\small\color{gray}N Rohit Vedhanandh | Pondicherry University}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Section and List Spacing
+\setlist[itemize]{leftmargin=*, topsep=2pt, itemsep=2pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=*, topsep=2pt, itemsep=2pt, parsep=0pt}
+
+% Custom Layout Macros for Question then Answer flow
+\newcommand{\questiontitle}[2]{%
+    \vspace{0.4cm}%
+    \noindent\textbf{\large\color{headerblue}#1. #2}\par\vspace{0.15cm}%
+}
+\newcommand{\qprompt}[1]{%
+    \noindent\textbf{Question:} \textit{#1}\par\vspace{0.2cm}%
+}
+\newcommand{\answer}{\noindent\textbf{\underline{Answer:}}\par\vspace{0.15cm}}
+
+% ==============================================================================
+% Document Body
+% ==============================================================================
+\begin{document}
+
+% Title Header Block
+\begin{center}
+    {\large \textbf{DEPARTMENT OF STATISTICS, PONDICHERRY UNIVERSITY}}\\[0.2em]
+    {\large \textbf{M.Sc. Quantitative Finance --- Semester III}}\\[0.5em]
+    {\LARGE \textbf{\color{headerblue}MSQF 536: MACHINE LEARNING TECHNIQUES}}\\[0.25em]
+    {\Large \textbf{UNIT I ASSIGNMENT ANSWERS: DATA PRE-PROCESSING}}\\[0.5em]
+    \rule{\linewidth}{1pt}\\[0.35em]
+    \textbf{Student Name:} N Rohit Vedhanandh \hfill \textbf{Course Code:} MSQF 536\\
+    \textbf{Programme:} M.Sc. Quantitative Finance \hfill \textbf{Topic:} Unit I Assignment Answers
+    \rule{\linewidth}{1pt}
+\end{center}
+\vspace{0.2cm}
+
+% ==============================================================================
+% SECTION A
+% ==============================================================================
+\section*{Section A: Conceptual Questions \hfill [10 Marks]}
+\addcontentsline{toc}{section}{Section A: Conceptual Questions}
+
+% Q1
+\questiontitle{1}{Define Machine Learning and Explain Data Pre-processing Importance}
+\qprompt{Define Machine Learning in your own words. Explain why data pre-processing is an important stage in a machine learning workflow.}
+\answer
+\textbf{Machine Learning} is a subset of artificial intelligence that enables systems to automatically learn and improve from experience without being explicitly programmed. It involves algorithms that identify patterns in data and make predictions or decisions based on those patterns.
+
+\paragraph{Why Data Pre-processing is Important:}
+\begin{itemize}
+    \item \textbf{Improves data quality}: Raw data often contains noise, missing values, and inconsistencies
+    \item \textbf{Enhances model performance}: Properly preprocessed data leads to better accuracy and generalization
+    \item \textbf{Reduces bias}: Removes systematic errors and inconsistencies
+    \item \textbf{Ensures algorithm compatibility}: Many algorithms require specific input formats
+    \item \textbf{Handles scale differences}: Prevents features with larger magnitudes from dominating
+    \item \textbf{Manages missing values}: Prevents loss of valuable information
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q2
+\questiontitle{2}{Types of Variables with Financial Examples}
+\qprompt{Distinguish between the following types of variables and give one suitable financial example for each: (a) Continuous variable, (b) Discrete variable, (c) Nominal variable, (d) Ordinal variable, (e) Binary variable.}
+\answer
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item \textbf{Continuous Variable}
+    \begin{itemize}
+        \item \textbf{Definition}: Can take any value within a range, including decimals
+        \item \textbf{Example}: Stock price (Rs. 145.67, Rs. 145.68, Rs. 145.69\dots)
+    \end{itemize}
+
+    \item \textbf{Discrete Variable}
+    \begin{itemize}
+        \item \textbf{Definition}: Takes only specific, countable values
+        \item \textbf{Example}: Number of trades in a day (150, 151, 152\dots)
+    \end{itemize}
+
+    \item \textbf{Nominal Variable}
+    \begin{itemize}
+        \item \textbf{Definition}: Categorical with no inherent order
+        \item \textbf{Example}: Stock exchange (NSE, BSE, NYSE)
+    \end{itemize}
+
+    \item \textbf{Ordinal Variable}
+    \begin{itemize}
+        \item \textbf{Definition}: Categorical with inherent order/ranking
+        \item \textbf{Example}: Credit rating (AAA $>$ AA $>$ A $>$ BBB)
+    \end{itemize}
+
+    \item \textbf{Binary Variable}
+    \begin{itemize}
+        \item \textbf{Definition}: Only two possible values
+        \item \textbf{Example}: Loan default status ($\text{Default} = 1$, $\text{No Default} = 0$)
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.35cm}
+
+% Q3
+\questiontitle{3}{Numerical vs. Categorical Variables}
+\qprompt{Explain the difference between numerical and categorical variables. Why is this distinction important in data pre-processing?}
+\answer
+\noindent\textbf{Numerical Variables}: Represent quantities that can be measured or counted (e.g., stock price, trading volume)\\[0.3em]
+\textbf{Categorical Variables}: Represent categories or groups without quantitative meaning (e.g., sector, stock name)
+
+\paragraph{Importance of Distinction:}
+\begin{itemize}
+    \item \textbf{Processing methods differ}: Numerical variables need scaling; categorical need encoding
+    \item \textbf{Algorithm requirements}: Some algorithms (e.g., regression) require numerical input
+    \item \textbf{Statistical treatment}: Different summary statistics for each type
+    \item \textbf{Interpretation}: Different meaning and handling in models
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q4
+\questiontitle{4}{Data Pre-processing Pipeline Steps}
+\qprompt{Explain the following steps in a data pre-processing pipeline: (a) Cleaning, (b) Transformation, (c) Normalization/Scaling, (d) Encoding.}
+\answer
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item \textbf{Cleaning}
+    \begin{itemize}
+        \item Removing duplicates
+        \item Handling missing values
+        \item Correcting inconsistencies
+        \item Removing irrelevant features
+    \end{itemize}
+
+    \item \textbf{Transformation}
+    \begin{itemize}
+        \item Converting data types
+        \item Creating derived features
+        \item Applying mathematical transformations (log, square root)
+        \item Feature engineering
+    \end{itemize}
+
+    \item \textbf{Normalization/Scaling}
+    \begin{itemize}
+        \item \textbf{Normalization} (Min-Max): Rescaling to $[0,1]$ range
+        \item \textbf{Standardization} (Z-score): Scaling to zero mean, unit variance
+        \item Purpose: Bring features to comparable scales
+    \end{itemize}
+
+    \item \textbf{Encoding}
+    \begin{itemize}
+        \item Converting categorical variables to numerical
+        \item Methods: One-hot encoding, label encoding
+        \item Purpose: Make data compatible with machine learning algorithms
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.35cm}
+
+% Q5
+\questiontitle{5}{Purpose of Datasets}
+\qprompt{Explain the purpose of the following datasets: (a) Training set, (b) Validation set, (c) Testing set.}
+\answer
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item \textbf{Training Set}
+    \begin{itemize}
+        \item Used to train the model by learning patterns and relationships
+        \item Typically 60-80\% of total data
+        \item Model learns parameters from this set
+    \end{itemize}
+
+    \item \textbf{Validation Set}
+    \begin{itemize}
+        \item Used to tune hyperparameters
+        \item Evaluates model performance during development
+        \item Helps prevent overfitting through model selection
+    \end{itemize}
+
+    \item \textbf{Testing Set}
+    \begin{itemize}
+        \item Used only once for final evaluation
+        \item Provides unbiased assessment of model performance
+        \item Simulates real-world data the model hasn't seen
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+% ==============================================================================
+% SECTION B
+% ==============================================================================
+\section*{Section B: Numerical and Short Answer Questions \hfill [10 Marks]}
+\addcontentsline{toc}{section}{Section B: Numerical and Short Answer Questions}
+
+% Q1
+\questiontitle{1}{Variable Classification}
+\qprompt{Consider the following variables from a financial dataset:
+\[
+\{\text{Stock Price},\, \text{Number of Trades},\, \text{Sector},\, \text{Credit Rating},\, \text{Loan Default}\}
+\]
+Classify each variable as continuous, discrete, nominal, ordinal, or binary.}
+\answer
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Variable} & \textbf{Type} \\
+\midrule
+Stock Price & Continuous \\
+Number of Trades & Discrete \\
+Sector & Nominal \\
+Credit Rating & Ordinal \\
+Loan Default & Binary \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.35cm}
+
+% Q2
+\questiontitle{2}{Calculate Mean for Missing Value Imputation}
+\qprompt{The observed daily trading volumes of a stock are: $100, 120, 140, 160, 180$. Calculate the mean value that would be used to replace a missing observation.}
+\answer
+Trading volumes: 100, 120, 140, 160, 180\\[0.3em]
+$\text{Mean} = (100 + 120 + 140 + 160 + 180) / 5$\\[0.2em]
+\textbf{Mean = 700 / 5 = 140}\\[0.4em]
+\textit{The missing observation would be replaced with 140.}
+
+\vspace{0.35cm}
+
+% Q3
+\questiontitle{3}{Min-Max Scaling Calculation}
+\qprompt{For $x = 80$, $x_{\min} = 20$, $x_{\max} = 100$, calculate the Min-Max scaled value using $x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}}$.}
+\answer
+Given: $x = 80$, $x_{\min} = 20$, $x_{\max} = 100$
+\begin{align*}
+x' &= (x - x_{\min}) / (x_{\max} - x_{\min}) \\
+x' &= (80 - 20) / (100 - 20) \\
+x' &= 60 / 80 \\
+\mathbf{x'} &= \mathbf{0.75}
+\end{align*}
+
+\vspace{0.35cm}
+
+% Q4
+\questiontitle{4}{Z-Score Calculation}
+\qprompt{A variable has mean $\mu = 50$ and standard deviation $\sigma = 10$. Calculate the Z-score when $x = 70$ using $z = \frac{x - \mu}{\sigma}$.}
+\answer
+Given: $\mu = 50$, $\sigma = 10$, $x = 70$
+\begin{align*}
+z &= (x - \mu) / \sigma \\
+z &= (70 - 50) / 10 \\
+z &= 20 / 10 \\
+\mathbf{z} &= \mathbf{2}
+\end{align*}
+\textit{This means the value of 70 is 2 standard deviations above the mean.}
+
+\vspace{0.35cm}
+
+% Q5
+\questiontitle{5}{80-20 Train-Test Split}
+\qprompt{A dataset contains $10,000$ observations. If an $80\text{--}20$ train-test split is used, determine the number of observations in the training and testing sets.}
+\answer
+Total observations = 10,000\\[0.3em]
+Training set = 80\% of 10,000 = 10,000 $\times$ 0.80 = \textbf{8,000}\\[0.2em]
+Testing set = 20\% of 10,000 = 10,000 $\times$ 0.20 = \textbf{2,000}
+
+\vspace{0.35cm}
+
+% Q6
+\questiontitle{6}{Problem with Random Train-Test Split for Time-Series Data}
+\qprompt{Explain why a random train-test split may be problematic for daily stock-price time-series data.}
+\answer
+\paragraph{Why random split is problematic:}
+\begin{enumerate}
+    \item \textbf{Temporal Order Violation}: Stock prices have temporal dependencies; past data influences future
+    \item \textbf{Look-ahead Bias}: Random split may place future data in training and past data in testing
+    \item \textbf{Information Leakage}: Future information could inadvertently affect past predictions
+    \item \textbf{Time Dependencies}: Auto-correlation means observations are not independent
+\end{enumerate}
+\noindent\textbf{Solution}: Use \textbf{time-based split} where training data is from an earlier period and test data from a later period.
+
+\vspace{0.35cm}
+
+% Q7
+\questiontitle{7}{Confusion Matrix Calculations}
+\qprompt{Consider the following confusion matrix:
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+& \textbf{Predicted Positive} & \textbf{Predicted Negative} \\
+\midrule
+\textbf{Actual Positive} & 40 & 5 \\
+\textbf{Actual Negative} & 10 & 945 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Calculate: (a) Accuracy, (b) Precision, (c) Recall, (d) F1-score.}
+\answer
+\paragraph{Confusion Matrix:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+& \textbf{Predicted Positive} & \textbf{Predicted Negative} \\
+\midrule
+\textbf{Actual Positive} & 40 & 5 \\
+\textbf{Actual Negative} & 10 & 945 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Calculations:}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item \textbf{Accuracy} = $(\text{TP} + \text{TN}) / (\text{TP} + \text{TN} + \text{FP} + \text{FN})$\\
+    $= (40 + 945) / (40 + 945 + 10 + 5)$\\
+    $= 985 / 1000$\\
+    $= \mathbf{0.985 \text{ \textbf{or} } 98.5\%}$
+
+    \item \textbf{Precision} = $\text{TP} / (\text{TP} + \text{FP})$\\
+    $= 40 / (40 + 10)$\\
+    $= 40 / 50$\\
+    $= \mathbf{0.80 \text{ \textbf{or} } 80\%}$
+
+    \item \textbf{Recall} = $\text{TP} / (\text{TP} + \text{FN})$\\
+    $= 40 / (40 + 5)$\\
+    $= 40 / 45$\\
+    $= \mathbf{0.889 \text{ \textbf{or} } 88.9\%}$
+
+    \item \textbf{F1-Score} = $2 \times (\text{Precision} \times \text{Recall}) / (\text{Precision} + \text{Recall})$\\
+    $= 2 \times (0.80 \times 0.889) / (0.80 + 0.889)$\\
+    $= 2 \times 0.711 / 1.689$\\
+    $= 1.422 / 1.689$\\
+    $= \mathbf{0.842 \text{ \textbf{or} } 84.2\%}$
+\end{enumerate}
+
+\vspace{0.35cm}
+
+% Q8
+\questiontitle{8}{Why Accuracy is Misleading for Imbalanced Targets}
+\qprompt{Explain why accuracy alone may be misleading when the target variable is highly imbalanced.}
+\answer
+\paragraph{Reasons:}
+\begin{enumerate}
+    \item \textbf{False Sense of Performance}: A model predicting the majority class for all instances can achieve high accuracy
+    \item \textbf{Example}: In fraud detection with 99\% non-fraud cases:
+    \begin{itemize}
+        \item Model predicting ``No Fraud'' for everything = 99\% accuracy
+        \item But it fails to catch any actual fraud!
+    \end{itemize}
+    \item \textbf{Misguided Business Decisions}: High accuracy may hide poor performance on minority class
+    \item \textbf{Better Metrics}: For imbalanced problems, use:
+    \begin{itemize}
+        \item Precision, Recall, F1-Score
+        \item AUC-ROC
+        \item Matthews Correlation Coefficient (MCC)
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+% ==============================================================================
+% SECTION C
+% ==============================================================================
+\section*{Section C: Long Answer Questions \hfill [12 Marks - Answer Any Four]}
+\addcontentsline{toc}{section}{Section C: Long Answer Questions}
+
+% Q1
+\questiontitle{1}{MCAR, MAR, MNAR Missing-Data Mechanisms}
+\qprompt{Explain the difference between MCAR, MAR, and MNAR missing-data mechanisms. Give one financial example for each.}
+\answer
+\noindent\textbf{Missing Completely At Random (MCAR)}
+\begin{itemize}
+    \item Missingness is completely random and independent of all variables
+    \item Example: A stock price recording fails due to random system glitch
+\end{itemize}
+
+\noindent\textbf{Missing At Random (MAR)}
+\begin{itemize}
+    \item Missingness depends on observed variables, not the missing value
+    \item Example: A credit score missing more often for customers with lower income (income is observed)
+\end{itemize}
+
+\noindent\textbf{Missing Not At Random (MNAR)}
+\begin{itemize}
+    \item Missingness depends on the unobserved value itself
+    \item Example: High-income individuals less likely to report their income (the missingness depends on the value being high)
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q2
+\questiontitle{2}{Missing-Value Imputation Methods}
+\qprompt{Compare the following missing-value imputation methods: (a) Mean/Median imputation, (b) Mode imputation, (c) KNN imputation, (d) Forward fill, (e) Backward fill, (f) Interpolation.}
+\answer
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item \textbf{Mean/Median Imputation}
+    \begin{itemize}
+        \item \textbf{Pros}: Simple, fast, works for numerical variables
+        \item \textbf{Cons}: Reduces variance, may distort distribution, ignores relationships
+    \end{itemize}
+
+    \item \textbf{Mode Imputation}
+    \begin{itemize}
+        \item \textbf{Pros}: Simple, suitable for categorical variables
+        \item \textbf{Cons}: Can introduce bias, may alter frequency distributions
+    \end{itemize}
+
+    \item \textbf{KNN Imputation}
+    \begin{itemize}
+        \item \textbf{Pros}: Uses similarity with other observations, captures relationships
+        \item \textbf{Cons}: Computationally expensive, sensitive to K parameter
+    \end{itemize}
+
+    \item \textbf{Forward Fill}
+    \begin{itemize}
+        \item \textbf{Pros}: Works well for time series, maintains temporal order
+        \item \textbf{Cons}: Assumes last value persists, may propagate errors
+    \end{itemize}
+
+    \item \textbf{Backward Fill}
+    \begin{itemize}
+        \item \textbf{Pros}: Uses future known values for missing data
+        \item \textbf{Cons}: May introduce look-ahead bias
+    \end{itemize}
+
+    \item \textbf{Interpolation}
+    \begin{itemize}
+        \item \textbf{Pros}: Smoothly estimates missing values in time series
+        \item \textbf{Cons}: Assumes linear/continuous relationships, may not capture sudden changes
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.35cm}
+
+% Q3
+\questiontitle{3}{Normalization vs. Standardization}
+\qprompt{Explain the difference between normalization and standardization. Give the mathematical formula for each.}
+\answer
+\paragraph{Normalization (Min-Max Scaling)}
+\begin{itemize}
+    \item Purpose: Transform features to a fixed range [0,1]
+    \item Formula: $x' = (x - x_{\min}) / (x_{\max} - x_{\min})$
+    \item Best when: Data distribution is not Gaussian, need bounded values
+    \item Sensitive to outliers
+\end{itemize}
+
+\paragraph{Standardization (Z-Score)}
+\begin{itemize}
+    \item Purpose: Scale features to zero mean and unit variance
+    \item Formula: $z = (x - \mu) / \sigma$
+    \item Best when: Data is normally distributed, need unbounded values
+    \item Less sensitive to outliers
+\end{itemize}
+
+\paragraph{When to use:}
+\begin{itemize}
+    \item Normalization: Neural networks, KNN, SVM
+    \item Standardization: Linear regression, Logistic regression, PCA
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q4
+\questiontitle{4}{One-Hot Encoding}
+\qprompt{Explain one-hot encoding. Consider the categorical variable:
+\[
+\text{Sector} \in \{\text{Banking},\, \text{IT},\, \text{Energy},\, \text{Pharma}\}
+\]
+Show how this variable can be represented using one-hot encoding.}
+\answer
+\paragraph{Explanation:}
+One-hot encoding converts categorical variables into binary vectors. Each category becomes a separate binary column where 1 indicates presence and 0 indicates absence.
+
+\paragraph{Example:}
+Original variable: $\text{Sector} \in [\text{Banking}, \text{IT}, \text{Energy}, \text{Pharma}]$
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Original} & \textbf{Banking} & \textbf{IT} & \textbf{Energy} & \textbf{Pharma} \\
+\midrule
+Banking & 1 & 0 & 0 & 0 \\
+IT & 0 & 1 & 0 & 0 \\
+Energy & 0 & 0 & 1 & 0 \\
+Pharma & 0 & 0 & 0 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Advantages:}
+\begin{itemize}
+    \item No ordinal relationship assumed
+    \item All categories equally weighted
+    \item Compatible with most algorithms
+\end{itemize}
+
+\paragraph{Disadvantages:}
+\begin{itemize}
+    \item Can create too many features with high cardinality
+    \item May cause multicollinearity if all categories used
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q5
+\questiontitle{5}{Why KNN and SVM are Sensitive to Scale}
+\qprompt{Explain why KNN and SVM are sensitive to the scale of variables. Illustrate your explanation with a simple financial example.}
+\answer
+\paragraph{Sensitivity Explanation:}
+\noindent\textbf{KNN (K-Nearest Neighbors):}
+\begin{itemize}
+    \item Uses distance metrics (Euclidean, Manhattan) to find neighbors
+    \item Features with larger scales dominate distance calculations
+    \item Small values become insignificant in comparison
+\end{itemize}
+
+\noindent\textbf{SVM (Support Vector Machines):}
+\begin{itemize}
+    \item Uses distance from decision boundary
+    \item Features with larger scales dominate the optimization process
+    \item Kernel computations scale with feature magnitudes
+\end{itemize}
+
+\paragraph{Financial Example:}
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\textbf{Customer} & \textbf{Age} & \textbf{Income (\$)} & \textbf{Days Delinquent} \\
+\midrule
+A & 25 & 50,000 & 10 \\
+B & 30 & 100,000 & 5 \\
+C & 35 & 150,000 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Without scaling:}
+\begin{itemize}
+    \item Euclidean distance dominated by income difference
+    \item Age and Days Delinquent contribute negligibly
+    \item KNN would essentially use only income to find neighbors
+\end{itemize}
+
+\noindent\textbf{With scaling:}
+\begin{itemize}
+    \item All features contribute equally to distance
+    \item More balanced representation of customer characteristics
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q6
+\questiontitle{6}{Over-sampling vs. Under-sampling and SMOTE}
+\qprompt{Explain the difference between over-sampling and under-sampling. What is SMOTE, and how does it differ from simple duplication of minority observations?}
+\answer
+\paragraph{Over-sampling:}
+\begin{itemize}
+    \item Increases minority class samples to balance the dataset
+    \item May lead to overfitting
+    \item Simple duplication creates identical copies
+\end{itemize}
+
+\paragraph{Under-sampling:}
+\begin{itemize}
+    \item Reduces majority class samples to balance the dataset
+    \item May lose valuable information
+    \item Can discard important patterns from majority class
+\end{itemize}
+
+\paragraph{SMOTE (Synthetic Minority Over-sampling Technique):}
+\begin{itemize}
+    \item Creates synthetic minority samples using interpolation
+    \item For each minority sample, find k nearest neighbors
+    \item Create new samples along the line connecting them
+\end{itemize}
+
+\paragraph{Difference from Simple Duplication:}
+\begin{itemize}
+    \item SMOTE creates \textbf{new synthetic examples}, not exact copies
+    \item SMOTE increases variety in minority class
+    \item Duplication just repeats existing examples
+    \item SMOTE reduces overfitting risk compared to simple duplication
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q7
+\questiontitle{7}{Data Leakage and Pre-processing}
+\qprompt{Explain the concept of data leakage. Why is it incorrect to scale or impute the complete dataset before performing the train-test split?}
+\answer
+\paragraph{Data Leakage Definition:}
+Data leakage occurs when information from outside the training dataset is used to create the model, causing overly optimistic performance estimates.
+
+\paragraph{Why Not to Scale/Impute Before Train-Test Split:}
+\begin{enumerate}
+    \item \textbf{Information Leakage}: 
+    \begin{itemize}
+        \item Statistics (mean, min, max) from entire dataset include test data
+        \item Model ``sees'' test data patterns during training
+    \end{itemize}
+    \item \textbf{Unrealistic Performance}:
+    \begin{itemize}
+        \item Model appears to perform better than it actually would
+        \item Real-world performance is worse
+    \end{itemize}
+    \item \textbf{Example}:
+    \begin{itemize}
+        \item If we scale before splitting, we use test data min/max to scale training data
+        \item Training process has access to test data statistics
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Correct Approach:}
+\begin{enumerate}
+    \item Split data first (train/validation/test)
+    \item Calculate scaling parameters ONLY on training set
+    \item Apply scaling to validation and test sets using training parameters
+    \item Impute missing values using training set statistics only
+\end{enumerate}
+
+\vspace{0.35cm}
+
+% Q8
+\questiontitle{8}{Fraud Detection as Class Imbalance Problem}
+\qprompt{Explain why fraud detection is a typical class-imbalance problem. Discuss why a model predicting ``No Fraud'' for every transaction may still achieve very high accuracy.}
+\answer
+\paragraph{Why Fraud Detection is Imbalanced:}
+\begin{enumerate}
+    \item \textbf{Nature of the Problem}:
+    \begin{itemize}
+        \item Fraudulent transactions are rare ($\sim 0.1\text{--}1\%$)
+        \item Most transactions are legitimate
+    \end{itemize}
+    \item \textbf{Dataset Characteristics}:
+    \begin{itemize}
+        \item Majority class: Non-fraud ($99\%+$)
+        \item Minority class: Fraud ($<1\%$)
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Why ``No Fraud'' Model May Achieve High Accuracy:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Prediction} & \textbf{Actual: Non-Fraud} & \textbf{Actual: Fraud} \\
+\midrule
+Non-Fraud & 99,000 (TP) & 100 (FN) \\
+Fraud & 0 (FP) & 0 (TN) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent\textbf{Accuracy = (99,000 + 0) / (99,000 + 0 + 0 + 100) = 99.9\%}
+
+\paragraph{Why This Model is Useless:}
+\begin{itemize}
+    \item Fails to detect ALL fraud cases
+    \item Misses 100 fraudulent transactions
+    \item Financial loss from undetected fraud
+    \item False sense of security
+\end{itemize}
+
+\paragraph{Better Approach:}
+\begin{itemize}
+    \item Use Precision, Recall, F1-Score
+    \item Consider cost-sensitive learning
+    \item Apply SMOTE or other balancing techniques
+    \item Use anomaly detection methods
+\end{itemize}
+
+\vspace{0.5cm}
+
+% ==============================================================================
+% SECTION D
+% ==============================================================================
+\section*{Section D: Python Exercises \hfill [10 Marks]}
+\addcontentsline{toc}{section}{Section D: Python Exercises}
+
+% Q1
+\questiontitle{1}{Identifying Variable Types}
+\qprompt{Create a Pandas DataFrame containing the following variables: stock, sector, credit\_rating, close\_price, num\_trades. Using Python: (a) Display the DataFrame, (b) Display the data types, (c) Identify the categorical variables, (d) Identify the numerical variables.}
+\answer
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+
+# Create DataFrame
+data = {
+    'stock': ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA'],
+    'sector': ['Technology', 'Technology', 'Technology', 'E-commerce', 'Automotive'],
+    'credit_rating': ['AA', 'AAA', 'AA+', 'A+', 'BBB+'],
+    'close_price': [175.34, 140.56, 330.45, 165.23, 245.67],
+    'num_trades': [1500, 1200, 980, 2100, 1650]
+}
+
+df = pd.DataFrame(data)
+
+# 1) Display the DataFrame
+print("DataFrame:")
+print(df)
+print("\n")
+
+# 2) Display the data types
+print("Data Types:")
+print(df.dtypes)
+print("\n")
+
+# 3) Identify categorical variables
+categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
+print("Categorical Variables:", categorical_cols)
+
+# 4) Identify numerical variables
+numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
+print("Numerical Variables:", numerical_cols)
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q2
+\questiontitle{2}{Scaling and Encoding}
+\qprompt{Create a DataFrame containing a numerical variable close\_price and a categorical variable sector. Using Python: (a) Apply Min-Max scaling to close\_price, (b) Apply Z-score standardization to close\_price, (c) Apply one-hot encoding to sector, (d) Display the resulting DataFrame.}
+\answer
+\begin{lstlisting}[language=Python]
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import OneHotEncoder
+
+# Create DataFrame
+data = {
+    'close_price': [100, 250, 150, 300, 200, 50, 180, 400],
+    'sector': ['Banking', 'IT', 'IT', 'Pharma', 'Banking', 'IT', 'Pharma', 'Banking']
+}
+
+df = pd.DataFrame(data)
+print("Original DataFrame:")
+print(df)
+print("\n")
+
+# (a) Min-Max scaling
+scaler_minmax = MinMaxScaler()
+df['close_price_minmax'] = scaler_minmax.fit_transform(df[['close_price']])
+
+# (b) Z-score standardization
+scaler_std = StandardScaler()
+df['close_price_zscore'] = scaler_std.fit_transform(df[['close_price']])
+
+print("After Scaling:")
+print(df)
+print("\n")
+
+# (c) One-hot encoding
+one_hot = pd.get_dummies(df['sector'], prefix='sector')
+df_encoded = pd.concat([df, one_hot], axis=1)
+df_encoded = df_encoded.drop('sector', axis=1)
+
+# (d) Display resulting DataFrame
+print("After One-Hot Encoding:")
+print(df_encoded)
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q3
+\questiontitle{3}{Missing-Value Imputation}
+\qprompt{Create a DataFrame containing at least two numerical variables with missing observations. Using Python: (a) Identify the missing values, (b) Perform mean imputation, (c) Perform median imputation, (d) Perform KNN imputation, (e) Compare the results obtained from the three methods.}
+\answer
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+from sklearn.impute import KNNImputer
+
+# Create DataFrame with missing values
+np.random.seed(42)
+data = {
+    'stock_price': [100, np.nan, 150, 200, np.nan, 180, 220, 160, 190, np.nan],
+    'trading_volume': [1000, 1200, np.nan, 1500, 1300, np.nan, 1100, 1400, 1600, 1700],
+    'return_ratio': [0.05, 0.03, 0.08, np.nan, 0.02, 0.07, 0.04, 0.06, np.nan, 0.09]
+}
+
+df = pd.DataFrame(data)
+print("Original DataFrame with Missing Values:")
+print(df)
+print("\n")
+
+# (a) Identify missing values
+print("Missing Values per Column:")
+print(df.isnull().sum())
+print("\n")
+
+# (b) Mean imputation
+df_mean = df.copy()
+df_mean['stock_price'] = df_mean['stock_price'].fillna(df_mean['stock_price'].mean())
+df_mean['trading_volume'] = df_mean['trading_volume'].fillna(df_mean['trading_volume'].mean())
+df_mean['return_ratio'] = df_mean['return_ratio'].fillna(df_mean['return_ratio'].mean())
+print("Mean Imputation:")
+print(df_mean)
+print("\n")
+
+# (c) Median imputation
+df_median = df.copy()
+df_median['stock_price'] = df_median['stock_price'].fillna(df_median['stock_price'].median())
+df_median['trading_volume'] = df_median['trading_volume'].fillna(df_median['trading_volume'].median())
+df_median['return_ratio'] = df_median['return_ratio'].fillna(df_median['return_ratio'].median())
+print("Median Imputation:")
+print(df_median)
+print("\n")
+
+# (d) KNN imputation
+knn_imputer = KNNImputer(n_neighbors=2)
+df_knn = pd.DataFrame(
+    knn_imputer.fit_transform(df),
+    columns=df.columns
+)
+print("KNN Imputation:")
+print(df_knn)
+print("\n")
+
+# (e) Compare results
+print("Comparison of Imputation Methods (Stock Price):")
+print(f"Original missing values: {df['stock_price'].isnull().sum()}")
+print(f"Mean imputation values: {df_mean['stock_price'].tolist()}")
+print(f"Median imputation values: {df_median['stock_price'].tolist()}")
+print(f"KNN imputation values: {df_knn['stock_price'].tolist()}")
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q4
+\questiontitle{4}{Train-Test Split}
+\qprompt{Using a suitable financial dataset, perform an 80-20 train-test split. Report: (a) Number of observations in the original dataset, (b) Number of observations in the training set, (c) Number of observations in the testing set, (d) The Python code used.}
+\answer
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+
+# Create a financial dataset
+np.random.seed(42)
+n_samples = 1000
+
+data = {
+    'feature1': np.random.randn(n_samples),
+    'feature2': np.random.randn(n_samples),
+    'feature3': np.random.randn(n_samples),
+    'target': np.random.randint(0, 2, n_samples)
+}
+
+df = pd.DataFrame(data)
+
+# (a) Number of observations in original dataset
+print(f"Original dataset observations: {len(df)}")
+print(f"Original dataset shape: {df.shape}")
+print("\n")
+
+# Perform 80-20 train-test split
+X = df.drop('target', axis=1)
+y = df['target']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, 
+    test_size=0.2,
+    random_state=42,
+    stratify=y  # Ensures class distribution is maintained
+)
+
+# (b) Number of observations in training set
+print(f"Training set observations: {len(X_train)}")
+
+# (c) Number of observations in testing set
+print(f"Testing set observations: {len(X_test)}")
+
+# (d) Python code used (shown above)
+print("\nTrain-Test Split Code:")
+print("""
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, 
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+""")
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q5
+\questiontitle{5}{Class Imbalance}
+\qprompt{Using a suitable binary classification dataset: (a) Display the class distribution before balancing, (b) Apply an appropriate sampling technique, (c) Display the class distribution after balancing, (d) Compare the class distributions before and after balancing, (e) Explain why the balancing procedure should not be applied to the test set.}
+\answer
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+from imblearn.over_sampling import SMOTE
+from sklearn.datasets import make_classification
+
+# Create imbalanced dataset
+X, y = make_classification(
+    n_samples=1000,
+    n_features=20,
+    n_informative=10,
+    n_redundant=5,
+    n_classes=2,
+    weights=[0.9, 0.1],  # 90% class 0, 10% class 1
+    random_state=42
+)
+
+df = pd.DataFrame(X)
+df['target'] = y
+
+# (a) Class distribution before balancing
+print("Class Distribution BEFORE Balancing:")
+print(df['target'].value_counts())
+print(f"Class 0: {df['target'].value_counts()[0]} ({df['target'].value_counts()[0]/len(df)*100:.2f}%)")
+print(f"Class 1: {df['target'].value_counts()[1]} ({df['target'].value_counts()[1]/len(df)*100:.2f}%)")
+print("\n")
+
+# (b) Apply SMOTE
+smote = SMOTE(random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+
+# Create balanced DataFrame
+df_balanced = pd.DataFrame(X_resampled)
+df_balanced['target'] = y_resampled
+
+# (c) Class distribution after balancing
+print("Class Distribution AFTER Balancing:")
+print(df_balanced['target'].value_counts())
+print(f"Class 0: {df_balanced['target'].value_counts()[0]} ({df_balanced['target'].value_counts()[0]/len(df_balanced)*100:.2f}%)")
+print(f"Class 1: {df_balanced['target'].value_counts()[1]} ({df_balanced['target'].value_counts()[1]/len(df_balanced)*100:.2f}%)")
+print("\n")
+
+# (d) Compare class distributions
+print("Comparison of Class Distributions:")
+print(f"{'Metric':<20} {'Before':<15} {'After':<15}")
+print("-" * 50)
+print(f"{'Total samples':<20} {len(df):<15} {len(df_balanced):<15}")
+print(f"{'Minority class':<20} {df['target'].value_counts()[1]:<15} {df_balanced['target'].value_counts()[1]:<15}")
+print(f"{'Majority class':<20} {df['target'].value_counts()[0]:<15} {df_balanced['target'].value_counts()[0]:<15}")
+print(f"{'Imbalance ratio':<20} {df['target'].value_counts()[0]/df['target'].value_counts()[1]:<15.2f} {df_balanced['target'].value_counts()[0]/df_balanced['target'].value_counts()[1]:<15.2f}")
+
+# (e) Why balancing should not be applied to test set
+print("\nWhy NOT to balance the test set:")
+print("""
+1. Test set should represent real-world data distribution
+2. Balancing test set would create unrealistic evaluation
+3. Model performance should be evaluated on original data distribution
+4. Real-world application will have imbalanced data
+5. Balancing test set would make results non-comparable with other models
+6. It would hide the model's true performance on minority class
+""")
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+% ==============================================================================
+% SECTION E
+% ==============================================================================
+\section*{Section E: Finance-Based Case Study \hfill [8 Marks]}
+\addcontentsline{toc}{section}{Section E: Finance-Based Case Study}
+
+\subsection*{Loan Default Prediction: Data Pre-processing Workflow}
+\noindent\textit{A financial institution has collected historical customer information to develop a machine learning model for predicting loan default. The dataset contains the following variables:}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Variable} & \textbf{Description} \\
+\midrule
+Age & Customer age \\
+Income & Annual income \\
+Credit Score & Credit score \\
+Employment Type & Employment category \\
+Credit Rating & Rating category \\
+Loan Amount & Amount of loan \\
+Debt-to-Income Ratio & Ratio of debt to income \\
+Previous Default & Previous default status \\
+Loan Default & Target variable \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+
+% Q1
+\questiontitle{1}{Identify Numerical and Categorical Variables}
+\qprompt{Identify the numerical and categorical variables.}
+\answer
+\noindent\textbf{Numerical Variables:}
+\begin{itemize}
+    \item Age
+    \item Income
+    \item Credit Score
+    \item Loan Amount
+    \item Debt-to-Income Ratio
+\end{itemize}
+
+\noindent\textbf{Categorical Variables:}
+\begin{itemize}
+    \item Employment Type (Nominal)
+    \item Credit Rating (Ordinal)
+    \item Previous Default (Binary)
+\end{itemize}
+
+\noindent\textbf{Target Variable:}
+\begin{itemize}
+    \item Loan Default (Binary)
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q2
+\questiontitle{2}{Encoding Methods for Categorical Variables}
+\qprompt{Suggest appropriate encoding methods for the categorical variables.}
+\answer
+\begin{center}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Variable} & \textbf{Encoding Method} & \textbf{Reason} \\
+\midrule
+Employment Type & One-Hot Encoding & No inherent order, categories are mutually exclusive \\
+Credit Rating & Ordinal Encoding & Has natural order (AAA $>$ AA $>$ A $>$ BBB) \\
+Previous Default & Binary Encoding & Only two values (Default/No Default) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Python Implementation:}
+\begin{lstlisting}[language=Python]
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder
+
+# One-hot encoding for Employment Type
+one_hot = OneHotEncoder(sparse_output=False)
+employment_encoded = one_hot.fit_transform(df[['Employment_Type']])
+
+# Ordinal encoding for Credit Rating
+rating_order = ['BBB', 'BBB+', 'A-', 'A', 'A+', 'AA-', 'AA', 'AA+', 'AAA']
+ordinal = OrdinalEncoder(categories=[rating_order])
+credit_encoded = ordinal.fit_transform(df[['Credit_Rating']])
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q3
+\questiontitle{3}{Handling Missing Values}
+\qprompt{Suggest suitable methods for handling missing values in the numerical and categorical variables.}
+\answer
+\noindent\textbf{Numerical Variables:}
+\begin{itemize}
+    \item \textbf{Age}: Median imputation (handles outliers better)
+    \item \textbf{Income}: Median imputation or KNN imputation
+    \item \textbf{Credit Score}: KNN imputation (relationship with other variables)
+    \item \textbf{Loan Amount}: Mean imputation
+    \item \textbf{DTI Ratio}: Forward fill if time series, else median
+\end{itemize}
+
+\noindent\textbf{Categorical Variables:}
+\begin{itemize}
+    \item \textbf{Employment Type}: Mode imputation
+    \item \textbf{Credit Rating}: Forward fill (if ordered) or create ``Missing'' category
+    \item \textbf{Previous Default}: Mode imputation or treat as separate category
+\end{itemize}
+
+\paragraph{Python Implementation:}
+\begin{lstlisting}[language=Python]
+from sklearn.impute import SimpleImputer, KNNImputer
+
+# Numerical - Median imputation
+num_imputer = SimpleImputer(strategy='median')
+df_numerical = num_imputer.fit_transform(df[numerical_cols])
+
+# Numerical - KNN imputation
+knn_imputer = KNNImputer(n_neighbors=5)
+df_numerical_knn = knn_imputer.fit_transform(df[numerical_cols])
+
+# Categorical - Mode imputation
+cat_imputer = SimpleImputer(strategy='most_frequent')
+df_categorical = cat_imputer.fit_transform(df[categorical_cols])
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q4
+\questiontitle{4}{Scaling Numerical Variables}
+\qprompt{Explain how the numerical variables should be scaled.}
+\answer
+\paragraph{Recommended Approach:}
+\begin{enumerate}
+    \item \textbf{For Tree-based models} (Random Forest, XGBoost):
+    \begin{itemize}
+        \item No scaling needed
+        \item These models are invariant to scale
+    \end{itemize}
+    \item \textbf{For Distance-based models} (KNN, SVM, Logistic Regression):
+    \begin{itemize}
+        \item Standardization (Z-score): For variables with normal distribution
+        \item Normalization (Min-Max): For variables with skewed distribution
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Implementation:}
+\begin{lstlisting}[language=Python]
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+# Standardization
+scaler_std = StandardScaler()
+df_standardized = scaler_std.fit_transform(df[numerical_cols])
+
+# Normalization
+scaler_minmax = MinMaxScaler()
+df_normalized = scaler_minmax.fit_transform(df[numerical_cols])
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q5
+\questiontitle{5}{Train-Validation-Test Strategy}
+\qprompt{Propose a suitable train-validation-test strategy.}
+\answer
+\paragraph{Proposed Strategy:}
+\begin{enumerate}
+    \item \textbf{Time-Based Split} (if temporal data exists):
+    \begin{itemize}
+        \item Training: 70\% (earlier period)
+        \item Validation: 15\% (middle period)
+        \item Test: 15\% (latest period)
+    \end{itemize}
+    \item \textbf{Stratified Split} (if cross-sectional data):
+    \begin{itemize}
+        \item Training: 70\% (with class stratification)
+        \item Validation: 15\% (with class stratification)
+        \item Test: 15\% (with class stratification)
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Implementation:}
+\begin{lstlisting}[language=Python]
+from sklearn.model_selection import train_test_split
+
+# First split: Train vs (Validation + Test)
+X_train, X_temp, y_train, y_temp = train_test_split(
+    X, y, 
+    test_size=0.3, 
+    random_state=42,
+    stratify=y
+)
+
+# Second split: Validation vs Test
+X_val, X_test, y_val, y_test = train_test_split(
+    X_temp, y_temp,
+    test_size=0.5,
+    random_state=42,
+    stratify=y_temp
+)
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q6
+\questiontitle{6}{Handling Class Imbalance}
+\qprompt{Explain how you would handle the class imbalance in the target variable.}
+\answer
+\paragraph{Recommended Strategy:}
+\begin{enumerate}
+    \item \textbf{Assess Imbalance Ratio}: Check if default cases $< 5\%$ of total
+    \item \textbf{Model Selection}:
+    \begin{itemize}
+        \item Use algorithms with class weights (Random Forest, XGBoost, Logistic Regression)
+        \item Set \texttt{class\_weight='balanced'} or calculate weights manually
+    \end{itemize}
+    \item \textbf{Resampling Techniques}:
+    \begin{itemize}
+        \item \textbf{SMOTE}: Create synthetic minority samples
+        \item \textbf{ADASYN}: Adaptive synthetic sampling
+        \item \textbf{ROSE}: Random over-sampling examples
+    \end{itemize}
+    \item \textbf{Ensemble Methods}: Balanced Random Forest, Easy Ensemble, RUSBoost
+\end{enumerate}
+
+\paragraph{Implementation:}
+\begin{lstlisting}[language=Python]
+from imblearn.over_sampling import SMOTE
+from sklearn.ensemble import RandomForestClassifier
+
+# Apply SMOTE only on training data
+smote = SMOTE(random_state=42)
+X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
+
+# Use class weights
+rf = RandomForestClassifier(
+    class_weight='balanced',
+    random_state=42
+)
+
+# Or custom weights
+class_weights = {
+    0: 1,  # Non-default
+    1: len(y_train[y_train==0]) / len(y_train[y_train==1])  # Default
+}
+rf = RandomForestClassifier(class_weight=class_weights)
+\end{lstlisting}
+
+\vspace{0.35cm}
+
+% Q7
+\questiontitle{7}{Possible Sources of Data Leakage}
+\qprompt{Identify two possible sources of data leakage in this problem.}
+\answer
+\noindent\textbf{Source 1: Future Information in Training}
+\begin{itemize}
+    \item \textbf{Example}: Using future financial data (e.g., post-loan performance) to predict default
+    \item \textbf{Solution}: Use only data available before loan approval
+\end{itemize}
+
+\noindent\textbf{Source 2: Scaling Before Train-Test Split}
+\begin{itemize}
+    \item \textbf{Example}: Scaling entire dataset before splitting
+    \item \textbf{Solution}: Calculate scaling parameters only on training set
+\end{itemize}
+
+\noindent\textbf{Source 3: Feature Engineering with Target Information}
+\begin{itemize}
+    \item \textbf{Example}: Creating features using target variable
+    \item \textbf{Solution}: Ensure features use only pre-loan information
+\end{itemize}
+
+\noindent\textbf{Source 4: Resampling Before Split}
+\begin{itemize}
+    \item \textbf{Example}: Applying SMOTE before train-test split
+    \item \textbf{Solution}: Apply resampling after splitting, only on training data
+\end{itemize}
+
+\noindent\textbf{Source 5: Temporal Data Leakage}
+\begin{itemize}
+    \item \textbf{Example}: Using future data to fill missing values
+    \item \textbf{Solution}: Use forward fill or impute using only past data
+\end{itemize}
+
+\vspace{0.35cm}
+
+% Q8
+\questiontitle{8}{Step-by-Step Data Pre-processing Workflow}
+\qprompt{Prepare a step-by-step data pre-processing workflow for this dataset before applying a machine learning classification algorithm.}
+\answer
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
+from sklearn.impute import SimpleImputer
+from imblearn.over_sampling import SMOTE
+
+# Step 1: Load and Explore Data
+df = pd.read_csv('loan_data.csv')
+print("Dataset shape:", df.shape)
+print("Missing values:\n", df.isnull().sum())
+
+# Step 2: Separate Features and Target
+X = df.drop('Loan_Default', axis=1)
+y = df['Loan_Default']
+
+# Step 3: Identify Variable Types
+numerical_cols = ['Age', 'Income', 'Credit_Score', 'Loan_Amount', 'Debt_to_Income_Ratio']
+categorical_cols = ['Employment_Type', 'Credit_Rating']
+binary_cols = ['Previous_Default']
+
+# Step 4: Train-Validation-Test Split
+X_train, X_temp, y_train, y_temp = train_test_split(
+    X, y, 
+    test_size=0.3, 
+    random_state=42, 
+    stratify=y
+)
+X_val, X_test, y_val, y_test = train_test_split(
+    X_temp, y_temp,
+    test_size=0.5,
+    random_state=42,
+    stratify=y_temp
+)
+
+# Step 5: Handle Missing Values - Numerical
+num_imputer = SimpleImputer(strategy='median')
+X_train_num = num_imputer.fit_transform(X_train[numerical_cols])
+X_val_num = num_imputer.transform(X_val[numerical_cols])
+X_test_num = num_imputer.transform(X_test[numerical_cols])
+
+# Step 6: Handle Missing Values - Categorical
+cat_imputer = SimpleImputer(strategy='most_frequent')
+X_train_cat = cat_imputer.fit_transform(X_train[categorical_cols])
+X_val_cat = cat_imputer.transform(X_val[categorical_cols])
+X_test_cat = cat_imputer.transform(X_test[categorical_cols])
+
+# Step 7: Scale Numerical Variables
+scaler = StandardScaler()
+X_train_num_scaled = scaler.fit_transform(X_train_num)
+X_val_num_scaled = scaler.transform(X_val_num)
+X_test_num_scaled = scaler.transform(X_test_num)
+
+# Step 8: Encode Categorical Variables
+# Ordinal encoding for Credit Rating
+rating_order = ['BBB', 'BBB+', 'A-', 'A', 'A+', 'AA-', 'AA', 'AA+', 'AAA']
+ord_encoder = OrdinalEncoder(categories=[rating_order])
+X_train_rating = ord_encoder.fit_transform(X_train_cat[:, 1].reshape(-1, 1))
+X_val_rating = ord_encoder.transform(X_val_cat[:, 1].reshape(-1, 1))
+X_test_rating = ord_encoder.transform(X_test_cat[:, 1].reshape(-1, 1))
+
+# One-hot encoding for Employment Type
+one_hot_encoder = OneHotEncoder(sparse_output=False)
+X_train_employment = one_hot_encoder.fit_transform(X_train_cat[:, 0].reshape(-1, 1))
+X_val_employment = one_hot_encoder.transform(X_val_cat[:, 0].reshape(-1, 1))
+X_test_employment = one_hot_encoder.transform(X_test_cat[:, 0].reshape(-1, 1))
+
+# Step 9: Combine Features
+X_train_processed = np.hstack([
+    X_train_num_scaled,
+    X_train_employment,
+    X_train_rating
+])
+X_val_processed = np.hstack([
+    X_val_num_scaled,
+    X_val_employment,
+    X_val_rating
+])
+X_test_processed = np.hstack([
+    X_test_num_scaled,
+    X_test_employment,
+    X_test_rating
+])
+
+# Step 10: Handle Class Imbalance (only on training data)
+smote = SMOTE(random_state=42)
+X_train_balanced, y_train_balanced = smote.fit_resample(
+    X_train_processed, y_train
+)
+
+# Step 11: Save Preprocessed Data
+np.save('X_train_balanced.npy', X_train_balanced)
+np.save('y_train_balanced.npy', y_train_balanced)
+np.save('X_val_processed.npy', X_val_processed)
+np.save('y_val.npy', y_val)
+np.save('X_test_processed.npy', X_test_processed)
+np.save('y_test.npy', y_test)
+
+# Step 12: Verify and Document
+print("Preprocessing Complete!")
+print(f"Training set shape: {X_train_balanced.shape}")
+print(f"Validation set shape: {X_val_processed.shape}")
+print(f"Test set shape: {X_test_processed.shape}")
+print(f"Class distribution after SMOTE: {np.unique(y_train_balanced, return_counts=True)}")
+\end{lstlisting}
+
+\paragraph{Key Considerations in This Workflow:}
+\begin{enumerate}
+    \item \textbf{Preprocessing is applied to training, validation, and test sets appropriately}
+    \item \textbf{No data leakage}: Parameters learned from training set only
+    \item \textbf{Missing values handled appropriately for variable types}
+    \item \textbf{Scaling applied after train-test split}
+    \item \textbf{Class imbalance handled only on training data}
+    \item \textbf{All steps are documented for reproducibility}
+\end{enumerate}
+\noindent This workflow ensures the model is properly trained and evaluated, avoiding common pitfalls like data leakage and improper handling of imbalanced data.
+
+\end{document}

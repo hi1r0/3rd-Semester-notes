@@ -26,8 +26,8 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
     - Construction of Present Value Factor ($\text{PVF}$) schedules.
     - Present Value of Ordinary Annuities ($\PVAF$) and Annuities Due.
     - Constant Perpetuities ($C/R$) & Growing Perpetuities ($C_1/(R-G)$).
-    - Finite Growing Annuity streams & Sinking Fund ($\text{S.F.}$) reserve accumulations.
-    - *Solved Examples:* `1.3.7` to `1.3.15` (*Lectures: 18/08/2026, 27/08/2026, 28/08/2026, 31/08/2026*).
+    - Finite Growing Annuity streams & Sinking Fund ($\text{S.F.}$) reserve accumulations (Ordinary & Annuity Due).
+    - *Solved Examples:* `1.3.7` to `1.3.16` (*Lectures: 18/08/2026, 27/08/2026, 28/08/2026, 31/08/2026, 01/09/2026*).
 
 ---
 

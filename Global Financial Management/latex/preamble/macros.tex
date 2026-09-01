@@ -50,5 +50,5 @@
 \newcommand{\diff}[2]{\frac{\dd #1}{\dd #2}}
 \newcommand{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
 
-% Lecture Date Tag
-\newcommand{\lecturedate}[1]{\marginpar{\raggedright\scriptsize\color{navyblue}\textbf{Lecture}\\\textsf{#1}}}
+% Lecture Date Tag (using marginnote with vertical offset to place cleanly above box headers)
+\newcommand{\lecturedate}[1]{\marginnote{\raggedright\scriptsize\color{navyblue}\textbf{Lecture}\\\textsf{#1}}[-1.0em]}

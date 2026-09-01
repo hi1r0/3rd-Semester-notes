@@ -12,7 +12,8 @@ Comprehensive course notes, lecture materials, presentations, and LaTeX study do
 │   ├── notes.docx
 │   └── latex/                     # LaTeX sources, preamble, chapters & compiled notes
 ├── Global Financial Management/
-│   └── notes (GFM).docx           # GFM course notes
+│   ├── notes (GFM).docx           # GFM course notes
+│   └── latex/                     # Modular LaTeX notes, TikZ flowcharts & compiled notes
 ├── ML/
 │   ├── QF_sem_3_ML_U1P1.pdf       # Unit 1 Part 1 Slides
 │   ├── QF_sem_3_ML_U2_PPT1.pdf    # Unit 2 Presentation
