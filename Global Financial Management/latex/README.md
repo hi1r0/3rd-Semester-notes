@@ -27,6 +27,17 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - Causes of BOP deficits and corrective policy toolkits (Monetary/Fiscal discipline, Forex reserves, Currency devaluation).
   - Core Pillars of IMF Intervention: Surveillance, Financial Assistance (Lending), and Capacity Development.
   - *Lecture Date:* `01/09/2026`.
+- **1.6 Special Drawing Rights (SDR)**
+  - Definition & reserve asset nature (1969, not a currency).
+  - Multi-Currency Valuation Basket & relative weights (USD 43.39%, EUR 29.31%, CNY 12.28%, JPY 7.59%, GBP 7.44%).
+  - Allocation based on IMF Quota shares and SDR interest rate mechanism (SDRi).
+  - *Lecture Date:* `02/09/2026`.
+- **1.7 Asian Development Bank (ADB) & Institutional Comparison**
+  - Institutional Profile (1966, Manila, MDB, Asia-Pacific, India founding member).
+  - Four Financing Channels: Loans, Grants, Technical Assistance, Policy Advisory.
+  - India-ADB Partnership Priorities: Urban Infra, Transport, Clean Energy, Water/Sanitation, Skills, Climate Resilience.
+  - Institutional Comparison: ADB (Regional development bank) vs. IMF (Global monetary authority).
+  - *Lecture Date:* `02/09/2026`.
 
 ---
 
@@ -42,7 +53,7 @@ latex/
 │   ├── titlepage.tex                                  # Official Pondicherry University title page
 │   └── syllabus.tex                                   # Official MSQF 535 syllabus & CO-PO matrix
 ├── chapters/
-│   └── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 01/09/2026)
+│   └── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 02/09/2026)
 ├── figures/                                           # Department & University logos
 └── README.md                                          # Documentation & compilation instructions
 ```

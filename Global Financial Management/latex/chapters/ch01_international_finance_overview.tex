@@ -46,7 +46,7 @@
             \footnotesize\normalfont International Financial \& Development Architecture
         };
 
-        % Tier 1: Sovereign Lending Arm
+        % Tier 1: Sovereign Lending Arm (3.6cm offset -> 1.0cm gap between boxes)
         \node[cardbox, draw=navyblue, fill=lightgraybg] (ibrd) at (-3.6, -2.4) {
             {\color{navyblue}\textbf{\normalsize IBRD (Est. 1944)}}\\[0.3em]
             \scriptsize $\bullet$ World's largest Development Bank\\
@@ -715,3 +715,327 @@ The International Monetary Fund executes its mandate through three fundamental p
         \item Modernizes tax administration, monetary policy frameworks, banking supervision, and macroeconomic data systems.
     \end{itemize}
 \end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% Lecture 6: 02/09/2026 (Part A)
+% ==============================================================================
+\section{Special Drawing Rights (SDR)}
+\lecturedate{02/09/2026}
+
+\begin{formulabox}[Institutional Profile: Special Drawing Rights (SDR)]
+The \textbf{Special Drawing Right (SDR)} is an international supplementary foreign exchange reserve asset created by the \textbf{International Monetary Fund (IMF)} in \textbf{1969}. 
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Nature:} The SDR is \textbf{not a currency} and not a claim on the IMF itself.
+    \item \textbf{Function:} It represents a potential claim on the freely usable currencies of IMF member states.
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 7: SDR Multi-Currency Basket & Valuation Architecture
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.98\textwidth}{!}{%
+    \begin{tikzpicture}[
+        sdrroot/.style={
+            rectangle, rounded corners=6pt,
+            draw=navyblue, fill=softblue,
+            line width=1.2pt, text=navyblue,
+            font=\bfseries\sffamily, align=center,
+            inner sep=8pt, text width=14.6cm, minimum height=1.3cm
+        },
+        sdrcard/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!70, fill=white,
+            line width=0.9pt, font=\sffamily,
+            align=center, inner sep=6pt,
+            text width=2.3cm, minimum height=2.4cm
+        },
+        arrowline/.style={
+            -{Stealth[length=6pt, width=4pt]},
+            draw=navyblue!80, line width=1pt
+        }
+    ]
+        % Root Node
+        \node[sdrroot] (root) at (0, 0) {
+            \large Special Drawing Rights (SDR) — Multi-Currency Basket Valuation\\[0.2em]
+            \footnotesize\normalfont International Reserve Asset $\bullet$ Allocated in Proportion to Member IMF Quotas
+        };
+
+        % 5 Currency Cards with 0.6cm clearance
+        \node[sdrcard, draw=navyblue, fill=lightgraybg] (c1) at (-6.0, -2.8) {
+            {\color{navyblue}\textbf{\small US Dollar}}\\[0.25em]
+            {\Large\textbf{43.39\%}}\\[0.25em]
+            \scriptsize USD (\$)
+        };
+
+        \node[sdrcard, draw=darkteal, fill=lightgraybg] (c2) at (-3.0, -2.8) {
+            {\color{darkteal}\textbf{\small Euro}}\\[0.25em]
+            {\Large\textbf{29.31\%}}\\[0.25em]
+            \scriptsize EUR
+        };
+
+        \node[sdrcard, draw=amber!90!black, fill=lightgraybg] (c3) at (0, -2.8) {
+            {\color{amber!90!black}\textbf{\small Chinese Yuan}}\\[0.25em]
+            {\Large\textbf{12.28\%}}\\[0.25em]
+            \scriptsize CNY (RMB)
+        };
+
+        \node[sdrcard, draw=navyblue!80, fill=lightgraybg] (c4) at (3.0, -2.8) {
+            {\color{navyblue!80}\textbf{\small Japanese Yen}}\\[0.25em]
+            {\Large\textbf{7.59\%}}\\[0.25em]
+            \scriptsize JPY
+        };
+
+        \node[sdrcard, draw=charcoal, fill=lightgraybg] (c5) at (6.0, -2.8) {
+            {\color{charcoal}\textbf{\small British Pound}}\\[0.25em]
+            {\Large\textbf{7.44\%}}\\[0.25em]
+            \scriptsize GBP
+        };
+
+        % Direct Connectors
+        \draw[arrowline] (root.south -| c1.north) -- (c1.north);
+        \draw[arrowline] (root.south -| c2.north) -- (c2.north);
+        \draw[arrowline] (root.south) -- (c3.north);
+        \draw[arrowline] (root.south -| c4.north) -- (c4.north);
+        \draw[arrowline] (root.south -| c5.north) -- (c5.north);
+    \end{tikzpicture}%
+    }
+    \caption{Composition and Weighting of the IMF Special Drawing Rights (SDR) Currency Basket}
+    \label{fig:sdr_basket}
+\end{figure}
+
+\subsection{1. Purpose and Functions of SDR}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Supplement Official Foreign Exchange Reserves:} Augmenting member countries' gold and foreign exchange reserve assets.
+    \item \textbf{Provide International Liquidity:} Supplying unconditional liquidity to the global financial system during liquidity shortages.
+    \item \textbf{Strengthen External Financial Position:} Enhancing sovereign balance sheet resilience without increasing debt distress.
+    \item \textbf{Help Countries Meet BOP Needs:} Assisting nations during severe external balance of payments distress.
+\end{itemize}
+
+\subsection{2. SDR Valuation Basket \& Weightage}
+The value of the SDR is determined daily by the IMF on the basis of a trade- and finance-weighted basket of five major global currencies. The relative weights are reviewed every five years:
+
+\begin{table}[htbp]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\textwidth}{llXr}
+        \toprule
+        \textbf{Currency} & \textbf{ISO Code} & \textbf{Central Bank / Authority} & \textbf{Approx. Weightage} \\
+        \midrule
+        \textbf{US Dollar} & \texttt{USD} & Board of Governors of the Federal Reserve System & \textbf{43.39\%} \\
+        \textbf{Euro} & \texttt{EUR} & European Central Bank (Eurosystem) & \textbf{29.31\%} \\
+        \textbf{Chinese Yuan (Renminbi)} & \texttt{CNY} & People's Bank of China & \textbf{12.28\%} \\
+        \textbf{Japanese Yen} & \texttt{JPY} & Bank of Japan & \textbf{7.59\%} \\
+        \textbf{British Pound Sterling} & \texttt{GBP} & Bank of England & \textbf{7.44\%} \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Constituent Currencies and Weightages of the SDR Basket}
+    \label{tab:sdr_weights}
+\end{table}
+
+\subsection{3. Allocation and Interest Mechanism of SDRs}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Allocation of SDRs:} SDRs are allocated to IMF member nations in direct proportion to their existing \textbf{IMF Quota shares}. Members can hold SDRs as part of their official reserves or exchange them with other members for freely usable currencies.
+    \item \textbf{SDR Interest Rate (SDRi):} The SDR interest rate is calculated weekly based on a weighted average of representative short-term interest rates in the money markets of the SDR basket currencies.
+\end{itemize}
+
+\subsection{4. Core Strategic Objectives of SDRs}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Increase Foreign Exchange Reserves:} Bolsters national central bank reserve adequacy metrics.
+    \item \textbf{Improve Liquidity During Crisis:} Infuses non-debt-creating global liquidity during systemic macroeconomic shocks.
+    \item \textbf{Reduce Pressure on Forex Reserves:} Decreases reliance on expensive domestic borrowing or volatile external debt markets.
+    \item \textbf{Support Balance of Payments (BOP):} Bridges temporary external account deficits.
+\end{enumerate}
+
+\newpage
+
+% ==============================================================================
+% Lecture 6: 02/09/2026 (Part B)
+% ==============================================================================
+\section{Asian Development Bank (ADB) \& Institutional Comparison}
+\lecturedate{02/09/2026}
+
+\begin{formulabox}[Institutional Profile: Asian Development Bank (ADB)]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Established:} 1966.
+    \item \textbf{Headquarters:} Manila, Philippines.
+    \item \textbf{Nature of Institution:} Multilateral Development Bank (MDB).
+    \item \textbf{Geographic Scope:} Asia and the Pacific Region.
+    \item \textbf{India's Membership:} Founding member of ADB since 1966.
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 8: ADB Operational Channels & Strategic Focus
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.98\textwidth}{!}{%
+    \begin{tikzpicture}[
+        adbroot/.style={
+            rectangle, rounded corners=6pt,
+            draw=navyblue, fill=softblue,
+            line width=1.2pt, text=navyblue,
+            font=\bfseries\sffamily, align=center,
+            inner sep=8pt, text width=14.6cm, minimum height=1.3cm
+        },
+        adbcard/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!60, fill=white,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=7pt,
+            text width=3.1cm, minimum height=2.0cm
+        },
+        impactbox/.style={
+            rectangle, rounded corners=5pt,
+            draw=amber!90!black, fill=softamber,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=8pt,
+            text width=14.6cm, minimum height=1.8cm
+        },
+        arrowline/.style={
+            -{Stealth[length=6pt, width=4pt]},
+            draw=navyblue!80, line width=1pt
+        }
+    ]
+        % Root
+        \node[adbroot] (root) at (0, 0) {
+            \large Asian Development Bank (ADB) — Est. 1966 (Manila)\\[0.2em]
+            \footnotesize\normalfont Core Vision: Inclusive $\bullet$ Sustainable $\bullet$ Resilient Economic Development
+        };
+
+        % 4 Channels (x at -5.4, -1.8, 1.8, 5.4 -> 0.6cm clearance)
+        \node[adbcard, draw=navyblue, fill=lightgraybg] (c1) at (-5.4, -2.6) {
+            {\color{navyblue}\textbf{\small 1. Loans}}\\[0.25em]
+            \scriptsize $\bullet$ Sovereign lending\\
+            \scriptsize $\bullet$ Private sector loans
+        };
+
+        \node[adbcard, draw=darkteal, fill=lightgraybg] (c2) at (-1.8, -2.6) {
+            {\color{darkteal}\textbf{\small 2. Grants}}\\[0.25em]
+            \scriptsize $\bullet$ Poverty relief\\
+            \scriptsize $\bullet$ Concessional funds
+        };
+
+        \node[adbcard, draw=amber!90!black, fill=lightgraybg] (c3) at (1.8, -2.6) {
+            {\color{amber!90!black}\textbf{\small 3. Technical Aid}}\\[0.25em]
+            \scriptsize $\bullet$ Project design\\
+            \scriptsize $\bullet$ Capacity building
+        };
+
+        \node[adbcard, draw=navyblue!80, fill=lightgraybg] (c4) at (5.4, -2.6) {
+            {\color{navyblue!80}\textbf{\small 4. Policy Advisory}}\\[0.25em]
+            \scriptsize $\bullet$ Policy dialogue\\
+            \scriptsize $\bullet$ Structural reform
+        };
+
+        % Bottom Impact Tier
+        \node[impactbox] (impact) at (0, -5.2) {
+            {\color{amber!90!black}\textbf{\normalsize Key Priority Focus Areas in India \& Asia-Pacific:}}\\[0.35em]
+            \scriptsize $\bullet$ \textbf{Transport \& Roads:} National highways \& regional corridors \hfill $\bullet$ \textbf{Renewable Energy:} Solar, wind \& power grids\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Urban Infrastructure:} Smart cities \& mass transit \hfill $\bullet$ \textbf{Water \& Sanitation:} Potable supply \& drainage\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Skill Development:} Vocational education \& human capital \hfill $\bullet$ \textbf{Climate Resilience:} Sustainable development
+        };
+
+        % Connectors
+        \draw[arrowline] (root.south -| c1.north) -- (c1.north);
+        \draw[arrowline] (root.south -| c2.north) -- (c2.north);
+        \draw[arrowline] (root.south -| c3.north) -- (c3.north);
+        \draw[arrowline] (root.south -| c4.north) -- (c4.north);
+        \draw[arrowline] (c1.south) -- (c1.south |- impact.north);
+        \draw[arrowline] (c2.south) -- (c2.south |- impact.north);
+        \draw[arrowline] (c3.south) -- (c3.south |- impact.north);
+        \draw[arrowline] (c4.south) -- (c4.south |- impact.north);
+    \end{tikzpicture}%
+    }
+    \caption{Asian Development Bank: Operational Channels and Priority Development Areas}
+    \label{fig:adb_framework}
+\end{figure}
+
+\subsection{1. Core Objectives and Operational Mandate of ADB}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Reduce Poverty:} Eradicating extreme poverty across member developing nations.
+    \item \textbf{Promote Economic Growth:} Fostering sustainable, inclusive economic progress.
+    \item \textbf{Support Infrastructure Development:} Financing critical capital assets (transportation, energy, telecommunications).
+    \item \textbf{Encourage Regional Cooperation:} Deepening cross-border economic ties and regional trade integration.
+    \item \textbf{Promote Environmental Sustainability:} Addressing climate change mitigation and adaptation.
+    \item \textbf{Improve Social Development:} Investing in education, healthcare, and gender equity.
+\end{itemize}
+
+\subsection{2. ADB and India Partnership Focus Areas}
+India is a founding member of the ADB (since 1966) and one of its largest borrowers. The partnership focuses on six key pillars:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Urban Infrastructure:} Water management, sewerage, and smart urban mobility.
+    \item \textbf{Transport and Roads:} State highways, rural connectivity, and economic corridors.
+    \item \textbf{Renewable Energy:} Solar parks, green energy corridors, and transmission modernization.
+    \item \textbf{Water and Sanitation:} Irrigation modernization and clean drinking water access.
+    \item \textbf{Skill Development:} Industrial training institutes and youth workforce readiness.
+    \item \textbf{Climate Resilient Development:} Coastal protection and climate adaptation programs.
+\end{enumerate}
+
+\subsection{3. Comparative Analysis: ADB vs. IMF}
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        adbcompare/.style={
+            rectangle, rounded corners=5pt,
+            draw=darkteal, fill=softgreen,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=8pt, text width=6.0cm, minimum height=4.6cm
+        },
+        imfcompare/.style={
+            rectangle, rounded corners=5pt,
+            draw=navyblue, fill=softblue,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=8pt, text width=6.0cm, minimum height=4.6cm
+        }
+    ]
+        % Left Card: ADB
+        \node[adbcompare] (adb_box) at (-3.8, 0) {
+            {\color{darkteal}\textbf{\normalsize Asian Development Bank (ADB)}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Scope:} Regional Development Institution (Asia-Pacific)\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Core Mandate:} Long-term socio-economic growth\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Financing Type:} Project loans, grants \& equity\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Target Focus:} Infrastructure, climate \& poverty\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Borrowers:} Developing member countries
+        };
+
+        % Right Card: IMF
+        \node[imfcompare] (imf_box) at (3.8, 0) {
+            {\color{navyblue}\textbf{\normalsize International Monetary Fund (IMF)}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Scope:} Global Multilateral Institution (190 members)\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Core Mandate:} Global monetary \& FX stability\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Financing Type:} Balance of payments crisis lending\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Target Focus:} Macroeconomic reform \& surveillance\\[0.2em]
+            \scriptsize $\bullet$ \textbf{Reserve Tool:} Special Drawing Rights (SDRs)
+        };
+    \end{tikzpicture}%
+    }
+    \caption{Institutional Comparison: Asian Development Bank (ADB) vs. International Monetary Fund (IMF)}
+    \label{fig:adb_vs_imf}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{\textwidth}{lXX}
+        \toprule
+        \textbf{Dimension} & \textbf{Asian Development Bank (ADB)} & \textbf{International Monetary Fund (IMF)} \\
+        \midrule
+        \textbf{Institutional Nature} & Regional Multilateral Development Bank & Global Monetary Authority \\
+        \textbf{Geographic Scope} & Asia and the Pacific Region & Global (Worldwide membership) \\
+        \textbf{Primary Objective} & Long-term economic development and poverty reduction & Global monetary stability and BOP crisis resolution \\
+        \textbf{Financing Structure} & Project-specific capital loans, equity, and grants & Short-to-medium-term balance of payments support \\
+        \textbf{Core Instruments} & Sovereign/non-sovereign project loans, technical aid & Stand-by Arrangements, EFF, SDRs \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Summary Matrix: Key Differences between ADB and IMF}
+    \label{tab:adb_imf_matrix}
+\end{table}
