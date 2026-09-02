@@ -18,6 +18,8 @@ description: Mandatory Git tracking, Markdown synchronization, and LaTeX structu
   - Update the relevant subject `README.md` (e.g. `Financial Mathematics/latex/README.md` or `Financial Mathematics/README.md`) with the latest chapter overview, date ranges, and list of covered topics.
   - Update the root `README.md` if new subjects, modules, or repository structures are modified.
 
-## 3. LaTeX Example & Content Numbering Alignment
+## 3. LaTeX Example, Section & Content Numbering Alignment
+- **No Double-Numbering in Section Headings**: Never include manual serial numbers inside `\section{...}`, `\subsection{...}`, or `\subsubsection{...}` (e.g., write `\subsection{Allocation and Interest Mechanism of SDRs}`, **never** `\subsection{3. Allocation and Interest Mechanism of SDRs}`). LaTeX automatically prepends the hierarchical section counter (e.g., `1.6.3`), which creates duplicate numbers if manual numbers are present.
 - **Section-Scoped Numbering**: Always configure example, definition, and theorem boxes with `number within=section` (e.g. `\newtcbtheorem[number within=section]{example}{Example}{...}`) so that example numbers directly match the section number (e.g. Section 1.1 has Examples 1.1.1 to 1.1.5, Section 1.3 has Examples 1.3.1 to 1.3.11).
 - **Chronological Date Tags**: Always tag lecture dates on examples and sections using margin notes or header tags (e.g. `\lecturedate{DD/MM/YYYY}`).
+- **Natural Flow & Orphan Prevention**: Maintain continuous document flow without arbitrary `\newpage` commands; only introduce manual page breaks where necessary to prevent orphaned subsection headers or split comparison tables.
