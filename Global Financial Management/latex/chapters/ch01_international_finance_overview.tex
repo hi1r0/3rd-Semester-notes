@@ -172,8 +172,6 @@
 \end{itemize}
 \end{formulabox}
 
-\newpage
-
 % ==============================================================================
 % Lecture 2: 21/08/2026
 % ==============================================================================
@@ -308,8 +306,6 @@
     \item Global and regional programs
 \end{itemize}
 
-\newpage
-
 % ==============================================================================
 % Lecture 3: 24/08/2026
 % ==============================================================================
@@ -386,8 +382,6 @@
     \item Country assistance strategy
     \item Borrowing and financial decisions
 \end{itemize}
-
-\newpage
 
 % ==============================================================================
 % Lecture 4: 31/08/2026
@@ -527,8 +521,6 @@ The global macroeconomic architecture collaborates closely with international in
     \caption{The 17 United Nations Sustainable Development Goals (SDGs)}
     \label{tab:sdgs_summary}
 \end{table}
-
-\newpage
 
 % ==============================================================================
 % Lecture 5: 01/09/2026
@@ -716,8 +708,6 @@ The International Monetary Fund executes its mandate through three fundamental p
     \end{itemize}
 \end{enumerate}
 
-\newpage
-
 % ==============================================================================
 % Lecture 6: 02/09/2026 (Part A)
 % ==============================================================================
@@ -851,8 +841,6 @@ The value of the SDR is determined daily by the IMF on the basis of a trade- and
     \item \textbf{Support Balance of Payments (BOP):} Bridges temporary external account deficits.
 \end{enumerate}
 
-\newpage
-
 % ==============================================================================
 % Lecture 6: 02/09/2026 (Part B)
 % ==============================================================================
@@ -887,8 +875,8 @@ The value of the SDR is determined daily by the IMF on the basis of a trade- and
             rectangle, rounded corners=5pt,
             draw=charcoal!60, fill=white,
             line width=0.9pt, font=\sffamily,
-            align=left, inner sep=7pt,
-            text width=3.1cm, minimum height=2.0cm
+            align=left, inner sep=6pt,
+            text width=2.8cm, minimum height=2.2cm
         },
         impactbox/.style={
             rectangle, rounded corners=5pt,
@@ -908,17 +896,17 @@ The value of the SDR is determined daily by the IMF on the basis of a trade- and
             \footnotesize\normalfont Core Vision: Inclusive $\bullet$ Sustainable $\bullet$ Resilient Economic Development
         };
 
-        % 4 Channels (x at -5.4, -1.8, 1.8, 5.4 -> 0.6cm clearance)
+        % 4 Channels (x at -5.4, -1.8, 1.8, 5.4 with text width=2.8cm -> 0.52cm clear gap)
         \node[adbcard, draw=navyblue, fill=lightgraybg] (c1) at (-5.4, -2.6) {
             {\color{navyblue}\textbf{\small 1. Loans}}\\[0.25em]
             \scriptsize $\bullet$ Sovereign lending\\
-            \scriptsize $\bullet$ Private sector loans
+            \scriptsize $\bullet$ Private credit
         };
 
         \node[adbcard, draw=darkteal, fill=lightgraybg] (c2) at (-1.8, -2.6) {
             {\color{darkteal}\textbf{\small 2. Grants}}\\[0.25em]
             \scriptsize $\bullet$ Poverty relief\\
-            \scriptsize $\bullet$ Concessional funds
+            \scriptsize $\bullet$ Special funds
         };
 
         \node[adbcard, draw=amber!90!black, fill=lightgraybg] (c3) at (1.8, -2.6) {
@@ -928,7 +916,7 @@ The value of the SDR is determined daily by the IMF on the basis of a trade- and
         };
 
         \node[adbcard, draw=navyblue!80, fill=lightgraybg] (c4) at (5.4, -2.6) {
-            {\color{navyblue!80}\textbf{\small 4. Policy Advisory}}\\[0.25em]
+            {\color{navyblue!80}\textbf{\small 4. Advisory}}\\[0.25em]
             \scriptsize $\bullet$ Policy dialogue\\
             \scriptsize $\bullet$ Structural reform
         };
@@ -984,36 +972,36 @@ India is a founding member of the ADB (since 1966) and one of its largest borrow
     \resizebox{0.95\textwidth}{!}{%
     \begin{tikzpicture}[
         adbcompare/.style={
-            rectangle, rounded corners=5pt,
+            rectangle, rounded corners=6pt,
             draw=darkteal, fill=softgreen,
-            line width=0.9pt, font=\sffamily,
-            align=left, inner sep=8pt, text width=6.0cm, minimum height=4.6cm
+            line width=1pt, font=\sffamily,
+            align=left, inner sep=9pt, text width=6.6cm, minimum height=4.5cm
         },
         imfcompare/.style={
-            rectangle, rounded corners=5pt,
+            rectangle, rounded corners=6pt,
             draw=navyblue, fill=softblue,
-            line width=0.9pt, font=\sffamily,
-            align=left, inner sep=8pt, text width=6.0cm, minimum height=4.6cm
+            line width=1pt, font=\sffamily,
+            align=left, inner sep=9pt, text width=6.6cm, minimum height=4.5cm
         }
     ]
         % Left Card: ADB
         \node[adbcompare] (adb_box) at (-3.8, 0) {
-            {\color{darkteal}\textbf{\normalsize Asian Development Bank (ADB)}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{Scope:} Regional Development Institution (Asia-Pacific)\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Core Mandate:} Long-term socio-economic growth\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Financing Type:} Project loans, grants \& equity\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Target Focus:} Infrastructure, climate \& poverty\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Borrowers:} Developing member countries
+            {\color{darkteal}\textbf{\normalsize Asian Development Bank (ADB)}}\\[0.4em]
+            \scriptsize $\bullet$ \textbf{Scope:} Regional MDB for Asia-Pacific\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Mandate:} Long-term socio-economic growth\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Financing:} Project loans, grants \& equity\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Priority:} Infrastructure, climate \& poverty relief\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Tool/Window:} Concessional development funds
         };
 
         % Right Card: IMF
         \node[imfcompare] (imf_box) at (3.8, 0) {
-            {\color{navyblue}\textbf{\normalsize International Monetary Fund (IMF)}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{Scope:} Global Multilateral Institution (190 members)\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Core Mandate:} Global monetary \& FX stability\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Financing Type:} Balance of payments crisis lending\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Target Focus:} Macroeconomic reform \& surveillance\\[0.2em]
-            \scriptsize $\bullet$ \textbf{Reserve Tool:} Special Drawing Rights (SDRs)
+            {\color{navyblue}\textbf{\normalsize International Monetary Fund (IMF)}}\\[0.4em]
+            \scriptsize $\bullet$ \textbf{Scope:} Global Institution (190 members)\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Mandate:} Global monetary \& FX stability\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Financing:} Balance of payments crisis loans\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Priority:} Macroeconomic surveillance \& reform\\[0.25em]
+            \scriptsize $\bullet$ \textbf{Tool/Window:} Special Drawing Rights (SDRs)
         };
     \end{tikzpicture}%
     }
