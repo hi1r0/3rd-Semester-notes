@@ -31,6 +31,11 @@ description: Mandatory Git tracking, Markdown synchronization, and LaTeX structu
 - **Ample Spacing for Transition Arrows**:
   - Inter-node transition arrows must never have cramped or squished arrowheads touching both box borders. Maintain a minimum clear inter-card clearance of $0.6\,\text{cm}$ to $1.0\,\text{cm}$ between card boundaries.
   - Where horizontal space is restricted across 5+ stages, use a connected top chevron process header or elevated numbered step badges with clean drop-lines rather than tiny squashed horizontal arrows.
+- **Connector Stem Length & Arrowhead Clearance**:
+  - Any directional connector (vertical drop stem, horizontal link, or branch line) MUST have a minimum clear distance of $0.6\,\text{cm}$ to $1.0\,\text{cm}$ between connected node boundaries. This guarantees that the shaft of the arrow is distinct and prominent before the arrowhead begins.
+  - Never allow an arrowhead to span the entire gap between two elements (which creates a cramped "stubby" appearance).
+  - High-Contrast Arrow Styling: Connectors should use bold stroke widths ($\ge 1.2\,\text{pt}$ to $1.5\,\text{pt}$) and either match the accent color of the destination card or use the primary palette tone (`navyblue`) rather than washed-out faint grays.
 - **Balanced Banner Connectors**:
   - Avoid solitary asymmetric downward arrows from a wide multi-column top banner pointing into only the first child card. Top banners should either serve as independent title blocks or provide symmetrical branch lines into all child pillars.
+
 

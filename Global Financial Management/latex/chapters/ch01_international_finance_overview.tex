@@ -1073,10 +1073,6 @@ The evolution of a domestic firm into a globally integrated enterprise typically
         trackarrow/.style={
             -{Stealth[length=6.5pt, width=4.5pt]},
             draw=navyblue!80, line width=1.4pt
-        },
-        dropline/.style={
-            -{Stealth[length=5.5pt, width=3.5pt]},
-            draw=charcoal!70, line width=1pt
         }
     ]
         % Top Evolution Banner
@@ -1085,12 +1081,12 @@ The evolution of a domestic firm into a globally integrated enterprise typically
             \footnotesize Increasing Resource Commitment $\bullet$ Strategic Coordination $\bullet$ Global Integration
         };
 
-        % Elevated Numbered Step Badges (centers at x = -6.4, -3.2, 0, 3.2, 6.4 and y = -1.6)
-        \node[badge=navyblue] (b1) at (-6.4, -1.6) {1};
-        \node[badge=darkteal] (b2) at (-3.2, -1.6) {2};
-        \node[badge=amber!90!black] (b3) at (0, -1.6) {3};
-        \node[badge=navyblue!80] (b4) at (3.2, -1.6) {4};
-        \node[badge=charcoal] (b5) at (6.4, -1.6) {5};
+        % Elevated Numbered Step Badges (centers at x = -6.4, -3.2, 0, 3.2, 6.4 and y = -1.5)
+        \node[badge=navyblue] (b1) at (-6.4, -1.5) {1};
+        \node[badge=darkteal] (b2) at (-3.2, -1.5) {2};
+        \node[badge=amber!90!black] (b3) at (0, -1.5) {3};
+        \node[badge=navyblue!80] (b4) at (3.2, -1.5) {4};
+        \node[badge=charcoal] (b5) at (6.4, -1.5) {5};
 
         % Horizontal Progression Flow Arrows between Badges (generous ~2.35cm clear arrow span!)
         \draw[trackarrow] (b1.east) -- (b2.west);
@@ -1098,8 +1094,8 @@ The evolution of a domestic firm into a globally integrated enterprise typically
         \draw[trackarrow] (b3.east) -- (b4.west);
         \draw[trackarrow] (b4.east) -- (b5.west);
 
-        % Stage Content Cards placed directly below badges (y = -3.7, uniform minimum height=2.9cm)
-        \node[stagebox, draw=navyblue] (s1) at (-6.4, -3.7) {
+        % Stage Content Cards placed at y = -4.3 (giving ~0.83cm clear vertical stem!)
+        \node[stagebox, draw=navyblue] (s1) at (-6.4, -4.3) {
             {\color{navyblue}\textbf{\small Domestic}}\\[0.3em]
             \scriptsize $\bullet$ Domestic suppliers\\
             \scriptsize $\bullet$ Domestic finance\\
@@ -1107,7 +1103,7 @@ The evolution of a domestic firm into a globally integrated enterprise typically
             \scriptsize $\bullet$ Zero FX exposure
         };
 
-        \node[stagebox, draw=darkteal] (s2) at (-3.2, -3.7) {
+        \node[stagebox, draw=darkteal] (s2) at (-3.2, -4.3) {
             {\color{darkteal}\textbf{\small Exporting}}\\[0.3em]
             \scriptsize $\bullet$ Cross-border trade\\
             \scriptsize $\bullet$ $\ge 2$ countries\\
@@ -1115,7 +1111,7 @@ The evolution of a domestic firm into a globally integrated enterprise typically
             \scriptsize $\bullet$ Foreign channels
         };
 
-        \node[stagebox, draw=amber!90!black] (s3) at (0, -3.7) {
+        \node[stagebox, draw=amber!90!black] (s3) at (0, -4.3) {
             {\color{amber!90!black}\textbf{\small Subs \& JVs}}\\[0.3em]
             \scriptsize $\bullet$ Physical presence\\
             \scriptsize $\bullet$ Local partnerships\\
@@ -1123,7 +1119,7 @@ The evolution of a domestic firm into a globally integrated enterprise typically
             \scriptsize $\bullet$ Overseas setup
         };
 
-        \node[stagebox, draw=navyblue!80] (s4) at (3.2, -3.7) {
+        \node[stagebox, draw=navyblue!80] (s4) at (3.2, -4.3) {
             {\color{navyblue!80}\textbf{\small Multinational}}\\[0.3em]
             \scriptsize $\bullet$ Multi-region base\\
             \scriptsize $\bullet$ Direct operations\\
@@ -1131,7 +1127,7 @@ The evolution of a domestic firm into a globally integrated enterprise typically
             \scriptsize $\bullet$ Global branding
         };
 
-        \node[stagebox, draw=charcoal] (s5) at (6.4, -3.7) {
+        \node[stagebox, draw=charcoal] (s5) at (6.4, -4.3) {
             {\color{charcoal}\textbf{\small Transnational}}\\[0.3em]
             \scriptsize $\bullet$ Global efficiency\\
             \scriptsize $\bullet$ Local response\\
@@ -1139,12 +1135,12 @@ The evolution of a domestic firm into a globally integrated enterprise typically
             \scriptsize $\bullet$ Network synergy
         };
 
-        % Clean Vertical Drop Connectors from Badges to Stage Cards
-        \draw[dropline] (b1.south) -- (s1.north);
-        \draw[dropline] (b2.south) -- (s2.north);
-        \draw[dropline] (b3.south) -- (s3.north);
-        \draw[dropline] (b4.south) -- (s4.north);
-        \draw[dropline] (b5.south) -- (s5.north);
+        % Prominent, Color-Matched Bold Vertical Drop Connectors with generous ~0.83cm stem!
+        \draw[-{Stealth[length=6.5pt, width=4.5pt]}, line width=1.4pt, draw=navyblue] (b1.south) -- (s1.north);
+        \draw[-{Stealth[length=6.5pt, width=4.5pt]}, line width=1.4pt, draw=darkteal] (b2.south) -- (s2.north);
+        \draw[-{Stealth[length=6.5pt, width=4.5pt]}, line width=1.4pt, draw=amber!90!black] (b3.south) -- (s3.north);
+        \draw[-{Stealth[length=6.5pt, width=4.5pt]}, line width=1.4pt, draw=navyblue!80] (b4.south) -- (s4.north);
+        \draw[-{Stealth[length=6.5pt, width=4.5pt]}, line width=1.4pt, draw=charcoal] (b5.south) -- (s5.north);
     \end{tikzpicture}%
     }
     \caption{The Five Progressive Stages of the Corporate Internationalisation Process}
