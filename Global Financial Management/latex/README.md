@@ -38,6 +38,13 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - India-ADB Partnership Priorities: Urban Infra, Transport, Clean Energy, Water/Sanitation, Skills, Climate Resilience.
   - Institutional Comparison: ADB (Regional development bank) vs. IMF (Global monetary authority).
   - *Lecture Date:* `02/09/2026`.
+- **1.8 Internationalisation Process (Completes Unit-I)**
+  - Definition & conceptual scope.
+  - Five Progressive Stages: Domestic, Exporting, Subsidiaries & Joint Ventures, Multinational, Transnational.
+  - Six Drivers of International Expansion: Saturated domestic growth, cost reduction, competitive pressures, customer following, attractive global cost structures, emerging market growth potential.
+  - Four Foreign Market Entry Strategies & Risk Spectrum: Exporting, Licensing & Franchising, Joint Ventures, Direct Investment (Wholly Owned FDI).
+  - Comparative Matrix: Strategic Advantages vs. Operational & Environmental Disadvantages.
+  - *Lecture Date:* `03/09/2026`.
 
 ---
 
@@ -53,7 +60,7 @@ latex/
 │   ├── titlepage.tex                                  # Official Pondicherry University title page
 │   └── syllabus.tex                                   # Official MSQF 535 syllabus & CO-PO matrix
 ├── chapters/
-│   └── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 02/09/2026)
+│   └── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 03/09/2026)
 ├── figures/                                           # Department & University logos
 └── README.md                                          # Documentation & compilation instructions
 ```
