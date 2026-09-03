@@ -1045,29 +1045,38 @@ India is a founding member of the ADB (since 1966) and one of its largest borrow
 The evolution of a domestic firm into a globally integrated enterprise typically progresses through five distinct developmental stages:
 
 % ------------------------------------------------------------------------------
-% TikZ Flowchart 10: 5-Stage Evolution Pipeline
+% TikZ Flowchart 10: 5-Stage Evolution Pipeline with Elevated Numbered Track
 % ------------------------------------------------------------------------------
 \begin{figure}[htbp]
     \centering
     \resizebox{0.98\textwidth}{!}{%
     \begin{tikzpicture}[
-        stagebox/.style={
-            rectangle, rounded corners=5pt,
-            draw=charcoal!70, fill=lightgraybg,
-            line width=0.9pt, font=\sffamily,
-            align=left, inner sep=5pt,
-            text width=2.7cm, minimum height=2.8cm
-        },
-        transline/.style={
-            -{Stealth[length=6pt, width=4pt]},
-            draw=navyblue!80, line width=1.1pt
-        },
         banner/.style={
             rectangle, rounded corners=5pt,
             draw=navyblue, fill=softblue,
             line width=1.1pt, font=\sffamily,
             align=center, inner sep=7pt,
             text width=15.6cm, minimum height=1.1cm
+        },
+        badge/.style={
+            circle, draw=#1, fill=white,
+            line width=1.3pt, font=\sffamily\bfseries\small,
+            text=#1, minimum size=0.85cm, inner sep=0pt
+        },
+        stagebox/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!70, fill=lightgraybg,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=6pt,
+            text width=2.65cm, minimum height=2.9cm
+        },
+        trackarrow/.style={
+            -{Stealth[length=6.5pt, width=4.5pt]},
+            draw=navyblue!80, line width=1.4pt
+        },
+        dropline/.style={
+            -{Stealth[length=5.5pt, width=3.5pt]},
+            draw=charcoal!70, line width=1pt
         }
     ]
         % Top Evolution Banner
@@ -1076,55 +1085,66 @@ The evolution of a domestic firm into a globally integrated enterprise typically
             \footnotesize Increasing Resource Commitment $\bullet$ Strategic Coordination $\bullet$ Global Integration
         };
 
-        % 5 Stages placed horizontally across 16.0cm coordinate space
-        \node[stagebox, draw=navyblue] (s1) at (-6.4, -2.8) {
-            {\color{navyblue}\textbf{\small 1. Domestic}}\\[0.3em]
+        % Elevated Numbered Step Badges (centers at x = -6.4, -3.2, 0, 3.2, 6.4 and y = -1.6)
+        \node[badge=navyblue] (b1) at (-6.4, -1.6) {1};
+        \node[badge=darkteal] (b2) at (-3.2, -1.6) {2};
+        \node[badge=amber!90!black] (b3) at (0, -1.6) {3};
+        \node[badge=navyblue!80] (b4) at (3.2, -1.6) {4};
+        \node[badge=charcoal] (b5) at (6.4, -1.6) {5};
+
+        % Horizontal Progression Flow Arrows between Badges (generous ~2.35cm clear arrow span!)
+        \draw[trackarrow] (b1.east) -- (b2.west);
+        \draw[trackarrow] (b2.east) -- (b3.west);
+        \draw[trackarrow] (b3.east) -- (b4.west);
+        \draw[trackarrow] (b4.east) -- (b5.west);
+
+        % Stage Content Cards placed directly below badges (y = -3.7, uniform minimum height=2.9cm)
+        \node[stagebox, draw=navyblue] (s1) at (-6.4, -3.7) {
+            {\color{navyblue}\textbf{\small Domestic}}\\[0.3em]
             \scriptsize $\bullet$ Domestic suppliers\\
             \scriptsize $\bullet$ Domestic finance\\
-            \scriptsize $\bullet$ Local opportunities\\
+            \scriptsize $\bullet$ Domestic market\\
             \scriptsize $\bullet$ Zero FX exposure
         };
 
-        \node[stagebox, draw=darkteal] (s2) at (-3.2, -2.8) {
-            {\color{darkteal}\textbf{\small 2. Exporting}}\\[0.3em]
+        \node[stagebox, draw=darkteal] (s2) at (-3.2, -3.7) {
+            {\color{darkteal}\textbf{\small Exporting}}\\[0.3em]
             \scriptsize $\bullet$ Cross-border trade\\
             \scriptsize $\bullet$ $\ge 2$ countries\\
             \scriptsize $\bullet$ Home production\\
             \scriptsize $\bullet$ Foreign channels
         };
 
-        \node[stagebox, draw=amber!90!black] (s3) at (0, -2.8) {
-            {\color{amber!90!black}\textbf{\small 3. Subs \& JVs}}\\[0.3em]
+        \node[stagebox, draw=amber!90!black] (s3) at (0, -3.7) {
+            {\color{amber!90!black}\textbf{\small Subs \& JVs}}\\[0.3em]
             \scriptsize $\bullet$ Physical presence\\
             \scriptsize $\bullet$ Local partnerships\\
             \scriptsize $\bullet$ Equity alliances\\
             \scriptsize $\bullet$ Overseas setup
         };
 
-        \node[stagebox, draw=navyblue!80] (s4) at (3.2, -2.8) {
-            {\color{navyblue!80}\textbf{\small 4. Multinational}}\\[0.3em]
+        \node[stagebox, draw=navyblue!80] (s4) at (3.2, -3.7) {
+            {\color{navyblue!80}\textbf{\small Multinational}}\\[0.3em]
             \scriptsize $\bullet$ Multi-region base\\
             \scriptsize $\bullet$ Direct operations\\
             \scriptsize $\bullet$ Autonomous units\\
             \scriptsize $\bullet$ Global branding
         };
 
-        \node[stagebox, draw=charcoal] (s5) at (6.4, -2.8) {
-            {\color{charcoal}\textbf{\small 5. Transnational}}\\[0.3em]
+        \node[stagebox, draw=charcoal] (s5) at (6.4, -3.7) {
+            {\color{charcoal}\textbf{\small Transnational}}\\[0.3em]
             \scriptsize $\bullet$ Global efficiency\\
             \scriptsize $\bullet$ Local response\\
             \scriptsize $\bullet$ Shared learning\\
             \scriptsize $\bullet$ Network synergy
         };
 
-        % Connectors from Banner
-        \draw[transline] (banner.south -| s1.north) -- (s1.north);
-
-        % Inter-Stage Progressive Flow Arrows
-        \draw[transline] (s1.east) -- (s2.west);
-        \draw[transline] (s2.east) -- (s3.west);
-        \draw[transline] (s3.east) -- (s4.west);
-        \draw[transline] (s4.east) -- (s5.west);
+        % Clean Vertical Drop Connectors from Badges to Stage Cards
+        \draw[dropline] (b1.south) -- (s1.north);
+        \draw[dropline] (b2.south) -- (s2.north);
+        \draw[dropline] (b3.south) -- (s3.north);
+        \draw[dropline] (b4.south) -- (s4.north);
+        \draw[dropline] (b5.south) -- (s5.north);
     \end{tikzpicture}%
     }
     \caption{The Five Progressive Stages of the Corporate Internationalisation Process}
@@ -1157,7 +1177,7 @@ Firms undertake cross-border expansion driven by key strategic imperatives:
 Entering international markets involves selecting an appropriate entry mode that balances operational control, resource commitment, and financial risk:
 
 % ------------------------------------------------------------------------------
-% TikZ Flowchart 11: Foreign Market Entry Mode Spectrum
+% TikZ Flowchart 11: Foreign Market Entry Mode Spectrum (Strictly Symmetrical)
 % ------------------------------------------------------------------------------
 \begin{figure}[htbp]
     \centering
@@ -1168,48 +1188,50 @@ Entering international markets involves selecting an appropriate entry mode that
             draw=charcoal!60, fill=white,
             line width=0.9pt, font=\sffamily,
             align=left, inner sep=7pt,
-            text width=3.1cm, minimum height=2.4cm
+            text width=3.1cm, minimum height=3.3cm
         },
         spectrumline/.style={
             -{Stealth[length=7pt, width=5pt]},
             draw=navyblue, line width=1.5pt
         }
     ]
-        % 4 Entry Mode Cards (centers at -5.7, -1.9, 1.9, 5.7)
+        % 4 Entry Mode Cards (strictly identical minimum height=3.3cm, text width=3.1cm)
         \node[entrycard, draw=navyblue, fill=lightgraybg] (e1) at (-5.7, 0) {
-            {\color{navyblue}\textbf{\small 1. Exporting}}\\[0.25em]
+            {\color{navyblue}\textbf{\small 1. Exporting}}\\[0.15em]
+            {\color{navyblue}\textbf{\footnotesize (Trade Mode)}}\\[0.35em]
             \scriptsize $\bullet$ Direct / Indirect trade\\
             \scriptsize $\bullet$ Lowest capital outlay\\
             \scriptsize $\bullet$ Rapid market entry
         };
 
         \node[entrycard, draw=darkteal, fill=lightgraybg] (e2) at (-1.9, 0) {
-            {\color{darkteal}\textbf{\small 2. Licensing \&}}\\[0.1em]
-            {\color{darkteal}\textbf{\small \phantom{2. }Franchising}}\\[0.25em]
+            {\color{darkteal}\textbf{\small 2. Licensing \&}}\\[0.15em]
+            {\color{darkteal}\textbf{\footnotesize Franchising}}\\[0.35em]
             \scriptsize $\bullet$ Contractual rights\\
             \scriptsize $\bullet$ Royalty payment model\\
             \scriptsize $\bullet$ Low capital barrier
         };
 
         \node[entrycard, draw=amber!90!black, fill=lightgraybg] (e3) at (1.9, 0) {
-            {\color{amber!90!black}\textbf{\small 3. Joint Ventures}}\\[0.25em]
+            {\color{amber!90!black}\textbf{\small 3. Joint}}\\[0.15em]
+            {\color{amber!90!black}\textbf{\footnotesize Ventures}}\\[0.35em]
             \scriptsize $\bullet$ Shared equity \& risk\\
             \scriptsize $\bullet$ Local partner insight\\
             \scriptsize $\bullet$ Shared management
         };
 
         \node[entrycard, draw=navyblue!80, fill=lightgraybg] (e4) at (5.7, 0) {
-            {\color{navyblue!80}\textbf{\small 4. Direct Entry}}\\[0.1em]
-            {\color{navyblue!80}\textbf{\small \phantom{4. }(FDI)}}\\[0.25em]
+            {\color{navyblue!80}\textbf{\small 4. Direct Entry}}\\[0.15em]
+            {\color{navyblue!80}\textbf{\footnotesize (Wholly Owned FDI)}}\\[0.35em]
             \scriptsize $\bullet$ Wholly owned entity\\
             \scriptsize $\bullet$ Maximum control\\
             \scriptsize $\bullet$ Highest capital outlay
         };
 
         % Gradient Spectrum Bar Below
-        \draw[spectrumline] (-7.6, -1.9) -- (7.6, -1.9);
-        \node[below, font=\sffamily\footnotesize\bfseries, text=navyblue] at (-4.5, -2.05) {Low Risk $\bullet$ Low Resource Commitment};
-        \node[below, font=\sffamily\footnotesize\bfseries, text=navyblue] at (4.5, -2.05) {High Control $\bullet$ High Capital Commitment};
+        \draw[spectrumline] (-7.6, -2.4) -- (7.6, -2.4);
+        \node[below, font=\sffamily\footnotesize\bfseries, text=navyblue] at (-4.5, -2.55) {Low Risk $\bullet$ Low Resource Commitment};
+        \node[below, font=\sffamily\footnotesize\bfseries, text=navyblue] at (4.5, -2.55) {High Control $\bullet$ High Capital Commitment};
     \end{tikzpicture}%
     }
     \caption{Strategic Spectrum of Foreign Market Entry Modes}

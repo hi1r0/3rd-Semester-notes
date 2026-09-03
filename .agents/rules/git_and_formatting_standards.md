@@ -23,3 +23,14 @@ description: Mandatory Git tracking, Markdown synchronization, and LaTeX structu
 - **Section-Scoped Numbering**: Always configure example, definition, and theorem boxes with `number within=section` (e.g. `\newtcbtheorem[number within=section]{example}{Example}{...}`) so that example numbers directly match the section number (e.g. Section 1.1 has Examples 1.1.1 to 1.1.5, Section 1.3 has Examples 1.3.1 to 1.3.11).
 - **Chronological Date Tags**: Always tag lecture dates on examples and sections using margin notes or header tags (e.g. `\lecturedate{DD/MM/YYYY}`).
 - **Natural Flow & Orphan Prevention**: Maintain continuous document flow without arbitrary `\newpage` commands; only introduce manual page breaks where necessary to prevent orphaned subsection headers or split comparison tables.
+
+## 4. TikZ Visual Symmetry & Connector Spacing Invariants
+- **Uniform Box Dimensions (Symmetry) Across Parallel Cards**: 
+  - Whenever multiple cards are arranged side-by-side in a row or along a spectrum (e.g., pipeline stages, entry modes, institutional comparisons), all cards MUST share identical geometry: uniform `text width` and an identical `minimum height` calibrated to the tallest card.
+  - Symmetrical content formatting: Standardize title lines (e.g. exactly 2 lines per title) and bullet volume across adjacent cards so vertical distribution is visually balanced.
+- **Ample Spacing for Transition Arrows**:
+  - Inter-node transition arrows must never have cramped or squished arrowheads touching both box borders. Maintain a minimum clear inter-card clearance of $0.6\,\text{cm}$ to $1.0\,\text{cm}$ between card boundaries.
+  - Where horizontal space is restricted across 5+ stages, use a connected top chevron process header or elevated numbered step badges with clean drop-lines rather than tiny squashed horizontal arrows.
+- **Balanced Banner Connectors**:
+  - Avoid solitary asymmetric downward arrows from a wide multi-column top banner pointing into only the first child card. Top banners should either serve as independent title blocks or provide symmetrical branch lines into all child pillars.
+
