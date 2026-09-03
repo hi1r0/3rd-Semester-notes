@@ -28,6 +28,12 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
     - Constant Perpetuities ($C/R$) & Growing Perpetuities ($C_1/(R-G)$).
     - Finite Growing Annuity streams & Sinking Fund ($\text{S.F.}$) reserve accumulations (Ordinary & Annuity Due).
     - *Solved Examples:* `1.3.7` to `1.3.16` (*Lectures: 18/08/2026, 27/08/2026, 28/08/2026, 31/08/2026, 01/09/2026*).
+- **1.4 Growth and Decay Curves:**
+  - Continuous exponential growth ($n_0 e^{kt}$) and decay ($n_0 e^{-kt}$) dynamics.
+  - Rate parameter calibration ($k = \frac{\ln(n_{\max}/n_{\min})}{T} \approx 0.389182$).
+  - Research-style greyscale side-by-side TikZ/pgfplots curves for growth (solid) and decay (dashed).
+  - Market microstructure applications: Trade price impact decay curves, large banks' monitoring, toxic flow detection, and market stability.
+  - *Lecture Date:* `03/09/2026`.
 
 ---
 

@@ -1192,3 +1192,109 @@ T Limited is creating a sinking fund to redeem its debentures of $\inr 40{,}00{,
 \textbf{Final Result:}
 The required annual sinking fund instalment is $\mathbf{\inr 1{,}28{,}664.31}$.
 \end{example}
+
+\newpage
+
+% ==============================================================================
+% 1.4 Growth and Decay Curves
+% ==============================================================================
+\section{Growth and Decay Curves}
+\lecturedate{03/09/2026}
+
+\begin{definition}{Exponential Growth and Decay Models}{exp_growth_decay_models}
+Let $t$ denote time ($t \ge 0$) and $n(t)$ denote the modeled quantity at time $t$. The dynamics of continuous exponential growth and decay are characterized by:
+\begin{itemize}[noitemsep, leftmargin=*]
+    \item \textbf{Exponential Growth Model:} $n(t) = n_0 \, e^{k t}, \quad k > 0$ \quad (initial quantity $n_0 = n(0)$, growth constant $k$)
+    \item \textbf{Exponential Decay Model:} $n(t) = n_0 \, e^{-k t}, \quad k > 0$ \quad (initial quantity $n_0 = n(0)$, decay constant $k$)
+\end{itemize}
+For scaling over time interval $[0, T]$ between boundary values $[n_{\min}, n_{\max}]$:
+\begin{equation}
+    k = \frac{1}{T} \ln\left(\frac{n_{\max}}{n_{\min}}\right) = \frac{1}{5} \ln\left(\frac{70}{10}\right) = \frac{\ln 7}{5} \approx 0.389182
+\end{equation}
+\begin{itemize}[noitemsep]
+    \item \textbf{Growth Curve:} $n(t) = 10 \, e^{0.389182 \, t}$, increasing monotonically from $10$ to $70$.
+    \item \textbf{Decay Curve:} $n(t) = 70 \, e^{-0.389182 \, t}$, decreasing monotonically from $70$ to $10$.
+\end{itemize}
+\end{definition}
+
+% ------------------------------------------------------------------------------
+% TikZ Pgfplots: Side-by-Side Research-Style Greyscale Plots
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\linewidth,
+                height=3.8cm,
+                title={\textbf{Growth Curve}},
+                title style={font=\normalsize\bfseries},
+                xlabel={Time ($t$)},
+                ylabel={Quantity ($n$)},
+                xmin=0, xmax=5,
+                ymin=10, ymax=70,
+                xtick={0,1,2,3,4,5},
+                ytick={10,20,30,40,50,60,70},
+                grid=major,
+                grid style={dashed, gray!35},
+                axis lines=box,
+                tick label style={font=\small},
+                label style={font=\small}
+            ]
+                \addplot[domain=0:5, samples=100, solid, line width=1.5pt, black] {10 * exp(0.389182 * x)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\linewidth,
+                height=3.8cm,
+                title={\textbf{Decay Curve}},
+                title style={font=\normalsize\bfseries},
+                xlabel={Time ($t$)},
+                ylabel={Quantity ($n$)},
+                xmin=0, xmax=5,
+                ymin=10, ymax=70,
+                xtick={0,1,2,3,4,5},
+                ytick={10,20,30,40,50,60,70},
+                grid=major,
+                grid style={dashed, gray!35},
+                axis lines=box,
+                tick label style={font=\small},
+                label style={font=\small}
+            ]
+                \addplot[domain=0:5, samples=100, dashed, line width=1.5pt, black] {70 * exp(-0.389182 * x)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \vspace{-0.7em}
+    \caption{Research-Style Greyscale Exponential Growth (Solid) and Decay (Dashed) Curves}
+    \label{fig:growth_decay_curves}
+\end{figure}
+
+\begin{formulabox}[Decay Curves in Financial Trading: Price Impact Analysis]
+\textbf{Market Microstructure Interpretation of the Decay Curve:}
+In financial markets and quantitative execution, a \textbf{decay curve} models how a trade's impact on asset price evolves over time:
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item \textbf{X-axis:} Time elapsed following trade execution.
+    \item \textbf{Y-axis:} Price change / price impact.
+\end{itemize}
+
+\vspace{0.4em}
+\textbf{Institutional Users (Large Banks):}
+Decay curves are systematically employed by large investment banks and market-making desks to:
+\begin{enumerate}[noitemsep, topsep=1pt]
+    \item \textbf{Monitor trade impacts:} Measuring how individual block orders or algorithmic parent orders move the bid-ask quote and midpoint over time.
+    \item \textbf{Detect toxic behavior:} Identifying informed order flow, adverse selection, and toxic flow that degrades fill quality and market liquidity.
+\end{enumerate}
+
+\vspace{0.4em}
+\textbf{Core Purpose:}
+\begin{enumerate}[noitemsep, topsep=1pt]
+    \item \textbf{Understand long-term trade impact:} Disentangling temporary market impact (liquidity consumption that decays back to fundamental value) from permanent price impact (information revelation).
+    \item \textbf{Ensure market stability:} Managing institutional execution schedules (e.g. TWAP/VWAP/POV) to prevent excessive volatility and preserve market stability.
+\end{enumerate}
+\end{formulabox}
