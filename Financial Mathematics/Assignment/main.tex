@@ -16,7 +16,19 @@
 \input{preamble/titlepage.tex}
 
 % ------------------------------------------------------------------------------
-% 2. Core Assignment Sections
+% 2. Table of Contents (Dedicated Front-Matter Page)
+% ------------------------------------------------------------------------------
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{2}
+{
+  \hypersetup{linkcolor=pureblack}
+  \tableofcontents
+}
+\clearpage
+
+% ------------------------------------------------------------------------------
+% 3. Core Assignment Sections
 % ------------------------------------------------------------------------------
 \pagenumbering{arabic}
 \setcounter{page}{1}
