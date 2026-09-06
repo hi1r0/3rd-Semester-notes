@@ -1,0 +1,78 @@
+% ==============================================================================
+% Packages Configuration - Monochrome & Greyscale Edition
+% ==============================================================================
+
+% Encoding and Typography
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{textcomp}
+
+% Mathematical Typesetting
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{bm}
+
+% Layout & Page Geometry
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[inline]{enumitem}
+\usepackage{marginnote}
+
+% Monochrome & Grayscale Color Definitions
+\usepackage{xcolor}
+\definecolor{pureblack}{gray}{0.00}
+\definecolor{darkgraytext}{gray}{0.20}
+\definecolor{midgray}{gray}{0.45}
+\definecolor{lightgrayborder}{gray}{0.65}
+\definecolor{tableheadbg}{gray}{0.88}
+\definecolor{tablerowbg}{gray}{0.95}
+\definecolor{boxfill}{gray}{0.96}
+\definecolor{darkboxfill}{gray}{0.92}
+
+% Graphics & TikZ
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, backgrounds, patterns}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% TColorBox Environments
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, theorems, breakable}
+
+% Tables and Formatting (Academic Booktabs Standard)
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Hyperlinks & Cross-Referencing (Pure Monochrome)
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=pureblack,
+    citecolor=darkgraytext,
+    urlcolor=pureblack,
+    pdfauthor={N Rohit Vedhanandh (25MSQUFPY0002)},
+    pdftitle={Equity Valuation Assignment: Net Asset Value Method - FMCG Sector}
+}
+
+% Section Heading Formatting (Crisp Academic Monochrome)
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{pureblack}}{\thesection}{1em}{}[\titlerule]
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{pureblack}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{pureblack}}{\thesubsubsection}{1em}{}
+
+% Running Headers & Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{darkgraytext}\nouppercase{\leftmark}}
+\fancyhead[R]{\small\color{pureblack}\textbf{MSQF 532}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}

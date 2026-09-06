@@ -1,0 +1,138 @@
+% ==============================================================================
+% Section 3: Comparative Analysis & Margin of Safety
+% ==============================================================================
+
+\section[Cross-Sectional Analysis]{Cross-Sectional Analysis and Margin of Safety Spectrum}
+
+\subsection{Visualizing the Overvaluation Spectrum}
+A cross-sectional examination of the ten sampled companies reveals stark dispersion in their respective market premiums. Figure~\ref{fig:overvaluation_chart} charts the overvaluation multiple ($P_0 / \IV$) across all firms, providing an immediate visual benchmarking of asset-backing strength.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xbar,
+    width=12.8cm,
+    height=8.6cm,
+    xlabel={\textbf{Overvaluation Multiple} $\left(\mathcal{R} = \dfrac{\text{Market Price}}{\text{Intrinsic Value}}\right)$},
+    symbolic y coords={
+        {Nestle India},
+        {Britannia Ind.},
+        {Marico Ltd},
+        {Colgate-Palm.},
+        {Godrej Cons.},
+        {Hindustan Unilever},
+        {Varun Beverages},
+        {Dabur India},
+        {Tata Consumer},
+        {ITC Ltd}
+    },
+    ytick=data,
+    yticklabel style={font=\small\bfseries, color=pureblack},
+    nodes near coords={\pgfmathprintnumber\pgfplotspointmeta$\times$},
+    nodes near coords align={horizontal},
+    nodes near coords style={font=\footnotesize\bfseries, color=pureblack, xshift=2pt},
+    point meta=rawx,
+    xmin=0, xmax=48,
+    xtick={0, 10, 20, 30, 40},
+    xmajorgrids=true,
+    grid style={dashed, gray!40},
+    bar width=10.5pt,
+    axis line style={line width=1.1pt, color=pureblack},
+    tick style={line width=0.8pt, color=pureblack},
+    enlarge y limits=0.08
+]
+\addplot[
+    draw=pureblack,
+    line width=1.1pt,
+    fill=tableheadbg,
+    postaction={pattern=north east lines, pattern color=midgray!50}
+] coordinates {
+    (4.5,{ITC Ltd})
+    (4.9,{Tata Consumer})
+    (6.8,{Dabur India})
+    (7.8,{Varun Beverages})
+    (9.8,{Hindustan Unilever})
+    (18.7,{Godrej Cons.})
+    (25.3,{Colgate-Palm.})
+    (25.4,{Marico Ltd})
+    (33.2,{Britannia Ind.})
+    (42.7,{Nestle India})
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Cross-Sectional Dispersion of Overvaluation Multiples Across Sample FMCG Firms.}
+\label{fig:overvaluation_chart}
+\end{figure}
+
+\subsection{Categorization into Valuation Tiers}
+To evaluate the relative asset protection available to conservative investors, the universe of ten companies is partitioned into three distinct risk-and-asset backing tiers, shown in Figure~\ref{fig:tier_cards}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    every node/.style = {font=\small\sffamily},
+    tiercard/.style = {
+        draw=pureblack,
+        line width=1.2pt,
+        fill=boxfill,
+        rounded corners=2pt,
+        text width=4.1cm,
+        minimum height=4.3cm,
+        align=left,
+        inner sep=6pt
+    },
+    tierheader/.style = {
+        font=\small\bfseries,
+        align=center
+    }
+]
+
+    % Three symmetrical parallel cards with identical width, height, and >= 0.8cm clearance
+    \node [tiercard] (t1) {
+        \centering\textbf{Tier 1: High Asset Backing}\\[0.2em]
+        \centering\footnotesize\textit{Multiple: $4.5\times - 6.8\times$}\\[0.6em]
+        \raggedright
+        \textbf{Firms:} ITC, Tata Consumer, Dabur India.\\[0.4em]
+        \textbf{Balance Sheet:} Substantial tangible asset pool, heavy manufacturing infrastructure, low relative leverage.\\[0.4em]
+        \textbf{Margin of Safety:} Highest among FMCG peers.
+    };
+
+    \node [tiercard, right=0.7cm of t1] (t2) {
+        \centering\textbf{Tier 2: Intermediate Multiple}\\[0.2em]
+        \centering\footnotesize\textit{Multiple: $7.8\times - 18.7\times$}\\[0.6em]
+        \raggedright
+        \textbf{Firms:} Varun Beverages, HUL, Godrej Consumer.\\[0.4em]
+        \textbf{Balance Sheet:} Hybrid capital structure; massive working capital throughput and operational scale.\\[0.4em]
+        \textbf{Margin of Safety:} Moderate asset coverage of market cap.
+    };
+
+    \node [tiercard, right=0.7cm of t2] (t3) {
+        \centering\textbf{Tier 3: Extreme Multiples}\\[0.2em]
+        \centering\footnotesize\textit{Multiple: $25.3\times - 42.7\times$}\\[0.6em]
+        \raggedright
+        \textbf{Firms:} Colgate, Marico, Britannia, Nestle India.\\[0.4em]
+        \textbf{Balance Sheet:} Ultra-lean physical asset base, minimal working capital, hyper-efficient ROIC.\\[0.4em]
+        \textbf{Margin of Safety:} Negligible liquidation protection.
+    };
+
+\end{tikzpicture}
+\caption{Classification of FMCG Universe by Asset-Backing Strength and Multiples.}
+\label{fig:tier_cards}
+\end{figure}
+
+\subsection{Margin of Safety Analysis}
+In classical Graham-and-Dodd value investing, the \textbf{Margin of Safety} is defined as the favorable difference between the intrinsic value and the market price paid:
+\begin{equation}
+    \text{Margin of Safety} = \frac{\IV - P_0}{P_0} = \frac{1}{\mathcal{R}} - 1
+\end{equation}
+
+When applied to the empirical results:
+\begin{itemize}
+    \item \textbf{ITC Limited ($\mathcal{R} = 4.5\times$)} and \textbf{Tata Consumer Products ($\mathcal{R} = 4.9\times$)} present the lowest overvaluation multiples in the entire sector. With \inr 74,257 Cr and \inr 20,195 Cr in tangible net assets, these companies offer the strongest balance sheet cushion against downside liquidation shocks.
+    \item \textbf{Nestle India Limited ($\mathcal{R} = 42.7\times$)} and \textbf{Britannia Industries ($\mathcal{R} = 33.2\times$)} trade at the most extreme multiples relative to physical book equity. An investor acquiring Nestle India at \inr 1,409 per share is supported by only \inr 33 in net liquidation equity, implying that over $97.6\%$ of the company's valuation relies entirely on expectations of perpetuity earnings rather than tangible liquidation worth.
+\end{itemize}
+
+\begin{remarkbox}[Economic Rationale of the Disparity]
+The large disparity between ITC ($4.5\times$) and Nestle ($42.7\times$) reflects distinct corporate capital architectures. ITC operates capital-intensive agribusiness, paperboards, and hotel divisions requiring extensive physical assets. In contrast, Nestle India functions as an agile branded formulator and marketing powerhouse whose manufacturing footprint is highly optimized, requiring nominal fixed capital per unit of net revenue.
+\end{remarkbox}

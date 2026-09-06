@@ -10,6 +10,7 @@ Comprehensive course notes, lecture materials, presentations, and LaTeX study do
 .
 ├── Financial Mathematics/
 │   ├── notes.docx
+│   ├── Assignment/                # FMCG Equity Valuation Assignment (Monochrome LaTeX & TikZ)
 │   └── latex/                     # LaTeX sources, preamble, chapters & compiled notes
 ├── Global Financial Management/
 │   ├── notes (GFM).docx           # GFM course notes
@@ -28,8 +29,8 @@ Comprehensive course notes, lecture materials, presentations, and LaTeX study do
 ## 📖 Subjects Covered
 
 1. **Financial Mathematics**
-   - Interest theory, annuities, bonds, and cash flow analysis.
-   - LaTeX source code with custom environments, macros, and full syllabus notes.
+   - Interest theory, annuities, bonds, cash flow analysis, and equity valuation methodologies.
+   - Modular lecture notes, problem sets, and course assignment report on FMCG Equity Valuation (Net Asset Value Method).
 
 2. **Global Financial Management (GFM)**
    - International financial markets, exchange rate mechanisms, and currency risk management.

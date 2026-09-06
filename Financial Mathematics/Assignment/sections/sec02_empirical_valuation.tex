@@ -1,0 +1,149 @@
+% ==============================================================================
+% Section 2: Empirical Valuation of 10 Indian FMCG Companies
+% ==============================================================================
+
+\section[Empirical Valuation of FMCG Firms]{Empirical Valuation of Ten Leading Indian FMCG Companies}
+
+\subsection{Cross-Sectional Dataset and Balance Sheet Composition}
+To assess the empirical behavior of the Net Asset Value method across the Indian Fast-Moving Consumer Goods (FMCG) sector, a representative sample of ten prominent blue-chip corporations was analyzed. Financial metrics are calibrated in Crores of Indian Rupees (\inr Cr), with per-share values expressed in Rupees (\inr).
+
+Table~\ref{tab:nav_calculation} provides the granular breakdown of total assets, recorded goodwill deductions, tangible assets, total liabilities, net assets available to shareholders, and the resulting intrinsic value per share.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{X rrrrrrr}
+\toprule
+\textbf{Company Name} & 
+\shortstack[r]{\textbf{Total}\\\textbf{Assets}} & 
+\shortstack[r]{\textbf{Goodwill}} & 
+\shortstack[r]{\textbf{Tangible}\\\textbf{Assets}} & 
+\shortstack[r]{\textbf{Total}\\\textbf{Liab.}} & 
+\shortstack[r]{\textbf{Net}\\\textbf{Assets}} & 
+\shortstack[r]{\textbf{Equity}\\\textbf{Shares}} & 
+\shortstack[r]{\textbf{Intrinsic}\\\textbf{Value}} \\
+& (\inr Cr) & (\inr Cr) & (\inr Cr) & (\inr Cr) & (\inr Cr) & (Cr) & (\inr) \\
+\midrule
+Hindustan Unilever Ltd & 79,738 & 1,478 & 78,260 & 30,999 & 47,261 & 235 & \textbf{201} \\
+ITC Ltd & 93,637 & 2,399 & 91,238 & 16,981 & 74,257 & 1,253 & \textbf{59} \\
+Nestle India Ltd & 13,357 & 444 & 12,913 & 6,641 & 6,272 & 193 & \textbf{33} \\
+Varun Beverages Ltd & 25,541 & 0 & 25,541 & 7,639 & 17,902 & 676 & \textbf{26} \\
+Britannia Industries Ltd & 9,730 & 1,380 & 8,350 & 4,648 & 3,702 & 24 & \textbf{154} \\
+Marico Ltd & 9,950 & 557 & 9,393 & 5,183 & 4,210 & 130 & \textbf{32} \\
+Tata Consumer Products & 34,279 & 2,820 & 31,459 & 11,264 & 20,195 & 99 & \textbf{204} \\
+Godrej Consumer Products & 13,365 & 2,948 & 10,417 & 5,573 & 4,844 & 102 & \textbf{47} \\
+Dabur India Ltd & 17,480 & 1,287 & 16,193 & 6,238 & 9,955 & 177 & \textbf{56} \\
+Colgate-Palmolive India & 3,408 & 47 & 3,361 & 1,394 & 1,967 & 27 & \textbf{73} \\
+\bottomrule
+\end{tabularx}
+\caption{Comprehensive Net Asset Value and Intrinsic Value Computation for FMCG Firms.}
+\label{tab:nav_calculation}
+\end{table}
+
+\subsection{Worked Valuation Walkthroughs}
+To demonstrate the exact algebraic steps prescribed by the valuation framework, detailed step-by-step calculations are presented for two polar cases: \textbf{ITC Ltd} (a high tangible-asset enterprise) and \textbf{Nestle India Ltd} (a lean, asset-light multinational).
+
+\begin{example}{Valuation Walkthrough: ITC Limited}{itc_calc}
+\textbf{Balance Sheet Inputs (in \inr Crores):}
+\begin{align*}
+    \text{Total Assets} &= \inr 93{,}637 \crunit \\
+    \text{Goodwill (Deducted)} &= \inr 2{,}399 \crunit \\
+    \text{Total Liabilities} &= \inr 16{,}981 \crunit \\
+    \text{Outstanding Shares} &= 1{,}253 \text{ Cr shares}
+\end{align*}
+
+\textbf{Step 1: Determine Net Tangible Assets Available to Shareholders:}
+\begin{align*}
+    \text{Tangible Assets} &= \text{Total Assets} - \text{Goodwill} = 93{,}637 - 2{,}399 = \inr 91{,}238 \crunit \\
+    \text{Net Assets} &= \text{Tangible Assets} - \text{Total Liabilities} = 91{,}238 - 16{,}981 = \inr 74{,}257 \crunit
+\end{align*}
+
+\textbf{Step 2: Normalization to Per-Share Intrinsic Worth:}
+\begin{equation*}
+    \IV_{\text{ITC}} = \frac{\text{Net Assets}}{\text{Shares}} = \frac{74{,}257}{1{,}253} \approx \inr 59.26 \implies \mathbf{\inr 59}
+\end{equation*}
+\end{example}
+
+\begin{example}{Valuation Walkthrough: Nestle India Limited}{nestle_calc}
+\textbf{Balance Sheet Inputs (in \inr Crores):}
+\begin{align*}
+    \text{Total Assets} &= \inr 13{,}357 \crunit \\
+    \text{Goodwill (Deducted)} &= \inr 444 \crunit \\
+    \text{Total Liabilities} &= \inr 6{,}641 \crunit \\
+    \text{Outstanding Shares} &= 193 \text{ Cr shares}
+\end{align*}
+
+\textbf{Step 1: Compute Tangible Net Asset Pool:}
+\begin{align*}
+    \text{Tangible Assets} &= 13{,}357 - 444 = \inr 12{,}913 \crunit \\
+    \text{Net Assets} &= 12{,}913 - 6{,}641 = \inr 6{,}272 \crunit
+\end{align*}
+
+\textbf{Step 2: Derive Intrinsic Value per Share:}
+\begin{equation*}
+    \IV_{\text{Nestle}} = \frac{6{,}272}{193} \approx \inr 32.50 \implies \mathbf{\inr 33}
+\end{equation*}
+\end{example}
+
+\subsection{Market Price Comparison and Valuation Gap Analysis}
+Table~\ref{tab:valuation_gap} tabulates the comparison between the computed intrinsic value and the prevailing market price per share, alongside the resulting valuation gap $\Delta = \IV - P_0$.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{X rrr l}
+\toprule
+\textbf{Company Name} & 
+\shortstack[r]{\textbf{Intrinsic}\\\textbf{Value (\inr)}} & 
+\shortstack[r]{\textbf{Market}\\\textbf{Price (\inr)}} & 
+\shortstack[r]{\textbf{Valuation}\\\textbf{Gap (\inr)}} & 
+\textbf{Valuation Status} \\
+\midrule
+Hindustan Unilever Ltd & 201 & 1,973 & $-1,772$ & Highly Overvalued \\
+ITC Ltd & 59 & 264 & $-205$ & Highly Overvalued \\
+Nestle India Ltd & 33 & 1,409 & $-1,376$ & Highly Overvalued \\
+Varun Beverages Ltd & 26 & 204 & $-178$ & Highly Overvalued \\
+Britannia Industries Ltd & 154 & 5,120 & $-4,966$ & Highly Overvalued \\
+Marico Ltd & 32 & 814 & $-782$ & Highly Overvalued \\
+Tata Consumer Products & 204 & 1,010 & $-806$ & Highly Overvalued \\
+Godrej Consumer Products & 47 & 881 & $-834$ & Highly Overvalued \\
+Dabur India Ltd & 56 & 382 & $-326$ & Highly Overvalued \\
+Colgate-Palmolive India & 73 & 1,843 & $-1,770$ & Highly Overvalued \\
+\bottomrule
+\end{tabularx}
+\caption{Market Price vs. Intrinsic Value and Resulting Valuation Gaps.}
+\label{tab:valuation_gap}
+\end{table}
+
+\subsection{Overvaluation Ratio Hierarchy}
+Table~\ref{tab:overvaluation_ratio} sorts all ten companies in ascending order of their Overvaluation Ratio $\mathcal{R} = P_0 / \IV$. This reveals the spectrum of pricing premiums prevailing in the public equity market relative to tangible liquidation values.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{0.85\textwidth}{l rrr}
+\toprule
+\textbf{Company Name} & 
+\textbf{\parbox{2.5cm}{\raggedleft Market Price (\inr)}} & 
+\textbf{\parbox{2.5cm}{\raggedleft Intrinsic Value (\inr)}} & 
+\textbf{\parbox{2.5cm}{\raggedleft Overvaluation Ratio}} \\
+\midrule
+ITC Ltd & 264 & 59 & $\mathbf{4.5\times}$ \\
+Tata Consumer Products & 1,010 & 204 & $\mathbf{4.9\times}$ \\
+Dabur India Ltd & 382 & 56 & $\mathbf{6.8\times}$ \\
+Varun Beverages Ltd & 204 & 26 & $\mathbf{7.8\times}$ \\
+Hindustan Unilever Ltd & 1,973 & 201 & $\mathbf{9.8\times}$ \\
+Godrej Consumer Products & 881 & 47 & $\mathbf{18.7\times}$ \\
+Colgate-Palmolive India & 1,843 & 73 & $\mathbf{25.3\times}$ \\
+Marico Ltd & 814 & 32 & $\mathbf{25.4\times}$ \\
+Britannia Industries Ltd & 5,120 & 154 & $\mathbf{33.2\times}$ \\
+Nestle India Ltd & 1,409 & 33 & $\mathbf{42.7\times}$ \\
+\bottomrule
+\end{tabularx}
+\caption{Ranked Overvaluation Multiples ($P_0 / \IV$) Across Sample Companies.}
+\label{tab:overvaluation_ratio}
+\end{table}

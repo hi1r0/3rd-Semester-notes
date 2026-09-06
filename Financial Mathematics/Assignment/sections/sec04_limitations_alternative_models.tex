@@ -1,0 +1,92 @@
+% ==============================================================================
+% Section 4: Critical Limitations and Alternative Valuation Frameworks
+% ==============================================================================
+
+\section[Limitations \& Alternative Models]{Critical Limitations of the NAV Method and Alternative Valuation Frameworks}
+
+\subsection{Why the Net Asset Value Method Systematically Understates FMCG Value}
+The uniform finding that \textbf{all ten FMCG enterprises trade at significant premiums ($4.5\times$ to $42.7\times$) above intrinsic liquidation value} is not an artifact of market irrationality, but rather exposes the foundational limitations of static balance sheet valuation when applied to consumer enterprises.
+
+\begin{formulabox}[Key Theoretical Insight: The Liquidation Floor]
+The Net Asset Value (Intrinsic Value) method establishes the \textbf{absolute liquidation floor} of a corporate entity---the worst-case cash recovery available upon bankruptcy or immediate dissolution. For a going-concern enterprise compounding returns at high rates of capital efficiency, the balance sheet value represents only the historical physical inputs, not the economic earning power.
+\end{formulabox}
+
+The Net Asset Value method is structurally suited for:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Asset-Heavy / Capital-Intensive Sectors:} Real estate investment trusts (REITs), shipping lines, commercial banking, heavy mining, and steel manufacturing, where tangible assets generate direct revenue and liquidation prices are readily observable.
+    \item \textbf{Distressed Liquidation Scenarios:} Situations where an enterprise is experiencing insolvency, operational paralysis, or mandatory debt restructuring.
+\end{enumerate}
+
+Conversely, the FMCG sector operates on an \textbf{asset-light business model}. The core economic engines that generate enterprise cash flows are uncapitalized off-balance-sheet intangible assets:
+\begin{itemize}
+    \item \textbf{Brand Equity and Pricing Power:} Established household trademarks (e.g., Maggi, Surf Excel, Aashirvaad, Parachute) command immense consumer loyalty, enabling firms to exercise pricing power and transfer raw material inflationary pressure to retail consumers without sacrificing sales volume.
+    \item \textbf{Distribution Infrastructure and Route-to-Market Moats:} Deep logistical networks reaching millions of traditional mom-and-pop retail outlets (kiranas) constitute formidable barriers to entry that cannot be replicated merely by deploying financial capital.
+    \item \textbf{Working Capital Architecture:} Leading FMCG corporations frequently operate with \textbf{negative net working capital} cycles, effectively funding operational inventory and receivables through interest-free supplier trade credit.
+    \item \textbf{High Return on Invested Capital ($\ROIC$):} Because physical capital requirements are modest, FMCG firms routinely produce return on equity ($\operatorname{ROE}$) and return on capital employed ($\operatorname{ROCE}$) exceeding $30\%$ to $80\%$, generating immense economic rent per rupee of book equity.
+\end{itemize}
+
+\subsection{Alternative Quantitative Equity Valuation Frameworks}
+To capture the true intrinsic worth of asset-light, going-concern consumer goods enterprises, quantitative analysts employ models rooted in future earnings, cash flows, and dividends.
+
+\subsubsection{Dividend Discount Model (DDM)}
+Given that established Indian FMCG companies (such as ITC, HUL, Colgate, and Nestle) maintain high dividend payout ratios (often $60\%$ to $90\%$ of net earnings), the \textbf{Gordon Growth Model} provides a valuation based on cash distributions to shareholders:
+\begin{equation}
+    P_0 = \sum_{t=1}^{\infty} \frac{D_t}{(1 + r_e)^t} = \frac{D_1}{r_e - g} = \frac{D_0 (1 + g)}{r_e - g}
+\end{equation}
+where $D_0$ is the current annualized dividend per share, $D_1$ is the anticipated next-period dividend, $r_e$ is the cost of equity derived from the Capital Asset Pricing Model ($\text{CAPM}$: $r_e = R_f + \beta [E(R_m) - R_f]$), and $g$ is the perpetual sustainable dividend growth rate ($g = b \times \operatorname{ROE}$, where $b$ is the retention ratio).
+
+For firms experiencing transient competitive advantages before settling into mature long-term growth, the \textbf{Two-Stage Dividend Discount Model} decomposes value into a supernormal growth phase and a stable terminal phase:
+\begin{equation}
+    P_0 = \sum_{t=1}^{T} \frac{D_0 (1 + g_s)^t}{(1 + r_e)^t} + \frac{D_0 (1 + g_s)^T (1 + g_n)}{(r_e - g_n)(1 + r_e)^T}
+\end{equation}
+where $g_s$ is the initial high growth rate during competitive advantage period $T$, and $g_n$ is the long-run macroeconomic growth rate.
+
+\subsubsection{Price-to-Earnings (P/E) Multiple and Earnings Power Value (EPV)}
+Under the earnings capitalization approach, share price reflects the multiple that market participants assign to sustainable accounting profits:
+\begin{equation}
+    P_0 = \text{EPS} \times \left(\frac{P}{E}\right)_{\text{target}}
+\end{equation}
+From fundamental finance theory, the justified leading $\PE$ multiple is mathematically related to the payout ratio ($1 - b$) and cost of equity:
+\begin{equation}
+    \left(\frac{P}{E}\right)_{\text{justified}} = \frac{1 - b}{r_e - g}
+\end{equation}
+
+Similarly, the \textbf{Earnings Power Value (EPV)} framework formalizes the value of current earnings sustainability without speculative growth:
+\begin{equation}
+    \text{EPV} = \frac{\text{Normalized Sustainable Operating Profit} \times (1 - t_{\text{eff}})}{\WACC}
+\end{equation}
+where $t_{\text{eff}}$ is the effective corporate tax rate and $\WACC$ is the Weighted Average Cost of Capital.
+
+\subsubsection{Discounted Free Cash Flow to Firm (FCFF)}
+The \textbf{DCF Model} evaluates total operating cash generation independent of capital structure financing decisions:
+\begin{equation}
+    \text{Enterprise Value} = \sum_{t=1}^{T} \frac{\FCFF_t}{(1 + \WACC)^t} + \frac{\FCFF_{T+1}}{(\WACC - g)(1 + \WACC)^T}
+\end{equation}
+\begin{equation}
+    \text{Intrinsic Equity Value} = \text{Enterprise Value} - \text{Total Debt} + \text{Cash and Liquid Investments}
+\end{equation}
+\begin{equation}
+    \FCFF = \text{EBIT}(1 - t) + \text{D\&A} - \text{CapEx} - \Delta\text{NWC}
+\end{equation}
+where $\text{D\&A}$ denotes Depreciation and Amortization, $\text{CapEx}$ represents Capital Expenditures, and $\Delta\text{NWC}$ is the net investment in Non-Cash Working Capital.
+
+\subsection{Methodology Synthesis Table}
+Table~\ref{tab:model_comparison} contrasts the Net Asset Value method against earnings- and cash-flow-driven alternatives, highlighting their operational mechanics and sector compatibility.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{l p{4.3cm} p{3.1cm} X}
+\toprule
+\textbf{Valuation Model} & \textbf{Core Governing Formula} & \textbf{Primary Value Driver} & \textbf{Sector Applicability} \\
+\midrule
+\textbf{Net Asset Value} & $\IV = \frac{\text{Tangible Assets} - \text{Liabilities}}{\text{Shares}}$ & Historical physical book assets & Real estate, shipping, banking, liquidation \\
+\textbf{Dividend Discount} & $P_0 = \frac{D_1}{r_e - g}$ & Sustainable cash payouts & Mature, high-dividend FMCG, regulated utilities \\
+\textbf{Price-to-Earnings} & $P_0 = \text{EPS} \times \left(\frac{1 - b}{r_e - g}\right)$ & Accounting earnings \& growth & Broad market benchmarking, consumer goods \\
+\textbf{Free Cash Flow} & $V_0 = \sum \frac{\FCFF_t}{(1 + \WACC)^t} + \frac{TV}{(1+\WACC)^T}$ & Operating cash flow generation & Growth FMCG, industrial conglomerates, tech \\
+\bottomrule
+\end{tabularx}
+\caption{Comparative Overview of Equity Valuation Methodologies.}
+\label{tab:model_comparison}
+\end{table}
