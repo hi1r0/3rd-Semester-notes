@@ -25,8 +25,8 @@ Figure~\ref{fig:framework_flowchart} illustrates the methodological pipeline lin
     every node/.style = {font=\footnotesize, align=center},
     banner/.style = {
         rectangle, draw=pureblack, line width=1.1pt, fill=darkboxfill,
-        minimum width=13.2cm, minimum height=0.7cm, rounded corners=1.2mm,
-        font=\bfseries\footnotesize
+        text width=13.0cm, minimum height=0.9cm, rounded corners=1.2mm,
+        align=center, font=\footnotesize
     },
     card/.style = {
         rectangle, draw=pureblack, line width=1.1pt, fill=white,
@@ -34,8 +34,8 @@ Figure~\ref{fig:framework_flowchart} illustrates the methodological pipeline lin
     },
     decision/.style = {
         rectangle, draw=pureblack, line width=1.1pt, fill=boxfill,
-        minimum width=13.2cm, minimum height=0.75cm, rounded corners=1.2mm,
-        font=\bfseries\footnotesize
+        text width=13.0cm, minimum height=0.75cm, rounded corners=1.2mm,
+        align=center, font=\bfseries\footnotesize
     },
     tier/.style = {
         rectangle, draw=pureblack, line width=1.0pt, fill=white,
@@ -48,7 +48,8 @@ Figure~\ref{fig:framework_flowchart} illustrates the methodological pipeline lin
 ]
 
     % Level 1: Input Data Banner
-    \node[banner] (inputs) {\textbf{Corporate Dataset Inputs:} Reported Balance Sheet $\bm{\cdot}$ FY26 EPS $\bm{\cdot}$ 5-Yr PAT CAGR $\bm{\cdot}$ $\Ke = 14\%$ $\bm{\cdot}$ $g \le 12\%$};
+    \node[banner] (inputs) {\textbf{Corporate Dataset Inputs (Ten Sampled FMCG Firms)}\\[1.5pt]
+        \scriptsize Reported Balance Sheet $\bm{\cdot}$ FY26 EPS $\bm{\cdot}$ 5-Yr PAT CAGR $\bm{\cdot}$ $\Ke = 14.0\%$ $\bm{\cdot}$ Growth Cap $g \le 12.0\%$};
 
     % Level 2: Three Valuation Engine Cards
     \node[card, below=0.8cm of inputs] (card2) {

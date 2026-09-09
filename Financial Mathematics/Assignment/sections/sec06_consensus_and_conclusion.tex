@@ -16,11 +16,11 @@ To synthesize the empirical findings across the three independent valuation meth
 \begin{table}[H]
 \centering
 \footnotesize
-\setlength{\tabcolsep}{6pt}
+\setlength{\tabcolsep}{4.0pt}
 \renewcommand{\arraystretch}{1.04}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c c c c}
 \toprule
-\textbf{Company} & \textbf{Liquidation Value} & \textbf{Dividend Yield} & \textbf{Gordon DDM} & \textbf{Consensus Classification} \\
+\textbf{Company} & \shortstack[c]{\textbf{Liquidation}\\\textbf{Value Floor}} & \shortstack[c]{\textbf{Dividend Yield}\\\scriptsize($\Ke = 14\%$ Hurdle)} & \shortstack[c]{\textbf{Gordon DDM}\\\scriptsize(Intrinsic Value)} & \shortstack[c]{\textbf{Consensus (2/3)}\\\textbf{Classification}} \\
 \midrule
 \textbf{Hindustan Unilever}   & Overvalued & Overvalued & Undervalued & \textbf{Mixed / Neutral} \\
 \textbf{ITC Ltd}              & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
@@ -54,13 +54,13 @@ Table~\ref{tab:formula_reference} consolidates all governing mathematical formul
 \begin{table}[H]
 \centering
 \footnotesize
-\setlength{\tabcolsep}{5pt}
+\setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.08}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l p{6.2cm}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l p{5.5cm}}
 \toprule
 \textbf{Valuation Metric} & \textbf{Mathematical Formulation} & \textbf{Operational Financial Purpose} \\
 \midrule
-\textbf{Liquidation Value / Share} & $\LV = \dfrac{\text{Total Assets} - \text{Goodwill} - \text{Liab.}}{\text{Shares Outstanding}}$ & Demarcates the hard tangible breakdown floor. \\
+\textbf{Liquidation Value} & $\LV = \dfrac{\text{Total Assets} - \text{Goodwill} - \text{Liab.}}{\text{Shares Outstanding}}$ & Demarcates the hard tangible breakdown floor. \\
 \textbf{Dividend Yield} & $\text{Yield} = \dfrac{\text{Annual Proxy DPS}}{P_0} \times 100$ & Evaluates direct cash return against $14\%$ hurdle. \\
 \textbf{Gordon Growth Model} & $P_0 = \dfrac{D_1}{\Ke - g} = \dfrac{D_0(1 + g)}{\Ke - g}$ & Values equity on perpetual growing dividend stream. \\
 \textbf{Expected Dividend ($\bm{D_1}$)} & $D_1 = D_0 \times (1 + g)$ & Forecasts immediate next-period cash distribution. \\

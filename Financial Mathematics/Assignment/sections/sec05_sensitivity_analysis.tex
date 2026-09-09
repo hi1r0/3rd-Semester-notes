@@ -32,44 +32,51 @@ Figure~\ref{fig:hul_sensitivity} plots HUL's DDM intrinsic value across a plausi
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    width=13.0cm,
-    height=5.2cm,
+    width=14.8cm,
+    height=7.8cm,
     xmin=8.0, xmax=13.0,
     ymin=500, ymax=3500,
     xlabel={\small Sustainable Perpetual Growth Rate $g$ (\%)},
-    ylabel={\small DDM Value (\inr)},
+    ylabel={\small DDM Intrinsic Value (\inr)},
     xtick={8, 9, 10, 11, 11.46, 12, 13},
     xticklabels={8\%, 9\%, 10\%, 11\%, \textbf{11.46\%}, 12\%, 13\%},
     ytick={500, 1000, 1500, 1973, 2500, 3000, 3500},
     yticklabels={\inr 500, \inr 1000, \inr 1500, \textbf{\inr 1973}, \inr 2500, \inr 3000, \inr 3500},
     grid=both,
-    grid style={line width=0.3pt, draw=lightgrayborder},
-    axis line style={line width=0.8pt, draw=pureblack},
+    grid style={line width=0.35pt, draw=lightgrayborder},
+    axis line style={line width=0.9pt, draw=pureblack},
     tick label style={font=\scriptsize},
     label style={font=\small},
     legend pos=north west,
-    legend style={font=\scriptsize, draw=pureblack, fill=white}
+    legend style={font=\scriptsize, draw=pureblack, fill=white, line width=0.7pt, inner sep=3.5pt}
 ]
 
     % DDM Curve: P0(g) = 44.86*(1 + x/100) / (0.14 - x/100)
-    \addplot[domain=8.0:12.6, samples=80, line width=1.3pt, color=pureblack] 
+    \addplot[domain=8.0:12.6, samples=100, line width=1.4pt, color=pureblack] 
         {44.86 * (1 + x/100) / (0.14 - x/100)};
-    \addlegendentry{DDM Curve $P_{\DDM}(g)$}
+    \addlegendentry{Gordon DDM Curve $P_{\DDM}(g)$}
 
     % Market Price Reference Line
-    \addplot[domain=8.0:13.0, dashed, line width=1.0pt, color=midgray] {1973};
-    \addlegendentry{Market Price ($P_0 = \inr 1,973$)}
+    \addplot[domain=8.0:13.0, densely dashed, line width=1.0pt, color=midgray] {1973};
+    \addlegendentry{Secondary Market Price ($P_0 = \inr 1,973$)}
 
     % Vertical Break-Even Line
-    \draw[dotted, line width=1.0pt, color=darkgraytext] (axis cs:11.4655, 500) -- (axis cs:11.4655, 1973);
+    \draw[densely dashed, line width=1.0pt, color=pureblack] (axis cs:11.4655, 500) -- (axis cs:11.4655, 1973);
 
-    % Break-Even Critical Point
-    \addplot[only marks, mark=*, mark size=2.5pt, color=pureblack] coordinates {(11.4655, 1973)};
-    \node[anchor=south east, font=\scriptsize\bfseries] at (axis cs:11.42, 2040) {Break-Even: $g^* = 11.46\%$};
+    % Break-Even Critical Intersection Point
+    \addplot[only marks, mark=*, mark size=3.0pt, fill=pureblack, draw=pureblack] coordinates {(11.4655, 1973)};
 
-    % Regional Annotations
-    \node[font=\scriptsize\bfseries, align=center] at (axis cs:8.8, 1600) {Overvalued Region\\($P_{\DDM} < P_0$)};
-    \node[font=\scriptsize\bfseries, align=center] at (axis cs:11.6, 3200) {Undervalued Region\\($P_{\DDM} > P_0$)};
+    % Break-Even Callout Badge with Arrow
+    \node[draw=pureblack, line width=0.8pt, fill=white, rounded corners=2pt, inner sep=3.5pt, font=\scriptsize, align=center] 
+        (beven) at (axis cs:10.3, 2350) {\textbf{Break-Even Growth Rate}\\[1pt]$g^* = 11.46\% \quad (P_0 = \text{\inr } 1,973)$};
+    \draw[->, >=Stealth, line width=1.1pt, draw=pureblack] (beven.south east) -- (axis cs:11.38, 2010);
+
+    % Regional Classification Badges
+    \node[draw=pureblack, line width=0.7pt, fill=boxfill, rounded corners=2pt, inner sep=4pt, font=\scriptsize, align=center] 
+        at (axis cs:9.2, 1350) {\textbf{Overvalued Region}\\[1pt]$P_{\DDM}(g) < P_0$};
+
+    \node[draw=pureblack, line width=0.7pt, fill=boxfill, rounded corners=2pt, inner sep=4pt, font=\scriptsize, align=center] 
+        at (axis cs:12.0, 3100) {\textbf{Undervalued Region}\\[1pt]$P_{\DDM}(g) > P_0$};
 
 \end{axis}
 \end{tikzpicture}
