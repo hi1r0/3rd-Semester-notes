@@ -13,7 +13,7 @@
 
 This report conducts a comprehensive cross-sectional equity valuation of ten premier Indian Fast-Moving Consumer Goods (FMCG) corporations using a **tri-partite valuation architecture**:
 1. **Liquidation Value (Breakdown Value)**: Evaluates the hard tangible balance-sheet floor of each corporation, deducting recorded goodwill and senior liabilities.
-2. **Dividend Yield Analysis (Bhuvanesh Hurdle Rule)**: Measures direct cash distributions against a uniform $14.0\%$ cost-of-equity hurdle ($K_e$), establishing that zero firms satisfy current income requirements.
+2. **Dividend Yield Analysis (Cost-of-Equity Hurdle Criterion)**: Measures direct cash distributions against a uniform $14.0\%$ cost-of-equity hurdle ($K_e$), establishing that zero firms satisfy current income requirements.
 3. **Dividend Discount Model (Gordon Growth Model)**: Estimates intrinsic value under perpetual dividend growth, enforcing a conservative $12.0\%$ growth ceiling for supernormal growth enterprises.
 4. **HUL Sensitivity Analysis**: Analytically derives the break-even perpetual growth threshold ($g^* \approx 11.46\%$) for Hindustan Unilever Ltd, demonstrating the extreme fragility of its apparent undervaluation.
 5. **Consolidated Decision Matrix**: Synthesizes the three models under a majority-rule (2-out-of-3) consensus engine, classifying nine firms as **Overvalued** and Hindustan Unilever as **Mixed / Neutral**.
@@ -51,7 +51,7 @@ Financial Mathematics/Assignment/
 ├── sections/
 │   ├── sec01_assumptions_framework.tex           # Assumptions, limits & TikZ consensus flowchart
 │   ├── sec02_liquidation_value.tex               # Liquidation value theory & Table 1
-│   ├── sec03_dividend_yield.tex                  # Yield analysis, Bhuvanesh rule & Table 2
+│   ├── sec03_dividend_yield.tex                  # Yield analysis, cost-of-equity hurdle & Table 2
 │   ├── sec04_dividend_discount_model.tex         # Gordon DDM, 12% cap logic & Table 3
 │   ├── sec05_sensitivity_analysis.tex            # HUL break-even derivation & Pgfplots sensitivity curve
 │   └── sec06_consensus_and_conclusion.tex       # Table 4 (Consensus), Conclusion & Table 5 (Master formulas)
