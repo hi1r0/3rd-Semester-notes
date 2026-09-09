@@ -1,0 +1,81 @@
+% ==============================================================================
+% Section 5: Sensitivity Analysis: Hindustan Unilever Break-Even Dynamics
+% ==============================================================================
+
+\clearpage
+\section[Sensitivity Analysis]{Sensitivity Analysis: Hindustan Unilever Break-Even Dynamics}
+
+\subsection{Algebraic Derivation of the Break-Even Perpetual Growth Rate}
+Because the Gordon Growth Model displays asymptotic convexity as $g \to \Ke$, the valuation of Hindustan Unilever (\inr 2,512 at $g = 12.0\%$ vs Market Price of \inr 1,973) is subjected to rigorous sensitivity analysis. We analytically solve for the \textbf{break-even growth rate ($\bm{g^*}$)} where intrinsic value exactly equates to the current market quotation:
+
+\begin{equation}
+    P_0 = \frac{\text{Proxy DPS} \times (1 + g)}{\Ke - g} \implies 1,973 = \frac{44.86\,(1 + g)}{0.14 - g}
+\end{equation}
+
+Expanding and solving for $g$:
+\begin{align}
+    1,973 \times (0.14 - g) = 44.86\,(1 + g) &\implies 276.22 - 1,973\,g = 44.86 + 44.86\,g \\
+    231.36 = 2,017.86\,g &\implies g^* = \frac{231.36}{2,017.86} \approx \bm{11.46\%}
+\end{align}
+
+\begin{formulabox}[HUL Growth-Rate Decision Boundaries]
+\centering\footnotesize
+$\bm{g > 11.46\%}$: \textbf{Undervalued} \quad $\bm{\cdot}$ \quad
+$\bm{g = 11.46\%}$: \textbf{Fairly Valued} \quad $\bm{\cdot}$ \quad
+$\bm{g < 11.46\%}$: \textbf{Overvalued}
+\end{formulabox}
+
+\subsection{Graphic Visualization of DDM Growth Sensitivity}
+Figure~\ref{fig:hul_sensitivity} plots HUL's DDM intrinsic value across a plausible perpetual growth domain ($8.0\%$ to $12.8\%$) against the current secondary market price of \inr 1,973.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=13.0cm,
+    height=5.2cm,
+    xmin=8.0, xmax=13.0,
+    ymin=500, ymax=3500,
+    xlabel={\small Sustainable Perpetual Growth Rate $g$ (\%)},
+    ylabel={\small DDM Value (\inr)},
+    xtick={8, 9, 10, 11, 11.46, 12, 13},
+    xticklabels={8\%, 9\%, 10\%, 11\%, \textbf{11.46\%}, 12\%, 13\%},
+    ytick={500, 1000, 1500, 1973, 2500, 3000, 3500},
+    yticklabels={\inr 500, \inr 1000, \inr 1500, \textbf{\inr 1973}, \inr 2500, \inr 3000, \inr 3500},
+    grid=both,
+    grid style={line width=0.3pt, draw=lightgrayborder},
+    axis line style={line width=0.8pt, draw=pureblack},
+    tick label style={font=\scriptsize},
+    label style={font=\small},
+    legend pos=north west,
+    legend style={font=\scriptsize, draw=pureblack, fill=white}
+]
+
+    % DDM Curve: P0(g) = 44.86*(1 + x/100) / (0.14 - x/100)
+    \addplot[domain=8.0:12.6, samples=80, line width=1.3pt, color=pureblack] 
+        {44.86 * (1 + x/100) / (0.14 - x/100)};
+    \addlegendentry{DDM Curve $P_{\DDM}(g)$}
+
+    % Market Price Reference Line
+    \addplot[domain=8.0:13.0, dashed, line width=1.0pt, color=midgray] {1973};
+    \addlegendentry{Market Price ($P_0 = \inr 1,973$)}
+
+    % Vertical Break-Even Line
+    \draw[dotted, line width=1.0pt, color=darkgraytext] (axis cs:11.4655, 500) -- (axis cs:11.4655, 1973);
+
+    % Break-Even Critical Point
+    \addplot[only marks, mark=*, mark size=2.5pt, color=pureblack] coordinates {(11.4655, 1973)};
+    \node[anchor=south east, font=\scriptsize\bfseries] at (axis cs:11.42, 2040) {Break-Even: $g^* = 11.46\%$};
+
+    % Regional Annotations
+    \node[font=\scriptsize\bfseries, align=center] at (axis cs:8.8, 1600) {Overvalued Region\\($P_{\DDM} < P_0$)};
+    \node[font=\scriptsize\bfseries, align=center] at (axis cs:11.6, 3200) {Undervalued Region\\($P_{\DDM} > P_0$)};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Hindustan Unilever: DDM Intrinsic Value Sensitivity to Growth Rate $g$ ($\Ke = 14.0\%$).}
+\label{fig:hul_sensitivity}
+\end{figure}
+
+\subsection{Empirical Implications of Growth Sensitivity}
+The empirical takeaway is that HUL's apparent undervaluation is exceptionally fragile: a minor deceleration of just \textbf{54 basis points} (from the assumed $12.00\%$ to $11.46\%$) completely eliminates the margin of safety, rendering the corporation overvalued under the Gordon Growth framework.

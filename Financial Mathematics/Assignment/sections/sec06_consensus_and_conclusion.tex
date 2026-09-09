@@ -1,0 +1,72 @@
+% ==============================================================================
+% Section 6 & 7: Consolidated Decision Matrix, Academic Conclusion & Formulas
+% ==============================================================================
+
+\clearpage
+\section[Consolidated Decision Matrix]{Consolidated Decision Matrix and Majority Classification}
+
+\subsection{Consensus Framework: Majority-Rule (2-out-of-3) Methodology}
+To synthesize the empirical findings across the three independent valuation methodologies, this study implements a formal \textbf{majority-rule (2-out-of-3) decision engine}:
+\begin{itemize}[topsep=1.5pt, itemsep=1pt, parsep=0pt]
+    \item \textbf{Overvalued:} Assigned if $\ge 2$ of the 3 valuation models indicate overvaluation.
+    \item \textbf{Undervalued:} Assigned if $\ge 2$ of the 3 valuation models indicate undervaluation.
+    \item \textbf{Mixed / Neutral:} Assigned when signals conflict without a two-thirds majority.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c c c c}
+\toprule
+\textbf{Company} & \textbf{Liquidation Value} & \textbf{Dividend Yield} & \textbf{Gordon DDM} & \textbf{Consensus Classification} \\
+\midrule
+\textbf{Hindustan Unilever}   & Overvalued & Overvalued & Undervalued & \textbf{Mixed / Neutral} \\
+\textbf{ITC Ltd}              & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Nestle India}         & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Varun Beverages}      & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Britannia Industries} & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Marico Ltd}           & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Tata Consumer}        & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Godrej Consumer}      & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Dabur India}          & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\textbf{Colgate-Palmolive}    & Overvalued & Overvalued & Overvalued  & \textbf{Overvalued} \\
+\bottomrule
+\end{tabular*}
+\caption{Cross-Sectional Valuation Consensus Matrix under Study Assumptions.}
+\label{tab:consensus_matrix}
+\end{table}
+
+\vspace{-3mm}
+\section[Academic Conclusion \& Formulas]{Academic Conclusion and Master Formula Reference}
+
+\subsection{Strategic Synthesis of Empirical Findings}
+\begin{enumerate}[label=\textbf{\arabic*.}, topsep=1.5pt, itemsep=1pt, parsep=0pt]
+    \item \textbf{Liquidation Floor Disconnect:} All ten enterprises trade at substantial multiples ($4.5\times$ to $42.7\times$) above tangible liquidation worth. FMCG valuations reflect off-balance-sheet intangible moats (brand loyalty, negative working capital cycles, distribution) rather than physical asset backing.
+    \item \textbf{Dividend Yield Deficit:} With dividend yields spanning $0.91\%$ to $4.45\%$, zero firms meet the $14.0\%$ cost-of-equity hurdle, proving that market prices discount growth rather than current yield.
+    \item \textbf{Final Consensus Verdict:} By unanimous majority rule, \textbf{nine of the ten corporations are classified as Overvalued}. \textbf{Hindustan Unilever} presents a \textbf{Mixed / Neutral} profile; however, because its break-even growth buffer is a razor-thin 54 basis points ($11.46\%$), any minor deceleration in consumer demand renders HUL overvalued as well.
+\end{enumerate}
+
+\subsection{Master Reference Table: Valuation Equations}
+Table~\ref{tab:formula_reference} consolidates all governing mathematical formulations utilized throughout this study.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l p{6.2cm}}
+\toprule
+\textbf{Valuation Metric} & \textbf{Mathematical Formulation} & \textbf{Operational Financial Purpose} \\
+\midrule
+\textbf{Liquidation Value / Share} & $\LV = \dfrac{\text{Total Assets} - \text{Goodwill} - \text{Liab.}}{\text{Shares Outstanding}}$ & Demarcates the hard tangible breakdown floor. \\
+\textbf{Dividend Yield} & $\text{Yield} = \dfrac{\text{Annual Proxy DPS}}{P_0} \times 100$ & Evaluates direct cash return against $14\%$ hurdle. \\
+\textbf{Gordon Growth Model} & $P_0 = \dfrac{D_1}{\Ke - g} = \dfrac{D_0(1 + g)}{\Ke - g}$ & Values equity on perpetual growing dividend stream. \\
+\textbf{Expected Dividend ($\bm{D_1}$)} & $D_1 = D_0 \times (1 + g)$ & Forecasts immediate next-period cash distribution. \\
+\textbf{Cost of Equity ($\bm{\Ke}$)} & $\Ke = R_f + \beta \times [E(R_m) - R_f]$ & Quantifies shareholder opportunity cost of capital. \\
+\bottomrule
+\end{tabular*}
+\caption{Consolidated Mathematical Formulations for Indian FMCG Equity Valuation.}
+\label{tab:formula_reference}
+\end{table}

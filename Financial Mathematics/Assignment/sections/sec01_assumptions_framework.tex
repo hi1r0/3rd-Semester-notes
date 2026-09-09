@@ -1,0 +1,113 @@
+% ==============================================================================
+% Section 1: Key Analytical Assumptions, Data Limitations & Valuation Framework
+% ==============================================================================
+
+\section[Assumptions \& Framework]{Key Analytical Assumptions, Data Limitations, and Valuation Framework}
+
+\subsection{Methodological Assumptions and Data Reconciliation}
+The cross-sectional empirical valuation of ten premier Indian Fast-Moving Consumer Goods (FMCG) corporations is conducted under four foundational analytical assumptions:
+
+\begin{enumerate}[label=\textbf{\arabic*.}, topsep=2pt, itemsep=2pt, parsep=0pt]
+    \item \textbf{Balance-Sheet Integrity and Asset Reconciliation:} A reconciliation of reported balance-sheet asset line-items revealed minor accounting discrepancies (notably for Hindustan Unilever Ltd, where disclosed components aggregate to \inr 99,738\crunit\ against reported total assets of \inr 79,738\crunit). To maintain empirical integrity, all calculations strictly adopt the reported \textbf{Total Assets} figure as the definitive asset pool.
+    \item \textbf{Uniform Required Rate of Return ($\bm{\Ke = 14.0\%}$):} Derived from the Capital Asset Pricing Model ($\text{CAPM}: \Ke = R_f + \beta \times \text{ERP}$) using a 10-year Indian sovereign bond yield ($R_f \approx 6.96\%$) and sector risk premium, a standardized discount rate of \textbf{$\bm{14.0\%}$} is adopted across all ten firms to ensure cross-sectional comparability.
+    \item \textbf{Sustainable Growth Ceiling ($\bm{g = 12.0\%}$):} The Gordon Growth Model mathematically requires $\Ke > g$. For enterprises where 5-year historical PAT compound annual growth exceeds $14\%$ (HUL at $15.8\%$, Britannia at $14.2\%$) or reflects supernormal expansion (Varun Beverages), a conservative perpetual growth ceiling of \textbf{$\bm{12.0\%}$} is enforced. For all other firms, the 5-year historical PAT CAGR serves as the perpetual growth proxy.
+    \item \textbf{Standardized Dividend Proxy ($\bm{\text{Proxy DPS} = 70\%\times\text{FY26 EPS}}$):} In the absence of historical dividend cash flow schedules in the source dataset, a dividend payout ratio of \textbf{$\bm{70\%}$} is applied to projected FY26 EPS, matching established FMCG capital distribution norms.
+\end{enumerate}
+
+\subsection{Tri-Partite Valuation and Consensus Decision Architecture}
+Figure~\ref{fig:framework_flowchart} illustrates the methodological pipeline linking input data, the three independent valuation engines, and the consensus decision filter.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    >=Stealth,
+    node distance = 0.75cm and 0.35cm,
+    every node/.style = {font=\footnotesize, align=center},
+    banner/.style = {
+        rectangle, draw=pureblack, line width=1.1pt, fill=darkboxfill,
+        minimum width=13.2cm, minimum height=0.7cm, rounded corners=1.2mm,
+        font=\bfseries\footnotesize
+    },
+    card/.style = {
+        rectangle, draw=pureblack, line width=1.1pt, fill=white,
+        text width=3.9cm, minimum height=2.1cm, rounded corners=1.2mm
+    },
+    decision/.style = {
+        rectangle, draw=pureblack, line width=1.1pt, fill=boxfill,
+        minimum width=13.2cm, minimum height=0.75cm, rounded corners=1.2mm,
+        font=\bfseries\footnotesize
+    },
+    tier/.style = {
+        rectangle, draw=pureblack, line width=1.0pt, fill=white,
+        text width=3.9cm, minimum height=0.8cm, rounded corners=1.2mm,
+        font=\scriptsize
+    },
+    linkline/.style = {
+        ->, draw=pureblack, line width=1.2pt
+    }
+]
+
+    % Level 1: Input Data Banner
+    \node[banner] (inputs) {\textbf{Corporate Dataset Inputs:} Reported Balance Sheet $\bm{\cdot}$ FY26 EPS $\bm{\cdot}$ 5-Yr PAT CAGR $\bm{\cdot}$ $\Ke = 14\%$ $\bm{\cdot}$ $g \le 12\%$};
+
+    % Level 2: Three Valuation Engine Cards
+    \node[card, below=0.8cm of inputs] (card2) {
+        \textbf{Model 2: Dividend}\\[1pt]
+        \textbf{Yield Analysis}\\[2pt]
+        $\text{Yield} = \frac{\text{Proxy DPS}}{P_0} \times 100$\\[2pt]
+        \scriptsize Bhuvanesh Hurdle Rule:\\[1pt]
+        $\text{Yield} < 14\% \implies$ Overvalued
+    };
+    
+    \node[card, left=0.35cm of card2] (card1) {
+        \textbf{Model 1: Liquidation}\\[1pt]
+        \textbf{Value (Breakdown)}\\[2pt]
+        $\LV = \frac{\text{Assets} - \text{GW} - \text{Liab.}}{\text{Equity Shares}}$\\[2pt]
+        \scriptsize Tangible Breakdown Floor:\\[1pt]
+        Excludes subjective goodwill
+    };
+    
+    \node[card, right=0.35cm of card2] (card3) {
+        \textbf{Model 3: Gordon DDM}\\[1pt]
+        \textbf{(Perpetual Growth)}\\[2pt]
+        $P_0 = \frac{D_0(1 + g)}{\Ke - g}$\\[2pt]
+        \scriptsize Perpetuity Cash Flows:\\[1pt]
+        Assumes sustainable $g < \Ke$
+    };
+
+    % Level 3: Consolidated Decision Matrix Banner
+    \node[decision, below=0.8cm of card2] (matrix) {
+        \textbf{Consolidated Decision Matrix: Majority-Rule (2-out-of-3) Consensus Filter}
+    };
+
+    % Level 4: Final Classification Tiers
+    \node[tier, below=0.65cm of matrix] (tier2) {
+        \textbf{Mixed / Neutral Tier}\\[1pt]
+        Conflicting signals ($\text{HUL}$)
+    };
+    \node[tier, left=0.35cm of tier2] (tier1) {
+        \textbf{Overvalued Tier}\\[1pt]
+        $\ge 2/3$ Overvalued signals (9 Firms)
+    };
+    \node[tier, right=0.35cm of tier2] (tier3) {
+        \textbf{Undervalued Tier}\\[1pt]
+        $\ge 2/3$ Undervalued signals (0 Firms)
+    };
+
+    % Connector Lines (Strict clearance >= 0.8cm, bold 1.2pt)
+    \draw[linkline] (inputs.south -| card1.north) -- (card1.north);
+    \draw[linkline] (inputs.south) -- (card2.north);
+    \draw[linkline] (inputs.south -| card3.north) -- (card3.north);
+
+    \draw[linkline] (card1.south) -- (matrix.north -| card1.south);
+    \draw[linkline] (card2.south) -- (matrix.north);
+    \draw[linkline] (card3.south) -- (matrix.north -| card3.south);
+
+    \draw[linkline] (matrix.south -| tier1.north) -- (tier1.north);
+    \draw[linkline] (matrix.south) -- (tier2.north);
+    \draw[linkline] (matrix.south -| tier3.north) -- (tier3.north);
+
+\end{tikzpicture}
+\caption{Tri-Partite Equity Valuation Architecture and Majority Consensus Pipeline.}
+\label{fig:framework_flowchart}
+\end{figure}

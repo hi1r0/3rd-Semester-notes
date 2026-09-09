@@ -1,0 +1,57 @@
+% ==============================================================================
+% Section 4: Dividend Discount Model (Gordon Growth Model) and Intrinsic Value
+% ==============================================================================
+
+\clearpage
+\section[Dividend Discount Model]{Dividend Discount Model (Gordon Growth Model) and Intrinsic Value}
+
+\subsection{Theoretical Framework and Growth-Capping Methodology}
+The \textbf{Gordon Growth Model (DDM)} evaluates equity by discounting an infinite stream of future dividend distributions growing at a constant sustainable rate $g$:
+\begin{equation}
+    P_0 = \sum_{t=1}^{\infty} \frac{D_t}{(1 + \Ke)^t} = \frac{D_1}{\Ke - g} = \frac{D_0 (1 + g)}{\Ke - g}
+\end{equation}
+A key mathematical prerequisite is that the discount rate must strictly exceed the perpetual growth rate ($\Ke > g$). If $g \ge \Ke$, the valuation series diverges to infinity.
+
+\begin{formulabox}[Governing Equation: Gordon Growth Model]
+\begin{equation}
+    P_0 = \frac{D_1}{\Ke - g} = \frac{\text{Proxy DPS} \times (1 + g)}{\Ke - g}
+\end{equation}
+\end{formulabox}
+
+\textbf{Methodological Capping at $\bm{g = 12.0\%}$:} Historical 5-year PAT compound growth for \textbf{Hindustan Unilever} ($15.8\%$), \textbf{Britannia Industries} ($14.2\%$), and \textbf{Varun Beverages} exceed or approach the $14.0\%$ hurdle. Because no enterprise can grow indefinitely faster than its cost of capital, an analytical ceiling of \textbf{$\bm{12.0\%}$} is applied to these three firms. For other firms, actual 5-year PAT CAGR is adopted.
+
+\subsection{Cross-Sectional DDM Intrinsic Valuation Results}
+Table~\ref{tab:ddm_valuation} presents next-period expected dividends ($D_1$), assumed perpetual growth rates, computed DDM values, and resulting verdicts against current market prices.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r r c r r r c}
+\toprule
+\textbf{Company} & \textbf{Proxy DPS} & \textbf{Assumed $\bm{g}$} & $\bm{\Ke}$ & $\bm{D_1}$ & \textbf{DDM Value} & \textbf{Market Price} & \textbf{DDM Verdict} \\
+ & (\inr) & (\%) & (\%) & (\inr) & (\inr) & (\inr) & \\
+\midrule
+\textbf{Hindustan Unilever}   & 44.86 & 12.00\% (Cap) & 14.0\% & 50.24 & \textbf{\inr 2,512} & \inr 1,973 & \textbf{Undervalued} \\
+\textbf{ITC Ltd}              & 11.74 & 7.87\%        & 14.0\% & 12.66 & \textbf{\inr 206}   & \inr 264   & \textbf{Overvalued} \\
+\textbf{Nestle India}         & 12.86 & 10.34\%       & 14.0\% & 14.19 & \textbf{\inr 388}   & \inr 1,409 & \textbf{Overvalued} \\
+\textbf{Varun Beverages}      & 3.17  & 12.00\% (Cap) & 14.0\% & 3.55  & \textbf{\inr 178}   & \inr 204   & \textbf{Overvalued} \\
+\textbf{Britannia Industries} & 74.00 & 12.00\% (Cap) & 14.0\% & 82.88 & \textbf{\inr 4,144} & \inr 5,120 & \textbf{Overvalued} \\
+\textbf{Marico Ltd}           & 9.77  & 9.62\%        & 14.0\% & 10.71 & \textbf{\inr 245}   & \inr 814   & \textbf{Overvalued} \\
+\textbf{Tata Consumer}        & 10.94 & 11.11\%       & 14.0\% & 12.16 & \textbf{\inr 421}   & \inr 1,010 & \textbf{Overvalued} \\
+\textbf{Godrej Consumer}      & 10.40 & 0.62\%        & 14.0\% & 10.46 & \textbf{\inr 78}    & \inr 881   & \textbf{Overvalued} \\
+\textbf{Dabur India}          & 7.39  & 1.77\%        & 14.0\% & 7.52  & \textbf{\inr 61}    & \inr 382   & \textbf{Overvalued} \\
+\textbf{Colgate-Palmolive}    & 34.35 & 5.29\%        & 14.0\% & 36.17 & \textbf{\inr 415}   & \inr 1,843 & \textbf{Overvalued} \\
+\bottomrule
+\end{tabular*}
+\caption{Cross-Sectional Dividend Discount Model (DDM) Intrinsic Valuation.}
+\label{tab:ddm_valuation}
+\end{table}
+
+\subsection{Analytical Insights and Valuation Gaps}
+\begin{enumerate}[label=\textbf{\arabic*.}, topsep=2pt, itemsep=1.5pt, parsep=0pt]
+    \item \textbf{HUL as the Sole Undervalued Firm:} HUL is the only company whose DDM intrinsic value (\inr 2,512) exceeds market price (\inr 1,973), showing a \textbf{$+27.3\%$ discount} under the capped $12\%$ assumption.
+    \item \textbf{Nine Overvalued Enterprises:} The remaining nine firms are classified as \textbf{Overvalued}, led by \textbf{Godrej Consumer} (trading at $11.3\times$ DDM value), \textbf{Dabur} ($6.3\times$), \textbf{Colgate} ($4.4\times$), and \textbf{Nestle} ($3.6\times$).
+    \item \textbf{Spread Sensitivity ($\bm{\Ke - g}$):} As the spread $(\Ke - g)$ narrows to $2.0\%$, intrinsic values expand rapidly, illustrating the inherent model fragility and motivating sensitivity analysis.
+\end{enumerate}
