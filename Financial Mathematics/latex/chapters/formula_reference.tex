@@ -1,0 +1,232 @@
+% ==============================================================================
+% Comprehensive Formula Reference Sheet (Combined Across All Chapters)
+% ==============================================================================
+\newpage
+\thispagestyle{plain}
+\chapter*{Comprehensive Formula Reference Sheet}
+\addcontentsline{toc}{chapter}{Comprehensive Formula Reference Sheet}
+
+% ------------------------------------------------------------------------------
+\section*{Chapter 1: Interest Theory and Mathematical Foundations}
+\addcontentsline{toc}{section}{Chapter 1: Interest Theory and Mathematical Foundations}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[1. Simple Interest and Total Accumulated Amount]
+\begin{align}
+    \SI &= \frac{P \cdot N \cdot R}{100} \\[4pt]
+    A &= P + \SI = P \left(1 + \frac{N \cdot R}{100}\right)
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P$ = Principal sum borrowed or invested
+    \item $N$ = Time period in years
+    \item $R$ = Annual rate of interest ($\%$)
+    \item $\SI$ = Simple interest earned
+    \item $A$ = Total accumulated amount (Principal $+$ Interest)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[2. Compound Interest and Multiple Conversion Periods]
+\begin{align}
+    \text{Annual Compounding:} \quad A &= P \left(1 + \frac{R}{100}\right)^N, \quad \CI = A - P = P \left[\left(1 + \frac{R}{100}\right)^N - 1\right] \\[4pt]
+    \text{Sub-Annual Compounding ($m$ times/year):} \quad A &= P \left(1 + \frac{R}{m \cdot 100}\right)^{m \cdot N} \\[4pt]
+    \text{Continuous Compounding:} \quad A &= P \cdot e^{r \cdot N} \qquad \left(r = \frac{R}{100}\right)
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P$ = Initial principal sum
+    \item $R$ = Nominal annual rate of interest ($\%$)
+    \item $r$ = Nominal interest rate in decimal form ($r = R/100$)
+    \item $N$ = Total investment duration in years
+    \item $m$ = Number of compounding periods per year ($m=2$ semi-annual, $m=4$ quarterly, $m=12$ monthly)
+    \item $e$ = Mathematical constant / base of natural logarithm ($\approx 2.71828$)
+    \item $A$ = Compound terminal amount; $\CI$ = Compound interest earned
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[3. Effective Annual Rate of Interest (ERI / EAR) and Depreciation]
+\begin{align}
+    \ERI &= \left(1 + \frac{R}{m \cdot 100}\right)^m - 1 \\[4pt]
+    \text{Depreciation (Reducing Balance Method):} \quad A &= P \left(1 - \frac{R}{100}\right)^N
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\ERI$ = Effective rate of interest (true annualized yield in decimal)
+    \item $m$ = Compounding frequency per annum
+    \item $P$ = Original asset acquisition cost
+    \item $R$ = Annual rate of depreciation ($\%$)
+    \item $N$ = Asset operational life in years
+    \item $A$ = Written Down Value (WDV) or estimated salvage/scrap value
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{4. Doubling Period Approximations}]
+\begin{align}
+    \text{Exact Limit:} \quad T_{\text{exact}} &= \frac{\ln 2}{r} \approx \frac{0.6931}{r} = \frac{69.3}{R} \\[4pt]
+    \text{Empirical Rules:} \quad T_{\text{Rule of 72}} &\approx \frac{72}{R}, \qquad T_{\text{Rule of 69}} \approx 0.35 + \frac{69}{R}
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $T$ = Number of years required for principal to double
+    \item $R$ = Annual percentage interest rate ($R\%$)
+    \item $r$ = Annual interest rate in decimal ($r = R/100$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{5. Annuity Cash Flows: Future Value and Present Value}]
+\begin{align}
+    \text{Ordinary Annuity Future Value:} \quad \FV &= A \cdot \CVAF(R, n) = A \left[ \frac{(1 + r)^n - 1}{r} \right] \\[4pt]
+    \text{Present Value of a Lump Sum:} \quad \PV &= \frac{A}{(1 + r)^n} = A \cdot \PVF(r, n) \\[4pt]
+    \text{Ordinary Annuity Present Value:} \quad \PV &= A \cdot \PVAF(R, n) = A \left[ \frac{1 - (1 + r)^{-n}}{r} \right] \\[4pt]
+    \text{Annuity Due Present Value:} \quad \PV_{\text{due}} &= \PV_{\text{ord}} \times (1 + r) = A \left[ \frac{1 - (1 + r)^{-n}}{r} \right] (1 + r)
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $A$ = Equal periodic cash payment / installment
+    \item $r$ = Periodic interest or discount rate ($R/100$)
+    \item $n$ = Total number of cash flow installments / conversion periods
+    \item $\CVAF$ = Compound Value Annuity Factor; $\PVF$ = Present Value Factor
+    \item $\PVAF$ = Present Value Annuity Factor
+    \item $(1 + r)$ = Advance compounding factor for payments at beginning of period (annuity due)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{6. Perpetuities, Finite Growing Annuity, and Sinking Funds}]
+\begin{align}
+    \text{Constant Perpetuity:} \quad \PV &= \frac{C}{r} \\[4pt]
+    \text{Growing Perpetuity:} \quad \PV &= \frac{C_1}{r - g} \qquad (r > g) \\[4pt]
+    \text{Finite Growing Annuity:} \quad \PV &= \frac{C_1}{r - g} \left[ 1 - \left(\frac{1 + g}{1 + r}\right)^n \right] \qquad (r \ne g) \\[4pt]
+    \text{Ordinary Sinking Fund Deposit:} \quad A &= \frac{\FV}{\CVAF(R, n)} = \FV \left[ \frac{r}{(1 + r)^n - 1} \right] \\[4pt]
+    \text{Sinking Fund Annuity Due Deposit:} \quad A_{\text{due}} &= \frac{A_{\text{ord}}}{1 + r} = \frac{\FV}{\CVAF(R, n) \times (1 + r)}
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $C$ = Constant periodic perpetual cash inflow
+    \item $C_1$ = Cash inflow generated at the end of Period 1
+    \item $r$ = Periodic discount rate
+    \item $g$ = Constant compound growth rate of periodic cash flows
+    \item $n$ = Total number of payment periods
+    \item $\FV$ = Target reserve accumulation sum required at maturity
+    \item $A$ = Periodic sinking fund contribution
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[7. Continuous Exponential Growth and Decay Models]
+\begin{equation}
+    \text{Growth Model:} \quad n(t) = n_0 \, e^{k t}, \qquad \text{Decay Model:} \quad n(t) = n_0 \, e^{-k t}, \qquad k = \frac{1}{T} \ln\left(\frac{n_{\max}}{n_{\min}}\right)
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $n(t)$ = Modeled quantity / price impact level at elapsed time $t$
+    \item $n_0$ = Initial quantity at baseline time $t = 0$
+    \item $k$ = Continuous rate constant ($k > 0$)
+    \item $T$ = Calibration interval between boundary values $[n_{\min}, n_{\max}]$
+\end{itemize}
+\end{formulabox}
+
+\newpage
+% ------------------------------------------------------------------------------
+\section*{Chapter 2: Valuation of Financial Instruments}
+\addcontentsline{toc}{section}{Chapter 2: Valuation of Financial Instruments}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[8. Security Yield Metrics and Holding Period Return]
+\begin{align}
+    \text{Current Yield} &= \frac{\text{Annual Dividend / Coupon}}{P_0} \times 100 \\[4pt]
+    \text{Dividend Yield } (dY) &= \frac{\DPS}{P_0} \times 100 \\[4pt]
+    \text{Holding Period Return } (\HPR) &= \frac{D_t + \Delta P}{P_1} = \frac{D_t + (P_t - P_1)}{P_1} \\[4pt]
+    \text{Earnings Yield} &= \frac{\EPS}{P_0} \times 100
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P_0$ = Current prevailing market purchase price of the share/security
+    \item $\DPS$ = Annual dividend per share
+    \item $\HPR$ = Total rate of return realized over the investment horizon
+    \item $D_t$ = Cash dividend received during the planned holding period
+    \item $P_1$ = Initial purchase price paid at acquisition
+    \item $P_t$ = Terminal market price realized at liquidation
+    \item $\Delta P$ = Capital appreciation or depreciation ($P_t - P_1$)
+    \item $\EPS$ = Earnings per share
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[9. General Dividend Discount Valuation Models (DDM)]
+\begin{align}
+    \text{Zero-Growth Model (Perpetual):} \quad P_0 &= \frac{D}{K_e} \\[4pt]
+    \text{Finite 2-Year Holding Horizon:} \quad P_0 &= \frac{D_1}{1 + K_e} + \frac{D_2 + P_2}{(1 + K_e)^2} \\[4pt]
+    \text{General Infinite DDM:} \quad P_0 &= \sum_{t=1}^{\infty} \frac{D_t}{(1 + K_e)^t} \\[4pt]
+    \text{Gordon Constant Growth DDM:} \quad P_0 &= \frac{D_1}{K_e - g} = \frac{D_0 (1 + g)}{K_e - g} \qquad (K_e > g)
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P_0$ = Theoretical intrinsic market price per share today
+    \item $D$ = Constant perpetual annual dividend per share
+    \item $D_1, D_2, D_t$ = Expected future dividend per share at the end of year 1, 2, and $t$
+    \item $D_0$ = Baseline dividend per share currently paid
+    \item $P_2$ = Projected terminal market price at the end of Year 2
+    \item $K_e$ = Required rate of return of equity investors / cost of equity capital
+    \item $g$ = Constant perpetual annual compound growth rate in dividends ($g < K_e$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[10. Gordon's Dividend Capitalization Model with Endogenous Growth]
+\begin{equation}
+    P_0 = \frac{\EPS_1 (1 - b)}{K_e - b \cdot r} = \frac{D_1}{K_e - g}, \qquad g = b \times r
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P_0$ = Theoretical market price per share ($\MPS$)
+    \item $\EPS_1$ = Expected earnings per share for the upcoming period
+    \item $b$ = Retention ratio (fraction of earnings retained within the firm, $0 \le b \le 1$)
+    \item $(1 - b)$ = Dividend payout ratio ($D_1 / \EPS_1$)
+    \item $K_e$ = Cost of equity / capitalization rate
+    \item $r$ = Internal rate of return on reinvested corporate earnings (ROE)
+    \item $g = b \cdot r$ = Endogenous growth rate of dividends and earnings
+\end{itemize}
+\vspace{0.4em}
+\textbf{Payout Optimization Policy Rules:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l c c X}
+    \toprule
+    \textbf{Firm Category} & \textbf{Condition} & \textbf{Optimal Payout} & \textbf{Theoretical Dynamic} \\
+    \midrule
+    Growth Firm & $r > K_e$ & $\text{NIL } (0\%)$ & Maximum retention ($b=1$) maximizes MPS \\
+    Normal Firm & $r = K_e$ & Indifferent & MPS is identical across all payout levels \\
+    Declining Firm & $r < K_e$ & $100\%$ & Full distribution ($b=0$) maximizes MPS \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+\end{formulabox}
+
+\begin{formulabox}[11. Walter's Valuation Formula and Firm Capitalization]
+\begin{equation}
+    P = \frac{D + \frac{r}{k}(E - D)}{k}, \qquad V = N \times P
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P$ = Theoretical market price per share ($\MPS$)
+    \item $D$ = Dividend per share paid ($\DPS = \EPS \times \text{Payout Ratio}$)
+    \item $E$ = Earnings per share ($\EPS$)
+    \item $(E - D)$ = Retained earnings per share
+    \item $r$ = Internal rate of return on investment earned by the company
+    \item $k$ = Cost of capital / capitalization rate
+    \item $\frac{r}{k}(E - D)$ = Capitalized market value of the earnings retained
+    \item $N$ = Total number of equity shares outstanding
+    \item $V$ = Aggregate market valuation of the firm
+\end{itemize}
+\vspace{0.4em}
+\textbf{Payout Optimization Policy Rules:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l c c X}
+    \toprule
+    \textbf{Firm Category} & \textbf{Condition} & \textbf{Optimum Payout} & \textbf{Share Price Dynamic} \\
+    \midrule
+    Growth Firm & $r > k$ & $0\%$ & MPS decreases as dividend payout increases \\
+    Normal Firm & $r = k$ & Indifferent & MPS is invariant to payout choice \\
+    Declining Firm & $r < k$ & $100\%$ & MPS increases as dividend payout increases \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+\end{formulabox}

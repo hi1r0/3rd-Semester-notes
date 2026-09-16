@@ -64,8 +64,9 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
   - Walter's model assumptions, internal financing, and mathematical formulation: $P = \frac{D + \frac{r}{k}(E-D)}{k}$, Total Firm Value $V = N \times P$.
   - Policy optimization across firm regimes: Growth firm ($r > k$, optimal payout $0\%$, Nirmal Ltd), Normal firm ($r = k$, payout indifferent), Declining firm ($r < k$, optimal payout $100\%$).
   - *Solved Examples:* `2.5.1` to `2.5.3` (*Lecture: 16/09/2026*).
-- **Standalone Formula Reference Sheet:**
-  - Dedicated formula-only final page summarizing Yield metrics, DDM horizons, Gordon's model with payout matrix, and Walter's formula with capitalization dynamics.
+- **Comprehensive Multi-Chapter Formula Reference Sheet:**
+  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1 and Chapter 2.
+  - Features high-density mathematical formula boxes with explicit itemized `Where:` parameter definitions for every variable, equation, and payout decision matrix.
 
 ---
 
@@ -82,7 +83,8 @@ latex/
 │   └── titlepage.tex                              # Formal cover page
 ├── chapters/
 │   ├── ch01_interest_theory.tex                   # Chapter 1: Interest Theory (Lectures: 13/08 – 03/09/2026)
-│   └── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 16/09/2026)
+│   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 16/09/2026)
+│   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions
 ├── figures/                                       # Department & University logos
 └── README.md                                      # Documentation & compilation instructions
 ```

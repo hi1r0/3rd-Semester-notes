@@ -38,9 +38,10 @@ description: Mandatory Git tracking, Markdown synchronization, and LaTeX structu
 - **Balanced Banner Connectors**:
   - Avoid solitary asymmetric downward arrows from a wide multi-column top banner pointing into only the first child card. Top banners should either serve as independent title blocks or provide symmetrical branch lines into all child pillars.
 
-## 5. Mandatory Standalone Formula Sheet Page on New Notes Upload
-- **Dedicated Final Page**: At the end of every new lecture notes upload or completed chapter, always conclude with a dedicated standalone page (`\newpage`) reserved exclusively for the **Consolidated Formula Reference / Formula Section Alone**.
-- **Formula-Only Content**: This section must strictly present mathematical formulas, equation numbers, variable definitions, and validity conditions grouped by subtopics (e.g., in a high-density summary box or multi-row table), with NO narrative commentary, background prose, or worked examples.
-- **Strict Page Budget**: Carefully calibrate vertical spacing and equation density so that the formula sheet sits cleanly on its designated final page without awkward orphan spillover onto an extra blank or near-empty page.
+## 5. Combined Multi-Chapter Formula Reference Section at Document End
+- **Single Combined Section at Document End**: Do NOT generate separate formula reference sections at the end of each individual chapter. Instead, maintain a single, consolidated **Comprehensive Formula Reference Sheet** placed at the very end of the entire document (`main.tex`).
+- **Chapter-by-Chapter Grouping**: Within the combined formula reference sheet, clearly demarcate formulas under distinct chapter headings (e.g. `\section*{Chapter 1: ...}`, `\section*{Chapter 2: ...}`).
+- **Mandatory "Where:" Parameter Definitions**: Every formula box MUST explicitly provide a structured itemized list of parameter definitions introduced by **Where:** (e.g. `$P = \text{Theoretical market price per share}$`, `$k = \text{cost of capital}$`, `$r = \text{internal rate of return}$`, etc.).
+- **Formula-Only Presentation**: This section must strictly present mathematical formulas, equations, variable definitions, and validity/payout conditions, with NO narrative commentary, prose introductions, or worked examples.
 
 
