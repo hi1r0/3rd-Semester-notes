@@ -35,23 +35,56 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
   - Market microstructure applications: Trade price impact decay curves, large banks' monitoring, toxic flow detection, and market stability.
   - *Lecture Date:* `03/09/2026`.
 
+### Chapter 2: Valuation of Financial Instruments
+- **2.1 Foundations of Valuation & Yield Concepts:**
+  - Balance sheet book value, market value, going concern value, liquidating breakup value, and capitalised value.
+  - Market yield, current yield, and equity/preference dividend yield ($dY = \DPS / P_0$).
+  - Intrinsic valuation decision rules (undervalued vs. overvalued securities).
+  - *Solved Examples:* `2.1.1` to `2.1.3` (*Lecture: 07/09/2026*).
+- **2.2 Yield to Maturity, Holding Period Return, & Equity Valuation Approaches:**
+  - Yield to Maturity ($\YTM$ / redemption yield) mechanics and capital appreciation/depreciation.
+  - Holding Period Return ($\HPR = \frac{D_t + \Delta P}{P_1}$).
+  - Accounting gross yield vs. net investor earnings yield ($\EPS / P_0$).
+  - Four equity valuation approaches: Accounting/Balance Sheet, Dividend Discount (DDM), DCF (FCFF/FCFE), and Relative multiples ($P/E, P/B, P/S$).
+  - General Dividend Discount Models: Finite $n$-year holding horizon and infinite perpetual DDM.
+  - *Lecture Date:* `08/09/2026`.
+- **2.3 Dividend Valuation Models: Constant Dividend & Gordon Basics:**
+  - Model 1: Zero-growth perpetual dividend ($P_0 = D / K_e$).
+  - Model 2: Constant dividend growth model ($P_0 = D_1 / (K_e - g)$).
+  - Gordon model endogenous growth fundamentals: $g = b \times r$, retention ratio $b$, and capitalization rate $K_e$.
+  - *Solved Examples:* `2.3.1` to `2.3.3` (*Lecture: 10/09/2026*).
+- **2.4 Gordon's Model: Growth, Normal, and Declining Firm Dynamics:**
+  - Endogenous dividend capitalization: $P_0 = \frac{\EPS_1(1-b)}{K_e - br}$.
+  - Growth Firm ($r > K_e$): Optimal payout is NIL ($0\%$), maximum retention maximizes share price (XY Ltd).
+  - Normal Firm ($r = K_e$): Dividend payout is neutral / irrelevant (MN Ltd).
+  - Declining Firm ($r < K_e$): Optimal payout is $100\%$, full distribution maximizes share price (ABC Ltd).
+  - *Solved Examples:* `2.4.1` to `2.4.3` (*Lecture: 15/09/2026*).
+- **2.5 Walter's Dividend Valuation Model & Policy Decisions:**
+  - Theories of dividend policy: Relevance (Gordon, Walter) vs. Irrelevance (Modigliani-Miller).
+  - Walter's model assumptions, internal financing, and mathematical formulation: $P = \frac{D + \frac{r}{k}(E-D)}{k}$, Total Firm Value $V = N \times P$.
+  - Policy optimization across firm regimes: Growth firm ($r > k$, optimal payout $0\%$, Nirmal Ltd), Normal firm ($r = k$, payout indifferent), Declining firm ($r < k$, optimal payout $100\%$).
+  - *Solved Examples:* `2.5.1` to `2.5.3` (*Lecture: 16/09/2026*).
+- **Standalone Formula Reference Sheet:**
+  - Dedicated formula-only final page summarizing Yield metrics, DDM horizons, Gordon's model with payout matrix, and Walter's formula with capitalization dynamics.
+
 ---
 
 ## 📂 Folder Structure
 
 ```text
 latex/
-├── main.tex                       # Master root file to compile
+├── main.tex                                       # Master root file to compile
 ├── preamble/
-│   ├── packages.tex               # Geometry, AMS-Math, TikZ, tcolorbox, hyperref, enumitem
-│   ├── environments.tex           # Section-scoped Theorem, Definition, Example & Formulaboxes
-│   ├── macros.tex                 # Shorthands for finance/actuarial/quant notations
-│   ├── syllabus.tex               # Pondicherry University syllabus page
-│   └── titlepage.tex              # Formal cover page
+│   ├── packages.tex                               # Geometry, AMS-Math, TikZ, tcolorbox, hyperref, enumitem
+│   ├── environments.tex                           # Section-scoped Theorem, Definition, Example & Formulaboxes
+│   ├── macros.tex                                 # Shorthands for finance/actuarial/quant notations
+│   ├── syllabus.tex                               # Pondicherry University syllabus page
+│   └── titlepage.tex                              # Formal cover page
 ├── chapters/
-│   └── ch01_interest_theory.tex   # Chapter 1: Interest Theory (Lectures: 13/08 – 31/08/2026)
-├── figures/                       # Department & University logos
-└── README.md                      # Documentation & compilation instructions
+│   ├── ch01_interest_theory.tex                   # Chapter 1: Interest Theory (Lectures: 13/08 – 03/09/2026)
+│   └── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 16/09/2026)
+├── figures/                                       # Department & University logos
+└── README.md                                      # Documentation & compilation instructions
 ```
 
 ---
