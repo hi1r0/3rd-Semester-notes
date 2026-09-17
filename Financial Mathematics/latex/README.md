@@ -64,8 +64,15 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
   - Walter's model assumptions, internal financing, and mathematical formulation: $P = \frac{D + \frac{r}{k}(E-D)}{k}$, Total Firm Value $V = N \times P$.
   - Policy optimization across firm regimes: Growth firm ($r > k$, optimal payout $0\%$, Nirmal Ltd), Normal firm ($r = k$, payout indifferent), Declining firm ($r < k$, optimal payout $100\%$).
   - *Solved Examples:* `2.5.1` to `2.5.3` (*Lecture: 16/09/2026*).
+- **2.6 Modigliani--Miller (MM) Dividend Irrelevance Theory & Capital Budgeting Dynamics:**
+  - Foundations of dividend irrelevance: firm value governed by earning power and real investment policy under perfect capital markets.
+  - End-of-period share price formulation: $P_1 = P_0(1 + K_e) - D_1$.
+  - Capital budgeting deficit & external equity financing: $\Delta M = I - (E - n D_1)$, and new shares issued $m = \Delta n = \Delta M / P_1$.
+  - Mathematical invariance proof: Total market value $V_1 = (n + m) P_1 = n P_0(1 + K_e) + I - E$ is independent of dividend payout.
+  - Empirical validity and limitations: Impact of taxes, flotation costs, information asymmetry/signaling, and investment policy interdependence.
+  - *Solved Example:* `2.6.1` Stewart Ltd comprehensive valuation, share issuance, and market value invariance proof (*Lecture: 17/09/2026*).
 - **Comprehensive Multi-Chapter Formula Reference Sheet:**
-  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1 and Chapter 2.
+  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1 and Chapter 2 (12 formula cards).
   - Features high-density mathematical formula boxes with explicit itemized `Where:` parameter definitions for every variable, equation, and payout decision matrix.
 
 ---

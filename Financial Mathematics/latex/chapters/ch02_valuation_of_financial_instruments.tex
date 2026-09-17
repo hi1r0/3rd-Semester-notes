@@ -462,5 +462,162 @@ Given $E = \inr 12$, $k = 0.15$, $r = 0.09$, so $\frac{r}{k} = \frac{0.09}{0.15}
 \begin{equation*}
     P = \frac{12 + 0.60(12 - 12)}{0.15} = \frac{12 + 0}{0.15} = \inr 80.00
 \end{equation*}
-\textbf{Conclusion:} Because $r < k$ ($9\% < 15\%$), the company is a declining firm. Market price per share is maximized when all earnings are distributed. The ideal payout ratio is \textbf{$100\%$}.
+\end{example}
+
+% ------------------------------------------------------------------------------
+\section{Modigliani--Miller (MM) Dividend Irrelevance Theory and Capital Budgeting Dynamics}
+\lecturedate{17/09/2026}
+% ------------------------------------------------------------------------------
+
+Franco Modigliani and Merton Miller (1961) presented a seminal theoretical framework establishing that under conditions of perfect capital markets, a firm's dividend policy has \textbf{no effect} on its market valuation or share price. The market value of the firm is governed exclusively by its fundamental earning power and real investment policy, rather than how net earnings are split between distributed dividends and retained earnings.
+
+\subsection{Theoretical Foundations and Valuation Equations}
+The MM approach assumes that investors are rational and indifferent between current dividends and capital appreciation in a frictionless market. The current market price of an equity share ($P_0$) represents the discounted present value of the dividend received at the end of the operating period ($D_1$) plus the market price of the share prevailing at that time ($P_1$):
+\begin{equation}
+    P_0 = \frac{D_1 + P_1}{1 + K_e}
+    \label{eq:mm_p0}
+\end{equation}
+Rearranging Equation~\eqref{eq:mm_p0} yields the market price of the share at the end of the period ($P_1$):
+\begin{equation}
+    P_1 = P_0 (1 + K_e) - D_1
+    \label{eq:mm_p1}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P_0$ = Current market price per share at the beginning of the period ($t=0$).
+    \item $P_1$ = Market price per share at the end of the period ($t=1$).
+    \item $D_1$ = Dividend per share declared/distributed at the end of the period.
+    \item $K_e$ = Rate of capitalization appropriate to the risk class of the firm.
+\end{itemize}
+
+\subsection{Financing Investment Requirements and New Share Issuance}
+When a firm undertakes capital investment outlays ($I$), the required funding is financed first through available retained earnings, with any deficit financed via the issuance of new equity shares:
+\begin{align}
+    \text{Retained Earnings Available} &= E - n D_1 \label{eq:mm_retained} \\[4pt]
+    \text{Capital Deficit to be Raised } (\Delta M) &= I - (E - n D_1) \label{eq:mm_deficit} \\[4pt]
+    \text{Number of New Shares Issued } (m = \Delta n) &= \frac{\Delta M}{P_1} = \frac{I - (E - n D_1)}{P_1} \label{eq:mm_new_shares}
+\end{align}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $I$ = Total capital investment budget required for the period.
+    \item $E$ = Total net income of the firm for the operating period.
+    \item $n$ = Number of existing shares outstanding at the beginning of the period.
+    \item $n D_1$ = Aggregate dividend distribution to existing shareholders.
+    \item $\Delta M$ = Additional equity capital required to be raised externally.
+    \item $m = \Delta n$ = Number of newly issued shares.
+    \item $P_1$ = Market issue price per share at the end of the period.
+\end{itemize}
+
+\subsection{Proof of Total Market Value Invariance}
+The aggregate market value of the firm at the end of the period ($V_1$) is given by multiplying the total post-issue shares by the year-end market price:
+\begin{equation}
+    V_1 = (n + m) P_1
+    \label{eq:mm_v1}
+\end{equation}
+Substituting $m P_1 = I - E + n D_1$ from Equation~\eqref{eq:mm_deficit} into Equation~\eqref{eq:mm_v1}:
+\begin{align}
+    V_1 &= n P_1 + m P_1 \nonumber \\
+    &= n P_1 + I - E + n D_1 \nonumber \\
+    &= n(P_1 + D_1) + I - E
+\end{align}
+From Equation~\eqref{eq:mm_p0}, $P_1 + D_1 = P_0 (1 + K_e)$. Substituting this gives:
+\begin{equation}
+    V_1 = n P_0 (1 + K_e) + I - E
+    \label{eq:mm_invariance_proof}
+\end{equation}
+Equation~\eqref{eq:mm_invariance_proof} contains neither $D_1$ nor the payout ratio. Consequently, total market value is invariant to dividend distributions: dividend payouts reduce internal funds, requiring compensatory new share issuance which dilutes future claims by exactly the dividend amount.
+
+\begin{example}{Stewart Ltd: MM Dividend Irrelevance and Valuation}{stewart_ltd_mm}
+Stewart Ltd has $40,000$ shares outstanding currently trading at $\inr 15$ each. The board of directors has recommended $\inr 2$ per share as dividend. The rate of capitalization appropriate to the firm's risk class is $20\%$.
+\begin{enumerate}[noitemsep, topsep=2pt]
+    \item Based on the MM approach, calculate the share price at the end of the year if dividend is: (a) distributed, (b) not declared.
+    \item Determine the number of new shares to be issued at year-end assuming net income is $\inr 1,20,000$ and the investment budget is $\inr 2,80,000$ under both cases.
+    \item Show that total market value of shares at year-end remains identical in both cases.
+    \item Is the MM approach realistic? What factors mar its empirical validity?
+\end{enumerate}
+\tcblower
+\textbf{Given Parameters:}
+\begin{align*}
+    n &= 40,000 \text{ shares}, \quad P_0 = \inr 15, \quad K_e = 20\% = 0.20 \implies 1 + K_e = 1.20 \\[3pt]
+    E &= \inr 1,20,000, \quad I = \inr 2,80,000
+\end{align*}
+
+\textbf{(i) Market Price of the Share at Year End ($P_1$):}
+\begin{equation*}
+    P_0 = \frac{D_1 + P_1}{1 + K_e} \implies P_1 = P_0(1 + K_e) - D_1
+\end{equation*}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item \textbf{(a) When Dividend is Distributed ($D_1 = \inr 2$):}
+    \begin{equation*}
+        15 = \frac{2 + P_1}{1.20} \implies 15 \times 1.20 = 2 + P_1 \implies 18 = 2 + P_1 \implies \mathbf{P_1 = \inr 16.00}
+    \end{equation*}
+    \item \textbf{(b) When Dividend is Not Declared ($D_1 = \inr 0$):}
+    \begin{equation*}
+        15 = \frac{0 + P_1}{1.20} \implies 15 \times 1.20 = P_1 \implies \mathbf{P_1 = \inr 18.00}
+    \end{equation*}
+\end{itemize}
+
+\textbf{(ii) Amount to be Raised and Number of New Shares Issued:}
+\begin{equation*}
+    \text{Deficit } (\Delta M) = I - (E - n D_1), \qquad m = \frac{\Delta M}{P_1}
+\end{equation*}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{X r r}
+    \toprule
+    \textbf{Particulars} & \textbf{Dividend Distributed} & \textbf{Dividend Not Declared} \\
+    & ($D_1 = \inr 2$) & ($D_1 = \inr 0$) \\
+    \midrule
+    Capital Investment Outlay ($I$) & \inr 2,80,000 & \inr 2,80,000 \\
+    \addlinespace[2pt]
+    \textit{Less: Retained Earnings Available:} & & \\
+    \quad Total Net Income ($E$) & \inr 1,20,000 & \inr 1,20,000 \\
+    \quad Less: Total Dividend Paid ($n D_1$) & (\inr 80,000) & (\inr 0) \\
+    \midrule
+    Retained Earnings Available for Investment & \inr 40,000 & \inr 1,20,000 \\
+    \midrule
+    \textbf{Amount to be Raised by New Issue} ($\Delta M$) & \textbf{\inr 2,40,000} & \textbf{\inr 1,60,000} \\
+    Issue Price per Share ($P_1$) & \inr 16.00 & \inr 18.00 \\
+    \midrule
+    \textbf{Number of New Shares Issued} ($m$) & \textbf{15,000 shares} & \textbf{8,888.89 shares} \\
+    & \scriptsize ($2,40,000 / 16$) & \scriptsize ($1,60,000 / 18 \approx 8,889$) \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{(iii) Proof of Total Market Value Invariance at Year End ($V_1$):}
+\begin{equation*}
+    V_1 = (n + m) \times P_1
+\end{equation*}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{X r r}
+    \toprule
+    \textbf{Particulars} & \textbf{Dividend Distributed} & \textbf{Dividend Not Declared} \\
+    \midrule
+    Existing Shares Outstanding ($n$) & 40,000 & 40,000 \\
+    (+) New Shares Issued ($m$) & 15,000 & 8,888.89 \\
+    \midrule
+    \textbf{Total Shares at Year End} ($n + m$) & \textbf{55,000} & \textbf{48,888.89} \\
+    Market Price per Share ($P_1$) & \inr 16.00 & \inr 18.00 \\
+    \midrule
+    \textbf{Total Market Value of Shares} ($V_1$) & \textbf{\inr 8,80,000} & \textbf{\inr 8,80,000} \\
+    & \scriptsize ($55,000 \times \inr 16$) & \scriptsize ($48,888.89 \times \inr 18$) \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+\textbf{Conclusion:} Market value of equity at year-end remains exactly \textbf{\inr 8,80,000} under both distribution policies, demonstrating complete dividend irrelevance.
+
+\textbf{(iv) Empirical Validity and Critical Limitations of the MM Approach:} \\
+The MM hypothesis is theoretical. In real-world capital markets, its validity is compromised by severe market frictions:
+\begin{enumerate}[noitemsep, topsep=2pt]
+    \item \textbf{Absence of Taxes:} MM assumes zero tax or identical taxation. In practice, personal income tax rates on dividends often exceed effective capital gains tax rates, creating tax-induced clienteles.
+    \item \textbf{Flotation and Transaction Costs:} Issuing new equity entails significant underwriting, legal, and administrative expenses. Thus, external equity is more costly than internal retained cash flows.
+    \item \textbf{Informational Asymmetry \& Signaling:} In reality, dividend increases signal managerial confidence regarding sustainable future profitability, causing positive market price reactions.
+    \item \textbf{Financing and Investment Separation:} MM assumes real investment policy is predetermined and invariant to dividend choices, whereas capital rationing often forces firms to curb investments if cash is paid out as dividends.
+\end{enumerate}
 \end{example}
