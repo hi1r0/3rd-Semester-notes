@@ -63,6 +63,7 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
 - **2.3 International Payment and Financial Telecommunication Systems**
   - SWIFT: Cooperative society, Brussels, 250 founding banks, 25,000+ members, BIC routing, Mumbai regional processing hub, core advantages.
   - CHIPS: Computerized electronic clearing system, New York Clearing House Association (1971), paperless USD clearing and multilateral netting.
+  - TikZ Flowchart: Dual-tier cross-border settlement architecture (Bank of India $\leftrightarrow$ SWIFT $\leftrightarrow$ Amex Bank $\leftrightarrow$ CHIPS $\leftrightarrow$ Fedwire $\leftrightarrow$ Citi Bank $\leftrightarrow$ Canara Bank).
   - *Lecture Date:* `16/09/2026`.
 - **2.4 Market Terminologies, Margins, and Transaction Classifications**
   - Market makers, two-way quotations, forward margins/swap points, forward premium vs. discount, base rate.

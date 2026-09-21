@@ -10,9 +10,9 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 % ==============================================================================
 
 \begin{formulabox}[Balance of Payments Equilibrium Identity]
-\begin{equation}
+\begin{equation*}
     \text{BOP} = \text{Current Account} + \text{Capital Account} + \text{Financial Account} + \text{Errors \& Omissions} = 0
-\end{equation}
+\end{equation*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Current Account:} Net balance on visible merchandise trade, invisible services, primary investment income, and unilateral transfers.
@@ -23,9 +23,9 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{formulabox}
 
 \begin{formulabox}[SDR Multi-Currency Basket Valuation]
-\begin{equation}
+\begin{equation*}
     \text{SDR Value in USD} = \sum_{i=1}^{5} \left( q_i \times S_i \right)
-\end{equation}
+\end{equation*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item $q_i$: Fixed units of currency $i$ defined in the 5-year IMF SDR valuation basket.
@@ -39,10 +39,10 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 % ==============================================================================
 
 \begin{formulabox}[Bid-Ask Spread and Percentage Spread]
-\begin{align}
+\begin{align*}
     \text{Spread} &= \text{Ask Price} - \text{Bid Price} \\[0.3em]
     \text{Percentage Spread (\%)} &= \left[ \frac{\text{Ask Price} - \text{Bid Price}}{\text{Ask Price}} \right] \times 100
-\end{align}
+\end{align*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Ask Price (Offer):} Exchange rate at which the quoting market maker sells foreign currency.
@@ -51,9 +51,9 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{formulabox}
 
 \begin{formulabox}[Covered Interest Rate Parity (Exact Forward Rate)]
-\begin{equation}
+\begin{equation*}
     F = S \times \left[ \frac{1 + r_h \times \frac{d}{365}}{1 + r_f \times \frac{d}{365}} \right]
-\end{equation}
+\end{equation*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item $F$: Outright forward exchange rate (Home currency per unit of foreign currency).
@@ -65,10 +65,10 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{formulabox}
 
 \begin{formulabox}[Linear Forward Approximation \& Annualized Premium/Discount]
-\begin{align}
+\begin{align*}
     F_{\text{linear}} &\approx S \times \left[ 1 + (r_h - r_f) \times \frac{d}{365} \right] \\[0.3em]
     \text{Annualized Premium / Discount (\%)} &= \left[ \frac{F - S}{S} \right] \times \frac{365}{d} \times 100
-\end{align}
+\end{align*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item $F$: Forward exchange rate; $S$: Spot exchange rate.
@@ -79,9 +79,9 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{formulabox}
 
 \begin{formulabox}[Merchant TT Buying Rate (Clean Remittances)]
-\begin{equation}
+\begin{equation*}
     \text{TT Buying Rate} = \text{Interbank Spot Buying Rate (Bid)} - \text{Exchange Margin}
-\end{equation}
+\end{equation*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Interbank Spot Buying Rate:} Market bid price utilized as base by authorized dealer.
@@ -91,15 +91,15 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{formulabox}
 
 \begin{formulabox}[Merchant Bill Buying Rate (Commercial Trade Bills)]
-\begin{equation}
+\begin{equation*}
     \text{Bill Buying Rate} = \text{Forward Buying Rate (for Transit)} - \text{Exchange Margin}
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     \text{Forward Buying Rate} = \begin{cases} 
         \text{Spot Bid} - \text{Forward Discount}, & \text{if at Discount} \\
         \text{Spot Bid}, & \text{if at Premium}
     \end{cases}
-\end{equation}
+\end{equation*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Forward Discount:} Forward discount margin deducted for the normal transit period.
@@ -109,9 +109,9 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{formulabox}
 
 \begin{formulabox}[Recovery of Interest on Commercial Bills Purchased]
-\begin{equation}
+\begin{equation*}
     \text{Interest on Bill} = \text{Rupee Amount} \times r \times \left[ \frac{\text{NTP} + \text{Usance}}{365} \right]
-\end{equation}
+\end{equation*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Rupee Amount:} Gross rupee value credited to exporter at the Bill Buying Rate.
@@ -122,9 +122,9 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{formulabox}
 
 \begin{formulabox}[Merchant TT Selling Rate (Outward Remittances)]
-\begin{equation}
+\begin{equation*}
     \text{TT Selling Rate} = \text{Interbank Spot Selling Rate (Ask)} + \text{Exchange Margin}
-\end{equation}
+\end{equation*}
 \textbf{Where:}
 \begin{itemize}[leftmargin=*, noitemsep]
     \item \textbf{Interbank Spot Selling Rate:} Market ask / offer rate at which bank covers in interbank tier.

@@ -201,8 +201,8 @@ Depending on the time elapsed between the transaction date ($T$) and the physica
         },
         badge/.style={
             circle, draw=#1, fill=white,
-            line width=1.3pt, font=\sffamily\bfseries\small,
-            text=#1, minimum size=0.9cm, inner sep=0pt
+            line width=1.5pt, font=\sffamily\bfseries\normalsize,
+            text=#1, minimum size=1.35cm, inner sep=0pt
         },
         settlebox/.style={
             rectangle, rounded corners=5pt,
@@ -213,37 +213,37 @@ Depending on the time elapsed between the transaction date ($T$) and the physica
         }
     ]
         % Horizontal Timeline Axis
-        \draw[timeline] (-7.2, 0) -- (7.5, 0);
+        \draw[timeline] (-7.4, 0) -- (7.6, 0);
 
-        % 4 Settlement Nodes
+        % 4 Settlement Nodes with enlarged circles and clear font
         \node[badge=navyblue] (b1) at (-5.4, 0) {$T+0$};
         \node[badge=darkteal] (b2) at (-1.8, 0) {$T+1$};
         \node[badge=amber!90!black] (b3) at (1.8, 0) {$T+2$};
         \node[badge=charcoal] (b4) at (5.4, 0) {$T>2$};
 
-        % Cards Placed Below
-        \node[settlebox, draw=navyblue] (c1) at (-5.4, -2.3) {
+        % Cards Placed Below at y = -2.6cm (giving ~0.53cm clean pin stem)
+        \node[settlebox, draw=navyblue] (c1) at (-5.4, -2.6) {
             {\color{navyblue}\textbf{\small 1. Ready / Cash}}\\[0.25em]
             \scriptsize $\bullet$ Value today ($T+0$)\\
             \scriptsize $\bullet$ Exchange of currencies occurs on the deal date\\
             \scriptsize $\bullet$ Immediate funds
         };
 
-        \node[settlebox, draw=darkteal] (c2) at (-1.8, -2.3) {
+        \node[settlebox, draw=darkteal] (c2) at (-1.8, -2.6) {
             {\color{darkteal}\textbf{\small 2. TOM Rate}}\\[0.25em]
             \scriptsize $\bullet$ Value tomorrow ($T+1$)\\
             \scriptsize $\bullet$ Exchange occurs next working day\\
             \scriptsize $\bullet$ 24-hour settlement
         };
 
-        \node[settlebox, draw=amber!90!black] (c3) at (1.8, -2.3) {
+        \node[settlebox, draw=amber!90!black] (c3) at (1.8, -2.6) {
             {\color{amber!90!black}\textbf{\small 3. SPOT Rate}}\\[0.25em]
             \scriptsize $\bullet$ Value spot ($T+2$)\\
             \scriptsize $\bullet$ Settled on 2nd working day post-deal\\
             \scriptsize $\bullet$ Global benchmark
         };
 
-        \node[settlebox, draw=charcoal] (c4) at (5.4, -2.3) {
+        \node[settlebox, draw=charcoal] (c4) at (5.4, -2.6) {
             {\color{charcoal}\textbf{\small 4. Forward Rate}}\\[0.25em]
             \scriptsize $\bullet$ Value forward ($T>2$)\\
             \scriptsize $\bullet$ Settled beyond 2 working days\\
@@ -251,10 +251,10 @@ Depending on the time elapsed between the transaction date ($T$) and the physica
         };
 
         % Pin Connectors
-        \draw[line width=1.3pt, draw=navyblue] (b1.south) -- (c1.north);
-        \draw[line width=1.3pt, draw=darkteal] (b2.south) -- (c2.north);
-        \draw[line width=1.3pt, draw=amber!90!black] (b3.south) -- (c3.north);
-        \draw[line width=1.3pt, draw=charcoal] (b4.south) -- (c4.north);
+        \draw[line width=1.4pt, draw=navyblue] (b1.south) -- (c1.north);
+        \draw[line width=1.4pt, draw=darkteal] (b2.south) -- (c2.north);
+        \draw[line width=1.4pt, draw=amber!90!black] (b3.south) -- (c3.north);
+        \draw[line width=1.4pt, draw=charcoal] (b4.south) -- (c4.north);
     \end{tikzpicture}%
     }
     \caption{Chronological Spectrum of Foreign Exchange Settlement Horizons}
@@ -344,6 +344,85 @@ Cross-border interbank settlements and foreign currency transfers rely on specia
     \item \textbf{Operational Scope:} Represents the largest private-sector payment clearing system in the world. It clears foreign exchange and cross-border US Dollar transactions.
     \item \textbf{Settlement Mechanism:} Daily electronic netting and settlement of payments and receipts without physical checks (purely paperless interbank settlement).
 \end{itemize}
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2.4: Mechanism for Settlement through CHIPS and SWIFT
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.98\textwidth}{!}{%
+    \begin{tikzpicture}[
+        bankcard/.style={
+            rectangle, rounded corners=4pt,
+            draw=navyblue, fill=lightgraybg,
+            font=\sffamily\bfseries\small, align=center,
+            text width=2.4cm, minimum height=1.5cm,
+            line width=0.9pt
+        },
+        correspcard/.style={
+            rectangle, rounded corners=4pt,
+            draw=darkteal, fill=softgreen,
+            font=\sffamily\bfseries\small, align=center,
+            text width=2.4cm, minimum height=1.5cm,
+            line width=0.9pt
+        },
+        settlecard/.style={
+            rectangle, rounded corners=4pt,
+            draw=charcoal, fill=white,
+            font=\sffamily\bfseries\small, align=center,
+            text width=2.4cm, minimum height=1.5cm,
+            line width=0.9pt
+        },
+        pillar/.style={
+            rectangle, rounded corners=4pt,
+            draw=#1, fill=#1!12,
+            font=\sffamily\bfseries\normalsize, align=center,
+            text=#1, minimum width=1.1cm, minimum height=4.2cm,
+            line width=1.1pt
+        },
+        flowarrow/.style={
+            -{Stealth[length=6.5pt, width=4.5pt]},
+            draw=navyblue, line width=1.3pt
+        }
+    ]
+        % Column 1: Indian Domestic Banks
+        \node[bankcard] (boi) at (-6.2, 1.4) {BANK OF\\INDIA};
+        \node[bankcard] (canara) at (-6.2, -1.4) {CANARA\\BANK};
+
+        % Column 2: SWIFT Vertical Pillar
+        \node[pillar=navyblue] (swift_pillar) at (-3.9, 0) {S\\[0.25em]W\\[0.25em]I\\[0.25em]F\\[0.25em]T};
+
+        % Column 3: US Correspondent Banks
+        \node[correspcard] (amex1) at (-1.6, 1.4) {AMEX\\BANK};
+        \node[correspcard] (citi1) at (-1.6, -1.4) {CITI\\BANK};
+
+        % Column 4: CHIPS Vertical Pillar
+        \node[pillar=darkteal] (chips_pillar) at (0.7, 0) {C\\[0.25em]H\\[0.25em]I\\[0.25em]P\\[0.25em]S};
+
+        % Column 5: FEDWIRE Vertical Pillar
+        \node[pillar=amber!90!black] (fedwire_pillar) at (3.0, 0) {F\\[0.15em]E\\[0.15em]D\\[0.15em]W\\[0.15em]I\\[0.15em]R\\[0.15em]E};
+
+        % Column 6: New York Fed Settlement Accounts
+        \node[settlecard] (amex2) at (5.5, 1.4) {AMEX\\BANK};
+        \node[settlecard] (citi2) at (5.5, -1.4) {CITI\\BANK};
+
+        % Forward / Top Flow Connectors (Payment Initiation)
+        \draw[flowarrow] (boi.east) -- (boi.east -| swift_pillar.west);
+        \draw[flowarrow] (swift_pillar.east |- amex1.west) -- (amex1.west);
+        \draw[flowarrow] (amex1.east) -- (amex1.east -| chips_pillar.west);
+        \draw[flowarrow] (chips_pillar.east) -- (fedwire_pillar.west);
+        \draw[flowarrow] (fedwire_pillar.east |- amex2.west) -- (amex2.west);
+
+        % Return / Bottom Flow Connectors (Settlement & Realization)
+        \draw[flowarrow, draw=darkteal] (citi2.west) -- (citi2.west -| fedwire_pillar.east);
+        \draw[flowarrow, draw=darkteal] (chips_pillar.west |- citi1.east) -- (citi1.east);
+        \draw[flowarrow, draw=darkteal] (citi1.west) -- (citi1.west -| swift_pillar.east);
+        \draw[flowarrow, draw=darkteal] (swift_pillar.west |- canara.east) -- (canara.east);
+    \end{tikzpicture}%
+    }
+    \caption{Operational Mechanism for Cross-Border Settlement through CHIPS, SWIFT, and Fedwire}
+    \label{fig:chips_settlement_mechanism}
+\end{figure}
 
 % ==============================================================================
 % Lecture 11: 17/09/2026 & 18/09/2026
@@ -483,8 +562,8 @@ Merchant rates are the retail foreign exchange rates quoted by authorized dealer
             \footnotesize\normalfont Retail Quotes Derived from Interbank Base Rates $\bullet$ Nearest Multiple of 0.0025 Rounding
         };
 
-        % Left Pillar: Buying Rates
-        \node[pillarbox, draw=darkteal, fill=softgreen] (buy) at (-3.4, -3.0) {
+        % Left Pillar: Buying Rates placed lower at y = -3.7cm for generous vertical stem
+        \node[pillarbox, draw=darkteal, fill=softgreen] (buy) at (-3.4, -3.7) {
             {\color{darkteal}\textbf{\normalsize 1. Merchant Buying Rates}}\\[0.3em]
             \scriptsize $\bullet$ \textbf{Bank Buys FX} (Pays INR to Customer)\\
             \scriptsize $\bullet$ \textbf{Base:} Interbank Bid Rate\\
@@ -494,8 +573,8 @@ Merchant rates are the retail foreign exchange rates quoted by authorized dealer
             \scriptsize \quad -- \textbf{Bill Buying Rate:} Commercial trade bills
         };
 
-        % Right Pillar: Selling Rates
-        \node[pillarbox, draw=amber!90!black, fill=softamber] (sell) at (3.4, -3.0) {
+        % Right Pillar: Selling Rates placed lower at y = -3.7cm
+        \node[pillarbox, draw=amber!90!black, fill=softamber] (sell) at (3.4, -3.7) {
             {\color{amber!90!black}\textbf{\normalsize 2. Merchant Selling Rates}}\\[0.3em]
             \scriptsize $\bullet$ \textbf{Bank Sells FX} (Receives INR from Customer)\\
             \scriptsize $\bullet$ \textbf{Base:} Interbank Ask Rate\\
@@ -505,9 +584,9 @@ Merchant rates are the retail foreign exchange rates quoted by authorized dealer
             \scriptsize \quad -- \textbf{Bill Selling Rate:} Import bill payments
         };
 
-        % Connectors
-        \draw[flowline] (root.south -| buy.north) -- (buy.north);
-        \draw[flowline] (root.south -| sell.north) -- (sell.north);
+        % High-Contrast, Prominent Downward Arrows with generous 1.15cm stem clearance
+        \draw[-{Stealth[length=7pt, width=5pt]}, line width=1.5pt, draw=darkteal] (root.south -| buy.north) -- (buy.north);
+        \draw[-{Stealth[length=7pt, width=5pt]}, line width=1.5pt, draw=amber!90!black] (root.south -| sell.north) -- (sell.north);
     \end{tikzpicture}%
     }
     \caption{The FEDAI Merchant Exchange Rate Quotation Architecture}
