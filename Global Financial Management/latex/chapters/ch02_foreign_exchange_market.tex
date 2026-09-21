@@ -1,0 +1,676 @@
+\chapter{The Foreign Exchange Market}
+\label{ch:foreign_exchange_market}
+
+% ==============================================================================
+% Lecture 8 (Part B): 07/09/2026
+% ==============================================================================
+\section{Structure and Participants of the Foreign Exchange Market}
+\lecturedate{07/09/2026}
+
+\begin{definition}{Foreign Exchange Market}{def_forex_market}
+The \textbf{Foreign Exchange (Forex) Market} is the global organizational and institutional framework where the currency of one country is exchanged for the currency of another country.
+\end{definition}
+
+\noindent In the foreign exchange market, currencies are quoted against a single base unit of another currency (e.g., $1\,\text{USD} = 95.88\,\text{INR}$). The market operates on a continuous, decentralized over-the-counter (OTC) basis across global financial centers.
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2.1: Two-Tier Structure and Participants
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        tierbox/.style={
+            rectangle, rounded corners=6pt,
+            draw=navyblue, fill=softblue,
+            line width=1.2pt, text=navyblue,
+            font=\bfseries\sffamily, align=center,
+            inner sep=8pt, text width=13.0cm, minimum height=1.3cm
+        },
+        partbox/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!70, fill=lightgraybg,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=7pt,
+            text width=5.8cm, minimum height=2.4cm
+        },
+        flowline/.style={
+            -{Stealth[length=6pt, width=4pt]},
+            draw=navyblue!80, line width=1.2pt
+        }
+    ]
+        % Tier 1: Wholesale / Interbank Tier
+        \node[tierbox] (tier1) at (0, 0) {
+            {\large Wholesale / Interbank Market}\\[0.2em]
+            \footnotesize\normalfont High-Volume Currency Transactions $\bullet$ Market Makers \& Sovereign Authorities
+        };
+
+        % Participants Tier 1
+        \node[partbox, draw=navyblue] (p1) at (-3.4, -2.6) {
+            {\color{navyblue}\textbf{\small 1. Commercial \& Central Banks}}\\[0.3em]
+            \scriptsize $\bullet$ Market makers quoting two-way rates\\
+            \scriptsize $\bullet$ Central banks managing currency stability\\
+            \scriptsize $\bullet$ Liquidity and reserve intervention
+        };
+
+        \node[partbox, draw=darkteal] (p2) at (3.4, -2.6) {
+            {\color{darkteal}\textbf{\small 2. Wholesale Foreign Exchange Brokers}}\\[0.3em]
+            \scriptsize $\bullet$ Intermediaries matching interbank orders\\
+            \scriptsize $\bullet$ Provide market anonymity and speed\\
+            \scriptsize $\bullet$ Earn brokerage commission on deals
+        };
+
+        % Tier 2: Retail / Merchant Tier
+        \node[tierbox, draw=amber!90!black, fill=softamber, text=amber!90!black] (tier2) at (0, -5.2) {
+            {\large Retail / Merchant Market}\\[0.2em]
+            \footnotesize\normalfont Customer Transactions with Authorized Dealer Commercial Banks
+        };
+
+        % Participants Tier 2
+        \node[partbox, draw=amber!90!black] (p3) at (-3.4, -7.8) {
+            {\color{amber!90!black}\textbf{\small 3. Exporters and Importers}}\\[0.3em]
+            \scriptsize $\bullet$ International trade settlement\\
+            \scriptsize $\bullet$ Convert foreign export earnings\\
+            \scriptsize $\bullet$ Procure foreign exchange for imports
+        };
+
+        \node[partbox, draw=charcoal] (p4) at (3.4, -7.8) {
+            {\color{charcoal}\textbf{\small 4. Multinational Corporations}}\\[0.3em]
+            \scriptsize $\bullet$ Cross-border capital budgeting and FDI\\
+            \scriptsize $\bullet$ Hedging foreign cash flow exposure\\
+            \scriptsize $\bullet$ Global liquidity and cash pooling
+        };
+
+        % Connectors
+        \draw[flowline] (tier1.south -| p1.north) -- (p1.north);
+        \draw[flowline] (tier1.south -| p2.north) -- (p2.north);
+        \draw[flowline] (p1.south) -- (p1.south |- tier2.north);
+        \draw[flowline] (p2.south) -- (p2.south |- tier2.north);
+        \draw[flowline] (tier2.south -| p3.north) -- (p3.north);
+        \draw[flowline] (tier2.south -| p4.north) -- (p4.north);
+    \end{tikzpicture}%
+    }
+    \caption{Architecture and Core Participants of the Foreign Exchange Market}
+    \label{fig:forex_market_structure}
+\end{figure}
+
+\subsection{Core Market Participants}
+The foreign exchange market operates through four constituent participant categories:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Commercial Banks and Central Banks:} Authorized dealer commercial banks serve as market makers by quoting two-way prices (bid and ask). Central banks participate to execute sovereign monetary policy, hold national reserves, and stabilize volatile domestic exchange rates.
+    \item \textbf{Wholesale Foreign Exchange Brokers:} Intermediaries operating between commercial banks in the interbank tier, matching buy and sell orders rapidly while preserving market anonymity.
+    \item \textbf{Exporters and Importers:} Commercial entities requiring foreign exchange conversion to settle merchandise and service trade transactions across international borders.
+    \item \textbf{Multinational Corporations (Corporates):} Global enterprises transferring capital across jurisdictions for direct investment, cross-border dividend repatriation, and liquidity hedging.
+\end{enumerate}
+
+% ==============================================================================
+% Lecture 9: 15/09/2026
+% ==============================================================================
+\section{Foreign Exchange Quotation Mechanics and Settlement Horizons}
+\lecturedate{15/09/2026}
+
+\begin{definition}{Foreign Exchange Quotation}{def_quotation}
+A \textbf{Foreign Exchange Quotation} is the price of one currency expressed in units of another currency.
+\end{definition}
+
+\subsection{Delivery Horizons: Spot vs. Forward Rates}
+Foreign exchange rates are quoted depending on the scheduled delivery date of the underlying currencies:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Spot Rate:} The exchange rate quoted for immediate delivery and settlement of currencies. In international banking practice, spot delivery is settled \textbf{two working days} after the date of the deal ($T+2$).
+    \item \textbf{Forward Rate:} The exchange rate agreed upon today for the exchange of currencies at a specified future date (exceeding two working days from the transaction date).
+\end{itemize}
+
+\subsection{Types of Exchange Rate Quotations}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Direct Quotation (Home Currency Quotation):} Expresses the price of \textbf{one unit of foreign currency} in terms of variable units of home currency.
+    \begin{equation}
+        \text{Home Currency (Variable)} = 1 \text{ Unit of Foreign Currency (Fixed)}
+    \end{equation}
+    \textit{Example in India:} $95.88\,\text{INR} = 1\,\text{USD}$ represents a direct quotation for the US Dollar in India.
+    
+    \item \textbf{Indirect Quotation (Foreign Currency Quotation):} Keeps the home currency fixed at \textbf{one unit} and expresses the exchange rate as variable units of foreign currency.
+    \begin{equation}
+        1 \text{ Unit of Home Currency (Fixed)} = \text{Foreign Currency (Variable)}
+    \end{equation}
+    \textit{Example:} $1\,\text{USD} = 0.87\,\text{EUR}$ represents an indirect quotation from the US domestic perspective.
+\end{enumerate}
+
+\subsection{Bid-Ask Spread and Percentage Spread}
+Foreign exchange quotes consist of a two-way price quoted by market makers:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Bid Price:} The price at which the bank/market maker is willing to \textbf{buy} foreign currency.
+    \item \textbf{Ask Price (Offer):} The price at which the bank/market maker is willing to \textbf{sell} foreign currency.
+    \item \textbf{Spread:} The gross margin earned by the quoting dealer:
+    \begin{equation}
+        \text{Spread} = \text{Ask Price} - \text{Bid Price}
+    \end{equation}
+    \item \textbf{Percentage Spread:} The proportional transaction cost relative to the asking price:
+    \begin{equation}
+        \text{Percentage Spread (\%)} = \frac{\text{Ask Price} - \text{Bid Price}}{\text{Ask Price}} \times 100
+    \end{equation}
+\end{itemize}
+
+\begin{example}{Bid-Ask Spread Calculation}{ex_bid_ask_spread}
+\textbf{Problem Statement:}\\
+In the interbank foreign exchange market, the US Dollar is quoted as:
+\begin{equation*}
+    1\,\text{USD} = \text{Rs. } 95.0000 - 95.0050
+\end{equation*}
+Calculate the absolute spread and the percentage spread for this quotation.
+
+\tcblower
+\textbf{Solution:}\\
+From the quotation:
+\begin{align*}
+    \text{Bid Price} &= \text{Rs. } 95.0000 \\
+    \text{Ask Price} &= \text{Rs. } 95.0050
+\end{align*}
+
+\noindent\textbf{1. Absolute Spread:}
+\begin{equation*}
+    \text{Spread} = \text{Ask} - \text{Bid} = 95.0050 - 95.0000 = \text{Rs. } 0.0050
+\end{equation*}
+
+\noindent\textbf{2. Percentage Spread:}
+\begin{align*}
+    \text{Percentage Spread} &= \frac{\text{Ask} - \text{Bid}}{\text{Ask}} \times 100 \\[0.3em]
+    &= \frac{0.0050}{95.0050} \times 100 = 0.00526\%
+\end{align*}
+\textit{Note:} If the quotation were $95.0000 - 95.0140$, the absolute spread would be $0.0140$, yielding a percentage spread of approximately $0.014\%$.
+\end{example}
+
+\subsection{Cross Rates}
+\begin{definition}{Cross Rate}{def_cross_rate}
+A \textbf{Cross Rate} is the exchange rate between two non-home currencies, derived through their respective exchange rates against a common vehicle currency (typically the US Dollar).
+\end{definition}
+\noindent\textit{Example:} In the Indian market where INR is the domestic currency, quotes for $\text{EUR}/\text{USD}$, $\text{GBP}/\text{USD}$, or $\text{JPY}/\text{CNY}$ represent cross-rate transactions.
+
+\subsection{Settlement Horizons}
+Depending on the time elapsed between the transaction date ($T$) and the physical settlement date, deals are categorized into four standard settlement horizons:
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2.2: Settlement Horizons Timeline
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.98\textwidth}{!}{%
+    \begin{tikzpicture}[
+        timeline/.style={
+            -{Stealth[length=7pt, width=5pt]},
+            draw=navyblue, line width=1.5pt
+        },
+        badge/.style={
+            circle, draw=#1, fill=white,
+            line width=1.3pt, font=\sffamily\bfseries\small,
+            text=#1, minimum size=0.9cm, inner sep=0pt
+        },
+        settlebox/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!70, fill=lightgraybg,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=6pt,
+            text width=3.1cm, minimum height=2.8cm
+        }
+    ]
+        % Horizontal Timeline Axis
+        \draw[timeline] (-7.2, 0) -- (7.5, 0);
+
+        % 4 Settlement Nodes
+        \node[badge=navyblue] (b1) at (-5.4, 0) {$T+0$};
+        \node[badge=darkteal] (b2) at (-1.8, 0) {$T+1$};
+        \node[badge=amber!90!black] (b3) at (1.8, 0) {$T+2$};
+        \node[badge=charcoal] (b4) at (5.4, 0) {$T>2$};
+
+        % Cards Placed Below
+        \node[settlebox, draw=navyblue] (c1) at (-5.4, -2.3) {
+            {\color{navyblue}\textbf{\small 1. Ready / Cash}}\\[0.25em]
+            \scriptsize $\bullet$ Value today ($T+0$)\\
+            \scriptsize $\bullet$ Exchange of currencies occurs on the deal date\\
+            \scriptsize $\bullet$ Immediate funds
+        };
+
+        \node[settlebox, draw=darkteal] (c2) at (-1.8, -2.3) {
+            {\color{darkteal}\textbf{\small 2. TOM Rate}}\\[0.25em]
+            \scriptsize $\bullet$ Value tomorrow ($T+1$)\\
+            \scriptsize $\bullet$ Exchange occurs next working day\\
+            \scriptsize $\bullet$ 24-hour settlement
+        };
+
+        \node[settlebox, draw=amber!90!black] (c3) at (1.8, -2.3) {
+            {\color{amber!90!black}\textbf{\small 3. SPOT Rate}}\\[0.25em]
+            \scriptsize $\bullet$ Value spot ($T+2$)\\
+            \scriptsize $\bullet$ Settled on 2nd working day post-deal\\
+            \scriptsize $\bullet$ Global benchmark
+        };
+
+        \node[settlebox, draw=charcoal] (c4) at (5.4, -2.3) {
+            {\color{charcoal}\textbf{\small 4. Forward Rate}}\\[0.25em]
+            \scriptsize $\bullet$ Value forward ($T>2$)\\
+            \scriptsize $\bullet$ Settled beyond 2 working days\\
+            \scriptsize $\bullet$ Hedging horizon
+        };
+
+        % Pin Connectors
+        \draw[line width=1.3pt, draw=navyblue] (b1.south) -- (c1.north);
+        \draw[line width=1.3pt, draw=darkteal] (b2.south) -- (c2.north);
+        \draw[line width=1.3pt, draw=amber!90!black] (b3.south) -- (c3.north);
+        \draw[line width=1.3pt, draw=charcoal] (b4.south) -- (c4.north);
+    \end{tikzpicture}%
+    }
+    \caption{Chronological Spectrum of Foreign Exchange Settlement Horizons}
+    \label{fig:settlement_horizons}
+\end{figure}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Cash / Ready Rate ($T+0$):} Settlement and physical delivery of the currencies occur on the very date of the deal.
+    \item \textbf{TOM Rate ($T+1$):} Settlement takes place on the next immediate working day following the deal date.
+    \item \textbf{SPOT Rate ($T+2$):} Standard interbank convention where the exchange of currencies occurs on the second working day after the deal date.
+    \item \textbf{Forward Rate ($T > 2$):} Delivery of currencies occurs at an agreed future date beyond two working days.
+\end{enumerate}
+
+% ==============================================================================
+% Lecture 10: 16/09/2026
+% ==============================================================================
+\section{International Payment and Financial Telecommunication Systems}
+\lecturedate{16/09/2026}
+
+Cross-border interbank settlements and foreign currency transfers rely on specialized international telecommunications and multilateral clearing systems.
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2.3: SWIFT vs CHIPS Architecture
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        instbox/.style={
+            rectangle, rounded corners=6pt,
+            line width=1pt, font=\sffamily,
+            align=left, inner sep=9pt,
+            text width=6.6cm, minimum height=4.5cm
+        }
+    ]
+        % Left Card: SWIFT
+        \node[instbox, draw=navyblue, fill=softblue] (swift) at (-3.8, 0) {
+            {\color{navyblue}\textbf{\normalsize SWIFT (Est. Brussels)}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Nature:} Financial messaging cooperative\\
+            \scriptsize $\bullet$ \textbf{Ownership:} Owned by $>250$ international banks\\
+            \scriptsize $\bullet$ \textbf{Network:} Connects $>25,000$ institutions globally\\
+            \scriptsize $\bullet$ \textbf{Function:} Authenticated financial transmission\\
+            \scriptsize $\bullet$ \textbf{Identifier:} Bank Identifier Codes (BIC)\\
+            \scriptsize $\bullet$ \textbf{India Hub:} Regional Processing Centre in Mumbai
+        };
+
+        % Right Card: CHIPS
+        \node[instbox, draw=darkteal, fill=softgreen] (chips) at (3.8, 0) {
+            {\color{darkteal}\textbf{\normalsize CHIPS (Est. 1971, New York)}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Nature:} Multilateral electronic clearing system\\
+            \scriptsize $\bullet$ \textbf{Founders:} 12 NY Clearing House commercial banks\\
+            \scriptsize $\bullet$ \textbf{Scale:} World's largest private USD clearing system\\
+            \scriptsize $\bullet$ \textbf{Function:} Daily electronic netting and settlement\\
+            \scriptsize $\bullet$ \textbf{Paperless:} 100\% electronic (zero physical checks)\\
+            \scriptsize $\bullet$ \textbf{Coverage:} Foreign exchange and USD cross-border flows
+        };
+    \end{tikzpicture}%
+    }
+    \caption{Institutional Comparison: SWIFT (Messaging) vs. CHIPS (Clearing \& Settlement)}
+    \label{fig:swift_vs_chips}
+\end{figure}
+
+\subsection{SWIFT (Society for Worldwide Interbank Financial Telecommunication)}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Organizational Nature:} A bank-owned cooperative society registered in \textbf{Brussels, Belgium}.
+    \item \textbf{Ownership \& Scope:} Formed by 250 member banks in Europe and North America; links more than \textbf{25,000 financial institutions} worldwide.
+    \item \textbf{Bank Identifier Codes (BIC):} Allots standardized identification codes (SWIFT/BIC codes) to each financial institution for routing.
+    \item \textbf{Services:}
+    \begin{itemize}[noitemsep]
+        \item International payment instructions.
+        \item Account statements from SWIFT.
+        \item Specialized administrative and trade finance messages.
+    \end{itemize}
+    \item \textbf{Indian Operations:} The primary regional processing center for India is situated in \textbf{Mumbai}.
+    \item \textbf{Key Operational Advantages:}
+    \begin{enumerate}[noitemsep]
+        \item Provides a reliable, secure method of transmitting messages across vast global locations.
+        \item Guarantees high accuracy and cryptographic authentication.
+        \item Enables counterparties to respond and process payments immediately.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{CHIPS (Clearing House Interbank Payments System)}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Organizational Nature:} A computerized electronic payment system owned by commercial banks constituting the \textbf{New York Clearing House Association}.
+    \item \textbf{Historical Commencement:} Began operations in \textbf{1971}.
+    \item \textbf{Operational Scope:} Represents the largest private-sector payment clearing system in the world. It clears foreign exchange and cross-border US Dollar transactions.
+    \item \textbf{Settlement Mechanism:} Daily electronic netting and settlement of payments and receipts without physical checks (purely paperless interbank settlement).
+\end{itemize}
+
+% ==============================================================================
+% Lecture 11: 17/09/2026 & 18/09/2026
+% ==============================================================================
+\section{Market Terminologies, Margins, and Transaction Classifications}
+\lecturedate{17/09/2026}
+
+\subsection{Key Market Terminologies}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Market Maker:} Major commercial banks that stand ready to buy and sell currencies at publicly quoted prices, providing two-way market liquidity.
+    \item \textbf{Two-Way Quotation:} A quotation indicating two distinct prices:
+    \begin{itemize}[noitemsep]
+        \item Price at which the market maker is willing to \textbf{buy} foreign currency (Bid).
+        \item Price at which the market maker is willing to \textbf{sell} foreign currency (Ask).
+    \end{itemize}
+    \item \textbf{Forward Margin / SWAP Points:} The difference between the forward exchange rate and the spot exchange rate.
+    \item \textbf{Forward Premium:} Occurs when foreign currency is costlier under the forward rate than under the spot rate ($\text{Forward Rate} > \text{Spot Rate}$).
+    \item \textbf{Forward Discount:} Occurs when foreign currency is cheaper for forward delivery than for spot delivery ($\text{Forward Rate} < \text{Spot Rate}$).
+    \item \textbf{Base Rate:} The ongoing interbank exchange rate on the basis of which commercial banks calculate merchant customer rates.
+\end{itemize}
+
+\subsection{Golden Rules: The Banker's Perspective}
+When analyzing any foreign exchange transaction, two fundamental principles must be strictly observed:
+\begin{formulabox}[The Two Foundational Principles of Foreign Exchange Accounting]
+\begin{enumerate}[leftmargin=*, noitemsep]
+    \item \textbf{Banker's Point of View:} All transactions are designated strictly from the perspective of the \textbf{bank}, not the customer.
+    \item \textbf{Underlying Asset:} The item being bought or sold is always the \textbf{Foreign Currency}.
+\end{enumerate}
+\end{formulabox}
+
+\noindent Consequently, transactions are classified as:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Purchase Transaction:} The bank has \textbf{purchased foreign currency} (the bank receives foreign currency and pays home currency/INR to the customer).
+    \item \textbf{Sale Transaction:} The bank has \textbf{sold foreign currency} (the bank parts with foreign currency and receives home currency/INR from the customer).
+\end{itemize}
+
+\lecturedate{18/09/2026}
+\begin{example}{Classification of Foreign Exchange Transactions}{ex_purchase_sale}
+\textbf{Problem Statement:}\\
+Based on the banker's perspective, determine whether each of the following transactions constitutes a \textbf{Purchase} or a \textbf{Sale} of foreign exchange:
+\begin{enumerate}[leftmargin=*]
+    \item The bank issues a Demand Draft (DD) on London for $100\,\text{EUR}$.
+    \item A customer of the bank purchases a Telegraphic Transfer (TT) on New York for $500\,\text{EUR}$.
+    \item A traveller encashes a traveller's cheque for $50\,\text{EUR}$ at the bank counter.
+    \item The bank purchases a Demand Draft (DD) drawn on London for $500\,\text{EUR}$.
+\end{enumerate}
+
+\tcblower
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Sale of Foreign Exchange:} In issuing a DD on London, the bank sells foreign currency ($100\,\text{EUR}$) to the customer and receives rupees.
+    \item \textbf{Sale of Foreign Exchange:} By executing a TT remittance to New York, the bank parts with foreign currency ($500\,\text{EUR}$) and receives rupees from the remitter.
+    \item \textbf{Purchase of Foreign Exchange:} When encashing the traveller's cheque, the bank acquires/buys foreign currency ($50\,\text{EUR}$) and pays equivalent rupees to the traveller.
+    \item \textbf{Purchase of Foreign Exchange:} By purchasing a draft drawn on London, the bank buys foreign currency ($500\,\text{EUR}$) from the presenter.
+\end{enumerate}
+\end{example}
+
+\subsection{Calculation of Forward Rates under Direct Quotation}
+In the interbank market, forward margins are quoted as points:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Ascending Order Margins $\implies$ Premium:} If forward margins are quoted in ascending order (e.g., $0.2000 / 0.2100$), foreign currency is at a \textbf{premium}. Margins are \textbf{added} to the spot rate:
+    \begin{equation}
+        \text{Forward Rate} = \text{Spot Rate} + \text{Forward Premium}
+    \end{equation}
+    \item \textbf{Descending Order Margins $\implies$ Discount:} If forward margins are quoted in descending order (e.g., $0.6000 / 0.5700$), foreign currency is at a \textbf{discount}. Margins are \textbf{deducted} from the spot rate:
+    \begin{equation}
+        \text{Forward Rate} = \text{Spot Rate} - \text{Forward Discount}
+    \end{equation}
+\end{itemize}
+
+\begin{example}{Determining Forward Margins via Covered Interest Parity}{ex_cip_forward}
+\textbf{Problem Statement:}\\
+The spot rate for US Dollars in the Mumbai interbank market is $1\,\text{USD} = 95\,\text{INR}$. The annual rate of interest in India is $8\%$ p.a., while in New York it is $5\%$ p.a. A bank is asked to quote a three-month selling rate to a customer for $10,000\,\text{USD}$, assuming the entire interest differential gain or loss is passed on to the customer. Calculate the theoretical forward rate and forward premium.
+
+\tcblower
+\textbf{Solution:}\\
+Given:
+\begin{align*}
+    S &= 95\,\text{INR/USD}, \quad r_{\text{INR}} = 8\% = 0.08, \quad r_{\text{USD}} = 5\% = 0.05, \quad t = \frac{3}{12} = 0.25\,\text{years}
+\end{align*}
+
+\noindent\textbf{1. Exact Covered Interest Parity Formula:}
+\begin{equation*}
+    F = S \times \left[ \frac{1 + r_{\text{INR}} \times t}{1 + r_{\text{USD}} \times t} \right] = 95 \times \left[ \frac{1 + (0.08 \times 0.25)}{1 + (0.05 \times 0.25)} \right] = 95 \times \frac{1.0200}{1.0125} = 95.7037\,\text{INR}
+\end{equation*}
+
+\noindent\textbf{2. Linear Interest Differential Approximation:}
+\begin{align*}
+    F_{\text{linear}} &\approx S \times [1 + (r_{\text{INR}} - r_{\text{USD}}) \times t] \\[0.3em]
+    &= 95 \times [1 + (0.08 - 0.05) \times 0.25] = 95 \times 1.0075 = \textbf{95.7125\,INR}
+\end{align*}
+
+\noindent\textbf{3. Forward Premium Difference:}
+\begin{equation*}
+    \Delta = 95.7125 - 95.7037 = 0.0088\,\text{INR}
+\end{equation*}
+Under the forward quotation of $95.7125\,\text{INR}$, the customer pays rupees to receive USD. For a transaction involving $10,000\,\text{USD}$, the rupee cash flow reflects the underlying forward valuation.
+\end{example}
+
+% ==============================================================================
+% Lecture 12: 18/09/2026 & 21/09/2026
+% ==============================================================================
+\section{Indian Merchant Rates: Buying Rates and Mechanics}
+\lecturedate{18/09/2026}
+
+Merchant rates are the retail foreign exchange rates quoted by authorized dealer commercial banks to their corporate and individual customers, calculated from ongoing interbank rates as prescribed by FEDAI (Foreign Exchange Dealers' Association of India).
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2.4: FEDAI Merchant Rates Framework
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        rootbox/.style={
+            rectangle, rounded corners=6pt,
+            draw=navyblue, fill=softblue,
+            line width=1.2pt, text=navyblue,
+            font=\bfseries\sffamily, align=center,
+            inner sep=8pt, text width=13.0cm, minimum height=1.3cm
+        },
+        pillarbox/.style={
+            rectangle, rounded corners=5pt,
+            draw=charcoal!70, fill=white,
+            line width=0.9pt, font=\sffamily,
+            align=left, inner sep=7pt,
+            text width=5.8cm, minimum height=3.5cm
+        },
+        flowline/.style={
+            -{Stealth[length=6pt, width=4pt]},
+            draw=navyblue!80, line width=1.2pt
+        }
+    ]
+        % Top Root Node
+        \node[rootbox] (root) at (0, 0) {
+            {\large Indian Merchant Rates Framework (FEDAI Rules)}\\[0.2em]
+            \footnotesize\normalfont Retail Quotes Derived from Interbank Base Rates $\bullet$ Nearest Multiple of 0.0025 Rounding
+        };
+
+        % Left Pillar: Buying Rates
+        \node[pillarbox, draw=darkteal, fill=softgreen] (buy) at (-3.4, -3.0) {
+            {\color{darkteal}\textbf{\normalsize 1. Merchant Buying Rates}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Bank Buys FX} (Pays INR to Customer)\\
+            \scriptsize $\bullet$ \textbf{Base:} Interbank Bid Rate\\
+            \scriptsize $\bullet$ \textbf{Exchange Margin:} \textbf{Deducted} from base\\
+            \scriptsize $\bullet$ \textbf{Two Tiers:}\\
+            \scriptsize \quad -- \textbf{TT Buying Rate:} Clean inflows, DD/MT/TT\\
+            \scriptsize \quad -- \textbf{Bill Buying Rate:} Commercial trade bills
+        };
+
+        % Right Pillar: Selling Rates
+        \node[pillarbox, draw=amber!90!black, fill=softamber] (sell) at (3.4, -3.0) {
+            {\color{amber!90!black}\textbf{\normalsize 2. Merchant Selling Rates}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Bank Sells FX} (Receives INR from Customer)\\
+            \scriptsize $\bullet$ \textbf{Base:} Interbank Ask Rate\\
+            \scriptsize $\bullet$ \textbf{Exchange Margin:} \textbf{Added} to base\\
+            \scriptsize $\bullet$ \textbf{Two Tiers:}\\
+            \scriptsize \quad -- \textbf{TT Selling Rate:} DD/MT/TT remittances\\
+            \scriptsize \quad -- \textbf{Bill Selling Rate:} Import bill payments
+        };
+
+        % Connectors
+        \draw[flowline] (root.south -| buy.north) -- (buy.north);
+        \draw[flowline] (root.south -| sell.north) -- (sell.north);
+    \end{tikzpicture}%
+    }
+    \caption{The FEDAI Merchant Exchange Rate Quotation Architecture}
+    \label{fig:fedai_merchant_rates}
+\end{figure}
+
+\subsection{Classification of Buying Rates}
+Authorized dealers in India quote two standard types of buying rates:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Telegraphic Transfer (TT) Buying Rate:} Applied when the transaction does not involve any delay in the bank obtaining reimbursement in foreign currency.
+    \item \textbf{Bill Buying Rate:} Applied when the bank purchases or discounts clean or documentary commercial trade bills.
+\end{enumerate}
+
+\subsection{TT Buying Rate Mechanics}
+The TT Buying Rate is applied in three distinct operational situations:
+\begin{enumerate}[leftmargin=*]
+    \item Payment of foreign Demand Drafts (DD), Mail Transfers (MT), and Telegraphic Transfers (TT) drawn on the quoting bank.
+    \item Payment of proceeds of foreign export bills sent for collection, after realization overseas.
+    \item Cancellation of foreign exchange forward sale contracts entered earlier with the customer.
+\end{enumerate}
+
+\noindent\textbf{Quotation Format and FEDAI Rounding Rule:}
+\begin{equation}
+    \text{TT Buying Rate} = \text{Interbank Spot Buying Rate (Bid)} - \text{Exchange Margin}
+\end{equation}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item The exchange margin is \textbf{deducted} because the bank pays fewer rupees to maximize its spread when buying foreign currency.
+    \item \textbf{Rounding Convention:} In India, all merchant exchange rates must be rounded off to the \textbf{nearest multiple of 0.0025}.
+\end{itemize}
+
+\begin{example}{Calculation of TT Buying Rate (Mail Transfer)}{ex_tt_buying}
+\textbf{Problem Statement:}\\
+On 15th September, you receive a Mail Transfer (MT) from your New York correspondent for $5,000\,\text{USD}$ payable to your customer. Your account with the correspondent bank has been credited with the amount of the mail transfer. The Rupee/Dollar quotes in the local interbank market are:
+\begin{align*}
+    \text{SPOT} \quad 1\,\text{USD} &= \text{Rs. } 95.7600 / 7900 \\
+    \text{SPOT / October} &= 0.5600 / 0.5700
+\end{align*}
+Calculate the exchange rate quoted to the customer and the rupee amount payable, given that you require an exchange margin of $0.080\%$ ($0.080$ per 100) to be loaded into the rate, rounded to the nearest multiple of $0.0025$.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Applicable Rate Determination:}\\
+Since reimbursement has already been credited to the bank's account overseas, the applicable rate is the \textbf{TT Buying Rate}.
+
+\noindent\textbf{2. Step-by-Step Rate Calculation:}
+\begin{align*}
+    \text{Interbank Spot Buying Rate (Bid)} &= \text{Rs. } 95.7600 \\
+    \text{Less: Exchange Margin } (0.080\%) = 95.7600 \times 0.00080 &= \text{Rs. } 0.0766 \\
+    \hline
+    \text{Subtotal} &= \text{Rs. } 95.6834 \\
+    \text{Rounded off to nearest multiple of } 0.0025 &= \textbf{Rs. } 95.6800
+\end{align*}
+
+\noindent\textbf{3. Rupee Amount Payable to Customer:}
+\begin{equation*}
+    \text{Rupee Amount} = 5,000\,\text{USD} \times 95.6800 = \textbf{Rs. } 4,78,400
+\end{equation*}
+\end{example}
+
+\lecturedate{21/09/2026}
+\subsection{Bill Buying Rate Mechanics}
+The \textbf{Bill Buying Rate} applies when a bank purchases or discounts a foreign trade bill. Because the bank disburses funds to the domestic exporter immediately while foreign reimbursement will only occur after the normal transit period (and usance period, if applicable), the forward rate for the transit period is used:
+
+\begin{equation}
+    \text{Bill Buying Rate} = \text{Forward Buying Rate (for Transit)} - \text{Exchange Margin}
+\end{equation}
+
+\noindent\textbf{Forward Margin Treatment under FEDAI Rules:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Foreign Currency at a Premium (Ascending Margins):} The bank gives \textbf{no benefit} of forward premium to the customer and bases the quote on the Spot Rate.
+    \item \textbf{Foreign Currency at a Discount (Descending Margins):} The forward discount for the full transit period (or transit maturity month) is \textbf{deducted} from the spot buying rate.
+\end{itemize}
+
+\begin{example}{Calculation of Bill Buying Rate (Letter of Credit)}{ex_bill_buying}
+\textbf{Problem Statement:}\\
+On 25th July, your customer presents at-sight documents for $100,000\,\text{USD}$ under an irrevocable Letter of Credit (LC). The LC provides for reimbursement by the negotiating bank's own DD on the opening bank in New York. Interbank market rates in Mumbai are:
+\begin{align*}
+    \text{SPOT} \quad 1\,\text{USD} &= \text{Rs. } 95.6525 / 6675 \\
+    \text{SPOT / August} &= 0.6000 / 0.5700 \\
+    \text{SPOT / September} &= 1.0000 / 0.9700 \\
+    \text{SPOT / October} &= 1.4000 / 1.3900
+\end{align*}
+The normal transit period for the bill is 25 days. Calculate the exchange rate quoted to the customer and the rupee amount payable, assuming an exchange margin of $0.15\%$ is loaded into the rate.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Transit Date and Applicable Margin:}\\
+Transaction date is 25th July. Adding 25 days of transit:
+\begin{equation*}
+    \text{Due Date of Reimbursement} = 25\text{th July} + 25\text{ days} = 19\text{th August}
+\end{equation*}
+The reimbursement falls in the month of August. Because the forward margins are in descending order ($0.6000 / 0.5700$), the foreign currency is at a \textbf{discount}. The bank deducts the August forward discount ($0.6000$).
+
+\noindent\textbf{2. Step-by-Step Calculation:}
+\begin{align*}
+    \text{Interbank Spot Buying Rate (Bid)} &= \text{Rs. } 95.6525 \\
+    \text{Less: Forward Discount for August} &= \text{Rs. } 0.6000 \\
+    \hline
+    \text{Base Forward Rate} &= \text{Rs. } 95.0525 \\
+    \text{Less: Exchange Margin } (0.15\% \text{ of Spot } 95.6525) = 95.6525 \times 0.0015 &= \text{Rs. } 0.1435 \\
+    \hline
+    \text{Net Bill Buying Rate} &= \text{Rs. } 94.9090 \\
+    \text{Rounded off to nearest multiple of } 0.0025 &= \textbf{Rs. } 94.9100
+\end{align*}
+
+\noindent\textbf{3. Rupee Conversion Amount Payable to Customer:}
+\begin{equation*}
+    \text{Rupee Amount} = 100,000\,\text{USD} \times 94.9100 = \textbf{Rs. } 94,91,000
+\end{equation*}
+\end{example}
+
+\subsection{Recovery of Interest on Bills Purchased}
+When commercial banks purchase or discount bills from customers, they advance rupee funds immediately. The bank claims interest from the customer covering the period from the purchase date until actual foreign realization:
+\begin{equation}
+    \text{Interest on Bill} = \text{Rupee Amount} \times r \times \left[ \frac{\text{NTP} + \text{Usance}}{365} \right]
+\end{equation}
+\noindent where $r$ is the annual bank interest rate, $\text{NTP}$ is the Normal Transit Period in days, and $\text{Usance}$ is the usance duration of the bill in days.
+
+% ==============================================================================
+% Lecture 13: 21/09/2026
+% ==============================================================================
+\section{Indian Merchant Rates: Selling Rates and Mechanics}
+\lecturedate{21/09/2026}
+
+\subsection{Nature and Types of Selling Rates}
+When a commercial bank sells foreign exchange, it receives INR from the customer and parts with foreign currency by issuing an international payment instrument. Authorized dealers quote two standard types of selling rates:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{TT Selling Rate:} Applied for clean outward remittances (issue of Demand Drafts, Mail Transfers, and Telegraphic Transfers) and cancellation of foreign exchange forward purchase contracts entered earlier.
+    \item \textbf{Bill Selling Rate:} Applied for processing outward commercial import bills and clean import documentary collection payments.
+\end{enumerate}
+
+\subsection{TT Selling Rate Mechanics}
+The TT Selling Rate is calculated on the basis of the ongoing interbank spot selling rate (Ask price):
+\begin{equation}
+    \text{TT Selling Rate} = \text{Interbank Spot Selling Rate (Ask)} + \text{Exchange Margin}
+\end{equation}
+\noindent\textit{Note:} The exchange margin is \textbf{added} because the bank charges more rupees to the customer when selling foreign currency.
+
+\begin{example}{Calculation of TT Selling Rate (Demand Draft on London)}{ex_tt_selling}
+\textbf{Problem Statement:}\\
+Your customer requests you to issue a Demand Draft (DD) on London for $25,000\,\text{EUR}$. The ongoing rates in the local interbank market for EUR are:
+\begin{align*}
+    \text{SPOT} \quad 1\,\text{EUR} &= \text{Rs. } 109.3575 / 3825 \\
+    \text{1 Month Forward} &= \text{Rs. } 109.7825 / 8250
+\end{align*}
+Assuming an exchange margin of $0.15\%$ is required, calculate the exchange rate quoted to the customer and the rupee amount payable by the customer.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Applicable Rate Determination:}\\
+Issuing a Demand Draft requires the bank to sell foreign currency for immediate delivery. The applicable rate is the \textbf{TT Selling Rate}.
+
+\noindent\textbf{2. Step-by-Step Calculation:}
+\begin{align*}
+    \text{Interbank Spot Selling Rate (Ask)} &= \text{Rs. } 109.3825 \\
+    \text{Add: Exchange Margin } (0.15\%) = 109.3825 \times 0.0015 &= \text{Rs. } 0.1641 \\
+    \hline
+    \text{Gross Rate} &= \text{Rs. } 109.5466 \\
+    \text{Rounded off to nearest multiple of } 0.0025 &= \textbf{Rs. } 109.5400
+\end{align*}
+
+\noindent\textbf{3. Total Rupee Amount Payable by Customer:}
+\begin{equation*}
+    \text{Rupee Amount} = 25,000\,\text{EUR} \times 109.5400 = \textbf{Rs. } 27,38,500
+\end{equation*}
+\end{example}

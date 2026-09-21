@@ -1,0 +1,134 @@
+\newpage
+\chapter*{Comprehensive Formula Reference Sheet}
+\addcontentsline{toc}{chapter}{Comprehensive Formula Reference Sheet}
+\markboth{Comprehensive Formula Reference Sheet}{Comprehensive Formula Reference Sheet}
+
+This section consolidates all mathematical formulas, pricing relationships, valuation models, and operational quotation mechanisms established throughout the course.
+
+% ==============================================================================
+\section*{Chapter 1: International Finance Overview \& Institutions}
+% ==============================================================================
+
+\begin{formulabox}[Balance of Payments Equilibrium Identity]
+\begin{equation}
+    \text{BOP} = \text{Current Account} + \text{Capital Account} + \text{Financial Account} + \text{Errors \& Omissions} = 0
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Current Account:} Net balance on visible merchandise trade, invisible services, primary investment income, and unilateral transfers.
+    \item \textbf{Capital Account:} Net cross-border capital transfers, debt forgiveness, and acquisition/disposal of non-produced, non-financial assets.
+    \item \textbf{Financial Account:} Net foreign direct investment (FDI), foreign portfolio investment (FPI), commercial loans, and official reserve transactions.
+    \item \textbf{Errors \& Omissions:} Statistical balancing item ensuring double-entry equality.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[SDR Multi-Currency Basket Valuation]
+\begin{equation}
+    \text{SDR Value in USD} = \sum_{i=1}^{5} \left( q_i \times S_i \right)
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $q_i$: Fixed units of currency $i$ defined in the 5-year IMF SDR valuation basket.
+    \item $S_i$: Spot market exchange rate of currency $i$ expressed in US Dollars.
+    \item \textbf{Relative Basket Weights:} USD ($43.39\%$), EUR ($29.31\%$), CNY ($12.28\%$), JPY ($7.59\%$), GBP ($7.44\%$).
+\end{itemize}
+\end{formulabox}
+
+% ==============================================================================
+\section*{Chapter 2: The Foreign Exchange Market}
+% ==============================================================================
+
+\begin{formulabox}[Bid-Ask Spread and Percentage Spread]
+\begin{align}
+    \text{Spread} &= \text{Ask Price} - \text{Bid Price} \\[0.3em]
+    \text{Percentage Spread (\%)} &= \left[ \frac{\text{Ask Price} - \text{Bid Price}}{\text{Ask Price}} \right] \times 100
+\end{align}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Ask Price (Offer):} Exchange rate at which the quoting market maker sells foreign currency.
+    \item \textbf{Bid Price:} Exchange rate at which the quoting market maker buys foreign currency.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Covered Interest Rate Parity (Exact Forward Rate)]
+\begin{equation}
+    F = S \times \left[ \frac{1 + r_h \times \frac{d}{365}}{1 + r_f \times \frac{d}{365}} \right]
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $F$: Outright forward exchange rate (Home currency per unit of foreign currency).
+    \item $S$: Spot exchange rate (Home currency per unit of foreign currency).
+    \item $r_h$: Annualized risk-free interest rate in the domestic (home) country.
+    \item $r_f$: Annualized risk-free interest rate in the foreign country.
+    \item $d$: Maturity duration of the forward contract in days.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Linear Forward Approximation \& Annualized Premium/Discount]
+\begin{align}
+    F_{\text{linear}} &\approx S \times \left[ 1 + (r_h - r_f) \times \frac{d}{365} \right] \\[0.3em]
+    \text{Annualized Premium / Discount (\%)} &= \left[ \frac{F - S}{S} \right] \times \frac{365}{d} \times 100
+\end{align}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $F$: Forward exchange rate; $S$: Spot exchange rate.
+    \item $r_h - r_f$: Nominal interest rate differential between home and foreign country.
+    \item $d$: Forward contract duration in days.
+    \item \textbf{Condition:} $F > S \implies \text{Forward Premium}$; $F < S \implies \text{Forward Discount}$.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Merchant TT Buying Rate (Clean Remittances)]
+\begin{equation}
+    \text{TT Buying Rate} = \text{Interbank Spot Buying Rate (Bid)} - \text{Exchange Margin}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Interbank Spot Buying Rate:} Market bid price utilized as base by authorized dealer.
+    \item \textbf{Exchange Margin:} Merchant loading percentage deducted to yield the customer buying quote.
+    \item \textbf{FEDAI Rounding Convention:} Quoted rate rounded to the nearest multiple of $0.0025$.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Merchant Bill Buying Rate (Commercial Trade Bills)]
+\begin{equation}
+    \text{Bill Buying Rate} = \text{Forward Buying Rate (for Transit)} - \text{Exchange Margin}
+\end{equation}
+\begin{equation}
+    \text{Forward Buying Rate} = \begin{cases} 
+        \text{Spot Bid} - \text{Forward Discount}, & \text{if at Discount} \\
+        \text{Spot Bid}, & \text{if at Premium}
+    \end{cases}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Forward Discount:} Forward discount margin deducted for the normal transit period.
+    \item \textbf{Exchange Margin:} Percentage margin deducted from the base buying rate.
+    \item \textbf{FEDAI Rounding Convention:} Quoted rate rounded to the nearest multiple of $0.0025$.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Recovery of Interest on Commercial Bills Purchased]
+\begin{equation}
+    \text{Interest on Bill} = \text{Rupee Amount} \times r \times \left[ \frac{\text{NTP} + \text{Usance}}{365} \right]
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Rupee Amount:} Gross rupee value credited to exporter at the Bill Buying Rate.
+    \item $r$: Annual commercial bank lending / discount rate charged to customer.
+    \item $\text{NTP}$: Normal Transit Period in days prescribed by FEDAI rules.
+    \item $\text{Usance}$: Commercial credit tenor specified on the bill of exchange in days.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Merchant TT Selling Rate (Outward Remittances)]
+\begin{equation}
+    \text{TT Selling Rate} = \text{Interbank Spot Selling Rate (Ask)} + \text{Exchange Margin}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Interbank Spot Selling Rate:} Market ask / offer rate at which bank covers in interbank tier.
+    \item \textbf{Exchange Margin:} Merchant loading percentage added to base selling rate.
+    \item \textbf{FEDAI Rounding Convention:} Quoted rate rounded to the nearest multiple of $0.0025$.
+\end{itemize}
+\end{formulabox}
