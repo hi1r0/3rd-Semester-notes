@@ -285,20 +285,20 @@ Cross-border interbank settlements and foreign currency transfers rely on specia
     \begin{tikzpicture}[
         instbox/.style={
             rectangle, rounded corners=6pt,
-            line width=1pt, font=\sffamily,
+            line width=1.1pt, font=\sffamily,
             align=left, inner sep=9pt,
-            text width=6.6cm, minimum height=4.5cm
+            text width=6.8cm, minimum height=5.5cm
         }
     ]
         % Left Card: SWIFT
         \node[instbox, draw=navyblue, fill=softblue] (swift) at (-3.8, 0) {
             {\color{navyblue}\textbf{\normalsize SWIFT (Est. Brussels)}}\\[0.3em]
-            \scriptsize $\bullet$ \textbf{Nature:} Financial messaging cooperative\\
-            \scriptsize $\bullet$ \textbf{Ownership:} Owned by $>250$ international banks\\
-            \scriptsize $\bullet$ \textbf{Network:} Connects $>25,000$ institutions globally\\
-            \scriptsize $\bullet$ \textbf{Function:} Authenticated financial transmission\\
-            \scriptsize $\bullet$ \textbf{Identifier:} Bank Identifier Codes (BIC)\\
-            \scriptsize $\bullet$ \textbf{India Hub:} Regional Processing Centre in Mumbai
+            \scriptsize $\bullet$ \textbf{Nature:} Bank-owned financial messaging cooperative\\
+            \scriptsize $\bullet$ \textbf{Ownership:} Owned by $>250$ member banks across Europe and North America\\
+            \scriptsize $\bullet$ \textbf{Network:} Connects $>25,000$ financial institutions across 200+ nations\\
+            \scriptsize $\bullet$ \textbf{Function:} Authenticated, cryptographic transmission of financial messages\\
+            \scriptsize $\bullet$ \textbf{Identifier:} Standardized Bank Identifier Codes (BIC)\\
+            \scriptsize $\bullet$ \textbf{India Hub:} Primary regional processing centre situated in Mumbai
         };
 
         % Right Card: CHIPS
@@ -504,22 +504,44 @@ Given:
     S &= 95\,\text{INR/USD}, \quad r_{\text{INR}} = 8\% = 0.08, \quad r_{\text{USD}} = 5\% = 0.05, \quad t = \frac{3}{12} = 0.25\,\text{years}
 \end{align*}
 
-\noindent\textbf{1. Exact Covered Interest Parity Formula:}
+\noindent\textbf{1. Accounting Cash Flow Schedule (for USD 10,000):}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+\textbf{Particulars} & \textbf{Amount} \\
+\midrule
+Purchase Dollar (Foreign Inflow) & 10,000.0000\,\text{USD} \\
+Interest earned for 3 months @ 5\% p.a. ($10,000 \times 0.05 \times \frac{3}{12}$) & 125.0000\,\text{USD} \\
+\midrule
+\textbf{Total Foreign Currency Realization at Maturity} & \textbf{10,125.0000\,USD} \\[0.6em]
+Borrow in Mumbai to pay for USD @ INR 95 ($95 \times 10,000$) & 950,000.0000\,\text{INR} \\
+Interest payable for 3 months @ 8\% p.a. ($950,000 \times 0.08 \times \frac{3}{12}$) & 19,000.0000\,\text{INR} \\
+\midrule
+\textbf{Total Rupee Outflow to be Recovered (Rate Quoted)} & \textbf{969,000.0000\,INR} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{2. Theoretical Forward Rate (Exact Covered Interest Parity):}
 \begin{equation*}
-    F = S \times \left[ \frac{1 + r_{\text{INR}} \times t}{1 + r_{\text{USD}} \times t} \right] = 95 \times \left[ \frac{1 + (0.08 \times 0.25)}{1 + (0.05 \times 0.25)} \right] = 95 \times \frac{1.0200}{1.0125} = 95.7037\,\text{INR}
+    F = \frac{\text{Total INR Outflow}}{\text{Total USD Realization}} = \frac{969,000.0000}{10,125.0000} = \textbf{95.7037\,INR/USD}
+\end{equation*}
+This matches the exact formula:
+\begin{equation*}
+    F = S \times \left[ \frac{1 + r_{\text{INR}} \times t}{1 + r_{\text{USD}} \times t} \right] = 95 \times \frac{1.0200}{1.0125} = 95.7037\,\text{INR}
 \end{equation*}
 
-\noindent\textbf{2. Linear Interest Differential Approximation:}
-\begin{align*}
-    F_{\text{linear}} &\approx S \times [1 + (r_{\text{INR}} - r_{\text{USD}}) \times t] \\[0.3em]
-    &= 95 \times [1 + (0.08 - 0.05) \times 0.25] = 95 \times 1.0075 = \textbf{95.7125\,INR}
-\end{align*}
-
-\noindent\textbf{3. Forward Premium Difference:}
+\noindent\textbf{3. Linear Interest Differential Approximation:}
 \begin{equation*}
-    \Delta = 95.7125 - 95.7037 = 0.0088\,\text{INR}
+    F_{\text{linear}} \approx S \times [1 + (r_{\text{INR}} - r_{\text{USD}}) \times t] = 95 \times [1 + (0.08 - 0.05) \times 0.25] = \textbf{95.7125\,INR}
 \end{equation*}
-Under the forward quotation of $95.7125\,\text{INR}$, the customer pays rupees to receive USD. For a transaction involving $10,000\,\text{USD}$, the rupee cash flow reflects the underlying forward valuation.
+
+\noindent\textbf{4. Forward Premium Difference:}
+\begin{equation*}
+    \Delta = 95.7125 - 95.7037 = \mathbf{0.0088\,INR}
+\end{equation*}
+The forward quotation reflects a forward premium of $0.0088\,\text{INR}$ per USD over the exact parity rate.
 \end{example}
 
 % ==============================================================================
@@ -608,7 +630,7 @@ The TT Buying Rate is applied in three distinct operational situations:
     \item Cancellation of foreign exchange forward sale contracts entered earlier with the customer.
 \end{enumerate}
 
-\noindent\textbf{Quotation Format and FEDAI Rounding Rule:}
+\noindent\textbf{Quotation Formula and FEDAI Rounding Rule:}
 \begin{equation}
     \text{TT Buying Rate} = \text{Interbank Spot Buying Rate (Bid)} - \text{Exchange Margin}
 \end{equation}
@@ -616,6 +638,24 @@ The TT Buying Rate is applied in three distinct operational situations:
     \item The exchange margin is \textbf{deducted} because the bank pays fewer rupees to maximize its spread when buying foreign currency.
     \item \textbf{Rounding Convention:} In India, all merchant exchange rates must be rounded off to the \textbf{nearest multiple of 0.0025}.
 \end{itemize}
+
+\paragraph{Pro-Forma Accounting Format: TT Buying Rate}
+Authorized dealers compute customer TT Buying quotes using the following accounting format:
+
+\begin{center}
+\small
+\begin{tabularx}{0.88\linewidth}{Xrr}
+\toprule
+\textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+\midrule
+Dollar / Rupee market SPOT buying rate & & $xxx$ \\
+Less: Exchange Margin & $(xxx)$ & $(xxx)$ \\
+\midrule
+\textbf{TT Buying Rate} & & $\mathbf{xxx}$ \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize\textit{Rounded off to nearest multiple of 0.0025 and quoted to customer.}}
+\end{tabularx}
+\end{center}
 
 \begin{example}{Calculation of TT Buying Rate (Mail Transfer)}{ex_tt_buying}
 \textbf{Problem Statement:}\\
@@ -631,14 +671,21 @@ Calculate the exchange rate quoted to the customer and the rupee amount payable,
 \noindent\textbf{1. Applicable Rate Determination:}\\
 Since reimbursement has already been credited to the bank's account overseas, the applicable rate is the \textbf{TT Buying Rate}.
 
-\noindent\textbf{2. Step-by-Step Rate Calculation:}
-\begin{align*}
-    \text{Interbank Spot Buying Rate (Bid)} &= \text{Rs. } 95.7600 \\
-    \text{Less: Exchange Margin } (0.080\%) = 95.7600 \times 0.00080 &= \text{Rs. } 0.0766 \\
-    \hline
-    \text{Subtotal} &= \text{Rs. } 95.6834 \\
-    \text{Rounded off to nearest multiple of } 0.0025 &= \textbf{Rs. } 95.6800
-\end{align*}
+\noindent\textbf{2. Accounting Ledger Computation:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+\textbf{Particulars} & \textbf{INR} \\
+\midrule
+Dollar / Rupee market SPOT buying rate & 95.7600 \\
+Less: Exchange margin @ 0.08\% on 95.7600 & 0.0766 \\
+\midrule
+\textbf{Subtotal} & 95.6834 \\
+\textbf{Rounded off to nearest multiple of 0.0025 (TT Buying Rate)} & \textbf{95.6800} \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
 \noindent\textbf{3. Rupee Amount Payable to Customer:}
 \begin{equation*}
@@ -660,6 +707,29 @@ The \textbf{Bill Buying Rate} applies when a bank purchases or discounts a forei
     \item \textbf{Foreign Currency at a Discount (Descending Margins):} The forward discount for the full transit period (or transit maturity month) is \textbf{deducted} from the spot buying rate.
 \end{itemize}
 
+\paragraph{Pro-Forma Accounting Format: Bill Buying Rate}
+The standard accounting format for computing the Bill Buying Rate, incorporating transit and usance period forward adjustments, is:
+
+\begin{center}
+\small
+\begin{tabularx}{0.95\linewidth}{Xrr}
+\toprule
+\textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+\midrule
+Dollar / Rupee market SPOT buying rate & & $xxx$ \\
+\textbf{ADD:} Forward Premium (for transit \& usance; rounded off to lower month) & $xxx$ & \\
+\quad \textit{OR} & & \\
+\textbf{Less:} Forward Discount (for transit \& usance; rounded off to higher month) & $xxx$ & $(xxx)$ \\
+\midrule
+\textbf{Base Forward Buying Rate} & & $xxx$ \\
+\textbf{Less:} Exchange Margin & & $(xxx)$ \\
+\midrule
+\textbf{Bill Buying Rate} & & $\mathbf{xxx}$ \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize\textit{Rounded off to nearest multiple of 0.0025 and quoted to customer.}}
+\end{tabularx}
+\end{center}
+
 \begin{example}{Calculation of Bill Buying Rate (Letter of Credit)}{ex_bill_buying}
 \textbf{Problem Statement:}\\
 On 25th July, your customer presents at-sight documents for $100,000\,\text{USD}$ under an irrevocable Letter of Credit (LC). The LC provides for reimbursement by the negotiating bank's own DD on the opening bank in New York. Interbank market rates in Mumbai are:
@@ -680,17 +750,24 @@ Transaction date is 25th July. Adding 25 days of transit:
 \end{equation*}
 The reimbursement falls in the month of August. Because the forward margins are in descending order ($0.6000 / 0.5700$), the foreign currency is at a \textbf{discount}. The bank deducts the August forward discount ($0.6000$).
 
-\noindent\textbf{2. Step-by-Step Calculation:}
-\begin{align*}
-    \text{Interbank Spot Buying Rate (Bid)} &= \text{Rs. } 95.6525 \\
-    \text{Less: Forward Discount for August} &= \text{Rs. } 0.6000 \\
-    \hline
-    \text{Base Forward Rate} &= \text{Rs. } 95.0525 \\
-    \text{Less: Exchange Margin } (0.15\% \text{ of Spot } 95.6525) = 95.6525 \times 0.0015 &= \text{Rs. } 0.1435 \\
-    \hline
-    \text{Net Bill Buying Rate} &= \text{Rs. } 94.9090 \\
-    \text{Rounded off to nearest multiple of } 0.0025 &= \textbf{Rs. } 94.9100
-\end{align*}
+\noindent\textbf{2. Accounting Ledger Computation:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xrr}
+\toprule
+\textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+\midrule
+Dollar / Rupee market SPOT buying rate & & 95.6525 \\
+Less: Discount on 1 month (transit period 25 days) & 0.6000 & 0.6000 \\
+\midrule
+\textbf{Base Forward Buying Rate} & & 95.0525 \\
+Less: Exchange margin ($0.15\%$ on Spot 95.6525) & & 0.1435 \\
+\midrule
+\textbf{Net Bill Buying Rate} & & 94.9090 \\
+\textbf{Rounded off to nearest multiple of 0.0025} & & \textbf{94.9100} \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
 \noindent\textbf{3. Rupee Conversion Amount Payable to Customer:}
 \begin{equation*}
@@ -725,6 +802,27 @@ The TT Selling Rate is calculated on the basis of the ongoing interbank spot sel
 \end{equation}
 \noindent\textit{Note:} The exchange margin is \textbf{added} because the bank charges more rupees to the customer when selling foreign currency.
 
+\paragraph{Pro-Forma Accounting Format: Selling Rates (TT and Bill)}
+The FEDAI accounting format for computing merchant selling rates is:
+
+\begin{center}
+\small
+\begin{tabularx}{0.88\linewidth}{Xrr}
+\toprule
+\textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+\midrule
+Dollar / Rupee market Spot selling rate & & $xxx$ \\
+Add: Exchange margin for TT selling rate & $xxx$ & $xxx$ \\
+\midrule
+\textbf{TT Selling Rate} & & $\mathbf{xxx}$ \\
+Add: Exchange margin for Bill selling rate & & $xxx$ \\
+\midrule
+\textbf{Bill Selling Rate} & & $\mathbf{xxx}$ \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize\textit{Rounded off to nearest multiple of 0.0025 and quoted to customer.}}
+\end{tabularx}
+\end{center}
+
 \begin{example}{Calculation of TT Selling Rate (Demand Draft on London)}{ex_tt_selling}
 \textbf{Problem Statement:}\\
 Your customer requests you to issue a Demand Draft (DD) on London for $25,000\,\text{EUR}$. The ongoing rates in the local interbank market for EUR are:
@@ -739,14 +837,21 @@ Assuming an exchange margin of $0.15\%$ is required, calculate the exchange rate
 \noindent\textbf{1. Applicable Rate Determination:}\\
 Issuing a Demand Draft requires the bank to sell foreign currency for immediate delivery. The applicable rate is the \textbf{TT Selling Rate}.
 
-\noindent\textbf{2. Step-by-Step Calculation:}
-\begin{align*}
-    \text{Interbank Spot Selling Rate (Ask)} &= \text{Rs. } 109.3825 \\
-    \text{Add: Exchange Margin } (0.15\%) = 109.3825 \times 0.0015 &= \text{Rs. } 0.1641 \\
-    \hline
-    \text{Gross Rate} &= \text{Rs. } 109.5466 \\
-    \text{Rounded off to nearest multiple of } 0.0025 &= \textbf{Rs. } 109.5400
-\end{align*}
+\noindent\textbf{2. Accounting Ledger Computation:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xrr}
+\toprule
+\textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+\midrule
+EUR / Rupee market Spot selling rate & & 109.3825 \\
+Add: Exchange margin for TT selling rate @ 0.15\% & 0.1641 & 0.1641 \\
+\midrule
+\textbf{TT Selling Rate} & & \textbf{109.5466} \\
+\textbf{Rounded off to nearest multiple of 0.0025} & & \textbf{109.5400} \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
 \noindent\textbf{3. Total Rupee Amount Payable by Customer:}
 \begin{equation*}

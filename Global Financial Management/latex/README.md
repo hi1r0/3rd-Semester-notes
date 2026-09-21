@@ -73,16 +73,19 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - *Lecture Dates:* `17/09/2026` & `18/09/2026`.
 - **2.5 Indian Merchant Rates: Buying Rates and Mechanics**
   - Two Types of Buying Rates: TT Buying Rate vs. Bill Buying Rate.
+  - Pro-Forma Accounting Format: Standard FEDAI `Particulars | INR | INR` computation format for TT Buying Rate.
   - TT Buying Rate application scenarios, exchange margin deduction, and FEDAI rounding off to nearest multiple of $0.0025$.
-  - Solved TT Buying Rate Problem: Mail Transfer USD 5,000 with October forward margin and $0.08\%$ exchange margin.
+  - Solved TT Buying Rate Problem: Mail Transfer USD 5,000 with October forward margin and $0.08\%$ exchange margin (formatted in accounting ledger table).
   - Bill Buying Rate mechanics, transit period forward margin treatment (Ascending = Premium, Descending = Discount).
-  - Solved Bill Buying Rate Problem: Sight Letter of Credit USD 100,000 with 25-day transit and $0.15\%$ exchange margin.
+  - Pro-Forma Accounting Format: Standard FEDAI `Particulars | INR | INR` computation format for Bill Buying Rate with transit/usance adjustment.
+  - Solved Bill Buying Rate Problem: Sight Letter of Credit USD 100,000 with 25-day transit and $0.15\%$ exchange margin (formatted in accounting ledger table).
   - Recovery of interest on commercial bills purchased formula.
   - *Lecture Dates:* `18/09/2026` & `21/09/2026`.
 - **2.6 Indian Merchant Rates: Selling Rates and Mechanics**
   - TT Selling Rate vs. Bill Selling Rate definitions and transaction scope.
+  - Pro-Forma Accounting Format: Standard FEDAI `Particulars | INR | INR` computation format for Selling Rates (TT and Bill).
   - TT Selling Rate calculation format (Interbank Spot Ask + Exchange Margin).
-  - Solved TT Selling Rate Problem: Demand Draft on London EUR 25,000 with $0.15\%$ exchange margin.
+  - Solved TT Selling Rate Problem: Demand Draft on London EUR 25,000 with $0.15\%$ exchange margin (formatted in accounting ledger table).
   - *Lecture Date:* `21/09/2026`.
 
 ### **Consolidated Formula Reference Sheet (Rule 5)**
