@@ -86,11 +86,23 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - Pro-Forma Accounting Format: Standard FEDAI `Particulars | INR | INR` computation format for Selling Rates (TT and Bill).
   - TT Selling Rate calculation format (Interbank Spot Ask + Exchange Margin).
   - Solved TT Selling Rate Problem: Demand Draft on London EUR 25,000 with $0.15\%$ exchange margin (formatted in accounting ledger table).
-  - *Lecture Date:* `21/09/2026`.
+  - **2.7 Ready Rates Based on Cross Rates and Draft Cancellations**
+  - Synthesized cross-rate quotation mechanics and merchant margin application.
+  - TikZ Architecture 2.6: Symmetrical triangular architecture of cross-rate conversion and wholesale interbank covering.
+  - Foreign Demand Draft cancellation mechanics: Mandatory repurchase at TT Buying Rate.
+  - Solved Problem 2.7.1: Demand Draft on Montreal for CAD 50,000 cancellation (formatted in standard accounting ledger; net loss Rs. 1,46,625).
+  - Solved Problem 2.7.2: Demand Draft on London for EUR 100,000 cancellation (formatted in standard accounting ledger; net gain Rs. 2,33,160).
+  - *Lecture Dates:* `22/09/2026` & `23/09/2026`.
+- **2.8 Forward Exchange Contracts and FEDAI Rule 7**
+  - Concept, formal definition, and economic hedging rationale for exporters and importers.
+  - Statutory delivery horizon rules under FEDAI Rule 7: Spot value date baseline ($T+2$).
+  - Fixed Forward Contracts vs. Option Forward Contracts (statutory maximum 1 calendar month option delivery window).
+  - TikZ Timeline 2.7: Symmetrical chronological delivery horizon architecture under FEDAI Rule 7 with side-by-side fixed vs. option cards.
+  - *Lecture Date:* `24/09/2026`.
 
 ### **Consolidated Formula Reference Sheet (Rule 5)**
 - Placed at document end (`chapters/formula_reference.tex`).
-- Chapter-by-chapter grouping of mathematical identities, valuation models, and FEDAI merchant quotation algorithms with explicit structured `Where:` parameter definitions.
+- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, and FEDAI Rule 7 delivery horizons with explicit structured `Where:` parameter definitions and unnumbered equations.
 
 ---
 
@@ -107,7 +119,7 @@ latex/
 │   └── syllabus.tex                                   # Official MSQF 535 syllabus & CO-PO matrix
 ├── chapters/
 │   ├── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 07/09/2026)
-│   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 21/09/2026)
+│   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 24/09/2026)
 │   └── formula_reference.tex                          # Consolidated Multi-Chapter Formula Reference Sheet (Rule 5)
 ├── figures/                                           # Department & University logos
 └── README.md                                          # Documentation & compilation instructions

@@ -132,3 +132,45 @@ This section consolidates all mathematical formulas, pricing relationships, valu
     \item \textbf{FEDAI Rounding Convention:} Quoted rate rounded to the nearest multiple of $0.0025$.
 \end{itemize}
 \end{formulabox}
+
+\begin{formulabox}[Cross-Rate Merchant TT Buying Rate]
+\begin{equation*}
+    \text{TT Buying Rate}_{\text{FC}} = \frac{\text{Interbank Spot Buying Rate (Bid)}_{\text{USD/INR}} - \text{Exchange Margin}}{\text{Overseas Market Spot Selling Rate (Ask)}_{\text{USD/FC}}}
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\text{Interbank Spot Buying Rate (Bid)}_{\text{USD/INR}}$: Quoting dealer's local base buying price for US Dollars.
+    \item $\text{Exchange Margin}$: Loading percentage deducted from the domestic base rate.
+    \item $\text{Overseas Market Spot Selling Rate (Ask)}_{\text{USD/FC}}$: Interbank offer rate for foreign currency in overseas market (Singapore, Tokyo, London).
+    \item $\text{Rounding Convention}$: Rate rounded off to nearest multiple of $0.0025$.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Financial Outcome on Foreign Demand Draft Cancellation]
+\begin{align*}
+    \text{Net Financial Outcome} &= \text{Cancellation Proceeds} - \text{Original Cost} \\
+    &= \text{FC Amount} \times \left( \text{TT Buying Rate} - \text{Original Issue Rate} \right)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\text{TT Buying Rate}$: Net cross-rate applied by the bank to repurchase the cancelled draft.
+    \item $\text{Original Issue Rate}$: Exchange rate paid by the customer when the draft was initially issued.
+    \item $\text{Condition: } \text{Outcome} > 0 \implies \text{Customer Realizes Exchange Gain}$.
+    \item $\text{Condition: } \text{Outcome} < 0 \implies \text{Customer Incurs Exchange Loss}$.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Forward Delivery Horizon under FEDAI Rule 7]
+\begin{align*}
+    \text{Spot Baseline Date} &= \text{Trade Booking Date } (T) + 2 \text{ Business Days} \\[0.3em]
+    \text{Fixed Maturity Date} &= \text{Spot Baseline Date} + \text{Contract Tenor} \\[0.3em]
+    \text{Option Delivery Period} &\le 1 \text{ Calendar Month}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $T$: Transaction booking date.
+    \item $\text{Spot Baseline Date}$: Inception anchor ($T+2$) from which forward duration commences.
+    \item $\text{Contract Tenor}$: Duration of forward cover (e.g., 1 month, 2 months, 3 months).
+    \item $\text{Option Delivery Period}$: Flexible window within which customer may deliver foreign exchange.
+\end{itemize}
+\end{formulabox}

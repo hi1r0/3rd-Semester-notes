@@ -858,3 +858,356 @@ Add: Exchange margin for TT selling rate @ 0.15\% & 0.1641 & 0.1641 \\
     \text{Rupee Amount} = 25,000\,\text{EUR} \times 109.5400 = \textbf{Rs. } 27,38,500
 \end{equation*}
 \end{example}
+
+% ==============================================================================
+% Lecture 14: 22/09/2026 & Lecture 15: 23/09/2026
+% ==============================================================================
+\section{Ready Rates Based on Cross Rates and Draft Cancellations}
+\lecturedate{22/09/2026}
+
+\subsection{Principle of Cross-Rate Quotations}
+In the domestic Indian foreign exchange market, direct quotations are quoted for the US Dollar (USD/INR). However, exchange rates for other major currencies (such as the Canadian Dollar, Euro, Japanese Yen, or Swiss Franc) are derived by authorized dealer commercial banks based on rates prevailing in major international foreign exchange centers, including Singapore, London, Tokyo, and Hong Kong.
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{USD-Base International Quotations:} In global financial markets, currencies are predominantly quoted in terms of the US Dollar as the base or terms currency (e.g., $1\,\text{USD} = 1.4551 / 1.4561\,\text{CAD}$, $1\,\text{USD} = 0.8541 / 0.8561\,\text{EUR}$, $1\,\text{USD} = 104.67 / 104.70\,\text{JPY}$).
+    \item \textbf{Conversion to Indian Rupee Terms:} To quote a ready merchant rate to a domestic customer, the authorized dealer synthesizes the international USD quote with the domestic interbank USD/INR rate via cross-currency arithmetic.
+\end{itemize}
+
+\subsection{Forward Margins and Swap Points}
+In international markets, forward margins are quoted as points (swap points):
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Point Definition:} A point represents the last decimal position in the exchange quotation.
+    \item \textbf{Four-Digit Quotations:} A point equals $0.0001$. For example, a 1-month forward margin quoted as $50/60$ on a spot rate of $1.5425/40$ represents $0.0050 / 0.0060$. Because margins are in ascending order ($50 < 60$), foreign currency is at a \textbf{forward premium} and margins are added to the spot base.
+    \item \textbf{Two-Digit Quotations:} A point equals $0.01$. For example, a 1-month forward margin quoted as $17/16$ on a spot base of $104.67/70$ represents $0.17 / 0.16$. Because margins are in descending order ($17 > 16$), foreign currency is at a \textbf{forward discount} and margins are deducted from the spot base.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2.6: Triangular Cross-Rate Architecture
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        box/.style={
+            rectangle, rounded corners=6pt,
+            line width=1.1pt, font=\sffamily,
+            align=center, inner sep=6pt,
+            minimum height=2.2cm, text width=4.6cm
+        },
+        flowline/.style={
+            -{Stealth[length=6pt, width=4pt]},
+            line width=1.3pt
+        }
+    ]
+        % Node 1: Indian Customer (left)
+        \node[box, draw=navyblue, fill=softblue] (cust) at (0, 0) {
+            {\color{navyblue}\textbf{\normalsize Indian Customer}}\\[0.4em]
+            \scriptsize $\bullet$ Purchases or cancels foreign draft\\
+            \scriptsize $\bullet$ Settles purely in Indian Rupees (INR)
+        };
+
+        % Node 2: Quoting Bank (India)
+        \node[box, draw=darkteal, fill=softgreen] (bank) at (7.8, 0) {
+            {\color{darkteal}\textbf{\normalsize Quoting Bank (India)}}\\[0.4em]
+            \scriptsize $\bullet$ Synthesizes merchant cross rate\\
+            \scriptsize $\bullet$ Covers legs across two markets
+        };
+
+        % Horizontal Customer <-> Bank Connectors
+        \draw[flowline, draw=navyblue] ([yshift=4mm]cust.east) -- node[above, font=\scriptsize\sffamily] {Draft Presentation} ([yshift=4mm]bank.west);
+        \draw[flowline, draw=navyblue] ([yshift=-4mm]bank.west) -- node[below, font=\scriptsize\sffamily] {INR Settlement} ([yshift=-4mm]cust.east);
+
+        % Symmetrical Interbank Pillars (y = -3.8)
+        % Node 3: Local Interbank Market
+        \node[box, draw=amber!90!black, fill=softamber] (inr) at (4.6, -3.8) {
+            {\color{amber!90!black}\textbf{\normalsize Local Interbank Market}}\\[0.4em]
+            \scriptsize $\bullet$ Domestic USD/INR base quotes\\
+            \scriptsize $\bullet$ Bank covers USD leg \& loads margin
+        };
+
+        % Node 4: Overseas Forex Market
+        \node[box, draw=charcoal, fill=white] (os) at (11.0, -3.8) {
+            {\color{charcoal}\textbf{\normalsize Overseas Forex Market}}\\[0.4em]
+            \scriptsize $\bullet$ Singapore / Tokyo / London / HK\\
+            \scriptsize $\bullet$ USD/FC interbank market quotes
+        };
+
+        % Symmetrical Split Connectors from Quoting Bank
+        \coordinate (split) at (7.8, -2.0);
+        
+        \draw[line width=1.3pt, draw=darkteal] (bank.south) -- (split);
+        \draw[flowline, draw=darkteal] (split) -| node[pos=0.25, above, font=\scriptsize\sffamily] {Cover USD/INR Leg} (inr.north);
+        \draw[flowline, draw=darkteal] (split) -| node[pos=0.25, above, font=\scriptsize\sffamily] {Cover USD/FC Leg} (os.north);
+    \end{tikzpicture}%
+    }
+    \caption{Triangular Architecture of Cross-Rate Conversion and Interbank Covering}
+    \label{fig:cross_rate_architecture}
+\end{figure}
+
+\subsection{Mechanics of Foreign Demand Draft Cancellation}
+When an authorized dealer commercial bank issues a foreign currency Demand Draft (DD) on an overseas center, the transaction constitutes a \textbf{Sale of Foreign Exchange}, quoted at the prevailing \textbf{TT Selling Rate}.
+
+If the purchaser subsequently requests cancellation of the draft and repayment of the rupee equivalent, the bank must repurchase the foreign currency from the customer. Consequently:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Applicable Cancellation Rate:} All draft cancellations are executed strictly at the \textbf{TT Buying Rate}.
+    \item \textbf{Cross-Rate TT Buying Formula:}
+    To purchase foreign currency (FC) via cross rates, the bank buys USD locally at the Spot Bid rate (less exchange margin) and sells USD overseas at the market Ask (selling) rate to buy FC:
+    \begin{equation}
+        \text{FC TT Buying Rate} = \frac{\text{Interbank USD/INR Spot Bid} - \text{Exchange Margin}}{\text{Overseas Market USD/FC Ask Rate}}
+    \end{equation}
+    \item \textbf{Customer Gain or Loss on Cancellation:}
+    \begin{equation}
+        \text{Net Gain / Loss} = \text{Cancellation Proceeds (INR)} - \text{Original Purchase Cost (INR)}
+    \end{equation}
+    A negative result represents a loss to the customer (due to merchant spreads and margin loadings), whereas a positive result indicates an exchange gain from currency appreciation.
+\end{itemize}
+
+\begin{example}{Cancellation of Demand Draft on Montreal (CAD 50,000)}{ex_draft_cancel_cad}
+\textbf{Problem Statement:}\\
+A bank issued a Demand Draft on Montreal for $\text{CAD } 50,000$ at $1\,\text{CAD} = 68.4850\,\text{INR}$. After a few days, the purchaser requested the bank to cancel the draft and repay the rupee equivalent. Assuming the Canadian Dollar was quoted in the Singapore foreign exchange market as:
+\begin{align*}
+    1\,\text{USD} &= 1.4551 / 1.4561\,\text{CAD}
+\end{align*}
+and the ongoing quotes in the local interbank market were:
+\begin{align*}
+    1\,\text{USD} &= \text{Rs. } 95.5275 / 5350
+\end{align*}
+Calculate the customer's gain or loss on cancellation, assuming an exchange margin of $0.08\%$ on the TT buying rate.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Applicable Rate Determination:}\\
+Cancelling the issued draft requires the bank to purchase foreign currency (CAD) back from the customer. The applicable rate is the \textbf{CAD TT Buying Rate}.
+
+\noindent\textbf{2. Accounting Ledger Computation:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xrr}
+\toprule
+\textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+\midrule
+USD/INR Local Interbank Market Spot Buying Rate (Bid) & 95.5275 & \\
+Less: Exchange Margin @ $0.08\%$ on $95.5275$ ($95.5275 \times 0.0008$) & 0.0764 & \\
+\midrule
+\textbf{Net USD/INR Buying Rate} & & \textbf{95.4511} \\
+\midrule
+USD/CAD Overseas Market Selling Rate (Ask) & & $1.4561$ \\
+\midrule
+\textbf{CAD TT Buying Rate} ($95.4511 / 1.4561$) & & \textbf{65.5526} \\
+\textbf{Rounded off to nearest multiple of 0.0025} & & \textbf{65.5525} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{3. Gain / Loss Calculation for Customer:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+\textbf{Particulars} & \textbf{Amount (INR)} \\
+\midrule
+Amount received on cancellation ($50,000\,\text{CAD} \times 65.5525$) & $32,77,625$ \\
+Original amount paid by customer on purchase of DD ($50,000\,\text{CAD} \times 68.4850$) & $34,24,250$ \\
+\midrule
+\textbf{Net Loss to Customer on Cancellation} & $\mathbf{1,46,625}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+The customer incurs a net financial loss of \textbf{Rs. 1,46,625} on cancellation.
+\end{example}
+
+\lecturedate{23/09/2026}
+\begin{example}{Cancellation of Demand Draft on London (EUR 100,000)}{ex_draft_cancel_eur}
+\textbf{Problem Statement:}\\
+A bank issued a Demand Draft on London for $100,000\,\text{EUR}$ at $1\,\text{EUR} = 109.3300\,\text{INR}$. After a few days, the purchaser requested cancellation of the draft and repayment of the rupee equivalent. Assuming the Euro was quoted in the Tokyo foreign exchange market as:
+\begin{align*}
+    1\,\text{USD} &= 0.8541 / 0.8561\,\text{EUR}
+\end{align*}
+and the ongoing rates in the local interbank market were:
+\begin{align*}
+    1\,\text{USD} &= \text{Rs. } 95.6700 / 6720
+\end{align*}
+Calculate the customer's gain or loss on cancellation, assuming an exchange margin of $0.08\%$ on the TT buying rate.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Applicable Rate Determination:}\\
+The bank repurchases the Euro draft from the customer, applying the \textbf{EUR TT Buying Rate}.
+
+\noindent\textbf{2. Accounting Ledger Computation:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xrr}
+\toprule
+\textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+\midrule
+USD/INR Local Interbank Market Spot Buying Rate (Bid) & 95.6700 & \\
+Less: Exchange Margin @ $0.08\%$ on $95.6700$ ($95.6700 \times 0.0008$) & 0.0765 & \\
+\midrule
+\textbf{Net USD/INR Buying Rate} & & \textbf{95.5935} \\
+\midrule
+USD/EUR Overseas Market Selling Rate (Ask) & & $0.8561$ \\
+\midrule
+\textbf{EUR TT Buying Rate} ($95.5935 / 0.8561$) & & \textbf{111.6616} \\
+\textbf{Quoted Rate (Preserved per Note Record)} & & \textbf{111.6616} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{3. Gain / Loss Calculation for Customer:}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+\textbf{Particulars} & \textbf{Amount (INR)} \\
+\midrule
+Amount received on cancellation ($100,000\,\text{EUR} \times 111.6616$) & $1,11,66,160$ \\
+Original amount paid by customer on purchase ($100,000\,\text{EUR} \times 109.3300$) & $1,09,33,000$ \\
+\midrule
+\textbf{Net Gain to Customer on Cancellation} & $\mathbf{2,33,160}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Owing to the substantial market appreciation of the Euro against the Rupee between the issue and cancellation dates, the customer realizes a net gain of \textbf{Rs. 2,33,160}.
+\end{example}
+
+% ==============================================================================
+% Lecture 16: 24/09/2026
+% ==============================================================================
+\section{Forward Exchange Contracts and FEDAI Rule 7}
+\lecturedate{24/09/2026}
+
+\subsection{Concept and Economic Purpose of Forward Contracts}
+A \textbf{Forward Exchange Contract (FEC)} is an operational risk management instrument designed to provide complete protection to an importer or exporter against adverse fluctuations in foreign exchange rates (exchange rate risk).
+
+\begin{definition}{Forward Exchange Contract (FEC)}{def_fec}
+A \textbf{Forward Exchange Contract} is a legally binding agreement entered into between an authorized dealer bank and a customer (or between two commercial banks in the interbank tier) to buy or sell a specified amount of foreign currency at a predetermined exchange rate on an agreed future date or within an agreed future period.
+\end{definition}
+
+By booking an FEC, commercial counterparties lock in their conversion rates at inception:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Exporters (Forward Sale / Bank Purchases):} Eliminate the risk of foreign currency depreciation, fixing the exact rupee cash realization upon receipt of export proceeds.
+    \item \textbf{Importers (Forward Purchase / Bank Sells):} Eliminate the risk of foreign currency appreciation, establishing the exact rupee expenditure required to settle overseas import payables.
+\end{itemize}
+
+\subsection{Delivery Date Computation under FEDAI Rule 7}
+A fundamental statutory standard established by FEDAI (Foreign Exchange Dealers' Association of India) governs the contractual maturity and delivery date of all forward exchange contracts booked in India:
+
+\begin{center}
+\begin{minipage}{0.92\linewidth}
+\begin{remarkbox}[FEDAI Rule 7: Commencement of Forward Duration]
+Under \textbf{FEDAI Rule 7}, the delivery date of a forward contract is deliverable at a future date where the contract duration is computed strictly from the \textbf{Spot Value Date ($T+2$)} of the transaction, and \textbf{NOT} from the trade booking date ($T$).
+\end{remarkbox}
+\end{minipage}
+\end{center}
+
+\noindent\textbf{Operational Example:}
+If a customer books a 3-month forward exchange contract on \textbf{12th February}:
+\begin{enumerate}[leftmargin=*]
+    \item The trade date is $T = \text{12th February}$.
+    \item The spot value date is $T+2 = \text{14th February}$ (two business days post-trade).
+    \item The 3-month contractual tenor commences on \textbf{14th February}, and the forward contract matures exactly on \textbf{14th May}.
+\end{enumerate}
+
+\subsection{Classification: Fixed vs. Option Forward Contracts}
+Depending on the flexibility of the settlement date, forward exchange contracts are categorized into two structural types:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Fixed Forward Contract:}
+    A forward contract where the delivery and physical settlement of foreign exchange must take place strictly on a \textbf{specified future calendar date}.
+    \begin{itemize}[noitemsep]
+        \item \textit{Example:} On 5th March, a customer enters into a 3-month fixed forward sale contract for $10,000\,\text{EUR}$. Computing from the spot date (7th March), the contract matures on \textbf{7th June}. The customer must present the underlying bill or foreign exchange instrument to the bank exactly on 7th June. Delivery cannot occur prior to or later than this designated date.
+    \end{itemize}
+
+    \item \textbf{Option Forward Contract:}
+    A forward contract where the customer possesses the contractual option to deliver or take delivery of foreign exchange on \textbf{any business day during a specified contractual window} at the predetermined exchange rate.
+    \begin{itemize}[noitemsep]
+        \item \textit{Example:} On 15th September, a customer enters into a 2-month forward contract with "option over November". The customer is entitled to deliver foreign exchange to the bank on any working day between \textbf{1st November and 30th November}.
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{FEDAI Rule 7 Statutory Option Window Constraint:}
+Under FEDAI Rule 7, the option delivery period granted to the customer shall \textbf{not exceed one calendar month}. Option contracts cannot span indefinite or multi-month settlement windows.
+
+% ------------------------------------------------------------------------------
+% TikZ Timeline 2.7: FEDAI Rule 7 Delivery Horizon Architecture
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        timeline/.style={-{Stealth[length=7pt, width=5pt]}, line width=1.4pt, draw=navyblue},
+        timepin/.style={draw=navyblue, line width=1.1pt},
+        badge/.style={
+            rectangle, rounded corners=4pt, line width=0.9pt,
+            font=\sffamily\bfseries\scriptsize, align=center, inner sep=4pt
+        },
+        card/.style={
+            rectangle, rounded corners=5pt, line width=1pt,
+            font=\sffamily, align=left, inner sep=7pt, text width=5.8cm,
+            minimum height=3.6cm
+        }
+    ]
+        % Main Timeline Axis
+        \draw[timeline] (0, 0) -- (14.8, 0) node[right, font=\sffamily\bfseries\small] {Time};
+
+        % Milestone 1: Trade Date T
+        \filldraw[navyblue] (1.0, 0) circle (3pt);
+        \node[badge, draw=navyblue, fill=softblue] at (1.0, 1.1) {Trade Date ($T$)\\[0.15em] \textmd{\tiny Contract Booked}};
+        \draw[timepin] (1.0, 0.45) -- (1.0, 0);
+
+        % Milestone 2: Spot Date T+2
+        \filldraw[darkteal] (3.8, 0) circle (3pt);
+        \node[badge, draw=darkteal, fill=softgreen] at (3.8, 1.1) {Spot Value Date ($T+2$)\\[0.15em] \textmd{\tiny FEDAI Rule 7 Tenor Base}};
+        \draw[timepin, draw=darkteal] (3.8, 0.45) -- (3.8, 0);
+
+        % 2-Day Spot Interval
+        \draw[<->, draw=charcoal, line width=0.9pt] (1.0, -0.5) -- node[below, font=\tiny\sffamily\bfseries] {2 Working Days} (3.8, -0.5);
+
+        % Milestone 3: Fixed Forward Maturity
+        \filldraw[amber!90!black] (8.8, 0) circle (3pt);
+        \node[badge, draw=amber!90!black, fill=softamber] at (8.8, 1.1) {Fixed Maturity ($T+2+n$)\\[0.15em] \textmd{\tiny Single Settlement Date}};
+        \draw[timepin, draw=amber!90!black] (8.8, 0.45) -- (8.8, 0);
+
+        % Tenor Duration Bracket
+        \draw[<->, draw=darkteal, line width=1.1pt] (3.8, -1.2) -- node[below, font=\scriptsize\sffamily\bfseries] {Forward Tenor Computed from Spot Date (FEDAI Rule 7)} (8.8, -1.2);
+
+        % Milestone 4: Option Delivery Window
+        \fill[softblue, opacity=0.9] (10.8, -0.3) rectangle (14.2, 0.3);
+        \draw[draw=navyblue, dashed, line width=1.1pt] (10.8, -0.3) rectangle (14.2, 0.3);
+        \node[badge, draw=navyblue, fill=white] at (12.5, 1.1) {Option Window\\[0.15em] \textmd{\tiny Delivery on Any Day}};
+        \draw[timepin] (12.5, 0.45) -- (12.5, 0.1);
+        \draw[<->, draw=navyblue, line width=0.9pt] (10.8, -0.5) -- node[below, font=\tiny\sffamily\bfseries] {Max 1 Month (FEDAI)} (14.2, -0.5);
+
+        % Symmetrical Cards Below
+        \node[card, draw=amber!90!black, fill=softamber] at (3.5, -3.8) {
+            {\color{amber!90!black}\textbf{\normalsize 1. Fixed Forward Contract}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Maturity:} Deliverable on a \textbf{single specified date}\\
+            \scriptsize $\bullet$ \textbf{Example:} Booked 5th March (3 months)\\
+            \scriptsize \quad $\implies$ Spot date: 7th March\\
+            \scriptsize \quad $\implies$ \textbf{Maturity date: 7th June}\\
+            \scriptsize $\bullet$ \textbf{Rigidity:} Counterparty cannot deliver earlier or later
+        };
+
+        \node[card, draw=navyblue, fill=softblue] at (10.5, -3.8) {
+            {\color{navyblue}\textbf{\normalsize 2. Option Forward Contract}}\\[0.3em]
+            \scriptsize $\bullet$ \textbf{Maturity:} Deliverable on \textbf{any working day} in window\\
+            \scriptsize $\bullet$ \textbf{Example:} Booked 15th Sept (2 months)\\
+            \scriptsize \quad $\implies$ Option over November\\
+            \scriptsize \quad $\implies$ \textbf{Delivery: 1st Nov -- 30th Nov}\\
+            \scriptsize $\bullet$ \textbf{FEDAI Rule 7:} Option window \textbf{$\le$ 1 calendar month}
+        };
+    \end{tikzpicture}%
+    }
+    \caption{Chronological Delivery Horizon Architecture under FEDAI Rule 7}
+    \label{fig:fedai_rule7_timeline}
+\end{figure}
+
+\subsection{Statutory Terms and Conditions of Forward Contracts}
+All forward exchange contracts entered into by authorized dealers in India are governed by standard terms and conditions prescribed under FEDAI rules:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Commercial Backing:} Every forward exchange contract booked by a customer must be supported by genuine, underlying foreign trade exposure (firm export order, import letter of credit, or authorized external commercial borrowing).
+    \item \textbf{Contractual Details:} The contract confirmation note must unambiguously state the contract date, counterparty name, currency, contract amount, agreed forward exchange rate, spot value baseline, and exact delivery horizon.
+    \item \textbf{Customer Margin Requirements:} Banks may stipulate an initial cash margin or credit line to protect against potential default risk arising from adverse currency movements prior to settlement.
+    \item \textbf{Non-Performance and Cancellation:} If the customer fails to deliver foreign exchange on the maturity date (or by the end of the option delivery window), the contract must be automatically cancelled by the bank on the 15th day post-maturity (or as prescribed by prevailing FEDAI rules) at the ongoing merchant buying/selling rate, with any resulting exchange loss recovered from the customer.
+\end{enumerate}
