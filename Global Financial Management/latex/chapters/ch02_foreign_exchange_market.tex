@@ -1140,47 +1140,48 @@ Under FEDAI Rule 7, the option delivery period granted to the customer shall \te
         timepin/.style={draw=navyblue, line width=1.1pt},
         badge/.style={
             rectangle, rounded corners=4pt, line width=0.9pt,
-            font=\sffamily\bfseries\scriptsize, align=center, inner sep=4pt
+            font=\sffamily\bfseries\scriptsize, align=center, inner sep=4pt,
+            text width=3.0cm, minimum height=1.1cm
         },
         card/.style={
             rectangle, rounded corners=5pt, line width=1pt,
-            font=\sffamily, align=left, inner sep=7pt, text width=5.8cm,
+            font=\sffamily, align=left, inner sep=7pt, text width=6.2cm,
             minimum height=3.6cm
         }
     ]
         % Main Timeline Axis
-        \draw[timeline] (0, 0) -- (14.8, 0) node[right, font=\sffamily\bfseries\small] {Time};
+        \draw[timeline] (0, 0) -- (17.0, 0) node[right, font=\sffamily\bfseries\small] {Time};
 
-        % Milestone 1: Trade Date T
+        % Milestone 1: Trade Date T (x = 1.0)
         \filldraw[navyblue] (1.0, 0) circle (3pt);
-        \node[badge, draw=navyblue, fill=softblue] at (1.0, 1.1) {Trade Date ($T$)\\[0.15em] \textmd{\tiny Contract Booked}};
-        \draw[timepin] (1.0, 0.45) -- (1.0, 0);
+        \node[badge, draw=navyblue, fill=softblue] at (1.0, 1.2) {Trade Date ($T$)\\[0.15em] \textmd{\tiny Contract Booked}};
+        \draw[timepin] (1.0, 0.65) -- (1.0, 0);
 
-        % Milestone 2: Spot Date T+2
-        \filldraw[darkteal] (3.8, 0) circle (3pt);
-        \node[badge, draw=darkteal, fill=softgreen] at (3.8, 1.1) {Spot Value Date ($T+2$)\\[0.15em] \textmd{\tiny FEDAI Rule 7 Tenor Base}};
-        \draw[timepin, draw=darkteal] (3.8, 0.45) -- (3.8, 0);
+        % Milestone 2: Spot Date T+2 (x = 5.0, gap between badge boundaries = 0.8cm)
+        \filldraw[darkteal] (5.0, 0) circle (3pt);
+        \node[badge, draw=darkteal, fill=softgreen] at (5.0, 1.2) {Spot Value Date ($T+2$)\\[0.15em] \textmd{\tiny FEDAI Rule 7 Tenor Base}};
+        \draw[timepin, draw=darkteal] (5.0, 0.65) -- (5.0, 0);
 
-        % 2-Day Spot Interval
-        \draw[<->, draw=charcoal, line width=0.9pt] (1.0, -0.5) -- node[below, font=\tiny\sffamily\bfseries] {2 Working Days} (3.8, -0.5);
+        % 2-Day Spot Interval Bracket
+        \draw[<->, draw=charcoal, line width=0.9pt] (1.0, -0.5) -- node[below, font=\tiny\sffamily\bfseries] {2 Working Days} (5.0, -0.5);
 
-        % Milestone 3: Fixed Forward Maturity
-        \filldraw[amber!90!black] (8.8, 0) circle (3pt);
-        \node[badge, draw=amber!90!black, fill=softamber] at (8.8, 1.1) {Fixed Maturity ($T+2+n$)\\[0.15em] \textmd{\tiny Single Settlement Date}};
-        \draw[timepin, draw=amber!90!black] (8.8, 0.45) -- (8.8, 0);
+        % Milestone 3: Fixed Forward Maturity (x = 10.4)
+        \filldraw[amber!90!black] (10.4, 0) circle (3pt);
+        \node[badge, draw=amber!90!black, fill=softamber] at (10.4, 1.2) {Fixed Maturity ($T+2+n$)\\[0.15em] \textmd{\tiny Single Settlement Date}};
+        \draw[timepin, draw=amber!90!black] (10.4, 0.65) -- (10.4, 0);
 
         % Tenor Duration Bracket
-        \draw[<->, draw=darkteal, line width=1.1pt] (3.8, -1.2) -- node[below, font=\scriptsize\sffamily\bfseries] {Forward Tenor Computed from Spot Date (FEDAI Rule 7)} (8.8, -1.2);
+        \draw[<->, draw=darkteal, line width=1.1pt] (5.0, -1.2) -- node[below, font=\scriptsize\sffamily\bfseries] {Forward Tenor Computed from Spot Date (FEDAI Rule 7)} (10.4, -1.2);
 
-        % Milestone 4: Option Delivery Window
-        \fill[softblue, opacity=0.9] (10.8, -0.3) rectangle (14.2, 0.3);
-        \draw[draw=navyblue, dashed, line width=1.1pt] (10.8, -0.3) rectangle (14.2, 0.3);
-        \node[badge, draw=navyblue, fill=white] at (12.5, 1.1) {Option Window\\[0.15em] \textmd{\tiny Delivery on Any Day}};
-        \draw[timepin] (12.5, 0.45) -- (12.5, 0.1);
-        \draw[<->, draw=navyblue, line width=0.9pt] (10.8, -0.5) -- node[below, font=\tiny\sffamily\bfseries] {Max 1 Month (FEDAI)} (14.2, -0.5);
+        % Milestone 4: Option Delivery Window (x = 12.6 to 16.2, center = 14.4)
+        \fill[softblue, opacity=0.9] (12.6, -0.3) rectangle (16.2, 0.3);
+        \draw[draw=navyblue, dashed, line width=1.1pt] (12.6, -0.3) rectangle (16.2, 0.3);
+        \node[badge, draw=navyblue, fill=white] at (14.4, 1.2) {Option Window\\[0.15em] \textmd{\tiny Delivery on Any Day}};
+        \draw[timepin] (14.4, 0.65) -- (14.4, 0.1);
+        \draw[<->, draw=navyblue, line width=0.9pt] (12.6, -0.5) -- node[below, font=\tiny\sffamily\bfseries] {Max 1 Month (FEDAI)} (16.2, -0.5);
 
         % Symmetrical Cards Below
-        \node[card, draw=amber!90!black, fill=softamber] at (3.5, -3.8) {
+        \node[card, draw=amber!90!black, fill=softamber] at (4.4, -3.8) {
             {\color{amber!90!black}\textbf{\normalsize 1. Fixed Forward Contract}}\\[0.3em]
             \scriptsize $\bullet$ \textbf{Maturity:} Deliverable on a \textbf{single specified date}\\
             \scriptsize $\bullet$ \textbf{Example:} Booked 5th March (3 months)\\
@@ -1189,7 +1190,7 @@ Under FEDAI Rule 7, the option delivery period granted to the customer shall \te
             \scriptsize $\bullet$ \textbf{Rigidity:} Counterparty cannot deliver earlier or later
         };
 
-        \node[card, draw=navyblue, fill=softblue] at (10.5, -3.8) {
+        \node[card, draw=navyblue, fill=softblue] at (12.4, -3.8) {
             {\color{navyblue}\textbf{\normalsize 2. Option Forward Contract}}\\[0.3em]
             \scriptsize $\bullet$ \textbf{Maturity:} Deliverable on \textbf{any working day} in window\\
             \scriptsize $\bullet$ \textbf{Example:} Booked 15th Sept (2 months)\\
