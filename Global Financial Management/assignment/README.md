@@ -1,4 +1,4 @@
-# Foreign Direct Investment in Switzerland: Trends, Determinants and Economic Impact — An Empirical Analysis
+# Empirical Analysis of Swiss Foreign Direct Investment (2015–2024)
 
 **Course:** MSQF 535 -- Global Financial Management  
 **Institution:** Pondicherry University, Ramanujan School of Mathematical Sciences, Department of Statistics  
@@ -62,8 +62,7 @@ Global Financial Management/assignment/
 │   ├── sec07_determinants_fdi.tex                # Macro/institutional/tax determinants & TikZ Figure 7.1
 │   ├── sec08_economic_impact.tex                 # Labor, GFCF, productivity, trade & TikZ Figure 8.1
 │   ├── sec09_major_findings.tex                  # Comprehensive findings & Table 9.1 synthesis matrix
-│   ├── sec10_conclusion_references.tex           # SWOT outlook, policy recommendations & references
-│   └── sec11_formula_reference.tex               # Appendix: Rule 5 formula reference sheet
+│   └── sec10_conclusion_references.tex           # SWOT outlook, policy recommendations & references
 ├── swiss_fdi_data/                               # Official SNB raw datasets (2015-2024)
 │   ├── fetch_swiss_fdi.py
 │   ├── swiss_fdi_by_country_2015_2024.csv
