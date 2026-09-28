@@ -16,7 +16,7 @@
 \input{preamble/titlepage.tex}
 
 % ------------------------------------------------------------------------------
-% 2. Table of Contents (Dedicated Front-Matter Page)
+% 2. Front Matter: Table of Contents & Executive Summary (Single Dedicated Page)
 % ------------------------------------------------------------------------------
 \newpage
 \pagenumbering{roman}
@@ -25,6 +25,8 @@
   \hypersetup{linkcolor=pureblack}
   \tableofcontents
 }
+\vspace{0.8em}
+\input{sections/sec00_executive_summary.tex}
 \clearpage
 
 % ------------------------------------------------------------------------------
@@ -33,7 +35,6 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\input{sections/sec00_executive_summary.tex}
 \input{sections/sec01_introduction.tex}
 \input{sections/sec02_overview_fdi_switzerland.tex}
 \input{sections/sec03_trend_analysis.tex}

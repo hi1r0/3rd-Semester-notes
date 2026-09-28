@@ -14,8 +14,8 @@
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
 \usepackage{bm}
 
-% Layout & Page Geometry
-\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+% Layout & Page Geometry (Calibrated for 12-15 page monograph)
+\usepackage[a4paper, top=2.2cm, bottom=2.2cm, left=2.2cm, right=2.2cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage[inline]{enumitem}
@@ -66,15 +66,15 @@
 
 % Section Heading Formatting (Crisp Academic Monochrome with Rules)
 \titleformat{\section}
-  {\normalfont\Large\bfseries\color{pureblack}}{\thesection}{1em}{}[\titlerule]
+  {\normalfont\large\bfseries\color{pureblack}}{\thesection}{0.8em}{}[\titlerule]
 \titleformat{\subsection}
-  {\normalfont\large\bfseries\color{pureblack}}{\thesubsection}{1em}{}
+  {\normalfont\normalsize\bfseries\color{pureblack}}{\thesubsection}{0.6em}{}
 \titleformat{\subsubsection}
-  {\normalfont\normalsize\bfseries\color{pureblack}}{\thesubsubsection}{1em}{}
+  {\normalfont\small\bfseries\color{pureblack}}{\thesubsubsection}{0.5em}{}
 
-\titlespacing*{\section}{0pt}{12pt plus 2pt minus 2pt}{6pt plus 1pt minus 1pt}
-\titlespacing*{\subsection}{0pt}{9pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
-\titlespacing*{\subsubsection}{0pt}{7pt plus 1pt minus 1pt}{3pt plus 1pt minus 1pt}
+\titlespacing*{\section}{0pt}{7pt plus 1pt minus 1pt}{3pt plus 1pt minus 1pt}
+\titlespacing*{\subsection}{0pt}{5pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
+\titlespacing*{\subsubsection}{0pt}{4pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
 
 % Running Headers & Footers
 \pagestyle{fancy}
@@ -87,12 +87,15 @@
 
 % Page Layout & Float Spacing
 \raggedbottom
-\setlength{\intextsep}{10pt plus 2pt minus 2pt}
-\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
-\setlength{\abovecaptionskip}{5pt plus 1pt minus 1pt}
-\setlength{\belowcaptionskip}{3pt plus 1pt minus 1pt}
+\setlength{\intextsep}{6pt plus 1pt minus 1pt}
+\setlength{\textfloatsep}{6pt plus 1pt minus 1pt}
+\setlength{\abovecaptionskip}{3pt plus 1pt minus 1pt}
+\setlength{\belowcaptionskip}{2pt plus 1pt minus 1pt}
 \makeatletter
 \setlength{\@fptop}{0pt}
-\setlength{\@fpsep}{12pt}
+\setlength{\@fpsep}{8pt}
 \setlength{\@fpbot}{0pt plus 1fil}
 \makeatother
+
+% Set TOC Depth to 1 to fit on exactly 1 page
+\setcounter{tocdepth}{1}

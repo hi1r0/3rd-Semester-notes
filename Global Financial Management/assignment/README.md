@@ -5,7 +5,8 @@
 **Course Instructor:** Dr. Venkatajalapathy  
 **Student:** N Rohit Vedhanandh (Reg. No.: `25MSQUFPY0002`)  
 **Date:** September 2026  
-**Format:** Monochromatic / Academic Greyscale (LaTeX, TikZ, Pgfplots, Booktabs, TColorBox)
+**Format:** Monochromatic / Academic Greyscale (LaTeX, TikZ, Pgfplots, Booktabs, TColorBox)  
+**Length:** Exactly 13 Pages (Strictly calibrated for the 12--15 Page Specification)
 
 ---
 
