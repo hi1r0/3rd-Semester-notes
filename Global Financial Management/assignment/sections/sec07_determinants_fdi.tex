@@ -1,0 +1,141 @@
+% ==============================================================================
+% Section 7: Determinants of FDI in Switzerland
+% ==============================================================================
+
+\section{Determinants of FDI in Switzerland}
+
+The substantial accumulation and geographic resilience of direct investment in Switzerland cannot be explained by classical market-seeking motives alone, given Switzerland's small domestic consumer population ($\approx 9\mn$ residents). Instead, Swiss direct investment dynamics are governed by a sophisticated tri-partite hierarchy of macroeconomic fundamentals, institutional governance, and sector-specific agglomeration economies.
+
+\subsection{Macroeconomic Determinants}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=3pt]
+    \item \textbf{GDP Stability and Purchasing Power:} Switzerland exhibits steady, non-inflationary real GDP growth combined with the world's highest per-capita income levels. While the aggregate market is small, the extreme density of high-net-worth consumers and sophisticated enterprise clients creates an ideal testbed for premium global product launches.
+    \item \textbf{Monetary Policy and the Negative Interest Rate Regime (2015--2022):} Following the abandonment of the $1.20$ EUR/CHF exchange rate floor in January 2015, the Swiss National Bank instituted negative policy rates (reaching $-0.75\pct$), which persisted until September 2022. This unprecedented negative rate environment compressed corporate borrowing costs, facilitating inexpensive debt financing for Swiss multinational acquisitions abroad, while penalizing foreign liquid deposits held in Swiss commercial banks.
+    \item \textbf{Low Inflation and Price Stability:} Switzerland maintains an exceptional record of price stability, with annual inflation averaging between $0.5\pct$ and $1.5\pct$ over the decade. Even during the global post-pandemic inflation surge (2021--2023), Swiss inflation peaked at merely $3.5\pct$ (compared to $>9\pct$ in the Eurozone and US), preserving the real purchasing power of long-term capital investments.
+    \item \textbf{The Safe-Haven Currency Paradox (Franc Appreciation):} The secular appreciation of the Swiss Franc exerts a dual, paradoxical effect on direct investment:
+    \begin{enumerate}[leftmargin=1.2em, itemsep=1.5pt]
+        \item \textit{Cost Deterrent and Valuation Deflator:} A strong Franc inflates domestic operational costs (labor, facilities) in foreign currency terms and mechanically reduces the converted CHF value of foreign-currency assets held by foreign parents.
+        \item \textit{Productivity Catalyst and Wealth Anchor:} Conversely, currency strength imposes a relentless productivity discipline on Swiss-based manufacturers, compelling continuous automation and R\&D upgrades, while insulating foreign investors against emerging-market currency devaluations.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Institutional and Regulatory Determinants}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=3pt]
+    \item \textbf{Fiscal Federalism and Inter-Cantonal Tax Competition:} Switzerland's decentralized fiscal constitution empowers its 26 cantons to set independent cantonal corporate income tax rates. This breeds healthy institutional tax competition: cantons such as Zug, Nidwalden, and Schwyz levy combined (federal, cantonal, communal) effective corporate profit tax rates of $11.8\pct$ to $12.5\pct$, while major urban cantons (Zurich, Basel-Stadt, Geneva) maintain competitive rates between $13.0\pct$ and $19.7\pct$.
+    \item \textbf{The STAF / TRAF Corporate Tax Reform (2020):} In response to OECD/G20 BEPS pressure, Switzerland enacted the Federal Act on Tax Reform and AHV Financing (STAF/TRAF) in January 2020. This historic legislation abolished outdated preferential tax regimes for holding, auxiliary, and mixed companies, replacing them with internationally compliant, innovation-friendly tax instruments:
+    \begin{itemize}[leftmargin=1.2em, itemsep=1.5pt]
+        \item \textit{Patent Box:} Preferential taxation of net profits derived from patents and equivalent intellectual property rights (up to a $90\pct$ cantonal tax exemption).
+        \item \textit{R\&D Super-Deductions:} Cantons may permit corporate deductions of up to $150\pct$ of domestic research and development expenditures.
+    \end{itemize}
+    \item \textbf{Direct Democracy and Unyielding Legal Certainty:} The Swiss political architecture of consensual governance, coalition federal councils, and citizen referendums prevents radical, expropriatory shifts in economic policy, guaranteeing unparalleled security for physical and intellectual property rights.
+    \item \textbf{Trade Openness and Bilateral Integration:} Switzerland maintains over 30 bilateral and multilateral Free Trade Agreements (FTAs) across 40+ nations through the European Free Trade Association (EFTA), supplemented by over 120 sector-specific Bilateral Agreements with the European Union, guaranteeing frictionless market access without EU regulatory overreach.
+\end{itemize}
+
+\subsection{Sector-Specific Agglomeration Drivers}
+
+In high-value industries, investment decisions are governed by specialized localized ecosystems rather than broad macroeconomic indicators:
+\begin{itemize}[leftmargin=1.5em, itemsep=2.5pt]
+    \item \textbf{Pharmaceuticals and Life Sciences:} Attracted by the premier patent enforcement regime, streamlined clinical trial protocols by Swissmedic, and research partnerships with ETH Zurich, EPFL, and the University of Basel.
+    \item \textbf{Commodity Trading Hubs:} Benefiting from specialized trade finance banks, global maritime insurance syndicates, and comprehensive cross-border arbitration infrastructure in Geneva and Zug.
+\end{itemize}
+
+\vspace{0.4em}
+% ------------------------------------------------------------------------------
+% TikZ Figure 7.1: Tri-Partite Hierarchy of Swiss FDI Determinants
+% Strictly adhering to Rule 4 (Symmetry, text width=4.3cm, height=5.0cm, gap=0.7cm)
+% ------------------------------------------------------------------------------
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    card/.style={
+        draw=pureblack,
+        line width=1.1pt,
+        fill=boxfill,
+        rounded corners=2mm,
+        text width=4.3cm,
+        minimum height=5.0cm,
+        align=center,
+        inner sep=3.5mm
+    },
+    titlebox/.style={
+        draw=pureblack,
+        line width=1.2pt,
+        fill=darkboxfill,
+        rounded corners=1.5mm,
+        text width=14.2cm,
+        minimum height=1.1cm,
+        align=center,
+        inner sep=2mm
+    },
+    conn/.style={
+        -{Stealth[length=3mm, width=2.2mm]},
+        line width=1.3pt,
+        color=pureblack
+    }
+]
+
+    % Master Banner Node
+    \node[titlebox] (banner) at (0, 3.4) {
+        \textbf{\large Tri-Partite Structural Architecture of Swiss FDI Determinants}\\[0.2em]
+        \footnotesize Interdependent Pillars Governing Inward Attractiveness and Outward Corporate Competitiveness
+    };
+
+    % Three Parallel Pillar Cards (Identical text width=4.3cm, minimum height=5.0cm, gap=0.7cm)
+    \node[card] (macro) at (-5.0, -0.4) {
+        \textbf{\normalsize Macroeconomic Core}\\[0.2em]
+        \textbf{\footnotesize Monetary \& Capital Factors}\\[0.6em]
+        \begin{minipage}{3.9cm}
+        \scriptsize
+        \begin{itemize}[leftmargin=1.0em, itemsep=2.5pt]
+            \item Safe-haven Franc anchor
+            \item Low inflation environment ($0.5\text{--}1.5\%$)
+            \item Historically low cost of capital
+            \item High domestic savings \& current account surplus
+        \end{itemize}
+        \end{minipage}
+    };
+
+    \node[card] (inst) at (0.0, -0.4) {
+        \textbf{\normalsize Institutional Pillar}\\[0.2em]
+        \textbf{\footnotesize Fiscal \& Legal Framework}\\[0.6em]
+        \begin{minipage}{3.9cm}
+        \scriptsize
+        \begin{itemize}[leftmargin=1.0em, itemsep=2.5pt]
+            \item Cantonal tax competition ($11.8\text{--}14\%$)
+            \item STAF/TRAF patent boxes \& R\&D super-deductions
+            \item Direct democratic stability
+            \item Uncompromising IP and property protection
+        \end{itemize}
+        \end{minipage}
+    };
+
+    \node[card] (sector) at (5.0, -0.4) {
+        \textbf{\normalsize Sectoral Clusters}\\[0.2em]
+        \textbf{\footnotesize Innovation Ecosystems}\\[0.6em]
+        \begin{minipage}{3.9cm}
+        \scriptsize
+        \begin{itemize}[leftmargin=1.0em, itemsep=2.5pt]
+            \item Dense Basel life-sciences agglomeration
+            \item Geneva/Zug global commodity trading hub
+            \item World-class STEM talent (ETH/EPFL)
+            \item Sophisticated private banking \& reinsurance
+        \end{itemize}
+        \end{minipage}
+    };
+
+    % Symmetrical Vertical Connectors from Banner to Pillar Heads
+    \draw[conn] (banner.south -| macro.north) -- (macro.north);
+    \draw[conn] (banner.south) -- (inst.north);
+    \draw[conn] (banner.south -| sector.north) -- (sector.north);
+
+    % Horizontal Clearance Links (Spacing between cards is 5.0 - 4.3 = 0.7cm)
+    \draw[conn, dashed] ([yshift=0.5cm]macro.east) -- ([yshift=0.5cm]inst.west)
+        node[midway, above, font=\tiny\bfseries] {Enables};
+    \draw[conn, dashed] ([yshift=0.5cm]inst.east) -- ([yshift=0.5cm]sector.west)
+        node[midway, above, font=\tiny\bfseries] {Catalyzes};
+
+\end{tikzpicture}
+\caption{Tri-Partite Hierarchy of Swiss Direct Investment Determinants. Symmetrical alignment highlights how macroeconomic stability and institutional tax frameworks synergize to sustain world-leading sectoral innovation clusters.}
+\label{fig:determinants_hierarchy}
+\end{figure}

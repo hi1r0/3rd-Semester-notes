@@ -1,0 +1,189 @@
+% ==============================================================================
+% Section 5: Country-wise FDI Analysis
+% ==============================================================================
+
+\section{Country-wise FDI Analysis}
+
+Bilateral geographic breakdowns provide vital empirical clarity regarding geopolitical linkages and capital routing. A critical innovation in contemporary direct investment statistics is the distinction between the \textbf{Immediate Investor} (the geographic domicile of the entity directly holding the equity stake) and the \textbf{Ultimate Beneficial Owner (UBO)}, which identifies the country where the ultimate parent enterprise exercises controlling authority.
+
+\subsection{Major Foreign Investors in Switzerland (Inward FDI)}
+
+Analyzing inward capital stocks through the dual lenses of immediate creditor origin versus ultimate parent domicile uncovers profound structural intermediation distortions within Europe, as shown in Tables~\ref{tab:inward_immediate} and~\ref{tab:inward_ubo}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Top Immediate Investor Countries in Switzerland (Capital Stocks, 2024)}
+\label{tab:inward_immediate}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{c l r r >{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{tableheadbg}
+\textbf{Rank} & \textbf{Country of Immediate Origin} & \textbf{Stock ($\CHF$\,mn)} & \textbf{Share (\%)} & \textbf{Dominant Intermediary Mechanism} \\
+\midrule
+1 & Netherlands & 244,052 & 26.4\% & Conduit holding companies \& financing hubs \\
+\rowcolor{tablerowbg}
+2 & United States & 168,833 & 18.2\% & Direct MNE operational headquarters \\
+3 & Luxembourg & 140,873 & 15.2\% & Specialized investment vehicles (SIVs) \& funds \\
+\rowcolor{tablerowbg}
+4 & United Kingdom & 71,091 & 7.7\% & Financial services, consumer brands \\
+5 & Japan & 36,780 & 4.0\% & Precision electronics, pharmaceuticals \\
+\rowcolor{tablerowbg}
+6 & Belgium & 34,794 & 3.8\% & European coordination centers \\
+7 & Germany & 27,403 & 3.0\% & Cross-border industrial manufacturing \\
+\rowcolor{tablerowbg}
+8 & France & 17,435 & 1.9\% & Luxury goods, specialty retail, banking \\
+\bottomrule
+\end{tabularx}
+\vspace{0.3em}
+\footnotesize
+\textit{Source: Swiss National Bank (SNB). Capital stocks at year-end 2024.}
+\normalsize
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Top Ultimate Beneficial Owner (UBO) Investor Countries in Switzerland (2024)}
+\label{tab:inward_ubo}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{c l r r >{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{tableheadbg}
+\textbf{Rank} & \textbf{Country of Ultimate Parent} & \textbf{Stock ($\CHF$\,mn)} & \textbf{Share (\%)} & \textbf{Structural Analytical Finding} \\
+\midrule
+1 & United States & 370,695 & 40.0\% & Massive unmasking of routed US corporate capital \\
+\rowcolor{tablerowbg}
+2 & Germany & 49,969 & 5.4\% & Substantial increase over immediate rank \\
+3 & Belgium & 38,075 & 4.1\% & Stable direct manufacturing footprint \\
+\rowcolor{tablerowbg}
+4 & Netherlands & 37,107 & 4.0\% & Plummets from 26.4\% (85\% phantom capital) \\
+5 & United Kingdom & 33,701 & 3.6\% & Concentrated corporate presence \\
+\bottomrule
+\end{tabularx}
+\vspace{0.3em}
+\footnotesize
+\textit{Source: Swiss National Bank (SNB). UBO positions trace ownership to the ultimate controlling parent.}
+\normalsize
+\end{table}
+
+\begin{remarkbox}[The Conduit Phenomenon and Phantom FDI Discrepancies]
+Comparing Table~\ref{tab:inward_immediate} against Table~\ref{tab:inward_ubo} reveals the classic \textbf{``Phantom FDI'' conduit effect} documented in international finance literature (Damgaard, Elkjaer, and Johannesen, 2019):
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{The United States Discrepancy:} Under immediate accounting, the US accounts for $\CHF\,168.8\bn$ ($18.2\pct$). Under UBO accounting, US exposure surges to \textbf{$\CHF\,370.7\bn$ ($40.0\pct$)}---an increase of \textbf{$+\CHF\,201.9\bn$} ($+120\pct$). This proves that the United States is overwhelmingly the true dominant source of foreign capital in Switzerland.
+    \item \textbf{The Netherlands \& Luxembourg Deflation:} Under immediate accounting, the Netherlands and Luxembourg combine for $\CHF\,384.9\bn$ ($41.6\pct$ of total inward stock). When traced to the ultimate beneficial owner, Dutch inward stock collapses by \textbf{$84.8\pct$} to merely $\CHF\,37.1\bn$, while Luxembourg virtually vanishes from the top tiers. US multinational corporations route their investments through Dutch and Luxembourgish Special Purpose Entities (SPEs) to optimize treaty withholding taxes prior to deployment into Swiss subsidiaries.
+\end{itemize}
+\end{remarkbox}
+
+% ------------------------------------------------------------------------------
+% Pgfplots Figure 5.1: Immediate vs UBO Inward FDI Comparison
+% High-Contrast Academic Greyscale Bar Chart
+% ------------------------------------------------------------------------------
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar=4pt,
+    bar width=0.65cm,
+    width=13.5cm,
+    height=6.8cm,
+    grid=major,
+    grid style={line width=0.2pt, color=midgray!30},
+    ylabel={\small\textbf{Inward Capital Stock ($\CHF$\,Billion)}},
+    symbolic x coords={United States, Netherlands, Luxembourg, Germany, United Kingdom},
+    xtick=data,
+    xticklabel style={font=\footnotesize\bfseries},
+    ytick={0, 50, 100, 150, 200, 250, 300, 350, 400},
+    ymin=0, ymax=420,
+    legend style={
+        at={(0.97,0.95)},
+        anchor=north east,
+        font=\footnotesize,
+        draw=pureblack,
+        line width=0.6pt
+    },
+    enlarge x limits=0.18
+]
+
+    % Immediate Investor Bars (Light Fill with Solid Border)
+    \addplot[fill=darkboxfill, draw=pureblack, line width=0.9pt] 
+        coordinates {(United States, 168.8) (Netherlands, 244.1) (Luxembourg, 140.9) (Germany, 27.4) (United Kingdom, 71.1)};
+    \addlegendentry{Immediate Creditor Basis}
+
+    % Ultimate Beneficial Owner Bars (Pure Black Solid Fill)
+    \addplot[fill=pureblack, draw=pureblack, line width=0.9pt] 
+        coordinates {(United States, 370.7) (Netherlands, 37.1) (Luxembourg, 8.5) (Germany, 50.0) (United Kingdom, 33.7)};
+    \addlegendentry{Ultimate Beneficial Owner (UBO)}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Immediate Investor versus Ultimate Beneficial Owner (UBO) Inward FDI Capital Stock in Switzerland (2024). Source: SNB. Highlights the immense conduit effect where American parent capital is routed through Benelux holding structures.}
+\label{fig:ubo_comparison}
+\end{figure}
+
+\subsection{Major Destinations of Swiss Outward FDI}
+
+Swiss outward direct investment demonstrates strategic diversification across high-income advanced economies and high-growth Asian hubs (Tables~\ref{tab:outward_destinations} and~\ref{tab:outward_regions}).
+
+\begin{table}[H]
+\centering
+\small
+\caption{Top Destination Countries for Swiss Outward Direct Investment (2024)}
+\label{tab:outward_destinations}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{c l r r >{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{tableheadbg}
+\textbf{Rank} & \textbf{Host Destination Country} & \textbf{Stock ($\CHF$\,mn)} & \textbf{Share (\%)} & \textbf{Primary Swiss Strategic Objective} \\
+\midrule
+1 & United States & 334,702 & 25.0\% & Biopharma, tech start-ups, consumer markets \\
+\rowcolor{tablerowbg}
+2 & Netherlands & 160,480 & 12.0\% & European distribution, port logistics hubs \\
+3 & Germany & 81,654 & 6.1\% & Cross-border industrial integration (DACH) \\
+\rowcolor{tablerowbg}
+4 & Luxembourg & 74,769 & 5.6\% & Treasury management, asset securitization \\
+5 & United Kingdom & 73,146 & 5.5\% & London financial center, commercial operations \\
+\rowcolor{tablerowbg}
+6 & France & 64,413 & 4.8\% & Consumer goods, manufacturing, logistics \\
+7 & Singapore & 59,901 & 4.5\% & Southeast Asian wealth management \& trade \\
+\rowcolor{tablerowbg}
+8 & Ireland & 58,968 & 4.4\% & Med-tech manufacturing, software licensing \\
+\bottomrule
+\end{tabularx}
+\vspace{0.3em}
+\footnotesize
+\textit{Source: Swiss National Bank (SNB). Figures in millions of Swiss Francs ($\CHF\,$mn) at year-end 2024.}
+\normalsize
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Regional Geographic Distribution of Swiss Outward FDI Capital Stocks (2024)}
+\label{tab:outward_regions}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{>{\raggedright}p{5.5cm} r r >{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{tableheadbg}
+\textbf{Geographic Region} & \textbf{Stock ($\CHF$\,mn)} & \textbf{Share (\%)} & \textbf{Strategic Regional Role} \\
+\midrule
+Europe (EU \& Non-EU) & 710,935 & 53.0\% & Integrated European Single Market access \\
+\rowcolor{tablerowbg}
+North America (USA \& Canada) & 351,484 & 26.2\% & Premier consumer market \& R\&D innovation \\
+Asia & 159,694 & 11.9\% & High-growth industrial and consumer demand \\
+\rowcolor{tablerowbg}
+Central and South America & 99,567 & 7.4\% & Food processing, agri-business, minerals \\
+Africa & 9,711 & 0.7\% & Strategic distribution, local manufacturing \\
+\rowcolor{tablerowbg}
+Oceania & 8,750 & 0.7\% & Specialized financial and consumer networks \\
+\midrule
+\textbf{Total Worldwide} & \textbf{1,340,141} & \textbf{100.0\%} & \textbf{Comprehensive Global Outward Portfolio} \\
+\bottomrule
+\end{tabularx}
+\vspace{0.3em}
+\footnotesize
+\textit{Source: Swiss National Bank (SNB). Outward stock positions at year-end 2024.}
+\normalsize
+\end{table}
+
+The United States represents the single largest destination for Swiss outward direct investment ($\CHF\,334.7\bn$, $25.0\pct$), absorbing more capital than any other individual sovereign state. Concurrently, Western Europe absorbs $53.0\pct$ ($\CHF\,710.9\bn$) of total Swiss foreign capital, illustrating Switzerland's profound economic interdependence with the surrounding European Union Single Market.

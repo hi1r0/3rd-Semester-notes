@@ -1,0 +1,391 @@
+﻿Year,Indicator,Survey_Source,Sector_Code,Sector_Name,Sector_Group,Unit,Value
+2015,Number of staff,All companies,B,Banks,Services,Persons (in thousands),77738
+2015,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),66959
+2015,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),92361
+2015,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),16536
+2015,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),23044
+2015,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),78980
+2015,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),84343
+2015,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),87380
+2015,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),322643
+2015,Number of staff,All companies,T1,Total,Services,Persons (in thousands),528758
+2015,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),851401
+2015,Number of staff,All companies,H,Trade,Services,Persons (in thousands),191546
+2015,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),132514
+2015,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),63553
+2015,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),54158
+2015,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),67401
+2015,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),5879
+2015,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),19501
+2015,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),46047
+2015,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),39810
+2015,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),15222
+2015,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),207416
+2015,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),320876
+2015,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),528292
+2015,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),108682
+2015,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),108039
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),14185
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),12801
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),24960
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),10657
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),3543
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),32933
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),44533
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),72158
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),115227
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),207882
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),323109
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),82864
+2015,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),24475
+2016,Number of staff,All companies,B,Banks,Services,Persons (in thousands),79253
+2016,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),67315
+2016,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),92475
+2016,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),17964
+2016,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),19934
+2016,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),80427
+2016,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),84595
+2016,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),91425
+2016,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),324812
+2016,Number of staff,All companies,T1,Total,Services,Persons (in thousands),535269
+2016,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),860081
+2016,Number of staff,All companies,H,Trade,Services,Persons (in thousands),193132
+2016,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),133561
+2016,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),64659
+2016,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),54447
+2016,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),68659
+2016,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),6044
+2016,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),17848
+2016,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),49524
+2016,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),38764
+2016,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),15190
+2016,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),211394
+2016,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),329060
+2016,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),540454
+2016,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),114430
+2016,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),110889
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),14594
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),12868
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),23816
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),11920
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),2086
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),30903
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),45831
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),76235
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),113418
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),206209
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),319627
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),78702
+2016,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),22672
+2017,Number of staff,All companies,B,Banks,Services,Persons (in thousands),78234
+2017,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),60969
+2017,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),93181
+2017,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),19265
+2017,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),19774
+2017,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),82321
+2017,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),87016
+2017,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),97057
+2017,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),323487
+2017,Number of staff,All companies,T1,Total,Services,Persons (in thousands),548183
+2017,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),871670
+2017,Number of staff,All companies,H,Trade,Services,Persons (in thousands),202269
+2017,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),131584
+2017,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),64014
+2017,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),48687
+2017,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),68772
+2017,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),6445
+2017,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),17565
+2017,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),50375
+2017,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),42335
+2017,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),16070
+2017,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),210169
+2017,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),332975
+2017,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),543144
+2017,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),117907
+2017,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),110974
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),14220
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),12282
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),24409
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),12820
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),2209
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),31946
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),44681
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),80987
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),113318
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),215208
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),328526
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),84362
+2017,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),20610
+2018,Number of staff,All companies,B,Banks,Services,Persons (in thousands),
+2018,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2018,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2018,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),
+2018,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),
+2018,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2018,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2018,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),
+2018,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),
+2018,Number of staff,All companies,T1,Total,Services,Persons (in thousands),
+2018,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),
+2018,Number of staff,All companies,H,Trade,Services,Persons (in thousands),
+2018,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),
+2018,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),68628
+2018,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),46071
+2018,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),71042
+2018,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),6862
+2018,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),17864
+2018,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),52163
+2018,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),47480
+2018,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),31311
+2018,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),216756
+2018,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),339962
+2018,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),556718
+2018,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),106437
+2018,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),108860
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),
+2018,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),
+2019,Number of staff,All companies,B,Banks,Services,Persons (in thousands),
+2019,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2019,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2019,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),
+2019,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),
+2019,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2019,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2019,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),
+2019,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),
+2019,Number of staff,All companies,T1,Total,Services,Persons (in thousands),
+2019,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),
+2019,Number of staff,All companies,H,Trade,Services,Persons (in thousands),
+2019,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),
+2019,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),63113
+2019,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),45840
+2019,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),69315
+2019,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),6483
+2019,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),18681
+2019,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),53292
+2019,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),46318
+2019,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),30842
+2019,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),214765
+2019,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),335016
+2019,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),549781
+2019,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),107097
+2019,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),108800
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),
+2019,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),
+2020,Number of staff,All companies,B,Banks,Services,Persons (in thousands),
+2020,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2020,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2020,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),
+2020,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),
+2020,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2020,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2020,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),
+2020,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),
+2020,Number of staff,All companies,T1,Total,Services,Persons (in thousands),
+2020,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),
+2020,Number of staff,All companies,H,Trade,Services,Persons (in thousands),
+2020,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),
+2020,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),64488
+2020,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),46478
+2020,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),66588
+2020,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),6104
+2020,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),19517
+2020,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),52230
+2020,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),44995
+2020,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),22673
+2020,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),210291
+2020,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),325239
+2020,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),535530
+2020,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),105267
+2020,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),107190
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),
+2020,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),
+2021,Number of staff,All companies,B,Banks,Services,Persons (in thousands),
+2021,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2021,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2021,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),
+2021,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),
+2021,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2021,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2021,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),
+2021,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),
+2021,Number of staff,All companies,T1,Total,Services,Persons (in thousands),
+2021,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),
+2021,Number of staff,All companies,H,Trade,Services,Persons (in thousands),
+2021,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),
+2021,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),64746
+2021,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),47790
+2021,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),68102
+2021,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),7076
+2021,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),19813
+2021,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),51943
+2021,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),42867
+2021,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),24855
+2021,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),210702
+2021,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),328324
+2021,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),539026
+2021,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),105646
+2021,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),106188
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),
+2021,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),
+2022,Number of staff,All companies,B,Banks,Services,Persons (in thousands),
+2022,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2022,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2022,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),
+2022,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),
+2022,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2022,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2022,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),
+2022,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),
+2022,Number of staff,All companies,T1,Total,Services,Persons (in thousands),
+2022,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),
+2022,Number of staff,All companies,H,Trade,Services,Persons (in thousands),
+2022,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),
+2022,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),65765
+2022,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),47025
+2022,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),70507
+2022,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),5958
+2022,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),19556
+2022,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),49678
+2022,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),43397
+2022,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),25782
+2022,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),210607
+2022,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),328137
+2022,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),538744
+2022,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),104499
+2022,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),106577
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),
+2022,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),
+2023,Number of staff,All companies,B,Banks,Services,Persons (in thousands),
+2023,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2023,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2023,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),
+2023,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),
+2023,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2023,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2023,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),
+2023,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),
+2023,Number of staff,All companies,T1,Total,Services,Persons (in thousands),
+2023,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),
+2023,Number of staff,All companies,H,Trade,Services,Persons (in thousands),
+2023,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),
+2023,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),65454
+2023,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),48538
+2023,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),76297
+2023,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),6343
+2023,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),20370
+2023,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),49841
+2023,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),43827
+2023,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),26180
+2023,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),218503
+2023,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),337807
+2023,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),556310
+2023,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),112529
+2023,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),106931
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),
+2023,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),
+2024,Number of staff,All companies,B,Banks,Services,Persons (in thousands),
+2024,Number of staff,All companies,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2024,Number of staff,All companies,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2024,Number of staff,All companies,FH,Finance and holding companies,Services,Persons (in thousands),
+2024,Number of staff,All companies,V,Insurance companies,Services,Persons (in thousands),
+2024,Number of staff,All companies,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2024,Number of staff,All companies,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2024,Number of staff,All companies,DU,Other services,Services,Persons (in thousands),
+2024,Number of staff,All companies,T0,Total,Manufacturing,Persons (in thousands),
+2024,Number of staff,All companies,T1,Total,Services,Persons (in thousands),
+2024,Number of staff,All companies,D1_2,Total,All / Total,Persons (in thousands),
+2024,Number of staff,All companies,H,Trade,Services,Persons (in thousands),
+2024,Number of staff,All companies,TUK,Transportation and communications,Services,Persons (in thousands),
+2024,Number of staff,Companies covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),68175
+2024,Number of staff,Companies covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),48469
+2024,Number of staff,Companies covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),80258
+2024,Number of staff,Companies covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),5338
+2024,Number of staff,Companies covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),21283
+2024,Number of staff,Companies covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),49740
+2024,Number of staff,Companies covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),44089
+2024,Number of staff,Companies covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),26208
+2024,Number of staff,Companies covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),222556
+2024,Number of staff,Companies covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),338408
+2024,Number of staff,Companies covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),560964
+2024,Number of staff,Companies covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),110214
+2024,Number of staff,Companies covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),107190
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,B,Banks,Services,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,CUK,Chemicals and plastics,Manufacturing,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,EEOU,"Electronics, energy, optical and watchmaking",Manufacturing,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,FH,Finance and holding companies,Services,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,V,Insurance companies,Services,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,MUM,Metals and machinery,Manufacturing,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,UIB,Other manufacturing and construction,Manufacturing,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,DU,Other services,Services,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,T0,Total,Manufacturing,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,T1,Total,Services,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,D1_2,Total,All / Total,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,H,Trade,Services,Persons (in thousands),
+2024,Number of staff,Companies not covered by the Swiss National Bank survey,TUK,Transportation and communications,Services,Persons (in thousands),

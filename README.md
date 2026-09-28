@@ -14,6 +14,7 @@ Comprehensive course notes, lecture materials, presentations, and LaTeX study do
 │   └── latex/                     # LaTeX sources, preamble, chapters & compiled notes
 ├── Global Financial Management/
 │   ├── notes (GFM).docx           # GFM course notes
+│   ├── assignment/                # Swiss FDI Empirical Analysis Assignment (Monochrome LaTeX, Pgfplots & TikZ)
 │   └── latex/                     # Modular LaTeX notes, TikZ flowcharts & compiled notes
 ├── ML/
 │   ├── QF_sem_3_ML_U1P1.pdf       # Unit 1 Part 1 Slides
@@ -34,6 +35,7 @@ Comprehensive course notes, lecture materials, presentations, and LaTeX study do
 
 2. **Global Financial Management (GFM)**
    - International financial markets, exchange rate mechanisms, and currency risk management.
+   - Empirical assignment report on Foreign Direct Investment in Switzerland: Trends, Determinants and Economic Impact (2015--2024).
 
 3. **Machine Learning (ML)**
    - Machine learning algorithms and statistical learning applications in finance.

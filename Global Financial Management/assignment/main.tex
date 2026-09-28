@@ -1,0 +1,49 @@
+\documentclass[11pt,a4paper,oneside]{article}
+
+% ==============================================================================
+% Input Preamble Configurations (Monochrome & Greyscale Edition)
+% ==============================================================================
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. Pondicherry University Assignment Title / Cover Page
+% ------------------------------------------------------------------------------
+\pagenumbering{gobble}
+\input{preamble/titlepage.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Table of Contents (Dedicated Front-Matter Page)
+% ------------------------------------------------------------------------------
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{2}
+{
+  \hypersetup{linkcolor=pureblack}
+  \tableofcontents
+}
+\clearpage
+
+% ------------------------------------------------------------------------------
+% 3. Core Assignment Sections
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{sections/sec00_executive_summary.tex}
+\input{sections/sec01_introduction.tex}
+\input{sections/sec02_overview_fdi_switzerland.tex}
+\input{sections/sec03_trend_analysis.tex}
+\input{sections/sec04_sectorwise_analysis.tex}
+\input{sections/sec05_countrywise_analysis.tex}
+\input{sections/sec06_swiss_mnes_abroad.tex}
+\input{sections/sec07_determinants_fdi.tex}
+\input{sections/sec08_economic_impact.tex}
+\input{sections/sec09_major_findings.tex}
+\input{sections/sec10_conclusion_references.tex}
+\input{sections/sec11_formula_reference.tex}
+
+\end{document}
