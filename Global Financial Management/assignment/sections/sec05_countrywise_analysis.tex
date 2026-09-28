@@ -36,28 +36,28 @@ Tracing capital ownership through immediate versus UBO lenses reveals the classi
 8 & France & 17,435 & 1.9\% & 20,100 & 2.2\% & Cross-Border Retail \& Luxury \\
 \bottomrule
 \end{tabularx}
-\vspace{0.2em}
+\par\vspace{0.3em}
 \footnotesize
 \textit{Source: Swiss National Bank (SNB). Direct investment capital stocks at year-end 2024.}
 \normalsize
 \end{table}
 
 \begin{remarkbox}[Unmasking the American Capital Preponderance]
-While the Netherlands ($26.4\pct$) and Luxembourg ($15.2\pct$) appear as the largest immediate creditor nations, their share collapses by over $85\pct$ under UBO accounting. Conversely, the **United States surges from $18.2\pct$ to $40.0\pct$ ($\CHF\,370.7\bn$)**, demonstrating that American multinationals heavily route European investments through Benelux Special Purpose Entities (SPEs) prior to deployment into Switzerland.
+While the Netherlands ($26.4\pct$) and Luxembourg ($15.2\pct$) appear as the largest immediate creditor nations, their share collapses by over $85\pct$ under UBO accounting. Conversely, the \textbf{United States surges from $18.2\pct$ to $40.0\pct$ ($\CHF\,370.7\bn$)}, demonstrating that American multinationals heavily route European investments through Benelux Special Purpose Entities (SPEs) prior to deployment into Switzerland.
 \end{remarkbox}
 
 % ------------------------------------------------------------------------------
 % Pgfplots Figure 5.1: Immediate vs UBO Inward FDI Comparison
-% Calibrated for 12-15 Page Monograph (Height 4.8cm)
+% Prominent Display (Width 14.8cm, Height 6.0cm)
 % ------------------------------------------------------------------------------
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    ybar=2.5pt,
+    ybar=3pt,
     bar width=0.55cm,
-    width=13.5cm,
-    height=4.8cm,
+    width=14.8cm,
+    height=6.0cm,
     grid=major,
     grid style={line width=0.2pt, color=midgray!30},
     ylabel={\footnotesize\textbf{Inward Stock ($\CHF$\,bn)}},
@@ -67,8 +67,9 @@ While the Netherlands ($26.4\pct$) and Luxembourg ($15.2\pct$) appear as the lar
     ytick={0, 50, 100, 150, 200, 250, 300, 350, 400},
     ymin=0, ymax=420,
     legend style={
-        at={(0.98,0.95)},
-        anchor=north east,
+        at={(0.5,1.08)},
+        anchor=south,
+        legend columns=2,
         font=\scriptsize,
         draw=pureblack,
         line width=0.5pt
@@ -79,7 +80,7 @@ While the Netherlands ($26.4\pct$) and Luxembourg ($15.2\pct$) appear as the lar
     % Immediate Basis
     \addplot[fill=darkboxfill, draw=pureblack, line width=0.7pt] 
         coordinates {(United States, 168.8) (Netherlands, 244.1) (Luxembourg, 140.9) (Germany, 27.4) (United Kingdom, 71.1)};
-    \addlegendentry{Immediate Creditor Basis}
+    \addlegendentry{Immediate Creditor Basis\hspace{1em}}
 
     % UBO Basis
     \addplot[fill=pureblack, draw=pureblack, line width=0.7pt] 
@@ -120,7 +121,7 @@ Swiss outward direct investment is strategically allocated across North America 
 \textbf{Top 6 Destinations} & \textbf{789,164} & \textbf{59.0\%} & \textbf{Total Worldwide Stock} & \textbf{1,340,141} & \textbf{100.0\%} \\
 \bottomrule
 \end{tabularx}
-\vspace{0.2em}
+\par\vspace{0.3em}
 \footnotesize
 \textit{Source: Swiss National Bank (SNB). Outward direct investment capital stocks at year-end 2024.}
 \normalsize

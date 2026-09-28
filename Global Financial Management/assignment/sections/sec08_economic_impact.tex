@@ -32,7 +32,7 @@ In 2024, multinational parent entities directly employed \textbf{$560,964$ perso
 \textbf{Growth (2015--24)} & \textbf{+4.6\%} & \textbf{+7.2\%} & \textbf{+6.2\%} & \textit{+32,520 Net Jobs} \\
 \bottomrule
 \end{tabular}
-\vspace{0.2em}
+\par\vspace{0.3em}
 \footnotesize
 \textit{Source: Swiss National Bank (SNB). Resident multinational parent enterprise headcounts in Switzerland.}
 \normalsize
@@ -57,20 +57,20 @@ In 2024, multinational parent entities directly employed \textbf{$560,964$ perso
         line width=1.0pt,
         fill=boxfill,
         rounded corners=1.5mm,
-        text width=4.1cm,
-        minimum height=3.3cm,
+        text width=3.2cm,
+        minimum height=3.4cm,
         align=center,
-        inner sep=2.5mm
+        inner sep=2.0mm
     },
     titlebox/.style={
         draw=pureblack,
         line width=1.1pt,
         fill=darkboxfill,
         rounded corners=1.2mm,
-        text width=13.8cm,
-        minimum height=0.8cm,
+        text width=15.2cm,
+        minimum height=0.75cm,
         align=center,
-        inner sep=1.5mm
+        inner sep=1.8mm
     },
     conn/.style={
         -{Stealth[length=2.5mm, width=1.8mm]},
@@ -79,18 +79,18 @@ In 2024, multinational parent entities directly employed \textbf{$560,964$ perso
     }
 ]
 
-    % Master Banner Node
-    \node[titlebox] (banner) at (0, 2.3) {
+    % Master Banner Node (Vertical clearance calibrated to 0.6cm above cards)
+    \node[titlebox] (banner) at (0, 2.7) {
         \textbf{\small Macroeconomic Transmission Pipeline of Swiss Direct Investment}\\[0.1em]
         \scriptsize Three-Stage Spillover Architecture Linking Capital Flows to Real Economic Growth
     };
 
-    % Three Symmetrical Cards (Identical text width=4.1cm, minimum height=3.3cm)
-    \node[card] (stage1) at (-4.7, 0) {
-        \textbf{\footnotesize 1. Capital Deployment}\\[0.3em]
-        \begin{minipage}{3.8cm}
+    % Three Symmetrical Cards (text width=3.2cm, spaced at x = -5.7, 0.0, +5.7; 21mm clearance)
+    \node[card] (stage1) at (-5.7, 0) {
+        \textbf{\footnotesize 1. Capital Deployment}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.0pt]
             \item Permanent equity funding
             \item $15\text{--}20\%$ GFCF contribution
             \item Automated biopharma labs
@@ -99,10 +99,10 @@ In 2024, multinational parent entities directly employed \textbf{$560,964$ perso
     };
 
     \node[card] (stage2) at (0.0, 0) {
-        \textbf{\footnotesize 2. Labor \& Trade}\\[0.3em]
-        \begin{minipage}{3.8cm}
+        \textbf{\footnotesize 2. Labor \& Trade}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.0pt]
             \item $561\text{k}$ domestic parent staff
             \item $2.48\mn$ personnel worldwide
             \item $70\%$ of Swiss export volumes
@@ -110,11 +110,11 @@ In 2024, multinational parent entities directly employed \textbf{$560,964$ perso
         \end{minipage}
     };
 
-    \node[card] (stage3) at (4.7, 0) {
-        \textbf{\footnotesize 3. Spillovers \& GDP}\\[0.3em]
-        \begin{minipage}{3.8cm}
+    \node[card] (stage3) at (5.7, 0) {
+        \textbf{\footnotesize 3. Spillovers \& GDP}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.0pt]
             \item Reverse technology diffusion
             \item $+18\text{--}25\%$ labor productivity
             \item $+1.5\text{--}3.0\%$ GDP growth impact
@@ -122,16 +122,17 @@ In 2024, multinational parent entities directly employed \textbf{$560,964$ perso
         \end{minipage}
     };
 
-    % Symmetrical Vertical Connectors
+    % Symmetrical Vertical Connectors from Banner to Cards (Clear 0.6cm stem)
     \draw[conn] (banner.south -| stage1.north) -- (stage1.north);
     \draw[conn] (banner.south) -- (stage2.north);
     \draw[conn] (banner.south -| stage3.north) -- (stage3.north);
 
-    % Horizontal Clearance Links (Spacing: 4.7 - 4.1 = 0.6cm clearance)
-    \draw[conn] ([yshift=0.2cm]stage1.east) -- ([yshift=0.2cm]stage2.west)
-        node[midway, above, font=\tiny\bfseries] {Mobilizes};
-    \draw[conn] ([yshift=0.2cm]stage2.east) -- ([yshift=0.2cm]stage3.west)
-        node[midway, above, font=\tiny\bfseries] {Diffuses};
+    % Horizontal Clearance Links with 21mm Gap and 6mm Margins
+    \draw[conn] (stage1.east) -- (stage2.west)
+        node[midway, above=3pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Mobilizes};
+
+    \draw[conn] (stage2.east) -- (stage3.west)
+        node[midway, above=3pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Diffuses};
 
 \end{tikzpicture}
 \caption{Macroeconomic Spillover Pipeline of Swiss Direct Investment. Symmetrical stages illustrate the progression from capital deployment to labor absorption and economy-wide GDP spillovers.}

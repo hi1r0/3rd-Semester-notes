@@ -41,7 +41,7 @@ Insurance Companies & 18,068 & 2.0\% & 109,810 & 8.2\% \\
 \textbf{Total All Sectors} & \textbf{925,711} & \textbf{100.0\%} & \textbf{1,340,141} & \textbf{100.0\%} \\
 \bottomrule
 \end{tabularx}
-\vspace{0.2em}
+\par\vspace{0.3em}
 \footnotesize
 \textit{Source: Swiss National Bank (SNB). Direct investment capital stocks at year-end 2024.}
 \normalsize
@@ -55,16 +55,16 @@ Insurance Companies & 18,068 & 2.0\% & 109,810 & 8.2\% \\
 
 % ------------------------------------------------------------------------------
 % Pgfplots Figure 4.1: Comparative Sectoral Distribution (Inward vs Outward)
-% Calibrated for 12-15 Page Monograph (Height 4.8cm)
+% Prominent Display (Width 14.8cm, Height 6.0cm)
 % ------------------------------------------------------------------------------
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    ybar=2pt,
-    bar width=0.50cm,
-    width=13.5cm,
-    height=4.8cm,
+    ybar=3pt,
+    bar width=0.55cm,
+    width=14.8cm,
+    height=6.0cm,
     grid=major,
     grid style={line width=0.2pt, color=midgray!30},
     ylabel={\footnotesize\textbf{Share of Capital Stock (\%)}},
@@ -74,7 +74,7 @@ Insurance Companies & 18,068 & 2.0\% & 109,810 & 8.2\% \\
     ytick={0, 10, 20, 30, 40, 50},
     ymin=0, ymax=55,
     legend style={
-        at={(0.5,1.10)},
+        at={(0.5,1.08)},
         anchor=south,
         legend columns=2,
         font=\scriptsize,
@@ -87,7 +87,7 @@ Insurance Companies & 18,068 & 2.0\% & 109,810 & 8.2\% \\
     % Inward FDI Bars
     \addplot[fill=darkgraytext!70!white, draw=pureblack, line width=0.7pt] 
         coordinates {(Manufacturing, 22.4) (Wholesale Trade, 25.4) (Finance \& Ins., 4.3) (Other Services, 47.9)};
-    \addlegendentry{Inward FDI in Switzerland}
+    \addlegendentry{Inward FDI in Switzerland\hspace{1em}}
 
     % Outward FDI Bars
     \addplot[fill=boxfill, draw=pureblack, line width=0.9pt, postaction={pattern=north east lines, pattern color=midgray}] 

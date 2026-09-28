@@ -41,26 +41,26 @@ Table~\ref{tab:combined_mne_abroad} tracks the synchronous expansion of foreign 
 \textbf{10-Yr $\Delta$} & \textbf{+18.7\%} & \textit{+3,342 entities} & \textbf{+22.1\%} & \textit{+449.9k jobs} & \textbf{+2.9\%} \\
 \bottomrule
 \end{tabular}
-\vspace{0.2em}
+\par\vspace{0.3em}
 \footnotesize
 \textit{Source: Swiss National Bank (SNB). Staff employed in non-resident enterprises controlled by Swiss MNEs.}
 \normalsize
 \end{table}
 
 \begin{remarkbox}[The $4.43\times$ Global Labor Multiplier]
-In 2024, Swiss MNEs employed **$2,483,500$ people abroad** across $21,265$ subsidiaries. Compared to the $560,964$ domestic personnel employed by Swiss parent companies in Switzerland, Swiss enterprise sustains an **overseas-to-domestic labor multiplier of $4.43\times$**. For every employee at a corporate headquarters in Switzerland, Swiss MNEs support more than four workers in global manufacturing, clinical trials, and distribution worldwide.
+In 2024, Swiss MNEs employed \textbf{2,483,500 people abroad} across $21,265$ subsidiaries. Compared to the $560,964$ domestic personnel employed by Swiss parent companies in Switzerland, Swiss enterprise sustains an \textbf{overseas-to-domestic labor multiplier of $4.43\times$}. For every employee at a corporate headquarters in Switzerland, Swiss MNEs support more than four workers in global manufacturing, clinical trials, and distribution worldwide.
 \end{remarkbox}
 
 % ------------------------------------------------------------------------------
 % Pgfplots Figure 6.1: Dual-Axis Trajectory of Affiliates and Employment
-% Calibrated for 12-15 Page Monograph (Height 5.0cm)
+% Prominent Display (Width 14.8cm, Height 6.0cm, Unified Legend Above Plot)
 % ------------------------------------------------------------------------------
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    width=13.6cm,
-    height=5.0cm,
+    width=14.8cm,
+    height=6.0cm,
     grid=both,
     grid style={line width=0.2pt, color=midgray!30},
     xlabel={\footnotesize\textbf{Year}},
@@ -68,11 +68,14 @@ In 2024, Swiss MNEs employed **$2,483,500$ people abroad** across $21,265$ subsi
     xmin=2014.5, xmax=2024.5,
     ymin=17000, ymax=22000,
     xtick={2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024},
+    scaled y ticks=false,
+    ytick={17000, 18000, 19000, 20000, 21000, 22000},
     xticklabel style={font=\scriptsize},
-    yticklabel style={font=\scriptsize},
+    yticklabel style={font=\scriptsize, /pgf/number format/fixed, /pgf/number format/1000 sep={\,}},
     legend style={
-        at={(0.02,0.95)},
-        anchor=north west,
+        at={(0.5,1.08)},
+        anchor=south,
+        legend columns=2,
         font=\scriptsize,
         fill=white,
         draw=pureblack,
@@ -87,27 +90,23 @@ In 2024, Swiss MNEs employed **$2,483,500$ people abroad** across $21,265$ subsi
             (2015, 17923) (2016, 17982) (2017, 18696) (2018, 19295) (2019, 19597)
             (2020, 19571) (2021, 20087) (2022, 21045) (2023, 21251) (2024, 21265)
         };
-    \addlegendentry{Foreign Affiliates (Left Axis)}
+    \addlegendentry{Foreign Affiliates (Left Axis)\hspace{1em}}
+
+    % Second Curve Legend Entry in Primary Axis
+    \addlegendimage{color=darkgraytext, dashed, mark=triangle*, mark size=2.0pt, line width=1.2pt}
+    \addlegendentry{Workforce Abroad (Right Axis)}
 
 \end{axis}
 
 \begin{axis}[
-    width=13.6cm,
-    height=5.0cm,
+    width=14.8cm,
+    height=6.0cm,
     xmin=2014.5, xmax=2024.5,
     ymin=1950, ymax=2600,
     axis y line*=right,
     axis x line=none,
     ylabel={\footnotesize\textbf{Workforce Abroad (Thousands)}},
     yticklabel style={font=\scriptsize},
-    legend style={
-        at={(0.02,0.80)},
-        anchor=north west,
-        font=\scriptsize,
-        fill=white,
-        draw=pureblack,
-        line width=0.5pt
-    },
     line width=1.1pt
 ]
 
@@ -117,7 +116,6 @@ In 2024, Swiss MNEs employed **$2,483,500$ people abroad** across $21,265$ subsi
             (2015, 2033.6) (2016, 2066.5) (2017, 2101.6) (2018, 2167.2) (2019, 2130.8)
             (2020, 2099.1) (2021, 2238.4) (2022, 2358.0) (2023, 2474.9) (2024, 2483.5)
         };
-    \addlegendentry{Workforce Abroad (Right Axis)}
 
 \end{axis}
 \end{tikzpicture}

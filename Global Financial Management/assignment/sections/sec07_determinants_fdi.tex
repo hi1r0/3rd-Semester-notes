@@ -26,20 +26,20 @@ Direct investment in Switzerland is not driven by classical market-seeking motiv
         line width=1.0pt,
         fill=boxfill,
         rounded corners=1.5mm,
-        text width=4.1cm,
+        text width=3.2cm,
         minimum height=3.4cm,
         align=center,
-        inner sep=2.5mm
+        inner sep=2.0mm
     },
     titlebox/.style={
         draw=pureblack,
         line width=1.1pt,
         fill=darkboxfill,
         rounded corners=1.2mm,
-        text width=13.8cm,
-        minimum height=0.8cm,
+        text width=15.2cm,
+        minimum height=0.75cm,
         align=center,
-        inner sep=1.5mm
+        inner sep=1.8mm
     },
     conn/.style={
         -{Stealth[length=2.5mm, width=1.8mm]},
@@ -48,18 +48,18 @@ Direct investment in Switzerland is not driven by classical market-seeking motiv
     }
 ]
 
-    % Master Banner Node
-    \node[titlebox] (banner) at (0, 2.3) {
+    % Master Banner Node (Vertical clearance calibrated to 0.6cm above cards)
+    \node[titlebox] (banner) at (0, 2.7) {
         \textbf{\small Tri-Partite Structural Hierarchy of Swiss FDI Determinants}\\[0.1em]
         \scriptsize Macroeconomic Fundamentals, Institutional Framework, and Sectoral Clusters
     };
 
-    % Three Symmetrical Cards (Identical text width=4.1cm, minimum height=3.4cm)
-    \node[card] (macro) at (-4.7, 0) {
-        \textbf{\footnotesize Macroeconomic Core}\\[0.3em]
-        \begin{minipage}{3.8cm}
+    % Three Symmetrical Cards (text width=3.2cm, spaced at x = -5.7, 0.0, +5.7; 21mm clearance)
+    \node[card] (macro) at (-5.7, 0) {
+        \textbf{\footnotesize Macroeconomic Core}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.0pt]
             \item Safe-haven Franc anchor
             \item Low inflation ($0.5\text{--}1.5\%$)
             \item High domestic savings pool
@@ -69,10 +69,10 @@ Direct investment in Switzerland is not driven by classical market-seeking motiv
     };
 
     \node[card] (inst) at (0.0, 0) {
-        \textbf{\footnotesize Institutional Framework}\\[0.3em]
-        \begin{minipage}{3.8cm}
+        \textbf{\footnotesize Institutional Framework}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.0pt]
             \item Cantonal tax competition ($12\text{--}14\%$)
             \item STAF/TRAF patent box regimes
             \item Direct democratic consensus
@@ -81,11 +81,11 @@ Direct investment in Switzerland is not driven by classical market-seeking motiv
         \end{minipage}
     };
 
-    \node[card] (sector) at (4.7, 0) {
-        \textbf{\footnotesize Sectoral Agglomeration}\\[0.3em]
-        \begin{minipage}{3.8cm}
+    \node[card] (sector) at (5.7, 0) {
+        \textbf{\footnotesize Sectoral Clusters}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.0pt]
             \item Basel biopharma research cluster
             \item Geneva/Zug commodity trading
             \item Elite STEM talent (ETH/EPFL)
@@ -94,16 +94,17 @@ Direct investment in Switzerland is not driven by classical market-seeking motiv
         \end{minipage}
     };
 
-    % Symmetrical Vertical Connectors
+    % Symmetrical Vertical Connectors from Banner to Cards (Clear 0.6cm stem)
     \draw[conn] (banner.south -| macro.north) -- (macro.north);
     \draw[conn] (banner.south) -- (inst.north);
     \draw[conn] (banner.south -| sector.north) -- (sector.north);
 
-    % Horizontal Clearance Links (Spacing: 4.7 - 4.1 = 0.6cm clearance)
-    \draw[conn, dashed] ([yshift=0.2cm]macro.east) -- ([yshift=0.2cm]inst.west)
-        node[midway, above, font=\tiny\bfseries] {Enables};
-    \draw[conn, dashed] ([yshift=0.2cm]inst.east) -- ([yshift=0.2cm]sector.west)
-        node[midway, above, font=\tiny\bfseries] {Catalyzes};
+    % Horizontal Clearance Links with 21mm Gap and 6mm Margins
+    \draw[conn] (macro.east) -- (inst.west)
+        node[midway, above=3pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Enables};
+
+    \draw[conn] (inst.east) -- (sector.west)
+        node[midway, above=3pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Catalyzes};
 
 \end{tikzpicture}
 \caption{Tri-Partite Hierarchy of Swiss Direct Investment Determinants. Symmetrical alignment highlights how macroeconomic stability and fiscal frameworks synergize to sustain world-leading innovation clusters.}

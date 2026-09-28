@@ -41,7 +41,7 @@ Table~\ref{tab:combined_fdi_trends} synthesizes the annual trajectories of inwar
 \textbf{10-Yr $\Delta$} & \textbf{-1.2\%} & \textbf{-31.3\% from peak} & \textbf{+18.5\%} & \textbf{Stable high} & \textbf{+114.0\%} \\
 \bottomrule
 \end{tabular}
-\vspace{0.2em}
+\par\vspace{0.3em}
 \footnotesize
 \textit{Source: Swiss National Bank (SNB). Figures in billions of Swiss Francs ($\CHF\,$bn). Net Surplus = Outward minus Inward stock.}
 \normalsize
@@ -56,14 +56,14 @@ Table~\ref{tab:combined_fdi_trends} synthesizes the annual trajectories of inwar
 
 % ------------------------------------------------------------------------------
 % Pgfplots Figure 3.1: Inward vs Outward FDI Capital Stocks 2015-2024
-% Calibrated for 12-15 Page Monograph (Height 5.0cm)
+% Prominent Display (Width 15.0cm, Height 6.2cm, Legend Below Plot)
 % ------------------------------------------------------------------------------
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    width=13.6cm,
-    height=5.0cm,
+    width=15.0cm,
+    height=6.2cm,
     grid=both,
     grid style={line width=0.2pt, color=midgray!30},
     xlabel={\footnotesize\textbf{Year}},
@@ -74,8 +74,9 @@ Table~\ref{tab:combined_fdi_trends} synthesizes the annual trajectories of inwar
     xticklabel style={font=\scriptsize},
     yticklabel style={font=\scriptsize},
     legend style={
-        at={(0.02,0.95)},
-        anchor=north west,
+        at={(0.5,-0.22)},
+        anchor=north,
+        legend columns=2,
         font=\scriptsize,
         fill=white,
         draw=pureblack,
@@ -94,7 +95,7 @@ Table~\ref{tab:combined_fdi_trends} synthesizes the annual trajectories of inwar
         (2015, 1130.7) (2016, 1362.2) (2017, 1398.1) (2018, 1511.1) (2019, 1467.4)
         (2020, 1513.0) (2021, 1457.1) (2022, 1312.0) (2023, 1308.0) (2024, 1340.1)
     };
-    \addlegendentry{Outward FDI Stock Abroad}
+    \addlegendentry{Outward FDI Stock Abroad\hspace{1em}}
 
     % Inward FDI Curve
     \addplot[

@@ -34,20 +34,20 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
         line width=1.0pt,
         fill=boxfill,
         rounded corners=1.5mm,
-        text width=4.1cm,
-        minimum height=3.3cm,
+        text width=3.2cm,
+        minimum height=3.4cm,
         align=center,
-        inner sep=2.5mm
+        inner sep=2.0mm
     },
     titlebox/.style={
         draw=pureblack,
         line width=1.1pt,
         fill=darkboxfill,
         rounded corners=1.2mm,
-        text width=13.8cm,
-        minimum height=0.8cm,
+        text width=15.2cm,
+        minimum height=0.75cm,
         align=center,
-        inner sep=1.5mm
+        inner sep=1.8mm
     },
     conn/.style={
         -{Stealth[length=2.5mm, width=1.8mm]},
@@ -56,42 +56,42 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
     }
 ]
 
-    % Master Banner Node
-    \node[titlebox] (banner) at (0, 2.3) {
+    % Master Banner Node (Vertical clearance calibrated to 0.6cm above cards)
+    \node[titlebox] (banner) at (0, 2.7) {
         \textbf{\small Dunning's OLI Eclectic Framework Applied to Swiss Direct Investment}\\[0.1em]
         \scriptsize Theoretical Decomposition of Swiss Multinational Competitiveness and Host Attractiveness
     };
 
-    % Three Symmetrical Cards (Identical text width=4.1cm, minimum height=3.3cm)
-    \node[card] (cardO) at (-4.7, 0) {
-        \textbf{\footnotesize Ownership (O) Advantages}\\[0.3em]
-        \begin{minipage}{3.8cm}
+    % Three Symmetrical Cards (text width=3.2cm, spaced at x = -5.7, 0.0, +5.7; 21mm clearance)
+    \node[card] (cardO) at (-5.7, 0) {
+        \textbf{\footnotesize Ownership (O) Core}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.2pt]
             \item Proprietary IP \& patents (Novartis, Roche)
             \item Global brand equity (Nestlé, Rolex)
-            \item Low cost of capital via Zurich markets
+            \item Low capital costs in Zurich financial markets
         \end{itemize}
         \end{minipage}
     };
 
     \node[card] (cardL) at (0.0, 0) {
-        \textbf{\footnotesize Location (L) Advantages}\\[0.3em]
-        \begin{minipage}{3.8cm}
+        \textbf{\footnotesize Location (L) Factors}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.2pt]
             \item Central European logistics crossroad
-            \item Competitive cantonal profit taxes ($12\text{--}14\%$)
-            \item CHF monetary stability \& rule of law
+            \item Low cantonal corporate profit taxes ($12\text{--}14\%$)
+            \item CHF monetary stability \& rock-solid rule of law
         \end{itemize}
         \end{minipage}
     };
 
-    \node[card] (cardI) at (4.7, 0) {
-        \textbf{\footnotesize Internalization (I) Motives}\\[0.3em]
-        \begin{minipage}{3.8cm}
+    \node[card] (cardI) at (5.7, 0) {
+        \textbf{\footnotesize Internalization (I) Motives}\\[0.25em]
+        \begin{minipage}{3.0cm}
         \tiny
-        \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
+        \begin{itemize}[leftmargin=1.0em, itemsep=1.2pt]
             \item Strict IP protection against expropriation
             \item Minimizing licensing transaction costs
             \item Intra-firm transfer pricing optimization
@@ -99,16 +99,17 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
         \end{minipage}
     };
 
-    % Symmetrical Vertical Connectors from Banner to Cards
+    % Symmetrical Vertical Connectors from Banner to Cards (Clear 0.6cm stem)
     \draw[conn] (banner.south -| cardO.north) -- (cardO.north);
     \draw[conn] (banner.south) -- (cardL.north);
     \draw[conn] (banner.south -| cardI.north) -- (cardI.north);
 
-    % Horizontal Clearance Links (Spacing: 4.7 - 4.1 = 0.6cm clearance)
-    \draw[conn, dashed] ([yshift=0.2cm]cardO.east) -- ([yshift=0.2cm]cardL.west)
-        node[midway, above, font=\tiny\bfseries] {Complements};
-    \draw[conn, dashed] ([yshift=0.2cm]cardL.east) -- ([yshift=0.2cm]cardI.west)
-        node[midway, above, font=\tiny\bfseries] {Reinforces};
+    % Horizontal Clearance Links with 21mm Gap and 6mm Margins
+    \draw[conn] (cardO.east) -- (cardL.west)
+        node[midway, above=3pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Complements};
+
+    \draw[conn] (cardL.east) -- (cardI.west)
+        node[midway, above=3pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Reinforces};
 
 \end{tikzpicture}
 \caption{Dunning's Eclectic Paradigm (OLI Framework) Contextualized for the Swiss Direct Investment Ecosystem. Symmetrical pillars illustrate the simultaneous ownership advantages of Swiss MNEs and location advantages of the Swiss host economy.}
