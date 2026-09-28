@@ -34,10 +34,10 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
         line width=1.0pt,
         fill=boxfill,
         rounded corners=1.5mm,
-        text width=3.3cm,
+        text width=3.2cm,
         minimum height=3.6cm,
         align=center,
-        inner sep=2.2mm
+        inner sep=2.0mm
     },
     titlebox/.style={
         draw=pureblack,
@@ -62,11 +62,11 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
         \scriptsize Theoretical Decomposition of Swiss Multinational Competitiveness and Host Attractiveness
     };
 
-    % Three Symmetrical Cards (text width=3.3cm, spaced at x = -5.6, 0.0, +5.6; 18.6mm clearance)
-    \node[card] (cardO) at (-5.6, 0) {
+    % Three Symmetrical Cards (text width=3.2cm, spaced at x = -5.8, 0.0, +5.8; 21.3mm clearance)
+    \node[card] (cardO) at (-5.8, 0) {
         \textbf{\footnotesize Ownership (O)}\\[-0.1em]
         \textbf{\footnotesize Core Advantages}\\[0.3em]
-        \begin{minipage}{3.1cm}
+        \begin{minipage}{3.0cm}
         \tiny
         \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
             \item Proprietary IP \& patents (Novartis, Roche)
@@ -79,7 +79,7 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
     \node[card] (cardL) at (0.0, 0) {
         \textbf{\footnotesize Location (L)}\\[-0.1em]
         \textbf{\footnotesize Host Factors}\\[0.3em]
-        \begin{minipage}{3.1cm}
+        \begin{minipage}{3.0cm}
         \tiny
         \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
             \item Central European logistics crossroad
@@ -89,10 +89,10 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
         \end{minipage}
     };
 
-    \node[card] (cardI) at (5.6, 0) {
+    \node[card] (cardI) at (5.8, 0) {
         \textbf{\footnotesize Internalization (I)}\\[-0.1em]
         \textbf{\footnotesize Strategic Motives}\\[0.3em]
-        \begin{minipage}{3.1cm}
+        \begin{minipage}{3.0cm}
         \tiny
         \begin{itemize}[leftmargin=1.0em, itemsep=1.5pt]
             \item Strict IP protection against expropriation
@@ -102,12 +102,12 @@ Switzerland's investment attractiveness is anchored in eight structural pillars:
         \end{minipage}
     };
 
-    % Horizontal Transition Connectors with Generous 18.6mm Clearance
+    % Horizontal Transition Connectors with Generous 21.3mm Clearance
     \draw[conn] (cardO.east) -- (cardL.west)
-        node[midway, above=3.5pt, font=\fontsize{7pt}{8.5pt}\selectfont\bfseries\color{pureblack}] {Complements};
+        node[midway, above=2.5pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Complements};
 
     \draw[conn] (cardL.east) -- (cardI.west)
-        node[midway, above=3.5pt, font=\fontsize{7pt}{8.5pt}\selectfont\bfseries\color{pureblack}] {Reinforces};
+        node[midway, above=2.5pt, font=\fontsize{6pt}{7.5pt}\selectfont\bfseries\color{pureblack}] {Reinforces};
 
 \end{tikzpicture}
 \caption{Dunning's Eclectic Paradigm (OLI Framework) Contextualized for the Swiss Direct Investment Ecosystem. Symmetrical pillars illustrate the simultaneous ownership advantages of Swiss MNEs and location advantages of the Swiss host economy.}
