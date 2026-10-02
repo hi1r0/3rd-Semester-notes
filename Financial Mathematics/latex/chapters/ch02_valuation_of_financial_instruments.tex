@@ -508,6 +508,35 @@ When a firm undertakes capital investment outlays ($I$), the required funding is
     \item $P_1$ = Market issue price per share at the end of the period.
 \end{itemize}
 
+\subsubsection{Accounting Statement Format for External Equity Financing}
+In corporate financial practice, the capital requirement and new equity issuance are determined using the standard accounting statement format shown in Table~\ref{tab:mm_financing_statement}.
+
+\begin{table}[htbp]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{0.88\linewidth}{X r r}
+        \toprule
+        \textbf{Particulars} & \textbf{Details (\inr)} & \textbf{Amount (\inr)} \\
+        \midrule
+        \textbf{Investment Proposal Outlay ($I$)} & & \text{xxx} \\
+        \addlinespace[2pt]
+        \textit{Less: Retained Earnings Available for Investment:} & & \\
+        \quad Total Net Income for the Period ($E$) & \text{xxx} & \\
+        \quad Less: Total Dividend Distribution ($n \cdot D_1$) & (\text{xxx}) & \\
+        \cmidrule(lr){2-2}
+        \quad Retained Earnings Available ($E - n \cdot D_1$) & & (\text{xxx}) \\
+        \midrule
+        \textbf{Amount to be Raised by Issue of New Shares ($\Delta M$)} & & \textbf{xxx} \\
+        \midrule[\heavyrulewidth]
+        \multicolumn{3}{l}{\textbf{Number of New Shares to be Issued ($m = \Delta n$):}} \\[4pt]
+        \multicolumn{3}{c}{$\displaystyle m = \Delta n = \frac{\text{Amount to be Raised by Issue of New Shares}}{\text{Issue Price per Share}} = \frac{\Delta M}{P_1} = \frac{I - (E - n \cdot D_1)}{P_1}$} \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Accounting Statement Layout for MM External Equity Financing}
+    \label{tab:mm_financing_statement}
+\end{table}
+
 \subsection{Proof of Total Market Value Invariance}
 The aggregate market value of the firm at the end of the period ($V_1$) is given by multiplying the total post-issue shares by the year-end market price:
 \begin{equation}
@@ -526,6 +555,31 @@ From Equation~\eqref{eq:mm_p0}, $P_1 + D_1 = P_0 (1 + K_e)$. Substituting this g
     \label{eq:mm_invariance_proof}
 \end{equation}
 Equation~\eqref{eq:mm_invariance_proof} contains neither $D_1$ nor the payout ratio. Consequently, total market value is invariant to dividend distributions: dividend payouts reduce internal funds, requiring compensatory new share issuance which dilutes future claims by exactly the dividend amount.
+
+To synthesize the mechanics of the MM model under alternative dividend distribution decisions, Table~\ref{tab:mm_comparative_dynamics} contrasts the analytical equations when dividends are paid out versus when earnings are fully retained.
+
+\begin{table}[htbp]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.8cm} X X}
+        \toprule
+        \textbf{Valuation Metric} & \textbf{Dividend Distributed ($D_1 > 0$)} & \textbf{Dividend Not Declared ($D_1 = 0$)} \\
+        \midrule
+        \textbf{Year-End Share Price ($P_1$)} & $P_1 = P_0(1 + K_e) - D_1$ \newline \scriptsize (Ex-dividend price declines by $D_1$) & $P_1 = P_0(1 + K_e)$ \newline \scriptsize (Price reflects full undistributed value) \\
+        \addlinespace[3pt]
+        \textbf{Retained Earnings Available} & $E - n \cdot D_1$ \newline \scriptsize (Reduced by dividend cash outflow) & $E$ \newline \scriptsize (Entire net income retained) \\
+        \addlinespace[3pt]
+        \textbf{External Financing Deficit ($\Delta M$)} & $I - (E - n \cdot D_1)$ \newline \scriptsize (Higher external funding need) & $I - E$ \newline \scriptsize (Lower external funding need) \\
+        \addlinespace[3pt]
+        \textbf{New Shares Issued ($m = \Delta n$)} & $\displaystyle \frac{I - (E - n \cdot D_1)}{P_1}$ \newline \scriptsize (Greater compensatory dilution) & $\displaystyle \frac{I - E}{P_1}$ \newline \scriptsize (Lesser dilution for shareholders) \\
+        \addlinespace[3pt]
+        \textbf{Total Market Value of Firm ($V_1$)} & $\mathbf{n \cdot P_0(1 + K_e) + I - E}$ & $\mathbf{n \cdot P_0(1 + K_e) + I - E}$ \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparative Matrix: MM Model Dynamics Under Alternative Dividend Policies}
+    \label{tab:mm_comparative_dynamics}
+\end{table}
 
 \begin{example}{Stewart Ltd: MM Dividend Irrelevance and Valuation}{stewart_ltd_mm}
 Stewart Ltd has $40,000$ shares outstanding currently trading at $\inr 15$ each. The board of directors has recommended $\inr 2$ per share as dividend. The rate of capitalization appropriate to the firm's risk class is $20\%$.

@@ -67,13 +67,14 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
 - **2.6 Modigliani--Miller (MM) Dividend Irrelevance Theory & Capital Budgeting Dynamics:**
   - Foundations of dividend irrelevance: firm value governed by earning power and real investment policy under perfect capital markets.
   - End-of-period share price formulation: $P_1 = P_0(1 + K_e) - D_1$.
-  - Capital budgeting deficit & external equity financing: $\Delta M = I - (E - n D_1)$, and new shares issued $m = \Delta n = \Delta M / P_1$.
+  - Capital budgeting deficit & external equity financing: $\Delta M = I - (E - n D_1)$, and new shares issued $m = \Delta n = \Delta M / P_1$, formatted as a structured corporate financing statement.
+  - Comparative dynamics matrix contrasting dividend distribution ($D_1 > 0$) vs. full retention ($D_1 = 0$).
   - Mathematical invariance proof: Total market value $V_1 = (n + m) P_1 = n P_0(1 + K_e) + I - E$ is independent of dividend payout.
   - Empirical validity and limitations: Impact of taxes, flotation costs, information asymmetry/signaling, and investment policy interdependence.
   - *Solved Example:* `2.6.1` Stewart Ltd comprehensive valuation, share issuance, and market value invariance proof (*Lecture: 17/09/2026*).
 - **Comprehensive Multi-Chapter Formula Reference Sheet:**
   - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1 and Chapter 2 (12 formula cards).
-  - Features high-density mathematical formula boxes with explicit itemized `Where:` parameter definitions for every variable, equation, and payout decision matrix.
+  - Features high-density mathematical formula boxes with explicit itemized `Where:` parameter definitions, policy decision matrices, and a 4-step MM valuation matrix table.
 
 ---
 
