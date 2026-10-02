@@ -241,25 +241,14 @@
 \end{formulabox}
 
 \begin{formulabox}[{12. Modigliani--Miller (MM) Dividend Irrelevance Model}]
-\begin{center}
-\small
-\renewcommand{\arraystretch}{1.25}
-\begin{tabularx}{\linewidth}{>{\bfseries}l X >{\raggedright\arraybackslash}p{3.8cm}}
-    \toprule
-    \textsf{Valuation Step} & \textsf{Core Mathematical Formulation} & \textsf{Economic Interpretation} \\
-    \midrule
-    1. Share Price ($P_1$) & $P_1 = P_0(1 + K_e) - D_1$ & Ex-dividend price drop equals $D_1$ \\
-    \addlinespace[2pt]
-    2. Financing Deficit ($\Delta M$) & $\Delta M = I - (E - n \cdot D_1)$ & Capital budget gap after internal earnings \\
-    \addlinespace[2pt]
-    3. New Shares Issued ($m$) & $m = \Delta n = \frac{\Delta M}{P_1} = \frac{I - (E - n \cdot D_1)}{P_1}$ & Compensatory equity dilution ratio \\
-    \addlinespace[2pt]
-    4. Firm Valuation ($V_1$) & $V_1 = (n + m) P_1 = n P_0(1 + K_e) + I - E$ & Total value is invariant to dividend $D_1$ \\
-    \bottomrule
-\end{tabularx}
-\end{center}
-
-\vspace{0.3em}
+\begin{align*}
+    \text{Current Share Valuation:} \quad P_0 &= \frac{D_1 + P_1}{1 + K_e} \\[4pt]
+    \text{Period-End Share Price:} \quad P_1 &= P_0 (1 + K_e) - D_1 \\[4pt]
+    \text{External Financing Deficit:} \quad \Delta M &= I - (E - n \cdot D_1) \\[4pt]
+    \text{New Shares to be Issued:} \quad m &= \Delta n = \frac{\Delta M}{P_1} = \frac{I - (E - n \cdot D_1)}{P_1} \\[4pt]
+    \text{Total Market Value Invariant:} \quad V_1 &= (n + m) P_1 = (n + \Delta n) P_1 \\[4pt]
+    &= n P_0 (1 + K_e) + I - E
+\end{align*}
 \textbf{Where:}
 \begin{itemize}[noitemsep, topsep=2pt]
     \item $P_0$ = Current prevailing market price per share at beginning of period
