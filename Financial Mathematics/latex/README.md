@@ -20,13 +20,15 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
     - Effective Rate of Interest ($\ERI = (1 + R/m)^m - 1$).
     - Doubling Period formulations: Continuous limit ($\ln 2 \approx 0.693$), Rule of 72, and Rule of 69 ($T = 0.35 + 69/R$).
     - Uneven series of payments & Compound Value Annuity Factor ($\CVAF$).
+    - Compound Value of Annuities: Closed-form factors and Year-by-Year Compound Accumulation Method ($\sum_{t=1}^n A(1+r)^{n-t}$ for Ordinary Annuity and $\sum_{t=0}^{n-1} A(1+r)^{n-t}$ for Annuity Due).
     - *Solved Examples:* `1.3.1` to `1.3.6` (*Lectures: 18/08/2026, 24/08/2026, 25/08/2026, 27/08/2026*).
   - **1.3.2 Discounting & Present Value Techniques:**
     - Present Value of a Lump Sum & Series of Cash Flows.
     - Construction of Present Value Factor ($\text{PVF}$) schedules.
-    - Present Value of Ordinary Annuities ($\PVAF$) and Annuities Due.
+    - Present Value of Ordinary Annuities ($\PVAF$) and Annuities Due: Closed-form factors and Year-by-Year Discounting Summation Formulations ($\sum_{t=1}^n \frac{A}{(1+r)^t}$ and $\sum_{t=0}^{n-1} \frac{A}{(1+r)^t}$).
     - Constant Perpetuities ($C/R$) & Growing Perpetuities ($C_1/(R-G)$).
-    - Finite Growing Annuity streams & Sinking Fund ($\text{S.F.}$) reserve accumulations (Ordinary & Annuity Due).
+    - Finite Growing Annuity streams: Analytical factor formula and Two-Step Year-by-Year Summation Formulation ($\sum_{t=1}^n \frac{C_1(1+g)^{t-1}}{(1+r)^t}$).
+    - Sinking Fund ($\text{S.F.}$) reserve accumulations (Ordinary & Annuity Due).
     - *Solved Examples:* `1.3.7` to `1.3.16` (*Lectures: 18/08/2026, 27/08/2026, 28/08/2026, 31/08/2026, 01/09/2026*).
 - **1.4 Growth and Decay Curves:**
   - Continuous exponential growth ($n_0 e^{kt}$) and decay ($n_0 e^{-kt}$) dynamics.
@@ -73,7 +75,8 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
   - *Solved Example:* `2.6.1` Stewart Ltd comprehensive valuation, share issuance, and market value invariance proof (*Lecture: 17/09/2026*).
 - **Comprehensive Multi-Chapter Formula Reference Sheet:**
   - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1 and Chapter 2 (12 formula cards).
-  - Features high-density mathematical formula boxes with explicit itemized `Where:` parameter definitions and policy decision matrices.
+  - Features grouped subsections for closed-form analytical factor formulas and explicit year-by-year summation ($\sum$) models (Ordinary Annuity FV/PV, Annuity Due FV/PV, Finite Growing Annuity PV).
+  - High-density mathematical formula boxes with explicit itemized `Where:` parameter definitions and policy decision matrices.
 
 ---
 
