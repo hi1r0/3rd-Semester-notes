@@ -90,7 +90,7 @@ latex/
 │   └── titlepage.tex                              # Formal cover page
 ├── chapters/
 │   ├── ch01_interest_theory.tex                   # Chapter 1: Interest Theory (Lectures: 13/08 – 03/09/2026)
-│   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 16/09/2026)
+│   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 17/09/2026)
 │   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions
 ├── figures/                                       # Department & University logos
 └── README.md                                      # Documentation & compilation instructions
