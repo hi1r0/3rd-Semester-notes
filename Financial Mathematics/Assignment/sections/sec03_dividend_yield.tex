@@ -8,9 +8,14 @@
 \subsection{Theoretical Premise and Income Hurdle Decision Rule}
 The \textbf{Dividend Yield} method evaluates the direct annual cash distribution an investor receives relative to the secondary market price paid per share. Under this analytical framework, dividend yield acts as an immediate income hurdle: if the current dividend yield is less than the investor's opportunity cost of capital ($\Ke = 14.0\%$), the asset fails to compensate for capital risk on immediate cash flow alone and is classified as \textbf{Overvalued}.
 
+For ongoing growth enterprises, the spread between required return and dividend yield represents the \textbf{Market-Implied Perpetual Growth Rate ($\bm{g^*}$)}. Inverting the Gordon model:
+\begin{equation}
+    P_0 = \frac{D_0(1 + g^*)}{\Ke - g^*} \implies g^* = \frac{P_0 \cdot \Ke - D_0}{P_0 + D_0}
+\end{equation}
+
 \begin{formulabox}[Governing Equation and Cost-of-Equity Hurdle Criterion]
 \begin{equation}
-    \text{Current Yield} = \frac{\text{Proxy DPS}}{P_0} \times 100
+    \text{Current Yield} = \frac{\text{Proxy DPS}}{P_0} \times 100 \quad \text{and} \quad g^* = \frac{P_0 \cdot \Ke - \text{Proxy DPS}}{P_0 + \text{Proxy DPS}}
 \end{equation}
 \vspace{-2mm}
 \begin{equation}
@@ -23,27 +28,27 @@ The \textbf{Dividend Yield} method evaluates the direct annual cash distribution
 \end{formulabox}
 
 \subsection{Cross-Sectional Dividend Yield Results}
-Table~\ref{tab:dividend_yield} details the projected FY26 EPS, standardized $70\%$ proxy DPS, current market prices, computed dividend yields, and comparative verdicts against the $14.0\%$ hurdle rate.
+Table~\ref{tab:dividend_yield} details the FY26 EPS, standardized $70\%$ proxy DPS, current market prices, computed dividend yields, market-implied growth hurdles, and comparative verdicts against the $14.0\%$ hurdle rate.
 
 \begin{table}[H]
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.5pt}
-\renewcommand{\arraystretch}{1.08}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r r r c c c}
+\setlength{\tabcolsep}{1.8pt}
+\renewcommand{\arraystretch}{1.06}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r r r c c c c}
 \toprule
-\textbf{Company} & \shortstack[r]{\textbf{FY26 EPS}\\\scriptsize(\inr)} & \shortstack[r]{\textbf{Proxy DPS}\\\scriptsize(70\%, \inr)} & \shortstack[r]{\textbf{Market}\\\textbf{Price} (\inr)} & \shortstack[c]{\textbf{Current}\\\textbf{Yield} (\%)} & \shortstack[c]{\textbf{Hurdle ($\bm{\Ke}$)}\\\scriptsize(14.0\%)} & \shortstack[c]{\textbf{Yield}\\\textbf{Verdict}} \\
+\textbf{Company} & \shortstack[r]{\textbf{FY26 EPS}\\\scriptsize(\inr)} & \shortstack[r]{\textbf{Proxy DPS}\\\scriptsize(70\%, \inr)} & \shortstack[r]{\textbf{Market}\\\textbf{Price} (\inr)} & \shortstack[c]{\textbf{Current}\\\textbf{Yield}} & \shortstack[c]{\textbf{Hurdle}\\\scriptsize($\Ke=14\%$)} & \shortstack[c]{\textbf{Implied $\bm{g^*}$}\\\scriptsize(\%)} & \shortstack[c]{\textbf{Yield}\\\textbf{Verdict}} \\
 \midrule
-\textbf{Hindustan Unilever}   & 64.08  & 44.86 & 1,973 & 2.27\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{ITC Ltd}              & 16.77  & 11.74 & 264   & 4.45\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Nestle India}         & 18.37  & 12.86 & 1,409 & 0.91\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Varun Beverages}      & 4.53   & 3.17  & 204   & 1.55\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Britannia Industries} & 105.71 & 74.00 & 5,120 & 1.44\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Marico Ltd}           & 13.95  & 9.77  & 814   & 1.20\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Tata Consumer}        & 15.63  & 10.94 & 1,010 & 1.08\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Godrej Consumer}      & 14.86  & 10.40 & 881   & 1.18\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Dabur India}          & 10.56  & 7.39  & 382   & 1.93\% & 14.0\% & \textbf{Overvalued} \\
-\textbf{Colgate-Palmolive}    & 49.07  & 34.35 & 1,843 & 1.86\% & 14.0\% & \textbf{Overvalued} \\
+\textbf{Hindustan Unilever}   & 64.08  & 44.86 & 1,973 & 2.27\% & 14.0\% & \textbf{11.47\%} & \textbf{Overvalued} \\
+\textbf{ITC Ltd}              & 16.77  & 11.74 & 264   & 4.45\% & 14.0\% & \textbf{9.15\%}  & \textbf{Overvalued} \\
+\textbf{Nestle India}         & 18.37  & 12.86 & 1,409 & 0.91\% & 14.0\% & \textbf{12.97\%} & \textbf{Overvalued} \\
+\textbf{Varun Beverages}      & 4.53   & 3.17  & 204   & 1.55\% & 14.0\% & \textbf{12.26\%} & \textbf{Overvalued} \\
+\textbf{Britannia Industries} & 105.71 & 74.00 & 5,120 & 1.45\% & 14.0\% & \textbf{12.38\%} & \textbf{Overvalued} \\
+\textbf{Marico Ltd}           & 13.95  & 9.77  & 814   & 1.20\% & 14.0\% & \textbf{12.65\%} & \textbf{Overvalued} \\
+\textbf{Tata Consumer}        & 15.63  & 10.94 & 1,010 & 1.08\% & 14.0\% & \textbf{12.78\%} & \textbf{Overvalued} \\
+\textbf{Godrej Consumer}      & 14.86  & 10.40 & 881   & 1.18\% & 14.0\% & \textbf{12.67\%} & \textbf{Overvalued} \\
+\textbf{Dabur India}          & 10.56  & 7.39  & 382   & 1.93\% & 14.0\% & \textbf{11.84\%} & \textbf{Overvalued} \\
+\textbf{Colgate-Palmolive}    & 49.07  & 34.35 & 1,843 & 1.86\% & 14.0\% & \textbf{11.91\%} & \textbf{Overvalued} \\
 \bottomrule
 \end{tabular*}
 \caption{Cross-Sectional Dividend Yield Analysis and Cost-of-Equity Hurdle Verification.}
@@ -54,5 +59,5 @@ Table~\ref{tab:dividend_yield} details the projected FY26 EPS, standardized $70\
 \begin{enumerate}[label=\textbf{\arabic*.}, topsep=2pt, itemsep=1.5pt, parsep=0pt]
     \item \textbf{100\% Failure of Current Income Hurdle:} Under the strict cost-of-equity hurdle criterion, \textbf{all ten companies are classified as Overvalued}. None provide an immediate cash yield remotely approaching the $14.0\%$ benchmark.
     \item \textbf{Yield Dispersion Across the Universe:} \textbf{ITC Ltd} offers the highest dividend yield at \textbf{$4.45\%$}, followed by \textbf{HUL} at \textbf{$2.27\%$}. Conversely, \textbf{Nestle India} generates the lowest yield at \textbf{$0.91\%$}, returning under one rupee per hundred rupees invested.
-    \item \textbf{Economic Rationale:} The substantial gap between current yields ($0.9\% - 4.5\%$) and $\Ke$ ($14.0\%$) demonstrates that secondary markets do not treat FMCG shares as quasi-fixed-income instruments; market valuations price in long-term earnings compounding and future dividend growth.
+    \item \textbf{Market-Implied Growth Requirements:} The substantial spread between current yields and $\Ke$ demonstrates that market pricing discounts heavy growth. Implied perpetual growth rates ($g^*$) span from \textbf{$9.15\%$} (ITC Ltd) to \textbf{$12.97\%$} (Nestle India), demonstrating that current equity prices demand continuous double-digit expansion.
 \end{enumerate}

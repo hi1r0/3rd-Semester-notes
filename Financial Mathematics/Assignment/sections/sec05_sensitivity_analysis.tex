@@ -33,7 +33,7 @@ Figure~\ref{fig:hul_sensitivity} plots HUL's DDM intrinsic value across a plausi
 \begin{tikzpicture}
 \begin{axis}[
     width=14.8cm,
-    height=7.8cm,
+    height=6.2cm,
     xmin=8.0, xmax=13.0,
     ymin=500, ymax=3500,
     xlabel={\small Sustainable Perpetual Growth Rate $g$ (\%)},
@@ -48,7 +48,7 @@ Figure~\ref{fig:hul_sensitivity} plots HUL's DDM intrinsic value across a plausi
     tick label style={font=\scriptsize},
     label style={font=\small},
     legend pos=north west,
-    legend style={font=\scriptsize, draw=pureblack, fill=white, line width=0.7pt, inner sep=3.5pt}
+    legend style={font=\scriptsize, draw=pureblack, fill=white, line width=0.7pt, inner sep=3.0pt}
 ]
 
     % DDM Curve: P0(g) = 44.86*(1 + x/100) / (0.14 - x/100)
@@ -67,15 +67,15 @@ Figure~\ref{fig:hul_sensitivity} plots HUL's DDM intrinsic value across a plausi
     \addplot[only marks, mark=*, mark size=3.0pt, fill=pureblack, draw=pureblack] coordinates {(11.4655, 1973)};
 
     % Break-Even Callout Badge with Arrow
-    \node[draw=pureblack, line width=0.8pt, fill=white, rounded corners=2pt, inner sep=3.5pt, font=\scriptsize, align=center] 
+    \node[draw=pureblack, line width=0.8pt, fill=white, rounded corners=2pt, inner sep=3pt, font=\scriptsize, align=center] 
         (beven) at (axis cs:10.3, 2350) {\textbf{Break-Even Growth Rate}\\[1pt]$g^* = 11.46\% \quad (P_0 = \text{\inr } 1,973)$};
     \draw[->, >=Stealth, line width=1.1pt, draw=pureblack] (beven.south east) -- (axis cs:11.38, 2010);
 
     % Regional Classification Badges
-    \node[draw=pureblack, line width=0.7pt, fill=boxfill, rounded corners=2pt, inner sep=4pt, font=\scriptsize, align=center] 
+    \node[draw=pureblack, line width=0.7pt, fill=boxfill, rounded corners=2pt, inner sep=3.5pt, font=\scriptsize, align=center] 
         at (axis cs:9.2, 1350) {\textbf{Overvalued Region}\\[1pt]$P_{\DDM}(g) < P_0$};
 
-    \node[draw=pureblack, line width=0.7pt, fill=boxfill, rounded corners=2pt, inner sep=4pt, font=\scriptsize, align=center] 
+    \node[draw=pureblack, line width=0.7pt, fill=boxfill, rounded corners=2pt, inner sep=3.5pt, font=\scriptsize, align=center] 
         at (axis cs:12.0, 3100) {\textbf{Undervalued Region}\\[1pt]$P_{\DDM}(g) > P_0$};
 
 \end{axis}
@@ -84,5 +84,10 @@ Figure~\ref{fig:hul_sensitivity} plots HUL's DDM intrinsic value across a plausi
 \label{fig:hul_sensitivity}
 \end{figure}
 
-\subsection{Empirical Implications of Growth Sensitivity}
-The empirical takeaway is that HUL's apparent undervaluation is exceptionally fragile: a minor deceleration of just \textbf{54 basis points} (from the assumed $12.00\%$ to $11.46\%$) completely eliminates the margin of safety, rendering the corporation overvalued under the Gordon Growth framework.
+\subsection{Cross-Sectional Growth Gap and Cost-of-Equity Stress Testing}
+Sensitivity dynamics extend beyond HUL across the entire cross-section:
+\begin{enumerate}[label=\textbf{\arabic*.}, topsep=2pt, itemsep=1.5pt, parsep=0pt]
+    \item \textbf{Knife-Edge Valuation Boundaries:} While HUL displays a positive growth buffer of \textbf{$+0.53\,\text{pp}$} ($g = 12.00\%$ vs $g^* = 11.47\%$), two peers operate on razor-thin overvaluation thresholds: \textbf{Varun Beverages} is overvalued by a mere \textbf{$-0.26\,\text{pp}$} ($g^* = 12.26\%$) and \textbf{Britannia Industries} by \textbf{$-0.38\,\text{pp}$} ($g^* = 12.38\%$).
+    \item \textbf{Discount-Rate Stress Testing ($\bm{\Ke = 13.0\%}$):} A 100-basis-point reduction in the cost of equity to $13.0\%$ lowers market-implied growth hurdles to $11.27\%$ for Varun and $11.39\%$ for Britannia. Consequently, \textbf{all three growth-capped enterprises flip to Undervalued}.
+    \item \textbf{Structural Robustness:} The remaining seven companies face substantial fundamental deficits ($g - g^* \le -1.28\,\text{pp}$), remaining decisively overvalued across all plausible parameters. Thus, only \textbf{seven of the ten overvaluations are analytically robust}.
+\end{enumerate}
