@@ -1,1 +1,911 @@
-% Placeholder for ch05_decision_trees.tex
+\chapter{Decision Trees}
+
+\section{Overview and Core Concepts}
+
+A \textbf{Decision Tree} is a supervised machine learning model that predicts a target outcome by recursively splitting the data into smaller, progressively more homogeneous (pure) subsets based on feature values.
+
+\subsection{Structural Components of a Decision Tree}
+\begin{itemize}
+    \item \textbf{Root Node:} The topmost node of the tree, containing all training samples prior to any partitioning.
+    \item \textbf{Decision Node (Internal Node):} A node that tests a specific feature condition to split data into child branches.
+    \item \textbf{Branch:} A directed link representing the outcome of a decision test leading to a subsequent node.
+    \item \textbf{Leaf Node (Terminal Node):} An end node carrying the final prediction (class label in classification or mean value in regression); it undergoes no further splitting.
+    \item \textbf{Parent Node:} A node immediately preceding a split.
+    \item \textbf{Child Node:} A node generated immediately as the outcome of a parent node split.
+    \item \textbf{Tree Depth:} The maximum number of levels (edges) from the root node to the deepest leaf node.
+\end{itemize}
+
+\subsection{General Recursive Splitting Algorithm}
+\begin{enumerate}
+    \item \textbf{Initialization:} Place all training observations at the root node.
+    \item \textbf{Check Termination:} If a stopping condition is met (e.g., node is pure, maximum depth reached, or insufficient samples), convert the node into a terminal leaf.
+    \item \textbf{Evaluate Candidate Splits:} For every available feature and potential split point, compute the impurity reduction across the subsets.
+    \item \textbf{Select Optimal Split:} Select the feature and threshold that yields the best split criterion:
+    \begin{itemize}
+        \item Maximum Information Gain (ID3 algorithm),
+        \item Maximum Gain Ratio (C4.5 algorithm),
+        \item Maximum Gini Gain / Minimum Weighted Gini Impurity (CART algorithm), or
+        \item Maximum Variance Reduction (for continuous regression trees).
+    \end{itemize}
+    \item \textbf{Recursive Partitioning:} Partition the sample observations into disjoint child subsets and recurse on each child node.
+    \item \textbf{Stopping Criteria:} Terminate tree growth when:
+    \begin{itemize}
+        \item The node is completely pure (all samples share the same class),
+        \item The predefined maximum depth has been reached,
+        \item The minimum sample size required for a split is breached, or
+        \item No available candidate split yields a positive impurity improvement.
+    \end{itemize}
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=0.85, every node/.append style={transform shape},
+    node distance=1.2cm, auto,
+    processbox/.style={
+        rectangle, draw=navyblue, fill=lightgraybg, rounded corners=2mm,
+        thick, minimum width=2.0cm, minimum height=1.0cm, align=center, font=\small\sffamily
+    },
+    arr/.style={->, >=stealth, very thick, navyblue}
+]
+    \node[processbox] (d1) {Training\\Data};
+    \node[processbox, right=0.6cm of d1] (d2) {Candidate\\Split};
+    \node[processbox, right=0.6cm of d2] (d3) {Measure\\Impurity};
+    \node[processbox, right=0.6cm of d3] (d4) {Gini /\\Entropy};
+    \node[processbox, right=0.6cm of d4] (d5) {Compare\\Splits};
+    \node[processbox, right=0.6cm of d5] (d6) {Choose Best\\Split};
+
+    \draw[arr] (d1) -- (d2);
+    \draw[arr] (d2) -- (d3);
+    \draw[arr] (d3) -- (d4);
+    \draw[arr] (d4) -- (d5);
+    \draw[arr] (d5) -- (d6);
+\end{tikzpicture}
+\caption{End-to-end split evaluation pipeline for constructing decision tree nodes.}
+\end{figure}
+
+\section{Impurity Measures and Splitting Criteria}
+
+\subsection{Standard Tree Induction Algorithms}
+Different decision tree induction algorithms utilize distinct impurity metrics and optimization objectives:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Algorithm} & \textbf{Impurity Measure} & \textbf{Split Criterion} \\
+\midrule
+\textbf{ID3} & Entropy & Information Gain \\
+\textbf{C4.5} & Entropy & Gain Ratio \\
+\textbf{CART} & Gini Impurity & Gini Gain / Minimum Weighted Gini \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Entropy and Information Gain}
+\textbf{Entropy} quantifies the amount of uncertainty or disorder in a dataset $S$ containing $c$ classes:
+\begin{equation}
+H(S) = -\sum_{i=1}^{c} p_i \log_2(p_i)
+\end{equation}
+where $p_i = \frac{\text{Number of samples in class } i}{\text{Total observations in node}}$ is the empirical class probability.
+
+For a two-class problem ($c=2$ with probabilities $p_1$ and $p_2$):
+\begin{equation}
+H(S) = -p_1 \log_2(p_1) - p_2 \log_2(p_2)
+\end{equation}
+\begin{itemize}
+    \item A node containing only one class is completely pure: $H(S) = 0$.
+    \item Maximum entropy occurs under equal class balance ($p_1 = p_2 = 0.5 \implies H(S) = 1.0$).
+\end{itemize}
+
+\textbf{Information Gain (IG)} measures the reduction in entropy achieved by partitioning a parent dataset $S$ using attribute $A$:
+\begin{equation}
+IG(S, A) = H(\text{parent}) - H(\text{children}) = H(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} H(S_v)
+\end{equation}
+where $H(\text{children}) = \sum_i \frac{n_i}{n} H_i$ represents the weighted average entropy across all resulting child partitions $S_v$ of size $n_i$.
+
+\subsection{Gain Ratio (C4.5)}
+To overcome ID3's bias toward attributes with many distinct values, the \textbf{C4.5} algorithm normalizes Information Gain by the split information:
+\begin{equation}
+\text{Gain Ratio}(S, A) = \frac{IG(S, A)}{\text{Split Info}(S, A)}
+\end{equation}
+where $\text{Split Info}(S, A) = -\sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} \log_2\left(\frac{|S_v|}{|S|}\right)$.
+
+\subsection{Gini Impurity (CART)}
+\textbf{Gini Impurity} measures the probability of misclassifying a randomly chosen element from the set if it were randomly labeled according to the class distribution:
+\begin{equation}
+\text{Gini}(S) = 1 - \sum_{i=1}^{c} p_i^2
+\end{equation}
+For a binary classification setting ($c = 2$):
+\begin{equation}
+\text{Gini}(S) = 1 - p_1^2 - p_2^2
+\end{equation}
+\begin{itemize}
+    \item \textbf{Smaller Gini:} Indicates a purer node.
+    \item \textbf{Larger Gini:} Indicates a more mixed, impure node.
+    \item $\text{Gini} = 0 \implies$ The node is completely pure (all samples belong to a single class).
+    \item For binary classification, maximum Gini is $0.5$ when $p_1 = p_2 = 0.5$.
+\end{itemize}
+
+\subsection{Comparison: Gini Impurity vs. Entropy}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Property} & \textbf{Gini Impurity} & \textbf{Entropy} \\
+\midrule
+\textbf{Measures} & Impurity & Uncertainty \\
+\textbf{Minimum Value} & $0$ & $0$ \\
+\textbf{Pure Node Value} & $0$ & $0$ \\
+\textbf{Binary Maximum} & $0.5$ (at $p = 0.5$) & $1.0$ (at $p = 0.5$) \\
+\textbf{Good Split Condition} & Lower Weighted Gini & Higher Information Gain \\
+\textbf{Computation} & Simpler (algebraic squares) & Heavy (evaluates logarithms) \\
+\textbf{Common Usage} & CART & ID3 / C4.5 algorithms \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Advantages and Disadvantages of Decision Trees}
+
+\begin{center}
+\begin{tabular}{p{0.46\textwidth} p{0.48\textwidth}}
+\toprule
+\textbf{Advantages} & \textbf{Disadvantages} \\
+\midrule
+\begin{itemize}[leftmargin=*, nosep]
+    \item Highly intuitive and easy to understand.
+    \item Easy to visualize graphically.
+    \item Easy to explain to non-technical audiences.
+    \item Captures complex non-linear relationships.
+    \item Directly applicable to classification and regression.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*, nosep]
+    \item Highly susceptible to overfitting on training data.
+    \item Deep trees become unwieldy and overly complex.
+    \item High variance: small data perturbations alter the tree.
+    \item A single tree has limited predictive stability.
+\end{itemize} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Solved Problem 5.1: Play Tennis Decision Tree}
+
+\begin{example}{ID3 Induction on Play Tennis Dataset}{play_tennis}
+Construct an optimal decision tree using the ID3 algorithm (Entropy and Information Gain) on the classic 15-sample Play Tennis dataset.
+
+\begin{center}
+\begin{tabular}{clllll}
+\toprule
+\textbf{Day} & \textbf{Outlook} & \textbf{Temp} & \textbf{Humidity} & \textbf{Wind} & \textbf{Tennis?} \\
+\midrule
+1  & Sunny (S)    & Hot (H)  & High (H)   & Weak (W)   & No (N) \\
+2  & Sunny (S)    & Hot (H)  & High (H)   & Strong (S) & No (N) \\
+3  & Overcast (O) & Hot (H)  & High (H)   & Weak (W)   & Yes (Y) \\
+4  & Rain (R)     & Mild (M) & High (H)   & Weak (W)   & Yes (Y) \\
+5  & Rain (R)     & Cool (C) & Normal (N) & Weak (W)   & Yes (Y) \\
+6  & Rain (R)     & Cool (C) & Normal (N) & Strong (S) & No (N) \\
+7  & Overcast (O) & Cool (C) & Normal (N) & Strong (S) & Yes (Y) \\
+8  & Sunny (S)    & Mild (M) & High (H)   & Weak (W)   & No (N) \\
+9  & Sunny (S)    & Cool (C) & Normal (N) & Weak (W)   & Yes (Y) \\
+10 & Rain (R)     & Mild (M) & Normal (N) & Weak (W)   & Yes (Y) \\
+11 & Sunny (S)    & Mild (M) & Normal (N) & Strong (S) & Yes (Y) \\
+12 & Overcast (O) & Mild (M) & High (H)   & Strong (S) & Yes (Y) \\
+13 & Overcast (O) & Hot (H)  & Normal (N) & Weak (W)   & Yes (Y) \\
+14 & Rain (R)     & Mild (M) & High (H)   & Strong (S) & No (N) \\
+15 & Sunny (S)    & Hot (H)  & High (H)   & Weak (W)   & No (N) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Overall Dataset Statistics and Entropy}
+The target variable contains $15$ total observations: $9$ Yes and $6$ No:
+\begin{equation}
+p_1 = P(Y) = \frac{9}{15} = 0.60, \quad p_2 = P(N) = \frac{6}{15} = 0.40
+\end{equation}
+\begin{equation}
+H(S) = -0.6 \log_2(0.6) - 0.4 \log_2(0.4) = 0.97095 \approx 0.9709
+\end{equation}
+
+\subsubsection{Root Attribute Evaluation}
+We calculate the weighted entropy $H(\text{children}) = \sum \frac{n_i}{n} H_i$ for each candidate predictor:
+
+\paragraph{1. Outlook ($n = 15$):}
+\begin{center}\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Sunny (S)    & 6 & 2 & 4 & $0.9182$ & $\frac{6}{15} \times 0.9182 = 0.3673$ \\
+Overcast (O) & 4 & 4 & 0 & $0.0000$ & $\frac{4}{15} \times 0 = 0.0000$ \\
+Rain (R)     & 5 & 3 & 2 & $0.9709$ & $\frac{5}{15} \times 0.9709 = 0.3236$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.6909} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{2. Temperature ($n = 15$):}
+\begin{center}\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Hot (H)  & 5 & 2 & 3 & $0.9709$ & $\frac{5}{15} \times 0.9709 = 0.3236$ \\
+Mild (M) & 6 & 4 & 2 & $0.9182$ & $\frac{6}{15} \times 0.9182 = 0.3673$ \\
+Cool (C) & 4 & 3 & 1 & $0.8112$ & $\frac{4}{15} \times 0.8112 = 0.2163$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.9072} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{3. Humidity ($n = 15$):}
+\begin{center}\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+High (H)   & 8 & 3 & 5 & $0.9544$ & $\frac{8}{15} \times 0.9544 = 0.5090$ \\
+Normal (N) & 7 & 6 & 1 & $0.5916$ & $\frac{7}{15} \times 0.5916 = 0.2761$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.7851} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{4. Wind ($n = 15$):}
+\begin{center}\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Weak (W)   & 9 & 6 & 3 & $0.9182$ & $\frac{9}{15} \times 0.9182 = 0.5509$ \\
+Strong (S) & 6 & 3 & 3 & $1.0000$ & $\frac{6}{15} \times 1.0000 = 0.4000$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.7672} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Root Information Gain Comparison}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Attribute} & \textbf{Information Gain Computation} & \textbf{Gain Value} \\
+\midrule
+\textbf{Outlook}  & $0.9709 - 0.69088$ & $\mathbf{0.28002}$ \\
+Wind              & $1.0000 - 0.76720$ (or $0.9709 - 0.7672 = 0.2037$) & $0.23280$ \\
+Humidity          & $0.9544 - 0.78500$ (or $0.9709 - 0.7850 = 0.1859$) & $0.16940$ \\
+Temperature       & $0.9709 - 0.90720$ & $0.06370$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Ranking: $\text{Outlook} > \text{Wind} > \text{Humidity} > \text{Temp}$.
+Therefore, \textbf{Outlook} is selected as the \textbf{Root Node}.
+\begin{itemize}
+    \item When $\text{Outlook} = \text{Overcast}$: Count $= 4$, all $4$ Yes $\implies$ \textbf{Pure Leaf: Predict Yes}.
+\end{itemize}
+
+\subsubsection{Partitioning the Rain Branch (\texorpdfstring{$n = 5$}{n = 5})}
+The Rain subset contains 5 observations (Days 4, 5, 6, 10, 14) with $3$ Yes and $2$ No ($H(S_{\text{Rain}}) = 0.9709$):
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
+\midrule
+\textbf{Temperature} & & & & & \\
+Mild & 3 & 2 & 1 & $0.9182$ & $\frac{3}{5} \times 0.9182 = 0.5509$ \\
+Cool & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1.0000 = 0.4000$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.9509} \\
+\midrule
+\textbf{Humidity} & & & & & \\
+High & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1.0000 = 0.4000$ \\
+Normal & 3 & 2 & 1 & $0.9182$ & $\frac{3}{5} \times 0.9182 = 0.55092$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.95092} \\
+\midrule
+\textbf{Wind} & & & & & \\
+Weak & 3 & 3 & 0 & $0$ & $\frac{3}{5} \times 0 = 0$ \\
+Strong & 2 & 0 & 2 & $0$ & $\frac{2}{5} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Information Gain under Rain:
+\begin{itemize}
+    \item $IG(\text{Temp}) = 0.9709 - 0.9509 = 0.0200$
+    \item $IG(\text{Humidity}) = 0.9709 - 0.95092 = 0.01998$
+    \item $IG(\text{Wind}) = 0.9709 - 0 = \mathbf{0.9709}$
+\end{itemize}
+Ranking: $\text{Wind} > \text{Temp} > \text{Humidity}$.
+Under Rain, we split on \textbf{Wind}:
+\begin{itemize}
+    \item $\text{Wind} = \text{Weak} \implies \mathbf{Yes}$
+    \item $\text{Wind} = \text{Strong} \implies \mathbf{No}$
+\end{itemize}
+
+\subsubsection{Partitioning the Sunny Branch (\texorpdfstring{$n = 6$}{n = 6})}
+The Sunny subset contains 6 observations (Days 1, 2, 8, 9, 11, 15) with $2$ Yes and $4$ No ($H(S_{\text{Sunny}}) = 0.9182$):
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
+\midrule
+\textbf{Temperature} & & & & & \\
+Hot & 3 & 0 & 3 & $0$ & $\frac{3}{6} \times 0 = 0$ \\
+Mild & 2 & 1 & 1 & $1.0000$ & $\frac{2}{6} \times 1.0000 = 0.3333$ \\
+Cool & 1 & 1 & 0 & $0$ & $\frac{1}{6} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.3333} \\
+\midrule
+\textbf{Humidity} & & & & & \\
+High & 4 & 0 & 4 & $0$ & $\frac{4}{6} \times 0 = 0$ \\
+Normal & 2 & 2 & 0 & $0$ & $\frac{2}{6} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0} \\
+\midrule
+\textbf{Wind} & & & & & \\
+Weak & 4 & 1 & 3 & $0$ (or $0.811$) & $\frac{4}{6} \times 0 = 0$ \\
+Strong & 2 & 1 & 1 & $1.0000$ & $\frac{2}{6} \times 1.0000 = 0.3333$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.3333} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Information Gain under Sunny:
+\begin{itemize}
+    \item $IG(\text{Temp}) = 0.9182 - 0.3333 = 0.5849$
+    \item $IG(\text{Humidity}) = 0.9182 - 0 = \mathbf{0.9182}$
+    \item $IG(\text{Wind}) = 0.9182 - 0.3333 = 0.5849$
+\end{itemize}
+Ranking: $\text{Humidity} > \text{Temp} = \text{Wind}$.
+Under Sunny, we split on \textbf{Humidity}:
+\begin{itemize}
+    \item $\text{Humidity} = \text{High} \implies \mathbf{No}$
+    \item $\text{Humidity} = \text{Normal} \implies \mathbf{Yes}$
+\end{itemize}
+
+\subsubsection{Final Play Tennis Decision Tree}
+\begin{center}
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=4.5cm, level distance=1.8cm},
+    level 2/.style={sibling distance=2.2cm, level distance=1.8cm},
+    node_box/.style={
+        rectangle, draw=navyblue, fill=lightgraybg, rounded corners=1.5mm,
+        thick, minimum width=2.4cm, minimum height=0.9cm, align=center, font=\small\bfseries\sffamily
+    },
+    leaf_yes/.style={
+        rectangle, draw=darkteal, fill=darkteal!15, rounded corners=1.5mm,
+        thick, minimum width=1.6cm, minimum height=0.8cm, align=center, font=\small\bfseries\sffamily, text=darkteal
+    },
+    leaf_no/.style={
+        rectangle, draw=crimson, fill=crimson!15, rounded corners=1.5mm,
+        thick, minimum width=1.6cm, minimum height=0.8cm, align=center, font=\small\bfseries\sffamily, text=crimson
+    },
+    edge_label/.style={font=\footnotesize\sffamily, fill=white, inner sep=2pt}
+]
+    \node[node_box] {Outlook}
+        child {
+            node[node_box] {Humidity}
+            child {
+                node[leaf_no] {No}
+                edge from parent node[edge_label] {High}
+            }
+            child {
+                node[leaf_yes] {Yes}
+                edge from parent node[edge_label] {Normal}
+            }
+            edge from parent node[edge_label] {Sunny}
+        }
+        child {
+            node[leaf_yes] {Yes}
+            edge from parent node[edge_label] {Overcast}
+        }
+        child {
+            node[node_box] {Wind}
+            child {
+                node[leaf_yes] {Yes}
+                edge from parent node[edge_label] {Weak}
+            }
+            child {
+                node[leaf_no] {No}
+                edge from parent node[edge_label] {Strong}
+            }
+            edge from parent node[edge_label] {Rain}
+        };
+\end{tikzpicture}
+\par\vspace{2mm}\small\textbf{Decision Tree Structure: Play Tennis Classification}
+\end{center}
+\end{example}
+
+\section{Solved Problem 5.2: Credit Loan Approval Decision Tree}
+
+\begin{example}{Decision Tree Induction for Loan Approval}{loan_approval}
+Given a dataset of 15 loan applicants across features Location, Income, Credit Score, and Employment, build the optimal decision tree using Entropy and Information Gain.
+
+\begin{center}
+\begin{tabular}{clllll}
+\toprule
+\textbf{App} & \textbf{Location} & \textbf{Income} & \textbf{Credit Score} & \textbf{Employment} & \textbf{Approved?} \\
+\midrule
+1  & Urban (U)    & High (H)   & Poor (P) & Part-time (PT) & No (N) \\
+2  & Urban (U)    & High (H)   & Poor (P) & Full-time (FT) & No (N) \\
+3  & Suburban (S) & High (H)   & Poor (P) & Part-time (PT) & Yes (Y) \\
+4  & Rural (R)    & Medium (M) & Poor (P) & Part-time (PT) & Yes (Y) \\
+5  & Rural (R)    & Low (L)    & Good (G) & Part-time (PT) & Yes (Y) \\
+6  & Rural (R)    & Low (L)    & Good (G) & Full-time (FT) & No (N) \\
+7  & Suburban (S) & Low (L)    & Good (G) & Full-time (FT) & Yes (Y) \\
+8  & Urban (U)    & Medium (M) & Poor (P) & Part-time (PT) & No (N) \\
+9  & Urban (U)    & Low (L)    & Good (G) & Part-time (PT) & Yes (Y) \\
+10 & Rural (R)    & Medium (M) & Good (G) & Part-time (PT) & Yes (Y) \\
+11 & Urban (U)    & Medium (M) & Good (G) & Full-time (FT) & Yes (Y) \\
+12 & Suburban (S) & Medium (M) & Poor (P) & Full-time (FT) & Yes (Y) \\
+13 & Suburban (S) & High (H)   & Good (G) & Part-time (PT) & Yes (Y) \\
+14 & Rural (R)    & Medium (M) & Poor (P) & Full-time (FT) & No (N) \\
+15 & Urban (U)    & High (H)   & Poor (P) & Part-time (PT) & No (N) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Overall Dataset Statistics and Entropy}
+The target variable Approved? contains $9$ Yes and $6$ No out of $15$ applications:
+\begin{equation}
+P_Y = \frac{9}{15}, \quad P_N = \frac{6}{15}
+\end{equation}
+\begin{equation}
+H_{\text{Approved}} = -\left(\frac{9}{15}\right)\log_2\left(\frac{9}{15}\right) - \left(\frac{6}{15}\right)\log_2\left(\frac{6}{15}\right) = 0.9709
+\end{equation}
+
+\subsubsection{Root Attribute Evaluation}
+
+\paragraph{1. Location ($n = 15$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Location} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Urban    & 6 & 2 & 4 & $0.9182$ & $\frac{6}{15} \times 0.9182 = 0.36728$ \\
+Suburban & 4 & 4 & 0 & $0$ & $\frac{4}{15} \times 0 = 0$ \\
+Rural    & 5 & 3 & 2 & $0.9709$ & $\frac{5}{15} \times 0.9709 = 0.32363$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.6909} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{2. Income ($n = 15$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Income} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+High   & 5 & 2 & 3 & $0.9709$ & $\frac{5}{15} \times 0.9709 = 0.32363$ \\
+Medium & 6 & 4 & 2 & $0.9182$ & $\frac{6}{15} \times 0.9182 = 0.36728$ \\
+Low    & 4 & 3 & 1 & $0.8112$ & $\frac{4}{15} \times 0.8112 = 0.21632$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.9072} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{3. Credit Score ($n = 15$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Credit Score} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Good & 7 & 6 & 1 & $0.5916$ & $\frac{7}{15} \times 0.5916 = 0.27608$ \\
+Poor & 8 & 3 & 5 & $0.9544$ & $\frac{8}{15} \times 0.9544 = 0.50901$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.7850} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{4. Employment ($n = 15$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Employment} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Full-time & 6 & 3 & 3 & $1.0000$ & $\frac{6}{15} \times 1.0000 = 0.4000$ \\
+Part-time & 9 & 6 & 3 & $0.9182$ & $\frac{9}{15} \times 0.9182 = 0.5509$ \\
+\midrule
+\textbf{Total} & 15 & 9 & 6 & & \textbf{0.9509} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Root Information Gain Comparison}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Root Attribute} & \textbf{Information Gain} & \textbf{Gain Value} \\
+\midrule
+\textbf{Location} & $0.9709 - 0.6909$ & $\mathbf{0.2800}$ \\
+Credit Score      & $0.9709 - 0.7850$ & $0.1859$ \\
+Income            & $0.9709 - 0.9072$ & $0.0637$ \\
+Employment        & $0.9709 - 0.9509$ & $0.0200$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Ranking: $\text{Location} > \text{Credit Score} > \text{Income} > \text{Employment}$.
+Thus, \textbf{Location} is selected as the \textbf{Root Node}.
+\begin{itemize}
+    \item When $\text{Location} = \text{Suburban}$: Count $= 4$, all $4$ Yes $\implies$ \textbf{Pure Leaf: Predict Yes}.
+\end{itemize}
+
+\subsubsection{Partitioning the Urban Branch (\texorpdfstring{$n = 6$}{n = 6})}
+The Urban subset contains 6 observations (Apps 1, 2, 8, 9, 11, 15) with $2$ Yes and $4$ No ($H(S_{\text{Urban}}) = 0.9182$):
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
+\midrule
+\textbf{Income} & & & & & \\
+High & 3 & 0 & 3 & $0$ & $\frac{3}{6} \times 0 = 0$ \\
+Medium & 2 & 1 & 1 & $1.0000$ & $\frac{2}{6} \times 1 = 0.3333$ \\
+Low & 1 & 1 & 0 & $0$ & $\frac{1}{6} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.3333} \\
+\midrule
+\textbf{Credit Score} & & & & & \\
+Good & 2 & 2 & 0 & $0$ & $\frac{2}{6} \times 0 = 0$ \\
+Poor & 4 & 0 & 4 & $0$ & $\frac{4}{6} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0} \\
+\midrule
+\textbf{Employment} & & & & & \\
+Full-time & 2 & 1 & 1 & $1.0000$ & $\frac{2}{6} \times 1 = 0.3333$ \\
+Part-time & 4 & 1 & 3 & $0.8112$ & $\frac{4}{6} \times 0.8112 = 0.5408$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.8741} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Information Gain under Urban:
+\begin{itemize}
+    \item $IG(\text{Income}) = 0.9182 - 0.3333 = 0.5849$
+    \item $IG(\text{Credit Score}) = 0.9182 - 0 = \mathbf{0.9182}$
+    \item $IG(\text{Employment}) = 0.9182 - 0.8741 = 0.0441$
+\end{itemize}
+Ranking: $\text{Credit Score} > \text{Income} > \text{Employment}$.
+Under Urban, we split on \textbf{Credit Score}:
+\begin{itemize}
+    \item $\text{Credit Score} = \text{Good} \implies \mathbf{Yes}$
+    \item $\text{Credit Score} = \text{Poor} \implies \mathbf{No}$
+\end{itemize}
+
+\subsubsection{Partitioning the Rural Branch (\texorpdfstring{$n = 5$}{n = 5})}
+The Rural subset contains 5 observations (Apps 4, 5, 6, 10, 14) with $3$ Yes and $2$ No ($H(S_{\text{Rural}}) = 0.9709$):
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
+\midrule
+\textbf{Income} & & & & & \\
+Medium & 3 & 2 & 1 & $0.9182$ & $\frac{3}{5} \times 0.9182 = 0.55092$ \\
+Low & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1 = 0.4000$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.95092} \\
+\midrule
+\textbf{Credit Score} & & & & & \\
+Good & 3 & 2 & 1 & $0.8899$ & $\frac{3}{5} \times 0.8899 = 0.53394$ \\
+Poor & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1 = 0.4000$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.93394} \\
+\midrule
+\textbf{Employment} & & & & & \\
+Full-time & 2 & 0 & 2 & $0$ & $\frac{2}{5} \times 0 = 0$ \\
+Part-time & 3 & 3 & 0 & $0$ & $\frac{3}{5} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Information Gain under Rural:
+\begin{itemize}
+    \item $IG(\text{Income}) = 0.9709 - 0.95092 = 0.01998$
+    \item $IG(\text{Credit Score}) = 0.9709 - 0.93394 = 0.03696$
+    \item $IG(\text{Employment}) = 0.9709 - 0 = \mathbf{0.9709}$
+\end{itemize}
+Ranking: $\text{Employment} > \text{Credit Score} > \text{Income}$.
+Under Rural, we split on \textbf{Employment}:
+\begin{itemize}
+    \item $\text{Employment} = \text{Full-time} \implies \mathbf{No}$
+    \item $\text{Employment} = \text{Part-time} \implies \mathbf{Yes}$
+\end{itemize}
+
+\subsubsection{Final Loan Approval Decision Tree}
+\begin{center}
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=4.5cm, level distance=1.8cm},
+    level 2/.style={sibling distance=2.2cm, level distance=1.8cm},
+    node_box/.style={
+        rectangle, draw=navyblue, fill=lightgraybg, rounded corners=1.5mm,
+        thick, minimum width=2.4cm, minimum height=0.9cm, align=center, font=\small\bfseries\sffamily
+    },
+    leaf_yes/.style={
+        rectangle, draw=darkteal, fill=darkteal!15, rounded corners=1.5mm,
+        thick, minimum width=1.6cm, minimum height=0.8cm, align=center, font=\small\bfseries\sffamily, text=darkteal
+    },
+    leaf_no/.style={
+        rectangle, draw=crimson, fill=crimson!15, rounded corners=1.5mm,
+        thick, minimum width=1.6cm, minimum height=0.8cm, align=center, font=\small\bfseries\sffamily, text=crimson
+    },
+    edge_label/.style={font=\footnotesize\sffamily, fill=white, inner sep=2pt}
+]
+    \node[node_box] {Location}
+        child {
+            node[node_box] {Credit Score}
+            child {
+                node[leaf_yes] {Yes}
+                edge from parent node[edge_label] {Good}
+            }
+            child {
+                node[leaf_no] {No}
+                edge from parent node[edge_label] {Poor}
+            }
+            edge from parent node[edge_label] {Urban}
+        }
+        child {
+            node[leaf_yes] {Yes}
+            edge from parent node[edge_label] {Suburban}
+        }
+        child {
+            node[node_box] {Employment}
+            child {
+                node[leaf_no] {No}
+                edge from parent node[edge_label] {Full-time}
+            }
+            child {
+                node[leaf_yes] {Yes}
+                edge from parent node[edge_label] {Part-time}
+            }
+            edge from parent node[edge_label] {Rural}
+        };
+\end{tikzpicture}
+\par\vspace{2mm}\small\textbf{Decision Tree Structure: Loan Approval Classification}
+\end{center}
+\end{example}
+
+\section{Solved Problem 5.3: Candidate Job Offer Decision Tree}
+
+\begin{example}{Decision Tree Induction for Candidate Job Offers}{job_offers}
+A human resources department assesses 14 candidates across Experience, Salary Requirement, Certification Status, and Interview Rating to predict whether a Job Offer is extended.
+
+\begin{center}
+\begin{tabular}{clllll}
+\toprule
+\textbf{Candidate} & \textbf{Experience} & \textbf{Salary} & \textbf{Certified} & \textbf{Rating} & \textbf{Job Offer} \\
+\midrule
+1  & Junior (J) & High (H)   & No (N)  & Fair (F)      & No (N) \\
+2  & Junior (J) & High (H)   & No (N)  & Excellent (E) & No (N) \\
+3  & Mid (M)    & High (H)   & No (N)  & Fair (F)      & Yes (Y) \\
+4  & Senior (S) & Medium (M) & No (N)  & Fair (F)      & Yes (Y) \\
+5  & Senior (S) & Low (L)    & Yes (Y) & Fair (F)      & Yes (Y) \\
+6  & Senior (S) & Low (L)    & Yes (Y) & Excellent (E) & No (N) \\
+7  & Mid (M)    & Low (L)    & Yes (Y) & Excellent (E) & Yes (Y) \\
+8  & Junior (J) & Medium (M) & No (N)  & Fair (F)      & No (N) \\
+9  & Junior (J) & Low (L)    & Yes (Y) & Fair (F)      & Yes (Y) \\
+10 & Senior (S) & Medium (M) & Yes (Y) & Fair (F)      & Yes (Y) \\
+11 & Junior (J) & Medium (M) & Yes (Y) & Excellent (E) & Yes (Y) \\
+12 & Mid (M)    & Medium (M) & No (N)  & Excellent (E) & Yes (Y) \\
+13 & Mid (M)    & High (H)   & Yes (Y) & Fair (F)      & Yes (Y) \\
+14 & Senior (S) & Medium (M) & No (N)  & Excellent (E) & No (N) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Overall Dataset Statistics and Entropy}
+The target variable Job Offer contains $9$ Yes and $5$ No out of $14$ candidates:
+\begin{equation}
+P_{\text{Yes}} = \frac{9}{14}, \quad P_{\text{No}} = \frac{5}{14}
+\end{equation}
+\begin{equation}
+H_S = -\left(\frac{9}{14}\right)\log_2\left(\frac{9}{14}\right) - \left(\frac{5}{14}\right)\log_2\left(\frac{5}{14}\right) = 0.9402
+\end{equation}
+
+\subsubsection{Root Attribute Evaluation}
+
+\paragraph{1. Experience ($n = 14$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Experience} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Junior (J) & 5 & 2 & 3 & $0.9709$ & $\frac{5}{14} \times 0.9709 = 0.34675$ \\
+Mid (M)    & 4 & 4 & 0 & $0$      & $\frac{4}{14} \times 0 = 0$ \\
+Senior (S) & 5 & 3 & 2 & $0.9709$ & $\frac{5}{14} \times 0.9709 = 0.34675$ \\
+\midrule
+\textbf{Total} & 14 & 9 & 5 & & \textbf{0.6935} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{2. Salary ($n = 14$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Salary} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+High (H)   & 4 & 2 & 2 & $1.0000$ & $\frac{4}{14} \times 1 = 0.2857$ \\
+Medium (M) & 6 & 4 & 2 & $0.9182$ & $\frac{6}{14} \times 0.9182 = 0.3935$ \\
+Low (L)    & 4 & 3 & 1 & $0.8112$ & $\frac{4}{14} \times 0.8112 = 0.2318$ \\
+\midrule
+\textbf{Total} & 14 & 9 & 5 & & \textbf{0.9110} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{3. Certified ($n = 14$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Certified} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Yes (Y) & 7 & 6 & 1 & $0.5916$ & $\frac{7}{14} \times 0.5916 = 0.2958$ \\
+No (N)  & 7 & 3 & 4 & $0.9852$ & $\frac{7}{14} \times 0.9852 = 0.4926$ \\
+\midrule
+\textbf{Total} & 14 & 9 & 5 & & \textbf{0.7884} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{4. Rating ($n = 14$):}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Rating} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
+\midrule
+Fair (F)      & 8 & 6 & 2 & $0.8112$ & $\frac{8}{14} \times 0.8112 = 0.4635$ \\
+Excellent (E) & 6 & 3 & 3 & $1.0000$ & $\frac{6}{14} \times 1 = 0.4286$ \\
+\midrule
+\textbf{Total} & 14 & 9 & 5 & & \textbf{0.8921} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Root Information Gain Comparison}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Root Attribute} & \textbf{Information Gain} & \textbf{Gain Value} \\
+\midrule
+\textbf{Experience} & $0.9402 - 0.6935$ & $\mathbf{0.2467}$ \\
+Certified           & $0.9402 - 0.7884$ & $0.1518$ \\
+Rating              & $0.9402 - 0.8921$ & $0.0481$ \\
+Salary              & $0.9402 - 0.9110$ & $0.0292$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Ranking: $\text{Experience} > \text{Certified} > \text{Rating} > \text{Salary}$.
+Thus, \textbf{Experience} is chosen as the \textbf{Root Node}.
+\begin{itemize}
+    \item When $\text{Experience} = \text{Mid}$: Count $= 4$, all $4$ Yes $\implies$ \textbf{Pure Leaf: Predict Yes}.
+\end{itemize}
+
+\subsubsection{Partitioning the Junior Branch (\texorpdfstring{$n = 5$}{n = 5})}
+The Junior subset contains 5 observations (Candidates 1, 2, 8, 9, 11) with $2$ Yes and $3$ No ($H(S_{\text{Junior}}) = 0.9709$):
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
+\midrule
+\textbf{Certified} & & & & & \\
+Yes & 2 & 2 & 0 & $0$ & $\frac{2}{5} \times 0 = 0$ \\
+No  & 3 & 0 & 3 & $0$ & $\frac{3}{5} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0} \\
+\midrule
+\textbf{Salary} & & & & & \\
+High & 2 & 0 & 2 & $0$ & $\frac{2}{5} \times 0 = 0$ \\
+Medium & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1 = 0.4000$ \\
+Low & 1 & 1 & 0 & $0$ & $\frac{1}{5} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.4000} \\
+\midrule
+\textbf{Rating} & & & & & \\
+Fair & 3 & 1 & 2 & $0.9182$ & $\frac{3}{5} \times 0.9182 = 0.55092$ \\
+Excellent & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1 = 0.4000$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.95092} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Information Gain under Junior:
+\begin{itemize}
+    \item $IG(\text{Certified}) = 0.9709 - 0 = \mathbf{0.9709}$
+    \item $IG(\text{Salary}) = 0.9709 - 0.4000 = 0.5709$
+    \item $IG(\text{Rating}) = 0.9709 - 0.95092 = 0.01998$
+\end{itemize}
+Ranking: $\text{Certified} > \text{Salary} > \text{Rating}$.
+Under Junior, we split on \textbf{Certified}:
+\begin{itemize}
+    \item $\text{Certified} = \text{Yes} \implies \mathbf{Yes}$
+    \item $\text{Certified} = \text{No} \implies \mathbf{No}$
+\end{itemize}
+
+\subsubsection{Partitioning the Senior Branch (\texorpdfstring{$n = 5$}{n = 5})}
+The Senior subset contains 5 observations (Candidates 4, 5, 6, 10, 14) with $3$ Yes and $2$ No ($H(S_{\text{Senior}}) = 0.9709$):
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
+\midrule
+\textbf{Certified} & & & & & \\
+Yes & 3 & 2 & 1 & $0.9182$ & $\frac{3}{5} \times 0.9182 = 0.55092$ \\
+No  & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1 = 0.4000$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.95092} \\
+\midrule
+\textbf{Salary} & & & & & \\
+Medium & 3 & 2 & 1 & $0.9182$ & $\frac{3}{5} \times 0.9182 = 0.55092$ \\
+Low    & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1 = 0.4000$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0.95092} \\
+\midrule
+\textbf{Rating} & & & & & \\
+Fair & 3 & 3 & 0 & $0$ & $\frac{3}{5} \times 0 = 0$ \\
+Excellent & 2 & 0 & 2 & $0$ & $\frac{2}{5} \times 0 = 0$ \\
+\textbf{Weighted Sum} & & & & & \textbf{0} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Information Gain under Senior:
+\begin{itemize}
+    \item $IG(\text{Certified}) = 0.9709 - 0.95092 = 0.01998$
+    \item $IG(\text{Salary}) = 0.9709 - 0.95092 = 0.01998$
+    \item $IG(\text{Rating}) = 0.9709 - 0 = \mathbf{0.9709}$
+\end{itemize}
+Ranking: $\text{Rating} > \text{Certified} = \text{Salary}$.
+Under Senior, we split on \textbf{Rating}:
+\begin{itemize}
+    \item $\text{Rating} = \text{Fair} \implies \mathbf{Yes}$
+    \item $\text{Rating} = \text{Excellent} \implies \mathbf{No}$
+\end{itemize}
+
+\subsubsection{Final Candidate Job Offer Decision Tree}
+\begin{center}
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=4.5cm, level distance=1.8cm},
+    level 2/.style={sibling distance=2.2cm, level distance=1.8cm},
+    node_box/.style={
+        rectangle, draw=navyblue, fill=lightgraybg, rounded corners=1.5mm,
+        thick, minimum width=2.4cm, minimum height=0.9cm, align=center, font=\small\bfseries\sffamily
+    },
+    leaf_yes/.style={
+        rectangle, draw=darkteal, fill=darkteal!15, rounded corners=1.5mm,
+        thick, minimum width=1.6cm, minimum height=0.8cm, align=center, font=\small\bfseries\sffamily, text=darkteal
+    },
+    leaf_no/.style={
+        rectangle, draw=crimson, fill=crimson!15, rounded corners=1.5mm,
+        thick, minimum width=1.6cm, minimum height=0.8cm, align=center, font=\small\bfseries\sffamily, text=crimson
+    },
+    edge_label/.style={font=\footnotesize\sffamily, fill=white, inner sep=2pt}
+]
+    \node[node_box] {Experience}
+        child {
+            node[node_box] {Certified}
+            child {
+                node[leaf_yes] {Yes}
+                edge from parent node[edge_label] {Yes}
+            }
+            child {
+                node[leaf_no] {No}
+                edge from parent node[edge_label] {No}
+            }
+            edge from parent node[edge_label] {Junior}
+        }
+        child {
+            node[leaf_yes] {Yes}
+            edge from parent node[edge_label] {Mid}
+        }
+        child {
+            node[node_box] {Rating}
+            child {
+                node[leaf_yes] {Yes}
+                edge from parent node[edge_label] {Fair}
+            }
+            child {
+                node[leaf_no] {No}
+                edge from parent node[edge_label] {Excellent}
+            }
+            edge from parent node[edge_label] {Senior}
+        };
+\end{tikzpicture}
+\par\vspace{2mm}\small\textbf{Decision Tree Structure: Candidate Job Offer Classification}
+\end{center}
+\end{example}
