@@ -1,1 +1,401 @@
-% Placeholder for formula_reference.tex
+% ==============================================================================
+% Comprehensive Formula Reference Sheet (Combined Across All Chapters)
+% ==============================================================================
+\newpage
+\thispagestyle{plain}
+\chapter*{Comprehensive Formula Reference Sheet}
+\markboth{Comprehensive Formula Reference Sheet}{}
+\phantomsection
+\addcontentsline{toc}{chapter}{Comprehensive Formula Reference Sheet}
+
+\vspace*{0.5cm}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 1: Machine Learning Foundations and Data Preprocessing}
+\addcontentsline{toc}{section}{Chapter 1: Machine Learning Foundations and Data Preprocessing}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Z-Score Standardization}]
+\begin{align*}
+    Z &= \frac{x - \mu}{\sigma}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $x$ = Raw feature observation value
+    \item $\mu$ = Mean of the feature across the dataset ($\mu = \frac{1}{n} \sum_{i=1}^n x_i$)
+    \item $\sigma$ = Standard deviation of the feature ($\sigma = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \mu)^2}$)
+    \item $Z$ = Standardized score with zero mean ($\mu_Z = 0$) and unit variance ($\sigma_Z^2 = 1$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Min-Max Normalization}]
+\begin{align*}
+    X' &= \frac{X - X_{\min}}{X_{\max} - X_{\min}} \cdot (\text{new\_max} - \text{new\_min}) + \text{new\_min}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $X$ = Original unscaled feature value
+    \item $X_{\min}$ = Minimum observed value of the feature in the dataset
+    \item $X_{\max}$ = Maximum observed value of the feature in the dataset
+    \item $\text{new\_min}, \text{new\_max}$ = Target boundary limits (typically $0$ and $1$)
+    \item $X'$ = Rescaled feature value constrained within $[\text{new\_min}, \text{new\_max}]$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Robust Feature Scaling}]
+\begin{align*}
+    X' &= \frac{X - Q_2}{\IQR} = \frac{X - \text{Median}}{Q_3 - Q_1}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $X$ = Raw feature observation value
+    \item $Q_2$ = Second quartile (median / 50th percentile)
+    \item $Q_1$ = First quartile (25th percentile)
+    \item $Q_3$ = Third quartile (75th percentile)
+    \item $\IQR$ = Interquartile range ($\IQR = Q_3 - Q_1$)
+    \item $X'$ = Outlier-robust scaled feature value
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{4. Mean Imputation for Missing Values}]
+\begin{align*}
+    \bar{x} &= \frac{1}{n_{\text{obs}}} \sum_{i \in \mathcal{I}_{\text{obs}}} x_i, \qquad x_{\text{missing}} \leftarrow \bar{x}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathcal{I}_{\text{obs}}$ = Index set of observed (non-missing) entries for feature $x$
+    \item $n_{\text{obs}}$ = Total number of observed values ($n_{\text{obs}} = |\mathcal{I}_{\text{obs}}|$)
+    \item $x_i$ = Observed feature value for sample $i$
+    \item $\bar{x}$ = Arithmetic mean of observed entries imputed into missing cells
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{5. One-Hot Indicator Encoding}]
+\begin{align*}
+    \mathbf{x} &= \begin{bmatrix} I(c = c_1) & I(c = c_2) & \cdots & I(c = c_k) \end{bmatrix}^T, \quad I(c = c_j) = \begin{cases} 1 & \text{if } c = c_j \\ 0 & \text{if } c \ne c_j \end{cases}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $c$ = Categorical feature taking values in unordered discrete set $\{c_1, c_2, \dots, c_k\}$
+    \item $k$ = Total cardinality (number of distinct categories)
+    \item $I(\cdot)$ = Binary indicator function
+    \item $\mathbf{x}$ = $k$-dimensional orthogonal binary vector representation
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 2: K-Nearest Neighbors (KNN)}
+\addcontentsline{toc}{section}{Chapter 2: K-Nearest Neighbors (KNN)}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Distance Metrics in Feature Space}]
+\begin{align*}
+    \text{Euclidean ($L_2$):} \quad D_E(\mathbf{x}, \mathbf{y}) &= \sqrt{\sum_{i=1}^d (x_i - y_i)^2} = \|\mathbf{x} - \mathbf{y}\|_2 \\[2pt]
+    \text{Manhattan ($L_1$):} \quad D_M(\mathbf{x}, \mathbf{y}) &= \sum_{i=1}^d |x_i - y_i| = \|\mathbf{x} - \mathbf{y}\|_1 \\[2pt]
+    \text{Minkowski ($L_p$):} \quad D_p(\mathbf{x}, \mathbf{y}) &= \left(\sum_{i=1}^d |x_i - y_i|^p\right)^{1/p}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{x}, \mathbf{y}$ = Coordinate vectors in $d$-dimensional continuous space $\mathbb{R}^d$
+    \item $x_i, y_i$ = Values of feature dimension $i$ for instances $\mathbf{x}$ and $\mathbf{y}$
+    \item $d$ = Total number of input features
+    \item $p$ = Minkowski norm order parameter ($p=1$ yields Manhattan, $p=2$ yields Euclidean)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Standard Majority Voting Classification}]
+\begin{align*}
+    \hat{Y} &= \arg\max_{c \in \mathcal{C}} \sum_{i \in \mathcal{N}_k(\mathbf{x})} I(y_i = c)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{x}$ = Unlabeled test query instance
+    \item $\mathcal{N}_k(\mathbf{x})$ = Index set of the $k$ nearest training instances to $\mathbf{x}$ by distance metric $D$
+    \item $y_i$ = Ground-truth class label of training instance $i$
+    \item $\mathcal{C}$ = Set of all candidate target classes
+    \item $I(y_i = c)$ = Indicator function equaling $1$ if $y_i = c$, and $0$ otherwise
+    \item $\hat{Y}$ = Predicted consensus class label
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Distance-Weighted KNN Classification}]
+\begin{align*}
+    w_i &= \frac{1}{D(\mathbf{x}, \mathbf{x}_i)}, \qquad \hat{Y} = \arg\max_{c \in \mathcal{C}} \sum_{i \in \mathcal{N}_k(\mathbf{x})} w_i \cdot I(y_i = c)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $D(\mathbf{x}, \mathbf{x}_i)$ = Distance from test query $\mathbf{x}$ to $i$-th neighbor $\mathbf{x}_i$
+    \item $w_i$ = Inverse distance weight assigned to neighbor $i$
+    \item $\mathcal{N}_k(\mathbf{x})$ = Set of $k$ nearest neighbors
+    \item $\hat{Y}$ = Weighted majority predicted class label
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{4. KNN Continuous Regression}]
+\begin{align*}
+    \hat{y} &= \frac{1}{k} \sum_{i \in \mathcal{N}_k(\mathbf{x})} y_i
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{x}$ = Query feature vector
+    \item $y_i$ = Continuous target value of neighbor $i$
+    \item $k$ = Number of nearest neighbors considered
+    \item $\hat{y}$ = Uniformly averaged predicted response value
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 3: Naive Bayes Classification}
+\addcontentsline{toc}{section}{Chapter 3: Naive Bayes Classification}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Bayes' Theorem for Multiclass Classification}]
+\begin{align*}
+    P(C_k \mid \mathbf{X}) &= \frac{P(C_k) \, P(\mathbf{X} \mid C_k)}{P(\mathbf{X})} = \frac{P(C_k) \, P(\mathbf{X} \mid C_k)}{\sum_{j=1}^K P(C_j) \, P(\mathbf{X} \mid C_j)}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $P(C_k \mid \mathbf{X})$ = Posterior probability of class $C_k$ given feature vector $\mathbf{X}$
+    \item $P(C_k)$ = Prior probability of class $C_k$
+    \item $P(\mathbf{X} \mid C_k)$ = Class-conditional likelihood of feature vector $\mathbf{X}$ given class $C_k$
+    \item $P(\mathbf{X})$ = Total evidence / marginal probability normalizing across all $K$ classes
+    \item $K$ = Total number of distinct candidate classes
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Class-Conditional Independence Assumption and MAP Decision Rule}]
+\begin{align*}
+    P(\mathbf{X} \mid C_k) &= \prod_{i=1}^d P(x_i \mid C_k) \\[2pt]
+    \hat{C} &= \arg\max_{C_k} \left[ P(C_k) \prod_{i=1}^d P(x_i \mid C_k) \right]
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{X} = (x_1, x_2, \dots, x_d)$ = Input feature vector of dimension $d$
+    \item $P(x_i \mid C_k)$ = Conditional likelihood of individual feature attribute $x_i$ given class $C_k$
+    \item $\hat{C}$ = Maximum A Posteriori (MAP) predicted class label
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Maximum Likelihood Categorical Estimator and Laplace Smoothing}]
+\begin{align*}
+    \text{MLE:} \quad P(x_i = v \mid C_k) &= \frac{N_{i,v,k}}{N_k} \\[2pt]
+    \text{Laplace Smoothing:} \quad P(x_i = v \mid C_k) &= \frac{N_{i,v,k} + \alpha}{N_k + \alpha \cdot |V_i|}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $N_{i,v,k}$ = Number of training instances in class $C_k$ where feature $i$ takes value $v$
+    \item $N_k$ = Total count of training instances in class $C_k$
+    \item $|V_i|$ = Total number of possible discrete categories for feature $i$
+    \item $\alpha$ = Additive smoothing hyperparameter ($\alpha = 1$ for standard Laplace smoothing)
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 4: Logistic Regression}
+\addcontentsline{toc}{section}{Chapter 4: Logistic Regression}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Standard Sigmoid (Logistic) Function}]
+\begin{align*}
+    P(Y = 1 \mid \mathbf{X}) &= \sigma(Z) = \frac{1}{1 + e^{-Z}} = \frac{e^Z}{1 + e^Z}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $P(Y = 1 \mid \mathbf{X})$ = Predicted posterior probability of the positive class ($Y=1$)
+    \item $Z$ = Linear predictor / logit argument ($Z \in (-\infty, +\infty)$)
+    \item $\sigma(Z)$ = Sigmoid activation function mapping $\mathbb{R} \to (0, 1)$
+    \item $e$ = Base of the natural logarithm ($\approx 2.71828$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Linear Predictor and Logit Transformation}]
+\begin{align*}
+    Z &= \beta_0 + \sum_{j=1}^p \beta_j X_j = \boldsymbol{\beta}^T \mathbf{X} \\[2pt]
+    \text{Odds} &= \frac{P}{1 - P} = e^Z \\[2pt]
+    \text{Logit}(P) &= \ln(\text{Odds}) = \ln\left(\frac{P}{1 - P}\right) = Z = \beta_0 + \sum_{j=1}^p \beta_j X_j
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $P$ = Probability of the event occurring ($P = P(Y=1 \mid \mathbf{X})$)
+    \item $1 - P$ = Probability of the non-event ($P(Y=0 \mid \mathbf{X})$)
+    \item $\text{Odds}$ = Ratio of probability of success to probability of failure
+    \item $\beta_0$ = Intercept parameter (baseline log-odds when all $X_j = 0$)
+    \item $\beta_j$ = Regression coefficient representing change in log-odds per unit increase in $X_j$
+    \item $X_j$ = $j$-th explanatory feature variable
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Odds Ratio (OR) and Percentage Change in Odds}]
+\begin{align*}
+    \text{OR}_j &= \frac{\text{Odds}(X_j + 1)}{\text{Odds}(X_j)} = e^{\beta_j} \\[2pt]
+    \%\Delta\text{Odds} &= (e^{\beta_j} - 1) \times 100\%
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\text{OR}_j$ = Multiplicative factor by which the odds change for a 1-unit increase in $X_j$
+    \item $\beta_j$ = Log-odds coefficient of feature $X_j$
+    \item $\%\Delta\text{Odds}$ = Percentage increase (if positive) or decrease (if negative) in odds
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{4. Binary Classification Decision Rule and Cross-Entropy Cost}]
+\begin{align*}
+    \hat{Y} &= \begin{cases} 1 & \text{if } P(Y=1 \mid \mathbf{X}) \ge \tau \iff Z \ge \ln\left(\frac{\tau}{1 - \tau}\right) \\ 0 & \text{if } P(Y=1 \mid \mathbf{X}) < \tau \end{cases} \quad (\tau = 0.5 \iff Z \ge 0) \\[2pt]
+    J(\boldsymbol{\beta}) &= -\frac{1}{m} \sum_{i=1}^m \left[ y^{(i)} \ln(p^{(i)}) + (1 - y^{(i)}) \ln(1 - p^{(i)}) \right]
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\tau$ = Probability classification decision threshold (standard default $\tau = 0.5$)
+    \item $\hat{Y}$ = Predicted binary class label ($\{0, 1\}$)
+    \item $m$ = Number of training examples in the dataset
+    \item $y^{(i)}$ = Actual binary ground-truth label for instance $i$
+    \item $p^{(i)}$ = Predicted model probability for instance $i$ ($p^{(i)} = \sigma(\boldsymbol{\beta}^T \mathbf{x}^{(i)})$)
+    \item $J(\boldsymbol{\beta})$ = Average cross-entropy (log-loss) objective function
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 5: Decision Trees}
+\addcontentsline{toc}{section}{Chapter 5: Decision Trees}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Shannon Entropy (ID3 / C4.5)}]
+\begin{align*}
+    H(S) &= - \sum_{i=1}^c p_i \log_2(p_i) \\[2pt]
+    \text{Binary Case ($c=2$):} \quad H(S) &= -p \log_2(p) - (1-p) \log_2(1-p)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $S$ = Collection of training examples at a node
+    \item $c$ = Number of target class categories
+    \item $p_i$ = Proportion of examples in $S$ belonging to class $i$ ($p_i = |S_i| / |S|$)
+    \item $p, 1-p$ = Proportions of positive and negative classes in binary classification
+    \item $H(S)$ = Expected information entropy in bits ($0 \le H(S) \le \log_2 c$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Gini Impurity (CART)}]
+\begin{align*}
+    \text{Gini}(S) &= 1 - \sum_{i=1}^c p_i^2 \\[2pt]
+    \text{Binary Case ($c=2$):} \quad \text{Gini}(S) &= 1 - (p^2 + (1-p)^2) = 2p(1-p)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $p_i$ = Probability of an item being chosen from class $i$
+    \item $p$ = Proportion of items belonging to the positive class in binary setting
+    \item $\text{Gini}(S)$ = Measure of statistical variance of class distributions ($0 \le \text{Gini}(S) \le 1 - 1/c$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Information Gain and Gain Ratio}]
+\begin{align*}
+    \text{IG}(S, A) &= H(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} H(S_v) \\[2pt]
+    \text{SplitInfo}(S, A) &= - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} \log_2\left(\frac{|S_v|}{|S|}\right) \\[2pt]
+    \text{GainRatio}(S, A) &= \frac{\text{IG}(S, A)}{\text{SplitInfo}(S, A)}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\text{IG}(S, A)$ = Expected reduction in entropy achieved by partitioning $S$ on attribute $A$
+    \item $\text{Values}(A)$ = Set of distinct branch outcomes of feature attribute $A$
+    \item $S_v$ = Subset of examples in $S$ for which attribute $A$ has value $v$
+    \item $|S_v| / |S|$ = Weighting fraction of examples routed to child branch $v$
+    \item $\text{SplitInfo}(S, A)$ = Potential information generated by splitting $S$ into $| \text{Values}(A) |$ partitions
+    \item $\text{GainRatio}(S, A)$ = Normalized information gain penalizing high-cardinality attributes
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{4. Reduction in Impurity / Gini Gain (CART)}]
+\begin{align*}
+    \Delta\text{Gini}(S, A) &= \text{Gini}(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} \text{Gini}(S_v)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\text{Gini}(S)$ = Impurity of the parent node before splitting
+    \item $\text{Gini}(S_v)$ = Impurity of the child node corresponding to branch value $v$
+    \item $|S_v| / |S|$ = Fraction of parent records directed to branch $v$
+    \item $\Delta\text{Gini}(S, A)$ = Total impurity reduction yielded by splitting on attribute $A$
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 6: Support Vector Machines (SVM)}
+\addcontentsline{toc}{section}{Chapter 6: Support Vector Machines (SVM)}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Linear Decision Boundary Hyperplane}]
+\begin{align*}
+    f(\mathbf{x}) &= \mathbf{w}^T \mathbf{x} + b = w_1 x_1 + w_2 x_2 + \cdots + w_d x_d + b = 0
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{x} = [x_1, x_2, \dots, x_d]^T$ = Input coordinate vector in $\mathbb{R}^d$
+    \item $\mathbf{w} = [w_1, w_2, \dots, w_d]^T$ = Weight vector perpendicular (normal) to the separating hyperplane
+    \item $b$ = Scalar bias term governing the orthogonal displacement of the hyperplane from origin
+    \item $f(\mathbf{x}) = 0$ = Equation of the separating decision boundary
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Canonical Margin Hyperplanes and Total Margin Width}]
+\begin{align*}
+    \text{Positive Margin Boundary:} \quad & \mathbf{w}^T \mathbf{x} + b = +1 \\[2pt]
+    \text{Negative Margin Boundary:} \quad & \mathbf{w}^T \mathbf{x} + b = -1 \\[2pt]
+    \text{Total Margin Width:} \quad & M = \frac{2}{\|\mathbf{w}\|} = \frac{2}{\sqrt{\sum_{j=1}^d w_j^2}}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{w}^T \mathbf{x} + b = +1$ = Hyperplane passing through the closest positive training instances
+    \item $\mathbf{w}^T \mathbf{x} + b = -1$ = Hyperplane passing through the closest negative training instances
+    \item $\|\mathbf{w}\|$ = Euclidean norm (magnitude) of the weight vector ($\sqrt{\mathbf{w}^T \mathbf{w}}$)
+    \item $M$ = Perpendicular distance separating the positive and negative margin hyperplanes
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Point-to-Hyperplane Perpendicular Distance}]
+\begin{align*}
+    d_i &= \frac{|\mathbf{w}^T \mathbf{x}_i + b|}{\|\mathbf{w}\|} = \frac{|f(\mathbf{x}_i)|}{\|\mathbf{w}\|}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{x}_i$ = Coordinate vector of observation $i$
+    \item $f(\mathbf{x}_i)$ = Evaluated functional value $\mathbf{w}^T \mathbf{x}_i + b$
+    \item $\|\mathbf{w}\|$ = Euclidean norm of the normal vector
+    \item $d_i$ = Exact geometric perpendicular distance from sample point $\mathbf{x}_i$ to decision boundary $f(\mathbf{x}) = 0$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{4. Hard-Margin Primal Feasibility Constraint}]
+\begin{align*}
+    y_i (\mathbf{w}^T \mathbf{x}_i + b) &\ge 1, \quad \forall i \in \{1, 2, \dots, n\}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $y_i \in \{-1, +1\}$ = Ground-truth binary class label of training observation $i$
+    \item $\mathbf{x}_i$ = Feature vector of training observation $i$
+    \item $n$ = Total number of observations in the training dataset
+    \item $y_i (\mathbf{w}^T \mathbf{x}_i + b) = 1$ = Strict equality defining the critical support vectors lying exactly on the margin
+    \item $y_i (\mathbf{w}^T \mathbf{x}_i + b) > 1$ = Strict inequality for interior points located beyond the margin boundaries
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{5. Axis-Aligned and Diagonal Separating Threshold Formulas}]
+\begin{align*}
+    c &= \frac{p + n}{2} \\[2pt]
+    \text{Single Coordinate Boundary ($x_k = c$):} \quad & w_k = \frac{2}{p - n}, \quad b = -w_k c = -\frac{p + n}{p - n} \\[2pt]
+    \text{Diagonal Boundary ($x_2 - x_1 = c$):} \quad & \mathbf{w} = s \begin{bmatrix} -1 \\ 1 \end{bmatrix}, \quad b = -s \cdot c, \quad s = \frac{2}{p - n}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $p$ = Coordinate value of the closest support vector in the positive class ($\min x_k$ or $\min (x_2 - x_1)$)
+    \item $n$ = Coordinate value of the closest support vector in the negative class ($\max x_k$ or $\max (x_2 - x_1)$)
+    \item $c$ = Optimal mid-point threshold maximizing margin width
+    \item $w_k, \mathbf{w}$ = Canonical weight parameter(s) scaled such that $y_i(\mathbf{w}^T \mathbf{x}_i + b) = 1$ at support vectors
+    \item $b$ = Canonical scalar bias parameter
+\end{itemize}
+\end{formulabox}
+
