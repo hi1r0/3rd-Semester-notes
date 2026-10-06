@@ -1,0 +1,38 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% Input Preamble Configurations
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. University Title / Cover Page
+% ------------------------------------------------------------------------------
+\input{preamble/titlepage.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Table of Contents
+% ------------------------------------------------------------------------------
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% 3. Course Chapters (Continuous Notes Flow)
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\input{chapters/ch01_ml_foundations_and_preprocessing.tex}
+\input{chapters/ch02_knn.tex}
+\input{chapters/ch03_naive_bayes.tex}
+\input{chapters/ch04_logistic_regression.tex}
+\input{chapters/ch05_decision_trees.tex}
+\input{chapters/ch06_svm.tex}
+
+% ------------------------------------------------------------------------------
+% 4. Comprehensive Multi-Chapter Formula Reference Sheet
+% ------------------------------------------------------------------------------
+\input{chapters/formula_reference.tex}
+
+\end{document}
