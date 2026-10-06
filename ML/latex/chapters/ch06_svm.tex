@@ -1,1 +1,546 @@
-% Placeholder for ch06_svm.tex
+\chapter{Support Vector Machines}
+
+\section{Core Principles and Mathematical Foundations}
+
+Support Vector Machine (SVM) is a powerful supervised learning algorithm primarily utilized for classification tasks, though it also extends to regression problems via Support Vector Regression (SVR). The objective of an SVM is to identify the optimal separating hyperplane that maximizes the geometric margin between distinct classes.
+
+\subsection{Fundamental Definitions and Geometry}
+\begin{itemize}
+    \item \textbf{Optimal Hyperplane:} A linear decision boundary that separates classes while maximizing the perpendicular distance to the closest training observations.
+    \item \textbf{Support Vectors:} The subset of training data points that lie directly on the margin boundaries. These critical points alone determine the exact position and orientation of the separating hyperplane; all other training points can be removed or relocated without altering the solution.
+    \item \textbf{Decision Boundary:} The separating hyperplane where the decision function evaluates to zero:
+    \begin{equation}
+    w^T x + b = 0
+    \end{equation}
+    \item \textbf{Margin Boundaries:} The parallel hyperplanes that delimit the empty slab separating the two classes:
+    \begin{align}
+    \text{Positive Margin Boundary:} \quad & w^T x + b = +1 \\
+    \text{Negative Margin Boundary:} \quad & w^T x + b = -1
+    \end{align}
+    \item \textbf{Margin Width ($M$):} The total geometric distance between the positive and negative margin boundaries:
+    \begin{equation}
+    M = \frac{2}{\|w\|}
+    \end{equation}
+    where $\|w\| = \sqrt{w_1^2 + w_2^2 + \dots + w_p^2}$ is the Euclidean norm of the weight vector.
+    \item \textbf{Perpendicular Distance of a Point:} The geometric distance of any arbitrary observation $x_i$ to the decision boundary:
+    \begin{equation}
+    d_i = \frac{|w^T x_i + b|}{\|w\|} = \frac{|f(x_i)|}{\|w\|}
+    \end{equation}
+\end{itemize}
+
+\subsection{Functional Margin and Hard-Margin Condition}
+The \textbf{functional margin} of an observation $(x_i, y_i)$ with label $y_i \in \{-1, +1\}$ is defined as:
+\begin{equation}
+\hat{\gamma}_i = y_i (w^T x_i + b)
+\end{equation}
+For a correctly scaled canonical hard-margin SVM, all training observations must satisfy the strict separability constraint:
+\begin{equation}
+y_i (w^T x_i + b) \ge 1, \quad \forall i = 1, 2, \dots, n
+\end{equation}
+where equality $y_i (w^T x_i + b) = 1$ holds if and only if $x_i$ is a support vector.
+
+\section{Boundary Identification and Analytical Solution Techniques}
+
+To solve linear SVM problems analytically for two-dimensional data, we identify whether the classes are separated by a horizontal, vertical, or diagonal boundary:
+
+\subsection{1. Horizontal Separation (\texorpdfstring{$x_2 = c$}{x2 = c})}
+A dataset exhibits horizontal separation if the second coordinate ($x_2$) of all points in one class is strictly greater than the second coordinate of all points in the opposite class:
+\begin{equation}
+\min\{x_2 \in \text{Class } +1\} > \max\{x_2 \in \text{Class } -1\}
+\end{equation}
+\begin{itemize}
+    \item Let $p = \min\{x_2 \in \text{Class } +1\}$ denote the smallest $x_2$ value on the positive side.
+    \item Let $n = \max\{x_2 \in \text{Class } -1\}$ denote the largest $x_2$ value on the negative side.
+    \item The optimal maximum margin boundary passes through the midpoint:
+    \begin{equation}
+    c = \frac{p + n}{2} \implies x_2 = c
+    \end{equation}
+    \item Setting $w = [0, w_2]^T$, we solve the canonical equations using the closest boundary points:
+    \begin{align}
+    w_2 p + b &= 1 \\
+    w_2 n + b &= -1
+    \end{align}
+    Subtracting the equations yields:
+    \begin{equation}
+    w_2 (p - n) = 2 \implies w_2 = \frac{2}{p - n}
+    \end{equation}
+    Substituting $w_2$ into either equation determines the intercept $b$.
+\end{itemize}
+
+\subsection{2. Vertical Separation (\texorpdfstring{$x_1 = c$}{x1 = c})}
+A dataset exhibits vertical separation if the first coordinate ($x_1$) of all points in one class is strictly greater than the first coordinate of all points in the opposite class:
+\begin{equation}
+\min\{x_1 \in \text{Class } +1\} > \max\{x_1 \in \text{Class } -1\}
+\end{equation}
+\begin{itemize}
+    \item Let $p = \min\{x_1 \in \text{Class } +1\}$ and $n = \max\{x_1 \in \text{Class } -1\}$.
+    \item The maximum margin boundary is given by:
+    \begin{equation}
+    c = \frac{p + n}{2} \implies x_1 = c
+    \end{equation}
+    \item Setting $w = [w_1, 0]^T$, we solve:
+    \begin{equation}
+    w_1 p + b = 1, \quad w_1 n + b = -1 \implies w_1 = \frac{2}{p - n}
+    \end{equation}
+\end{itemize}
+
+\subsection{3. Diagonal Separation (\texorpdfstring{$x_2 - x_1 = c$ or $x_2 + x_1 = c$}{x2 - x1 = c or x2 + x1 = c})}
+When neither coordinate alone separates the classes, evaluate linear combinations such as $x_2 - x_1$ or $x_2 + x_1$. If the resulting combined score is strictly positive for one class and strictly negative for the other, the optimal decision boundary is diagonal:
+\begin{equation}
+x_2 - x_1 = c \quad \text{or} \quad x_2 + x_1 = c
+\end{equation}
+
+\section{Solved Problem 6.1: Horizontal Decision Boundary}
+
+\begin{example}{SVM Induction for Horizontal Separation}{svm_horizontal}
+Given a 12-point dataset partitioned into Class $+1$ and Class $-1$:
+\begin{itemize}
+    \item \textbf{Class $+1$:} $(1, 7),\, (2, 8),\, (3, 7),\, (4, 9),\, (5, 8),\, (6, 7)$
+    \item \textbf{Class $-1$:} $(1, 3),\, (2, 2),\, (3, 3),\, (4, 1),\, (5, 2),\, (6, 3)$
+\end{itemize}
+Determine the maximum margin decision boundary, compute the correctly scaled parameters $w$ and $b$, identify the support vectors, verify the hard-margin condition, compute the margin width and sample distances, and classify a new query observation $(3, 6)$.
+
+\subsubsection{Step 1: Identify Separating Orientation and Midpoint}
+Inspecting the $x_2$ coordinates:
+\begin{equation}
+p = \min\{x_2 \in \text{Class } +1\} = 7, \quad n = \max\{x_2 \in \text{Class } -1\} = 3
+\end{equation}
+Since all Class $+1$ points have $x_2 \ge 7$ and all Class $-1$ points have $x_2 \le 3$, the classes are separated horizontally:
+\begin{equation}
+7 > c > 3
+\end{equation}
+The maximum margin decision boundary lies at the midpoint:
+\begin{equation}
+c = \frac{p + n}{2} = \frac{7 + 3}{2} = 5 \implies x_2 = 5
+\end{equation}
+
+\subsubsection{Step 2: Solve Correctly Scaled \texorpdfstring{$w$}{w} and \texorpdfstring{$b$}{b}}
+Since the boundary is horizontal, $x_1$ has no effect, so $w = [0, w_2]^T$. The decision function is $f(x) = w_2 x_2 + b$. Setting up the margin boundary equations:
+\begin{align}
+w_2(7) + b &= 1 \label{eq:h1} \\
+w_2(3) + b &= -1 \label{eq:h2}
+\end{align}
+Subtracting Equation \eqref{eq:h2} from \eqref{eq:h1}:
+\begin{equation}
+4 w_2 = 2 \implies w_2 = 0.5
+\end{equation}
+Substituting $w_2 = 0.5$ into Equation \eqref{eq:h1}:
+\begin{equation}
+0.5(7) + b = 1 \implies 3.5 + b = 1 \implies b = -2.5
+\end{equation}
+Thus, the canonical parameters are:
+\begin{equation}
+w = \begin{bmatrix} 0 \\ 0.5 \end{bmatrix}, \quad b = -2.5
+\end{equation}
+and the decision function is:
+\begin{equation}
+f(x) = 0 \cdot x_1 + 0.5 x_2 - 2.5 = 0.5 x_2 - 2.5
+\end{equation}
+
+\subsubsection{Step 3: Identify Support Vectors}
+The support vectors are the data points satisfying $f(x) = \pm 1$:
+\begin{itemize}
+    \item \textbf{Positive Support Vectors ($x_2 = 7$):} $(1, 7),\, (3, 7),\, (6, 7)$
+    \item \textbf{Negative Support Vectors ($x_2 = 3$):} $(1, 3),\, (3, 3),\, (6, 3)$
+\end{itemize}
+
+\subsubsection{Step 4: Verify Hard-Margin Constraint \texorpdfstring{$y_i(w^T x_i + b) \ge 1$}{yi(w^T xi + b) >= 1}}
+
+\begin{center}\small
+\begin{tabular}{cc|cc}
+\toprule
+\multicolumn{2}{c|}{\textbf{Class $+1$ ($y_i = +1$)}} & \multicolumn{2}{c}{\textbf{Class $-1$ ($y_i = -1$)}} \\
+\textbf{Point $(x_1, x_2)$} & $y_i f(x)$ & \textbf{Point $(x_1, x_2)$} & $y_i f(x)$ \\
+\midrule
+$(1, 7)$ & $+1 \cdot (0.5(7) - 2.5) = 1.0$ & $(1, 3)$ & $-1 \cdot (0.5(3) - 2.5) = 1.0$ \\
+$(2, 8)$ & $+1 \cdot (0.5(8) - 2.5) = 1.5$ & $(2, 2)$ & $-1 \cdot (0.5(2) - 2.5) = 1.5$ \\
+$(3, 7)$ & $+1 \cdot (0.5(7) - 2.5) = 1.0$ & $(3, 3)$ & $-1 \cdot (0.5(3) - 2.5) = 1.0$ \\
+$(4, 9)$ & $+1 \cdot (0.5(9) - 2.5) = 2.0$ & $(4, 1)$ & $-1 \cdot (0.5(1) - 2.5) = 2.0$ \\
+$(5, 8)$ & $+1 \cdot (0.5(8) - 2.5) = 1.5$ & $(5, 2)$ & $-1 \cdot (0.5(2) - 2.5) = 1.5$ \\
+$(6, 7)$ & $+1 \cdot (0.5(7) - 2.5) = 1.0$ & $(6, 3)$ & $-1 \cdot (0.5(3) - 2.5) = 1.0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+All points satisfy $y_i(w^T x_i + b) \ge 1$ strictly, confirming hard-margin validity.
+
+\subsubsection{Step 5: Margin Width and Geometric Distances}
+\begin{equation}
+\|w\| = \sqrt{0^2 + 0.5^2} = 0.5
+\end{equation}
+\begin{equation}
+M = \frac{2}{\|w\|} = \frac{2}{0.5} = 4
+\end{equation}
+The perpendicular distance of each point to the boundary $x_2 = 5$ is $d_i = \frac{|0.5 x_2 - 2.5|}{0.5} = |x_2 - 5|$:
+
+\begin{center}\small
+\begin{tabular}{cc|cc}
+\toprule
+\multicolumn{2}{c|}{\textbf{Class $+1$}} & \multicolumn{2}{c}{\textbf{Class $-1$}} \\
+\textbf{Point} & \textbf{Distance $d_i$} & \textbf{Point} & \textbf{Distance $d_i$} \\
+\midrule
+$(1, 7)$ & $2$ & $(1, 3)$ & $2$ \\
+$(2, 8)$ & $3$ & $(2, 2)$ & $3$ \\
+$(3, 7)$ & $2$ & $(3, 3)$ & $2$ \\
+$(4, 9)$ & $4$ & $(4, 1)$ & $4$ \\
+$(5, 8)$ & $3$ & $(5, 2)$ & $3$ \\
+$(6, 7)$ & $2$ & $(6, 3)$ & $2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Step 6: Classify Query Observation \texorpdfstring{$(3, 6)$}{(3, 6)}}
+Evaluating the decision function at $x = (3, 6)$:
+\begin{equation}
+f(3, 6) = 0.5(6) - 2.5 = 3.0 - 2.5 = 0.5
+\end{equation}
+Since $f(3, 6) = 0.5 \ge 0$, the query point is assigned to \textbf{Class $+1$}:
+\begin{equation}
+\hat{y} = +1
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Grid and axes
+    \draw[->, >=stealth, thick, darkgray] (0, 0) -- (7.5, 0) node[right] {$x_1$};
+    \draw[->, >=stealth, thick, darkgray] (0, 0) -- (0, 10.5) node[above] {$x_2$};
+    \draw[step=1cm, gray!20, very thin] (0, 0) grid (7, 10);
+    
+    % Decision Boundary and Margins
+    \draw[navyblue, very thick] (0.5, 5) -- (6.8, 5) node[right, font=\footnotesize] {Decision Boundary: $x_2 = 5$};
+    \draw[dashed, darkteal, thick] (0.5, 7) -- (6.8, 7) node[right, font=\footnotesize] {Positive Margin: $x_2 = 7$};
+    \draw[dashed, crimson, thick] (0.5, 3) -- (6.8, 3) node[right, font=\footnotesize] {Negative Margin: $x_2 = 3$};
+    
+    % Class +1 points (blue squares)
+    \foreach \p in {(1,7), (3,7), (6,7)} {
+        \filldraw[darkteal] \p circle (2.8pt);
+        \draw[darkteal, thick] \p circle (5pt); % circled as support vector
+    }
+    \filldraw[darkteal] (2,8) circle (2.8pt);
+    \filldraw[darkteal] (4,9) circle (2.8pt);
+    \filldraw[darkteal] (5,8) circle (2.8pt);
+    
+    % Class -1 points (red circles)
+    \foreach \p in {(1,3), (3,3), (6,3)} {
+        \filldraw[crimson] \p circle (2.8pt);
+        \draw[crimson, thick] \p circle (5pt); % circled as support vector
+    }
+    \filldraw[crimson] (2,2) circle (2.8pt);
+    \filldraw[crimson] (4,1) circle (2.8pt);
+    \filldraw[crimson] (5,2) circle (2.8pt);
+    
+    % Query point (3, 6)
+    \node[star, star points=5, star point ratio=2.25, fill=amber, draw=amber!80!black, inner sep=2.5pt] at (3,6) {};
+    \node[above right, font=\footnotesize, text=amber!80!black] at (3,6) {Query $(3,6) \to \text{Class } +1$};
+
+    % Axis numbers
+    \foreach \x in {1, 2, 3, 4, 5, 6, 7} \node[below, font=\scriptsize] at (\x, 0) {$\x$};
+    \foreach \y in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} \node[left, font=\scriptsize] at (0, \y) {$\y$};
+\end{tikzpicture}
+\par\vspace{2mm}\small\textbf{Geometric Visualization: Horizontal SVM Decision Boundary at $x_2 = 5$}
+\end{center}
+\end{example}
+
+\section{Solved Problem 6.2: Vertical Decision Boundary}
+
+\begin{example}{SVM Induction for Vertical Separation}{svm_vertical}
+Given the 12-point dataset:
+\begin{itemize}
+    \item \textbf{Class $+1$:} $(7, 1),\, (8, 2),\, (7, 3),\, (9, 2),\, (8, 1),\, (7, 2)$
+    \item \textbf{Class $-1$:} $(3, 1),\, (2, 2),\, (3, 3),\, (1, 2),\, (2, 1),\, (3, 2)$
+\end{itemize}
+Determine the maximum margin decision boundary, solve for $w$ and $b$, identify the support vectors, verify the hard-margin condition, compute the margin and distances, and classify the query point $(5, 2)$.
+
+\subsubsection{Step 1: Identify Separating Orientation and Midpoint}
+Inspecting the $x_1$ coordinates:
+\begin{equation}
+p = \min\{x_1 \in \text{Class } +1\} = 7, \quad n = \max\{x_1 \in \text{Class } -1\} = 3
+\end{equation}
+Since all Class $+1$ points have $x_1 \ge 7$ and all Class $-1$ points have $x_1 \le 3$, the classes are separated vertically:
+\begin{equation}
+7 > c > 3 \implies c = \frac{7 + 3}{2} = 5 \implies x_1 = 5
+\end{equation}
+
+\subsubsection{Step 2: Solve Correctly Scaled \texorpdfstring{$w$}{w} and \texorpdfstring{$b$}{b}}
+Since the boundary is vertical, $w = [w_1, 0]^T$ and $f(x) = w_1 x_1 + b$:
+\begin{align}
+w_1(7) + b &= 1 \\
+w_1(3) + b &= -1
+\end{align}
+Subtracting yields $4 w_1 = 2 \implies w_1 = 0.5$, and substituting gives $0.5(7) + b = 1 \implies b = -2.5$.
+\begin{equation}
+w = \begin{bmatrix} 0.5 \\ 0 \end{bmatrix}, \quad b = -2.5
+\end{equation}
+The decision function is:
+\begin{equation}
+f(x) = 0.5 x_1 - 2.5
+\end{equation}
+
+\subsubsection{Step 3: Support Vectors}
+\begin{itemize}
+    \item \textbf{Positive Support Vectors ($x_1 = 7$):} $(7, 1),\, (7, 3),\, (7, 2)$
+    \item \textbf{Negative Support Vectors ($x_1 = 3$):} $(3, 1),\, (3, 3),\, (3, 2)$
+\end{itemize}
+
+\subsubsection{Step 4: Verify Hard-Margin Constraint \texorpdfstring{$y_i(w^T x_i + b) \ge 1$}{yi(w^T xi + b) >= 1}}
+
+\begin{center}\small
+\begin{tabular}{cc|cc}
+\toprule
+\multicolumn{2}{c|}{\textbf{Class $+1$ ($y_i = +1$)}} & \multicolumn{2}{c}{\textbf{Class $-1$ ($y_i = -1$)}} \\
+\textbf{Point $(x_1, x_2)$} & $y_i f(x)$ & \textbf{Point $(x_1, x_2)$} & $y_i f(x)$ \\
+\midrule
+$(7, 1)$ & $+1 \cdot (0.5(7) - 2.5) = 1.0$ & $(3, 1)$ & $-1 \cdot (0.5(3) - 2.5) = 1.0$ \\
+$(8, 2)$ & $+1 \cdot (0.5(8) - 2.5) = 1.5$ & $(2, 2)$ & $-1 \cdot (0.5(2) - 2.5) = 1.5$ \\
+$(7, 3)$ & $+1 \cdot (0.5(7) - 2.5) = 1.0$ & $(3, 3)$ & $-1 \cdot (0.5(3) - 2.5) = 1.0$ \\
+$(9, 2)$ & $+1 \cdot (0.5(9) - 2.5) = 2.0$ & $(1, 2)$ & $-1 \cdot (0.5(1) - 2.5) = 2.0$ \\
+$(8, 1)$ & $+1 \cdot (0.5(8) - 2.5) = 1.5$ & $(2, 1)$ & $-1 \cdot (0.5(2) - 2.5) = 1.5$ \\
+$(7, 2)$ & $+1 \cdot (0.5(7) - 2.5) = 1.0$ & $(3, 2)$ & $-1 \cdot (0.5(3) - 2.5) = 1.0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Step 5: Margin Width and Geometric Distances}
+\begin{equation}
+\|w\| = \sqrt{0.5^2 + 0^2} = 0.5 \implies M = \frac{2}{0.5} = 4
+\end{equation}
+Distances $d_i = \frac{|0.5 x_1 - 2.5|}{0.5} = |x_1 - 5|$:
+
+\begin{center}\small
+\begin{tabular}{cc|cc}
+\toprule
+\multicolumn{2}{c|}{\textbf{Class $+1$}} & \multicolumn{2}{c}{\textbf{Class $-1$}} \\
+\textbf{Point} & \textbf{Distance $d_i$} & \textbf{Point} & \textbf{Distance $d_i$} \\
+\midrule
+$(7, 1)$ & $2$ & $(3, 1)$ & $2$ \\
+$(8, 2)$ & $3$ & $(2, 2)$ & $3$ \\
+$(7, 3)$ & $2$ & $(3, 3)$ & $2$ \\
+$(9, 2)$ & $4$ & $(1, 2)$ & $4$ \\
+$(8, 1)$ & $3$ & $(2, 1)$ & $3$ \\
+$(7, 2)$ & $2$ & $(3, 2)$ & $2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Step 6: Classify Query Observation \texorpdfstring{$(5, 2)$}{(5, 2)}}
+Evaluating at $x = (5, 2)$:
+\begin{equation}
+f(5, 2) = 0.5(5) - 2.5 = 2.5 - 2.5 = 0
+\end{equation}
+\textbf{Boundary Indeterminacy:} Since $f(5, 2) = 0$, the query point lies exactly on the decision boundary. Consequently, it cannot be strictly classified into either Class $+1$ or Class $-1$ without a tie-breaking rule.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Grid and axes
+    \draw[->, >=stealth, thick, darkgray] (0, 0) -- (10.5, 0) node[right] {$x_1$};
+    \draw[->, >=stealth, thick, darkgray] (0, 0) -- (0, 4.5) node[above] {$x_2$};
+    \draw[step=1cm, gray!20, very thin] (0, 0) grid (10, 4);
+    
+    % Decision Boundary and Margins
+    \draw[navyblue, very thick] (5, 0.5) -- (5, 3.8) node[above, font=\footnotesize] {$x_1 = 5$};
+    \draw[dashed, darkteal, thick] (7, 0.5) -- (7, 3.8) node[above, font=\footnotesize] {$x_1 = 7$};
+    \draw[dashed, crimson, thick] (3, 0.5) -- (3, 3.8) node[above, font=\footnotesize] {$x_1 = 3$};
+    
+    % Class +1 points (blue)
+    \foreach \p in {(7,1), (7,3), (7,2)} {
+        \filldraw[darkteal] \p circle (2.8pt);
+        \draw[darkteal, thick] \p circle (5pt);
+    }
+    \filldraw[darkteal] (8,2) circle (2.8pt);
+    \filldraw[darkteal] (9,2) circle (2.8pt);
+    \filldraw[darkteal] (8,1) circle (2.8pt);
+    
+    % Class -1 points (red)
+    \foreach \p in {(3,1), (3,3), (3,2)} {
+        \filldraw[crimson] \p circle (2.8pt);
+        \draw[crimson, thick] \p circle (5pt);
+    }
+    \filldraw[crimson] (2,2) circle (2.8pt);
+    \filldraw[crimson] (1,2) circle (2.8pt);
+    \filldraw[crimson] (2,1) circle (2.8pt);
+    
+    % Query point (5, 2)
+    \filldraw[amber] (5,2) circle (3.2pt) node[below right, font=\footnotesize, text=amber!80!black] {Query $(5,2)$ on Boundary ($f=0$)};
+
+    % Axis numbers
+    \foreach \x in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} \node[below, font=\scriptsize] at (\x, 0) {$\x$};
+    \foreach \y in {1, 2, 3, 4} \node[left, font=\scriptsize] at (0, \y) {$\y$};
+\end{tikzpicture}
+\par\vspace{2mm}\small\textbf{Geometric Visualization: Vertical SVM Decision Boundary at $x_1 = 5$}
+\end{center}
+\end{example}
+
+\section{Solved Problem 6.3: Diagonal Decision Boundary}
+
+\begin{example}{SVM Induction for Diagonal Separation}{svm_diagonal}
+Given a 12-point dataset:
+\begin{itemize}
+    \item \textbf{Class $+1$:} $(1, 3),\, (1, 4),\, (2, 4),\, (2, 5),\, (3, 5),\, (3, 6)$
+    \item \textbf{Class $-1$:} $(3, 1),\, (4, 1),\, (4, 2),\, (5, 2),\, (5, 3),\, (6, 3)$
+\end{itemize}
+Find the optimal separating hyperplane, determine correctly scaled parameters $w$ and $b$, identify support vectors, verify hard-margin conditions, compute margin and distances, and classify query observation $(3, 4)$.
+
+\subsubsection{Step 1: Diagnose Separating Pattern}
+Evaluating single coordinate boundaries reveals that neither $x_1$ nor $x_2$ separates the data independently. Testing the difference $x_2 - x_1$:
+
+\begin{center}\small
+\begin{tabular}{cc|cc}
+\toprule
+\multicolumn{2}{c|}{\textbf{Class $+1$}} & \multicolumn{2}{c}{\textbf{Class $-1$}} \\
+\textbf{Point $(x_1, x_2)$} & $x_2 - x_1$ & \textbf{Point $(x_1, x_2)$} & $x_2 - x_1$ \\
+\midrule
+$(1, 3)$ & $3 - 1 = +2$ & $(3, 1)$ & $1 - 3 = -2$ \\
+$(1, 4)$ & $4 - 1 = +3$ & $(4, 1)$ & $1 - 4 = -3$ \\
+$(2, 4)$ & $4 - 2 = +2$ & $(4, 2)$ & $2 - 4 = -2$ \\
+$(2, 5)$ & $5 - 2 = +3$ & $(5, 2)$ & $2 - 5 = -3$ \\
+$(3, 5)$ & $5 - 3 = +2$ & $(5, 3)$ & $3 - 5 = -2$ \\
+$(3, 6)$ & $6 - 3 = +3$ & $(6, 3)$ & $3 - 6 = -3$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Every point in Class $+1$ yields $x_2 - x_1 \ge +2$, while every point in Class $-1$ yields $x_2 - x_1 \le -2$.
+\begin{equation}
+p = \min(x_2 - x_1) = +2, \quad n = \max(x_2 - x_1) = -2
+\end{equation}
+The maximum margin decision boundary lies at the midpoint:
+\begin{equation}
+c = \frac{p + n}{2} = \frac{+2 + (-2)}{2} = 0 \implies x_2 - x_1 = 0 \iff x_2 = x_1
+\end{equation}
+
+\subsubsection{Step 2: Solve Correctly Scaled Parameters \texorpdfstring{$w$}{w} and \texorpdfstring{$b$}{b}}
+Rearranging the boundary equation into standard form:
+\begin{equation}
+-x_1 + x_2 + 0 = 0 \implies w = s \begin{bmatrix} -1 \\ 1 \end{bmatrix}, \quad b = 0
+\end{equation}
+where $s > 0$ is a positive scaling factor.
+Evaluating for the closest positive support point $(1, 3)$ with label $y = +1$:
+\begin{equation}
+w^T x_i = s (-1 \cdot 1 + 1 \cdot 3) = 2s
+\end{equation}
+Setting the hard-margin condition $y_i (w^T x_i + b) = 1$:
+\begin{equation}
++1 \cdot (2s + 0) = 1 \implies 2s = 1 \implies s = 0.5
+\end{equation}
+Similarly, evaluating for the closest negative support point $(3, 1)$ with label $y = -1$:
+\begin{equation}
+w^T x_i = 0.5(-1 \cdot 3 + 1 \cdot 1) = -1 \implies -1(-1 + 0) = +1
+\end{equation}
+Thus, the correctly scaled parameters are:
+\begin{equation}
+w = \begin{bmatrix} -0.5 \\ 0.5 \end{bmatrix}, \quad b = 0
+\end{equation}
+and the decision function is:
+\begin{equation}
+f(x) = -0.5 x_1 + 0.5 x_2 + 0 = 0.5(x_2 - x_1)
+\end{equation}
+
+\subsubsection{Step 3: Margin Boundaries and Support Vectors}
+\begin{align}
+\text{Positive Margin Boundary:} \quad & 0.5(x_2 - x_1) = +1 \implies x_2 - x_1 = +2 \\
+\text{Negative Margin Boundary:} \quad & 0.5(x_2 - x_1) = -1 \implies x_2 - x_1 = -2
+\end{align}
+The support vectors are:
+\begin{itemize}
+    \item \textbf{Positive Support Vectors ($x_2 - x_1 = 2$):} $(1, 3),\, (2, 4),\, (3, 5)$
+    \item \textbf{Negative Support Vectors ($x_2 - x_1 = -2$):} $(3, 1),\, (4, 2),\, (5, 3)$
+\end{itemize}
+
+\subsubsection{Step 4: Verify Hard-Margin Constraint \texorpdfstring{$y_i(w^T x_i + b) \ge 1$}{yi(w^T xi + b) >= 1}}
+
+\begin{center}\small
+\begin{tabular}{cc|cc}
+\toprule
+\multicolumn{2}{c|}{\textbf{Class $+1$ ($y_i = +1$)}} & \multicolumn{2}{c}{\textbf{Class $-1$ ($y_i = -1$)}} \\
+\textbf{Point $(x_1, x_2)$} & $y_i f(x)$ & \textbf{Point $(x_1, x_2)$} & $y_i f(x)$ \\
+\midrule
+$(1, 3)$ & $+1 \cdot 0.5(3 - 1) = 1.0$ & $(3, 1)$ & $-1 \cdot 0.5(1 - 3) = 1.0$ \\
+$(1, 4)$ & $+1 \cdot 0.5(4 - 1) = 1.5$ & $(4, 1)$ & $-1 \cdot 0.5(1 - 4) = 1.5$ \\
+$(2, 4)$ & $+1 \cdot 0.5(4 - 2) = 1.0$ & $(4, 2)$ & $-1 \cdot 0.5(2 - 4) = 1.0$ \\
+$(2, 5)$ & $+1 \cdot 0.5(5 - 2) = 1.5$ & $(5, 2)$ & $-1 \cdot 0.5(2 - 5) = 1.5$ \\
+$(3, 5)$ & $+1 \cdot 0.5(5 - 3) = 1.0$ & $(5, 3)$ & $-1 \cdot 0.5(3 - 5) = 1.0$ \\
+$(3, 6)$ & $+1 \cdot 0.5(6 - 3) = 1.5$ & $(6, 3)$ & $-1 \cdot 0.5(3 - 6) = 1.5$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Hence, $y_i (w^T x_i + b) \ge 1$ holds strictly for all observations.
+
+\subsubsection{Step 5: Margin Width and Geometric Distances}
+\begin{equation}
+\|w\| = \sqrt{(-0.5)^2 + (0.5)^2} = \sqrt{0.25 + 0.25} = \sqrt{0.5} = \frac{\sqrt{2}}{2} = \frac{1}{\sqrt{2}}
+\end{equation}
+The total margin width is:
+\begin{equation}
+M = \frac{2}{\|w\|} = \frac{2}{\frac{1}{\sqrt{2}}} = 2\sqrt{2} \approx 2.8284
+\end{equation}
+The perpendicular distance from each sample point to the boundary $x_2 = x_1$ is:
+\begin{equation}
+d_i = \frac{|f(x_i)|}{\|w\|} = \frac{|0.5(x_2 - x_1)|}{1/\sqrt{2}} = \frac{|x_2 - x_1|}{\sqrt{2}}
+\end{equation}
+
+\begin{center}\small
+\begin{tabular}{cc|cc}
+\toprule
+\multicolumn{2}{c|}{\textbf{Class $+1$}} & \multicolumn{2}{c}{\textbf{Class $-1$}} \\
+\textbf{Point} & \textbf{Distance $d_i$} & \textbf{Point} & \textbf{Distance $d_i$} \\
+\midrule
+$(1, 3)$ & $\frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.4142$ & $(3, 1)$ & $\frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.4142$ \\
+$(1, 4)$ & $\frac{3}{\sqrt{2}} = 1.5\sqrt{2} \approx 2.1213$ & $(4, 1)$ & $\frac{3}{\sqrt{2}} = 1.5\sqrt{2} \approx 2.1213$ \\
+$(2, 4)$ & $\frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.4142$ & $(4, 2)$ & $\frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.4142$ \\
+$(2, 5)$ & $\frac{3}{\sqrt{2}} = 1.5\sqrt{2} \approx 2.1213$ & $(5, 2)$ & $\frac{3}{\sqrt{2}} = 1.5\sqrt{2} \approx 2.1213$ \\
+$(3, 5)$ & $\frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.4142$ & $(5, 3)$ & $\frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.4142$ \\
+$(3, 6)$ & $\frac{3}{\sqrt{2}} = 1.5\sqrt{2} \approx 2.1213$ & $(6, 3)$ & $\frac{3}{\sqrt{2}} = 1.5\sqrt{2} \approx 2.1213$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Step 6: Classify Query Observation \texorpdfstring{$(3, 4)$}{(3, 4)}}
+Evaluating the decision function at $x = (3, 4)$:
+\begin{equation}
+f(3, 4) = 0.5(4 - 3) = 0.5(1) = 0.5
+\end{equation}
+Since $f(3, 4) = 0.5 > 0$, the query point belongs to \textbf{Class $+1$}:
+\begin{equation}
+\hat{y} = +1
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    % Grid and axes
+    \draw[->, >=stealth, thick, darkgray] (0, 0) -- (7.5, 0) node[right] {$x_1$};
+    \draw[->, >=stealth, thick, darkgray] (0, 0) -- (0, 7.5) node[above] {$x_2$};
+    \draw[step=1cm, gray!20, very thin] (0, 0) grid (7, 7);
+    
+    % Decision Boundary and Margins
+    \draw[navyblue, very thick] (0.5, 0.5) -- (6.5, 6.5) node[above right, font=\footnotesize] {Decision: $x_2 = x_1$};
+    \draw[dashed, darkteal, thick] (0.5, 2.5) -- (4.5, 6.5) node[above, font=\footnotesize] {Positive Margin: $x_2 - x_1 = 2$};
+    \draw[dashed, crimson, thick] (2.5, 0.5) -- (6.5, 4.5) node[right, font=\footnotesize] {Negative Margin: $x_2 - x_1 = -2$};
+    
+    % Class +1 points (blue)
+    \foreach \p in {(1,3), (2,4), (3,5)} {
+        \filldraw[darkteal] \p circle (2.8pt);
+        \draw[darkteal, thick] \p circle (5pt);
+    }
+    \filldraw[darkteal] (1,4) circle (2.8pt);
+    \filldraw[darkteal] (2,5) circle (2.8pt);
+    \filldraw[darkteal] (3,6) circle (2.8pt);
+    
+    % Class -1 points (red)
+    \foreach \p in {(3,1), (4,2), (5,3)} {
+        \filldraw[crimson] \p circle (2.8pt);
+        \draw[crimson, thick] \p circle (5pt);
+    }
+    \filldraw[crimson] (4,1) circle (2.8pt);
+    \filldraw[crimson] (5,2) circle (2.8pt);
+    \filldraw[crimson] (6,3) circle (2.8pt);
+    
+    % Query point (3, 4)
+    \node[star, star points=5, star point ratio=2.25, fill=amber, draw=amber!80!black, inner sep=2.5pt] at (3,4) {};
+    \node[above right, font=\footnotesize, text=amber!80!black] at (3,4) {Query $(3,4) \to \text{Class } +1$};
+
+    % Axis numbers
+    \foreach \x in {1, 2, 3, 4, 5, 6, 7} \node[below, font=\scriptsize] at (\x, 0) {$\x$};
+    \foreach \y in {1, 2, 3, 4, 5, 6, 7} \node[left, font=\scriptsize] at (0, \y) {$\y$};
+\end{tikzpicture}
+\par\vspace{2mm}\small\textbf{Geometric Visualization: Diagonal SVM Decision Boundary $x_2 = x_1$ with Query $(3,4)$}
+\end{center}
+\end{example}
