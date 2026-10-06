@@ -1,1 +1,379 @@
-% Placeholder for ch01_ml_foundations_and_preprocessing.tex
+\chapter{Machine Learning Foundations \& Data Preprocessing}
+
+\section{Challenges in Machine Learning}
+
+Machine learning applications in financial engineering face several structural and regulatory constraints:
+
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Requires Large, Clean Data}: Models demand substantial volumes of high-quality, cleansed historical records to generalize effectively.
+    \item \textbf{Risk of Overfitting}: Complex models risk fitting noise and idiosyncratic market movements rather than genuine underlying signals.
+    \item \textbf{Interpretability (\textquotedblleft Black Box\textquotedblright)}: Advanced algorithms often lack transparent mechanistic explanations, creating auditing hurdles.
+    \item \textbf{Regulatory \& Ethical Concerns in Finance}: Strict regulatory compliance mandates model explainability, fairness, and accountability in financial decision-making.
+\end{itemize}
+
+\section{Types of Variables}
+
+Variables encountered in machine learning datasets are broadly categorized into numerical and categorical types:
+
+\begin{center}
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=7.5cm, level distance=1.3cm},
+    level 2/.style={sibling distance=3.2cm, level distance=1.3cm},
+    every node/.style={
+        draw=navyblue,
+        thick,
+        rounded corners=2pt,
+        fill=lightgraybg,
+        font=\sffamily\bfseries\small,
+        text=navyblue,
+        inner sep=5pt,
+        align=center
+    },
+    edge from parent/.style={draw=navyblue, -{Stealth[length=2.5mm]}, thick}
+]
+\node {Variables}
+    child { node {Numerical}
+        child { node {Continuous} }
+        child { node {Discrete} }
+    }
+    child { node {Categorical}
+        child { node {Nominal} }
+        child { node {Ordinal} }
+        child { node {Binary} }
+    };
+\end{tikzpicture}
+\end{center}
+
+\begin{table}[htbp]
+\centering
+\caption{Taxonomy of Data Types and Financial Examples}
+\vspace{0.2em}
+\begin{tabularx}{\textwidth}{llp{4.2cm}X}
+\toprule
+\textbf{Type} & \textbf{Subtype} & \textbf{Meaning} & \textbf{Finance Example} \\
+\midrule
+Numerical & Continuous & Any value in a continuous range & Stock price, portfolio return, volatility \\
+\addlinespace[0.4em]
+Numerical & Discrete & Countable whole numbers & Number of trades per day, number of defaults \\
+\addlinespace[0.4em]
+Categorical & Nominal & No natural ordering among categories & Sector: Banking, IT, Pharma \\
+\addlinespace[0.4em]
+Categorical & Ordinal & Natural hierarchical order exists & Credit Rating: $\text{AAA} > \text{AA} > \text{A} > \text{BBB}$ \\
+\addlinespace[0.4em]
+Categorical & Binary & Exactly two distinct categories & Loan Default: Yes / No \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Data Preprocessing Pipeline}
+
+The standard end-to-end data preparation workflow transforms raw financial inputs into model-ready datasets:
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    stage/.style={
+        draw=navyblue,
+        thick,
+        fill=lightgraybg,
+        font=\sffamily\bfseries\small,
+        text=navyblue,
+        rounded corners=2pt,
+        minimum width=2.4cm,
+        minimum height=1.0cm,
+        align=center
+    },
+    finalstage/.style={
+        draw=darkteal,
+        line width=1.2pt,
+        fill=white,
+        font=\sffamily\bfseries\small,
+        text=darkteal,
+        rounded corners=2pt,
+        minimum width=3.0cm,
+        minimum height=1.0cm,
+        align=center
+    },
+    conn/.style={
+        draw=navyblue,
+        -{Stealth[length=2.5mm]},
+        line width=1.2pt
+    }
+]
+\node[stage] (raw) {Raw Data};
+\node[stage, right=0.8cm of raw] (clean) {Cleaning};
+\node[stage, right=0.8cm of clean] (trans) {Transformation};
+\node[stage, right=0.8cm of trans] (norm) {Normalization /\\Scaling};
+\node[stage, below=1.2cm of norm] (enc) {Encoding\\Categorical};
+\node[finalstage, left=1.2cm of enc] (ready) {Model-Ready\\Data};
+
+\draw[conn] (raw) -- (clean);
+\draw[conn] (clean) -- (trans);
+\draw[conn] (trans) -- (norm);
+\draw[conn] (norm) -- (enc);
+\draw[conn] (enc) -- (ready);
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Cleaning}: Removes duplicate records, corrects erroneous entries, and handles missing observations.
+    \item \textbf{Transformation}: Converts raw figures into mathematically suitable modeling formats (e.g., calculating log returns from sequential stock prices).
+    \item \textbf{Normalization / Scaling}: Brings numerical features across heterogeneous magnitudes into a common comparable scale.
+    \item \textbf{Encoding}: Converts non-numeric categorical attributes into numerical indicator representations.
+\end{itemize}
+
+\subsection{Scaling \& Normalization}
+
+Features measured in disparate units must be rescaled to ensure distance-based and gradient-based algorithms treat features proportionately:
+
+\begin{formulabox}[Min-Max Scaling]
+Rescales feature values into the bounded closed interval $[0, 1]$:
+\begin{equation}
+x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}[$Z$-Score Standardization]
+Standardizes observations using empirical sample mean and sample standard deviation:
+\begin{equation}
+Z = \frac{x - \mu}{\sigma}
+\end{equation}
+\end{formulabox}
+
+\section{Train-Test-Validation Splitting}
+
+Datasets are partitioned into distinct subsets to evaluate model performance on unseen data, verifying whether the algorithm generalizes rather than memorizing training samples:
+
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Training Set}: Used to fit model parameters and learn patterns.
+    \item \textbf{Validation Set}: Used during model development to tune hyperparameters and guide model selection.
+    \item \textbf{Testing Set}: Used strictly for final unbiased model performance evaluation.
+\end{itemize}
+
+\subsection{Common Partitioning Ratios}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Train-Test Splits}: $80\% - 20\%$ or $70\% - 30\%$.
+    \item \textbf{Train-Validation-Test Splits}: $70\% - 15\% - 15\%$.
+\end{itemize}
+
+\subsection{K-Fold Cross-Validation}
+In $k$-fold cross-validation:
+\begin{enumerate}[leftmargin=1.5em]
+    \item The training dataset is partitioned into $k$ equal parts (\textquotedblleft folds\textquotedblright).
+    \item The model is trained on $k-1$ folds and validated on the remaining fold.
+    \item This procedure is repeated $k$ times, rotating the held-out validation fold sequentially across all splits.
+\end{enumerate}
+
+\begin{remarkbox}[Benefits \& Common Choices]
+\begin{itemize}[leftmargin=1.2em]
+    \item Provides a significantly more robust estimate of true out-of-sample model performance.
+    \item Reduces vulnerability to an anomalous single lucky or unlucky split.
+    \item Common configurations: $k = 5$ or $k = 10$.
+\end{itemize}
+\end{remarkbox}
+
+\subsection{Data Leakage Prevention}
+\begin{takeawaybox}[Data Leakage Warning]
+\textbf{Never scale or normalize the entire dataset prior to splitting.}
+
+If sample mean $\mu$ and standard deviation $\sigma$ are calculated over the aggregate dataset, information from the test set leaks directly into the training stage. 
+
+\textbf{Mandatory Pipeline Sequence:}
+\begin{enumerate}[leftmargin=1.2em]
+    \item Split the raw dataset first.
+    \item Fit the scaler/imputer exclusively on training data.
+    \item Transform validation and test data using the saved training parameters.
+\end{enumerate}
+\end{takeawaybox}
+
+\subsection{Splitting Financial Time-Series Data}
+For time-series data like stock prices, a purely random split is fundamentally problematic because it mixes past and future observations. Sequential financial records must strictly use \textbf{chronological splits}.
+
+\section{Missing Data Mechanisms \& Imputation}
+
+\subsection{Missingness Mechanisms}
+
+\begin{table}[htbp]
+\centering
+\caption{Mechanisms of Missing Data and Practical Financial Examples}
+\vspace{0.2em}
+\begin{tabularx}{\textwidth}{p{2.0cm}p{6.0cm}X}
+\toprule
+\textbf{Type} & \textbf{Meaning} & \textbf{Finance Example} \\
+\midrule
+\textbf{MCAR} & \textbf{Missing Completely at Random}: Missingness is entirely independent of observed and unobserved variables. & Trade entry terminal intermittently experiences random network packet drops logging trades. \\
+\addlinespace[0.5em]
+\textbf{MAR} & \textbf{Missing at Random}: Missingness is statistically related to other observed features in the dataset. & Younger retail banking customers are systematically more likely to leave the optional income field blank. \\
+\addlinespace[0.5em]
+\textbf{MNAR} & \textbf{Missing Not at Random}: Missingness is directly correlated with the actual missing value itself. & Highly indebted distressed borrowers deliberately omit outstanding secondary credit obligations. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Imputation Methods}
+
+Common techniques for replacing missing data include:
+\begin{itemize*}[itemjoin={, }, itemjoin*={, and }]
+    \item Mean / Median / Mode
+    \item K-Nearest Neighbors (KNN) Imputation
+    \item Forward Fill
+    \item Backward Fill
+    \item Interpolation
+\end{itemize*}.
+
+\begin{table}[htbp]
+\centering
+\caption{Advantages and Disadvantages of Imputation Methods}
+\vspace{0.2em}
+\begin{tabularx}{\textwidth}{p{3.2cm}p{4.8cm}X}
+\toprule
+\textbf{Method} & \textbf{Advantages} & \textbf{Disadvantages} \\
+\midrule
+Mean / Median & Simple, fast to compute & Distorts sample variance; ignores inter-feature relationships. \\
+\addlinespace[0.4em]
+Mode & Directly applicable to categorical data & Can artificially over-represent the most common category. \\
+\addlinespace[0.4em]
+KNN & Exploits multivariate relationships between features & Computationally expensive on large financial datasets. \\
+\addlinespace[0.4em]
+Forward / Backward Fill & Well-suited for time-series sequences & Assumes most recent observed value remains representative. \\
+\addlinespace[0.4em]
+Interpolation & Produces smooth estimates capturing trends & Unsuitable for non-sequential, unordered data. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Decision Framework for Selecting Imputation Methods}
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.0cm,
+    decision/.style={
+        draw=navyblue,
+        thick,
+        fill=lightgraybg,
+        font=\sffamily\bfseries\small,
+        text=navyblue,
+        rounded corners=2pt,
+        align=center,
+        inner sep=6pt
+    },
+    action/.style={
+        draw=darkteal,
+        thick,
+        fill=white,
+        font=\sffamily\small,
+        text=darkteal,
+        rounded corners=2pt,
+        align=center,
+        inner sep=6pt
+    },
+    conn/.style={
+        draw=navyblue,
+        -{Stealth[length=2.5mm]},
+        thick
+    }
+]
+\node[decision] (ts) {Is data Time Series?};
+
+% Yes branch
+\node[action, left=1.8cm of ts] (ts_act) {Forward / Backward Fill\\or Interpolation};
+
+% No branch
+\node[decision, below=1.2cm of ts] (dtype) {Numerical or Categorical?};
+\node[action, left=1.2cm of dtype] (num_act) {Mean / Median /\\KNN Imputation};
+\node[action, right=1.2cm of dtype] (cat_act) {Mode\\Imputation};
+
+\draw[conn] (ts) -- node[above, font=\footnotesize\bfseries] {Yes} (ts_act);
+\draw[conn] (ts) -- node[right, font=\footnotesize\bfseries] {No} (dtype);
+\draw[conn] (dtype) -- node[above, font=\footnotesize\bfseries] {Numerical} (num_act);
+\draw[conn] (dtype) -- node[above, font=\footnotesize\bfseries] {Categorical} (cat_act);
+\end{tikzpicture}
+\end{center}
+
+\section{Imbalanced Categorical Data}
+
+Class imbalance arises when one category of the target variable appears far more frequently than other categories:
+
+\begin{remarkbox}[Financial Example]
+In credit card fraud detection:
+\begin{itemize}[leftmargin=1.5em]
+    \item Genuine Transactions: $99.9\%$
+    \item Fraudulent Transactions: $0.1\%$
+\end{itemize}
+A naive model that blindly predicts \textquotedblleft no fraud\textquotedblright\ every single time achieves $99.9\%$ raw accuracy, yet is entirely useless. Thus, \textbf{accuracy alone is fundamentally misleading}.
+\end{remarkbox}
+
+\subsection{Consequences of Class Imbalance}
+\begin{itemize}[leftmargin=1.5em]
+    \item Biases model parameters heavily toward majority class patterns.
+    \item Renders overall accuracy metric uninformative for decision-makers.
+\end{itemize}
+
+\subsection{Remedial Solutions}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Oversampling}: Duplicating or synthetically generating minority class instances.
+    \item \textbf{Undersampling}: Down-sampling majority class observations.
+    \item \textbf{SMOTE}: Synthetic Minority Over-sampling Technique, interpolating new instances along minority feature lines.
+\end{itemize}
+
+\section{Model Evaluation Metrics}
+
+For binary classification problems, predictions and actual outcomes are summarized in a confusion matrix:
+
+\begin{table}[htbp]
+\centering
+\caption{Binary Classification Confusion Matrix}
+\vspace{0.2em}
+\begin{tabular}{lcc}
+\toprule
+& \textbf{Predicted Positive} & \textbf{Predicted Negative} \\
+\midrule
+\textbf{Actual Positive} & True Positive ($TP$) & False Negative ($FN$) \\
+\addlinespace[0.3em]
+\textbf{Actual Negative} & False Positive ($FP$) & True Negative ($TN$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{formulabox}[Precision]
+Of all instances predicted as positive, how many were genuinely correct?
+\begin{equation}
+\text{Precision} = \frac{TP}{TP + FP}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}[Recall]
+Of all actual positive instances in the population, how many did the model identify?
+\begin{equation}
+\text{Recall} = \frac{TP}{TP + FN}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}[$F_1$-Score]
+Harmonic mean of Precision and Recall, balancing false alarms against missed detections:
+\begin{equation}
+F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+\end{formulabox}
+
+\section{Mistakes to be Avoided in ML Pipelines}
+
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Global Scaling Before Splitting}: Scaling or normalizing the entire dataset prior to train/test partitioning causes data leakage.
+    \item \textbf{Blind Mean Imputation on MNAR Data}: Imputing missing values with unconditional means when data is Missing Not at Random injects substantial estimation bias.
+    \item \textbf{Ignoring Class Imbalance}: Relying exclusively on overall classification accuracy in skewed datasets conceals poor minority detection.
+    \item \textbf{Unchecked One-Hot Encoding on High-Cardinality Variables}: Creating dummy variables for high-cardinality categorical features leads to severe dimensionality inflation.
+    \item \textbf{Failing to Shuffle Non-Time-Series Data}: Neglecting random shuffling before partitioning standard cross-sectional data risks clustering-induced bias.
+\end{enumerate}
+
+\section{Key Takeaways}
+
+\begin{takeawaybox}[Core Principles of ML Data Preparation]
+\begin{enumerate}[leftmargin=1.2em, label=\roman*)]
+    \item \textbf{Pre-processing dominates}: Data preprocessing accounts for $60\% - 80\%$ of total machine learning workflow effort.
+    \item \textbf{Always split first}: Partition data into training, validation, and test sets before performing any scaling or modeling.
+    \item \textbf{Diagnose missingness}: Determine whether missing values are MCAR, MAR, or MNAR before selecting an imputation strategy.
+    \item \textbf{Address class imbalance}: Use SMOTE, oversampling, or undersampling; accuracy alone is never sufficient.
+    \item \textbf{Respect temporal order}: For financial and time-series data, strictly employ chronological splits and forward-looking imputation to prevent look-ahead bias.
+\end{enumerate}
+\end{takeawaybox}
