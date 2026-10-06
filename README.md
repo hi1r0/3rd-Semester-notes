@@ -23,6 +23,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 │   ├── notes (GFM).docx           # GFM lecture notes Word document
 │   └── README.md                  # Subject roadmap and lecture index
 ├── ML/
+│   ├── latex/                     # Publication-grade LaTeX lecture notes book (59 pages, main.pdf)
 │   ├── Data Preprocessing/        # Notes, exercises, and U1E1 Loan Data assignment (code, notebook & solutions)
 │   ├── Decision Tree/             # Tree-based models (ID3, C4.5, CART) and exercise sets
 │   ├── KNN/                       # K-Nearest Neighbors theory slides and assignment questions
@@ -63,6 +64,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 4. **Machine Learning for Quantitative Finance**
    - End-to-end data preprocessing pipelines: Missing value handling, categorical encoding, standardization, SMOTE class balancing, and train/validation/test splits.
    - Algorithmic foundations and mathematical derivations: Logistic Regression, K-Nearest Neighbors (KNN), Naive Bayes Classifiers, Decision Trees/Ensembles, and Support Vector Machines (SVM).
+   - **Modular LaTeX Lecture Notes Book (`ML/latex/main.pdf`):** 59-page publication-grade reference with 6 chapters and a consolidated comprehensive formula reference sheet.
 
 5. **Applied Time Series Analysis and Forecasting (MSQF 531)**
    - Chronological series decomposition (Additive, Multiplicative, Logarithmic transformations) into trend ($T$), seasonality ($S$), cyclical ($C$), and irregular ($I$) components.
@@ -77,7 +79,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 To compile the lecture notes in any of the subject `latex` directories:
 
 ```bash
-cd "Financial Mathematics/latex"       # or "Global Financial Management/latex" or "Time Series/latex"
+cd "ML/latex"                          # or "Financial Mathematics/latex" or "Global Financial Management/latex" or "Time Series/latex"
 pdflatex -interaction=nonstopmode main.tex
 pdflatex -interaction=nonstopmode main.tex  # Second run resolves TOC and cross-references
 ```
