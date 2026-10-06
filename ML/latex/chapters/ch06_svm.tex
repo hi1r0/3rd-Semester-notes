@@ -43,7 +43,7 @@ where equality $y_i (w^T x_i + b) = 1$ holds if and only if $x_i$ is a support v
 
 To solve linear SVM problems analytically for two-dimensional data, we identify whether the classes are separated by a horizontal, vertical, or diagonal boundary:
 
-\subsection{1. Horizontal Separation (\texorpdfstring{$x_2 = c$}{x2 = c})}
+\subsection{Horizontal Separation (\texorpdfstring{$x_2 = c$}{x2 = c})}
 A dataset exhibits horizontal separation if the second coordinate ($x_2$) of all points in one class is strictly greater than the second coordinate of all points in the opposite class:
 \begin{equation}
 \min\{x_2 \in \text{Class } +1\} > \max\{x_2 \in \text{Class } -1\}
@@ -67,7 +67,7 @@ A dataset exhibits horizontal separation if the second coordinate ($x_2$) of all
     Substituting $w_2$ into either equation determines the intercept $b$.
 \end{itemize}
 
-\subsection{2. Vertical Separation (\texorpdfstring{$x_1 = c$}{x1 = c})}
+\subsection{Vertical Separation (\texorpdfstring{$x_1 = c$}{x1 = c})}
 A dataset exhibits vertical separation if the first coordinate ($x_1$) of all points in one class is strictly greater than the first coordinate of all points in the opposite class:
 \begin{equation}
 \min\{x_1 \in \text{Class } +1\} > \max\{x_1 \in \text{Class } -1\}
@@ -84,7 +84,7 @@ A dataset exhibits vertical separation if the first coordinate ($x_1$) of all po
     \end{equation}
 \end{itemize}
 
-\subsection{3. Diagonal Separation (\texorpdfstring{$x_2 - x_1 = c$ or $x_2 + x_1 = c$}{x2 - x1 = c or x2 + x1 = c})}
+\subsection{Diagonal Separation (\texorpdfstring{$x_2 - x_1 = c$ or $x_2 + x_1 = c$}{x2 - x1 = c or x2 + x1 = c})}
 When neither coordinate alone separates the classes, evaluate linear combinations such as $x_2 - x_1$ or $x_2 + x_1$. If the resulting combined score is strictly positive for one class and strictly negative for the other, the optimal decision boundary is diagonal:
 \begin{equation}
 x_2 - x_1 = c \quad \text{or} \quad x_2 + x_1 = c
