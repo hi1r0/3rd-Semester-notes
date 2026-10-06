@@ -1,1 +1,192 @@
-% Placeholder for ch03_naive_bayes.tex
+\chapter{Naive Bayes Classification}
+
+\section{Probability Foundations \& Notations}
+
+The Naive Bayes classifier is grounded in classical axiomatic probability theory and conditional distributions.
+
+\begin{table}[htbp]
+\centering
+\caption{Probability Notations and Terminology}
+\vspace{0.2em}
+\begin{tabular}{ll}
+\toprule
+\textbf{Notation} & \textbf{Meaning} \\
+\midrule
+$P(A)$ & Probability of event $A$ \\
+\addlinespace[0.3em]
+$P(A^c)$ & Probability of complement of $A$ \\
+\addlinespace[0.3em]
+$P(A \cap B)$ & Joint probability of $A$ and $B$ occurring simultaneously \\
+\addlinespace[0.3em]
+$P(A \cup B)$ & Probability of either event $A$ or event $B$ occurring \\
+\addlinespace[0.3em]
+$P(A \mid B)$ & Conditional probability of event $A$ given event $B$ has occurred \\
+\addlinespace[0.3em]
+$P(A, B)$ & Joint probability of events $A$ and $B$ (alternative standard notation) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Key Probability Identities}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Complement Rule}:
+    \begin{equation}
+    P(A^c) = 1 - P(A)
+    \end{equation}
+    \item \textbf{Addition Rule (Union)}:
+    \begin{equation}
+    P(A \cup B) = P(A) + P(B) - P(A \cap B)
+    \end{equation}
+    \item \textbf{Joint Probability Equivalence}:
+    \begin{equation}
+    P(A \cap B) = P(A, B)
+    \end{equation}
+\end{itemize}
+
+\subsection{Conditional Probability \& Multiplication Rule}
+
+\begin{definition}{Conditional Probability}{cond_prob}
+For two events $A$ and $B$ with $P(B) > 0$:
+\begin{equation}
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+\end{equation}
+\end{definition}
+
+\noindent Re-arranging yields the general \textbf{Multiplication Rule}:
+\begin{align}
+P(A, B) &= P(A \mid B) P(B) \\
+P(A, B) &= P(B \mid A) P(A)
+\end{align}
+
+\subsection{Statistical Independence}
+If events $A$ and $B$ are statistically independent:
+\begin{equation}
+P(A \cap B) = P(A) \cdot P(B)
+\end{equation}
+and equivalently:
+\begin{equation}
+P(A \mid B) = P(A)
+\end{equation}
+
+\section{Bayes' Theorem}
+
+Suppose an analyst wishes to determine the probability that an observation belongs to class $C_k$ after observing feature evidence vector $\vect{X}$:
+
+\begin{theorem}{Bayes' Theorem}{bayes_thm}
+\begin{equation}
+P(C_k \mid \vect{X}) = \frac{P(\vect{X} \mid C_k) P(C_k)}{P(\vect{X})}
+\end{equation}
+\end{theorem}
+
+\noindent In conceptual terms:
+\begin{equation}
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}
+\end{equation}
+
+\section{Worked Numerical Example: Credit Risk Classification}
+
+\begin{example}{Credit Risk Classification}{credit_risk_nb}
+A retail lending institution assesses credit risk with two target states:
+\begin{itemize}[leftmargin=1.5em]
+    \item $C_1$: Good Credit
+    \item $C_2$: Default
+\end{itemize}
+
+\noindent Historical portfolio priors and likelihoods for a financial indicator vector $\vect{X}$ are given by:
+\begin{align*}
+P(C_1) &= 0.80, \quad P(C_2) = 0.20 \\
+P(\vect{X} \mid C_1) &= 0.10, \quad P(\vect{X} \mid C_2) = 0.60
+\end{align*}
+
+\noindent\textbf{Task:} Compute the evidence $P(\vect{X})$, determine the posterior probabilities $P(C_1 \mid \vect{X})$ and $P(C_2 \mid \vect{X})$, and classify the borrower.
+
+\tcblower
+\textbf{Solution:}
+
+\noindent\textbf{Step 1: Compute Total Evidence $P(\vect{X})$ via Law of Total Probability:}
+\begin{align*}
+P(\vect{X}) &= P(\vect{X} \mid C_1) P(C_1) + P(\vect{X} \mid C_2) P(C_2) \\
+&= (0.10 \times 0.80) + (0.60 \times 0.20) \\
+&= 0.08 + 0.12 \\
+&= 0.20
+\end{align*}
+
+\noindent\textbf{Step 2: Calculate Posterior Probabilities:}
+\begin{align*}
+P(C_1 \mid \vect{X}) &= \frac{P(\vect{X} \mid C_1) P(C_1)}{P(\vect{X})} = \frac{0.10 \times 0.80}{0.20} = \frac{0.08}{0.20} = 0.40 \\[0.5em]
+P(C_2 \mid \vect{X}) &= \frac{P(\vect{X} \mid C_2) P(C_2)}{P(\vect{X})} = \frac{0.60 \times 0.20}{0.20} = \frac{0.12}{0.20} = 0.60
+\end{align*}
+
+\noindent\textbf{Step 3: Comparison and Decision:}
+$$P(C_2 \mid \vect{X}) > P(C_1 \mid \vect{X}) \quad (0.60 > 0.40)$$
+$$\therefore \text{Classify } \vect{X} \text{ as } \textbf{Default } (C_2).$$
+\end{example}
+
+\section{The Bayes Classifier Framework}
+
+\subsection{Marginal Evidence Across \texorpdfstring{$K$}{K} Classes}
+For a classification problem with $K$ discrete classes $C_1, C_2, \dots, C_K$, the overall marginal probability of evidence $\vect{X}$ is:
+\begin{equation}
+P(\vect{X}) = \sum_{k=1}^K P(\vect{X} \mid C_k) P(C_k)
+\end{equation}
+
+\subsection{Optimal Bayes Decision Rule}
+The Bayes classifier assigns an observation $\vect{X}$ to the class maximizing the posterior probability:
+\begin{equation}
+\hat{c} = \argmax_{C_k} P(C_k \mid \vect{X}) = \argmax_{C_k} \frac{P(\vect{X} \mid C_k) P(C_k)}{P(\vect{X})}
+\end{equation}
+Because the evidence denominator $P(\vect{X})$ is identical across all classes $C_k$, the decision rule simplifies to:
+\begin{equation}
+\hat{c} = \argmax_{C_k} P(\vect{X} \mid C_k) P(C_k)
+\end{equation}
+
+\section{The Naive Bayes Classifier}
+
+\subsection{The Challenge of High-Dimensional Likelihoods}
+When an observation is characterized by $p$ features $\vect{X} = (x_1, x_2, \dots, x_p)$:
+\begin{equation}
+P(C_k \mid x_1, x_2, \dots, x_p) = \frac{P(x_1, x_2, \dots, x_p \mid C_k) P(C_k)}{P(x_1, x_2, \dots, x_p)}
+\end{equation}
+Directly estimating the joint multivariate conditional distribution $P(x_1, x_2, \dots, x_p \mid C_k)$ from finite sample sizes is computationally and statistically challenging due to exponential data sparsity.
+
+\subsection{The Naive Conditional Independence Assumption}
+
+\begin{definition}{The Naive Assumption}{naive_assump}
+All input features $x_1, x_2, \dots, x_p$ are mutually conditionally independent given the class label $C_k$:
+\begin{equation}
+P(x_1, x_2, \dots, x_p \mid C_k) = \prod_{j=1}^p P(x_j \mid C_k)
+\end{equation}
+that is:
+\begin{equation}
+P(x_1, x_2, \dots, x_p \mid C_k) = P(x_1 \mid C_k) \cdot P(x_2 \mid C_k) \cdots P(x_p \mid C_k)
+\end{equation}
+\end{definition}
+
+\subsection{Naive Bayes Classification Rule}
+Applying the independence assumption produces the core operational classification formula:
+\begin{equation}
+\hat{c} = \argmax_{C_k} P(C_k) \prod_{j=1}^p P(x_j \mid C_k)
+\end{equation}
+
+\begin{remarkbox}[Why Is It Termed \textquotedblleft Naive\textquotedblright?]
+The assumption is termed \textquotedblleft naive\textquotedblright\ because conditional independence among predictors is rarely strictly true in real-world scenarios.
+
+\textbf{Financial Example:} In credit scoring, variables such as \textit{Income}, \textit{Debt}, and \textit{Employment Status} clearly exhibit mutual dependencies. However, in practice, the naive approximation dramatically simplifies computation while delivering strong empirical classification performance.
+\end{remarkbox}
+
+\subsection{Algorithmic Step-by-Step Sequence}
+
+\begin{algorithmbox}[Naive Bayes Execution Procedure]
+\begin{enumerate}[leftmargin=1.5em, label=\roman*)]
+    \item \textbf{Start with Training Data}: Assemble feature vectors $\vect{X}_i$ and class labels $y_i$.
+    \item \textbf{Calculate Prior Probabilities}: Compute class base rates $P(C_k) = \frac{N_{C_k}}{N}$.
+    \item \textbf{Calculate Univariate Likelihoods}: Estimate 1-D conditional probabilities $P(x_j \mid C_k)$ for each feature given each class.
+    \item \textbf{Apply Naive Assumption}: Decompose joint likelihood into the product:
+    $$P(x_1, \dots, x_p \mid C_k) = \prod_{j=1}^p P(x_j \mid C_k)$$
+    \item \textbf{Calculate Class Score}: Evaluate the unnormalized joint score for each candidate class:
+    $$\text{Score}(C_k) = P(C_k) \prod_{j=1}^p P(x_j \mid C_k)$$
+    \item \textbf{Compare Scores Across All Classes}: Evaluate $\text{Score}(C_k)$ across $k = 1, \dots, K$.
+    \item \textbf{Predict Output Class}:
+    $$\hat{c} = \argmax_{C_k} \text{Score}(C_k)$$
+\end{enumerate}
+\end{algorithmbox}
