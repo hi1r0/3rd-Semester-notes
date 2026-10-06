@@ -1,1 +1,421 @@
-% Placeholder for ch02_knn.tex
+\chapter{K-Nearest Neighbors (KNN)}
+
+\section{Introduction to KNN}
+
+\begin{definition}{K-Nearest Neighbors}{knn_def}
+\textbf{K-Nearest Neighbors (KNN)} is a non-parametric, distance-based supervised machine learning algorithm used for both classification and regression tasks.
+\end{definition}
+
+\subsection{Core Algorithmic Characteristics}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Supervised Learning}: Operates on labeled training datasets to predict continuous targets or discrete classes.
+    \item \textbf{Dual Capability}: Utilized for classification (via majority voting) as well as regression (via local averaging).
+    \item \textbf{Distance-Based Metric Method}: Assigns predictions purely based on geometric proximity in the feature space.
+    \item \textbf{Lazy Learning / Instance-Based}: Does not construct an explicit internal model or parameter set during training; retains the entire training dataset and defers computation until inference time.
+\end{itemize}
+
+\subsection{Algorithmic Workflow}
+
+The operational execution pipeline of KNN proceeds through four sequential stages:
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.0cm,
+    stage/.style={
+        draw=navyblue,
+        thick,
+        fill=lightgraybg,
+        font=\sffamily\bfseries\small,
+        text=navyblue,
+        rounded corners=2pt,
+        minimum width=2.7cm,
+        minimum height=1.0cm,
+        align=center
+    },
+    finalstage/.style={
+        draw=darkteal,
+        line width=1.2pt,
+        fill=white,
+        font=\sffamily\bfseries\small,
+        text=darkteal,
+        rounded corners=2pt,
+        minimum width=2.7cm,
+        minimum height=1.0cm,
+        align=center
+    },
+    conn/.style={
+        draw=navyblue,
+        -{Stealth[length=2.5mm]},
+        line width=1.2pt
+    }
+]
+\node[stage] (train) {Training\\Data};
+\node[stage, right=1.0cm of train] (calc) {Calculate\\Distance};
+\node[stage, right=1.0cm of calc] (find) {Find $k$\\Nearest};
+\node[finalstage, right=1.0cm of find] (pred) {Make\\Prediction};
+
+\draw[conn] (train) -- (calc);
+\draw[conn] (calc) -- (find);
+\draw[conn] (find) -- (pred);
+\end{tikzpicture}
+\end{center}
+
+\section{Distance Metrics}
+
+Geometric closeness between query observations and stored instances is computed using formal metric distance functions.
+
+\subsection{Euclidean Distance}
+
+For two observations in a 2-dimensional feature space, $\vect{X} = (x_1, x_2)$ and $\vect{Y} = (y_1, y_2)$:
+\begin{equation}
+d(\vect{X}, \vect{Y}) = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2}
+\end{equation}
+
+For an arbitrary $p$-dimensional feature vector (or $n$ features):
+\begin{equation}
+d(\vect{X}, \vect{Y}) = \sqrt{\sum_{j=1}^p (x_j - y_j)^2} = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}
+\end{equation}
+
+\subsection{Manhattan Distance}
+
+The Manhattan distance ($L_1$ norm) measures rectilinear city-block distance across coordinates:
+\begin{equation}
+d(\vect{X}, \vect{Y}) = \sum_{i=1}^n |x_i - y_i|
+\end{equation}
+
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{For 2 Dimensions}: $d = |x_1 - x_2| + |y_1 - y_2|$
+    \item \textbf{For 3 Dimensions}: $d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2|$
+\end{itemize}
+
+\subsection{Minkowski Distance}
+
+The generalized Minkowski metric of order $p \ge 1$ encompasses both Manhattan and Euclidean distances:
+\begin{equation}
+d(\vect{X}, \vect{Y}) = \left(\sum_{i=1}^n |x_i - y_i|^p \right)^{1/p}
+\end{equation}
+
+\begin{table}[htbp]
+\centering
+\caption{Minkowski Distance Orders and Resulting Metrics}
+\vspace{0.2em}
+\begin{tabular}{cll}
+\toprule
+\textbf{Order} $p$ & \textbf{Distance Metric} & \textbf{Mathematical Formula} \\
+\midrule
+$p = 1$ & Manhattan distance & $\displaystyle \sum |x_i - y_i|$ \\
+\addlinespace[0.4em]
+$p = 2$ & Euclidean distance & $\displaystyle \sqrt{\sum (x_i - y_i)^2}$ \\
+\addlinespace[0.4em]
+$p \ge 1$ & Minkowski distance & $\displaystyle \left(\sum |x_i - y_i|^p \right)^{1/p}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Where:}
+\begin{itemize}[leftmargin=1.5em]
+    \item $n = \text{number of dimensions (features)}$
+    \item $p = \text{positive real number (the \textquotedblleft order\textquotedblright\ of the distance metric)}$
+    \item $x_i, y_i = \text{the } i\text{-th feature coordinates of the two compared observations}$
+\end{itemize}
+
+\section{Worked Numerical Examples}
+
+\subsection{Fruit Classification via Euclidean Distance}
+
+\begin{example}{Fruit Classification (Apple vs. Lemon)}{fruit_knn}
+A dataset contains observations evaluated on two physical attributes: \textit{Sweetness} and \textit{Crunchiness}.
+
+\begin{center}
+\textbf{Fruit Training Dataset}\\[0.3em]
+\begin{tabular}{cccc}
+\toprule
+\textbf{Point} & \textbf{Sweetness} & \textbf{Crunchiness} & \textbf{Class} \\
+\midrule
+$A$ & 7 & 7 & Apple \\
+$B$ & 8 & 6 & Apple \\
+$C$ & 3 & 8 & Lemon \\
+$D$ & 2 & 7 & Lemon \\
+$E$ & 6 & 8 & Apple \\
+$F$ & 1 & 9 & Lemon \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Task:} Classify a new query observation $\vect{X} = (5, 7)$ using $k = 3$ and Euclidean distance.
+
+\tcblower
+\textbf{Solution:}
+
+\noindent\textbf{Step 1: Compute Euclidean distances from query point $\vect{X}(5,7)$:}
+\begin{align*}
+\text{To } A(7, 7): & \quad d = \sqrt{(5 - 7)^2 + (7 - 7)^2} = \sqrt{4 + 0} = 2.00 \\
+\text{To } B(8, 6): & \quad d = \sqrt{(5 - 8)^2 + (7 - 6)^2} = \sqrt{9 + 1} = \sqrt{10} \approx 3.16 \\
+\text{To } C(3, 8): & \quad d = \sqrt{(5 - 3)^2 + (7 - 8)^2} = \sqrt{4 + 1} = \sqrt{5} \approx 2.23 \\
+\text{To } D(2, 7): & \quad d = \sqrt{(5 - 2)^2 + (7 - 7)^2} = \sqrt{9 + 0} = 3.00 \\
+\text{To } E(6, 8): & \quad d = \sqrt{(5 - 6)^2 + (7 - 8)^2} = \sqrt{1 + 1} = \sqrt{2} \approx 1.41 \\
+\text{To } F(1, 9): & \quad d = \sqrt{(5 - 1)^2 + (7 - 9)^2} = \sqrt{16 + 4} = \sqrt{20} \approx 4.04
+\end{align*}
+
+\noindent\textbf{Step 2: Sort distances in ascending order:}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Point} & \textbf{Distance} & \textbf{Class} \\
+\midrule
+$E$ & $1.41$ & Apple \\
+$A$ & $2.00$ & Apple \\
+$C$ & $2.23$ & Lemon \\
+$D$ & $3.00$ & Lemon \\
+$B$ & $3.16$ & Apple \\
+$F$ & $4.04$ & Lemon \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Step 3: Evaluate majority class for $k = 3$:}
+$$\{k = 3\} = \{E, A, C\}$$
+\begin{itemize}[leftmargin=1.5em]
+    \item Apple: $2$ votes ($E, A$)
+    \item Lemon: $1$ vote ($C$)
+\end{itemize}
+$$\therefore \vect{X} \text{ is to be classified as } \textbf{Apple}.$$
+\end{example}
+
+\subsection{Fintech Stock Recommendation with Standardized Indicators}
+
+\begin{example}{Fintech Stock Recommendation (Buy, Hold, Avoid)}{fintech_knn}
+A fintech company builds a KNN system to recommend whether a stock is a \textbf{Buy}, \textbf{Hold}, or \textbf{Avoid} based on three financial indicators: Price-to-Earnings ($P/E$), Return on Equity ($ROE$), and Debt-to-Equity ($D/E$).
+
+The training samples are provided after standardizing each indicator via $Z = \frac{x - \mu}{\sigma}$:
+
+\begin{center}
+\textbf{Standardized Financial Indicator Training Dataset}\\[0.3em]
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Stock} & $P/E\,(Z)$ & $ROE\,(Z)$ & $D/E\,(Z)$ & \textbf{Class} \\
+\midrule
+$S_1$ & $-1.351$ & $1.542$ & $-1.184$ & Buy \\
+$S_2$ & $-0.787$ & $0.806$ & $-0.858$ & Buy \\
+$S_3$ & $-0.129$ & $-0.299$ & $-0.204$ & Hold \\
+$S_4$ & $0.341$ & $-0.668$ & $0.286$ & Hold \\
+$S_5$ & $1.750$ & $-1.404$ & $1.757$ & Avoid \\
+$S_6$ & $1.093$ & $-1.036$ & $1.267$ & Avoid \\
+$S_7$ & $-1.069$ & $1.174$ & $-1.021$ & Buy \\
+$S_8$ & $0.153$ & $-0.115$ & $-0.041$ & Hold \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Task:} Predict the recommendation class for a new stock with standardized features:
+$$\vect{X} = (-0.559,\, 0.437,\, -0.531)$$
+using $k = 3$ and Euclidean distance.
+
+\tcblower
+\textbf{Solution:}
+
+\noindent\textbf{Step 1: Compute Euclidean distance for each stock:}
+$$d(\vect{X}, S_i) = \sqrt{\left(z_{1, X} - z_{1, S_i}\right)^2 + \left(z_{2, X} - z_{2, S_i}\right)^2 + \left(z_{3, X} - z_{3, S_i}\right)^2}$$
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Stock} & $P/E\,(Z)$ & $ROE\,(Z)$ & $D/E\,(Z)$ & \textbf{Distance} & \textbf{Class} \\
+\midrule
+$S_1$ & $-1.351$ & $1.542$ & $-1.184$ & $1.487$ & Buy \\
+$S_2$ & $-0.787$ & $0.806$ & $-0.858$ & $0.527$ & Buy \\
+$S_3$ & $-0.129$ & $-0.299$ & $-0.204$ & $0.939$ & Hold \\
+$S_4$ & $0.341$ & $-0.668$ & $0.286$ & $1.266$ & Hold \\
+$S_5$ & $1.750$ & $-1.404$ & $1.757$ & $3.760$ & Avoid \\
+$S_6$ & $1.093$ & $-1.036$ & $1.267$ & $2.874$ & Avoid \\
+$S_7$ & $-1.069$ & $1.174$ & $-1.021$ & $1.002$ & Buy \\
+$S_8$ & $0.153$ & $-0.115$ & $-0.041$ & $1.053$ & Hold \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Step 2: Sorted Euclidean distance table:}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Stock} & \textbf{Distance} & \textbf{Class} \\
+\midrule
+$S_2$ & $0.527$ & Buy \\
+$S_3$ & $0.939$ & Hold \\
+$S_7$ & $1.002$ & Buy \\
+$S_8$ & $1.053$ & Hold \\
+$S_4$ & $1.266$ & Hold \\
+$S_1$ & $1.487$ & Buy \\
+$S_6$ & $2.874$ & Avoid \\
+$S_5$ & $3.760$ & Avoid \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Step 3: Majority voting for $k = 3$:}
+$$\{k = 3\} = \{S_2, S_3, S_7\}$$
+\begin{itemize}[leftmargin=1.5em]
+    \item Buy: $2$ votes ($S_2, S_7$)
+    \item Hold: $1$ vote ($S_3$)
+    \item Avoid: $0$ votes
+\end{itemize}
+$$\therefore \text{The new point is to be classified as } \textbf{Buy} \text{ for } k = 3.$$
+\end{example}
+
+\subsection{Bank Loan Approval via Manhattan Distance}
+
+\begin{example}{Bank Loan Approval Decision}{loan_knn}
+A bank utilizes KNN to decide whether to \textbf{Approve} or \textbf{Reject} a loan application based on two features:
+\begin{itemize}[leftmargin=1.5em]
+    \item Credit score (scaled by dividing by 100, such that $750 \implies 7.5$)
+    \item Annual Income (in \inr Lakhs)
+\end{itemize}
+
+\begin{center}
+\textbf{Loan Applicant Training Dataset}\\[0.3em]
+\begin{tabular}{cccc}
+\toprule
+\textbf{Applicant} & \textbf{Credit Score} & \textbf{Annual Income (\inr Lakhs)} & \textbf{Decision} \\
+\midrule
+$A_1$ & $7.5$ & $8.0$ & Approve \\
+$A_2$ & $6.8$ & $6.0$ & Approve \\
+$A_3$ & $6.0$ & $4.0$ & Reject \\
+$A_4$ & $5.5$ & $3.0$ & Reject \\
+$A_5$ & $7.2$ & $7.0$ & Approve \\
+$A_6$ & $5.8$ & $3.5$ & Reject \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Task:} Predict the decision for a new applicant with $\text{Credit Score} = 6.5$ and $\text{Annual Income} = 5.5\text{ Lakhs}$, i.e., $\vect{X} = (6.5, 5.5)$, using $k = 3$ and Manhattan distance.
+
+\tcblower
+\textbf{Solution:}
+
+\noindent\textbf{Step 1: Compute Manhattan distances from query point $\vect{X}(6.5, 5.5)$:}
+\begin{align*}
+\text{To } A_1(7.5, 8.0): & \quad d = |6.5 - 7.5| + |5.5 - 8.0| = 1.0 + 2.5 = 3.5 \\
+\text{To } A_2(6.8, 6.0): & \quad d = |6.5 - 6.8| + |5.5 - 6.0| = 0.3 + 0.5 = 0.8 \\
+\text{To } A_3(6.0, 4.0): & \quad d = |6.5 - 6.0| + |5.5 - 4.0| = 0.5 + 1.5 = 2.0 \\
+\text{To } A_4(5.5, 3.0): & \quad d = |6.5 - 5.5| + |5.5 - 3.0| = 1.0 + 2.5 = 3.5 \\
+\text{To } A_5(7.2, 7.0): & \quad d = |6.5 - 7.2| + |5.5 - 7.0| = 0.7 + 1.5 = 2.2 \\
+\text{To } A_6(5.8, 3.5): & \quad d = |6.5 - 5.8| + |5.5 - 3.5| = 0.7 + 2.0 = 2.7
+\end{align*}
+
+\noindent\textbf{Step 2: Sorted Manhattan distance ranking:}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Applicant} & \textbf{Distance} & \textbf{Decision} \\
+\midrule
+$A_2$ & $0.8$ & Approve \\
+$A_3$ & $2.0$ & Reject \\
+$A_5$ & $2.2$ & Approve \\
+$A_6$ & $2.7$ & Reject \\
+$A_4$ & $3.5$ & Reject \\
+$A_1$ & $3.5$ & Approve \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Step 3: Majority vote for $k = 3$:}
+$$\{k = 3\} = \{A_2, A_3, A_5\}$$
+\begin{itemize}[leftmargin=1.5em]
+    \item Approve: $2$ votes ($A_2, A_5$)
+    \item Reject: $1$ vote ($A_3$)
+\end{itemize}
+$$\therefore \text{The new applicant } \vect{X} = (6.5, 5.5) \text{ is to be concluded as } \textbf{Approve} \text{ when } k = 3.$$
+\end{example}
+
+\subsection{Real Estate House Price Prediction (KNN Regression)}
+
+\begin{example}{Real Estate Price Estimation (KNN Regression)}{real_estate_knn}
+A real estate agency uses KNN regression to estimate house prices based on:
+\begin{itemize}[leftmargin=1.5em]
+    \item Area (in hundreds of sq. ft., e.g., $1400\text{ sq. ft.} \implies 14$)
+    \item Age (in years)
+\end{itemize}
+
+\begin{center}
+\textbf{Real Estate Housing Dataset}\\[0.3em]
+\begin{tabular}{cccc}
+\toprule
+\textbf{House} & \textbf{Area (hundred sq. ft.)} & \textbf{Age (years)} & \textbf{Price (\inr Lakhs)} \\
+\midrule
+$H_1$ & $12$ & $5$ & $50$ \\
+$H_2$ & $15$ & $3$ & $65$ \\
+$H_3$ & $8$ & $10$ & $30$ \\
+$H_4$ & $20$ & $2$ & $90$ \\
+$H_5$ & $10$ & $8$ & $38$ \\
+$H_6$ & $18$ & $6$ & $75$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Task:} Predict the price of a new house with $\text{Area} = 14$ ($1400\text{ sq. ft.}$) and $\text{Age} = 4\text{ years}$, i.e., $\vect{X} = (14, 4)$, using $k = 3$ and Manhattan distance.
+
+\tcblower
+\textbf{Solution:}
+
+\noindent\textbf{Step 1: Compute Manhattan distances from query house $\vect{X}(14, 4)$:}
+\begin{align*}
+\text{To } H_1(12, 5): & \quad d = |14 - 12| + |4 - 5| = 2 + 1 = 3 \\
+\text{To } H_2(15, 3): & \quad d = |14 - 15| + |4 - 3| = 1 + 1 = 2 \\
+\text{To } H_3(8, 10): & \quad d = |14 - 8| + |4 - 10| = 6 + 6 = 12 \\
+\text{To } H_4(20, 2): & \quad d = |14 - 20| + |4 - 2| = 6 + 2 = 8 \\
+\text{To } H_5(10, 8): & \quad d = |14 - 10| + |4 - 8| = 4 + 4 = 8 \\
+\text{To } H_6(18, 6): & \quad d = |14 - 18| + |4 - 6| = 4 + 2 = 6
+\end{align*}
+
+\noindent\textbf{Step 2: Sorted Manhattan distance ranking:}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+\textbf{House} & \textbf{Distance} & \textbf{Price (\inr Lakhs)} \\
+\midrule
+$H_2$ & $2$ & $65$ \\
+$H_1$ & $3$ & $50$ \\
+$H_6$ & $6$ & $75$ \\
+$H_4$ & $8$ & $90$ \\
+$H_5$ & $8$ & $38$ \\
+$H_3$ & $12$ & $30$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Step 3: Average prices across $k = 3$ nearest neighbors:}
+$$\{k = 3\} = \{H_2, H_1, H_6\}$$
+$$\hat{y} = \frac{65 + 50 + 75}{3} = \frac{190}{3} \approx 63.33\text{ Lakhs}$$
+$$\therefore \text{The new point } \vect{X} = (14, 4) \text{ is predicted to have a price of } \textbf{\inr 63.33 Lakhs} \text{ for } k = 3.$$
+\end{example}
+
+\section{Parameter Selection: Small \texorpdfstring{$k$}{k} vs. Large \texorpdfstring{$k$}{k}}
+
+Selecting the hyperparameter $k$ balances local sensitivity against global regularization:
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of Small $k$ versus Large $k$ Characteristics}
+\vspace{0.2em}
+\begin{tabular}{lll}
+\toprule
+\textbf{Aspect} & \textbf{Small} $k$ & \textbf{Large} $k$ \\
+\midrule
+\textbf{Neighbourhood} & Local & Broad \\
+\addlinespace[0.4em]
+\textbf{Sensitivity to Noise} & High & Lower \\
+\addlinespace[0.4em]
+\textbf{Variance} & Higher & Lower \\
+\addlinespace[0.4em]
+\textbf{Bias} & Lower & Higher \\
+\addlinespace[0.4em]
+\textbf{Decision Boundary} & Irregular / complex & Smoother \\
+\addlinespace[0.4em]
+\textbf{Risk} & Overfitting & Underfitting \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{takeawaybox}[Guiding Principle for Choosing $k$]
+$$\textbf{Choose } k \textbf{ to balance bias and variance.}$$
+\end{takeawaybox}
