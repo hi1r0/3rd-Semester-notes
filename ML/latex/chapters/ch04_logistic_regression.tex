@@ -1,1 +1,279 @@
-% Placeholder for ch04_logistic_regression.tex
+\chapter{Logistic Regression}
+
+\section{Introduction and Core Motivation}
+
+Logistic regression is a fundamental supervised learning algorithm utilized for classification problems. Unlike regression models that predict a continuous numerical quantity, logistic regression models the conditional probability that a given observation belongs to a particular class.
+
+\subsection{Why Not Standard Linear Regression?}
+In ordinary linear regression, the relationship between features and the target is modeled as:
+\begin{equation}
+Y = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p + \varepsilon
+\end{equation}
+Under this linear formulation, the predicted value $\hat{Y}$ can take any real value across the entire unbounded interval:
+\begin{equation}
+\hat{Y} \in (-\infty, +\infty)
+\end{equation}
+However, probabilities are mathematically constrained to lie strictly within the unit interval:
+\begin{equation}
+P(Y = 1 \mid X) \in [0, 1]
+\end{equation}
+If ordinary linear regression were used for classification, predictions could yield nonsensical probabilities less than $0$ or greater than $1$. Consequently, a transformation is needed that ``squashes'' the unbounded linear output $(-\infty, +\infty)$ into the valid probability range $[0, 1]$. In logistic regression, this transformation is provided by the \textbf{sigmoid (logistic) function}.
+
+\section{The Sigmoid (Logistic) Function and Probability Modeling}
+
+Logistic regression first computes a linear combination of the input features:
+\begin{equation}
+Z = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p
+\end{equation}
+The real-valued score $Z$ is then passed through the sigmoid (logistic) activation function to yield the predicted probability of the positive class ($Y=1$):
+\begin{equation}
+P(Y=1) = \frac{1}{1 + e^{-Z}}
+\end{equation}
+
+\subsection{Algebraic Equivalence of the Sigmoid Function}
+Multiplying both the numerator and the denominator by $e^Z$ (since $\frac{e^Z}{e^Z} = 1$) provides the alternate standard representation:
+\begin{align}
+P(Y=1) &= \frac{1 \cdot e^Z}{(1 + e^{-Z}) \cdot e^Z} \\
+&= \frac{e^Z}{e^Z + e^{-Z} \cdot e^Z} \\
+&= \frac{e^Z}{e^Z + e^{Z - Z}} \\
+&= \frac{e^Z}{e^Z + e^0} \\
+&= \frac{e^Z}{e^Z + 1} = \frac{e^Z}{1 + e^Z}
+\end{align}
+Substituting the linear combination $Z = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p$ directly yields:
+\begin{equation}
+P(Y=1) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1 + e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}
+\end{equation}
+
+\subsection{Properties of the Sigmoid Curve and Decision Threshold}
+The sigmoid curve possesses distinctive geometric characteristics:
+\begin{itemize}
+    \item \textbf{S-Shaped Geometry:} The curve exhibits a smooth, monotonic S-shape.
+    \item \textbf{Asymptotic Bounds:} As $Z \to -\infty$, $P(Y=1) \to 0$. As $Z \to +\infty$, $P(Y=1) \to 1$.
+    \item \textbf{Symmetric Midpoint:} At $Z = 0$, $e^0 = 1$, yielding exactly $P(Y=1) = \frac{1}{1+1} = 0.5$.
+\end{itemize}
+
+To convert continuous probability estimates into discrete class labels, a \textbf{decision threshold} is established (conventionally set to $0.5$):
+\begin{equation}
+\hat{Y} = 
+\begin{cases}
+1, & \text{if } P(Y=1) \ge 0.5 \quad (Z \ge 0) \\
+0, & \text{if } P(Y=1) < 0.5 \quad (Z < 0)
+\end{cases}
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % Grid and axes
+    \draw[->, >=stealth, thick, darkgray] (-5.5, 0) -- (5.5, 0) node[right, font=\small] {$Z$};
+    \draw[->, >=stealth, thick, darkgray] (0, -0.2) -- (0, 1.25) node[above, font=\small] {$P(Y=1)$};
+    
+    % Asymptotes
+    \draw[dashed, gray!60] (-5.2, 1) -- (5.2, 1) node[right, font=\footnotesize, text=gray] {$P = 1.0$};
+    \draw[dashed, gray!60] (-5.2, 0.5) -- (5.2, 0.5) node[right, font=\footnotesize, text=gray] {Threshold $= 0.5$};
+    
+    % Sigmoid curve
+    \draw[navyblue, ultra thick, domain=-5:5, samples=100, smooth] 
+        plot (\x, {1 / (1 + exp(-\x))});
+    
+    % Inflection point
+    \filldraw[crimson] (0, 0.5) circle (2.2pt) node[above left, font=\footnotesize, text=crimson] {$(0,\, 0.5)$};
+    
+    % Region annotations
+    \node[font=\footnotesize, navyblue, align=center] at (3.2, 0.25) {Predict Class 1\\($P \ge 0.5$, $Z \ge 0$)};
+    \node[font=\footnotesize, crimson, align=center] at (-3.2, 0.75) {Predict Class 0\\($P < 0.5$, $Z < 0$)};
+    
+    % Axis ticks
+    \foreach \x in {-4, -2, 2, 4} {
+        \draw (\x, 0.05) -- (\x, -0.05) node[below, font=\scriptsize] {$\x$};
+    }
+    \draw (0.05, 1) -- (-0.05, 1) node[left, font=\scriptsize] {$1.0$};
+    \draw (0.05, 0.5) -- (-0.05, 0.5) node[left, font=\scriptsize] {$0.5$};
+    \draw (0.05, 0) -- (-0.05, 0) node[below left, font=\scriptsize] {$0$};
+\end{tikzpicture}
+\caption{The Sigmoid activation function squashing unbounded linear values $Z$ into valid class probabilities $[0, 1]$ with a decision boundary at $Z = 0$ ($P = 0.5$).}
+\end{figure}
+
+\section{Key Terms and Matrix Notation}
+
+\begin{definition}{Core Variables of Logistic Regression}{lr_terms}
+\begin{itemize}
+    \item \textbf{Independent Variables ($X$):} The set of input features or predictor variables $X_1, X_2, \dots, X_p$.
+    \item \textbf{Dependent Variable ($Y$):} The categorical target outcome, typically binary $Y \in \{0, 1\}$.
+    \item \textbf{Logistic Function (Sigmoid Function):} The nonlinear squashing function $\sigma(Z) = \frac{1}{1 + e^{-Z}}$ mapping real scores to $(0, 1)$.
+    \item \textbf{Coefficient ($\beta_j$):} The parameter estimated by the model for predictor $X_j$, indicating how strongly $X_j$ affects the dependent variable on the log-odds scale.
+    \item \textbf{Intercept ($\beta_0$):} The constant baseline term representing the log-odds when all independent variables equal zero ($X_1 = X_2 = \dots = X_p = 0$).
+\end{itemize}
+\end{definition}
+
+\subsection{Matrix Representation}
+In compact linear algebra notation, the dataset of $n$ observations and $p$ features is represented as an $n \times p$ feature matrix $X$:
+\begin{equation}
+X = \begin{bmatrix}
+x_{11} & x_{12} & \dots & x_{1p} \\
+x_{21} & x_{22} & \dots & x_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} & x_{n2} & \dots & x_{np}
+\end{bmatrix}
+\end{equation}
+where:
+\begin{itemize}
+    \item $n$ is the total number of observations (samples).
+    \item $p$ is the total number of features (predictors).
+\end{itemize}
+The observed class labels form a binary response vector $y \in \{0, 1\}^n$:
+\begin{equation}
+y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}, \quad y_i \in \{0, 1\}
+\end{equation}
+
+\section{Odds, Log-Odds (Logit), and Parameter Interpretation}
+
+\subsection{Definition of Odds}
+The \textbf{odds} of an event represent the ratio of the probability that the event occurs to the probability that the event does not occur:
+\begin{equation}
+\text{Odds} = \frac{P(Y = 1)}{1 - P(Y = 1)}
+\end{equation}
+
+\begin{example}{Calculating Probabilities and Odds}{odds_apples_oranges}
+Consider a basket containing $3$ apples and $5$ oranges (total items $= 3 + 5 = 8$).
+
+\begin{enumerate}
+    \item \textbf{Probability of selecting an Orange:}
+    \begin{equation}
+    P(\text{Orange}) = \frac{5}{8} = 0.625
+    \end{equation}
+
+    \item \textbf{Odds of selecting an Orange:}
+    \begin{equation}
+    \text{Odds}(\text{Orange}) = \frac{\text{Number of Oranges}}{\text{Number of Not Oranges (Apples)}} = \frac{5}{3} \approx 1.667
+    \end{equation}
+
+    \item \textbf{Odds of selecting an Apple:}
+    \begin{equation}
+    \text{Odds}(\text{Apple}) = \frac{\text{Number of Apples}}{\text{Number of Not Apples (Oranges)}} = \frac{3}{5} = 0.600
+    \end{equation}
+\end{enumerate}
+\end{example}
+
+\subsection{Log-Odds (Logit Function)}
+Taking the natural logarithm of the odds produces the \textbf{log-odds} (or \textbf{logit}):
+\begin{equation}
+\ln(\text{Odds}) = \ln\left(\frac{P(Y=1)}{1 - P(Y=1)}\right)
+\end{equation}
+Substituting $P(Y=1) = \frac{e^Z}{1 + e^Z}$ and $1 - P(Y=1) = \frac{1}{1 + e^Z}$:
+\begin{equation}
+\frac{P(Y=1)}{1 - P(Y=1)} = \frac{\frac{e^Z}{1+e^Z}}{\frac{1}{1+e^Z}} = e^Z
+\end{equation}
+Taking the natural logarithm:
+\begin{equation}
+\ln\left(\frac{P(Y=1)}{1 - P(Y=1)}\right) = \ln(e^Z) = Z = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p
+\end{equation}
+Thus, \textbf{logistic regression is a linear model for the log-odds}.
+
+\subsection{Interpreting Coefficients and Odds Ratios}
+For a one-unit increase in predictor $X_j$ (holding all other variables constant), the log-odds changes by $\beta_j$:
+\begin{equation}
+\Delta \ln(\text{Odds}) = \beta_j
+\end{equation}
+Exponentiating both sides yields the \textbf{Odds Ratio (OR)}:
+\begin{equation}
+\text{Odds Ratio} = e^{\beta_j}
+\end{equation}
+
+The directional impact of $\beta_j$ on the odds is summarized as follows:
+\begin{itemize}
+    \item $\beta_j > 0 \implies e^{\beta_j} > 1$: The odds of the event increase.
+    \item $\beta_j < 0 \implies e^{\beta_j} < 1$: The odds of the event decrease.
+    \item $\beta_j = 0 \implies e^{\beta_j} = 1$: Predictor $X_j$ has no effect on the odds.
+\end{itemize}
+
+\begin{example}{Odds Ratio Interpretation with $\beta_j = 0.7$}{coef_interp}
+Suppose the estimated coefficient for a predictor $X_j$ is $\beta_j = 0.7$.
+\begin{equation}
+\text{Odds Ratio} = e^{\beta_j} = e^{0.7} \approx 2.0137 \approx 2
+\end{equation}
+\textbf{Interpretation:} A one-unit increase in $X_j$ roughly doubles the odds of the outcome event occurring ($Y=1$).
+\end{example}
+
+\section{Model Training via Maximum Likelihood Estimation (MLE)}
+
+Logistic regression estimates its parameters $\beta_0, \beta_1, \dots, \beta_p$ using \textbf{Maximum Likelihood Estimation (MLE)}. 
+\begin{itemize}
+    \item \textbf{Objective of MLE:} Find the parameter vector $\beta$ that maximizes the joint likelihood of observing the given sample data.
+    \item \textbf{Lack of Closed-Form Solution:} Unlike ordinary least squares (OLS) regression where $\hat{\beta} = (X^T X)^{-1} X^T y$, there is \textbf{no closed-form analytical solution} for the MLE of logistic regression parameters.
+    \item \textbf{Numerical Optimization:} Parameter estimates are solved numerically using iterative optimization algorithms (e.g., Newton-Raphson, Iteratively Reweighted Least Squares, or Gradient Ascent).
+\end{itemize}
+
+\section{Assumptions of Logistic Regression}
+
+Valid inference and stable performance in logistic regression rely on six foundational assumptions:
+\begin{enumerate}
+    \item \textbf{Independent Observations:} Sample observations must be independent of one another (no repeated measures or auto-correlation).
+    \item \textbf{Binary Dependent Variable:} The response variable $Y$ is binary (for standard binomial logistic regression).
+    \item \textbf{Linearity in Log-Odds:} Independent variables exhibit a strictly linear relationship with the log-odds $\ln\left(\frac{P}{1-P}\right)$.
+    \item \textbf{Absence of Extreme Outliers:} The predictor space should not contain extreme leverage points or anomalous outliers.
+    \item \textbf{Adequately Large Sample Size:} Because MLE relies on large-sample asymptotic properties, sufficient sample size is required to prevent biased parameter estimates.
+    \item \textbf{Low Multicollinearity:} Predictor variables should exhibit little to no multicollinearity. High correlation among predictors inflates parameter standard errors.
+\end{enumerate}
+
+\section{Variants, Metrics, and Trade-Offs}
+
+\subsection{Types of Logistic Regression}
+Depending on the nature of the target variable, logistic regression is categorized into three types:
+\begin{itemize}
+    \item \textbf{Binomial Logistic Regression:} The target has exactly two classes (e.g., Yes / No, Default / Non-Default).
+    \item \textbf{Multinomial Logistic Regression:} The target has three or more unordered nominal classes (e.g., Cat, Dog, Sheep).
+    \item \textbf{Ordinal Logistic Regression:} The target has three or more ordered categories (e.g., Low, Medium, High).
+\end{itemize}
+
+\subsection{Model Evaluation Metrics}
+Model performance for logistic regression is assessed using standard classification metrics:
+\begin{itemize}
+    \item \textbf{Accuracy:} Ratio of correctly classified instances to total instances.
+    \item \textbf{Precision:} Ratio of true positives to all predicted positives ($\frac{\text{TP}}{\text{TP} + \text{FP}}$).
+    \item \textbf{Recall (Sensitivity):} Ratio of true positives to all actual positives ($\frac{\text{TP}}{\text{TP} + \text{FN}}$).
+    \item \textbf{F1-Score:} Harmonic mean of precision and recall ($2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$).
+    \item \textbf{AUC-ROC:} Area Under the Receiver Operating Characteristic curve, measuring discrimination across all possible classification thresholds.
+\end{itemize}
+
+\subsection{Advantages and Disadvantages}
+
+\begin{center}
+\begin{tabular}{p{0.46\textwidth} p{0.48\textwidth}}
+\toprule
+\textbf{Advantages (Pros)} & \textbf{Disadvantages (Cons)} \\
+\midrule
+\begin{itemize}[leftmargin=*, nosep]
+    \item Outputs well-calibrated probabilities, not just hard class labels.
+    \item Highly interpretable parameters via odds ratios ($e^{\beta_j}$).
+    \item Directly extends to multiclass classification problems.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*, nosep]
+    \item Interaction terms between features must be constructed manually.
+    \item Interpretations are multiplicative on odds, not linear on probabilities.
+    \item Complete separation prevents convergence (coefficients diverge to $\pm\infty$).
+    \item Requires regularization (e.g., L1/L2 penalties) or informative priors to handle separation.
+\end{itemize} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{End-to-End Workflow and Generalized Linear Model (GLM) Classification}
+
+\subsection{Five-Step Implementation Pipeline}
+\begin{enumerate}
+    \item \textbf{Prepare Data:} Encode categorical predictors (e.g., one-hot or dummy encoding) and scale continuous features if regularization is utilized.
+    \item \textbf{Fit Model:} Estimate parameter vector $\beta$ using Maximum Likelihood Estimation (MLE) via numerical optimization.
+    \item \textbf{Interpret Coefficients:} Exponentiate parameters to interpret predictor effects as odds ratios ($e^{\beta_j}$).
+    \item \textbf{Predict and Threshold:} Compute predicted probabilities $P(Y=1) = \sigma(X\beta)$ and assign class labels based on a selected threshold (typically $0.5$).
+    \item \textbf{Evaluate Model:} Measure performance using Accuracy, Precision, Recall, F1-Score, and AUC-ROC.
+\end{enumerate}
+
+\subsection{Membership in Generalized Linear Models (GLM)}
+Logistic regression is a member of the broader \textbf{Generalized Linear Models (GLM)} family. In GLM theory, a model is defined by three components:
+\begin{enumerate}
+    \item \textbf{Random Component:} The dependent variable $Y$ follows a Bernoulli (or Binomial) distribution: $Y \sim \text{Bernoulli}(p)$.
+    \item \textbf{Systematic Component:} A linear combination of predictors $Z = \beta_0 + \sum_{j=1}^p \beta_j X_j$.
+    \item \textbf{Link Function:} The \textbf{logit link function} $g(p) = \ln\left(\frac{p}{1-p}\right) = Z$, which maps the expected probability parameter from $[0, 1]$ to the unbounded real line $(-\infty, +\infty)$.
+\end{enumerate}
