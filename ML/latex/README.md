@@ -3,7 +3,7 @@
 **Course:** Machine Learning in Quantitative Finance  
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
-**Document:** `main.pdf` (59 pages, publication-grade compiled book)  
+**Document:** `main.pdf` (62 pages, publication-grade compiled book)  
 **Author / Scribe:** N Rohit Vedhanandh (Reg. No.: 25MSQUFPY0002)  
 
 ---
@@ -12,7 +12,7 @@
 
 This repository contains the publication-grade, fully transcribed and verified LaTeX lecture notes for **Machine Learning in Quantitative Finance**, converted directly and faithfully from handwritten lecture scans (`DocScanner 6 Oct 2026 19-28.pdf`).
 
-The book adheres strictly to classroom lecture contents ("no extra, no little"), formatted with modern professional typography, custom `tcolorbox` theorem environments, standalone TikZ architectural diagrams and decision trees, analytical coordinate plots, and a consolidated multi-chapter formula reference sheet.
+The book adheres strictly to classroom lecture contents ("no extra, no little"), formatted with modern professional typography, custom `tcolorbox` theorem environments, standalone TikZ architectural diagrams and decision trees with sequential figure numbering (`Figures 1.1–1.2`, `2.1`, `4.1`, `5.1–5.4`, `6.1–6.3`), generous equation spacing, and a consolidated multi-chapter formula reference sheet.
 
 ---
 
@@ -23,20 +23,20 @@ ML/latex/
 ├── figures/
 │   └── pondicherry_university_logo.png     # Official institutional crest
 ├── preamble/
-│   ├── packages.tex                        # Font, math, TikZ, and geometry setup
+│   ├── packages.tex                        # Font, math, TikZ, caption, and geometry setup
 │   ├── environments.tex                    # Custom tcolorboxes (definition, example, formulabox, etc.)
 │   ├── macros.tex                          # Mathematical operators and notation shortcuts
 │   └── titlepage.tex                       # Formal university front cover page
 ├── chapters/
-│   ├── ch01_ml_foundations_and_preprocessing.tex  # Chapter 1 (pp. 44–51 of scans)
-│   ├── ch02_knn.tex                               # Chapter 2 (pp. 1–10 of scans)
+│   ├── ch01_ml_foundations_and_preprocessing.tex  # Chapter 1 (pp. 44–51 of scans; Figs 1.1–1.2)
+│   ├── ch02_knn.tex                               # Chapter 2 (pp. 1–10 of scans; Fig 2.1)
 │   ├── ch03_naive_bayes.tex                       # Chapter 3 (pp. 52–56 of scans)
-│   ├── ch04_logistic_regression.tex               # Chapter 4 (pp. 56–61 of scans)
-│   ├── ch05_decision_trees.tex                    # Chapter 5 (pp. 11–30 of scans)
-│   ├── ch06_svm.tex                               # Chapter 6 (pp. 31–43 of scans)
+│   ├── ch04_logistic_regression.tex               # Chapter 4 (pp. 56–61 of scans; Fig 4.1)
+│   ├── ch05_decision_trees.tex                    # Chapter 5 (pp. 11–30 of scans; Figs 5.1–5.4)
+│   ├── ch06_svm.tex                               # Chapter 6 (pp. 31–43 of scans; Figs 6.1–6.3)
 │   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet
 ├── main.tex                                # Root master document
-└── main.pdf                                # 59-page compiled PDF book
+└── main.pdf                                # 62-page compiled PDF book
 ```
 
 ---

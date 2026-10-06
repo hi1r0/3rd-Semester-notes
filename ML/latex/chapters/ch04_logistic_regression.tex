@@ -63,37 +63,47 @@ To convert continuous probability estimates into discrete class labels, a \textb
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.0]
-    % Grid and axes
-    \draw[->, >=stealth, thick, darkgray] (-5.5, 0) -- (5.5, 0) node[right, font=\small] {$Z$};
-    \draw[->, >=stealth, thick, darkgray] (0, -0.2) -- (0, 1.25) node[above, font=\small] {$P(Y=1)$};
+\begin{tikzpicture}[x=1.15cm, y=4.5cm]
+    % Background subtle grid/regions
+    \fill[darkteal!4] (0, 0.5) rectangle (5.2, 1.0);
+    \fill[crimson!4] (-5.2, 0) rectangle (0, 0.5);
+
+    % Axes
+    \draw[->, >=stealth, thick, darkgray] (-5.5, 0) -- (5.6, 0) node[right, font=\small] {$Z$};
+    \draw[->, >=stealth, thick, darkgray] (0, -0.08) -- (0, 1.18) node[above, font=\small] {$P(Y=1)$};
     
-    % Asymptotes
-    \draw[dashed, gray!60] (-5.2, 1) -- (5.2, 1) node[right, font=\footnotesize, text=gray] {$P = 1.0$};
-    \draw[dashed, gray!60] (-5.2, 0.5) -- (5.2, 0.5) node[right, font=\footnotesize, text=gray] {Threshold $= 0.5$};
+    % Asymptotes and Threshold lines
+    \draw[dashed, gray!60, thick] (-5.2, 1.0) -- (5.2, 1.0) node[right, font=\footnotesize, text=gray!80!black] {$P = 1.0$};
+    \draw[dashed, navyblue!60, thick] (-5.2, 0.5) -- (5.2, 0.5) node[right, font=\footnotesize, text=navyblue!80!black] {Threshold $= 0.5$};
     
     % Sigmoid curve
-    \draw[navyblue, ultra thick, domain=-5:5, samples=100, smooth] 
+    \draw[navyblue, ultra thick, domain=-5.2:5.2, samples=120, smooth] 
         plot (\x, {1 / (1 + exp(-\x))});
     
-    % Inflection point
-    \filldraw[crimson] (0, 0.5) circle (2.2pt) node[above left, font=\footnotesize, text=crimson] {$(0,\, 0.5)$};
+    % Inflection / Decision boundary point
+    \filldraw[crimson] (0, 0.5) circle (2.5pt);
+    \node[above=5pt, xshift=14pt, font=\footnotesize\bfseries\sffamily, text=crimson, fill=white, inner sep=1.5pt] at (0, 0.5) {$(0,\, 0.5)$};
     
-    % Region annotations
-    \node[font=\footnotesize, navyblue, align=center] at (3.2, 0.25) {Predict Class 1\\($P \ge 0.5$, $Z \ge 0$)};
-    \node[font=\footnotesize, crimson, align=center] at (-3.2, 0.75) {Predict Class 0\\($P < 0.5$, $Z < 0$)};
+    % Region Annotation Badges (ample vertical and horizontal space)
+    \node[draw=darkteal, fill=white, line width=0.8pt, rounded corners=3pt, font=\footnotesize\bfseries\sffamily, text=darkteal, align=center, inner sep=4pt] 
+        at (2.8, 0.80) {Predict Class 1 ($\hat{Y} = 1$)\\\normalfont\scriptsize $P(Y=1) \ge 0.5 \iff Z \ge 0$};
+        
+    \node[draw=crimson, fill=white, line width=0.8pt, rounded corners=3pt, font=\footnotesize\bfseries\sffamily, text=crimson, align=center, inner sep=4pt] 
+        at (-2.8, 0.22) {Predict Class 0 ($\hat{Y} = 0$)\\\normalfont\scriptsize $P(Y=1) < 0.5 \iff Z < 0$};
     
-    % Axis ticks
+    % Axis ticks and values
     \foreach \x in {-4, -2, 2, 4} {
-        \draw (\x, 0.05) -- (\x, -0.05) node[below, font=\scriptsize] {$\x$};
+        \draw (\x, 0.02) -- (\x, -0.02) node[below=2pt, font=\scriptsize] {$\x$};
     }
-    \draw (0.05, 1) -- (-0.05, 1) node[left, font=\scriptsize] {$1.0$};
-    \draw (0.05, 0.5) -- (-0.05, 0.5) node[left, font=\scriptsize] {$0.5$};
-    \draw (0.05, 0) -- (-0.05, 0) node[below left, font=\scriptsize] {$0$};
+    \draw (0.08, 1.0) -- (-0.08, 1.0) node[left=4pt, font=\scriptsize] {$1.0$};
+    \draw (0.08, 0.5) -- (-0.08, 0.5) node[left=4pt, font=\scriptsize] {$0.5$};
+    \draw (0.08, 0) -- (-0.08, 0) node[below left=3pt, font=\scriptsize] {$0$};
 \end{tikzpicture}
 \caption{The Sigmoid activation function squashing unbounded linear values $Z$ into valid class probabilities $[0, 1]$ with a decision boundary at $Z = 0$ ($P = 0.5$).}
+\label{fig:sigmoid_activation}
 \end{figure}
 
+\newpage
 \section{Key Terms and Matrix Notation}
 
 \begin{definition}{Core Variables of Logistic Regression}{lr_terms}

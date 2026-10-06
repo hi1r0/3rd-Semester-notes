@@ -69,7 +69,7 @@ A \textbf{Decision Tree} is a supervised machine learning model that predicts a 
 \subsection{Standard Tree Induction Algorithms}
 Different decision tree induction algorithms utilize distinct impurity metrics and optimization objectives:
 
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lll}
 \toprule
 \textbf{Algorithm} & \textbf{Impurity Measure} & \textbf{Split Criterion} \\
@@ -128,7 +128,7 @@ For a binary classification setting ($c = 2$):
 
 \subsection{Comparison: Gini Impurity vs. Entropy}
 
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lll}
 \toprule
 \textbf{Property} & \textbf{Gini Impurity} & \textbf{Entropy} \\
@@ -146,7 +146,7 @@ For a binary classification setting ($c = 2$):
 
 \subsection{Advantages and Disadvantages of Decision Trees}
 
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{p{0.46\textwidth} p{0.48\textwidth}}
 \toprule
 \textbf{Advantages} & \textbf{Disadvantages} \\
@@ -174,7 +174,7 @@ For a binary classification setting ($c = 2$):
 \begin{example}{ID3 Induction on Play Tennis Dataset}{play_tennis}
 Construct an optimal decision tree using the ID3 algorithm (Entropy and Information Gain) on the classic 15-sample Play Tennis dataset.
 
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{clllll}
 \toprule
 \textbf{Day} & \textbf{Outlook} & \textbf{Temp} & \textbf{Humidity} & \textbf{Wind} & \textbf{Tennis?} \\
@@ -211,7 +211,7 @@ H(S) = -0.6 \log_2(0.6) - 0.4 \log_2(0.4) = 0.97095 \approx 0.9709
 We calculate the weighted entropy $H(\text{children}) = \sum \frac{n_i}{n} H_i$ for each candidate predictor:
 
 \paragraph{1. Outlook ($n = 15$):}
-\begin{center}\small
+\begin{center}\small\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -226,7 +226,7 @@ Rain (R)     & 5 & 3 & 2 & $0.9709$ & $\frac{5}{15} \times 0.9709 = 0.3236$ \\
 \end{center}
 
 \paragraph{2. Temperature ($n = 15$):}
-\begin{center}\small
+\begin{center}\small\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -241,7 +241,7 @@ Cool (C) & 4 & 3 & 1 & $0.8112$ & $\frac{4}{15} \times 0.8112 = 0.2163$ \\
 \end{center}
 
 \paragraph{3. Humidity ($n = 15$):}
-\begin{center}\small
+\begin{center}\small\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -255,7 +255,7 @@ Normal (N) & 7 & 6 & 1 & $0.5916$ & $\frac{7}{15} \times 0.5916 = 0.2761$ \\
 \end{center}
 
 \paragraph{4. Wind ($n = 15$):}
-\begin{center}\small
+\begin{center}\small\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Value} & \textbf{Count ($n_i$)} & \textbf{Yes ($Y$)} & \textbf{No ($N$)} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -269,7 +269,7 @@ Strong (S) & 6 & 3 & 3 & $1.0000$ & $\frac{6}{15} \times 1.0000 = 0.4000$ \\
 \end{center}
 
 \subsubsection{Root Information Gain Comparison}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lll}
 \toprule
 \textbf{Attribute} & \textbf{Information Gain Computation} & \textbf{Gain Value} \\
@@ -289,7 +289,7 @@ Therefore, \textbf{Outlook} is selected as the \textbf{Root Node}.
 
 \subsubsection{Partitioning the Rain Branch (\texorpdfstring{$n = 5$}{n = 5})}
 The Rain subset contains 5 observations (Days 4, 5, 6, 10, 14) with $3$ Yes and $2$ No ($H(S_{\text{Rain}}) = 0.9709$):
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
@@ -312,12 +312,12 @@ Strong & 2 & 0 & 2 & $0$ & $\frac{2}{5} \times 0 = 0$ \\
 \end{tabular}
 \end{center}
 
-Information Gain under Rain:
-\begin{itemize}
-    \item $IG(\text{Temp}) = 0.9709 - 0.9509 = 0.0200$
-    \item $IG(\text{Humidity}) = 0.9709 - 0.95092 = 0.01998$
-    \item $IG(\text{Wind}) = 0.9709 - 0 = \mathbf{0.9709}$
-\end{itemize}
+\textbf{Information Gain under Rain:}
+\begin{align*}
+    IG(\text{Temperature}) &= 0.9709 - 0.9509 = 0.0200 \\[4pt]
+    IG(\text{Humidity}) &= 0.9709 - 0.95092 = 0.01998 \\[4pt]
+    IG(\text{Wind}) &= 0.9709 - 0.0000 = \mathbf{0.9709}
+\end{align*}
 Ranking: $\text{Wind} > \text{Temp} > \text{Humidity}$.
 Under Rain, we split on \textbf{Wind}:
 \begin{itemize}
@@ -327,7 +327,7 @@ Under Rain, we split on \textbf{Wind}:
 
 \subsubsection{Partitioning the Sunny Branch (\texorpdfstring{$n = 6$}{n = 6})}
 The Sunny subset contains 6 observations (Days 1, 2, 8, 9, 11, 15) with $2$ Yes and $4$ No ($H(S_{\text{Sunny}}) = 0.9182$):
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
@@ -351,12 +351,12 @@ Strong & 2 & 1 & 1 & $1.0000$ & $\frac{2}{6} \times 1.0000 = 0.3333$ \\
 \end{tabular}
 \end{center}
 
-Information Gain under Sunny:
-\begin{itemize}
-    \item $IG(\text{Temp}) = 0.9182 - 0.3333 = 0.5849$
-    \item $IG(\text{Humidity}) = 0.9182 - 0 = \mathbf{0.9182}$
-    \item $IG(\text{Wind}) = 0.9182 - 0.3333 = 0.5849$
-\end{itemize}
+\textbf{Information Gain under Sunny:}
+\begin{align*}
+    IG(\text{Temperature}) &= 0.9182 - 0.3333 = 0.5849 \\[4pt]
+    IG(\text{Humidity}) &= 0.9182 - 0.0000 = \mathbf{0.9182} \\[4pt]
+    IG(\text{Wind}) &= 0.9182 - 0.3333 = 0.5849
+\end{align*}
 Ranking: $\text{Humidity} > \text{Temp} = \text{Wind}$.
 Under Sunny, we split on \textbf{Humidity}:
 \begin{itemize}
@@ -413,7 +413,7 @@ Under Sunny, we split on \textbf{Humidity}:
             edge from parent node[edge_label] {Rain}
         };
 \end{tikzpicture}
-\par\vspace{2mm}\small\textbf{Decision Tree Structure: Play Tennis Classification}
+\captionof{figure}{Final Decision Tree Structure for Play Tennis Classification.}\label{fig:play_tennis_tree}
 \end{center}
 \end{example}
 
@@ -422,7 +422,7 @@ Under Sunny, we split on \textbf{Humidity}:
 \begin{example}{Decision Tree Induction for Loan Approval}{loan_approval}
 Given a dataset of 15 loan applicants across features Location, Income, Credit Score, and Employment, build the optimal decision tree using Entropy and Information Gain.
 
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{clllll}
 \toprule
 \textbf{App} & \textbf{Location} & \textbf{Income} & \textbf{Credit Score} & \textbf{Employment} & \textbf{Approved?} \\
@@ -458,7 +458,7 @@ H_{\text{Approved}} = -\left(\frac{9}{15}\right)\log_2\left(\frac{9}{15}\right) 
 \subsubsection{Root Attribute Evaluation}
 
 \paragraph{1. Location ($n = 15$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Location} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -473,7 +473,7 @@ Rural    & 5 & 3 & 2 & $0.9709$ & $\frac{5}{15} \times 0.9709 = 0.32363$ \\
 \end{center}
 
 \paragraph{2. Income ($n = 15$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Income} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -488,7 +488,7 @@ Low    & 4 & 3 & 1 & $0.8112$ & $\frac{4}{15} \times 0.8112 = 0.21632$ \\
 \end{center}
 
 \paragraph{3. Credit Score ($n = 15$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Credit Score} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -502,7 +502,7 @@ Poor & 8 & 3 & 5 & $0.9544$ & $\frac{8}{15} \times 0.9544 = 0.50901$ \\
 \end{center}
 
 \paragraph{4. Employment ($n = 15$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Employment} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -516,7 +516,7 @@ Part-time & 9 & 6 & 3 & $0.9182$ & $\frac{9}{15} \times 0.9182 = 0.5509$ \\
 \end{center}
 
 \subsubsection{Root Information Gain Comparison}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lll}
 \toprule
 \textbf{Root Attribute} & \textbf{Information Gain} & \textbf{Gain Value} \\
@@ -536,7 +536,7 @@ Thus, \textbf{Location} is selected as the \textbf{Root Node}.
 
 \subsubsection{Partitioning the Urban Branch (\texorpdfstring{$n = 6$}{n = 6})}
 The Urban subset contains 6 observations (Apps 1, 2, 8, 9, 11, 15) with $2$ Yes and $4$ No ($H(S_{\text{Urban}}) = 0.9182$):
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
@@ -560,12 +560,12 @@ Part-time & 4 & 1 & 3 & $0.8112$ & $\frac{4}{6} \times 0.8112 = 0.5408$ \\
 \end{tabular}
 \end{center}
 
-Information Gain under Urban:
-\begin{itemize}
-    \item $IG(\text{Income}) = 0.9182 - 0.3333 = 0.5849$
-    \item $IG(\text{Credit Score}) = 0.9182 - 0 = \mathbf{0.9182}$
-    \item $IG(\text{Employment}) = 0.9182 - 0.8741 = 0.0441$
-\end{itemize}
+\textbf{Information Gain under Urban:}
+\begin{align*}
+    IG(\text{Income}) &= 0.9182 - 0.3333 = 0.5849 \\[4pt]
+    IG(\text{Credit Score}) &= 0.9182 - 0.0000 = \mathbf{0.9182} \\[4pt]
+    IG(\text{Employment}) &= 0.9182 - 0.8741 = 0.0441
+\end{align*}
 Ranking: $\text{Credit Score} > \text{Income} > \text{Employment}$.
 Under Urban, we split on \textbf{Credit Score}:
 \begin{itemize}
@@ -575,7 +575,7 @@ Under Urban, we split on \textbf{Credit Score}:
 
 \subsubsection{Partitioning the Rural Branch (\texorpdfstring{$n = 5$}{n = 5})}
 The Rural subset contains 5 observations (Apps 4, 5, 6, 10, 14) with $3$ Yes and $2$ No ($H(S_{\text{Rural}}) = 0.9709$):
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
@@ -598,12 +598,12 @@ Part-time & 3 & 3 & 0 & $0$ & $\frac{3}{5} \times 0 = 0$ \\
 \end{tabular}
 \end{center}
 
-Information Gain under Rural:
-\begin{itemize}
-    \item $IG(\text{Income}) = 0.9709 - 0.95092 = 0.01998$
-    \item $IG(\text{Credit Score}) = 0.9709 - 0.93394 = 0.03696$
-    \item $IG(\text{Employment}) = 0.9709 - 0 = \mathbf{0.9709}$
-\end{itemize}
+\textbf{Information Gain under Rural:}
+\begin{align*}
+    IG(\text{Income}) &= 0.9709 - 0.95092 = 0.01998 \\[4pt]
+    IG(\text{Credit Score}) &= 0.9709 - 0.93394 = 0.03696 \\[4pt]
+    IG(\text{Employment}) &= 0.9709 - 0.0000 = \mathbf{0.9709}
+\end{align*}
 Ranking: $\text{Employment} > \text{Credit Score} > \text{Income}$.
 Under Rural, we split on \textbf{Employment}:
 \begin{itemize}
@@ -660,7 +660,7 @@ Under Rural, we split on \textbf{Employment}:
             edge from parent node[edge_label] {Rural}
         };
 \end{tikzpicture}
-\par\vspace{2mm}\small\textbf{Decision Tree Structure: Loan Approval Classification}
+\captionof{figure}{Final Decision Tree Structure for Credit Loan Approval.}\label{fig:loan_approval_tree}
 \end{center}
 \end{example}
 
@@ -669,7 +669,7 @@ Under Rural, we split on \textbf{Employment}:
 \begin{example}{Decision Tree Induction for Candidate Job Offers}{job_offers}
 A human resources department assesses 14 candidates across Experience, Salary Requirement, Certification Status, and Interview Rating to predict whether a Job Offer is extended.
 
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{clllll}
 \toprule
 \textbf{Candidate} & \textbf{Experience} & \textbf{Salary} & \textbf{Certified} & \textbf{Rating} & \textbf{Job Offer} \\
@@ -704,7 +704,7 @@ H_S = -\left(\frac{9}{14}\right)\log_2\left(\frac{9}{14}\right) - \left(\frac{5}
 \subsubsection{Root Attribute Evaluation}
 
 \paragraph{1. Experience ($n = 14$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Experience} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -719,7 +719,7 @@ Senior (S) & 5 & 3 & 2 & $0.9709$ & $\frac{5}{14} \times 0.9709 = 0.34675$ \\
 \end{center}
 
 \paragraph{2. Salary ($n = 14$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Salary} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -734,7 +734,7 @@ Low (L)    & 4 & 3 & 1 & $0.8112$ & $\frac{4}{14} \times 0.8112 = 0.2318$ \\
 \end{center}
 
 \paragraph{3. Certified ($n = 14$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Certified} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -748,7 +748,7 @@ No (N)  & 7 & 3 & 4 & $0.9852$ & $\frac{7}{14} \times 0.9852 = 0.4926$ \\
 \end{center}
 
 \paragraph{4. Rating ($n = 14$):}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Rating} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy ($H_i$)} & \textbf{Weighted Entropy} \\
@@ -762,7 +762,7 @@ Excellent (E) & 6 & 3 & 3 & $1.0000$ & $\frac{6}{14} \times 1 = 0.4286$ \\
 \end{center}
 
 \subsubsection{Root Information Gain Comparison}
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lll}
 \toprule
 \textbf{Root Attribute} & \textbf{Information Gain} & \textbf{Gain Value} \\
@@ -782,7 +782,7 @@ Thus, \textbf{Experience} is chosen as the \textbf{Root Node}.
 
 \subsubsection{Partitioning the Junior Branch (\texorpdfstring{$n = 5$}{n = 5})}
 The Junior subset contains 5 observations (Candidates 1, 2, 8, 9, 11) with $2$ Yes and $3$ No ($H(S_{\text{Junior}}) = 0.9709$):
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
@@ -806,12 +806,12 @@ Excellent & 2 & 1 & 1 & $1.0000$ & $\frac{2}{5} \times 1 = 0.4000$ \\
 \end{tabular}
 \end{center}
 
-Information Gain under Junior:
-\begin{itemize}
-    \item $IG(\text{Certified}) = 0.9709 - 0 = \mathbf{0.9709}$
-    \item $IG(\text{Salary}) = 0.9709 - 0.4000 = 0.5709$
-    \item $IG(\text{Rating}) = 0.9709 - 0.95092 = 0.01998$
-\end{itemize}
+\textbf{Information Gain under Junior:}
+\begin{align*}
+    IG(\text{Certified}) &= 0.9709 - 0.0000 = \mathbf{0.9709} \\[4pt]
+    IG(\text{Salary}) &= 0.9709 - 0.4000 = 0.5709 \\[4pt]
+    IG(\text{Rating}) &= 0.9709 - 0.95092 = 0.01998
+\end{align*}
 Ranking: $\text{Certified} > \text{Salary} > \text{Rating}$.
 Under Junior, we split on \textbf{Certified}:
 \begin{itemize}
@@ -821,7 +821,7 @@ Under Junior, we split on \textbf{Certified}:
 
 \subsubsection{Partitioning the Senior Branch (\texorpdfstring{$n = 5$}{n = 5})}
 The Senior subset contains 5 observations (Candidates 4, 5, 6, 10, 14) with $3$ Yes and $2$ No ($H(S_{\text{Senior}}) = 0.9709$):
-\begin{center}
+\begin{center}\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Attribute \& Value} & \textbf{Count} & \textbf{Yes} & \textbf{No} & \textbf{Entropy} & \textbf{Weighted Entropy} \\
@@ -844,12 +844,12 @@ Excellent & 2 & 0 & 2 & $0$ & $\frac{2}{5} \times 0 = 0$ \\
 \end{tabular}
 \end{center}
 
-Information Gain under Senior:
-\begin{itemize}
-    \item $IG(\text{Certified}) = 0.9709 - 0.95092 = 0.01998$
-    \item $IG(\text{Salary}) = 0.9709 - 0.95092 = 0.01998$
-    \item $IG(\text{Rating}) = 0.9709 - 0 = \mathbf{0.9709}$
-\end{itemize}
+\textbf{Information Gain under Senior:}
+\begin{align*}
+    IG(\text{Certified}) &= 0.9709 - 0.95092 = 0.01998 \\[4pt]
+    IG(\text{Salary}) &= 0.9709 - 0.95092 = 0.01998 \\[4pt]
+    IG(\text{Rating}) &= 0.9709 - 0.0000 = \mathbf{0.9709}
+\end{align*}
 Ranking: $\text{Rating} > \text{Certified} = \text{Salary}$.
 Under Senior, we split on \textbf{Rating}:
 \begin{itemize}
@@ -906,6 +906,6 @@ Under Senior, we split on \textbf{Rating}:
             edge from parent node[edge_label] {Senior}
         };
 \end{tikzpicture}
-\par\vspace{2mm}\small\textbf{Decision Tree Structure: Candidate Job Offer Classification}
+\captionof{figure}{Final Decision Tree Structure for Candidate Job Offer Acceptance.}\label{fig:job_offer_tree}
 \end{center}
 \end{example}

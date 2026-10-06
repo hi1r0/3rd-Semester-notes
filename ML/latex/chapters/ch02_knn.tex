@@ -18,7 +18,8 @@
 
 The operational execution pipeline of KNN proceeds through four sequential stages:
 
-\begin{center}
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[
     node distance=1.0cm,
     stage/.style={
@@ -58,7 +59,8 @@ The operational execution pipeline of KNN proceeds through four sequential stage
 \draw[conn] (calc) -- (find);
 \draw[conn] (find) -- (pred);
 \end{tikzpicture}
-\end{center}
+\caption{Sequential Execution Pipeline of the $k$-Nearest Neighbors Algorithm.}\label{fig:knn_workflow}
+\end{figure}
 
 \section{Distance Metrics}
 

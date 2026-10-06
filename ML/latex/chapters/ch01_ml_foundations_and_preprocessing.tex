@@ -69,43 +69,43 @@ Categorical & Binary & Exactly two distinct categories & Loan Default: Yes / No 
 
 The standard end-to-end data preparation workflow transforms raw financial inputs into model-ready datasets:
 
-\begin{center}
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[
-    node distance=0.8cm,
     stage/.style={
         draw=navyblue,
-        thick,
-        fill=lightgraybg,
+        line width=1.1pt,
+        fill=navyblue!5,
         font=\sffamily\bfseries\small,
         text=navyblue,
-        rounded corners=2pt,
-        minimum width=2.4cm,
-        minimum height=1.0cm,
+        rounded corners=3pt,
+        text width=2.4cm,
+        minimum height=1.1cm,
         align=center
     },
     finalstage/.style={
         draw=darkteal,
-        line width=1.2pt,
-        fill=white,
+        line width=1.3pt,
+        fill=darkteal!8,
         font=\sffamily\bfseries\small,
-        text=darkteal,
-        rounded corners=2pt,
-        minimum width=3.0cm,
-        minimum height=1.0cm,
+        text=darkteal!90!black,
+        rounded corners=3pt,
+        text width=2.8cm,
+        minimum height=1.1cm,
         align=center
     },
     conn/.style={
         draw=navyblue,
-        -{Stealth[length=2.5mm]},
+        -{Stealth[length=2.8mm, width=2.0mm]},
         line width=1.2pt
     }
 ]
-\node[stage] (raw) {Raw Data};
-\node[stage, right=0.8cm of raw] (clean) {Cleaning};
-\node[stage, right=0.8cm of clean] (trans) {Transformation};
-\node[stage, right=0.8cm of trans] (norm) {Normalization /\\Scaling};
-\node[stage, below=1.2cm of norm] (enc) {Encoding\\Categorical};
-\node[finalstage, left=1.2cm of enc] (ready) {Model-Ready\\Data};
+\node[stage] (raw) at (0, 0) {Raw Data};
+\node[stage] (clean) at (3.3, 0) {Cleaning};
+\node[stage] (trans) at (6.6, 0) {Transformation};
+\node[stage] (norm) at (9.9, 0) {Normalization /\\Scaling};
+\node[stage] (enc) at (9.9, -2.0) {Encoding\\Categorical};
+\node[finalstage] (ready) at (6.6, -2.0) {Model-Ready\\Data};
 
 \draw[conn] (raw) -- (clean);
 \draw[conn] (clean) -- (trans);
@@ -113,7 +113,9 @@ The standard end-to-end data preparation workflow transforms raw financial input
 \draw[conn] (norm) -- (enc);
 \draw[conn] (enc) -- (ready);
 \end{tikzpicture}
-\end{center}
+\caption{End-to-End Data Preprocessing Pipeline from Raw Inputs to Model-Ready Data.}
+\label{fig:preprocessing_pipeline}
+\end{figure}
 
 \begin{itemize}[leftmargin=1.5em]
     \item \textbf{Cleaning}: Removes duplicate records, corrects erroneous entries, and handles missing observations.
@@ -244,51 +246,66 @@ Interpolation & Produces smooth estimates capturing trends & Unsuitable for non-
 
 \subsection{Decision Framework for Selecting Imputation Methods}
 
-\begin{center}
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[
-    node distance=1.0cm,
     decision/.style={
         draw=navyblue,
-        thick,
-        fill=lightgraybg,
+        line width=1.2pt,
+        fill=navyblue!6,
         font=\sffamily\bfseries\small,
         text=navyblue,
-        rounded corners=2pt,
+        rounded corners=3pt,
         align=center,
-        inner sep=6pt
+        inner sep=6pt,
+        text width=4.2cm,
+        minimum height=1.0cm
     },
     action/.style={
         draw=darkteal,
-        thick,
-        fill=white,
+        line width=1.2pt,
+        fill=darkteal!6,
         font=\sffamily\small,
-        text=darkteal,
-        rounded corners=2pt,
+        text=darkteal!90!black,
+        rounded corners=3pt,
         align=center,
-        inner sep=6pt
+        inner sep=6pt,
+        minimum height=1.0cm
     },
     conn/.style={
         draw=navyblue,
-        -{Stealth[length=2.5mm]},
-        thick
+        -{Stealth[length=2.8mm, width=2.0mm]},
+        line width=1.2pt
+    },
+    badge/.style={
+        font=\footnotesize\bfseries\sffamily,
+        fill=white,
+        draw=navyblue!40,
+        text=navyblue,
+        rounded corners=2pt,
+        inner sep=2.5pt
     }
 ]
-\node[decision] (ts) {Is data Time Series?};
+% Level 0: Root Question
+\node[decision] (ts) at (0, 0) {Is data Time Series?};
 
-% Yes branch
-\node[action, left=1.8cm of ts] (ts_act) {Forward / Backward Fill\\or Interpolation};
+% Level 1: Branches
+\node[action, text width=4.0cm] (ts_act) at (-4.0, -2.0) {Forward / Backward Fill\\or Interpolation};
+\node[decision, text width=4.0cm] (dtype) at (4.0, -2.0) {Numerical or\\Categorical?};
 
-% No branch
-\node[decision, below=1.2cm of ts] (dtype) {Numerical or Categorical?};
-\node[action, left=1.2cm of dtype] (num_act) {Mean / Median /\\KNN Imputation};
-\node[action, right=1.2cm of dtype] (cat_act) {Mode\\Imputation};
+% Level 2: Data Type Leaves
+\node[action, text width=3.4cm] (num_act) at (2.0, -4.4) {Mean / Median /\\KNN Imputation};
+\node[action, text width=3.0cm] (cat_act) at (6.0, -4.4) {Mode\\Imputation};
 
-\draw[conn] (ts) -- node[above, font=\footnotesize\bfseries] {Yes} (ts_act);
-\draw[conn] (ts) -- node[right, font=\footnotesize\bfseries] {No} (dtype);
-\draw[conn] (dtype) -- node[above, font=\footnotesize\bfseries] {Numerical} (num_act);
-\draw[conn] (dtype) -- node[above, font=\footnotesize\bfseries] {Categorical} (cat_act);
+% Connectors with ample space
+\draw[conn] (ts) -- node[above left=2pt, badge] {Yes} (ts_act);
+\draw[conn] (ts) -- node[above right=2pt, badge] {No} (dtype);
+\draw[conn] (dtype) -- node[above left=2pt, badge] {Numerical} (num_act);
+\draw[conn] (dtype) -- node[above right=2pt, badge] {Categorical} (cat_act);
 \end{tikzpicture}
-\end{center}
+\caption{Decision Framework for Selecting Missing Value Imputation Methods.}
+\label{fig:imputation_decision_framework}
+\end{figure}
 
 \section{Imbalanced Categorical Data}
 
