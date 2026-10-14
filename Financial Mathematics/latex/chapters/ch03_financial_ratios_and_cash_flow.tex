@@ -1,0 +1,458 @@
+% ==============================================================================
+% Chapter 3: Financial Ratios and Cash Flow Analysis
+% Unit III of Pondicherry University MSQF 532 Curriculum
+% ==============================================================================
+\chapter{Financial Ratios and Cash Flow Analysis}
+
+% ==============================================================================
+% 3.1 Fundamentals of Ratio Analysis & Classification
+% ==============================================================================
+\section{Fundamentals of Ratio Analysis \& Classification}
+\lecturedate{12/10/2026}
+
+\begin{definition}{Financial Ratio \& Ratio Analysis}{def_financial_ratio}
+A \textbf{Financial Ratio} is a quantitative mathematical expression establishing a proportional, fractional, or percentage relationship between two or more interrelated accounting figures extracted from corporate balance sheets, income statements, or cash flow reports.
+
+\textbf{Ratio Analysis} is the diagnostic technique of standardizing and interpreting these numerical proportions to assess the operational efficiency, liquidity, leverage, solvency, and profitability of a business concern.
+\end{definition}
+
+\subsection{Managerial Purposes \& Core Advantages of Ratio Analysis}
+Financial statement ratios serve seven strategic corporate functions:
+\begin{enumerate}[leftmargin=*, topsep=3pt, itemsep=3pt]
+    \item \textbf{Financial Forecasting \& Budgeting:} Historical ratio trajectories reveal structural growth rates, operating expense ratios, and asset utilization rhythms, facilitating predictive multi-year pro forma cash flow modeling.
+    \item \textbf{Managerial Control:} Acts as a continuous diagnostic monitoring instrument by highlighting negative variances between actual operational performance and benchmark targets.
+    \item \textbf{Facilitating Corporate Communication:} Distills complex, voluminous accounting transactions into standardized, intuitive indicator scores readily comprehended by board members, institutional investors, and lenders.
+    \item \textbf{Measuring Operational Efficiency:} Quantifies the rotation velocity and conversion efficiency with which assets and working capital are transformed into revenues.
+    \item \textbf{Investment Decision Support:} Equips equity analysts and shareholders with normalized valuation multiples (e.g. $\text{P/E}$, dividend yields, return on capital) to identify mispriced securities.
+    \item \textbf{Evaluating Financial Solvency:} Simultaneously examines short-term debt-servicing capacity (liquidity) and long-term capital structure stability (financial gearing and leverage).
+    \item \textbf{Inter-Firm \& Intra-Firm Benchmarking:} Facilitates cross-sectional peer comparison against industry leaders as well as longitudinal trend analysis across consecutive operating cycles.
+\end{enumerate}
+
+\subsection{Functional Taxonomy: Classification of Ratios by Purpose}
+In corporate accounting, ratios are classified into three primary functional families based on the economic dimensions they diagnose:
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    >=Stealth,
+    banner/.style={
+        draw=navyblue,
+        fill=navyblue!12,
+        text=navyblue,
+        font=\bfseries\sffamily\small,
+        rounded corners=2mm,
+        text width=15.0cm,
+        align=center,
+        inner sep=7pt,
+        line width=1.1pt
+    },
+    pillar/.style={
+        draw=#1,
+        fill=#1!4,
+        rounded corners=2mm,
+        text width=4.4cm,
+        minimum height=5.4cm,
+        align=flush left,
+        inner sep=6pt,
+        line width=1.1pt
+    },
+    line/.style={
+        draw=navyblue,
+        line width=1.2pt
+    }
+]
+
+% Top Process Header
+\node[banner] (top) {Classification of Financial Ratios by Purpose / Function};
+
+% Middle Pillar (Turnover / Activity Ratios)
+\node[pillar=amber, anchor=north] (p2) at ($(top.south) + (0, -1.3cm)$) {
+    {\centering\color{amber}\textbf{\sffamily Turnover / Activity Ratios}\par}
+    \vspace{0.3em}{\color{amber}\hrule height 0.6pt}\vspace{0.4em}
+    \scriptsize
+    \begin{itemize}[leftmargin=*, noitemsep, topsep=1pt]
+        \item Stock / Inventory Turnover
+        \item Debtors / Receivables Turnover
+        \item Creditors / Payables Turnover
+        \item Working Capital Turnover
+        \item Fixed Assets Turnover
+    \end{itemize}
+    \vfill
+    {\raggedright\tiny\color{amber}\textit{Measures operational velocity \& rotation efficiency of capital.}}
+};
+
+% Left Pillar (Profitability Ratios)
+\node[pillar=darkteal, left=0.7cm of p2.north west, anchor=north east] (p1) {
+    {\centering\color{darkteal}\textbf{\sffamily Profitability Ratios}\par}
+    \vspace{0.3em}{\color{darkteal}\hrule height 0.6pt}\vspace{0.4em}
+    \scriptsize
+    \begin{itemize}[leftmargin=*, noitemsep, topsep=1pt]
+        \item Return on Investment (ROI)
+        \item Net Profit Ratio
+        \item Gross Profit Ratio
+        \item Operating Expenses Ratio
+        \item Operating Profit Ratio
+    \end{itemize}
+    \vfill
+    {\raggedright\tiny\color{darkteal}\textit{Diagnoses margin generation on revenue \& capital bases.}}
+};
+
+% Right Pillar (Solvency / Financial Ratios)
+\node[pillar=navyblue, right=0.7cm of p2.north east, anchor=north west] (p3) {
+    {\centering\color{navyblue}\textbf{\sffamily Solvency / Financial Ratios}\par}
+    \vspace{0.3em}{\color{navyblue}\hrule height 0.6pt}\vspace{0.4em}
+    \scriptsize
+    \textbf{1. Short-Term Solvency (Liquidity):}
+    \begin{itemize}[leftmargin=*, noitemsep, topsep=0.5pt]
+        \item Current Ratio
+        \item Liquidity / Quick Ratio
+        \item Cash Position Ratio
+    \end{itemize}
+    \vspace{0.3em}
+    \textbf{2. Long-Term Solvency (Leverage):}
+    \begin{itemize}[leftmargin=*, noitemsep, topsep=0.5pt]
+        \item Proprietary Ratio
+        \item Debt-to-Equity Ratio
+        \item Fixed Assets Ratio
+        \item Capital Gearing Ratio
+    \end{itemize}
+};
+
+% Coordinate anchor for horizontal branch bus (0.65cm below top banner)
+\coordinate (bus) at ($(top.south) + (0, -0.65cm)$);
+
+% Symmetrical Connector Bus & Downward Drop Stems (0.65cm stem clearance)
+\draw[line] (top.south) -- (bus);
+\draw[line] ($(p1.north |- bus)$) -- ($(p3.north |- bus)$);
+\draw[line, ->] ($(p1.north |- bus)$) -- (p1.north);
+\draw[line, ->] (bus) -- (p2.north);
+\draw[line, ->] ($(p3.north |- bus)$) -- (p3.north);
+
+\end{tikzpicture}
+\caption{Taxonomy of Financial Ratios by Managerial Purpose and Analytical Function}
+\label{fig:ratio_classification_tree}
+\end{figure}
+
+\subsection{Profitability Ratios: Formulation \& Operational Margin Identities}
+\textbf{Profitability Ratios} measure an enterprise's ability to generate operational surplus, gross margin, and net earnings relative to revenue, total assets, or equity investment:
+
+\begin{formulabox}[Profitability Ratios Formulations]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Gross Profit Ratio:} Reflects margin after direct production costs ($\COGS$):
+    \begin{equation}
+        \text{Gross Profit Ratio} = \frac{\text{Gross Profit}}{\text{Net Sales}} \times 100
+    \end{equation}
+    where $\text{Net Sales} = \text{Total Sales} - \text{Sales Returns}$, and $\text{Gross Profit} = \text{Net Sales} - \COGS$.
+
+    \item \textbf{Operating Profit Ratio:} Measures operational profit after administrative, selling, and depreciation expenses:
+    \begin{equation}
+        \text{Operating Profit Ratio} = \frac{\text{Operating Profit}}{\text{Net Sales}} \times 100
+    \end{equation}
+    where $\text{Operating Profit} = \text{Gross Profit} - \text{Operating Expenses} = \text{Net Operating Income}$.
+
+    \item \textbf{Operating Ratio:} Measures aggregate cost efficiency (direct + operating expenses per rupee of sales):
+    \begin{equation}
+        \text{Operating Ratio} = \frac{\COGS + \text{Operating Expenses}}{\text{Net Sales}} \times 100
+    \end{equation}
+
+    \item \textbf{Fundamental Invariance Identity:}
+    \begin{equation}
+        \text{Operating Ratio} + \text{Operating Profit Ratio} = 100\%
+    \end{equation}
+
+    \item \textbf{Net Profit Ratio:} Final margin available to equity holders after non-operating expenses and taxes:
+    \begin{equation}
+        \text{Net Profit Ratio} = \frac{\text{Net Profit After Tax } (\NPAT)}{\text{Net Sales}} \times 100
+    \end{equation}
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{12/10/2026}
+\begin{example}{Comprehensive Evaluation of Profitability Ratios}{ex_profitability_ratios}
+\textbf{Problem:} \\
+The following financial statement items relate to the trading and operating activities of a company for the year ended 31/12/1987:
+\begin{center}
+\small
+\begin{tabular}{lr lr}
+\toprule
+\textbf{Particulars} & \textbf{Amount (\inr)} & \textbf{Particulars} & \textbf{Amount (\inr)} \\
+\midrule
+Sales & 1,00,000 & Salary of Salesmen & 1,800 \\
+Purchases & 70,000 & Advertising & 700 \\
+Closing Stock & 14,000 & Travelling Expenses & 500 \\
+Sales Returns & 4,000 & Salaries (Office) & 3,000 \\
+Dividend Received & 1,200 & Rent & 6,000 \\
+Profit on Sale of Fixed Assets & 600 & Stationery & 200 \\
+Loss on Sale of Shares & 300 & Depreciation & 1,000 \\
+Opening Stock & 11,000 & Other Expenses & 2,000 \\
+& & Provision for Tax & 7,000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+You are required to prepare the formal Trading and Operating Profit \& Loss Account for the period, and compute:
+\begin{enumerate*}[label=(\roman*), itemjoin=\qquad]
+    \item Gross Profit Ratio,
+    \item Operating Profit Ratio,
+    \item Operating Ratio, and
+    \item Net Profit Ratio.
+\end{enumerate*}
+
+\tcbline
+\newpage
+\textbf{Trading, Operating, and Profit \& Loss Account for the Year Ended 31/12/1987:}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X r >{\raggedright\arraybackslash}X r r}
+\toprule
+\textbf{Dr. Particulars} & \textbf{Amount (\inr)} & \textbf{Cr. Particulars} & \textbf{Inner (\inr)} & \textbf{Amount (\inr)} \\
+\midrule
+To Opening Stock & 11,000 & By Sales & 1,00,000 & \\
+To Purchases & 70,000 & \textit{Less:} Sales Returns & (4,000) & 96,000 \\
+To Gross Profit c/d & 29,000 & By Closing Stock & & 14,000 \\
+\midrule
+\textbf{Total} & \textbf{1,10,000} & \textbf{Total} & & \textbf{1,10,000} \\
+\midrule
+To Office Salaries & 3,000 & By Gross Profit b/d & & 29,000 \\
+To Rent & 6,000 & & & \\
+To Stationery & 200 & & & \\
+To Depreciation & 1,000 & & & \\
+To Other Operating Expenses & 2,000 & & & \\
+To Salesmen Salary & 1,800 & & & \\
+To Advertising & 700 & & & \\
+To Travelling Expenses & 500 & & & \\
+To Operating Profit c/d & \textbf{13,800} & & & \\
+\midrule
+\textbf{Total} & \textbf{29,000} & \textbf{Total} & & \textbf{29,000} \\
+\midrule
+To Loss on Sale of Shares & 300 & By Operating Profit b/d & & 13,800 \\
+To Provision for Tax & 7,000 & By Dividend Received & & 1,200 \\
+To Net Profit transferred to Equity & \textbf{8,300} & By Profit on Sale of Assets & & 600 \\
+\midrule
+\textbf{Total} & \textbf{15,600} & \textbf{Total} & & \textbf{15,600} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Calculations of Profitability Ratios:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Gross Profit Ratio:}
+    \begin{align*}
+        \text{Gross Profit Ratio} &= \frac{\text{Gross Profit}}{\text{Net Sales}} \times 100 = \frac{29{,}000}{96{,}000} \times 100 = \mathbf{30.21\%}
+    \end{align*}
+    \textit{Interpretation:} The enterprise retains $\inr 30.21$ from every $\inr 100$ of net revenue after absorbing direct manufacturing and procurement costs ($\COGS$).
+
+    \item \textbf{Operating Profit Ratio:}
+    \begin{align*}
+        \text{Operating Profit Ratio} &= \frac{\text{Operating Profit}}{\text{Net Sales}} \times 100 = \frac{13{,}800}{96{,}000} \times 100 = \mathbf{14.38\%}
+    \end{align*}
+    \textit{Interpretation:} Pure core operational business activities yield an operating margin of $14.38\%$ before considering capital gains, dividend windfalls, or income taxes.
+
+    \item \textbf{Operating Ratio:}
+    \begin{align*}
+        \COGS &= \text{Opening Stock} + \text{Purchases} - \text{Closing Stock} \\
+              &= 11{,}000 + 70{,}000 - 14{,}000 = \inr 67{,}000 \\
+        \text{Operating Expenses} &= 3{,}000 + 6{,}000 + 200 + 1{,}000 + 2{,}000 + 1{,}800 + 700 + 500 \\
+                                  &= \inr 15{,}200 \\
+        \text{Total Operating Cost} &= \COGS + \text{Operating Expenses} = 67{,}000 + 15{,}200 = \inr 82{,}200 \\[0.3em]
+        \text{Operating Ratio} &= \frac{\text{Total Operating Cost}}{\text{Net Sales}} \times 100 = \frac{82{,}200}{96{,}000} \times 100 = \mathbf{85.63\%}
+    \end{align*}
+    \textit{Verification of Invariance Identity:}
+    \begin{equation*}
+        \text{Operating Ratio} + \text{Operating Profit Ratio} = 85.63\% + 14.38\% = \mathbf{100.01\% \approx 100\%}
+    \end{equation*}
+
+    \item \textbf{Net Profit Ratio:}
+    \begin{align*}
+        \text{Net Profit Ratio} &= \frac{\text{Net Profit After Tax}}{\text{Net Sales}} \times 100 = \frac{8{,}300}{96{,}000} \times 100 = \mathbf{8.65\%}
+    \end{align*}
+    (If computed prior to non-operating adjustments as pure net operating income after tax: $\frac{13,800 - 7,000}{96,000} \times 100 = \frac{6,800}{96,000} \times 100 = 7.08\%$).
+\end{enumerate}
+
+\textbf{Final Results Summary:}
+\begin{itemize}[noitemsep]
+    \item Gross Profit Ratio = $\mathbf{30.21\%}$
+    \item Operating Profit Ratio = $\mathbf{14.38\%}$
+    \item Operating Ratio = $\mathbf{85.63\%}$
+    \item Net Profit Ratio = $\mathbf{8.65\%}$ (or $\mathbf{7.81\%}$ based on standard pre-dividend adjusted net line)
+\end{itemize}
+\end{example}
+
+% ==============================================================================
+% 3.2 Turnover / Activity Ratios & Operational Velocity
+% ==============================================================================
+\section{Turnover / Activity Ratios \& Operational Velocity}
+\lecturedate{13/10/2026}
+
+\begin{definition}{Turnover Ratio \& Operational Velocity}{def_turnover_ratio}
+\textbf{Turnover Ratios} (also termed \textbf{Activity Ratios} or \textbf{Performance Ratios}) measure the operational efficiency and rotation velocity with which an enterprise converts its balance sheet assets and capital resources into revenue or cost of sales.
+
+Unlike profitability metrics expressed as percentages, turnover ratios are mathematically expressed in \textbf{number of times} (rotation frequency per annum). A higher multiple generally signals superior managerial agility, efficient working capital deployment, and minimized idle capital.
+\end{definition}
+
+\begin{formulabox}[Comprehensive Activity and Velocity Formulations]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Inventory / Stock Turnover Ratio (ITR):}
+    \begin{equation}
+        \text{ITR} = \frac{\text{Cost of Goods Sold } (\COGS)}{\text{Average Inventory}} \quad \text{or} \quad \frac{\text{Net Sales}}{\text{Average Inventory}}
+    \end{equation}
+    where $\text{Average Inventory} = \dfrac{\text{Opening Stock} + \text{Closing Stock}}{2}$.
+    \begin{equation}
+        \text{Inventory Holding Period (Velocity)} = \frac{365}{\text{ITR}} \text{ days} = \frac{12}{\text{ITR}} \text{ months}
+    \end{equation}
+
+    \item \textbf{Debtors / Accounts Receivable Turnover Ratio (DTR):}
+    \begin{equation}
+        \text{DTR} = \frac{\text{Net Credit Sales}}{\text{Average Accounts Receivable}}
+    \end{equation}
+    where $\text{Net Credit Sales} = \text{Credit Sales} - \text{Sales Returns}$, and $\text{Average Receivables} = \text{Debtors} + \text{Bills Receivable}$.
+    \begin{equation}
+        \text{Debtors Collection Period (Velocity)} = \frac{365}{\text{DTR}} \text{ days} = \frac{12}{\text{DTR}} \text{ months}
+    \end{equation}
+
+    \item \textbf{Creditors / Accounts Payable Turnover Ratio (CTR):}
+    \begin{equation}
+        \text{CTR} = \frac{\text{Net Credit Purchases}}{\text{Average Accounts Payable}}
+    \end{equation}
+    where $\text{Net Credit Purchases} = \text{Credit Purchases} - \text{Purchase Returns}$, and $\text{Average Payables} = \text{Creditors} + \text{Bills Payable}$.
+    \begin{equation}
+        \text{Creditors Payment Period (Velocity)} = \frac{365}{\text{CTR}} \text{ days} = \frac{12}{\text{CTR}} \text{ months}
+    \end{equation}
+
+    \item \textbf{Working Capital Turnover Ratio:}
+    \begin{equation}
+        \text{Working Capital Turnover} = \frac{\text{Net Sales (or Cost of Sales)}}{\text{Net Working Capital}}
+    \end{equation}
+    where $\text{Net Working Capital} = \text{Current Assets} - \text{Current Liabilities}$.
+
+    \item \textbf{Fixed Assets Turnover Ratio:}
+    \begin{equation}
+        \text{Fixed Assets Turnover} = \frac{\COGS}{\text{Net Fixed Assets}} \quad \text{or} \quad \frac{\text{Net Sales}}{\text{Net Fixed Assets}}
+    \end{equation}
+
+    \item \textbf{Capital Turnover Ratio:}
+    \begin{equation}
+        \text{Capital Turnover} = \frac{\text{Cost of Sales (or Net Sales)}}{\text{Capital Employed}}
+    \end{equation}
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{13/10/2026}
+\begin{example}{Comprehensive Calculation of Turnover Ratios and Velocity Periods}{ex_turnover_comprehensive}
+\textbf{Problem:} \\
+The accounting records of a manufacturing corporation disclose the following operating data for the financial year:
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X r >{\raggedright\arraybackslash}X r}
+\toprule
+\textbf{Particulars} & \textbf{Amount (\inr)} & \textbf{Particulars} & \textbf{Amount (\inr)} \\
+\midrule
+Total Sales & 5,00,000 & Cash Purchases & 50,000 \\
+Cash Sales & 40,000 & Purchase Returns & 10,000 \\
+Sales Returns & 20,000 & Creditors at the end & 60,000 \\
+Debtors at the end & 80,000 & Bills Payable at the end & 20,000 \\
+Bills Receivable at the end & 20,000 & Reserve on Discount on Creditors & 2,000 \\
+Reserve for Doubtful Debts & 1,000 & Opening Stock & 50,000 \\
+Total Purchases & 3,00,000 & Closing Stock & 40,000 \\
+Gross Profit & 1,00,000 & Fixed Assets & 10,00,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+From the above information, compute:
+\begin{enumerate*}[label=(\alph*), itemjoin=\quad]
+    \item Stock Turnover Ratio,
+    \item Fixed Asset Turnover Ratio (under both Cost of Sales and Net Sales bases),
+    \item Debtors Turnover Ratio and Debtors Collection Period (in months and days),
+    \item Creditors Turnover Ratio and Creditors Payment Period (in months and days).
+\end{enumerate*}
+
+\tcbline
+\textbf{Reconciliation of Intermediate Financial Aggregates:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Net Sales:}
+    \begin{equation*}
+        \text{Net Sales} = \text{Total Sales} - \text{Sales Returns} = 5{,}00{,}000 - 20{,}000 = \mathbf{\inr 4{,}80{,}000}
+    \end{equation*}
+
+    \item \textbf{Cost of Goods Sold (Cost of Sales):}
+    \begin{equation*}
+        \COGS = \text{Net Sales} - \text{Gross Profit} = 4{,}80{,}000 - 1{,}00{,}000 = \mathbf{\inr 3{,}80{,}000}
+    \end{equation*}
+
+    \item \textbf{Average Stock:}
+    \begin{equation*}
+        \text{Average Stock} = \frac{\text{Opening Stock} + \text{Closing Stock}}{2} = \frac{50{,}000 + 40{,}000}{2} = \mathbf{\inr 45{,}000}
+    \end{equation*}
+
+    \item \textbf{Net Credit Sales:}
+    \begin{align*}
+        \text{Net Credit Sales} &= \text{Total Sales} - \text{Cash Sales} - \text{Sales Returns} \\
+                                &= 5{,}00{,}000 - 40{,}000 - 20{,}000 = \mathbf{\inr 4{,}40{,}000}
+    \end{align*}
+
+    \item \textbf{Average Accounts Receivable:}
+    (Note: Reserves for doubtful debts are provisions and are not deducted from gross receivables in turnover velocity analysis):
+    \begin{equation*}
+        \text{Accounts Receivable} = \text{Debtors} + \text{Bills Receivable} = 80{,}000 + 20{,}000 = \mathbf{\inr 1{,}00{,}000}
+    \end{equation*}
+
+    \item \textbf{Net Credit Purchases:}
+    \begin{align*}
+        \text{Net Credit Purchases} &= \text{Total Purchases} - \text{Cash Purchases} - \text{Purchase Returns} \\
+                                    &= 3{,}00{,}000 - 50{,}000 - 10{,}000 = \mathbf{\inr 2{,}40{,}000}
+    \end{align*}
+
+    \item \textbf{Average Accounts Payable:}
+    \begin{equation*}
+        \text{Accounts Payable} = \text{Creditors} + \text{Bills Payable} = 60{,}000 + 20{,}000 = \mathbf{\inr 80{,}000}
+    \end{equation*}
+\end{enumerate}
+
+\tcbline
+\textbf{Step-by-Step Ratio Computations:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Stock Turnover Ratio:}
+    \begin{equation*}
+        \text{Stock Turnover Ratio} = \frac{\COGS}{\text{Average Stock}} = \frac{3{,}80{,}000}{45{,}000} = \mathbf{8.44 \text{ times}}
+    \end{equation*}
+    (If evaluated on Net Sales basis: $\frac{4,80,000}{45,000} = 10.67 \text{ times}$).
+
+    \item \textbf{Fixed Asset Turnover Ratio:}
+    \begin{itemize}[noitemsep]
+        \item \textit{Based on Cost of Sales:}
+        \begin{equation*}
+            \text{Fixed Asset Turnover} = \frac{\COGS}{\text{Fixed Assets}} = \frac{3{,}80{,}000}{10{,}00{,}000} = \mathbf{0.38 \text{ times}}
+        \end{equation*}
+        \item \textit{Based on Net Sales:}
+        \begin{equation*}
+            \text{Fixed Asset Turnover} = \frac{\text{Net Sales}}{\text{Fixed Assets}} = \frac{4{,}80{,}000}{10{,}00{,}000} = \mathbf{0.48 \text{ times}}
+        \end{equation*}
+    \end{itemize}
+
+    \item \textbf{Debtors Turnover Ratio and Debtors Collection Velocity:}
+    \begin{equation*}
+        \text{Debtors Turnover Ratio} = \frac{\text{Net Credit Sales}}{\text{Accounts Receivable}} = \frac{4{,}40{,}000}{1{,}00{,}000} = \mathbf{4.40 \text{ times}}
+    \end{equation*}
+    \begin{align*}
+        \text{Collection Period (Months)} &= \frac{12}{\text{Debtors Turnover}} = \frac{12}{4.40} = \mathbf{2.73 \text{ months}} \\[0.4em]
+        \text{Collection Period (Days)} &= \frac{365}{\text{Debtors Turnover}} = \frac{365}{4.40} = \mathbf{82.95 \approx 83 \text{ days}}
+    \end{align*}
+
+    \item \textbf{Creditors Turnover Ratio and Creditors Payment Velocity:}
+    \begin{equation*}
+        \text{Creditors Turnover Ratio} = \frac{\text{Net Credit Purchases}}{\text{Accounts Payable}} = \frac{2{,}40{,}000}{80{,}000} = \mathbf{3.00 \text{ times}}
+    \end{equation*}
+    \begin{align*}
+        \text{Payment Period (Months)} &= \frac{12}{\text{Creditors Turnover}} = \frac{12}{3.00} = \mathbf{4.00 \text{ months}} \\[0.4em]
+        \text{Payment Period (Days)} &= \frac{365}{\text{Creditors Turnover}} = \frac{365}{3.00} = \mathbf{121.67 \approx 122 \text{ days}}
+    \end{align*}
+\end{enumerate}
+
+\textbf{Final Results Summary:}
+\begin{itemize}[noitemsep]
+    \item Stock Turnover Ratio = $\mathbf{8.44 \text{ times}}$
+    \item Fixed Asset Turnover Ratio = $\mathbf{0.38 \text{ times}}$ (Cost of Sales) / $\mathbf{0.48 \text{ times}}$ (Net Sales)
+    \item Debtors Turnover Ratio = $\mathbf{4.40 \text{ times}}$ ($\mathbf{2.73 \text{ months}}$ or $\mathbf{83 \text{ days}}$)
+    \item Creditors Turnover Ratio = $\mathbf{3.00 \text{ times}}$ ($\mathbf{4.00 \text{ months}}$ or $\mathbf{122 \text{ days}}$)
+\end{itemize}
+\end{example}

@@ -288,3 +288,132 @@
     \item $V_1$ = Total aggregate market valuation of the firm at year end
 \end{itemize}
 \end{formulabox}
+
+\newpage
+\begin{formulabox}[{13. Bond Valuation, Yield to Maturity (YTM), and Yield to Call (YTC)}]
+\textbf{A. Theoretical Present Value Valuation:}
+\begin{align*}
+    V_0 &= \sum_{t=1}^{n} \frac{C}{(1 + k_d)^t} + \frac{M}{(1 + k_d)^n} = C \cdot \PVAF(k_d, n) + M \cdot \PVF(k_d, n) \\[4pt]
+    V_{\text{call}} &= \sum_{t=1}^{N_c} \frac{C}{(1 + k_c)^t} + \frac{CP}{(1 + k_c)^{N_c}} = C \cdot \PVAF(k_c, N_c) + CP \cdot \PVF(k_c, N_c)
+\end{align*}
+
+\vspace{0.2em}
+\textbf{B. Approximation Formulas:}
+\begin{align*}
+    \text{Approximate YTM} &= \frac{C + \dfrac{M - P_0}{n}}{\dfrac{M + P_0}{2}} \\[6pt]
+    \text{Approximate YTC} &= \frac{C + \dfrac{CP - P_0}{N_c}}{\dfrac{CP + P_0}{2}}
+\end{align*}
+
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $V_0$ = Theoretical intrinsic economic value of the bond
+    \item $P_0$ = Current prevailing market purchase price of the bond
+    \item $C$ = Annual coupon interest payment ($C = M \times \text{Coupon Rate}$)
+    \item $M$ = Par or face value of the bond payable at final maturity
+    \item $n$ = Total number of years until final stated maturity
+    \item $N_c$ = Number of years remaining until the earliest call date
+    \item $CP$ = Call price payable upon redemption ($CP = M + \text{Call Premium}$)
+    \item $k_d$ = Periodic required rate of return / discount rate of bondholders
+    \item $k_c$ = True Yield to Call rate ($\YTC$)
+    \item $\PVAF(k, n)$ = Present Value Annuity Factor at rate $k$ for $n$ periods
+    \item $\PVF(k, n)$ = Present Value Factor at rate $k$ for $n$ periods
+\end{itemize}
+\end{formulabox}
+
+\newpage
+\begin{formulabox}[{14. Loan Amortization and Equal Periodic Installment (EMI)}]
+\begin{align*}
+    \text{Periodic Loan Installment (EMI):} \quad E &= \frac{P \cdot r \cdot (1 + r)^n}{(1 + r)^n - 1} = \frac{P}{\PVAF(r, n)} \\[4pt]
+    \text{Interest Component for Period } t: \quad I_t &= B_{t-1} \times r \\[4pt]
+    \text{Principal Amortization for Period } t: \quad \Delta P_t &= E - I_t \\[4pt]
+    \text{Closing Principal Balance for Period } t: \quad B_t &= B_{t-1} - \Delta P_t = B_{t-1} - (E - I_t)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $E$ = Equal periodic loan installment / repayment (EMI)
+    \item $P = B_0$ = Initial principal loan amount borrowed
+    \item $r$ = Periodic interest rate in decimal ($R / (m \cdot 100)$)
+    \item $n$ = Total number of periodic repayment installments ($N \times m$)
+    \item $t$ = Amortization period index ($t = 1, 2, \dots, n$)
+    \item $B_{t-1}$ = Outstanding principal balance at the beginning of period $t$
+    \item $B_t$ = Outstanding principal balance remaining at the end of period $t$
+    \item $I_t$ = Interest charge incurred during period $t$
+    \item $\Delta P_t$ = Principal reduction portion of installment $E$ in period $t$
+    \item $\PVAF(r, n)$ = Present Value Annuity Factor for $n$ periods at rate $r$
+\end{itemize}
+\end{formulabox}
+
+\newpage
+\begin{formulabox}[{15. Price--Earnings (P/E) Valuation Model and Earnings Per Share}]
+\begin{align*}
+    \text{Earnings Per Share (EPS):} \quad \EPS &= \frac{\EAT - D_p}{N} \\[4pt]
+    \text{Price--Earnings Ratio (P/E):} \quad \text{P/E Ratio} &= \frac{P_0}{\EPS} \\[4pt]
+    \text{Implied Stock Valuation:} \quad P_0 &= \EPS \times (\text{P/E Ratio}) \\[4pt]
+    \text{Theoretical P/E Multiple (from Gordon DDM):} \quad \frac{P_0}{\EPS_1} &= \frac{1 - b}{K_e - g} = \frac{\text{Payout Ratio}}{K_e - g}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\EPS$ = Earnings per share
+    \item $\EAT$ = Corporate earnings after tax (net income)
+    \item $D_p$ = Total preference dividend obligations payable ($\EAT - D_p$ = Earnings to Common Shareholders)
+    \item $N$ = Weighted average number of common equity shares outstanding
+    \item $P_0$ = Current market price per share ($\MPS$)
+    \item $\text{P/E Ratio}$ = Price-to-earnings valuation multiple
+    \item $\EPS_1$ = Projected forward earnings per share for the next annual period
+    \item $b$ = Retention ratio of earnings ($0 \le b \le 1$)
+    \item $(1 - b)$ = Dividend payout ratio ($D_1 / \EPS_1$)
+    \item $K_e$ = Cost of equity / required rate of return
+    \item $g$ = Sustainable constant annual growth rate in earnings and dividends ($g = b \cdot r$)
+\end{itemize}
+\end{formulabox}
+
+\newpage
+% ------------------------------------------------------------------------------
+\section*{Chapter 3: Financial Ratios and Cash Flow Analysis}
+\addcontentsline{toc}{section}{Chapter 3: Financial Ratios and Cash Flow Analysis}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{16. Profitability Ratios and Operational Margin Identities}]
+\begin{align*}
+    \text{Gross Profit Ratio} &= \frac{\text{Gross Profit}}{\text{Net Sales}} \times 100 \\[4pt]
+    \text{Operating Profit Ratio} &= \frac{\text{Operating Profit}}{\text{Net Sales}} \times 100 \\[4pt]
+    \text{Operating Ratio} &= \frac{\COGS + \text{Operating Expenses}}{\text{Net Sales}} \times 100 \\[4pt]
+    \text{Invariance Identity:} &\quad \text{Operating Ratio} + \text{Operating Profit Ratio} = 100\% \\[4pt]
+    \text{Net Profit Ratio} &= \frac{\NPAT}{\text{Net Sales}} \times 100 \\[4pt]
+    \text{Return on Investment (ROI):} \quad \text{ROI} &= \frac{\text{Operating Profit (EBIT)}}{\text{Capital Employed}} \times 100
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\text{Net Sales}$ = Total gross sales revenue less sales returns and allowances
+    \item $\COGS$ = Cost of Goods Sold ($\text{Opening Stock} + \text{Purchases} + \text{Direct Expenses} - \text{Closing Stock}$)
+    \item $\text{Gross Profit}$ = Net revenue remaining after direct manufacturing/trading costs ($\text{Net Sales} - \COGS$)
+    \item $\text{Operating Expenses}$ = Administrative, office, selling, distribution, and depreciation expenses
+    \item $\text{Operating Profit}$ = Core operational earnings before non-operating income, interest, and tax ($\text{EBIT}$)
+    \item $\NPAT$ = Final net income available after non-operating gains/losses and corporate income taxes
+    \item $\text{Capital Employed}$ = Total long-term funds deployed ($\text{Shareholders' Equity} + \text{Long-Term Debt}$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{17. Activity and Turnover Ratios with Operational Velocity Periods}]
+\begin{align*}
+    \text{Inventory Turnover Ratio (ITR):} \quad \text{ITR} &= \frac{\COGS}{\text{Average Inventory}} \quad \text{or} \quad \frac{\text{Net Sales}}{\text{Average Inventory}} \\[4pt]
+    \text{Inventory Holding Velocity:} \quad T_{\text{inventory}} &= \frac{365}{\text{ITR}} \text{ days} = \frac{12}{\text{ITR}} \text{ months} \\[4pt]
+    \text{Debtors Turnover Ratio (DTR):} \quad \text{DTR} &= \frac{\text{Net Credit Sales}}{\text{Average Accounts Receivable}} \\[4pt]
+    \text{Debtors Collection Velocity:} \quad T_{\text{debtors}} &= \frac{365}{\text{DTR}} \text{ days} = \frac{12}{\text{DTR}} \text{ months} \\[4pt]
+    \text{Creditors Turnover Ratio (CTR):} \quad \text{CTR} &= \frac{\text{Net Credit Purchases}}{\text{Average Accounts Payable}} \\[4pt]
+    \text{Creditors Payment Velocity:} \quad T_{\text{creditors}} &= \frac{365}{\text{CTR}} \text{ days} = \frac{12}{\text{CTR}} \text{ months} \\[4pt]
+    \text{Fixed Assets Turnover:} \quad \text{FATR} &= \frac{\COGS \text{ (or Net Sales)}}{\text{Net Fixed Assets}} \\[4pt]
+    \text{Working Capital Turnover:} \quad \text{WCTR} &= \frac{\text{Cost of Sales (or Net Sales)}}{\text{Net Working Capital}}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\text{Average Inventory}$ = $\frac{1}{2}(\text{Opening Inventory} + \text{Closing Inventory})$
+    \item $\text{Net Credit Sales}$ = Total gross sales less cash sales and sales returns
+    \item $\text{Average Accounts Receivable}$ = Sundry Debtors $+$ Bills Receivable (gross before doubtful debt reserves)
+    \item $\text{Net Credit Purchases}$ = Total gross purchases less cash purchases and purchase returns
+    \item $\text{Average Accounts Payable}$ = Sundry Creditors $+$ Bills Payable
+    \item $\text{Net Fixed Assets}$ = Book value of property, plant, and equipment less accumulated depreciation
+    \item $\text{Net Working Capital}$ = $\text{Current Assets} - \text{Current Liabilities}$
+    \item $T_{\text{inventory}}, T_{\text{debtors}}, T_{\text{creditors}}$ = Operational velocity turnover periods in calendar days or months
+\end{itemize}
+\end{formulabox}

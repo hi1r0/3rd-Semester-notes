@@ -73,10 +73,41 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
   - Mathematical invariance proof: Total market value $V_1 = (n + m) P_1 = n P_0(1 + K_e) + I - E$ is independent of dividend payout.
   - Empirical validity and limitations: Impact of taxes, flotation costs, information asymmetry/signaling, and investment policy interdependence.
   - *Solved Example:* `2.6.1` Stewart Ltd comprehensive valuation, share issuance, and market value invariance proof (*Lecture: 17/09/2026*).
+- **2.7 Bond Valuation & Yield to Call (YTC):**
+  - Discrete annual coupon bond valuation, face value, coupon cash flows, and call features.
+  - Approximate Yield to Call formula: $\text{Approximate YTC} = \frac{C + \frac{CP - P_0}{N_c}}{\frac{CP + P_0}{2}}$.
+  - Exact discounted cash flow equation: $P_0 = \sum_{t=1}^{N_c} \frac{C}{(1 + k_c)^t} + \frac{CP}{(1 + k_c)^{N_c}}$.
+  - Comparative Analysis: $\YTM$ vs. $\YTC$, and proof that $\YTC \ge \YTM$ for discount bonds.
+  - *Solved Example:* `2.7.1` Callable 10-year bond with 4-year call horizon and 3% penalty fee (*Lecture: 22/09/2026*).
+- **2.8 Loan Amortization Models:**
+  - Equated Periodic Installment (EMI) formulation: $A = \frac{P}{\PVAF(r, n)} = P \left[\frac{r}{1 - (1+r)^{-n}}\right]$.
+  - Mathematical mechanics: Monotonically decreasing interest component ($I_t = B_{t-1} \times r$) and monotonically increasing principal amortization component ($\Delta B_t = A - I_t$).
+  - Four loan archetypes: Fixed-Rate Fully Amortized Loans, Adjustable-Rate Mortgages (ARM / SOFR), Bullet/Balloon Loans, and Negative Amortization Loans.
+  - Strategic corporate and consumer advantages: Predictable cash budgeting, equity accumulation, interest tax deductibility, credit profile enhancement, and borrower default mitigation.
+  - *Lecture Date:* `23/09/2026`.
+- **2.9 Price-Earnings Valuation Model & Earnings Per Share:**
+  - Fundamental definitions: Price-Earnings Ratio ($\text{P/E} = P_0 / \EPS$) and Earnings Per Share ($\EPS = \frac{\EAT - D_p}{N}$).
+  - Link between P/E and Gordon DDM: Theoretical forward P/E multiple $\frac{P_0}{\EPS_1} = \frac{1 - b}{K_e - g}$.
+  - Managerial and investor interpretation: Growth expectations, cost of capital, earnings quality, risk pricing, and cross-sectional benchmarking.
+  - *Lecture Date:* `08/10/2026`.
+
+### Chapter 3: Financial Ratios and Cash Flow Analysis (Unit III)
+- **3.1 Fundamentals of Ratio Analysis & Classification:**
+  - Definition of financial ratios and diagnostic role of ratio analysis.
+  - Seven core managerial advantages: Financial Forecasting, Managerial Control, Corporate Communication, Operational Efficiency, Investment Decision Support, Solvency Diagnostics, and Inter/Intra-Firm Benchmarking.
+  - Functional Taxonomy Tree: Research-grade TikZ visual classification tree organizing ratios into Profitability, Turnover/Activity, and Solvency (Short-Term Liquidity & Long-Term Gearing).
+  - Profitability ratio formulations: Gross Profit Ratio, Operating Profit Ratio, Operating Ratio, Fundamental Invariance Identity ($\text{Operating Ratio} + \text{Operating Profit Ratio} = 100\%$), Net Profit Ratio, and Return on Investment (ROI).
+  - *Solved Example:* `3.1.1` Comprehensive multi-column Trading, Operating, and Profit & Loss Account reconstruction and profitability ratio computation (*Lecture: 12/10/2026*).
+- **3.2 Turnover / Activity Ratios & Operational Velocity:**
+  - Velocity and asset conversion frequency principles (expressed in annual rotation multiples).
+  - Formulations: Stock / Inventory Turnover Ratio ($\text{ITR} = \COGS / \text{Average Stock}$), Debtors / Receivables Turnover Ratio ($\text{DTR} = \text{Credit Sales} / \text{Average Receivables}$), Creditors / Payables Turnover Ratio ($\text{CTR} = \text{Credit Purchases} / \text{Average Payables}$), Working Capital Turnover, and Fixed Assets Turnover (on Cost of Sales and Net Sales bases).
+  - Conversion Velocity Periods: Inventory holding period ($365 / \text{ITR}$ days), Debtors collection velocity ($365 / \text{DTR}$ days or $12 / \text{DTR}$ months), and Creditors payment velocity ($365 / \text{CTR}$ days or $12 / \text{CTR}$ months).
+  - *Solved Example:* `3.2.1` Comprehensive operational turnover analysis, intermediate aggregate reconciliation, and velocity period evaluation (*Lecture: 13/10/2026*).
+
 - **Comprehensive Multi-Chapter Formula Reference Sheet:**
-  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1 and Chapter 2 (12 formula cards).
-  - Features grouped subsections for closed-form analytical factor formulas and explicit year-by-year summation ($\sum$) models (Ordinary Annuity FV/PV, Annuity Due FV/PV, Finite Growing Annuity PV).
-  - High-density mathematical formula boxes with explicit itemized `Where:` parameter definitions and policy decision matrices.
+  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1, Chapter 2, and Chapter 3 (17 formula cards).
+  - High-density mathematical formula boxes with explicit itemized `Where:` parameter definitions, validity conditions, and policy decision matrices.
+  - Zero awkward splits: Every formula box is completely self-contained.
 
 ---
 
@@ -93,7 +124,8 @@ latex/
 │   └── titlepage.tex                              # Formal cover page
 ├── chapters/
 │   ├── ch01_interest_theory.tex                   # Chapter 1: Interest Theory (Lectures: 13/08 – 03/09/2026)
-│   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 17/09/2026)
+│   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 08/10/2026)
+│   ├── ch03_financial_ratios_and_cash_flow.tex     # Chapter 3: Financial Ratios & Cash Flow (Lectures: 12/10 – 13/10/2026)
 │   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions
 ├── figures/                                       # Department & University logos
 └── README.md                                      # Documentation & compilation instructions
