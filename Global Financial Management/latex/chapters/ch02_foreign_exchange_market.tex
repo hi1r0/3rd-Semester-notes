@@ -1212,3 +1212,486 @@ All forward exchange contracts entered into by authorized dealers in India are g
     \item \textbf{Customer Margin Requirements:} Banks may stipulate an initial cash margin or credit line to protect against potential default risk arising from adverse currency movements prior to settlement.
     \item \textbf{Non-Performance and Cancellation:} If the customer fails to deliver foreign exchange on the maturity date (or by the end of the option delivery window), the contract must be automatically cancelled by the bank on the 15th day post-maturity (or as prescribed by prevailing FEDAI rules) at the ongoing merchant buying/selling rate, with any resulting exchange loss recovered from the customer.
 \end{enumerate}
+
+% ==============================================================================
+% Lecture 17: 08/10/2026 & Lecture 18: 12/10/2026
+% ==============================================================================
+\section{Forward Merchant Rates and Delivery Option Mechanics}
+\lecturedate{08/10/2026}
+
+\subsection{Mechanics of Forward Merchant Bill Buying Rates}
+When an authorized dealer commercial bank enters into a forward purchase contract for an export bill, the date on which foreign exchange proceeds are physically realized depends on the classification of the underlying instrument:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Demand Bill:} Foreign currency funds are realized post-shipment after the \textbf{Normal Transit Period (NTP)}, standardly stipulated under FEDAI rules as \textbf{25 days}.
+    \item \textbf{Usance Bill:} Realization occurs only upon maturity of the credit period, encompassing both the \textbf{Normal Transit Period} and the agreed \textbf{Usance Period} (e.g., $25 \text{ days transit} + 60 \text{ days usance} = 85 \text{ days}$).
+\end{itemize}
+
+Consequently, when quoting a forward merchant bill buying rate, the total duration for which the quoting bank must cover itself in the interbank market is:
+\begin{equation}
+    \text{Total Interbank Cover Tenor} = \text{Forward Period} + \text{Transit Period} + \text{Usance Period}
+\end{equation}
+
+\subsubsection{Statutory FEDAI Rules for Forward Swap Margins}
+Because interbank forward margins are quoted on a monthly basis, fractional holding periods (in days) must be rounded to an integer number of months. To ensure the quoting bank remains fully hedged and does not grant undue speculative gain to the merchant:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Ascending Swap Margins (Foreign Currency at Forward Premium):}
+    Adding a premium increases the buying rate paid to the exporter. Under FEDAI guidelines, the bank must give the minimum benefit to the customer by \textbf{rounding down} the total duration to the \textbf{lower whole month} (e.g., 25 days transit $\to$ 0 months; 85 days $\to$ 2 months; 145 days $\to$ 4 months).
+    \item \textbf{Descending Swap Margins (Foreign Currency at Forward Discount):}
+    Deducting a discount lowers the buying rate. To ensure the bank is adequately protected against market depreciation, the bank must \textbf{round up} the total duration to the \textbf{higher whole month}.
+    \item \textbf{Exchange Margin Deduction:}
+    The standard merchant loading percentage (e.g., $0.10\%$) is computed on the base buying rate and deducted.
+    \item \textbf{FEDAI Rounding Rule:}
+    The resulting merchant quote is rounded off to the nearest multiple of $0.0025$.
+\end{enumerate}
+
+\begin{example}{Multi-Tier Forward Bill Buying Rate Determinations}{ex_forward_bill_buying_comprehensive}
+\textbf{Problem Statement:}\\
+An authorized dealer bank is requested to quote merchant buying rates for US Dollars under the following ongoing interbank market quotations:
+\begin{center}
+\begin{tabular}{rcc}
+    \toprule
+    \textbf{Tenor} & \textbf{Bid Rate} & \textbf{Ask Rate} \\
+    \midrule
+    Spot USD/INR & 96.6000 & 96.6075 \\
+    1-Month Forward Margin & 0.3500 & 0.3600 \\
+    2-Month Forward Margin & 0.5500 & 0.5600 \\
+    3-Month Forward Margin & 0.8500 & 0.8600 \\
+    4-Month Forward Margin & 1.1500 & 1.1600 \\
+    5-Month Forward Margin & 1.3500 & 1.3600 \\
+    6-Month Forward Margin & 1.5500 & 1.6600 \\
+    \bottomrule
+\end{tabular}
+\end{center}
+The normal transit period is 25 days. All forward contracts are for fixed delivery. The bank requires an exchange margin of $0.10\%$. Calculate:
+\begin{enumerate*}[label=(\alph*)]
+    \item Ready bill buying rate,
+    \item 2 months forward buying rate for a demand bill,
+    \item Ready rate for a 60 days usance bill, and
+    \item 2 months forward buying rate for a 60 days usance bill.
+\end{enumerate*}
+
+\tcblower
+\textbf{Solution:}\\[0.4em]
+\noindent\textbf{(a) Computation of Ready Bill Buying Rate:}\\
+For a ready demand bill, the holding period is the 25-day transit period. Since margins are ascending (premium), 25 days rounds down to 0 months, so no forward premium is added:
+\begin{center}
+\begin{tabularx}{0.96\linewidth}{Xrr}
+    \toprule
+    \textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+    \midrule
+    USD/INR Market Spot Buying Rate (Bid) & & 96.6000 \\
+    \textit{Less:} Exchange Margin @ 0.10\% on 96.6000 ($96.6000 \times 0.0010$) & & 0.0966 \\
+    \midrule
+    \textbf{Subtotal (before rounding)} & & \textbf{96.5034} \\
+    \textbf{Quoted Ready Bill Buying Rate (Rounded to nearest 0.0025)} & & \textbf{96.5025} \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{(b) Computation of 2 Months Forward Buying Rate for Demand Bill:}\\
+Total duration $= \text{Forward Period } (2 \text{ months}) + \text{Transit Period } (25 \text{ days})$. Under premium, 25 days rounds down to 0 months, making the applicable forward tenor 2 months (premium $= 0.5000$ per bank ledger):
+\begin{center}
+\begin{tabularx}{0.96\linewidth}{Xrr}
+    \toprule
+    \textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+    \midrule
+    USD/INR Market Spot Buying Rate (Bid) & & 96.6000 \\
+    \textit{Add:} Forward Premium for 2 Months (Transit 25 days rounded to lower month) & & 0.5000 \\
+    \midrule
+    \textbf{Gross Forward Buying Rate} & & 97.1000 \\
+    \textit{Less:} Exchange Margin @ 0.10\% on 97.1000 ($97.1000 \times 0.0010$) & & 0.0971 \\
+    \midrule
+    \textbf{Subtotal (before rounding)} & & \textbf{97.0029} \\
+    \textbf{Quoted 2-Month Forward Demand Bill Rate (Rounded to nearest 0.0025)} & & \textbf{97.0000} \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{(c) Computation of Ready Rate for 60 Days Usance Bill:}\\
+Total duration $= \text{Transit Period } (25 \text{ days}) + \text{Usance Period } (60 \text{ days}) = 85 \text{ days}$. Under premium, 85 days rounds down to 2 months (applicable 2-month bid premium $= 0.5500$):
+\begin{center}
+\begin{tabularx}{0.96\linewidth}{Xrr}
+    \toprule
+    \textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+    \midrule
+    USD/INR Market Spot Buying Rate (Bid) & & 96.6000 \\
+    \textit{Add:} Forward Premium for 2 Months ($25\text{d transit} + 60\text{d usance} = 85\text{d} \to 2\text{m}$) & & 0.5500 \\
+    \midrule
+    \textbf{Gross Buying Rate} & & 97.1500 \\
+    \textit{Less:} Exchange Margin @ 0.10\% on 97.1500 ($97.1500 \times 0.0010$) & & 0.09715 \\
+    \midrule
+    \textbf{Subtotal (before rounding)} & & \textbf{97.05285} \\
+    \textbf{Quoted Ready 60-Day Usance Bill Rate (Rounded to nearest 0.0025)} & & \textbf{97.0525} \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{(d) Computation of 2 Months Forward Rate for 60 Days Usance Bill:}\\
+Total duration $= \text{Forward Period } (2 \text{ months}) + \text{Transit } (25 \text{ days}) + \text{Usance } (60 \text{ days}) = 145 \text{ days}$. Under premium, 145 days rounds down to 4 months (applicable 4-month bid premium $= 1.1500$):
+\begin{center}
+\begin{tabularx}{0.96\linewidth}{Xrr}
+    \toprule
+    \textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+    \midrule
+    USD/INR Market Spot Buying Rate (Bid) & & 96.6000 \\
+    \textit{Add:} Forward Premium for 4 Months ($2\text{m forward} + 25\text{d transit} + 60\text{d usance} \to 4\text{m}$) & & 1.1500 \\
+    \midrule
+    \textbf{Gross Forward Buying Rate} & & 97.7500 \\
+    \textit{Less:} Exchange Margin @ 0.10\% on 97.7500 ($97.7500 \times 0.0010$) & & 0.09775 \\
+    \midrule
+    \textbf{Subtotal (before rounding)} & & \textbf{97.65225} \\
+    \textbf{Quoted 2-Month Forward 60-Day Usance Rate (Rounded to nearest 0.0025)} & & \textbf{97.6525} \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+\end{example}
+
+\subsection{Option Forward Contracts and Delivery Window Margin Rules}
+\lecturedate{12/10/2026}
+Under FEDAI Rule 7, an option forward contract provides the customer with operational flexibility to execute delivery on any working day within an agreed calendar window (not exceeding one month). 
+
+Because the exact date of settlement is elected exclusively by the merchant, the quoting bank faces uncertainty regarding the exact interbank swap points to apply. To eliminate counterparty selection risk, FEDAI establishes the \textbf{Worst-Of Principle}:
+
+\begin{center}
+\begin{minipage}{0.92\linewidth}
+\begin{remarkbox}[FEDAI "Worst-Of" Principle for Option Contracts]
+The quoting bank must always compute the merchant forward rate on the assumption that the customer will elect to deliver foreign exchange on the specific calendar date within the option window that is \textbf{least advantageous to the bank} (and most favorable to the customer).
+\end{remarkbox}
+\end{minipage}
+\end{center}
+
+\subsubsection{Statutory Delivery Date Selection Protocol}
+The operational date assumed by the bank depends on whether the transaction is a bank purchase or bank sale, and whether the currency is at a premium or discount:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Forward Purchase by Bank (Customer Sells Foreign Exchange):}
+    \begin{itemize}[noitemsep]
+        \item \textit{Foreign Currency at Premium:} Adding premium increases the payout to the customer. Therefore, the bank quotes the \textbf{Earliest Delivery Date} of the option window, giving the customer the lowest premium.
+        \item \textit{Foreign Currency at Discount:} Deducting discount reduces the payout. Therefore, the bank quotes the \textbf{Latest Delivery Date} of the option window, deducting the maximum discount.
+    \end{itemize}
+    \item \textbf{Forward Sale by Bank (Customer Buys Foreign Exchange):}
+    \begin{itemize}[noitemsep]
+        \item \textit{Foreign Currency at Premium:} Adding premium increases the cost to the customer. Therefore, the bank quotes the \textbf{Latest Delivery Date} of the option window, charging the maximum premium.
+        \item \textit{Foreign Currency at Discount:} Deducting discount reduces the cost. Therefore, the bank quotes the \textbf{Earliest Delivery Date} of the option window, granting the minimum discount.
+    \end{itemize}
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% TikZ Flowchart 2.8: Option Delivery Margin Selection Decision Architecture
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.96\textwidth}{!}{%
+    \begin{tikzpicture}[
+        banner/.style={
+            rectangle, rounded corners=6pt, line width=1.1pt,
+            draw=navyblue, fill=navyblue!10, text=navyblue,
+            font=\sffamily\bfseries\normalsize, align=center,
+            inner sep=8pt, text width=14.4cm
+        },
+        card/.style={
+            rectangle, rounded corners=6pt, line width=1.1pt,
+            font=\sffamily, align=left, inner sep=8pt,
+            text width=6.6cm, minimum height=4.4cm
+        },
+        branch/.style={
+            line width=1.3pt, draw=navyblue, -{Stealth[length=6pt, width=4pt]}
+        }
+    ]
+        % Top Banner
+        \node[banner] (top) at (7.7, 0) {
+            FEDAI Option Forward Pricing Standard: The Worst-Of Principle\\[0.2em]
+            \textmd{\scriptsize Bank prices the contract assuming the merchant delivers on the date least advantageous to the dealer}
+        };
+
+        % Split Stem
+        \coordinate (split) at (7.7, -1.15);
+        \draw[line width=1.3pt, draw=navyblue] (top.south) -- (split);
+
+        % Symmetrical Child Pillars
+        \node[card, draw=darkteal, fill=softgreen] (pillar1) at (3.8, -3.8) {
+            {\color{darkteal}\textbf{\normalsize 1. Bank Purchases FX (Merchant Sells)}}\\[0.4em]
+            \scriptsize $\bullet$ \textbf{FC at Premium (Points Ascending):}\\
+            \quad $\implies$ Assume \textbf{Earliest Date} of window\\
+            \quad $\implies$ Bank awards \textbf{Minimum Premium}\\[0.4em]
+            \scriptsize $\bullet$ \textbf{FC at Discount (Points Descending):}\\
+            \quad $\implies$ Assume \textbf{Latest Date} of window\\
+            \quad $\implies$ Bank deducts \textbf{Maximum Discount}
+        };
+
+        \node[card, draw=amber!90!black, fill=softamber] (pillar2) at (11.6, -3.8) {
+            {\color{amber!90!black}\textbf{\normalsize 2. Bank Sells FX (Merchant Buys)}}\\[0.4em]
+            \scriptsize $\bullet$ \textbf{FC at Premium (Points Ascending):}\\
+            \quad $\implies$ Assume \textbf{Latest Date} of window\\
+            \quad $\implies$ Bank charges \textbf{Maximum Premium}\\[0.4em]
+            \scriptsize $\bullet$ \textbf{FC at Discount (Points Descending):}\\
+            \quad $\implies$ Assume \textbf{Earliest Date} of window\\
+            \quad $\implies$ Bank allows \textbf{Minimum Discount}
+        };
+
+        % Branch Connectors
+        \draw[branch] (split) -| (pillar1.north);
+        \draw[branch] (split) -| (pillar2.north);
+    \end{tikzpicture}%
+    }
+    \caption{FEDAI Statutory Margin Selection Architecture for Option Forward Contracts}
+    \label{fig:option_margin_selection}
+\end{figure}
+
+\begin{example}{Option Forward Contract for Export Bill on New York}{ex_option_forward_nyc}
+\textbf{Problem Statement:}\\
+On 15th July, an export customer requests an authorized dealer bank to book a forward exchange contract with delivery during September covering a 30-day sight bill drawn on New York for $\text{USD } 65{,}000$ under an irrevocable Letter of Credit.
+
+Assuming US Dollars are quoted in the local interbank market on Spot August 2026 baseline as follows:
+\begin{center}
+\begin{tabular}{rcc}
+    \toprule
+    \textbf{Tenor} & \textbf{Bid Rate} & \textbf{Ask Rate} \\
+    \midrule
+    Spot USD/INR & 96.3700 & 96.3800 \\
+    Spot / August Forward Margin & 0.0300 & 0.0400 \\
+    Spot / September Forward Margin & 0.1100 & 0.1300 \\
+    Spot / October Forward Margin & 0.1900 & 0.2200 \\
+    Spot / November Forward Margin & 0.2700 & 0.3100 \\
+    Spot / December Forward Margin & 0.3500 & 0.4000 \\
+    \bottomrule
+\end{tabular}
+\end{center}
+Assuming the bank charges an exchange margin of $0.10\%$ on the spot buying rate and the normal transit period is 25 days, calculate:
+\begin{enumerate*}[label=(\roman*)]
+    \item the forward bill buying rate quoted to the customer, and
+    \item the total rupee proceeds payable upon realization.
+\end{enumerate*}
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Transaction Characterization and Rate Determination:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Contract Type:} Forward Purchase of an Export Bill (Bank purchases USD).
+    \item \textbf{Delivery Option Window:} 1st September to 30th September.
+    \item \textbf{Margin Structure:} Forward points are ascending ($0.0300 < 0.1100 < 0.1900$), indicating USD is at a \textbf{Forward Premium}.
+    \item \textbf{Worst-Of Rule Application:} Under forward premium, the bank assumes the customer delivers on the \textbf{earliest possible date} in the window (1st September) to award the minimum premium, applying the September bid margin ($0.1100$).
+\end{itemize}
+
+\noindent\textbf{2. Accounting Ledger Computation:}
+\begin{center}
+\begin{tabularx}{0.96\linewidth}{Xrr}
+    \toprule
+    \textbf{Particulars} & \textbf{INR} & \textbf{INR} \\
+    \midrule
+    USD/INR Market Spot Buying Rate (Bid) & & 96.3700 \\
+    \textit{Add:} Forward Premium for September (Bid Side) & & 0.1100 \\
+    \midrule
+    \textbf{Gross Forward Buying Rate} & & 96.4800 \\
+    \textit{Less:} Exchange Margin @ 0.10\% on Spot Buying Rate ($96.3700 \times 0.0010$) & & 0.0964 \\
+    \midrule
+    \textbf{Bill Buying Rate (before rounding)} & & \textbf{96.3836} \\
+    \textbf{Quoted Rate (Rounded off to nearest multiple of 0.0025)} & & \textbf{96.3800} \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{3. Total Rupee Realization:}
+\begin{equation}
+    \text{Rupee Amount Payable} = \text{USD } 65{,}000 \times 96.3800 = \mathbf{\inr 62{,}64{,}700}
+\end{equation}
+The customer receives exactly $\mathbf{\inr 62{,}64{,}700}$ upon delivering the export bill.
+\end{example}
+
+% ==============================================================================
+% Lecture 19: 14/10/2026
+% ==============================================================================
+\section{Forward Exchange Rates Based on Cross Rates}
+\lecturedate{14/10/2026}
+
+\subsection{Principles of Cross-Rate Forward Quotations}
+When an Indian exporter or importer requires forward exchange cover in a non-USD currency (e.g., SGD, JPY, EUR, GBP, CHF), the quotation cannot be established directly from domestic rupee interbank quotes because non-dollar currencies are not actively traded against the Rupee in the domestic interbank market.
+
+Instead, commercial authorized dealers synthesize the required forward merchant rate via \textbf{Triangular Interbank Covering}, entering into two concurrent wholesale hedging transactions:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Domestic Interbank Tier (Mumbai):} An interbank USD/INR forward contract for the underlying delivery month.
+    \item \textbf{Overseas Interbank Tier (Singapore/Tokyo/London):} An interbank forward contract in USD against the foreign currency (USD/FC) for the required duration.
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% TikZ Architecture 2.9: Dual-Leg Forward Cross-Rate Covering
+% ------------------------------------------------------------------------------
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        box/.style={
+            rectangle, rounded corners=6pt, line width=1.1pt,
+            font=\sffamily, align=center, inner sep=6pt,
+            minimum height=2.2cm, text width=4.6cm
+        },
+        flowline/.style={
+            -{Stealth[length=6pt, width=4pt]}, line width=1.3pt
+        }
+    ]
+        % Node 1: Indian Customer (left)
+        \node[box, draw=navyblue, fill=softblue] (cust) at (0, 0) {
+            {\color{navyblue}\textbf{\normalsize Indian Exporter}}\\[0.4em]
+            \scriptsize $\bullet$ Books non-USD forward bill\\
+            \scriptsize $\bullet$ Delivers foreign exchange (SGD)
+        };
+
+        % Node 2: Quoting Bank (India)
+        \node[box, draw=darkteal, fill=softgreen] (bank) at (7.8, 0) {
+            {\color{darkteal}\textbf{\normalsize Quoting Bank (India)}}\\[0.4em]
+            \scriptsize $\bullet$ Synthesizes forward cross rate\\
+            \scriptsize $\bullet$ Covers forward legs concurrently
+        };
+
+        % Horizontal Connectors
+        \draw[flowline, draw=navyblue] ([yshift=4mm]cust.east) -- node[above, font=\scriptsize\sffamily] {Bill Presentation} ([yshift=4mm]bank.west);
+        \draw[flowline, draw=navyblue] ([yshift=-4mm]bank.west) -- node[below, font=\scriptsize\sffamily] {INR Payout} ([yshift=-4mm]cust.east);
+
+        % Symmetrical Interbank Pillars (y = -3.8)
+        % Node 3: Domestic Interbank Forward Leg
+        \node[box, draw=amber!90!black, fill=softamber] (inr) at (4.6, -3.8) {
+            {\color{amber!90!black}\textbf{\normalsize Domestic Interbank Tier}}\\[0.4em]
+            \scriptsize $\bullet$ Covers USD/INR forward leg\\
+            \scriptsize $\bullet$ Locks Mumbai forward rate (July)
+        };
+
+        % Node 4: Overseas Interbank Forward Leg
+        \node[box, draw=charcoal, fill=white] (os) at (11.0, -3.8) {
+            {\color{charcoal}\textbf{\normalsize Overseas Forex Market}}\\[0.4em]
+            \scriptsize $\bullet$ Singapore / Tokyo / London\\
+            \scriptsize $\bullet$ Covers USD/FC forward leg (5-m)
+        };
+
+        % Split Connectors
+        \coordinate (split) at (7.8, -2.0);
+        \draw[line width=1.3pt, draw=darkteal] (bank.south) -- (split);
+        \draw[flowline, draw=darkteal] (split) -| node[pos=0.25, above, font=\scriptsize\sffamily] {Cover USD/INR Leg} (inr.north);
+        \draw[flowline, draw=darkteal] (split) -| node[pos=0.25, above, font=\scriptsize\sffamily] {Cover USD/FC Leg} (os.north);
+    \end{tikzpicture}%
+    }
+    \caption{Dual-Leg Wholesale Covering Architecture for Forward Cross-Rate Contracts}
+    \label{fig:forward_cross_rate_covering}
+\end{figure}
+
+\clearpage
+\subsection{Textbook Pro-Forma Quotation Formats}
+FEDAI guidelines establish standardized accounting statement templates for computing forward merchant rates on a cross-rate basis:
+
+\begin{center}
+\small
+\begin{tabularx}{0.96\linewidth}{Xr}
+    \toprule
+    \multicolumn{2}{c}{\textbf{Format 9.1: Calculation of Forward Buying Rate for Other Currencies}} \\
+    \midrule
+    Dollar/Rupee Market Spot Buying Rate & $= \text{Rs. } \dots\dots$ \\
+    \textit{Add:} Forward Premium (for forward, transit, \& usance: rounded to lower month) & \\
+    \quad\textbf{OR} \textit{Less:} Forward Discount (rounded to higher month) & $\pm\text{ Rs. } \dots\dots$ \\
+    \midrule
+    \textbf{Subtotal} & $= \text{Rs. } \dots\dots$ \\
+    \textit{Less:} Exchange Margin & $- \text{Rs. } \dots\dots$ \\
+    \midrule
+    \textbf{Forward Buying Rate for Dollar} & $\mathbf{= \text{Rs. } \dots\dots^\ast \quad [1]}$ \\
+    \midrule
+    Dollar/Foreign Currency Market Spot Selling Rate & $= \text{FC } \dots\dots$ \\
+    \textit{Add:} Forward Premium (for forward, transit, \& usance: rounded to higher month) & \\
+    \quad\textbf{OR} \textit{Less:} Forward Discount (rounded to lower month) & $\pm\text{ FC } \dots\dots$ \\
+    \midrule
+    \textbf{Forward Selling Rate for Foreign Currency} & $\mathbf{= \text{FC } \dots\dots \quad [2]}$ \\
+    \midrule
+    \textbf{Forward Buying Rate for Foreign Currency} $= [1] \div [2]$ & $\mathbf{= \text{Rs. } \dots\dots^\ast \quad [3]}$ \\
+    \bottomrule
+\end{tabularx}\\[0.3em]
+{\footnotesize $^\ast$Rounded off to the nearest multiple of $0.0025$ when quoted to the customer.}
+\end{center}
+
+\vspace{0.8em}
+
+\begin{center}
+\small
+\begin{tabularx}{0.96\linewidth}{Xr}
+    \toprule
+    \multicolumn{2}{c}{\textbf{Format 9.2: Calculation of Forward Selling Rate for Other Currencies}} \\
+    \midrule
+    Dollar/Rupee Market Spot Selling Rate & $= \text{Rs. } \dots\dots$ \\
+    \textit{Add:} Forward Premium (for forward period) & \\
+    \quad\textbf{OR} \textit{Less:} Forward Discount (for forward period) & $\pm\text{ Rs. } \dots\dots$ \\
+    \midrule
+    \textbf{Subtotal} & $= \text{Rs. } \dots\dots$ \\
+    \textit{Add:} Exchange Margin to TT Selling Rate & $+ \text{Rs. } \dots\dots$ \\
+    \midrule
+    \textbf{Forward TT Selling Rate for Dollar} & $\mathbf{= \text{Rs. } \dots\dots^\ast \quad [1]}$ \\
+    \textit{Add:} Exchange Margin for Bill Selling Rate & $+ \text{Rs. } \dots\dots$ \\
+    \midrule
+    \textbf{Forward Bill Selling Rate for Dollar} & $\mathbf{= \text{Rs. } \dots\dots^\ast \quad [2]}$ \\
+    \midrule
+    Dollar/Foreign Currency Spot Buying Rate & $= \text{FC } \dots\dots$ \\
+    \textit{Add:} Forward Premium (for forward period) & \\
+    \quad\textbf{OR} \textit{Less:} Forward Discount (for forward period) & $\pm\text{ FC } \dots\dots$ \\
+    \midrule
+    \textbf{Forward Buying Rate for Foreign Currency} & $\mathbf{= \text{FC } \dots\dots \quad [3]}$ \\
+    \midrule
+    \textbf{Forward TT Selling Rate for Foreign Currency} $= [1] \div [3]$ & $\mathbf{= \text{Rs. } \dots\dots^\ast \quad [4]}$ \\
+    \textbf{Forward Bill Selling Rate for Foreign Currency} $= [2] \div [3]$ & $\mathbf{= \text{Rs. } \dots\dots^\ast \quad [5]}$ \\
+    \bottomrule
+\end{tabularx}\\[0.3em]
+{\footnotesize $^\ast$Rounded off to the nearest multiple of $0.0025$ when quoted to the customer.}
+\end{center}
+
+\clearpage
+
+\begin{example}{Forward Purchase of Export Bill in Singapore Dollars}{ex_forward_bill_sgd}
+\textbf{Problem Statement:}\\
+An export customer requests an authorized dealer bank to book a forward contract for an export bill of $\text{SGD } 1{,}00{,}000$. The bill is drawn under an irrevocable Letter of Credit with a usance period of 4 months and 5 days sight. The normal transit period is 25 days.
+
+The ongoing interbank market rates are quoted as follows:
+\begin{align*}
+    \text{USD/INR Spot} &= 96.4875 / 4925 \\
+    \text{USD/INR Spot / July Forward Margin} &= 0.4600 / 0.4800 \\
+    \text{USD/SGD Spot} &= 1.4004 / 1.4078 \\
+    \text{USD/SGD 5-Month Forward Margin} &= 0.0235 / 0.0265
+\end{align*}
+Assuming an exchange margin of $0.10\%$ is required, calculate the forward exchange rate quoted to the customer and the total rupee amount payable, given that the bank covers the USD/INR leg for July and the USD/SGD leg for 5 months.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Total Duration Determination:}\\
+\begin{align*}
+    \text{Total Duration} &= \text{Usance Period } (4\text{ months } 5\text{ days}) + \text{Transit Period } (25\text{ days}) \\
+                          &= 4\text{ months } 30\text{ days} = \mathbf{5 \text{ months}}
+\end{align*}
+The bank covers the USD/INR leg in the Mumbai market for July (premium $= 0.4600$) and the USD/SGD leg in the Singapore market for 5 months (premium $= 0.0235$).
+
+\noindent\textbf{2. Accounting Ledger Computation:}
+\begin{center}
+\begin{tabularx}{0.96\linewidth}{Xrr}
+    \toprule
+    \textbf{Particulars} & \textbf{INR} & \textbf{SGD} \\
+    \midrule
+    \textbf{Stage 1: Domestic Interbank Dollar Buying Rate} & & \\
+    USD/INR Spot Buying Rate (Bid) & 96.4875 & \\
+    \textit{Add:} Forward Premium for July & 0.4600 & \\
+    \midrule
+    \textbf{Gross Forward Buying Rate for Dollar} & 96.9475 & \\
+    \textit{Less:} Exchange Margin @ 0.10\% on 96.9475 ($96.9475 \times 0.0010$) & 0.0970 & \\
+    \midrule
+    \textbf{Net Forward Buying Rate for Dollar [1]} & \textbf{96.8505} & \\
+    \midrule
+    \textbf{Stage 2: Overseas Interbank Dollar Selling Rate} & & \\
+    USD/SGD Spot Selling Rate (Ask) & & 1.4078 \\
+    \textit{Add:} Forward Premium for 5 Months & & 0.0235 \\
+    \midrule
+    \textbf{Forward Selling Rate for Dollar against SGD [2]} & & \textbf{1.4313} \\
+    \midrule
+    \textbf{Stage 3: Synthesized SGD Forward Buying Rate} & & \\
+    $\text{Forward Buying Rate for SGD} = [1] \div [2] = \frac{96.8505}{1.4313}$ & & \textbf{67.6661} \\
+    \textbf{Quoted Rate (Rounded off to nearest multiple of 0.0025)} & & \textbf{67.6625} \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent\textbf{3. Total Rupee Amount Payable to Customer:}
+\begin{equation}
+    \text{Rupee Amount Payable} = \text{SGD } 1{,}00{,}000 \times 67.6625 = \mathbf{\inr 67{,}66{,}250}
+\end{equation}
+The customer receives $\mathbf{\inr 67{,}66{,}250}$ upon realization of the Singapore Dollar export bill.
+\end{example}
+

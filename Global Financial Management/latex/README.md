@@ -99,10 +99,24 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - Fixed Forward Contracts vs. Option Forward Contracts (statutory maximum 1 calendar month option delivery window).
   - TikZ Timeline 2.7: Symmetrical chronological delivery horizon architecture under FEDAI Rule 7 with side-by-side fixed vs. option cards.
   - *Lecture Date:* `24/09/2026`.
+- **2.9 Forward Merchant Rates and Delivery Option Mechanics**
+  - Forward Bill Buying Rate formulation with transit and usance tenors.
+  - Statutory fractional forward margin rounding convention: Premium points rounded down to lower whole month ($\lfloor M \rfloor$); Discount points rounded up to higher whole month ($\lceil M \rceil$).
+  - Solved Example 2.9.1: Demand Bill and 60-day Usance Bill on New York for USD 25,000 with 25-day transit period (formatted in standard accounting ledger tables).
+  - Delivery Option Forward Contracts: Market risk exposure, asymmetrical exercise flexibility, and FEDAI "Worst-Of" statutory pricing principle.
+  - TikZ Architecture 2.8: Symmetrical 4-quadrant FEDAI option forward margin selection decision architecture.
+  - Solved Example 2.9.2: Option forward contract for export bill on New York for USD 65,000 with September delivery option window (formatted in standard accounting ledger table).
+  - *Lecture Dates:* `08/10/2026` & `12/10/2026`.
+- **2.10 Forward Exchange Rates Based on Cross Rates**
+  - Principles of cross-rate forward quotations and dual-tier wholesale covering (Domestic Interbank USD/INR leg in Mumbai + Overseas USD/FC leg in Singapore/Tokyo/London).
+  - TikZ Architecture 2.9: Symmetrical dual-leg wholesale covering architecture for forward cross-rate contracts.
+  - Textbook Pro-Forma Formats: Standardized FEDAI computation templates (Format 9.1 for Forward Buying Rate; Format 9.2 for Forward Selling Rate).
+  - Solved Example 2.10.1: Forward purchase of export bill in Singapore Dollars for SGD 1,00,000 with 4-month 5-day sight and 25-day transit (5 months total; USD/INR July leg covered in Mumbai and USD/SGD 5-month leg covered in Singapore; formatted in standard accounting ledger table).
+  - *Lecture Date:* `14/10/2026`.
 
 ### **Consolidated Formula Reference Sheet (Rule 5)**
 - Placed at document end (`chapters/formula_reference.tex`).
-- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, and FEDAI Rule 7 delivery horizons with explicit structured `Where:` parameter definitions and unnumbered equations.
+- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, FEDAI Rule 7 delivery horizons, forward merchant bill rates with transit/usance tenors, FEDAI option delivery margin selection rules, and cross-rate forward conversion identities with explicit structured `Where:` parameter definitions and unnumbered equations.
 
 ---
 
@@ -119,7 +133,7 @@ latex/
 │   └── syllabus.tex                                   # Official MSQF 535 syllabus & CO-PO matrix
 ├── chapters/
 │   ├── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 07/09/2026)
-│   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 24/09/2026)
+│   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 14/10/2026)
 │   └── formula_reference.tex                          # Consolidated Multi-Chapter Formula Reference Sheet (Rule 5)
 ├── figures/                                           # Department & University logos
 └── README.md                                          # Documentation & compilation instructions

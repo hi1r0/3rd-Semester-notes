@@ -12,7 +12,7 @@
 | Directory / File | Description |
 | :--- | :--- |
 | [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I (International Financial Architecture & Balance of Payments) and Unit II (Foreign Exchange Market), with compiled [`main.pdf`](./latex/main.pdf). |
-| [`latex/README.md`](./latex/README.md) | Detailed syllabus coverage, chronological lecture dates (`18/08/2026` to `24/09/2026`), FEDAI Rule 7, and LaTeX build instructions. |
+| [`latex/README.md`](./latex/README.md) | Detailed syllabus coverage, chronological lecture dates (`18/08/2026` to `14/10/2026`), FEDAI Rules, and LaTeX build instructions. |
 | [`assignment/`](./assignment/) | Empirical research monograph on Foreign Direct Investment (FDI) in Switzerland (2015–2024) with compiled 13-page [`main.pdf`](./assignment/main.pdf). |
 | [`assignment/README.md`](./assignment/README.md) | Monograph summary, empirical findings, SNB data synthesis, and compilation commands. |
 | [`assignment/swiss_fdi_data/`](./assignment/swiss_fdi_data/) | Official Swiss National Bank (SNB) data cubes (2015–2024) and automated API extraction script ([`fetch_swiss_fdi.py`](./assignment/swiss_fdi_data/fetch_swiss_fdi.py)). |
@@ -36,6 +36,8 @@
    - Covered Interest Parity (CIP) and forward margins/swap points.
    - Indian merchant rates under FEDAI guidelines: TT Buying, Bill Buying, TT Selling, and Bill Selling rates with standardized pro-forma accounting ledgers.
    - Ready cross rates, foreign demand draft cancellations, and forward exchange delivery horizons under FEDAI Rule 7.
+   - Forward merchant rates with transit & usance tenors, fractional margin rounding conventions, and option forward contracts under the FEDAI "Worst-Of" principle.
+   - Forward cross-rate synthesis and dual-leg wholesale covering (Mumbai USD/INR + Overseas USD/FC) with standard pro-forma accounting templates.
 3. **Swiss FDI Empirical Monograph (2015–2024)**
    - Analysis of SNB capital stocks, flows, investment income, and Ultimate Beneficial Owner (UBO) conduit dynamics.
    - Sectoral allocations, global labor multipliers of Swiss multinational enterprises, and econometric determinants.

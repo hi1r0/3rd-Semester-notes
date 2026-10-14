@@ -174,3 +174,56 @@ This section consolidates all mathematical formulas, pricing relationships, valu
     \item $\text{Option Delivery Period}$: Flexible window within which customer may deliver foreign exchange.
 \end{itemize}
 \end{formulabox}
+
+\begin{formulabox}[Forward Merchant Bill Buying Rate with Transit and Usance Tenors]
+\begin{equation*}
+    \text{Forward Bill Buying Rate} = \left( \Spot_{\text{Bid}} \pm \text{Swap Points}_{M} \right) - \left[ \left( \Spot_{\text{Bid}} \pm \text{Swap Points}_{M} \right) \times m \right]
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\Spot_{\text{Bid}}$: Interbank spot buying (bid) base rate for US Dollars.
+    \item $\text{Swap Points}_{M}$: Monthly forward margin where tenor $M = \text{Forward Period} + \text{Transit Period} + \text{Usance Period}$.
+    \item $\text{Ascending Margins (Premium)}$: Add premium; fractional duration rounded down to lower whole month ($M \leftarrow \lfloor M \rfloor$).
+    \item $\text{Descending Margins (Discount)}$: Deduct discount; fractional duration rounded up to higher whole month ($M \leftarrow \lceil M \rceil$).
+    \item $m$: Statutory exchange margin percentage (e.g., $0.10\%$).
+    \item $\text{Rounding Rule}$: Final merchant quote rounded to nearest multiple of $0.0025$.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[FEDAI Option Forward Delivery Margin Selection Rule]
+\begin{align*}
+    &\textbf{Bank Purchases FX (Merchant Sells):} \\
+    &\quad \begin{cases}
+        \text{FC at Premium} \implies \text{Earliest Option Date } (\text{Lowest Premium Paid}) \\
+        \text{FC at Discount} \implies \text{Latest Option Date } (\text{Highest Discount Deducted})
+    \end{cases} \\[0.4em]
+    &\textbf{Bank Sells FX (Merchant Buys):} \\
+    &\quad \begin{cases}
+        \text{FC at Premium} \implies \text{Latest Option Date } (\text{Highest Premium Charged}) \\
+        \text{FC at Discount} \implies \text{Earliest Option Date } (\text{Lowest Discount Allowed})
+    \end{cases}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\text{Option Delivery Window}$: Contractual execution window not exceeding $1 \text{ calendar month}$.
+    \item $\text{Principle of Quotation}$: Quoting dealer prices assuming merchant exercises option on date least favorable to bank.
+    \item $\text{Ascending Points}$: Indicates foreign currency forward premium.
+    \item $\text{Descending Points}$: Indicates foreign currency forward discount.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Cross-Rate Forward Merchant Conversion Identity]
+\begin{align*}
+    \Forward_{\text{Buying (FC)}} &= \frac{\Forward_{\text{Domestic Interbank Buying (USD/INR)}}}{\Forward_{\text{Overseas Interbank Selling (USD/FC)}}} \\[0.5em]
+    \Forward_{\text{Selling (FC)}} &= \frac{\Forward_{\text{Domestic Interbank Selling (USD/INR)}}}{\Forward_{\text{Overseas Interbank Buying (USD/FC)}}}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\Forward_{\text{Domestic Interbank Buying (USD/INR)}}$: Mumbai forward dollar buying rate (Spot Bid $\pm$ forward margin less margin).
+    \item $\Forward_{\text{Overseas Interbank Selling (USD/FC)}}$: Overseas market forward dollar selling rate (Spot Ask $\pm$ overseas forward margin).
+    \item $\Forward_{\text{Domestic Interbank Selling (USD/INR)}}$: Mumbai forward dollar selling rate (Spot Ask $\pm$ forward margin plus margin).
+    \item $\Forward_{\text{Overseas Interbank Buying (USD/FC)}}$: Overseas market forward dollar buying rate (Spot Bid $\pm$ overseas forward margin).
+    \item $\text{Rounding Convention}$: Final synthesized cross-rate rounded to nearest multiple of $0.0025$.
+\end{itemize}
+\end{formulabox}
+
