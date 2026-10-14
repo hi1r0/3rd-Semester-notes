@@ -650,3 +650,225 @@ The MM hypothesis is theoretical. In real-world capital markets, its validity is
     \item \textbf{Financing and Investment Separation:} MM assumes real investment policy is predetermined and invariant to dividend choices, whereas capital rationing often forces firms to curb investments if cash is paid out as dividends.
 \end{enumerate}
 \end{example}
+
+% ==============================================================================
+% 2.7 Bond Valuation & Yield to Call (YTC)
+% ==============================================================================
+\section{Bond Valuation \& Yield to Call (YTC)}
+\lecturedate{22/09/2026}
+
+\begin{definition}{Callable Bond \& Yield to Call (YTC)}{def_ytc}
+A \textbf{Callable Bond} grants the issuing corporation the contractual right (option) to repurchase (call back) and retire the debt obligation prior to its contractual maturity date at a predetermined call price ($CP$).
+
+The \textbf{Yield to Call ($\YTC$)} measures the annualized rate of return realized by an investor who purchases a callable bond at its current market price ($P_0$) and holds it until the company exercises its call option, receiving contractual periodic coupon payments plus a terminal call price that typically includes a call penalty fee.
+\end{definition}
+
+\begin{formulabox}[Yield to Call (YTC) Formulations]
+\paragraph{a. Approximate Yield to Call Formula}
+For rapid practical analysis, the annualized $\YTC$ is estimated using the standard average yield approximation:
+\begin{equation}
+    \text{Approximate } \YTC = \frac{C + \dfrac{CP - P_0}{N_c}}{\dfrac{CP + P_0}{2}}
+\end{equation}
+where:
+\begin{itemize}[noitemsep]
+    \item $C = \text{Annual coupon payment } (\text{Coupon Rate} \times \text{Par Value})$
+    \item $CP = \text{Call price paid at redemption} = \text{Par Value} + \text{Call Penalty Fee}$
+    \item $P_0 = \text{Current purchase / market price of the bond}$
+    \item $N_c = \text{Number of years remaining from purchase until the call date}$
+\end{itemize}
+
+\vspace{0.3em}
+\paragraph{b. Exact Discounted Cash Flow Equation}
+The exact $\YTC$ is the internal rate of return equating the present value of coupon and call cash flows to the purchase price:
+\begin{equation}
+    P_0 = \sum_{t=1}^{N_c} \frac{C}{(1 + \YTC)^t} + \frac{CP}{(1 + \YTC)^{N_c}}
+\end{equation}
+\end{formulabox}
+
+\subsection{Comparative Analysis: Yield to Maturity (YTM) vs. Yield to Call (YTC)}
+The primary distinction between $\YTM$ and $\YTC$ centers on the expected holding horizon and the terminal payoff structure:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Dimension} & \textbf{Yield to Maturity ($\YTM$)} & \textbf{Yield to Call ($\YTC$)} \\
+\midrule
+\textbf{Holding Horizon} & Investor holds the bond until official maturity date ($N$). & Shorter holding period terminating at designated call date ($N_c < N$). \\
+\textbf{Terminal Payout} & Exact par face value ($\text{Par}$). & Elevated call price with call penalty fee ($CP > \text{Par}$). \\
+\textbf{Discount Bond ($P_0 < \text{Par}$)} & Lower capital appreciation rate amortized across full horizon $N$. & $\mathbf{\YTC \ge \YTM}$ --- Capital discount is recovered over a shorter horizon $N_c$ alongside penalty. \\
+\textbf{Premium Bond ($P_0 > \text{Par}$)} & Higher annualized yield distributed across longer tenure. & $\mathbf{\YTC \le \YTM}$ --- Purchase premium is written off rapidly across shorter horizon $N_c$. \\
+\bottomrule
+\end{tabularx}
+\caption{Comparative Matrix: Yield to Maturity ($\YTM$) vs. Yield to Call ($\YTC$)}
+\label{tab:ytm_vs_ytc}
+\end{table}
+
+\lecturedate{22/09/2026}
+\begin{example}{Determination of Yield to Call (YTC) vs. Yield to Maturity (YTM)}{ex_ytc_calculation}
+\textbf{Problem:} \\
+A bond with a par value of $\usd 1{,}000$ and an annual coupon rate of $5\%$ is currently trading at a $10\%$ discount to its par value. The bond was purchased on 31/12/2023 with a contractual maturity date of 31/12/2033 ($10$-year maturity period).
+
+The issuing corporation retains a call option to retire the bond early on 31/12/2027 ($4$ years after purchase) subject to a call penalty fee of $3\%$.
+\begin{enumerate}[label=(\alph*), noitemsep]
+    \item Determine the current market purchase price ($P_0$) and the call price ($CP$).
+    \item Calculate the approximate Yield to Call ($\YTC$).
+    \item Calculate the approximate Yield to Maturity ($\YTM$) and verify the yield relationship.
+\end{enumerate}
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Par Face Value ($\text{Par}$) = $\usd 1{,}000$
+    \item Current Market Price ($P_0$) = $\usd 1{,}000 \times (1 - 0.10) = \usd 900$
+    \item Annual Coupon Rate = $5\% \implies C = 5\% \times \usd 1{,}000 = \usd 50$
+    \item Maturity Tenure ($N$) = $10$ years (from 31/12/2023 to 31/12/2033)
+    \item Call Horizon ($N_c$) = $4$ years (from 31/12/2023 to 31/12/2027)
+    \item Call Penalty Fee = $3\% \times \usd 1{,}000 = \usd 30$
+    \item Call Redemption Price ($CP$) = $\usd 1{,}000 + \usd 30 = \usd 1{,}030$
+\end{itemize}
+
+\textbf{Calculations:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Approximate Yield to Call ($\YTC$):}
+    \begin{align*}
+        \text{Approximate } \YTC &= \frac{C + \dfrac{CP - P_0}{N_c}}{\dfrac{CP + P_0}{2}} = \frac{50 + \dfrac{1{,}030 - 900}{4}}{\dfrac{1{,}030 + 900}{2}} \\[0.5em]
+        &= \frac{50 + \dfrac{130}{4}}{\dfrac{1{,}930}{2}} = \frac{50 + 32.50}{965} = \frac{82.50}{965} \approx \mathbf{0.08549} \quad (\mathbf{8.55\%})
+    \end{align*}
+
+    \item \textbf{Approximate Yield to Maturity ($\YTM$):}
+    \begin{align*}
+        \text{Approximate } \YTM &= \frac{C + \dfrac{\text{Par} - P_0}{N}}{\dfrac{\text{Par} + P_0}{2}} = \frac{50 + \dfrac{1{,}000 - 900}{10}}{\dfrac{1{,}000 + 900}{2}} \\[0.5em]
+        &= \frac{50 + \dfrac{100}{10}}{\dfrac{1{,}900}{2}} = \frac{50 + 10}{950} = \frac{60}{950} \approx \mathbf{0.06316} \quad (\mathbf{6.32\%})
+    \end{align*}
+\end{enumerate}
+
+\textbf{Conclusion \& Analytical Interpretation:} \\
+Because the bond trades at a $10\%$ discount to par value ($P_0 = \usd 900 < \usd 1{,}000$), the investor benefits from accelerated capital appreciation over the compressed $4$-year call period plus the $3\%$ penalty premium, yielding:
+\begin{equation*}
+    \YTC \; (8.55\%) > \YTM \; (6.32\%)
+\end{equation*}
+This validates the fundamental pricing theorem: \textit{for a discount bond, the Yield to Call strictly exceeds the Yield to Maturity ($\YTC \ge \YTM$)}.
+\end{example}
+
+% ==============================================================================
+% 2.8 Loan Amortization Models
+% ==============================================================================
+\section{Loan Amortization Models}
+\lecturedate{23/09/2026}
+
+\begin{definition}{Loan Amortization}{def_loan_amortization}
+\textbf{Loan Amortization} is the quantitative process of extinguishing a financial debt obligation over a predetermined horizon through a schedule of uniform periodic installments ($A$).
+
+Each periodic payment covers:
+\begin{enumerate*}[label=(\roman*), itemjoin=\quad]
+    \item the interest accrued on the outstanding principal balance, and
+    \item a partial repayment of the principal sum borrowed.
+\end{enumerate*}
+\end{definition}
+
+\begin{formulabox}[Loan Amortization Mathematical Mechanics]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Equated Periodic Installment ($A$):} Derived from the present value of an ordinary annuity:
+    \begin{equation}
+        A = \frac{P_0}{\PVAF(r, n)} = P_0 \left[ \frac{r}{1 - (1 + r)^{-n}} \right]
+    \end{equation}
+    where $P_0$ is the initial loan principal sum, $r$ is the periodic interest rate, and $n$ is the total number of repayment periods.
+
+    \item \textbf{Periodic Interest Component ($I_t$):} Interest due in period $t$ based on unamortized balance $B_{t-1}$:
+    \begin{equation}
+        I_t = B_{t-1} \times r
+    \end{equation}
+    Because the loan balance $B_{t-1}$ declines with each repayment, $I_t$ \textbf{strictly decreases} monotonically over time.
+
+    \item \textbf{Periodic Principal Repayment Component ($\Delta B_t$):}
+    \begin{equation}
+        \Delta B_t = A - I_t = A - (B_{t-1} \times r)
+    \end{equation}
+    Because total installment $A$ is constant and $I_t$ declines, $\Delta B_t$ \textbf{strictly increases} monotonically over time.
+
+    \item \textbf{Remaining Unamortized Debt Balance ($B_t$):}
+    \begin{equation}
+        B_t = B_{t-1} - \Delta B_t = B_{t-1}(1 + r) - A \implies B_n = 0
+    \end{equation}
+\end{itemize}
+\end{formulabox}
+
+\subsection{Taxonomy of Amortization Loans}
+Corporate and retail credit structures employ four primary amortization archetypes:
+\begin{enumerate}[leftmargin=*, topsep=3pt, itemsep=4pt]
+    \item \textbf{Fixed-Rate Fully Amortized Loans:} The contractual interest rate and periodic debt-service payment ($A$) remain constant across the entire horizon. Early payments consist primarily of interest, while later payments consist overwhelmingly of principal liquidation.
+    \item \textbf{Variable / Adjustable-Rate Loans (ARM):} The interest rate resets periodically based on benchmark interbank references (e.g. SOFR, Treasury yield). Periodic payment amounts adjust at specified intervals to preserve full amortization by maturity.
+    \item \textbf{Bullet / Balloon Loans:} Equal periodic payments cover interest obligations only (or minimal amortizing principal), leaving a substantial terminal lump sum (the ``balloon balance'') payable upon final contractual maturity.
+    \item \textbf{Negative Amortization Loans:} Periodic installment payments are set below the accrued periodic interest ($A < I_t$). The unserviced interest is capitalized into the loan principal base, causing total outstanding debt to grow ($B_t > B_{t-1}$) rather than amortize.
+\end{enumerate}
+
+\subsection{Strategic Importance \& Corporate Advantages of Amortization}
+\begin{itemize}[leftmargin=*, noitemsep, topsep=2pt]
+    \item \textbf{Predictable Payment Schedule:} Facilitates long-term corporate liquidity planning, cash flow forecasting, and working capital stability.
+    \item \textbf{Reduced Financial Burden over Time:} Steady principal liquidation continuously curtails the interest-bearing debt base, reducing aggregate interest expense.
+    \item \textbf{Credit Score \& Debt Capacity Enhancement:} Consistent, timely amortization establishes verifiable creditworthiness and builds corporate borrowing headroom.
+    \item \textbf{Debt Accumulation Avoidance:} Enforces disciplined capital retirement, preventing perpetual refinancing traps and liquidity crises at maturity.
+\end{itemize}
+
+% ==============================================================================
+% 2.9 Price-Earnings (P/E) Valuation Model & Earnings Per Share (EPS)
+% ==============================================================================
+\section{Price-Earnings Valuation Model \& Earnings Per Share}
+\lecturedate{08/10/2026}
+
+\begin{definition}{Price-Earnings Ratio (P/E Ratio) \& EPS}{def_pe_ratio}
+The \textbf{Price-Earnings Ratio (P/E Ratio)} is a market-based equity valuation multiple expressing the proportional relationship between the current market price of an equity share and its underlying earnings per share ($\EPS$). It reflects the valuation multiplier the capital market assigns to each rupee of earnings generated by the firm.
+\end{definition}
+
+\begin{formulabox}[P/E Ratio and Earnings Per Share Formulations]
+\paragraph{a. Price-Earnings Ratio (P/E)}
+\begin{equation}
+    \text{P/E Ratio} = \frac{\text{Market Price per Equity Share } (\MPS)}{\text{Earnings per Equity Share } (\EPS)}
+\end{equation}
+
+\vspace{0.3em}
+\paragraph{b. Earnings per Share (EPS)}
+For an enterprise with ordinary equity capital:
+\begin{equation}
+    \EPS = \frac{\text{Net Income Available to Equity Holders}}{\text{Total Number of Outstanding Equity Shares}}
+\end{equation}
+In corporate capital structures with preference share capital:
+\begin{equation}
+    \EPS = \frac{\text{Net Profit After Tax } (\NPAT) - \text{Preference Dividend}}{\text{Number of Equity Shares Outstanding}}
+\end{equation}
+\end{formulabox}
+
+\subsection{Managerial Utility \& Investor Interpretation of the P/E Ratio}
+\begin{itemize}[leftmargin=*, noitemsep, topsep=2pt]
+    \item \textbf{Investment Decision Support:} Serves as a primary screening metric for individual and institutional investors to gauge whether an equity security is trading at an attractive earnings valuation relative to industry peers.
+    \item \textbf{Comprehensive Success Metric:} The $\EPS$ reflects owner-centric profitability, while the $\text{P/E}$ ratio synthesizes market perception of future growth prospects, business quality, and operational risk.
+    \item \textbf{Valuation Multiple Interpretation:} A $\text{P/E}$ ratio of $k$ signifies that investors in the secondary market are willing to pay $\inr k$ in capital outlay for every $\inr 1$ of current annual net earnings produced by the firm.
+\end{itemize}
+
+\lecturedate{08/10/2026}
+\begin{example}{Calculation and Economic Interpretation of P/E Ratio}{ex_pe_ratio}
+\textbf{Problem:} \\
+A company's equity shares are currently trading in the secondary market at $\inr 100$ per share. The company reports an Earnings Per Share ($\EPS$) of $\inr 5.00$ for the financial year.
+\begin{enumerate}[label=(\alph*), noitemsep]
+    \item Compute the company's Price-Earnings ($\text{P/E}$) ratio.
+    \item State the economic meaning and practical conclusion of the computed multiple from an investor's perspective.
+\end{enumerate}
+
+\tcbline
+\textbf{Given Data:}
+\begin{itemize}[noitemsep]
+    \item Current Market Price per Share ($\MPS$) = $\inr 100$
+    \item Earnings per Share ($\EPS$) = $\inr 5$
+\end{itemize}
+
+\textbf{Calculation:}
+\begin{equation*}
+    \text{P/E Ratio} = \frac{\MPS}{\EPS} = \frac{100}{5} = \mathbf{20}
+\end{equation*}
+
+\textbf{Conclusion \& Practical Interpretation:} \\
+The firm's Price-Earnings ratio is $\mathbf{20}$. This indicates that investors are willing to pay $\mathbf{\inr 20}$ in market price for every $\mathbf{\inr 1}$ of annual net profit earned by the company. Alternatively, it reflects an underlying earnings capitalization yield of $\frac{1}{\text{P/E}} = \frac{1}{20} = 5\%$.
+\end{example}
