@@ -1,29 +1,30 @@
-# Design Document: FinMetrics-PU Corporate Internship High-End LaTeX Slide Deck
+# Design Document: FinMetrics-PU Corporate Internship High-End LaTeX Slide Deck (Updated)
 
 **Date:** 2026-10-15  
 **Topic:** FinMetrics-PU High-End LaTeX Slides for Corporate Internship  
 **Directory Target:** `D:\MSQF\Semester III\Coporate Internship`  
 **Reference Material:** `FinMetrics_PU_Algorithms_and_Mechanism.pptx`, `https://github.com/hi1r0/finmetrics-PU`  
+**Palette Revision:** Pure Monochromatic Emerald & Jade (Zero Gold)
 
 ---
 
 ## 1. Executive Summary & Objectives
 
-The goal is to design, implement, and compile a presentation slide deck in LaTeX Beamer for the Corporate Internship defense in M.Sc. Quantitative Finance at Pondicherry University. 
+The goal is to design, implement, and compile an executive-grade presentation slide deck in LaTeX Beamer for the Corporate Internship defense in M.Sc. Quantitative Finance at Pondicherry University. 
 
-The deck is based on **FinMetrics-PU: Cross-Sectional Financial Outlier Detection and Sector Benchmarking System for NSE Equities**. It translates the high-level concepts from `FinMetrics_PU_Algorithms_and_Mechanism.pptx` into mathematically rigorous, publication-grade slides with custom TikZ architecture diagrams, balanced multi-pillar metric cards, and a sophisticated color scheme.
+The deck is based on **FinMetrics-PU: Cross-Sectional Financial Outlier Detection and Sector Benchmarking System for NSE Equities**. It translates the high-level concepts from `FinMetrics_PU_Algorithms_and_Mechanism.pptx` into mathematically rigorous, publication-grade slides with custom TikZ architecture diagrams, balanced multi-pillar metric cards, and a cohesive, pure green quantitative color scheme.
 
 ---
 
-## 2. Visual Aesthetic & Color Palette: "Executive Quant Emerald & Gold"
+## 2. Visual Aesthetic & Color Palette: "Pure Monochromatic Emerald & Jade"
 
-The presentation implements a bespoke Beamer style tailored to quantitative finance, balancing deep organic forest emeralds with crisp mathematical readability:
+Per explicit user direction, all warm gold/amber tones are replaced with a sophisticated monochromatic green-emerald spectrum:
 
 - **Primary Brand / Structure (`deepemerald`):** `#064E3B` / `RGB(6, 78, 59)` — Slide titles, structural header bars, major framing borders.
 - **Secondary Tone (`forestgreen`):** `#0D5C3A` / `RGB(13, 92, 58)` — Section banners, card title text, primary TikZ nodes.
+- **Vibrant Accent / Badges (`jade`):** `#059669` / `RGB(5, 150, 105)` — Replaces gold entirely. Used for formula badges, active pipeline nodes, key mathematical variables, tags, and contrast markers.
 - **Card Fill (`lightsage`):** `#EBF5EE` / `RGB(235, 245, 238)` — Soft, glare-free container background for content cards and formula boxes.
 - **Card Border (`mintborder`):** `#A7F3D0` / `RGB(167, 243, 208)` — Subtle, crisp $0.8\,\text{pt}$ outline ensuring card definition without visual heaviness.
-- **Highlight / Alert (`accentgold`):** `#D97706` / `RGB(217, 119, 6)` — Formula badges, anomaly warning badges, key mathematical constants ($\kappa$, $\gamma$, $0.6745$).
 - **Slide Background (`paperbg`):** `#F7FBF9` / `RGB(247, 251, 249)` — Off-white soft mint parchment avoiding harsh screen glare.
 - **Primary Typography (`darkcharcoal`):** `#0F172A` / `RGB(15, 23, 42)` — High-contrast dark slate body and formula text.
 - **Muted Subtitles (`slatygray`):** `#475569` / `RGB(71, 85, 105)` — Slide subtitles, source tags, footnotes.
@@ -40,8 +41,8 @@ The presentation implements a bespoke Beamer style tailored to quantitative fina
 
 All diagrams and parallel cards adhere strictly to the repository formatting invariants:
 1. **Uniform Box Dimensions (Symmetry):** Parallel cards and horizontal workflow stages share identical width and height calibrations.
-2. **Clearance & Arrow Spacing:** All inter-node connector stems maintain $\ge 0.6\,\text{cm}$ to $1.0\,\text{cm}$ clearance between card boundaries; arrowheads never squish against borders.
-3. **High-Contrast Connectors:** Arrow strokes are rendered with bold stroke widths ($\ge 1.2\,\text{pt}$ to $1.5\,\text{pt}$) using `deepemerald` or `accentgold`.
+2. **Clearance & Arrow Spacing:** All inter-node connector stems maintain $\ge 0.7\,\text{cm}$ to $1.0\,\text{cm}$ clearance between card boundaries; arrowheads never squish against borders.
+3. **High-Contrast Connectors:** Arrow strokes are rendered with bold stroke widths ($\ge 1.3\,\text{pt}$ to $1.5\,\text{pt}$) using `deepemerald` or `jade`.
 4. **No Double-Numbering:** Headers rely entirely on Beamer's automatic framing.
 
 ---
@@ -70,13 +71,13 @@ The deck comprises exactly 11 focused, high-density slides:
   2. *Statistical Vulnerabilities (Mean Distortion)*: Failure of Gaussian assumption $X \sim \mathcal{N}(\mu, \sigma^2)$ in heavy-tailed corporate ratios; skewness induced by single distressed firms.
   3. *Enterprise Analytical Requirements*: Non-parametric robust dispersion, multi-tier anomaly consensus, automated executive synthesis.
 
-### Slide 3: End-to-End System Architecture (TikZ Pipeline)
-- Full-width 4-stage TikZ pipeline:
+### Slide 3: End-to-End System Architecture (TikZ 4-Stage Horizontal Pipeline)
+- Full-width 4-stage horizontal TikZ pipeline with $\ge 0.7\,\text{cm}$ connector clearance:
   - Stage 1: Data Acquisition (`SectorLoader` + `yfinance` + Parquet Cache)
   - Stage 2: Financial Parsing (`FinancialParser` + Canonical Alias Mapping)
   - Stage 3: Analytical Core (`RatioEngine` + `OutlierEngine` + `BenchmarkCore`)
   - Stage 4: Reporting & Delivery (`GeminiAIHandler` + `ReportGenerator` + Streamlit)
-- Accompanying architectural summary card highlighting asynchronous caching and decoupled micro-layers.
+- Architectural summary container card underneath highlighting asynchronous caching, safe division, and decoupled micro-layers.
 
 ### Slide 4: Ratio Engine Mechanism & Mathematical Guardrails
 - Five-Pillar analytical framework:
@@ -154,7 +155,7 @@ D:\MSQF\Semester III\Coporate Internship\
 |-- README.md                        # Documentation of presentation structure & compilation
 |-- preamble\
 |   |-- packages.tex                 # Core Beamer, TikZ, and tcolorbox imports
-|   |-- theme.tex                    # Custom Beamer theme, color definitions, header/footer
+|   |-- theme.tex                    # Custom Beamer theme, Emerald/Jade palette, header/footer
 |   |-- macros.tex                   # Presenter metadata, mathematical operators, card macros
 |-- slides\
 |   |-- slide01_title.tex
