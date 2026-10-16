@@ -1,0 +1,67 @@
+% ==============================================================================
+% Slide 05: Statistical Anomaly Algorithms (Tukey IQR & MAD Z-Score)
+% ==============================================================================
+\begin{frame}{Statistical Anomaly Algorithms}{Non-Parametric Robust Dispersion Resists Heavy-Tailed Financial Skew}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: Tukey IQR Fences
+        \begin{column}{0.485\textwidth}
+            \begin{mathcard}[height=5.4cm]{1. Tukey Fences (Interquartile Range)}
+                \fontsize{6.5pt}{8.2pt}\selectfont
+                Quantifies spread across middle $50\%$ of peer sector:
+                \begin{equation*}
+                    \IQR = Q_3 - Q_1
+                \end{equation*}
+                \textbf{\color{deepemerald}Inner Fence Thresholds:}
+                \begin{align*}
+                    \mathcal{F}_{\text{lower}} &= Q_1 - 1.5 \times \IQR \\
+                    \mathcal{F}_{\text{upper}} &= Q_3 + 1.5 \times \IQR
+                \end{align*}
+                \begin{equation*}
+                    \text{Flag}(x_i) = 
+                    \begin{cases} 
+                        \text{Outlier} & \text{if } x_i \notin [\mathcal{F}_{\text{lower}}, \mathcal{F}_{\text{upper}}] \\
+                        \text{Normal} & \text{otherwise}
+                    \end{cases}
+                \end{equation*}
+                \vspace{2pt}
+                \textbf{\color{deepemerald}Key Financial Property:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Completely invariant to extreme outliers in the top $25\%$ or bottom $25\%$ tails.
+                    \item Computationally fast for cross-sectional screening.
+                \end{itemize}
+                \vfill
+                \badge[jade]{50\% Central Bracket Invariant}
+            \end{mathcard}
+        \end{column}
+
+        % Column 2: Modified MAD Z-Score
+        \begin{column}{0.485\textwidth}
+            \begin{mathcard}[height=5.4cm]{2. Modified Z-Score (MAD)}
+                \fontsize{6.5pt}{8.2pt}\selectfont
+                Median Absolute Deviation replaces mean and variance:
+                \begin{equation*}
+                    \MAD = \median\Big(\big|x_i - \median(X)\big|\Big)
+                \end{equation*}
+                \textbf{\color{deepemerald}Scaled Modified Z-Score Formula:}
+                \begin{equation*}
+                    M_i = \frac{0.6745 \times \big(x_i - \median(X)\big)}{\MAD}, \quad |M_i| > 3.5 \implies \text{Outlier}
+                \end{equation*}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}Mathematical Rationale for 0.6745:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item For $X \sim \mathcal{N}(\mu, \sigma^2)$, $\mathbb{E}[\MAD] = \Phi^{-1}(0.75)\,\sigma \approx 0.6745\,\sigma$.
+                    \item Scale factor ensures $M_i \approx Z_i$ under Gaussian convergence while preserving high 50\% breakdown point.
+                \end{itemize}
+                \vfill
+                \badge[jade]{50\% Breakdown Point Resistance}
+            \end{mathcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.1cm}
+    \hfill \sourcepill{modules/outlier\_engine.py \& docs/02\_ratios\_and\_outliers.md}
+\end{frame}

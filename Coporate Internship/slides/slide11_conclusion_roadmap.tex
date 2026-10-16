@@ -1,0 +1,78 @@
+% ==============================================================================
+% Slide 11: Conclusion, Internship Learnings & Future Roadmap
+% ==============================================================================
+\begin{frame}{Conclusion \& Future Roadmap}{Transforming Raw NSE Filings into Automated Credit Risk Intelligence and Equity Alpha}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: Core Contributions & Quantitative Value
+        \begin{column}{0.485\textwidth}
+            \begin{quantcard}[height=4.0cm]{Core Internship Contributions}
+                \fontsize{6.3pt}{8pt}\selectfont
+                \textbf{\color{deepemerald}1. Robust Non-Parametric Engine}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Completely eliminated Gaussian mean distortion ($0\%$ breakdown) across heavy-tailed NSE equity filings.
+                    \item Delivered consensus outlier scoring combining Tukey IQR, MAD ($0.6745$), and Isolation Forest in $\mathbb{R}^{16}$.
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}2. Production Quant Finance Value}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Cuts institutional ratio screening latency from hours to $< 1.8\,\text{seconds}$.
+                    \item Detects cash-flow decoupling months before credit agency rating downgrades.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Algorithmic Value Delivery}
+            \end{quantcard}
+        \end{column}
+
+        % Column 2: Future Roadmap
+        \begin{column}{0.485\textwidth}
+            \begin{quantcard}[height=4.0cm]{Future Quantitative Extensions}
+                \fontsize{6.3pt}{8pt}\selectfont
+                \textbf{\color{deepemerald}1. Dynamic Concept Drift Tracking}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Adaptive percentile drift modeling across macro interest rate and RBI monetary policy cycles.
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}2. Systemic Graph Contagion Networks}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Graph Neural Networks (GNNs) modeling inter-firm supplier and banking debt contagion paths.
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}3. Alternative Textual ESG Auditing}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Fine-tuned FinBERT sentiment extraction on NSE annual report management MD\&A sections.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Next-Gen Quantitative Roadmap}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.15cm}
+
+    % Closing Banner
+    \begin{tcolorbox}[
+        enhanced,
+        colback=deepemerald,
+        colframe=forestgreen,
+        boxrule=0.8pt,
+        arc=3pt,
+        width=\textwidth,
+        left=8pt, right=8pt, top=4pt, bottom=4pt
+    ]
+        \centering
+        {\fontsize{9pt}{11pt}\selectfont\bfseries\color{white}Thank You \textbar\ Questions \& Discussion}\par
+        \vspace{2pt}
+        {\fontsize{6.5pt}{8pt}\selectfont\color{minttint}
+            \textbf{Pondicherry University} \textbar\ Department of Economics (MSQF) \textbar\ \texttt{\ProjectRepo}
+        }
+    \end{tcolorbox}
+\end{frame}

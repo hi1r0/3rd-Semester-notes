@@ -1,0 +1,78 @@
+% ==============================================================================
+% Slide 04: Ratio Engine Mechanism & Mathematical Guardrails
+% ==============================================================================
+\begin{frame}{Ratio Engine Mechanism}{Sixteen Core Ratios Span Five Weighted Analytical Pillars with Singularity Guards}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: The 5-Pillar Architecture
+        \begin{column}{0.54\textwidth}
+            \begin{quantcard}[height=5.4cm]{Five-Pillar Weighting Architecture}
+                \fontsize{6.2pt}{7.8pt}\selectfont
+                \textbf{\color{deepemerald}1. Profitability Pillar (Weight: 30\%)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Gross (20\%), Operating (25\%), Net Profit Margin (25\%)
+                    \item $\text{ROE} = \frac{\text{Net Income}}{\text{Total Equity}}$ (15\%), $\text{ROA} = \frac{\text{Net Income}}{\text{Total Assets}}$ (15\%)
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}2. Solvency \& Capital Structure (Weight: 25\%)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Debt-to-Equity ($\frac{D}{E}$), Debt Ratio ($\frac{D}{A}$), Interest Coverage ($\frac{\text{EBIT}}{\text{Interest}}$)
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}3. Growth Trajectory (Weight: 15\%)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item YoY Revenue Growth, Net Income Growth, Operating Cash Flow Growth
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}4. Liquidity Coverage (Weight: 15\%)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Current Ratio ($\frac{\text{CA}}{\text{CL}}$), Quick Ratio ($\frac{\text{Cash}+\text{AR}}{\text{CL}}$), Cash Ratio ($\frac{\text{Cash}}{\text{CL}}$)
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}5. Operating Efficiency (Weight: 15\%)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Asset Turnover ($\frac{\text{Revenue}}{\text{Assets}}$), Inventory Turnover ($\frac{\text{COGS}}{\text{Inventory}}$)
+                \end{itemize}
+            \end{quantcard}
+        \end{column}
+
+        % Column 2: Mathematical Guardrails & DuPont Alignment
+        \begin{column}{0.44\textwidth}
+            \begin{mathcard}[height=2.7cm]{Singularity Guardrail: safe\_divide}
+                \fontsize{6.5pt}{8.2pt}\selectfont
+                Guarantees zero-division and infinite singularity immunity:
+                \begin{equation*}
+                    \safedivide(a, b, \epsilon) = 
+                    \begin{cases} 
+                        \dfrac{a}{b} & \text{if } |b| > \epsilon \\[4pt]
+                        \text{NaN} & \text{if } |b| \le \epsilon \text{ or } b = \text{NaN}
+                    \end{cases}
+                \end{equation*}
+                Threshold $\epsilon = 10^{-9}$ preserves numerical stability when firms carry zero interest debt or negligible current liabilities.
+            \end{mathcard}
+
+            \vspace{0.1cm}
+
+            \begin{quantcard}[height=2.5cm]{DuPont Analytical Identity}
+                \fontsize{6.5pt}{8.2pt}\selectfont
+                Bridges Profitability, Efficiency, and Leverage pillars:
+                \begin{equation*}
+                    \text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{Net Margin}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Asset Turn}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Equity Mult}}
+                \end{equation*}
+                Ensures cross-pillar balance across high-margin tech vs. capital-heavy industrial equities on the NSE.
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.1cm}
+    \hfill \sourcepill{modules/ratio\_engine.py \& utils.py}
+\end{frame}

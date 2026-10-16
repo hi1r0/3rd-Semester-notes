@@ -1,0 +1,66 @@
+% ==============================================================================
+% Slide 07: Cross-Sectional Peer Benchmarking & Sigmoid Normalization
+% ==============================================================================
+\begin{frame}{Peer Benchmarking \& Sigmoid Normalization}{Non-Linear Scaling Transforms Heavy Tails into Fair 0--100 Performance Scores}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: Sigmoid Transformation & Inversion
+        \begin{column}{0.50\textwidth}
+            \begin{mathcard}[height=5.4cm]{Robust Sigmoid Normalization}
+                \fontsize{6.3pt}{7.9pt}\selectfont
+                Maps unbounded financial metrics to a smooth $[0, 100]$ score:
+                \begin{equation*}
+                    S(x) = \frac{100}{1 + \exp\left(-\kappa \cdot \dfrac{x - \median(X)}{\IQR(X)}\right)}
+                \end{equation*}
+                \textbf{\color{deepemerald}Sigmoid Calibration ($\kappa = 1.386$):}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item $\text{Score}(\median) = 50.0$: Neutral sector median.
+                    \item $\text{Score}(Q_1) \approx 35.0$, $\text{Score}(Q_3) \approx 65.0$.
+                    \item Smooth tail saturation: Extreme outliers cannot explode or crush composite score bounds.
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}Directional Inversion for Solvency Ratios:}
+                \begin{equation*}
+                    S_{\text{inv}}(x) = 100 - S(x), \quad \text{for } \frac{D}{E},\; \frac{D}{A}
+                \end{equation*}
+                Ensures lower debt loads receive deserved higher health scores.
+                \vfill
+                \badge[jade]{Non-Linear Sigmoid Mapping}
+            \end{mathcard}
+        \end{column}
+
+        % Column 2: Percentile Anchors & Dynamic Weights
+        \begin{column}{0.48\textwidth}
+            \begin{quantcard}[height=5.4cm]{Anchors \& Dynamic Weighting}
+                \fontsize{6.3pt}{8pt}\selectfont
+                \textbf{\color{deepemerald}Five-Point Peer Sector Vector:}
+                \begin{equation*}
+                    \mathbf{\Theta}_{\mathcal{S}} = \big[\,P_{10},\; Q_1,\; \median,\; Q_3,\; P_{90}\,\big]
+                \end{equation*}
+                Precomputed per NSE sector and cached in Parquet matrices.
+
+                \vspace{4pt}
+                \textbf{\color{deepemerald}Dynamic Missing-Value Weighting:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Real filings often omit optional disclosures (e.g., Inventory turnover in pure software firms).
+                    \item Rescales valid subset $\mathcal{V}_k$ to preserve unity:
+                \end{itemize}
+                \begin{equation*}
+                    w_i' = \frac{w_i}{\sum_{j \in \mathcal{V}_k} w_j}, \quad \sum_{i \in \mathcal{V}_k} w_i' = 1.00
+                \end{equation*}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Prevents artificial score degradation from missing data.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Adaptive Sector Alignment}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.1cm}
+    \hfill \sourcepill{modules/benchmark\_core.py \& data/benchmarks/}
+\end{frame}

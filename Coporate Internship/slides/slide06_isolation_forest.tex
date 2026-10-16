@@ -1,0 +1,73 @@
+% ==============================================================================
+% Slide 06: Machine Learning Anomaly Engine (Isolation Forests)
+% ==============================================================================
+\begin{frame}{Machine Learning Anomaly Engine}{Multivariate Isolation Trees Detect High-Dimensional Ratio Discrepancies}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: Algorithmic Mathematics
+        \begin{column}{0.51\textwidth}
+            \begin{mathcard}[height=5.4cm]{Multivariate Tree Isolation Mechanics}
+                \fontsize{6.3pt}{7.9pt}\selectfont
+                Recursively partitions the 16-ratio space $\mathbb{R}^{16}$ via random hyperplanes.
+                Anomalies require fewer cuts to isolate near the tree root.
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}Average Path Length of Unsuccessful Search in BST:}
+                \begin{equation*}
+                    c(n) = 2\ln(n - 1) + 2\gamma - \frac{2(n - 1)}{n}
+                \end{equation*}
+                where $\gamma \approx 0.5772156649$ is the Euler--Mascheroni constant and $n$ is the peer sub-sampling size ($n=256$).
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}Anomaly Score Formulation:}
+                \begin{equation*}
+                    s(x, n) = 2^{-\frac{\mathbb{E}(h(x))}{c(n)}}
+                \end{equation*}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item $\mathbb{E}(h(x)) \to 0 \implies s \to 1$: Highly isolated outlier.
+                    \item $\mathbb{E}(h(x)) \to c(n) \implies s \to 0.5$: Structurally typical peer.
+                    \item Classification Rule: $s(x, n) \ge 0.60 \implies \text{Outlier}$.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Multivariate Tree Ensemble}
+            \end{mathcard}
+        \end{column}
+
+        % Column 2: Consensus Scoring Engine
+        \begin{column}{0.46\textwidth}
+            \begin{quantcard}[height=5.4cm]{Tri-Method Consensus Engine}
+                \fontsize{6.3pt}{8pt}\selectfont
+                FinMetrics-PU combines non-parametric statistics with unsupervised tree learning into a 3-tier severity matrix:
+
+                \vspace{4pt}
+                \textbf{\color{deepemerald}1. Critical Anomaly (Tier 3)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Concurrently flagged by \textbf{Tukey IQR}, \textbf{MAD Z-Score}, and \textbf{Isolation Forest}.
+                    \item Indicates simultaneous extreme margin and cash flow breakdown.
+                \end{itemize}
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}2. Elevated Divergence (Tier 2)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Flagged by any 2 out of 3 algorithmic engines.
+                    \item Detects hidden balance sheet leverage risks.
+                \end{itemize}
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}3. Moderate Variance (Tier 1)}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Flagged by single detector; monitored for drift.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Consensus Robustness}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.1cm}
+    \hfill \sourcepill{modules/outlier\_engine.py \& Liu et al. (2008)}
+\end{frame}

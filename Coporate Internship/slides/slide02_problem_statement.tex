@@ -1,0 +1,81 @@
+% ==============================================================================
+% Slide 02: Problem Statement & Screening Bottlenecks
+% ==============================================================================
+\begin{frame}{Problem Statement \& Analytical Motivations}{Automated Pipeline Replaces Vulnerable Manual Financial Screening}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: Schema Heterogeneity
+        \begin{column}{0.32\textwidth}
+            \begin{quantcard}[height=5.4cm]{1. Ingestion Bottlenecks}
+                \fontsize{6.8pt}{8.8pt}\selectfont
+                \textbf{\color{deepemerald}Schema Variance Across Sectors}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item \textit{yfinance} API delivers inconsistent line-item aliases across NSE sectors (Banking vs. Manufacturing).
+                    \item Incomplete quarterly filings and asynchronous statement reporting.
+                \end{itemize}
+                
+                \vspace{4pt}
+                \textbf{\color{deepemerald}Manual Screening Latency}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item Human audit of 2,000+ equities is computationally prohibitive.
+                    \item High risk of transcription errors and missed reporting anomalies.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Data Engineering Barrier}
+            \end{quantcard}
+        \end{column}
+
+        % Column 2: Statistical Vulnerabilities
+        \begin{column}{0.32\textwidth}
+            \begin{quantcard}[height=5.4cm]{2. Statistical Breakdown}
+                \fontsize{6.8pt}{8.8pt}\selectfont
+                \textbf{\color{deepemerald}Gaussian Z-Score Failure}
+                \begin{equation*}
+                    Z_i = \frac{x_i - \bar{\mu}}{\hat{\sigma}}, \quad x \sim \text{Heavy-Tailed}
+                \end{equation*}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item Corporate financial ratios violate normality ($X \not\sim \mathcal{N}$).
+                    \item Extreme outliers inflate sample variance $\hat{\sigma}^2$ and displace mean $\bar{\mu}$.
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}Outlier Masking Effect}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item A single distressed entity masks moderate, actionable peer risks.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Algorithmic Distortion}
+            \end{quantcard}
+        \end{column}
+
+        % Column 3: System Solution
+        \begin{column}{0.32\textwidth}
+            \begin{quantcard}[height=5.4cm]{3. FinMetrics-PU Architecture}
+                \fontsize{6.8pt}{8.8pt}\selectfont
+                \textbf{\color{deepemerald}Robust Non-Parametric Core}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item Replaces $\bar{\mu}, \hat{\sigma}$ with median-based Tukey IQR and MAD Z-scores.
+                    \item 5-Pillar Ratio Engine (16 metrics) guarded with safe floating-point division.
+                \end{itemize}
+
+                \vspace{4pt}
+                \textbf{\color{deepemerald}Enterprise Synthesis}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item Sigmoid peer normalization ($0\text{--}100$).
+                    \item Consensus anomaly detection (IQR, MAD, and Isolation Forest).
+                \end{itemize}
+                \vfill
+                \badge[jade]{Production Solution}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.15cm}
+    \hfill \sourcepill{README.md \& SYSTEM\_LOGICS\_AND\_BLUEPRINT.md}
+\end{frame}

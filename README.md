@@ -7,7 +7,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 ## 📚 Repository Structure
 
 ```text
-.
+├── Coporate Internship/           # FinMetrics-PU High-End Beamer Presentation (11 slides, Emerald/Jade, main.pdf)
 ├── Financial Mathematics/
 │   ├── Assignment/                # FMCG Equity Valuation Assignment (Monochrome LaTeX, 8 pages, main.pdf)
 │   ├── latex/                     # Modular LaTeX lecture notes (Unit I & Chapter 2, main.pdf)
@@ -71,11 +71,26 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Forecasting methodologies: Quantitative vs. qualitative taxonomy, planning horizons, and annual trend models (linear, quadratic, exponential, $\AR(p)$).
    - Smoothing techniques, moving average models, and practical spreadsheet implementations.
 
+6. **Corporate Internship Presentation (FinMetrics-PU)**
+   - Cross-sectional financial outlier detection and sector benchmarking system for National Stock Exchange (NSE) equities.
+   - Algorithms: Tukey IQR fences, Modified MAD Z-scores ($0.6745$ scaling consistency), and multivariate Isolation Forest ($c(n)$ and $s(x,n)$).
+   - Architecture: 4-stage pipeline (SectorLoader, FinancialParser, RatioEngine with safe-divide guards, ReportGenerator with Gemini AI rotation and 6-tab Excel workbooks).
+   - **Executive Slide Deck (`Coporate Internship/main.pdf`):** 11-slide Beamer presentation with custom TikZ architecture diagrams and an Executive Emerald & Jade palette.
+
 ---
 
 ## 🛠️ Building LaTeX Documents
 
-### 1. Compile Lecture Notes
+### 1. Compile Presentation Slides
+To compile the Corporate Internship Beamer slide deck:
+
+```bash
+cd "Coporate Internship"
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex  # Second run resolves slide counters and cross-references
+```
+
+### 2. Compile Lecture Notes
 To compile the lecture notes in any of the subject `latex` directories:
 
 ```bash
@@ -84,7 +99,7 @@ pdflatex -interaction=nonstopmode main.tex
 pdflatex -interaction=nonstopmode main.tex  # Second run resolves TOC and cross-references
 ```
 
-### 2. Compile Empirical Research Assignments
+### 3. Compile Empirical Research Assignments
 To compile the assignment research monographs:
 
 ```bash

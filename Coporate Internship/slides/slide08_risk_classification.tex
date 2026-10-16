@@ -1,0 +1,79 @@
+% ==============================================================================
+% Slide 08: Risk Classification Matrix & Composite Health Scoring
+% ==============================================================================
+\begin{frame}{Risk Classification Matrix}{Five-Tier Classifier Translates Normalized Ratios into Investment-Grade Health Labels}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: Composite Index & Contribution Math
+        \begin{column}{0.48\textwidth}
+            \begin{mathcard}[height=5.4cm]{Composite Scoring \& Marginal Drag}
+                \fontsize{6.3pt}{8pt}\selectfont
+                Hierarchical weighted aggregation across all 5 analytical pillars:
+                \begin{equation*}
+                    \text{Score} = \sum_{k=1}^5 W_k \left( \sum_{i \in \text{Pillar}_k} w_{k,i}' \cdot S(x_i) \right)
+                \end{equation*}
+                where $\sum W_k = 1.00$ ($30\%$ Profit, $25\%$ Solv, $15\%$ Grow, $15\%$ Liq, $15\%$ Eff).
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}Ratio Contribution Analysis ($\Delta S_i$):}
+                \begin{equation*}
+                    \Delta S_i = W_k \cdot w_{k,i}' \times \big(S(x_i) - 50.0\big)
+                \end{equation*}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item $\Delta S_i > 0$: Net positive alpha contributor above peer median.
+                    \item $\Delta S_i < 0$: Specific metric creating point drag on composite health.
+                \end{itemize}
+
+                \vspace{2pt}
+                \textbf{\color{deepemerald}Quartile Positioning Tags:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item $x_i \ge Q_3$: \badge[jade]{Opportunity}
+                    \item $Q_1 \le x_i < Q_3$: \badge[slatygray]{Neutral}
+                    \item $x_i < Q_1$: \badge[forestgreen]{Risk Watch}
+                \end{itemize}
+                \vfill
+                \badge[jade]{Hierarchical Aggregation}
+            \end{mathcard}
+        \end{column}
+
+        % Column 2: Five-Tier Classification Table
+        \begin{column}{0.50\textwidth}
+            \begin{quantcard}[height=5.4cm]{Five-Tier Enterprise Health Tiers}
+                \fontsize{6pt}{7.5pt}\selectfont
+                Maps continuous 0--100 scores into actionable credit categories:
+                \vspace{3pt}
+
+                \renewcommand{\arraystretch}{1.2}
+                \begin{tabularx}{\linewidth}{>{\bfseries}l c >{\raggedright\arraybackslash}X}
+                    \toprule
+                    \textbf{\color{deepemerald}Health Tier} & \textbf{\color{deepemerald}Score} & \textbf{\color{deepemerald}Analytical Interpretation} \\
+                    \midrule
+                    \rowcolor{minttint!40}
+                    Excellent & $\ge 80$ & Industry leader, superior margins, minimal solvency risk. \\
+                    Strong & $65\text{--}79$ & Robust operational stability, healthy coverage ratios. \\
+                    \rowcolor{lightsage!50}
+                    Moderate & $50\text{--}64$ & Median peer standing, balanced risk-return dynamics. \\
+                    Weak & $35\text{--}49$ & Margin contraction or elevated debt overhang. \\
+                    \rowcolor{mintborder!20}
+                    Distressed & $< 35$ & Imminent working capital deficit or insolvency threat. \\
+                    \bottomrule
+                \end{tabularx}
+
+                \vspace{5pt}
+                \textbf{\color{deepemerald}Production Utility:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Automated equity screening filters for asset managers.
+                    \item Real-time stress test alerts on sudden quarter-over-quarter tier migration.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Standardized Credit Benchmark}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.1cm}
+    \hfill \sourcepill{modules/benchmark\_classifier.py}
+\end{frame}

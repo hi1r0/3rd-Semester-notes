@@ -1,0 +1,67 @@
+% ==============================================================================
+% Slide 10: Empirical Results & Sector Benchmarking Insights (NSE Case Study)
+% ==============================================================================
+\begin{frame}{Empirical Results \& Sector Benchmarks}{Cross-Sectional Validation Across NSE Automobile, IT, FMCG, and Banking Equities}
+    \vspace{-0.2cm}
+    \begin{columns}[T]
+        % Column 1: Comparative Empirical Matrix
+        \begin{column}{0.50\textwidth}
+            \begin{quantcard}[height=5.4cm]{Cross-Sectional Model Comparison}
+                \fontsize{6pt}{7.5pt}\selectfont
+                Empirical validation on 150+ NSE equities across 4 sectors:
+                \vspace{3pt}
+
+                \renewcommand{\arraystretch}{1.2}
+                \begin{tabularx}{\linewidth}{>{\bfseries}l c c >{\raggedright\arraybackslash}X}
+                    \toprule
+                    \textbf{\color{deepemerald}Detection Method} & \textbf{\color{deepemerald}Breakdown} & \textbf{\color{deepemerald}Yield} & \textbf{\color{deepemerald}Sector Resilience} \\
+                    \midrule
+                    Gaussian $Z$-Score & $0.0\%$ & $2.1\%$ & Masked 8 troubled mid-caps due to mean shift ($+32.4\%$). \\
+                    \rowcolor{minttint!40}
+                    Tukey IQR Fences & $50.0\%$ & $4.8\%$ & Resisted heavy tails; flagged univariate outliers. \\
+                    \rowcolor{lightsage!50}
+                    Modified MAD $Z$ & $50.0\%$ & $5.2\%$ & Stable baseline ($\Delta \text{Med} < 1.2\%$) across peers. \\
+                    \rowcolor{mintborder!25}
+                    Isolation Forest & N/A & $8.4\%$ & Flagged multivariate cash-flow/margin decoupling. \\
+                    \bottomrule
+                \end{tabularx}
+
+                \vspace{4pt}
+                \textbf{\color{deepemerald}Consensus Anomaly Detection Rate:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1pt}
+                    \item Tri-Engine consensus flagged $2.8\%$ of equities as high-severity risks.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Empirical NSE Validation}
+            \end{quantcard}
+        \end{column}
+
+        % Column 2: Quantitative Discoveries & Performance Metrics
+        \begin{column}{0.48\textwidth}
+            \begin{quantcard}[height=5.4cm]{Quantitative Discoveries \& Production SLA}
+                \fontsize{6.3pt}{8pt}\selectfont
+                \textbf{\color{deepemerald}1. Multivariate Cash Flow Decoupling}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item 1D screening missed firms reporting aggressive accrual profits while operating cash flow (OCF) turned deeply negative.
+                    \item iForest isolated these multi-dimensional anomalies at shallow tree depths ($\bar{h} < 4.2$).
+                \end{itemize}
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}2. Production Latency \& Cache Efficiency}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Parquet multi-tier cache delivered \textbf{88.5\% hit rate}.
+                    \item Sector screening latency: \textbf{$< 1.8\,\text{seconds}$} per 50 stocks.
+                    \item 100\% numerical stability: zero division-by-zero crashes across 10,000+ computed financial data points.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Enterprise SLA Performance}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.1cm}
+    \hfill \sourcepill{Report/chapters/results.tex \& data/benchmarks/}
+\end{frame}

@@ -1,0 +1,64 @@
+% ==============================================================================
+% Slide 1: Title Slide & Institutional Attribution
+% ==============================================================================
+\begin{frame}[plain]
+    \vspace{0.2cm}
+    \begin{center}
+        % University & Department Header
+        \begin{minipage}[c]{0.12\textwidth}
+            \centering
+            \includegraphics[height=1.25cm]{figures/pondicherry_university_logo.png}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[c]{0.85\textwidth}
+            {\fontsize{9pt}{11pt}\selectfont\bfseries\color{deepemerald}PONDICHERRY UNIVERSITY \textbar\ DEPARTMENT OF ECONOMICS}\par
+            {\fontsize{8pt}{9.5pt}\selectfont\color{forestgreen}\textbf{M.Sc. Quantitative Finance} \textbar\ Corporate Internship Final Defense}
+        \end{minipage}
+        
+        \vspace{0.25cm}
+        \tikz{\draw[mintborder, line width=1pt] (0,0) -- (\textwidth, 0);}
+        \vspace{0.25cm}
+
+        % Title & Subtitle Card
+        \begin{tcolorbox}[
+            enhanced,
+            colback=lightsage,
+            colframe=deepemerald,
+            boxrule=1pt,
+            arc=4pt,
+            width=\textwidth,
+            left=10pt, right=10pt, top=8pt, bottom=8pt
+        ]
+            \centering
+            {\fontsize{15pt}{17pt}\selectfont\bfseries\color{deepemerald}\ProjectTitle}\par
+            \vspace{4pt}
+            {\fontsize{9pt}{11pt}\selectfont\color{darkcharcoal}\textsf{\ProjectSubtitle}}\par
+            \vspace{5pt}
+            \badge[jade]{Open Source Architecture} \hspace{6pt}
+            \tikz[baseline=-0.5ex]{\node[fill=white, text=deepemerald, draw=mintborder, rounded corners=2pt, inner sep=2pt, font=\fontsize{6.5pt}{7.5pt}\selectfont\ttfamily] {\ProjectRepo};}
+        \end{tcolorbox}
+
+        \vspace{0.15cm}
+
+        % Attribution Matrix Grid (Two Columns)
+        \begin{minipage}[t]{0.485\textwidth}
+            \begin{quantcard}{Student Presenter}
+                \fontsize{7.5pt}{9.5pt}\selectfont
+                \textbf{Candidate:} \StudentName \par
+                \textbf{Register No:} \RollNumber \par
+                \textbf{Degree:} \ProgramName \par
+                \textbf{Affiliation:} \DepartmentName, PU
+            \end{quantcard}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[t]{0.485\textwidth}
+            \begin{quantcard}{Corporate Internship Supervision}
+                \fontsize{7.5pt}{9.5pt}\selectfont
+                \textbf{Host Organization:} \CompanyName \par
+                \textbf{Internal Guide:} \InternalGuide \par
+                \textbf{Industry Mentor:} \ExternalSupervisor \par
+                \textbf{Session:} \PresentationDate
+            \end{quantcard}
+        \end{minipage}
+    \end{center}
+\end{frame}
