@@ -2,69 +2,53 @@
 % Slide 02: Analytical Motivations & Screening Latency
 % ==============================================================================
 \begin{frame}{Analytical Motivations \& Screening Latency}{Line-Item Variance and Asynchronous Disclosures Inhibit Scalable Equity Screening}
-    \vspace{-0.1cm}
+    \vspace{-0.20cm}
     \begin{columns}[T,onlytextwidth]
         % Column 1: Financial Reporting Bottlenecks
         \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=2.65cm]{1. Schema Heterogeneity \& Alias Variance}
-                \fontsize{6.6pt}{8.6pt}\selectfont
-                \textbf{\color{deepemerald}Line-Item Discrepancies Across NSE Sectors}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Inconsistent canonical aliases in public filings (\textit{Revenue from Operations} vs.\ \textit{Total Revenue} vs.\ \textit{Gross Sales}).
-                    \item Fragmented accounting disclosures across standalone versus consolidated financial statements.
-                \end{itemize}
-                \textbf{\color{deepemerald}Fiscal Period Misalignment}
+            \begin{quantcard}[height=2.74cm]{1. Schema Heterogeneity \& Alias Variance}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
                     \setlength{\itemsep}{1.5pt}
-                    \item Asynchronous quarterly filing dates create lagging comparative peer sets.
+                    \item \textbf{Alias Heterogeneity:} Inconsistent canonical line-item naming in public filings (\textit{Revenue from Operations} vs.\ \textit{Total Revenue} vs.\ \textit{Gross Sales}).
+                    \item \textbf{Statement Fragmentation:} Discrepant structures across standalone versus consolidated financial disclosures.
+                    \item \textbf{Fiscal Period Asynchrony:} Staggered quarterly filing dates delay robust cross-sectional peer grouping.
                 \end{itemize}
             \end{quantcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{quantcard}[height=2.65cm]{2. Manual Screening Scalability Limits}
-                \fontsize{6.6pt}{8.6pt}\selectfont
-                \textbf{\color{deepemerald}Audit Fatigue \& Operational Risk}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Manual financial auditing across 2,000+ listed NSE equities is computationally prohibitive and prone to transcription error.
-                    \item Analyst fatigue during quarterly earnings surges delays critical credit downgrades and risk warnings.
-                \end{itemize}
-                \textbf{\color{deepemerald}Spreadsheet Inefficiencies}
+            \begin{quantcard}[height=2.74cm]{2. Manual Screening Scalability Limits}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
                     \setlength{\itemsep}{1.5pt}
-                    \item Brittle spreadsheet models break on missing rows or divide-by-zero fields.
+                    \item \textbf{Audit Fatigue:} Manual auditing across 2,000+ listed NSE equities is computationally prohibitive and prone to transcription errors.
+                    \item \textbf{Earnings Season Surge:} Analyst bottlenecks during quarterly disclosures delay critical credit warnings and rating downgrades.
+                    \item \textbf{Brittle Models:} Ad-hoc spreadsheet models crash on missing rows or zero-denominator singularities.
                 \end{itemize}
             \end{quantcard}
         \end{column}
 
         % Column 2: Systemic Consequences & Quantitative Objectives
         \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=2.65cm]{3. Latent Insolvency Detection Lag}
-                \fontsize{6.6pt}{8.6pt}\selectfont
-                \textbf{\color{deepemerald}Silent Credit Health Erosion}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Working capital deficits and cash-flow decay often precede formal credit rating agency downgrades by 2 to 3 quarters.
-                    \item Conventional heuristics fail to correlate high accounting margins with deteriorating operating cash conversion.
-                \end{itemize}
-                \textbf{\color{deepemerald}Information Asymmetry}
+            \begin{quantcard}[height=2.74cm]{3. Latent Insolvency Detection Lag}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
                     \setlength{\itemsep}{1.5pt}
-                    \item Retail and institutional desks lack immediate peer-relative ranking signals.
+                    \item \textbf{Silent Health Erosion:} Working capital deficits and cash-flow decay precede rating agency downgrades by 2 to 3 quarters.
+                    \item \textbf{Decoupled Heuristics:} Conventional screening fails to correlate high accounting margins with deteriorating cash conversion.
+                    \item \textbf{Information Asymmetry:} Retail and institutional desks lack immediate peer-relative ranking signals.
                 \end{itemize}
             \end{quantcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{quantcard}[height=2.65cm]{4. Production Engineering Objectives}
-                \fontsize{6.6pt}{8.6pt}\selectfont
-                \textbf{\color{deepemerald}The FinMetrics Suite Mandate}
+            \begin{quantcard}[height=2.74cm]{4. Production Engineering Objectives}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item \textbf{Autonomous Ingestion:} Real-time retrieval and caching of multi-year balance sheets and cash flow statements.
-                    \item \textbf{Deterministic Normalization:} Unify diverse schema aliases into 16 standardized fundamental financial ratios.
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{Autonomous Ingestion:} Automated retrieval and caching of multi-year balance sheets and cash flows.
+                    \item \textbf{Deterministic Normalization:} Unify discordant aliases into 16 standardized fundamental financial ratios.
                     \item \textbf{Sub-2-Second SLA:} Deliver instantaneous cross-sectional peer diagnostics without manual spreadsheet intervention.
                 \end{itemize}
             \end{quantcard}

@@ -2,75 +2,53 @@
 % Slide 05: Ingestion Caching & Schema Harmonization
 % ==============================================================================
 \begin{frame}{Ingestion Caching \& Schema Harmonization}{Multi-Tier Parquet Storage and Canonical Alias Normalization}
-    \vspace{-0.1cm}
+    \vspace{-0.20cm}
     \begin{columns}[T,onlytextwidth]
         % Column 1: Multi-Tier Cache Architecture
         \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=2.65cm]{1. Multi-Tier Parquet Caching Architecture}
-                \fontsize{6.5pt}{8.5pt}\selectfont
-                \textbf{\color{deepemerald}Hierarchical Storage Strategy}
+            \begin{quantcard}[height=2.74cm]{1. Multi-Tier Parquet Caching Architecture}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
+                    \setlength{\itemsep}{1.2pt}
                     \item \textbf{Tier 1 (In-Memory RAM):} Sub-millisecond hash-map lookup for active analysis sessions and UI responsiveness.
-                    \item \textbf{Tier 2 (Snappy Parquet Store):} Columnar, strongly typed persistent storage preventing datatype corruption across sessions.
-                \end{itemize}
-                \textbf{\color{deepemerald}High Hit Rate \& Rate-Limit Mitigation}
-                \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item Achieves an empirical \textbf{88.5\% cache hit rate} during multi-ticker cross-sectional sweeps.
-                    \item Eliminates upstream public API rate limits (HTTP 429) and network I/O lag.
+                    \item \textbf{Tier 2 (Snappy Parquet Store):} Strongly typed columnar storage preventing datatype corruption across sessions.
+                    \item \textbf{Hit Rate Efficiency:} Achieves empirical \textbf{88.5\% cache hit rate}, bypassing public API rate limits (HTTP 429).
                 \end{itemize}
             \end{quantcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{quantcard}[height=2.65cm]{2. Columnar Data Invariants}
-                \fontsize{6.5pt}{8.5pt}\selectfont
-                \textbf{\color{deepemerald}Serialization Robustness}
+            \begin{quantcard}[height=2.74cm]{2. Columnar Data Invariants}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Preserves IEEE-754 floating point accuracy and explicit null indicators without CSV text parse overhead.
-                    \item Strict schema enforcement ensures 4-year financial statement time-series align seamlessly into 3D tensors.
-                \end{itemize}
-                \textbf{\color{deepemerald}Deterministic Time-To-Live (TTL)}
-                \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item Automated timestamp invalidation ensures fresh data ingestion post-quarterly earnings disclosures.
+                    \setlength{\itemsep}{1.2pt}
+                    \item \textbf{Serialization Robustness:} Preserves IEEE-754 floating point accuracy and explicit null indicators without CSV overhead.
+                    \item \textbf{Tensor Alignment:} Strict schema enforcement aligns 4-year financial time-series into 3D analytical arrays.
+                    \item \textbf{Deterministic TTL:} Automated timestamp invalidation ensures fresh data ingestion post-quarterly earnings.
                 \end{itemize}
             \end{quantcard}
         \end{column}
 
         % Column 2: Schema Normalization & Sanitization
         \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=2.65cm]{3. Canonical Alias Harmonization}
-                \fontsize{6.5pt}{8.5pt}\selectfont
-                \textbf{\color{deepemerald}Multi-Statement Alias Resolution}
+            \begin{quantcard}[height=2.74cm]{3. Canonical Alias Harmonization}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Resolves discordant terminology across standalone vs.\ consolidated filings into invariant analytical keys:
-                    \begin{itemize}
-                        \setlength{\itemsep}{1pt}
-                        \item \textit{Revenue from Operations}, \textit{Operating Revenue} $\mapsto$ \texttt{revenue}
-                        \item \textit{Profit Before Tax}, \textit{EBT} $\mapsto$ \texttt{ebt}
-                        \item \textit{Cash and Short Term Investments} $\mapsto$ \texttt{cash}
-                    \end{itemize}
-                \end{itemize}
-                \textbf{\color{deepemerald}Zero Parsing Disruption}
-                \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item Gracefully handles missing line items without halting batch ingestion.
+                    \setlength{\itemsep}{1.2pt}
+                    \item \textbf{Revenue Harmonization:} Resolves \textit{Revenue from Operations}, \textit{Operating Revenue} $\mapsto$ \texttt{revenue}.
+                    \item \textbf{Earnings Harmonization:} Maps \textit{Profit Before Tax}, \textit{EBT} $\mapsto$ \texttt{ebt}.
+                    \item \textbf{Liquidity Harmonization:} Resolves \textit{Cash \& Short Term Investments} $\mapsto$ \texttt{cash} without ingestion disruption.
                 \end{itemize}
             \end{quantcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{quantcard}[height=2.65cm]{4. Pre-Engine Singularity Sanitization}
-                \fontsize{6.5pt}{8.5pt}\selectfont
-                \textbf{\color{deepemerald}Defensive Boundary Validations}
+            \begin{quantcard}[height=2.74cm]{4. Pre-Engine Singularity Sanitization}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item \textbf{Accounting Equality Check:} Flags filings violating $\text{Assets} \approx \text{Liabilities} + \text{Equity}$ prior to computation.
-                    \item \textbf{Negative Equity Guard:} Isolates technically insolvent firms with negative book equity from debt/equity inversion traps.
+                    \setlength{\itemsep}{1.2pt}
+                    \item \textbf{Accounting Equality Guard:} Flags filings violating $\text{Assets} \approx \text{Liabilities} + \text{Equity}$ prior to computation.
+                    \item \textbf{Negative Equity Interceptor:} Isolates technically insolvent firms with negative book equity from $D/E$ traps.
                     \item \textbf{Zero-Denominator Sanitizer:} Replaces pathological zero denominators with typed IEEE NaNs.
                 \end{itemize}
             \end{quantcard}

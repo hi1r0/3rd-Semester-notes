@@ -2,67 +2,68 @@
 % Slide 10: Machine Learning Outlier Detection
 % ==============================================================================
 \begin{frame}{Machine Learning Outlier Detection}{Multivariate Isolation Trees Detect High-Dimensional Ratio Discrepancies}
-    \vspace{-0.1cm}
+    \vspace{-0.20cm}
     \begin{columns}[T,onlytextwidth]
         % Column 1: High-Dimensional Ratio Geometry & Subsampling
         \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=2.65cm]{1. The High-Dimensional Challenge ($\mathbb{R}^{16}$)}
-                \fontsize{6.4pt}{8.3pt}\selectfont
+            \begin{quantcard}[height=2.74cm]{High-Dimensional Ratio Geometry ($\mathbb{R}^{16}$)}
+                \fontsize{5.7pt}{6.9pt}\selectfont
                 \textbf{\color{deepemerald}Failure of 1D Marginal Screening}
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item An entity can exhibit normal Net Margin ($12\%$) and normal Debt Ratio ($40\%$) individually, yet display severe multivariate structural dysfunction when paired with negative operating cash flows.
-                    \item Classical univariate filters cannot detect joint coordinate decoupling across 16 financial dimensions.
+                    \setlength{\itemsep}{0.8pt}
+                    \item An entity can exhibit normal Net Margin ($12\%$) and normal Debt Ratio ($40\%$) individually, yet display severe structural dysfunction when paired with negative OCF.
+                    \item Univariate filters fail to detect joint coordinate decoupling across 16 financial dimensions.
                 \end{itemize}
                 \textbf{\color{deepemerald}Subsampling Invariant ($\psi = 256$)}
                 \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
+                    \setlength{\itemsep}{0.5pt}
                     \item Subsampling isolates anomalies while eliminating swamping hazards.
                 \end{itemize}
             \end{quantcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{quantcard}[height=2.65cm]{2. Tri-Method Consensus Architecture}
-                \fontsize{6.4pt}{8.2pt}\selectfont
-                Combines 1D distribution-free metrics with 16D tree cuts:
+            \begin{quantcard}[height=2.74cm]{Tri-Method Consensus Architecture}
+                \fontsize{5.4pt}{6.6pt}\selectfont
+                \textbf{\color{deepemerald}Three-Tier Detection Hierarchy:}
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item \textbf{Tier 3 (Critical Alert):} Concurrently flagged by Tukey IQR, MAD $Z$-score, and Isolation Forest (unanimous distress signal).
-                    \item \textbf{Tier 2 (Elevated Watch):} Flagged by 2 of 3 detectors (subtle balance sheet overhang or accrual-cash decoupling).
-                    \item \textbf{Tier 1 (Observation):} Single detector flag; tracked for temporal drift across consecutive earnings quarters.
+                    \setlength{\itemsep}{0.2pt}
+                    \setlength{\topsep}{1pt}
+                    \item \textbf{Tier 3 (Critical Alert):} Flagged by IQR, MAD, and iForest.
+                    \item \textbf{Tier 2 (Elevated Watch):} Flagged by 2 of 3 detectors.
+                    \item \textbf{Tier 1 (Observation):} Single detector flag; tracked for drift.
                 \end{itemize}
-                \vfill
+                \vspace{2pt}
                 \badge[jade]{Multi-Detector Consensus Framework}
             \end{quantcard}
         \end{column}
 
         % Column 2: Mathematical Scoring Function & Asymptotics
         \begin{column}{0.485\textwidth}
-            \begin{mathcard}[height=2.65cm]{Path-Length Expectation $c(n)$}
-                \fontsize{6.2pt}{8.0pt}\selectfont
+            \begin{mathcard}[height=2.74cm]{Path-Length Expectation $c(n)$}
+                \fontsize{5.7pt}{6.9pt}\selectfont
                 Average unsuccessful search depth in a Binary Search Tree (BST):
                 \begin{equation*}
-                    c(n) = 2\ln(n - 1) + 2\gamma - \frac{2(n - 1)}{n}, \quad \gamma \approx 0.5772
+                    \textstyle c(n) = 2\ln(n - 1) + 2\gamma - \frac{2(n - 1)}{n}, \quad \gamma \approx 0.5772
                 \end{equation*}
                 \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
+                    \setlength{\itemsep}{0.8pt}
                     \item Provides an equivalent null-model benchmark for random recursive data partitioning across $n$ samples.
-                    \item Serves as the normalizing divisor for path depth $\mathbb{E}[h(x)]$.
+                    \item Serves as normalizing divisor for path depth $\mathbb{E}[h(x)]$.
                 \end{itemize}
             \end{mathcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{mathcard}[height=2.65cm]{Exponential Anomaly Scoring Function}
-                \fontsize{6.2pt}{8.0pt}\selectfont
+            \begin{mathcard}[height=2.74cm]{Exponential Anomaly Scoring Function}
+                \fontsize{5.5pt}{6.7pt}\selectfont
                 Monotonic mapping of tree depth into $[0, 1]$ anomaly score:
                 \begin{equation*}
-                    s(x, n) = 2^{-\frac{\mathbb{E}[h(x)]}{c(n)}}, \quad s(x, n) \ge 0.60 \implies \text{Outlier}
+                    \textstyle s(x, n) = 2^{-\mathbb{E}[h(x)]/c(n)}, \quad s \ge 0.60 \implies \text{Outlier}
                 \end{equation*}
                 \textbf{\color{deepemerald}Asymptotic Bounds:}
                 \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
+                    \setlength{\itemsep}{0.3pt}
                     \item $\mathbb{E}[h(x)] \to 0 \implies s \to 1.0$ (definite structural anomaly).
                     \item $\mathbb{E}[h(x)] \to c(n) \implies s \to 0.5$ (typical peer behaviour).
                     \item $\mathbb{E}[h(x)] \to n - 1 \implies s \to 0.0$ (dense core cluster).

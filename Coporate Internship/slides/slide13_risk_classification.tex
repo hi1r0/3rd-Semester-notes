@@ -2,7 +2,7 @@
 % Slide 13: 5-Tier Health Classification Matrix
 % ==============================================================================
 \begin{frame}{5-Tier Health Classification Matrix}{Translating Normalized Pillar Distributions into Investment-Grade Health Labels}
-    \vspace{-0.1cm}
+    \vspace{-0.20cm}
     \begin{columns}[T,onlytextwidth]
         % Column 1: TikZ 5-Tier Health Meter & Formula
         \begin{column}{0.45\textwidth}
@@ -12,8 +12,8 @@
                 colframe=mintborder,
                 boxrule=0.7pt,
                 arc=3pt,
-                height=5.45cm,
-                left=4pt, right=4pt, top=4pt, bottom=4pt
+                height=5.60cm,
+                left=4pt, right=4pt, top=3pt, bottom=3pt
             ]
                 \centering
                 {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Five-Tier Health Meter}\par
@@ -22,34 +22,34 @@
                     gaugebox/.style={
                         rounded corners=2pt,
                         text width=5.0cm,
-                        minimum height=0.54cm,
+                        minimum height=0.50cm,
                         inner sep=2pt,
                         align=center,
-                        font=\fontsize{5.5pt}{7.0pt}\selectfont\bfseries
+                        font=\fontsize{5.4pt}{6.8pt}\selectfont\bfseries
                     }
                 ]
                     \node[gaugebox, fill=deepemerald, text=cardbg] (g1) at (0, 0) {
                         EXCELLENT ($\ge 80$) \textbar\ Pristine Solvency
                     };
-                    \node[gaugebox, fill=forestgreen, text=cardbg, below=0.08cm of g1] (g2) {
+                    \node[gaugebox, fill=forestgreen, text=cardbg, below=0.06cm of g1] (g2) {
                         STRONG ($65\text{--}79$) \textbar\ High Margin \& Coverage
                     };
-                    \node[gaugebox, fill=jade, text=darkcharcoal, below=0.08cm of g2] (g3) {
+                    \node[gaugebox, fill=jade, text=darkcharcoal, below=0.06cm of g2] (g3) {
                         MODERATE ($50\text{--}64$) \textbar\ Sector-Median Alignment
                     };
-                    \node[gaugebox, fill=cardinner, text=darkcharcoal, draw=mintborder, line width=0.6pt, below=0.08cm of g3] (g4) {
+                    \node[gaugebox, fill=cardinner, text=darkcharcoal, draw=mintborder, line width=0.6pt, below=0.06cm of g3] (g4) {
                         WEAK ($35\text{--}49$) \textbar\ Margin Drag \& High Debt
                     };
-                    \node[gaugebox, fill=cardbg, text=deepemerald, draw=jade, line width=0.8pt, below=0.08cm of g4] (g5) {
+                    \node[gaugebox, fill=cardbg, text=deepemerald, draw=jade, line width=0.8pt, below=0.06cm of g4] (g5) {
                         DISTRESSED ($< 35$) \textbar\ Severe Capital Deficit
                     };
                 \end{tikzpicture}
 
-                \vspace{3pt}
-                \begin{mathcard}[height=1.45cm]{Composite Weighted Aggregation}
-                    \fontsize{5.6pt}{7.0pt}\selectfont
+                \vspace{4pt}
+                \begin{mathcard}[top=2pt, bottom=2pt]{Composite Weighted Aggregation}
+                    \fontsize{5.5pt}{6.9pt}\selectfont
                     \begin{equation*}
-                        \text{Score} = \sum_{k=1}^5 W_k \left( \sum_{i \in \mathcal{P}_k} w_{k,i}' \cdot S(x_i) \right) \in [0, 100]
+                        \textstyle \text{Score} = \sum_{k=1}^5 W_k \left( \sum_{i \in \mathcal{P}_k} w_{k,i}' \cdot S(x_i) \right) \in [0, 100]
                     \end{equation*}
                 \end{mathcard}
             \end{tcolorbox}
@@ -57,12 +57,12 @@
 
         % Column 2: Complete Credit Health Table
         \begin{column}{0.52\textwidth}
-            \begin{quantcard}[height=5.45cm]{Credit Health Classification Matrix}
-                \fontsize{5.8pt}{7.5pt}\selectfont
+            \begin{quantcard}[height=5.60cm]{Credit Health Classification Matrix}
+                \fontsize{5.2pt}{6.4pt}\selectfont
                 Calibrated against NSE historical equity rating migrations:
                 \vspace{2pt}
 
-                \renewcommand{\arraystretch}{1.2}
+                \renewcommand{\arraystretch}{0.98}
                 \begin{tabularx}{\linewidth}{>{\bfseries}l c >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
                     \toprule
                     \textbf{\color{deepemerald}Grade} & \textbf{\color{deepemerald}Score} & \textbf{\color{deepemerald}Solvency Risk} & \textbf{\color{deepemerald}Portfolio Strategy} \\
@@ -77,10 +77,10 @@
                     \bottomrule
                 \end{tabularx}
 
-                \vspace{4pt}
-                \textbf{\color{deepemerald}Early Warning Migration:}
-                FinMetrics Suite flags cross-tier downward migration 2 quarters prior to rating agency action.
-                \vfill
+                \vspace{3pt}
+                {\raggedright\textbf{\color{deepemerald}Early Warning Migration:}
+                FinMetrics Suite flags cross-tier downward migration 2 quarters prior to rating agency action.\par}
+                \vspace{3pt}
                 \badge[jade]{Standardized Investment-Grade Credit Matrix}
             \end{quantcard}
         \end{column}

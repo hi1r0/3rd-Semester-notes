@@ -2,7 +2,7 @@
 % Slide 12: Peer Benchmarking & Sigmoid Normalization
 % ==============================================================================
 \begin{frame}{Peer Benchmarking \& Sigmoid Normalization}{Non-Linear Scaling Transforms Heavy Tails into Fair 0--100 Performance Scores}
-    \vspace{-0.1cm}
+    \vspace{-0.20cm}
     \begin{columns}[T,onlytextwidth]
         % Column 1: Native TikZ Sigmoid Curve Plot
         \begin{column}{0.485\textwidth}
@@ -12,13 +12,13 @@
                 colframe=mintborder,
                 boxrule=0.7pt,
                 arc=3pt,
-                height=5.45cm,
-                left=4pt, right=4pt, top=4pt, bottom=4pt
+                height=5.60cm,
+                left=4pt, right=4pt, top=3pt, bottom=3pt
             ]
                 \centering
                 {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Calibrated Sigmoid Response Curve}\par
-                \vspace{3pt}
-                \begin{tikzpicture}[scale=0.82, every node/.style={transform shape}]
+                \vspace{2pt}
+                \begin{tikzpicture}[scale=0.78, every node/.style={transform shape}]
                     % Axes
                     \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (-3.2, 0) -- (3.4, 0) node[right, font=\fontsize{4.8pt}{5.8pt}\selectfont] {$\frac{x-\text{Med}}{\IQR}$};
                     \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (0, 0) -- (0, 2.7) node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont] {Score $S(x)$};
@@ -45,45 +45,43 @@
                     \node[above right, font=\fontsize{4.8pt}{5.8pt}\selectfont\color{deepemerald}] at (0.75, 1.65) {$Q_3 \to 65$};
 
                     % Annotation Box
-                    \node[fill=cardinner, draw=mintborder, rounded corners=2pt, inner sep=3.5pt, text width=5.0cm, align=left] at (0.1, -0.75) {
-                        \fontsize{5.2pt}{6.5pt}\selectfont
+                    \node[fill=cardinner, draw=mintborder, rounded corners=2pt, inner sep=3pt, text width=5.2cm, align=left] at (0.1, -0.50) {
+                        \fontsize{5.2pt}{6.4pt}\selectfont
                         \textbf{\color{deepemerald}Bounded Saturation Guarantee:}
                         Extreme ratio outliers flatten smoothly against $[0, 100]$ asymptotes, eliminating artificial composite score distortion.
                     };
                 \end{tikzpicture}
-                \vfill
+                \vspace{2pt}
                 \badge[jade]{Non-Linear Sigmoid Transfer Function}
             \end{tcolorbox}
         \end{column}
 
         % Column 2: Mathematical Normalization & Dynamic Weights
         \begin{column}{0.485\textwidth}
-            \begin{mathcard}[height=2.65cm]{Sigmoid Normalization Formulation}
-                \fontsize{6.3pt}{8.2pt}\selectfont
+            \begin{mathcard}[height=2.74cm]{Sigmoid Normalization Formulation}
+                \fontsize{5.5pt}{6.7pt}\selectfont
                 Calibrated logistic curve with scaling parameter $\kappa = 1.386$:
                 \begin{equation*}
-                    S(x_i) = \frac{100}{1 + \exp\left(-\kappa \cdot \dfrac{x_i - \median(X)}{\IQR(X)}\right)}
+                    \textstyle S(x_i) = \frac{100}{1 + \exp\left(-\kappa \cdot \frac{x_i - \median(X)}{\IQR(X)}\right)}
                 \end{equation*}
-                \textbf{\color{deepemerald}Directional Inversion for Solvency Ratios:}
-                \begin{equation*}
-                    S_{\text{inv}}(x_i) = 100 - S(x_i), \quad \text{for Debt/Equity \& Debt Ratio}
-                \end{equation*}
+                \textbf{\color{deepemerald}Directional Inversion for Solvency Ratios:} \\[1.5pt]
+                $S_{\text{inv}}(x_i) = 100 - S(x_i)$ for Debt/Equity \& Debt Ratio. \\
                 Rewards conservative balance sheets with higher health scores.
             \end{mathcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{quantcard}[height=2.65cm]{Dynamic Missing-Data Redistribution}
-                \fontsize{6.3pt}{8.2pt}\selectfont
+            \begin{quantcard}[height=2.74cm]{Dynamic Missing-Data Redistribution}
+                \fontsize{5.5pt}{6.7pt}\selectfont
                 Prevents penalizing firms with valid omitted disclosures:
                 \begin{equation*}
-                    w_i' = \frac{w_i}{\sum_{j \in \mathcal{V}_k} w_j}, \quad \sum_{i \in \mathcal{V}_k} w_i' = 1.00
+                    \textstyle w_i' = \frac{w_i}{\sum_{j \in \mathcal{V}_k} w_j}, \quad \sum_{i \in \mathcal{V}_k} w_i' = 1.00
                 \end{equation*}
                 \textbf{\color{deepemerald}Pillar Preservation Invariants:}
                 \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item $\mathcal{V}_k$ denotes valid non-NaN reporting metrics in Pillar $k$.
-                    \item Guarantees exact 100-point total composite scale across diverse industry reporting standards (e.g. IT services vs.\ manufacturing).
+                    \setlength{\itemsep}{0.2pt}
+                    \item $\mathcal{V}_k$ denotes valid reporting metrics in Pillar $k$.
+                    \item Guarantees exact 100-point total composite scale across sectors.
                 \end{itemize}
             \end{quantcard}
         \end{column}

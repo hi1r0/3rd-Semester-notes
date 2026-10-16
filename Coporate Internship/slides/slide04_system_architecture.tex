@@ -2,7 +2,7 @@
 % Slide 04: System Architecture & Data Pipeline
 % ==============================================================================
 \begin{frame}{System Architecture \& Data Pipeline}{Decoupled 4-Stage Execution Flow from Raw NSE Filings to Actionable Intelligence}
-    \vspace{-0.25cm}
+    \vspace{-0.15cm}
     \begin{center}
     \begin{tikzpicture}[
         stagecard/.style={
@@ -10,8 +10,8 @@
             fill=cardbg,
             line width=0.8pt,
             rounded corners=3pt,
-            text width=2.5cm,
-            minimum height=2.85cm,
+            text width=2.65cm,
+            minimum height=3.0cm,
             align=left,
             inner sep=4pt,
             font=\fontsize{6.1pt}{7.5pt}\selectfont
@@ -34,16 +34,15 @@
             font=\fontsize{6.1pt}{7.8pt}\selectfont
         }
     ]
-        % Symmetrically centered 4 stages around x = 0 with >= 1.0cm inter-node clearance
-        % Node width ~2.78cm, center step = 3.80cm => clearance ~ 1.02cm
-        \node[stagecard] (s1) at (-5.70, 0) {
-            {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{1} Ingestion}\par
+        % Symmetrically centered 4 stages around x = 0 with >= 0.75cm inter-node clearance
+        \node[stagecard] (s1) at (-5.55, 0.75) {
+            {\fontsize{7.5pt}{8.8pt}\selectfont\textbf{\color{jade}{[1]}~\color{deepemerald}Ingestion}}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
+            {\color{mintborder}\rule{2.45cm}{0.5pt}}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}SectorLoader}
             \begin{itemize}
-                \setlength{\itemsep}{1.5pt}
+                \setlength{\itemsep}{1.2pt}
                 \item Maps NSE tickers (\texttt{.NS}).
                 \item 4-yr balance sheets \& flows.
                 \item Multi-tier Parquet cache.
@@ -51,14 +50,14 @@
             \end{itemize}
         };
 
-        \node[stagecard] (s2) at (-1.90, 0) {
-            {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{2} Parsing}\par
+        \node[stagecard] (s2) at (-1.85, 0.75) {
+            {\fontsize{7.5pt}{8.8pt}\selectfont\textbf{\color{jade}{[2]}~\color{deepemerald}Parsing}}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
+            {\color{mintborder}\rule{2.45cm}{0.5pt}}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}FinancialParser}
             \begin{itemize}
-                \setlength{\itemsep}{1.5pt}
+                \setlength{\itemsep}{1.2pt}
                 \item Canonical alias resolver.
                 \item Fiscal period alignment.
                 \item Singularity sanitization.
@@ -66,14 +65,14 @@
             \end{itemize}
         };
 
-        \node[stagecard] (s3) at (1.90, 0) {
-            {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{3} Engines}\par
+        \node[stagecard] (s3) at (1.85, 0.75) {
+            {\fontsize{7.5pt}{8.8pt}\selectfont\textbf{\color{jade}{[3]}~\color{deepemerald}Engines}}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
+            {\color{mintborder}\rule{2.45cm}{0.5pt}}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}Ratio \& Outliers}
             \begin{itemize}
-                \setlength{\itemsep}{1.5pt}
+                \setlength{\itemsep}{1.2pt}
                 \item 16 metrics across 5 pillars.
                 \item Non-parametric Tukey IQR.
                 \item Modified MAD $Z$-score.
@@ -81,14 +80,14 @@
             \end{itemize}
         };
 
-        \node[stagecard] (s4) at (5.70, 0) {
-            {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{4} Delivery}\par
+        \node[stagecard] (s4) at (5.55, 0.75) {
+            {\fontsize{7.5pt}{8.8pt}\selectfont\textbf{\color{jade}{[4]}~\color{deepemerald}Delivery}}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
+            {\color{mintborder}\rule{2.45cm}{0.5pt}}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}Reporting Suite}
             \begin{itemize}
-                \setlength{\itemsep}{1.5pt}
+                \setlength{\itemsep}{1.2pt}
                 \item Sigmoid scoring ($0\text{--}100$).
                 \item 5-tier credit health radar.
                 \item 6-tab Excel workbooks.
@@ -96,13 +95,13 @@
             \end{itemize}
         };
 
-        % Inter-card Transition Arrows with clear clearance (>= 1.0cm)
+        % Inter-card Transition Arrows with clear clearance (>= 0.75cm)
         \draw[arrowlink] (s1.east) -- node[above, font=\fontsize{5.2pt}{6.2pt}\selectfont\bfseries\color{forestgreen}] {Parquet} (s2.west);
         \draw[arrowlink] (s2.east) -- node[above, font=\fontsize{5.2pt}{6.2pt}\selectfont\bfseries\color{forestgreen}] {Parsed} (s3.west);
         \draw[arrowlink] (s3.east) -- node[above, font=\fontsize{5.2pt}{6.2pt}\selectfont\bfseries\color{forestgreen}] {Scores} (s4.west);
 
         % Summary Banner Underneath (Symmetrically Centered)
-        \node[summarycard] (summary) at (0, -2.25) {
+        \node[summarycard] (summary) at (0, -1.95) {
             \textbf{\color{deepemerald}Core Architectural Invariants \& High-Throughput SLA:}
             \begin{itemize}
                 \setlength{\itemsep}{1pt}
@@ -112,10 +111,10 @@
         };
 
         % Clean Symmetrical Drop-line Connectors into Summary Card
-        \draw[line width=1.1pt, color=deepemerald] (s2.south) -- ++(0,-0.16cm);
-        \draw[line width=1.1pt, color=deepemerald] (s3.south) -- ++(0,-0.16cm);
-        \draw[line width=1.1pt, color=deepemerald] ($(s2.south) + (0,-0.16cm)$) -- ($(s3.south) + (0,-0.16cm)$);
-        \draw[arrowlink, line width=1.1pt] (0, -1.61) -- (summary.north);
+        \draw[line width=1.1pt, color=deepemerald] (s2.south) -- ++(0,-0.22cm);
+        \draw[line width=1.1pt, color=deepemerald] (s3.south) -- ++(0,-0.22cm);
+        \draw[line width=1.1pt, color=deepemerald] ($(s2.south) + (0,-0.22cm)$) -- ($(s3.south) + (0,-0.22cm)$);
+        \draw[arrowlink, line width=1.1pt] (0, -1.02) -- (summary.north);
 
     \end{tikzpicture}
     \end{center}

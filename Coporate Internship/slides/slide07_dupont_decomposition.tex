@@ -2,68 +2,60 @@
 % Slide 07: Financial Decomposition & DuPont Analysis
 % ==============================================================================
 \begin{frame}{Financial Decomposition \& DuPont Analysis}{Deconstructing Equity Returns into Orthogonal Operational and Financial Drivers}
-    \vspace{-0.1cm}
+    \vspace{-0.20cm}
     \begin{columns}[T,onlytextwidth]
         % Column 1: DuPont Formulations
         \begin{column}{0.485\textwidth}
-            \begin{mathcard}[height=2.65cm]{3-Stage DuPont Decomposition}
-                \fontsize{6.3pt}{8.2pt}\selectfont
+            \begin{mathcard}[height=2.74cm]{3-Stage DuPont Decomposition}
+                \fontsize{5.7pt}{6.9pt}\selectfont
                 Deconstructs headline ROE into three orthogonal business drivers:
                 \begin{equation*}
-                    \text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{Profitability (P1)}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Efficiency (P5)}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Financial Leverage (P2)}}
+                    \textstyle \text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{Margin (P1)}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Efficiency (P5)}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Leverage (P2)}}
                 \end{equation*}
-                \textbf{\color{deepemerald}Diagnostic Insight:}
                 \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item Identifies whether superior ROE stems from pricing power (margin), asset velocity (turnover), or risky balance sheet gearing (leverage).
+                    \setlength{\itemsep}{1.2pt}
+                    \item \textbf{Diagnostic Insight:} Decouples whether superior ROE stems from pricing power, asset velocity, or risky balance sheet gearing.
+                    \item \textbf{Driver Attribution:} Pinpoints margin vs.\ leverage trade-offs.
                 \end{itemize}
             \end{mathcard}
 
-            \vspace{0.15cm}
+            \vspace{0.12cm}
 
-            \begin{mathcard}[height=2.65cm]{5-Stage Extended DuPont Identity}
-                \fontsize{6.1pt}{8.0pt}\selectfont
+            \begin{mathcard}[height=2.74cm]{5-Stage Extended DuPont Identity}
+                \fontsize{5.6pt}{6.8pt}\selectfont
                 Separates financing and tax burdens from operating performance:
                 \begin{equation*}
-                    \text{ROE} = \underbrace{\frac{\text{NI}}{\text{EBT}}}_{\text{Tax Burden}} \times \underbrace{\frac{\text{EBT}}{\text{EBIT}}}_{\text{Interest Burden}} \times \underbrace{\frac{\text{EBIT}}{\text{Sales}}}_{\text{Operating Margin}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Turnover}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Leverage}}
+                    \textstyle \text{ROE} = \underbrace{\frac{\text{NI}}{\text{EBT}}}_{\text{Tax}} \times \underbrace{\frac{\text{EBT}}{\text{EBIT}}}_{\text{Interest}} \times \underbrace{\frac{\text{EBIT}}{\text{Sales}}}_{\text{Operating Margin}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Turnover}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Leverage}}
                 \end{equation*}
-                \textbf{\color{deepemerald}Extended Guardrail:}
                 \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item Isolates transient tax incentives or debt refinancing relief from enduring structural operating margin deterioration.
+                    \setlength{\itemsep}{1.2pt}
+                    \item \textbf{Extended Guardrail:} Isolates transient tax incentives or debt refinancing relief from enduring operational margin contraction.
+                    \item \textbf{Operational Integrity:} Validates true core profitability.
                 \end{itemize}
             \end{mathcard}
         \end{column}
 
         % Column 2: Cross-Sector Insights & Production Utility
         \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=2.65cm]{Cross-Sector Comparative Normalization}
-                \fontsize{6.4pt}{8.4pt}\selectfont
-                \textbf{\color{deepemerald}Structural Heterogeneity on the NSE}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item \textbf{Asset-Light IT Services:} Characterized by near-zero debt, moderate asset turnover, and high net operating margins ($20\text{--}25\%$).
-                    \item \textbf{Capital-Intensive Utilities \& Infra:} High financial leverage ($\frac{\text{Assets}}{\text{Equity}} > 3.5$) with low asset turnover and narrow operating margins.
-                    \item \textbf{Automobile \& FMCG:} High inventory turnover offsetting competitive gross margins.
-                \end{itemize}
-                \textbf{\color{deepemerald}Fair Peer Evaluation:}
-                DuPont decomposition prevents cross-industry bias during automated screening.
-            \end{quantcard}
-
-            \vspace{0.15cm}
-
-            \begin{quantcard}[height=2.65cm]{Analytical Risk Early-Warning}
-                \fontsize{6.4pt}{8.4pt}\selectfont
-                \textbf{\color{deepemerald}Leverage Masking Flag}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Flags companies sustaining high ROE purely by escalating debt leverage while operating margins ($\frac{\text{EBIT}}{\text{Sales}}$) contract.
-                    \item Automatically triggers a \badge[jade]{Leverage Overhang} warning in the FinMetrics Suite rating engine.
-                \end{itemize}
-                \textbf{\color{deepemerald}Corporate Finance Utility}
+            \begin{quantcard}[height=2.74cm]{Cross-Sector Comparative Normalization}
+                \fontsize{5.8pt}{7.0pt}\selectfont
                 \begin{itemize}
                     \setlength{\itemsep}{1.5pt}
-                    \item Directly informs the multi-tier credit scoring matrix and Gemini narrative memo generation.
+                    \item \textbf{IT Services:} Zero debt, moderate asset turnover, and high net margins ($20\text{--}25\%$).
+                    \item \textbf{Utilities \& Infra:} High leverage ($\frac{\text{Assets}}{\text{Equity}} > 3.5$) with low asset turnover and narrow operating margins.
+                    \item \textbf{Automobile \& FMCG:} Rapid inventory turnover offsetting competitive gross margins.
+                \end{itemize}
+            \end{quantcard}
+
+            \vspace{0.12cm}
+
+            \begin{quantcard}[height=2.74cm]{Analytical Risk Early-Warning}
+                \fontsize{5.8pt}{7.0pt}\selectfont
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{Leverage Masking Flag:} Intercepts firms sustaining high ROE purely through escalating debt leverage as operating margins contract.
+                    \item \textbf{Automated Alert:} Triggers \badge[jade]{Leverage Overhang} warning badge in the FinMetrics Suite rating engine.
+                    \item \textbf{Executive Memo:} Directly feeds AI narration context.
                 \end{itemize}
             \end{quantcard}
         \end{column}
