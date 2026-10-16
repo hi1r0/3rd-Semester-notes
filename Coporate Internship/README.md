@@ -1,77 +1,75 @@
-# FinMetrics-PU: Corporate Internship Defense Presentation
+# FinMetrics Suite: Corporate Internship Presentation
 
-An executive-grade, 11-slide presentation deck in LaTeX Beamer for the Corporate Internship defense in **M.Sc. Quantitative Finance** at **Pondicherry University (Department of Economics)**.
+An executive-grade, 11-slide presentation deck in LaTeX Beamer for the Corporate Internship presentation in **M.Sc. Quantitative Finance** at **Pondicherry University (Ramanujan School of Mathematical Sciences, Department of Statistics)**.
 
-The deck presents **FinMetrics-PU: Cross-Sectional Financial Outlier Detection and Sector Benchmarking System for NSE Equities**, featuring custom TikZ system architecture pipelines, mathematical card containers, and an **Executive Monochromatic Emerald & Jade** color palette (zero gold).
+The deck presents **FinMetrics Suite: Algorithms and Architecture for Automated Ratio Benchmarking and Anomaly Detection for NSE Equities**, featuring custom native TikZ system architecture diagrams, mathematical card containers, statistical plots, and an **Executive Monochromatic Emerald & Jade** color palette (zero gold).
 
 ---
 
 ## 1. Presentation Structure (11 Slides)
 
-| Slide | Topic | Key Equations / Algorithmic Core | Primary Components |
+| Slide | Topic | Key Equations / Algorithmic Core | Primary Visual Components |
 | :---: | :--- | :--- | :--- |
-| **01** | **Title & Institutional Attribution** | University Crest, Candidate, Guide, Supervisor metadata | `pondicherry_university_logo.png`, `quantcard` |
-| **02** | **Problem Statement & Bottlenecks** | $Z_i = \frac{x_i - \bar{\mu}}{\hat{\sigma}}$ failure under heavy tails | 3 Symmetric Ingestion/Stats/Architecture Cards |
-| **03** | **End-to-End System Architecture** | 4-Stage Horizontal Pipeline ($\ge 0.7\,\text{cm}$ clearance) | Custom TikZ chevron flow \& decoupled summary card |
-| **04** | **Ratio Engine Mechanism** | 5 analytical pillars (16 ratios) \& $\safedivide(a, b, \epsilon)$ | Weighting matrix, DuPont decomposition card |
-| **05** | **Statistical Anomaly Algorithms** | $\IQR = Q_3 - Q_1$, $M_i = \frac{0.6745(x_i - \median)}{\MAD}$ | Dual `mathcard` comparing Tukey vs. MAD $0.6745$ |
-| **06** | **Machine Learning Anomaly Engine** | $c(n) = 2\ln(n-1) + 2\gamma - \frac{2(n-1)}{n}$, $s(x,n) = 2^{-\frac{\mathbb{E}(h(x))}{c(n)}}$ | Multivariate iForest in $\mathbb{R}^{16}$ \& consensus matrix |
-| **07** | **Peer Benchmarking \& Sigmoid** | $S(x) = \frac{100}{1 + e^{-\kappa \frac{x-\text{Med}}{\IQR}}}$, $w_i' = \frac{w_i}{\sum w_j}$ | Non-linear Sigmoid scaling, dynamic NaN weights |
-| **08** | **Risk Classification Matrix** | $\text{Composite} = \sum W_k \cdot \text{Pillar}_k$, $\Delta S_i = w_i'(S(x_i) - 50)$ | 5-tier credit health table (Excellent to Distressed) |
-| **09** | **AI Narration \& Delivery** | Gemini round-robin rotation (`GEMINI_API_KEY_1..N`) | 6-tab automated Excel artifact, Streamlit UI |
-| **10** | **Empirical Results (NSE Study)** | Gaussian breakdown ($+32.4\%$ distortion) vs. MAD stability | Cross-sectional validation table across 150+ stocks |
-| **11** | **Conclusion \& Future Roadmap** | Technical contributions, credit early warnings, GNN roadmap | 3 strategic pillars \& Q&A discussion banner |
+| **01** | **Title & Institutional Attribution** | Department of Statistics, Candidate, Faculty Guidance | University Crest, Centered Executive Attribution Card |
+| **02** | **Problem Statement & Bottlenecks** | $Z_i = \frac{x_i - \bar{\mu}}{\hat{\sigma}}$ failure under heavy tails ($0.0\%$ BP) | TikZ Gaussian mean displacement curve vs. robust median |
+| **03** | **End-to-End System Architecture** | 4-stage execution flow with clean inter-node spacing | Native TikZ 4-stage pipeline \& decoupled summary card |
+| **04** | **Ratio Engine Mechanism** | 5 analytical pillars (16 ratios) \& $\safedivide(a, b, \epsilon)$ | TikZ 5-pillar segmented hierarchy, DuPont decomposition card |
+| **05** | **Statistical Anomaly Algorithms** | $\IQR = Q_3 - Q_1$, $M_i = \frac{0.6745(x_i - \median)}{\MAD}$ | Native TikZ Boxplot (quartiles, fences, outliers) \& MAD card |
+| **06** | **Machine Learning Anomaly Engine** | $c(n) = 2\ln(n-1) + 2\gamma - \frac{2(n-1)}{n}$, $s(x,n) = 2^{-\frac{\mathbb{E}(h(x))}{c(n)}}$ | Native TikZ 2D hyperplanes \& isolation tree hierarchy |
+| **07** | **Peer Benchmarking \& Sigmoid** | $S(x) = \frac{100}{1 + e^{-\kappa \frac{x-\text{Med}}{\IQR}}}$, $w_i' = \frac{w_i}{\sum w_j}$ | Native TikZ Sigmoid S-curve plot ($Q_1 \to 35$, Med $\to 50$, $Q_3 \to 65$) |
+| **08** | **Risk Classification Matrix** | $\text{Composite} = \sum W_k \cdot \text{Pillar}_k$, $\Delta S_i = w_i'(S(x_i) - 50)$ | Native TikZ 5-tier Health Meter gauge \& classification table |
+| **09** | **AI Narration \& Delivery** | Round-robin rotation (`GEMINI_API_KEY_1..N`) | Native TikZ synthesis flow, 6-tab Excel details \& Streamlit UI |
+| **10** | **Empirical Results (NSE Study)** | Gaussian distortion ($+32.4\%$) vs. MAD stability | Cross-sectional validation table across 150+ NSE equities |
+| **11** | **Conclusion \& Future Roadmap** | Production microservices, GNN systemic contagion modeling | 3 strategic pillars \& Department of Statistics closing banner |
 
 ---
 
 ## 2. Directory Architecture
 
-```
+```text
 D:\MSQF\Semester III\Coporate Internship\
-|-- main.tex                         # Master compilation document (aspectratio=169)
-|-- main.pdf                         # Compiled 11-slide presentation deliverable
+|-- main.tex                         # Master Beamer document (aspectratio=169, 11 slides)
+|-- main.pdf                         # Compiled 11-slide presentation deliverable (0 overfull warnings)
 |-- README.md                        # Documentation of presentation structure & compilation
-|-- figures\
-|   |-- pondicherry_university_logo.png
-|-- preamble\
-|   |-- packages.tex                 # Core packages (beamer, tikz, tcolorbox, amsmath)
-|   |-- theme.tex                    # Custom Beamer theme, Emerald/Jade palette, header/footer
-|   |-- macros.tex                   # Presenter metadata, mathematical operators, card macros
-|-- slides\
-|   |-- slide01_title.tex            # University branding & attribution card
-|   |-- slide02_problem_statement.tex # Schema variance & mean distortion
-|   |-- slide03_system_architecture.tex # Full-width 4-stage horizontal TikZ pipeline
-|   |-- slide04_ratio_engine.tex     # 16 ratios, 5 analytical pillars & safe divide
-|   |-- slide05_statistical_anomalies.tex # Tukey Fences & MAD Z-Scores
-|   |-- slide06_isolation_forest.tex # Multivariate iForest & path-length math
-|   |-- slide07_benchmarking_sigmoid.tex # Sigmoid normalization & dynamic weights
-|   |-- slide08_risk_classification.tex # 5-tier health classification matrix
-|   |-- slide09_ai_reporting_pipeline.tex # Gemini LLM key rotation & 6-tab Excel
-|   |-- slide10_empirical_results.tex # Cross-sector NSE empirical findings
-|   |-- slide11_conclusion_roadmap.tex # Industry impact, future work & Q&A
+|-- figures/
+|   `-- pondicherry_university_logo.png
+|-- preamble/
+|   |-- packages.tex                 # Core packages (beamer, tikz, tcolorbox, amsmath, tabularx)
+|   |-- theme.tex                    # Custom Beamer theme, Emerald/Jade palette, clean header (zero footline)
+|   `-- macros.tex                   # Presenter metadata, mathematical operators, card macros
+`-- slides/
+    |-- slide01_title.tex            # University branding & centered executive attribution card
+    |-- slide02_problem_statement.tex # Gaussian mean displacement plot & line-item variance
+    |-- slide03_system_architecture.tex # 4-stage horizontal TikZ pipeline with bold connectors
+    |-- slide04_ratio_engine.tex     # 16 ratios, 5 analytical pillars & safe-divide guards
+    |-- slide05_statistical_anomalies.tex # Native TikZ boxplot, Tukey fences & MAD Z-Scores
+    |-- slide06_isolation_forest.tex # Multivariate iForest, 2D hyperplanes & tree diagram
+    |-- slide07_benchmarking_sigmoid.tex # Sigmoid S-curve plot & dynamic NaN weighting
+    |-- slide08_risk_classification.tex # 5-tier health gauge & credit health matrix
+    |-- slide09_ai_reporting_pipeline.tex # Round-robin LLM synthesis & 6-tab Excel exports
+    |-- slide10_empirical_results.tex # Cross-sectional validation on NSE equities
+    `-- slide11_conclusion_roadmap.tex # Industry impact, GNN roadmap & closing discussion banner
 ```
 
 ---
 
-## 3. Presenter Metadata Configuration
+## 3. Presenter & Institutional Metadata
 
-To personalize the title slide, edit the following macros in `preamble/macros.tex`:
+Configured in `preamble/macros.tex`:
 
-```latex
-\newcommand{\StudentName}{[Your Name]}
-\newcommand{\RollNumber}{[Your Roll No]}
-\newcommand{\ProgramName}{M.Sc. Quantitative Finance (MSQF)}
-\newcommand{\DepartmentName}{Department of Economics}
-\newcommand{\UniversityName}{Pondicherry University}
-\newcommand{\CompanyName}{[Company Name]}
-\newcommand{\InternalGuide}{[Faculty Name]}
-\newcommand{\ExternalSupervisor}{[Supervisor Name]}
-\newcommand{\PresentationDate}{Academic Year 2026--2027}
-```
+- **Project Title:** FinMetrics Suite
+- **Presentation Type:** Corporate Internship
+- **Candidate:** N Rohit Vedhanandh
+- **Register Number:** 25MSQUFPY0002
+- **Faculty Guidance:** Dr. Kiruthika
+- **Department:** Department of Statistics
+- **School:** Ramanujan School of Mathematical Sciences
+- **University:** Pondicherry University
+- **Program:** M.Sc. Quantitative Finance (MSQF)
 
 ---
 
-## 4. Color Palette: Pure Monochromatic Emerald & Jade
+## 4. Color Palette: Pure Monochromatic Emerald & Jade (Zero Gold)
 
 | Color Role | Name | Hex Code | RGB Values | Usage |
 | :--- | :--- | :--- | :--- | :--- |
@@ -79,10 +77,10 @@ To personalize the title slide, edit the following macros in `preamble/macros.te
 | **Secondary Accent** | `forestgreen` | `#0D5C3A` | `RGB(13, 92, 58)` | Section subtitles, card title text, subheadings |
 | **Vibrant Highlight** | `jade` | `#059669` | `RGB(5, 150, 105)` | Formula badges, active nodes, contrast pills |
 | **Card Fill** | `lightsage` | `#EBF5EE` | `RGB(235, 245, 238)` | Card background for high mathematical contrast |
-| **Card Border** | `mintborder` | `#A7F3D0` | `RGB(167, 243, 208)` | Subtle 0.8pt outlines for card definition |
+| **Card Border** | `mintborder` | `#A7F3D0` | `RGB(167, 243, 208)` | Subtle 0.7pt outlines for card definition |
 | **Slide Background** | `paperbg` | `#F7FBF9` | `RGB(247, 251, 249)` | Off-white soft mint canvas preventing screen glare |
 | **Primary Text** | `darkcharcoal` | `#0F172A` | `RGB(15, 23, 42)` | High-contrast body text and equations |
-| **Muted Annotation** | `slatygray` | `#475569` | `RGB(71, 85, 105)` | Footnotes, source pills, and secondary details |
+| **Muted Annotation** | `slatygray` | `#475569` | `RGB(71, 85, 105)` | Section subtitles, source pills, and secondary details |
 
 ---
 
@@ -95,7 +93,7 @@ pdflatex -interaction=nonstopmode -output-directory="." main.tex
 pdflatex -interaction=nonstopmode -output-directory="." main.tex
 ```
 
-Two compilation passes are recommended to fully resolve page totals (`\inserttotalframenumber`) and navigation counters.
+Two compilation passes resolve all cross-references, bounding boxes, and navigation counters. The output compiles with **zero overfull warnings** and exit code 0.
 
 ---
 

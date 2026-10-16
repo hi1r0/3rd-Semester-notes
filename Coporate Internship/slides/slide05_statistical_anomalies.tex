@@ -1,67 +1,102 @@
 % ==============================================================================
 % Slide 05: Statistical Anomaly Algorithms (Tukey IQR & MAD Z-Score)
 % ==============================================================================
-\begin{frame}{Statistical Anomaly Algorithms}{Non-Parametric Robust Dispersion Resists Heavy-Tailed Financial Skew}
+\begin{frame}{Statistical Anomaly Algorithms}{Non-Parametric Dispersion Resists Heavy-Tailed Financial Skew}
     \vspace{-0.2cm}
-    \begin{columns}[T]
-        % Column 1: Tukey IQR Fences
+    \begin{columns}[T,onlytextwidth]
+        % Column 1: Native TikZ Boxplot with Tukey Fences
         \begin{column}{0.485\textwidth}
-            \begin{mathcard}[height=5.4cm]{1. Tukey Fences (Interquartile Range)}
-                \fontsize{6.5pt}{8.2pt}\selectfont
-                Quantifies spread across middle $50\%$ of peer sector:
-                \begin{equation*}
-                    \IQR = Q_3 - Q_1
-                \end{equation*}
-                \textbf{\color{deepemerald}Inner Fence Thresholds:}
-                \begin{align*}
-                    \mathcal{F}_{\text{lower}} &= Q_1 - 1.5 \times \IQR \\
-                    \mathcal{F}_{\text{upper}} &= Q_3 + 1.5 \times \IQR
-                \end{align*}
-                \begin{equation*}
-                    \text{Flag}(x_i) = 
-                    \begin{cases} 
-                        \text{Outlier} & \text{if } x_i \notin [\mathcal{F}_{\text{lower}}, \mathcal{F}_{\text{upper}}] \\
-                        \text{Normal} & \text{otherwise}
-                    \end{cases}
-                \end{equation*}
-                \vspace{2pt}
-                \textbf{\color{deepemerald}Key Financial Property:}
-                \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item Completely invariant to extreme outliers in the top $25\%$ or bottom $25\%$ tails.
-                    \item Computationally fast for cross-sectional screening.
-                \end{itemize}
-                \vfill
-                \badge[jade]{50\% Central Bracket Invariant}
-            \end{mathcard}
+            \begin{tcolorbox}[
+                enhanced,
+                colback=white,
+                colframe=mintborder,
+                boxrule=0.7pt,
+                arc=3pt,
+                height=5.35cm,
+                left=4pt, right=4pt, top=4pt, bottom=4pt
+            ]
+                \centering
+                {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Tukey IQR Boxplot \& Cutoff Fences}\par
+                \vspace{3pt}
+                \begin{tikzpicture}[scale=0.75, every node/.style={transform shape}]
+                    % Horizontal scale axis
+                    \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (-3.2, 0) -- (3.4, 0) node[right, font=\fontsize{5pt}{6pt}\selectfont] {Ratio ($x$)};
+
+                    % Outer normal range (whiskers)
+                    \draw[line width=0.8pt, color=deepemerald] (-1.8, 1.2) -- (-1.0, 1.2);
+                    \draw[line width=0.8pt, color=deepemerald] (1.0, 1.2) -- (2.0, 1.2);
+
+                    % Whisker caps
+                    \draw[line width=0.8pt, color=deepemerald] (-1.8, 0.9) -- (-1.8, 1.5);
+                    \draw[line width=0.8pt, color=deepemerald] (2.0, 0.9) -- (2.0, 1.5);
+
+                    % Central Box: Q1 to Q3
+                    \draw[draw=deepemerald, fill=lightsage, line width=0.9pt, rounded corners=1pt] (-1.0, 0.6) rectangle (1.0, 1.8);
+
+                    % Median Line
+                    \draw[line width=1.4pt, color=forestgreen] (0.1, 0.6) -- (0.1, 1.8)
+                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {Median};
+
+                    % Quartile labels
+                    \node[below, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (-1.0, 0.55) {$Q_1$ (25\%)};
+                    \node[below, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (1.0, 0.55) {$Q_3$ (75\%)};
+
+                    % IQR Span Bracket
+                    \draw[<->, >=Stealth, line width=0.6pt, color=deepemerald] (-1.0, 2.05) -- (1.0, 2.05)
+                        node[midway, above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {$\text{IQR} = Q_3 - Q_1$};
+
+                    % Inner Fences
+                    \draw[line width=0.8pt, dash dot, color=jade] (-2.5, 0.4) -- (-2.5, 2.0)
+                        node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries] {$\mathcal{F}_{\text{lower}}$};
+                    \draw[line width=0.8pt, dash dot, color=jade] (2.5, 0.4) -- (2.5, 2.0)
+                        node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries] {$\mathcal{F}_{\text{upper}}$};
+
+                    % Outliers beyond fences
+                    \node[circle, fill=jade, inner sep=2pt] at (-2.9, 1.2) {};
+                    \node[circle, fill=jade, inner sep=2pt] at (2.9, 1.2) {};
+                    \node[circle, fill=jade, inner sep=2pt] at (3.2, 1.2) {};
+                    \node[above, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (3.05, 1.35) {Outliers};
+
+                    % Annotation Box
+                    \node[fill=lightsage, draw=mintborder, rounded corners=2pt, inner sep=2.5pt, text width=4.8cm, align=left] at (0, -0.9) {
+                        \fontsize{5.2pt}{6.5pt}\selectfont
+                        \textbf{\color{deepemerald}Non-Parametric Fence Invariant:}
+                        Values outside $[\mathcal{F}_{\text{lower}}, \mathcal{F}_{\text{upper}}] = [Q_1 - 1.5\,\text{IQR},\, Q_3 + 1.5\,\text{IQR}]$ are isolated without Gaussian assumptions.
+                    };
+                \end{tikzpicture}
+            \end{tcolorbox}
         \end{column}
 
-        % Column 2: Modified MAD Z-Score
+        % Column 2: Mathematical Formulations
         \begin{column}{0.485\textwidth}
-            \begin{mathcard}[height=5.4cm]{2. Modified Z-Score (MAD)}
-                \fontsize{6.5pt}{8.2pt}\selectfont
-                Median Absolute Deviation replaces mean and variance:
+            \begin{mathcard}[height=2.7cm]{Tukey Fences Cutoff Bounds}
+                \fontsize{6.3pt}{8pt}\selectfont
+                Evaluates empirical spread of central $50\%$ peer mass:
+                \begin{equation*}
+                    \mathcal{F}_{\text{lower}} = Q_1 - 1.5 \times \IQR, \quad \mathcal{F}_{\text{upper}} = Q_3 + 1.5 \times \IQR
+                \end{equation*}
+                \begin{equation*}
+                    \text{Outlier}(x_i) = \mathbf{1}_{\{x_i < \mathcal{F}_{\text{lower}} \;\lor\; x_i > \mathcal{F}_{\text{upper}}\}}
+                \end{equation*}
+                Incorruptible by extreme fat tails in the upper or lower 25\%.
+            \end{mathcard}
+
+            \vspace{0.1cm}
+
+            \begin{mathcard}[height=2.75cm]{Modified MAD Z-Score}
+                \fontsize{6.1pt}{7.7pt}\selectfont
+                Calculates median dispersion relative to peer median:
                 \begin{equation*}
                     \MAD = \median\Big(\big|x_i - \median(X)\big|\Big)
                 \end{equation*}
-                \textbf{\color{deepemerald}Scaled Modified Z-Score Formula:}
                 \begin{equation*}
-                    M_i = \frac{0.6745 \times \big(x_i - \median(X)\big)}{\MAD}, \quad |M_i| > 3.5 \implies \text{Outlier}
+                    M_i = \frac{0.6745 \cdot |x_i - \median(X)|}{\MAD}, \quad M_i > 3.5 \implies \text{Outlier}
                 \end{equation*}
-
-                \vspace{2pt}
-                \textbf{\color{deepemerald}Mathematical Rationale for 0.6745:}
-                \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item For $X \sim \mathcal{N}(\mu, \sigma^2)$, $\mathbb{E}[\MAD] = \Phi^{-1}(0.75)\,\sigma \approx 0.6745\,\sigma$.
-                    \item Scale factor ensures $M_i \approx Z_i$ under Gaussian convergence while preserving high 50\% breakdown point.
-                \end{itemize}
-                \vfill
-                \badge[jade]{50\% Breakdown Point Resistance}
+                \textbf{\color{deepemerald}Why 0.6745?} Under $X \sim \mathcal{N}$, $\mathbb{E}[\MAD] = \Phi^{-1}(0.75)\,\sigma \approx 0.6745\,\sigma$, guaranteeing standard Gaussian consistency with a \textbf{50\% breakdown point}.
             \end{mathcard}
         \end{column}
     \end{columns}
 
     \vspace{0.1cm}
-    \hfill \sourcepill{modules/outlier\_engine.py \& docs/02\_ratios\_and\_outliers.md}
+    \hfill \sourcepill{modules/outlier\_engine.py \& Tukey (1977)}
 \end{frame}

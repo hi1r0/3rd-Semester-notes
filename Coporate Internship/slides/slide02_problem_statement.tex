@@ -3,79 +3,95 @@
 % ==============================================================================
 \begin{frame}{Problem Statement \& Analytical Motivations}{Automated Pipeline Replaces Vulnerable Manual Financial Screening}
     \vspace{-0.2cm}
-    \begin{columns}[T]
-        % Column 1: Schema Heterogeneity
-        \begin{column}{0.32\textwidth}
-            \begin{quantcard}[height=5.4cm]{1. Ingestion Bottlenecks}
-                \fontsize{6.8pt}{8.8pt}\selectfont
-                \textbf{\color{deepemerald}Schema Variance Across Sectors}
+    \begin{columns}[T,onlytextwidth]
+        % Column 1: Core Bottlenecks
+        \begin{column}{0.485\textwidth}
+            \begin{quantcard}[height=2.7cm]{1. Schema Heterogeneity \& Latency}
+                \fontsize{6.5pt}{8.3pt}\selectfont
+                \textbf{\color{deepemerald}Line-Item Variance Across NSE Sectors}
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item \textit{yfinance} API delivers inconsistent line-item aliases across NSE sectors (Banking vs. Manufacturing).
-                    \item Incomplete quarterly filings and asynchronous statement reporting.
+                    \setlength{\itemsep}{1pt}
+                    \item Inconsistent canonical aliases in Yahoo Finance filings.
+                    \item Missing quarterly disclosures and asynchronous fiscal years.
                 \end{itemize}
-                
-                \vspace{4pt}
-                \textbf{\color{deepemerald}Manual Screening Latency}
+                \textbf{\color{deepemerald}Manual Screening Prohibitive}
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Human audit of 2,000+ equities is computationally prohibitive.
-                    \item High risk of transcription errors and missed reporting anomalies.
+                    \setlength{\itemsep}{1pt}
+                    \item Manual auditing of 2,000+ equities invites fatigue and errors.
                 \end{itemize}
-                \vfill
-                \badge[jade]{Data Engineering Barrier}
             \end{quantcard}
-        \end{column}
 
-        % Column 2: Statistical Vulnerabilities
-        \begin{column}{0.32\textwidth}
-            \begin{quantcard}[height=5.4cm]{2. Statistical Breakdown}
-                \fontsize{6.8pt}{8.8pt}\selectfont
-                \textbf{\color{deepemerald}Gaussian Z-Score Failure}
+            \vspace{0.1cm}
+
+            \begin{quantcard}[height=2.75cm]{2. Gaussian Mean Distortion}
+                \fontsize{6.5pt}{8.3pt}\selectfont
+                Classical $Z$-score collapses on fat-tailed financial distributions:
                 \begin{equation*}
-                    Z_i = \frac{x_i - \bar{\mu}}{\hat{\sigma}}, \quad x \sim \text{Heavy-Tailed}
+                    Z_i = \frac{x_i - \bar{\mu}}{\hat{\sigma}}, \quad \text{Breakdown Point } = 0.0\%
                 \end{equation*}
                 \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Corporate financial ratios violate normality ($X \not\sim \mathcal{N}$).
-                    \item Extreme outliers inflate sample variance $\hat{\sigma}^2$ and displace mean $\bar{\mu}$.
+                    \setlength{\itemsep}{1pt}
+                    \item A single distressed entity inflates sample variance $\hat{\sigma}^2$ and pulls sample mean $\bar{\mu}$.
+                    \item \textbf{Masking Effect:} Moderate peer distress appears artificially "normal".
                 \end{itemize}
-
-                \vspace{2pt}
-                \textbf{\color{deepemerald}Outlier Masking Effect}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item A single distressed entity masks moderate, actionable peer risks.
-                \end{itemize}
-                \vfill
-                \badge[jade]{Algorithmic Distortion}
             \end{quantcard}
         \end{column}
 
-        % Column 3: System Solution
-        \begin{column}{0.32\textwidth}
-            \begin{quantcard}[height=5.4cm]{3. FinMetrics-PU Architecture}
-                \fontsize{6.8pt}{8.8pt}\selectfont
-                \textbf{\color{deepemerald}Robust Non-Parametric Core}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Replaces $\bar{\mu}, \hat{\sigma}$ with median-based Tukey IQR and MAD Z-scores.
-                    \item 5-Pillar Ratio Engine (16 metrics) guarded with safe floating-point division.
-                \end{itemize}
+        % Column 2: TikZ Visual Demonstration of Mean Skew vs Robust Median
+        \begin{column}{0.485\textwidth}
+            \begin{tcolorbox}[
+                enhanced,
+                colback=white,
+                colframe=mintborder,
+                boxrule=0.7pt,
+                arc=3pt,
+                height=5.3cm,
+                left=4pt, right=4pt, top=4pt, bottom=4pt
+            ]
+                \centering
+                {\fontsize{7pt}{8.5pt}\selectfont\bfseries\color{deepemerald}Empirical Mean Distortion vs.\ Robust Median}\par
+                \vspace{2pt}
+                \begin{tikzpicture}[scale=0.76, every node/.style={transform shape}]
+                    % Coordinate axes
+                    \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (-3.0, 0) -- (3.3, 0) node[right, font=\fontsize{5pt}{6pt}\selectfont] {Ratio ($x$)};
+                    \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (0, 0) -- (0, 2.5);
 
-                \vspace{4pt}
-                \textbf{\color{deepemerald}Enterprise Synthesis}
-                \begin{itemize}
-                    \setlength{\itemsep}{2pt}
-                    \item Sigmoid peer normalization ($0\text{--}100$).
-                    \item Consensus anomaly detection (IQR, MAD, and Isolation Forest).
-                \end{itemize}
-                \vfill
-                \badge[jade]{Production Solution}
-            \end{quantcard}
+                    % True Peer Distribution (Uncorrupted) - Bell Curve
+                    \draw[line width=1.1pt, color=forestgreen!60!white, domain=-2.8:2.8, samples=50] 
+                        plot (\x, {2.2 * exp(-\x*\x / 0.8)});
+
+                    % Outlier Distribution (Displaced Tail)
+                    \draw[line width=1.2pt, color=deepemerald, domain=-2.8:3.2, samples=60] 
+                        plot (\x, {1.7 * exp(-(\x-0.45)*(\x-0.45) / 1.1)});
+
+                    % Ground Truth Median Line
+                    \draw[line width=1pt, dashed, color=forestgreen] (0, 0) -- (0, 2.3)
+                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {Median ($50\%$ BP)};
+
+                    % Skewed Sample Mean Line
+                    \draw[line width=1pt, dash dot, color=jade] (0.85, 0) -- (0.85, 2.0)
+                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {Skewed $\bar{\mu}$};
+
+                    % Outlier point cluster
+                    \node[circle, fill=jade, inner sep=1.8pt] at (2.8, 0.15) {};
+                    \node[circle, fill=jade, inner sep=1.8pt] at (3.1, 0.08) {};
+                    \node[above, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (2.95, 0.3) {Outliers};
+
+                    % Masking Zone annotation
+                    \draw[<->, >=Stealth, line width=0.6pt, color=slatygray] (0.1, 0.8) -- (0.8, 0.8)
+                        node[midway, above, font=\fontsize{4.8pt}{5.8pt}\selectfont\color{deepemerald}] {$\Delta \bar{\mu}$ Shift};
+
+                    % Annotation Box
+                    \node[fill=lightsage, draw=mintborder, rounded corners=2pt, inner sep=2.5pt, text width=4.8cm, align=left] at (0.2, -0.75) {
+                        \fontsize{5.2pt}{6.5pt}\selectfont
+                        \textbf{\color{deepemerald}The Masking Hazard:}
+                        Extreme positive/negative filings displace standard mean $\bar{\mu}$, causing vulnerable peer ratios to fall within $[\bar{\mu} \pm 2\hat{\sigma}]$ false-safety bracket.
+                    };
+                \end{tikzpicture}
+            \end{tcolorbox}
         \end{column}
     \end{columns}
 
-    \vspace{0.15cm}
+    \vspace{0.1cm}
     \hfill \sourcepill{README.md \& SYSTEM\_LOGICS\_AND\_BLUEPRINT.md}
 \end{frame}

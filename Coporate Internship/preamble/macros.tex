@@ -3,17 +3,15 @@
 % ==============================================================================
 
 % Presenter Attribution & Institutional Metadata
-\newcommand{\StudentName}{[Your Name]}
-\newcommand{\RollNumber}{[Your Roll No]}
+\newcommand{\StudentName}{N Rohit Vedhanandh}
+\newcommand{\RollNumber}{25MSQUFPY0002}
 \newcommand{\ProgramName}{M.Sc. Quantitative Finance (MSQF)}
-\newcommand{\DepartmentName}{Department of Economics}
+\newcommand{\DepartmentName}{Department of Statistics}
+\newcommand{\SchoolName}{Ramanujan School of Mathematical Sciences}
 \newcommand{\UniversityName}{Pondicherry University}
-\newcommand{\CompanyName}{[Company Name]}
-\newcommand{\InternalGuide}{[Faculty Name]}
-\newcommand{\ExternalSupervisor}{[Supervisor Name]}
-\newcommand{\PresentationDate}{Academic Year 2026--2027}
-\newcommand{\ProjectTitle}{FinMetrics-PU: NSE Financial Outlier Detective}
-\newcommand{\ProjectSubtitle}{Algorithms and Architecture for Automated Ratio Benchmarking and Anomaly Detection}
+\newcommand{\FacultyGuide}{Dr. Kiruthika}
+\newcommand{\PresentationTitle}{Corporate Internship}
+\newcommand{\ProjectTitle}{FinMetrics Suite}
 \newcommand{\ProjectRepo}{github.com/hi1r0/finmetrics-PU}
 
 % Mathematical Operators
@@ -22,10 +20,10 @@
 \DeclareMathOperator{\MAD}{MAD}
 \newcommand{\safedivide}{\mathrm{safe\_divide}}
 
-% Visual Badges & Pills (Zero Gold)
+% Visual Badges & Pills (Pure Emerald/Jade - Zero Gold)
 \newcommand{\badge}[2][jade]{%
     \tikz[baseline=-0.5ex]{%
-        \node[fill=#1!15, text=#1, draw=#1!60, line width=0.5pt, rounded corners=2.5pt, inner sep=2.5pt, font=\fontsize{6.5pt}{7.5pt}\selectfont\bfseries] {#2};%
+        \node[fill=#1!12, text=#1, draw=#1!50, line width=0.5pt, rounded corners=2.5pt, inner sep=2.5pt, font=\fontsize{6pt}{7pt}\selectfont\bfseries] {#2};%
     }%
 }
 
@@ -41,7 +39,7 @@
     colback=lightsage,
     colframe=mintborder,
     coltitle=deepemerald,
-    fonttitle=\fontsize{8.5pt}{10.5pt}\selectfont\bfseries,
+    fonttitle=\fontsize{8pt}{10pt}\selectfont\bfseries,
     title={#2},
     boxrule=0.7pt,
     arc=3pt,
@@ -57,12 +55,12 @@
     colback=white,
     colframe=deepemerald,
     coltitle=deepemerald,
-    fonttitle=\fontsize{8.5pt}{10.5pt}\selectfont\bfseries,
+    fonttitle=\fontsize{8pt}{10pt}\selectfont\bfseries,
     title={#2},
     boxrule=0.8pt,
     arc=3pt,
-    left=6pt, right=6pt, top=5pt, bottom=5pt,
-    titlerule=0.5pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+    titlerule=0.4pt,
     colbacktitle=lightsage,
     #1
 }
@@ -70,15 +68,15 @@
 % High-Priority Alert / Guardrail Card
 \newtcolorbox{alertcard}[2][]{%
     enhanced,
-    colback=minttint!40!white,
+    colback=minttint!30!white,
     colframe=jade,
     coltitle=deepemerald,
-    fonttitle=\fontsize{8.5pt}{10.5pt}\selectfont\bfseries,
+    fonttitle=\fontsize{8pt}{10pt}\selectfont\bfseries,
     title={#2},
     boxrule=0.8pt,
     arc=3pt,
     left=5pt, right=5pt, top=4pt, bottom=4pt,
-    titlerule=0.5pt,
-    colbacktitle=minttint!70!white,
+    titlerule=0.4pt,
+    colbacktitle=minttint!60!white,
     #1
 }

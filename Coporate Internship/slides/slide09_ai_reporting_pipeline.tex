@@ -4,59 +4,86 @@
 \begin{frame}{AI Narration \& Multi-Format Delivery}{Round-Robin LLM Synthesis Powers Executive Briefings and Automated Multi-Sheet Exports}
     \vspace{-0.2cm}
     \begin{columns}[T]
-        % Column 1: AI Narration & Key Rotation
-        \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=5.4cm]{Gemini LLM Narration Engine}
-                \fontsize{6.3pt}{8pt}\selectfont
-                Translates high-dimensional ratio vectors into institutional analyst prose:
-
+        % Column 1: TikZ Visual Delivery Flow
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[
+                enhanced,
+                colback=white,
+                colframe=mintborder,
+                boxrule=0.7pt,
+                arc=3pt,
+                height=5.55cm,
+                left=4pt, right=4pt, top=4pt, bottom=4pt
+            ]
+                \centering
+                {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Autonomous Synthesis Data Flow}\par
                 \vspace{3pt}
-                \textbf{\color{deepemerald}Round-Robin API Key Pool:}
-                \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item Rotates \texttt{GEMINI\_API\_KEY\_1..N} dynamically to eliminate free-tier rate limits (RPM/TPM blocks).
-                    \item Automatic failover ensures uninterrupted bulk batch screening.
-                \end{itemize}
+                \begin{tikzpicture}[
+                    flownode/.style={
+                        draw=mintborder,
+                        fill=lightsage,
+                        rounded corners=2pt,
+                        text width=4.9cm,
+                        minimum height=0.72cm,
+                        inner sep=3pt,
+                        align=left,
+                        font=\fontsize{5.8pt}{7.2pt}\selectfont
+                    },
+                    flowarrow/.style={
+                        ->,
+                        >=Stealth,
+                        line width=1.1pt,
+                        color=deepemerald
+                    }
+                ]
+                    \node[flownode] (f1) at (0, 0) {
+                        \textbf{\color{deepemerald}1. API Key Pool (Round-Robin):} \\
+                        Rotates \texttt{KEY\_1..N} to bypass RPM/TPM quota ceilings.
+                    };
+                    \node[flownode, below=0.25cm of f1] (f2) {
+                        \textbf{\color{deepemerald}2. Quantitative Context Injection:} \\
+                        Feeds 5-pillar vector + anomaly flags into prompt template.
+                    };
+                    \node[flownode, below=0.25cm of f2] (f3) {
+                        \textbf{\color{deepemerald}3. Dual Output Generators:} \\
+                        Synthesizes analyst prose and triggers 6-tab Excel builder.
+                    };
 
-                \vspace{3pt}
-                \textbf{\color{deepemerald}Context-Injected Quantitative Prompting:}
-                \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item Injects 5-pillar scores, sector percentile ranks, and consensus outlier severity counts.
-                    \item Synthesizes executive SWOT analysis and specific debt/working capital corrective actions.
-                \end{itemize}
+                    \draw[flowarrow] (f1.south) -- (f2.north);
+                    \draw[flowarrow] (f2.south) -- (f3.north);
+                \end{tikzpicture}
                 \vfill
-                \badge[jade]{Autonomous Financial Synthesis}
-            \end{quantcard}
+                \badge[jade]{Continuous Batch Processing Pipeline}
+            \end{tcolorbox}
         \end{column}
 
-        % Column 2: Six-Tab Excel & UI Delivery
-        \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=5.4cm]{Enterprise Reporting Architecture}
+        % Column 2: Structured Features & Excel Details
+        \begin{column}{0.48\textwidth}
+            \begin{quantcard}[height=2.7cm]{Gemini AI Analyst Narration}
                 \fontsize{6.3pt}{7.9pt}\selectfont
-                Dual delivery channels for quant analysts and C-suite stakeholders:
+                Translates high-dimensional vector outputs into executive English:
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{Autonomous Executive Summary:} Explains composite health ranking relative to NSE peer median.
+                    \item \textbf{Outlier Root-Cause Diagnosis:} Highlights exact metric decoupling (e.g. margin spike vs.\ negative operating cash flow).
+                    \item \textbf{Turnaround Recommendations:} Actionable working capital advice.
+                \end{itemize}
+            \end{quantcard}
 
-                \vspace{2pt}
-                \textbf{\color{deepemerald}Automated Six-Tab Excel Workbook:}
+            \vspace{0.1cm}
+
+            \begin{quantcard}[height=2.75cm]{Six-Tab Automated Excel Artifact}
+                \fontsize{6.2pt}{7.7pt}\selectfont
+                \textbf{\color{deepemerald}Complete Institutional Deliverable:}
                 \begin{itemize}
                     \setlength{\itemsep}{1pt}
-                    \item \textbf{Tab 1: Scorecard} --- 16 ratios with conditional heatmap styling.
-                    \item \textbf{Tab 2: Percentiles} --- Sector benchmarks ($P_{10}, Q_1, \text{Med}, Q_3, P_{90}$).
-                    \item \textbf{Tab 3: Outliers} --- Consensus flags across Tukey, MAD, and iForest.
-                    \item \textbf{Tab 4: Scores} --- Standardized $0\text{--}100$ pillar ratings.
-                    \item \textbf{Tab 5: Narrative} --- LLM-authored executive briefing.
-                    \item \textbf{Tab 6: Metadata} --- Ticker mapping and audit timestamps.
+                    \item \textbf{Tab 1 (Scorecard):} 16 ratios with conditional heatmaps.
+                    \item \textbf{Tab 2 (Percentiles):} Sector anchors ($P_{10}, Q_1, \text{Med}, Q_3, P_{90}$).
+                    \item \textbf{Tab 3 (Outliers):} Multi-tier consensus flags.
+                    \item \textbf{Tab 4 (Scores):} Normalized 0--100 pillar distributions.
+                    \item \textbf{Tab 5 (Narrative):} AI-generated investment memo.
+                    \item \textbf{Tab 6 (Metadata):} Audit trail \& timestamp logs.
                 \end{itemize}
-
-                \vspace{2pt}
-                \textbf{\color{deepemerald}Streamlit \& Headless PDF Suite:}
-                \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item Interactive Plotly radar charts, peer scatter, and box plots.
-                    \item Automated PDF export via headless command-line interface.
-                \end{itemize}
-                \vfill
-                \badge[jade]{Dual Delivery Suite}
             \end{quantcard}
         \end{column}
     \end{columns}

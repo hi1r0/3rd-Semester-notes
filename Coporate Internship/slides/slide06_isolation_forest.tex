@@ -4,66 +4,89 @@
 \begin{frame}{Machine Learning Anomaly Engine}{Multivariate Isolation Trees Detect High-Dimensional Ratio Discrepancies}
     \vspace{-0.2cm}
     \begin{columns}[T]
-        % Column 1: Algorithmic Mathematics
-        \begin{column}{0.51\textwidth}
-            \begin{mathcard}[height=5.4cm]{Multivariate Tree Isolation Mechanics}
-                \fontsize{6.3pt}{7.9pt}\selectfont
-                Recursively partitions the 16-ratio space $\mathbb{R}^{16}$ via random hyperplanes.
-                Anomalies require fewer cuts to isolate near the tree root.
-
+        % Column 1: Native TikZ Isolation Forest Tree & 2D Space Diagram
+        \begin{column}{0.48\textwidth}
+            \begin{tcolorbox}[
+                enhanced,
+                colback=white,
+                colframe=mintborder,
+                boxrule=0.7pt,
+                arc=3pt,
+                height=5.35cm,
+                left=4pt, right=4pt, top=4pt, bottom=4pt
+            ]
+                \centering
+                {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Recursive Tree Isolation Mechanics}\par
                 \vspace{2pt}
-                \textbf{\color{deepemerald}Average Path Length of Unsuccessful Search in BST:}
-                \begin{equation*}
-                    c(n) = 2\ln(n - 1) + 2\gamma - \frac{2(n - 1)}{n}
-                \end{equation*}
-                where $\gamma \approx 0.5772156649$ is the Euler--Mascheroni constant and $n$ is the peer sub-sampling size ($n=256$).
+                \begin{tikzpicture}[scale=0.82, every node/.style={transform shape}]
+                    % Left: 2D Feature Space with Random Hyperplane Cuts
+                    \draw[draw=mintborder, fill=lightsage, line width=0.8pt, rounded corners=2pt] (-2.9, 0.4) rectangle (-0.3, 2.5);
+                    \node[font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries\color{deepemerald}] at (-1.6, 2.3) {2D Ratio Space ($\mathbb{R}^2$)};
 
-                \vspace{2pt}
-                \textbf{\color{deepemerald}Anomaly Score Formulation:}
-                \begin{equation*}
-                    s(x, n) = 2^{-\frac{\mathbb{E}(h(x))}{c(n)}}
-                \end{equation*}
-                \begin{itemize}
-                    \setlength{\itemsep}{1.5pt}
-                    \item $\mathbb{E}(h(x)) \to 0 \implies s \to 1$: Highly isolated outlier.
-                    \item $\mathbb{E}(h(x)) \to c(n) \implies s \to 0.5$: Structurally typical peer.
-                    \item Classification Rule: $s(x, n) \ge 0.60 \implies \text{Outlier}$.
-                \end{itemize}
+                    % Normal cluster
+                    \foreach \x/\y in {-1.7/1.3, -1.5/1.5, -1.8/1.6, -1.4/1.2, -1.6/1.4, -1.3/1.5} {
+                        \node[circle, fill=forestgreen, inner sep=1.2pt] at (\x, \y) {};
+                    }
+                    % Anomaly in corner
+                    \node[circle, fill=jade, inner sep=1.8pt] (anom) at (-2.5, 2.0) {};
+                    \node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont\color{deepemerald}] at (-2.5, 2.05) {$x_{\text{outlier}}$};
+
+                    % Random Cuts
+                    \draw[line width=0.7pt, dash dot, color=slatygray] (-2.9, 1.8) -- (-0.3, 1.8);
+                    \draw[line width=0.7pt, dash dot, color=jade] (-2.2, 1.8) -- (-2.2, 2.5);
+
+                    % Right: Mini Isolation Tree
+                    \node[draw=deepemerald, fill=lightsage, rounded corners=1.5pt, font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries, inner sep=2pt] (root) at (1.6, 2.3) {Split 1};
+                    
+                    \node[draw=jade, fill=minttint, rounded corners=1.5pt, font=\fontsize{4.5pt}{5.5pt}\selectfont\bfseries, inner sep=1.8pt, below left=0.45cm and 0.4cm of root] (outnode) {Isolated $x_0$};
+                    \node[draw=deepemerald, fill=white, rounded corners=1.5pt, font=\fontsize{4.5pt}{5.5pt}\selectfont, inner sep=1.8pt, below right=0.45cm and 0.4cm of root] (t2) {Split 2};
+
+                    \draw[->, >=Stealth, line width=0.6pt, color=deepemerald] (root) -- (outnode) node[midway, left, font=\fontsize{4pt}{5pt}\selectfont] {$h=1$};
+                    \draw[->, >=Stealth, line width=0.6pt, color=deepemerald] (root) -- (t2);
+
+                    \node[font=\fontsize{4.5pt}{5.5pt}\selectfont, below left=0.35cm and 0.2cm of t2] (t3a) {$\dots$};
+                    \node[font=\fontsize{4.5pt}{5.5pt}\selectfont, below right=0.35cm and 0.2cm of t2] (t3b) {$h \ge 6$};
+                    \draw[->, >=Stealth, line width=0.5pt, color=slatygray] (t2) -- (t3a);
+                    \draw[->, >=Stealth, line width=0.5pt, color=slatygray] (t2) -- (t3b);
+
+                    % Annotation Box
+                    \node[fill=lightsage, draw=mintborder, rounded corners=2pt, inner sep=3pt, text width=4.8cm, align=left] at (0, -0.6) {
+                        \fontsize{5.2pt}{6.5pt}\selectfont
+                        \textbf{\color{deepemerald}Short Search Path Principle:}
+                        Anomalies are few and structurally distinct, isolating at shallow tree depths ($\mathbb{E}[h(x)] \ll c(n)$).
+                    };
+                \end{tikzpicture}
                 \vfill
-                \badge[jade]{Multivariate Tree Ensemble}
-            \end{mathcard}
+                \badge[jade]{Multivariate Random Forest}
+            \end{tcolorbox}
         \end{column}
 
-        % Column 2: Consensus Scoring Engine
-        \begin{column}{0.46\textwidth}
-            \begin{quantcard}[height=5.4cm]{Tri-Method Consensus Engine}
-                \fontsize{6.3pt}{8pt}\selectfont
-                FinMetrics-PU combines non-parametric statistics with unsupervised tree learning into a 3-tier severity matrix:
+        % Column 2: Mathematical Scoring & Consensus
+        \begin{column}{0.48\textwidth}
+            \begin{mathcard}[height=2.7cm]{Path-Length \& Anomaly Score}
+                \fontsize{6.3pt}{7.9pt}\selectfont
+                Average BST unsuccessful search path ($n = 256$ subsample):
+                \begin{equation*}
+                    c(n) = 2\ln(n - 1) + 2\gamma - \frac{2(n - 1)}{n}, \quad \gamma \approx 0.5772
+                \end{equation*}
+                \textbf{\color{deepemerald}Normalized Score:}
+                \begin{equation*}
+                    s(x, n) = 2^{-\frac{\mathbb{E}(h(x))}{c(n)}}, \quad s \ge 0.60 \implies \text{Outlier}
+                \end{equation*}
+                $\mathbb{E}[h(x)] \to 0 \implies s \to 1.0$ (definite structural anomaly).
+            \end{mathcard}
 
-                \vspace{4pt}
-                \textbf{\color{deepemerald}1. Critical Anomaly (Tier 3)}
-                \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item Concurrently flagged by \textbf{Tukey IQR}, \textbf{MAD Z-Score}, and \textbf{Isolation Forest}.
-                    \item Indicates simultaneous extreme margin and cash flow breakdown.
-                \end{itemize}
+            \vspace{0.1cm}
 
-                \vspace{3pt}
-                \textbf{\color{deepemerald}2. Elevated Divergence (Tier 2)}
+            \begin{quantcard}[height=2.75cm]{Tri-Method Consensus Engine}
+                \fontsize{6.3pt}{7.9pt}\selectfont
+                Combines 1D statistical cuts with 16D tree isolation:
                 \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item Flagged by any 2 out of 3 algorithmic engines.
-                    \item Detects hidden balance sheet leverage risks.
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{Tier 3 (Critical):} Concurrently flagged by IQR, MAD, and iForest (simultaneous margin \& cash flow collapse).
+                    \item \textbf{Tier 2 (Elevated):} Flagged by 2 of 3 detectors (subtle balance sheet overhang).
+                    \item \textbf{Tier 1 (Watch):} Single detector flag; tracked for drift.
                 \end{itemize}
-
-                \vspace{3pt}
-                \textbf{\color{deepemerald}3. Moderate Variance (Tier 1)}
-                \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item Flagged by single detector; monitored for drift.
-                \end{itemize}
-                \vfill
-                \badge[jade]{Consensus Robustness}
             \end{quantcard}
         \end{column}
     \end{columns}

@@ -24,50 +24,23 @@
 \setbeamertemplate{navigation symbols}{}
 
 % Page margins for 16:9 widescreen
-\setbeamersize{text margin left=0.8cm, text margin right=0.8cm}
+\setbeamersize{text margin left=0.75cm, text margin right=0.75cm}
 
-% Custom Frametitle Banner
+% Custom Frametitle Banner (Top-right pill removed)
 \setbeamertemplate{frametitle}{
     \nointerlineskip
-    \begin{beamercolorbox}[wd=\paperwidth, ht=1.15cm, dp=0.25cm, leftskip=0.8cm, rightskip=0.8cm]{frametitle}
+    \begin{beamercolorbox}[wd=\paperwidth, ht=1.05cm, dp=0.2cm, leftskip=0.75cm, rightskip=0.75cm]{frametitle}
         \usebeamercolor[fg]{structure}
-        \vspace{0.1cm}
-        \begin{minipage}[c]{0.78\textwidth}
-            {\fontsize{13pt}{15pt}\selectfont\bfseries\color{deepemerald}\insertframetitle}\par
-            \ifx\insertframesubtitle\@empty\else
-                \vspace{1pt}
-                {\fontsize{7.5pt}{9pt}\selectfont\color{slatygray}\textsf{\insertframesubtitle}}
-            \fi
-        \end{minipage}
-        \hfill
-        \begin{minipage}[c]{0.18\textwidth}
-            \raggedleft
-            \tikz{
-                \node[fill=lightsage, draw=mintborder, rounded corners=3pt, inner sep=3pt] {
-                    \fontsize{6pt}{7pt}\selectfont\bfseries\color{forestgreen}FinMetrics-PU
-                };
-            }
-        \end{minipage}
         \vspace{0.08cm}
-        \tikz{\draw[mintborder, line width=0.8pt] (0,0) -- (\paperwidth-1.6cm, 0);}
+        {\fontsize{13pt}{15pt}\selectfont\bfseries\color{deepemerald}\insertframetitle}\par
+        \ifx\insertframesubtitle\@empty\else
+            \vspace{1.5pt}
+            {\fontsize{7.5pt}{9pt}\selectfont\color{slatygray}\textsf{\insertframesubtitle}}
+        \fi
+        \vspace{0.08cm}
+        {\color{mintborder}\rule{\dimexpr\paperwidth-1.5cm\relax}{0.7pt}}
     \end{beamercolorbox}
 }
 
-% Custom Footline
-\setbeamertemplate{footline}{
-    \ifnum\thepage=1
-        % No footline on title slide
-    \else
-        \begin{beamercolorbox}[wd=\paperwidth, ht=0.45cm, dp=0.2cm, leftskip=0.8cm, rightskip=0.8cm]{footline}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (\paperwidth-1.6cm, 0);}\par
-            \vspace{2pt}
-            {\fontsize{6pt}{7.5pt}\selectfont\color{slatygray}
-                \textbf{\color{forestgreen}Pondicherry University} \textbar\ Dept. of Economics (MSQF) \textbar\ Corporate Internship
-                \hfill
-                FinMetrics-PU: Automated NSE Outlier Detection
-                \hfill
-                Slide \textbf{\color{deepemerald}\insertframenumber} of \inserttotalframenumber
-            }
-        \end{beamercolorbox}
-    \fi
-}
+% Completely Empty Footline (Per User Directive)
+\setbeamertemplate{footline}{}
