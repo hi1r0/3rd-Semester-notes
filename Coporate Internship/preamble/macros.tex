@@ -18,65 +18,66 @@
 \DeclareMathOperator{\median}{median}
 \DeclareMathOperator{\IQR}{IQR}
 \DeclareMathOperator{\MAD}{MAD}
+\DeclareMathOperator{\sign}{sign}
 \newcommand{\safedivide}{\mathrm{safe\_divide}}
 
-% Visual Badges & Pills (Pure Emerald/Jade - Zero Gold)
-\newcommand{\badge}[2][jade]{%
+% Visual Badges & Pills (Executive Dark Mode)
+\newcommand{\badge}[2][forestgreen]{%
     \tikz[baseline=-0.5ex]{%
-        \node[fill=#1!12, text=#1, draw=#1!50, line width=0.5pt, rounded corners=2.5pt, inner sep=2.5pt, font=\fontsize{6pt}{7pt}\selectfont\bfseries] {#2};%
+        \node[fill=cardinner, text=#1, draw=mintborder, line width=0.6pt, rounded corners=2.5pt, inner sep=2.5pt, font=\fontsize{6pt}{7pt}\selectfont\bfseries] {#2};%
     }%
 }
 
-\newcommand{\sourcepill}[1]{%
-    \tikz[baseline=-0.5ex]{%
-        \node[fill=lightsage, text=slatygray, draw=mintborder, line width=0.4pt, rounded corners=2pt, inner sep=2pt, font=\fontsize{5.5pt}{6.5pt}\selectfont] {Source: #1};%
-    }%
-}
+% Source Pill: Redefined to render completely nothing per user requirement
+\newcommand{\sourcepill}[1]{}
 
 % Standard Quantitative Content Card
 \newtcolorbox{quantcard}[2][]{%
     enhanced,
-    colback=lightsage,
+    colback=cardbg,
     colframe=mintborder,
     coltitle=deepemerald,
+    coltext=darkcharcoal,
     fonttitle=\fontsize{8pt}{10pt}\selectfont\bfseries,
     title={#2},
     boxrule=0.7pt,
     arc=3pt,
     left=5pt, right=5pt, top=4pt, bottom=4pt,
     titlerule=0.4pt,
-    colbacktitle=lightsage!80!white,
+    colbacktitle=cardbg,
     #1
 }
 
 % Mathematical Formula & Model Card
 \newtcolorbox{mathcard}[2][]{%
     enhanced,
-    colback=white,
-    colframe=deepemerald,
+    colback=cardinner,
+    colframe=mintborder,
     coltitle=deepemerald,
+    coltext=darkcharcoal,
     fonttitle=\fontsize{8pt}{10pt}\selectfont\bfseries,
     title={#2},
-    boxrule=0.8pt,
+    boxrule=0.7pt,
     arc=3pt,
     left=6pt, right=6pt, top=4pt, bottom=4pt,
     titlerule=0.4pt,
-    colbacktitle=lightsage,
+    colbacktitle=cardinner,
     #1
 }
 
 % High-Priority Alert / Guardrail Card
 \newtcolorbox{alertcard}[2][]{%
     enhanced,
-    colback=minttint!30!white,
+    colback=cardbg,
     colframe=jade,
     coltitle=deepemerald,
+    coltext=darkcharcoal,
     fonttitle=\fontsize{8pt}{10pt}\selectfont\bfseries,
     title={#2},
     boxrule=0.8pt,
     arc=3pt,
     left=5pt, right=5pt, top=4pt, bottom=4pt,
     titlerule=0.4pt,
-    colbacktitle=minttint!60!white,
+    colbacktitle=cardbg,
     #1
 }

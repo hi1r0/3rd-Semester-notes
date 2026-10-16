@@ -1,0 +1,77 @@
+% ==============================================================================
+% Slide 09: Modified MAD Dispersion Engine
+% ==============================================================================
+\begin{frame}{Modified MAD Dispersion Engine}{Median Absolute Deviation with Standard Gaussian Consistency and 50\% Breakdown}
+    \vspace{-0.1cm}
+    \begin{columns}[T,onlytextwidth]
+        % Column 1: Mathematical Derivation & 0.6745 Factor
+        \begin{column}{0.485\textwidth}
+            \begin{mathcard}[height=2.65cm]{Mathematical Derivation: Why 0.6745?}
+                \fontsize{6.2pt}{8.0pt}\selectfont
+                Median Absolute Deviation relative to peer sample median:
+                \begin{equation*}
+                    \MAD = \median\Big(\big|x_i - \median(X)\big|\Big)
+                \end{equation*}
+                \textbf{\color{deepemerald}Normal Distribution Consistency Proof:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item For $X \sim \mathcal{N}(\mu, \sigma^2)$, $|X - \mu|/\sigma$ follows a standard folded half-normal distribution with CDF $F(z) = 2\Phi(z) - 1$.
+                    \item Setting $F(z) = 0.50 \implies \Phi(z) = 0.75 \implies z = \Phi^{-1}(0.75) \approx 0.6745$.
+                    \item Therefore, $\mathbb{E}[\MAD] = \Phi^{-1}(0.75)\,\sigma \approx 0.6745\,\sigma$.
+                \end{itemize}
+            \end{mathcard}
+
+            \vspace{0.15cm}
+
+            \begin{mathcard}[height=2.65cm]{Asymptotically Unbiased Scale Estimator}
+                \fontsize{6.2pt}{8.0pt}\selectfont
+                Inverting the expectation yields robust standard deviation $\hat{\sigma}_{\MAD}$:
+                \begin{equation*}
+                    \hat{\sigma}_{\MAD} = \frac{\MAD}{\Phi^{-1}(0.75)} \approx 1.4826 \times \MAD
+                \end{equation*}
+                \textbf{\color{deepemerald}Modified Z-Score Formulation:}
+                \begin{equation*}
+                    M_i = \frac{|x_i - \median(X)|}{\hat{\sigma}_{\MAD}} = \frac{0.6745 \cdot |x_i - \median(X)|}{\MAD}
+                \end{equation*}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Retains the intuitive scale of classical $Z$, but remains immune to outlier masking.
+                \end{itemize}
+            \end{mathcard}
+        \end{column}
+
+        % Column 2: Decision Rules & 50% Breakdown Point
+        \begin{column}{0.485\textwidth}
+            \begin{quantcard}[height=2.65cm]{Decision Rule \& Outlier Classification}
+                \fontsize{6.4pt}{8.3pt}\selectfont
+                \textbf{\color{deepemerald}Iglewicz \& Hoaglin (1993) Criterion}
+                \begin{equation*}
+                    \text{Outlier}(x_i) = \mathbf{1}_{\{M_i > 3.5\}}
+                \end{equation*}
+                \textbf{\color{deepemerald}Analytical Significance:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item $M_i > 3.5$ represents a $3.5\sigma$ deviation relative to robust dispersion, isolating genuine structural irregularities.
+                    \item Unlike parametric $Z$, sample size $n$ does not dilute the anomaly score of distressed peers.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Iglewicz-Hoaglin Robust Metric Benchmark}
+            \end{quantcard}
+
+            \vspace{0.15cm}
+
+            \begin{quantcard}[height=2.65cm]{Maximal 50\% Breakdown Point Invariant}
+                \fontsize{6.4pt}{8.3pt}\selectfont
+                \textbf{\color{deepemerald}Theoretical Upper Bound of Robustness}
+                \begin{equation*}
+                    \varepsilon^*(\MAD) = \frac{\lfloor n/2 \rfloor}{n} \xrightarrow{n \to \infty} 50.0\%
+                \end{equation*}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Up to \textbf{half the sector cohort} can be driven to arbitrary $\pm\infty$ extremes without causing $\median(X)$ or $\MAD$ to collapse.
+                    \item Guarantees flawless anomaly isolation even during sector-wide liquidity shocks or cyclical corporate downturns.
+                \end{itemize}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+\end{frame}

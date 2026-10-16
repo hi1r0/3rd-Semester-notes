@@ -1,31 +1,31 @@
 % ==============================================================================
-% Slide 09: Generative AI Narration & Multi-Format Enterprise Delivery
+% Slide 15: AI Narration & Multi-Format Delivery
 % ==============================================================================
 \begin{frame}{AI Narration \& Multi-Format Delivery}{Round-Robin LLM Synthesis Powers Executive Briefings and Automated Multi-Sheet Exports}
-    \vspace{-0.2cm}
-    \begin{columns}[T]
+    \vspace{-0.1cm}
+    \begin{columns}[T,onlytextwidth]
         % Column 1: TikZ Visual Delivery Flow
-        \begin{column}{0.48\textwidth}
+        \begin{column}{0.485\textwidth}
             \begin{tcolorbox}[
                 enhanced,
-                colback=white,
+                colback=cardbg,
                 colframe=mintborder,
                 boxrule=0.7pt,
                 arc=3pt,
-                height=5.55cm,
+                height=5.45cm,
                 left=4pt, right=4pt, top=4pt, bottom=4pt
             ]
                 \centering
                 {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Autonomous Synthesis Data Flow}\par
-                \vspace{3pt}
+                \vspace{4pt}
                 \begin{tikzpicture}[
                     flownode/.style={
                         draw=mintborder,
-                        fill=lightsage,
+                        fill=cardinner,
                         rounded corners=2pt,
-                        text width=4.9cm,
+                        text width=5.1cm,
                         minimum height=0.72cm,
-                        inner sep=3pt,
+                        inner sep=3.5pt,
                         align=left,
                         font=\fontsize{5.8pt}{7.2pt}\selectfont
                     },
@@ -38,15 +38,15 @@
                 ]
                     \node[flownode] (f1) at (0, 0) {
                         \textbf{\color{deepemerald}1. API Key Pool (Round-Robin):} \\
-                        Rotates \texttt{KEY\_1..N} to bypass RPM/TPM quota ceilings.
+                        Rotates \texttt{KEY\_1..N} dynamically to bypass public RPM/TPM quota ceilings.
                     };
                     \node[flownode, below=0.25cm of f1] (f2) {
                         \textbf{\color{deepemerald}2. Quantitative Context Injection:} \\
-                        Feeds 5-pillar vector + anomaly flags into prompt template.
+                        Feeds 5-pillar normalized vector + anomaly flags into strict structured prompt.
                     };
                     \node[flownode, below=0.25cm of f2] (f3) {
-                        \textbf{\color{deepemerald}3. Dual Output Generators:} \\
-                        Synthesizes analyst prose and triggers 6-tab Excel builder.
+                        \textbf{\color{deepemerald}3. Dual Output Generation:} \\
+                        Synthesizes natural analyst memo and triggers 6-tab openpyxl workbook generator.
                     };
 
                     \draw[flowarrow] (f1.south) -- (f2.north);
@@ -58,22 +58,22 @@
         \end{column}
 
         % Column 2: Structured Features & Excel Details
-        \begin{column}{0.48\textwidth}
-            \begin{quantcard}[height=2.7cm]{Gemini AI Analyst Narration}
-                \fontsize{6.3pt}{7.9pt}\selectfont
+        \begin{column}{0.485\textwidth}
+            \begin{quantcard}[height=2.65cm]{Gemini AI Analyst Narration}
+                \fontsize{6.3pt}{8.0pt}\selectfont
                 Translates high-dimensional vector outputs into executive English:
                 \begin{itemize}
                     \setlength{\itemsep}{1.5pt}
                     \item \textbf{Autonomous Executive Summary:} Explains composite health ranking relative to NSE peer median.
                     \item \textbf{Outlier Root-Cause Diagnosis:} Highlights exact metric decoupling (e.g. margin spike vs.\ negative operating cash flow).
-                    \item \textbf{Turnaround Recommendations:} Actionable working capital advice.
+                    \item \textbf{Turnaround Strategy:} Generates actionable working capital and debt reprofiling advice.
                 \end{itemize}
             \end{quantcard}
 
-            \vspace{0.1cm}
+            \vspace{0.15cm}
 
-            \begin{quantcard}[height=2.75cm]{Six-Tab Automated Excel Artifact}
-                \fontsize{6.2pt}{7.7pt}\selectfont
+            \begin{quantcard}[height=2.65cm]{Six-Tab Automated Excel Artifact}
+                \fontsize{6.1pt}{7.8pt}\selectfont
                 \textbf{\color{deepemerald}Complete Institutional Deliverable:}
                 \begin{itemize}
                     \setlength{\itemsep}{1pt}
@@ -84,10 +84,9 @@
                     \item \textbf{Tab 5 (Narrative):} AI-generated investment memo.
                     \item \textbf{Tab 6 (Metadata):} Audit trail \& timestamp logs.
                 \end{itemize}
+                \vfill
+                \badge[jade]{Automated openpyxl Multi-Tab Financial Reporting}
             \end{quantcard}
         \end{column}
     \end{columns}
-
-    \vspace{0.1cm}
-    \hfill \sourcepill{modules/ai\_handler.py \& modules/report\_generator.py}
 \end{frame}

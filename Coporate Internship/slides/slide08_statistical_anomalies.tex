@@ -1,24 +1,24 @@
 % ==============================================================================
-% Slide 05: Statistical Anomaly Algorithms (Tukey IQR & MAD Z-Score)
+% Slide 08: Non-Parametric Anomaly Detection
 % ==============================================================================
-\begin{frame}{Statistical Anomaly Algorithms}{Non-Parametric Dispersion Resists Heavy-Tailed Financial Skew}
-    \vspace{-0.2cm}
+\begin{frame}{Non-Parametric Anomaly Detection}{Tukey IQR Cutoff Fences Resist Heavy-Tailed Financial Distributions}
+    \vspace{-0.1cm}
     \begin{columns}[T,onlytextwidth]
         % Column 1: Native TikZ Boxplot with Tukey Fences
         \begin{column}{0.485\textwidth}
             \begin{tcolorbox}[
                 enhanced,
-                colback=white,
+                colback=cardbg,
                 colframe=mintborder,
                 boxrule=0.7pt,
                 arc=3pt,
-                height=5.35cm,
+                height=5.45cm,
                 left=4pt, right=4pt, top=4pt, bottom=4pt
             ]
                 \centering
                 {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Tukey IQR Boxplot \& Cutoff Fences}\par
-                \vspace{3pt}
-                \begin{tikzpicture}[scale=0.75, every node/.style={transform shape}]
+                \vspace{4pt}
+                \begin{tikzpicture}[scale=0.76, every node/.style={transform shape}]
                     % Horizontal scale axis
                     \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (-3.2, 0) -- (3.4, 0) node[right, font=\fontsize{5pt}{6pt}\selectfont] {Ratio ($x$)};
 
@@ -31,11 +31,11 @@
                     \draw[line width=0.8pt, color=deepemerald] (2.0, 0.9) -- (2.0, 1.5);
 
                     % Central Box: Q1 to Q3
-                    \draw[draw=deepemerald, fill=lightsage, line width=0.9pt, rounded corners=1pt] (-1.0, 0.6) rectangle (1.0, 1.8);
+                    \draw[draw=deepemerald, fill=cardinner, line width=0.9pt, rounded corners=1pt] (-1.0, 0.6) rectangle (1.0, 1.8);
 
                     % Median Line
                     \draw[line width=1.4pt, color=forestgreen] (0.1, 0.6) -- (0.1, 1.8)
-                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {Median};
+                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries\color{forestgreen}] {Median};
 
                     % Quartile labels
                     \node[below, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (-1.0, 0.55) {$Q_1$ (25\%)};
@@ -43,13 +43,13 @@
 
                     % IQR Span Bracket
                     \draw[<->, >=Stealth, line width=0.6pt, color=deepemerald] (-1.0, 2.05) -- (1.0, 2.05)
-                        node[midway, above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {$\text{IQR} = Q_3 - Q_1$};
+                        node[midway, above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries\color{deepemerald}] {$\text{IQR} = Q_3 - Q_1$};
 
                     % Inner Fences
                     \draw[line width=0.8pt, dash dot, color=jade] (-2.5, 0.4) -- (-2.5, 2.0)
-                        node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries] {$\mathcal{F}_{\text{lower}}$};
+                        node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries\color{jade}] {$\mathcal{F}_{\text{lower}}$};
                     \draw[line width=0.8pt, dash dot, color=jade] (2.5, 0.4) -- (2.5, 2.0)
-                        node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries] {$\mathcal{F}_{\text{upper}}$};
+                        node[above, font=\fontsize{4.8pt}{5.8pt}\selectfont\bfseries\color{jade}] {$\mathcal{F}_{\text{upper}}$};
 
                     % Outliers beyond fences
                     \node[circle, fill=jade, inner sep=2pt] at (-2.9, 1.2) {};
@@ -58,45 +58,52 @@
                     \node[above, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (3.05, 1.35) {Outliers};
 
                     % Annotation Box
-                    \node[fill=lightsage, draw=mintborder, rounded corners=2pt, inner sep=2.5pt, text width=4.8cm, align=left] at (0, -0.9) {
+                    \node[fill=cardinner, draw=mintborder, rounded corners=2pt, inner sep=3.5pt, text width=4.9cm, align=left] at (0, -0.9) {
                         \fontsize{5.2pt}{6.5pt}\selectfont
                         \textbf{\color{deepemerald}Non-Parametric Fence Invariant:}
-                        Values outside $[\mathcal{F}_{\text{lower}}, \mathcal{F}_{\text{upper}}] = [Q_1 - 1.5\,\text{IQR},\, Q_3 + 1.5\,\text{IQR}]$ are isolated without Gaussian assumptions.
+                        Values outside $[\mathcal{F}_{\text{lower}}, \mathcal{F}_{\text{upper}}] = [Q_1 - 1.5\,\text{IQR},\, Q_3 + 1.5\,\text{IQR}]$ are isolated without making fragile Gaussian assumptions.
                     };
                 \end{tikzpicture}
+                \vfill
+                \badge[jade]{Tukey (1977) Exploratory Data Analysis Standard}
             \end{tcolorbox}
         \end{column}
 
         % Column 2: Mathematical Formulations
         \begin{column}{0.485\textwidth}
-            \begin{mathcard}[height=2.7cm]{Tukey Fences Cutoff Bounds}
-                \fontsize{6.3pt}{8pt}\selectfont
-                Evaluates empirical spread of central $50\%$ peer mass:
+            \begin{mathcard}[height=2.65cm]{Tukey Fences Formulation}
+                \fontsize{6.3pt}{8.2pt}\selectfont
+                Evaluates empirical spread of the central $50\%$ peer cohort:
                 \begin{equation*}
                     \mathcal{F}_{\text{lower}} = Q_1 - 1.5 \times \IQR, \quad \mathcal{F}_{\text{upper}} = Q_3 + 1.5 \times \IQR
                 \end{equation*}
                 \begin{equation*}
                     \text{Outlier}(x_i) = \mathbf{1}_{\{x_i < \mathcal{F}_{\text{lower}} \;\lor\; x_i > \mathcal{F}_{\text{upper}}\}}
                 \end{equation*}
-                Incorruptible by extreme fat tails in the upper or lower 25\%.
+                \textbf{\color{deepemerald}Two-Tier Severity Thresholds:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{Mild Anomaly ($1.5\,\text{IQR}$):} Flags candidate peer deviation.
+                    \item \textbf{Extreme Anomaly ($3.0\,\text{IQR}$):} Structural reporting divergence.
+                \end{itemize}
             \end{mathcard}
 
-            \vspace{0.1cm}
+            \vspace{0.15cm}
 
-            \begin{mathcard}[height=2.75cm]{Modified MAD Z-Score}
-                \fontsize{6.1pt}{7.7pt}\selectfont
-                Calculates median dispersion relative to peer median:
-                \begin{equation*}
-                    \MAD = \median\Big(\big|x_i - \median(X)\big|\Big)
-                \end{equation*}
-                \begin{equation*}
-                    M_i = \frac{0.6745 \cdot |x_i - \median(X)|}{\MAD}, \quad M_i > 3.5 \implies \text{Outlier}
-                \end{equation*}
-                \textbf{\color{deepemerald}Why 0.6745?} Under $X \sim \mathcal{N}$, $\mathbb{E}[\MAD] = \Phi^{-1}(0.75)\,\sigma \approx 0.6745\,\sigma$, guaranteeing standard Gaussian consistency with a \textbf{50\% breakdown point}.
-            \end{mathcard}
+            \begin{quantcard}[height=2.65cm]{Non-Parametric Invariants \& Properties}
+                \fontsize{6.4pt}{8.3pt}\selectfont
+                \textbf{\color{deepemerald}1. 25\% Breakdown Resistance}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Up to $25\%$ of observations in each tail can be infinitely distorted without shifting quartile anchors $Q_1$ or $Q_3$.
+                \end{itemize}
+                \textbf{\color{deepemerald}2. Asymmetry \& Skew Preservation}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Unlike symmetric $(\bar{\mu} \pm 2\hat{\sigma})$, Tukey fences naturally adapt to skewed distributions like P/E ratios and Debt/Equity.
+                    \item Prevents penalizing firms operating in intrinsically skewed industries.
+                \end{itemize}
+            \end{quantcard}
         \end{column}
     \end{columns}
-
-    \vspace{0.1cm}
-    \hfill \sourcepill{modules/outlier\_engine.py \& Tukey (1977)}
 \end{frame}

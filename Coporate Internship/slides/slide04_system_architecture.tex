@@ -1,20 +1,20 @@
 % ==============================================================================
-% Slide 03: End-to-End System Architecture & Data Flow
+% Slide 04: System Architecture & Data Pipeline
 % ==============================================================================
 \begin{frame}{System Architecture \& Data Pipeline}{Decoupled 4-Stage Execution Flow from Raw NSE Filings to Actionable Intelligence}
-    \vspace{-0.2cm}
+    \vspace{-0.25cm}
     \begin{center}
     \begin{tikzpicture}[
         stagecard/.style={
             draw=mintborder,
-            fill=lightsage,
+            fill=cardbg,
             line width=0.8pt,
             rounded corners=3pt,
-            text width=2.65cm,
-            minimum height=2.75cm,
+            text width=2.5cm,
+            minimum height=2.85cm,
             align=left,
             inner sep=4pt,
-            font=\fontsize{6.2pt}{7.6pt}\selectfont
+            font=\fontsize{6.1pt}{7.5pt}\selectfont
         },
         arrowlink/.style={
             ->,
@@ -24,98 +24,99 @@
         },
         summarycard/.style={
             draw=mintborder,
-            fill=white,
+            fill=cardinner,
             line width=0.7pt,
             rounded corners=3pt,
-            text width=12.7cm,
-            minimum height=1.2cm,
+            text width=12.8cm,
+            minimum height=1.15cm,
             align=left,
             inner sep=4pt,
-            font=\fontsize{6.1pt}{8.0pt}\selectfont
+            font=\fontsize{6.1pt}{7.8pt}\selectfont
         }
     ]
-        % Stage 1: Ingestion
-        \node[stagecard] (s1) at (0, 0) {
+        % Symmetrically centered 4 stages around x = 0 with >= 1.0cm inter-node clearance
+        % Node width ~2.78cm, center step = 3.80cm => clearance ~ 1.02cm
+        \node[stagecard] (s1) at (-5.70, 0) {
             {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{1} Ingestion}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.45cm, 0);}\par
+            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}SectorLoader}
             \begin{itemize}
-                \setlength{\itemsep}{1pt}
-                \item Maps NSE tickers (.NS).
+                \setlength{\itemsep}{1.5pt}
+                \item Maps NSE tickers (\texttt{.NS}).
                 \item 4-yr balance sheets \& flows.
-                \item Parquet multi-tier cache.
+                \item Multi-tier Parquet cache.
+                \item Asynchronous batch pull.
             \end{itemize}
         };
 
-        % Stage 2: Parsing
-        \node[stagecard, right=0.75cm of s1] (s2) {
+        \node[stagecard] (s2) at (-1.90, 0) {
             {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{2} Parsing}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.45cm, 0);}\par
+            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}FinancialParser}
             \begin{itemize}
-                \setlength{\itemsep}{1pt}
-                \item Canonical aliasing table.
+                \setlength{\itemsep}{1.5pt}
+                \item Canonical alias resolver.
                 \item Fiscal period alignment.
                 \item Singularity sanitization.
+                \item Unit/scale normalization.
             \end{itemize}
         };
 
-        % Stage 3: Analytical Core
-        \node[stagecard, right=0.75cm of s2] (s3) {
+        \node[stagecard] (s3) at (1.90, 0) {
             {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{3} Engines}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.45cm, 0);}\par
+            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}Ratio \& Outliers}
             \begin{itemize}
-                \setlength{\itemsep}{1pt}
+                \setlength{\itemsep}{1.5pt}
                 \item 16 metrics across 5 pillars.
-                \item Tukey IQR \& MAD $Z$-score.
+                \item Non-parametric Tukey IQR.
+                \item Modified MAD $Z$-score.
                 \item Isolation Forest in $\mathbb{R}^{16}$.
             \end{itemize}
         };
 
-        % Stage 4: Delivery
-        \node[stagecard, right=0.75cm of s3] (s4) {
+        \node[stagecard] (s4) at (5.70, 0) {
             {\fontsize{7pt}{8.2pt}\selectfont\bfseries\color{deepemerald}\badge[jade]{4} Delivery}\par
             \vspace{2pt}
-            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.45cm, 0);}\par
+            \tikz{\draw[mintborder, line width=0.5pt] (0,0) -- (2.35cm, 0);}\par
             \vspace{2pt}
             \textbf{\color{forestgreen}Reporting Suite}
             \begin{itemize}
-                \setlength{\itemsep}{1pt}
+                \setlength{\itemsep}{1.5pt}
                 \item Sigmoid scoring ($0\text{--}100$).
-                \item 6-tab executive Excel output.
+                \item 5-tier credit health radar.
+                \item 6-tab Excel workbooks.
                 \item Gemini LLM + Streamlit UI.
             \end{itemize}
         };
 
-        % Inter-card Transition Arrows with clear clearance
+        % Inter-card Transition Arrows with clear clearance (>= 1.0cm)
         \draw[arrowlink] (s1.east) -- node[above, font=\fontsize{5.2pt}{6.2pt}\selectfont\bfseries\color{forestgreen}] {Parquet} (s2.west);
         \draw[arrowlink] (s2.east) -- node[above, font=\fontsize{5.2pt}{6.2pt}\selectfont\bfseries\color{forestgreen}] {Parsed} (s3.west);
         \draw[arrowlink] (s3.east) -- node[above, font=\fontsize{5.2pt}{6.2pt}\selectfont\bfseries\color{forestgreen}] {Scores} (s4.west);
 
-        % Summary Banner Underneath (Ample vertical separation)
-        \node[summarycard, below=0.35cm of $(s2.south)!0.5!(s3.south)$] (summary) {
-            \textbf{\color{deepemerald}Decoupled Architectural Invariants:}
+        % Summary Banner Underneath (Symmetrically Centered)
+        \node[summarycard] (summary) at (0, -2.25) {
+            \textbf{\color{deepemerald}Core Architectural Invariants \& High-Throughput SLA:}
             \begin{itemize}
                 \setlength{\itemsep}{1pt}
-                \item \textbf{Singularity Resilience:} Missing company filings or zero denominators cannot crash downstream sector benchmarks.
-                \item \textbf{High-Throughput Caching:} Multi-level Parquet storage delivers $>88\%$ cache hit rate during batch cross-sectional screens.
+                \item \textbf{Decoupled Fail-Safe Execution:} Missing company filings or single-metric division errors cannot crash peer sector benchmarks.
+                \item \textbf{Sub-Two-Second Processing:} End-to-end evaluation of a 50-firm sector cohort completes in $< 1.8\,\text{seconds}$ via multi-tier caching.
             \end{itemize}
         };
 
         % Clean Symmetrical Drop-line Connectors into Summary Card
-        \draw[line width=1.1pt, color=deepemerald] (s2.south) -- ++(0,-0.18cm);
-        \draw[line width=1.1pt, color=deepemerald] (s3.south) -- ++(0,-0.18cm);
-        \draw[arrowlink, line width=1.1pt] ($(s2.south)!0.5!(s3.south) + (0,-0.18cm)$) -- (summary.north);
+        \draw[line width=1.1pt, color=deepemerald] (s2.south) -- ++(0,-0.16cm);
+        \draw[line width=1.1pt, color=deepemerald] (s3.south) -- ++(0,-0.16cm);
+        \draw[line width=1.1pt, color=deepemerald] ($(s2.south) + (0,-0.16cm)$) -- ($(s3.south) + (0,-0.16cm)$);
+        \draw[arrowlink, line width=1.1pt] (0, -1.61) -- (summary.north);
 
     \end{tikzpicture}
     \end{center}
-    \vspace{-0.15cm}
-    \hfill \sourcepill{01\_overview\_architecture.md}
 \end{frame}

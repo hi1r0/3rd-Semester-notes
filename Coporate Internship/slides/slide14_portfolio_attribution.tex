@@ -1,0 +1,71 @@
+% ==============================================================================
+% Slide 14: Portfolio Factor Attribution & Strategy
+% ==============================================================================
+\begin{frame}{Portfolio Factor Attribution \& Strategy}{Factor Delta Decomposition Quantifies Metric Alpha Drivers and Risk Overhangs}
+    \vspace{-0.1cm}
+    \begin{columns}[T,onlytextwidth]
+        % Column 1: Attribution Mathematics & Positioning
+        \begin{column}{0.485\textwidth}
+            \begin{mathcard}[height=2.65cm]{Factor Delta Attribution ($\Delta S_i$)}
+                \fontsize{6.3pt}{8.2pt}\selectfont
+                Quantifies exact point impact of each ratio on composite score:
+                \begin{equation*}
+                    \Delta S_i = W_k \cdot w_{k,i}' \times \big(S(x_i) - 50.0\big)
+                \end{equation*}
+                \textbf{\color{deepemerald}Attribution Directionality:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item $\Delta S_i > 0$: Metric exceeds peer median, delivering positive alpha.
+                    \item $\Delta S_i < 0$: Pinpoints the specific fundamental drag causing rating downgrades or operational underperformance.
+                \end{itemize}
+            \end{mathcard}
+
+            \vspace{0.15cm}
+
+            \begin{quantcard}[height=2.65cm]{Empirical Positioning Badges}
+                \fontsize{6.4pt}{8.3pt}\selectfont
+                Automatic categorization based on sector quartiles:
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item $x_i \ge Q_3 \implies$ \badge[jade]{Opportunity} (Top-quartile outperformance).
+                    \item $x_i \le Q_1 \implies$ \badge[forestgreen]{Risk Watch} (Vulnerability warning).
+                    \item $Q_1 < x_i < Q_3 \implies$ \badge[slatygray]{Neutral} (In-line sector peer).
+                \end{itemize}
+                \textbf{\color{deepemerald}Portfolio Triage:}
+                Enables instant multi-factor diagnostics without manual spreadsheet inspection.
+            \end{quantcard}
+        \end{column}
+
+        % Column 2: Quantitative Asset Management Applications
+        \begin{column}{0.485\textwidth}
+            \begin{quantcard}[height=2.65cm]{Systematic Asset Management Utility}
+                \fontsize{6.4pt}{8.3pt}\selectfont
+                \textbf{\color{deepemerald}1. Automated Fundamental Universe Screener}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Rapidly screens 2,000+ NSE equities into high-conviction factor baskets based on 5-pillar composite strength.
+                \end{itemize}
+                \textbf{\color{deepemerald}2. Credit Early-Warning Signal}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Leads credit rating agencies (CRISIL, ICRA) by 6--9 months through continuous fundamental monitoring.
+                \end{itemize}
+            \end{quantcard}
+
+            \vspace{0.15cm}
+
+            \begin{quantcard}[height=2.65cm]{Long/Short Factor Strategies}
+                \fontsize{6.4pt}{8.3pt}\selectfont
+                \textbf{\color{deepemerald}Systematic Equity Factor Portfolios}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{Long Basket:} Equities in the \textit{Excellent} tier ($\ge 80$) with robust cash flows and low debt burden.
+                    \item \textbf{Short/Underweight Basket:} Equities in \textit{Distressed} ($< 35$) facing working capital drains.
+                    \item Delivers robust long-term Sharpe ratio improvements over standard market-cap weighted benchmarks.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Institutional Quantitative Alpha Generation}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+\end{frame}

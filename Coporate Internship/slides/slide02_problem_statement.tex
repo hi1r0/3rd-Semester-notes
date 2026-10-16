@@ -1,97 +1,73 @@
 % ==============================================================================
-% Slide 02: Problem Statement & Screening Bottlenecks
+% Slide 02: Analytical Motivations & Screening Latency
 % ==============================================================================
-\begin{frame}{Problem Statement \& Analytical Motivations}{Automated Pipeline Replaces Vulnerable Manual Financial Screening}
-    \vspace{-0.2cm}
+\begin{frame}{Analytical Motivations \& Screening Latency}{Line-Item Variance and Asynchronous Disclosures Inhibit Scalable Equity Screening}
+    \vspace{-0.1cm}
     \begin{columns}[T,onlytextwidth]
-        % Column 1: Core Bottlenecks
+        % Column 1: Financial Reporting Bottlenecks
         \begin{column}{0.485\textwidth}
-            \begin{quantcard}[height=2.7cm]{1. Schema Heterogeneity \& Latency}
-                \fontsize{6.5pt}{8.3pt}\selectfont
-                \textbf{\color{deepemerald}Line-Item Variance Across NSE Sectors}
+            \begin{quantcard}[height=2.65cm]{1. Schema Heterogeneity \& Alias Variance}
+                \fontsize{6.6pt}{8.6pt}\selectfont
+                \textbf{\color{deepemerald}Line-Item Discrepancies Across NSE Sectors}
                 \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item Inconsistent canonical aliases in Yahoo Finance filings.
-                    \item Missing quarterly disclosures and asynchronous fiscal years.
+                    \setlength{\itemsep}{2pt}
+                    \item Inconsistent canonical aliases in public filings (\textit{Revenue from Operations} vs.\ \textit{Total Revenue} vs.\ \textit{Gross Sales}).
+                    \item Fragmented accounting disclosures across standalone versus consolidated financial statements.
                 \end{itemize}
-                \textbf{\color{deepemerald}Manual Screening Prohibitive}
+                \textbf{\color{deepemerald}Fiscal Period Misalignment}
                 \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item Manual auditing of 2,000+ equities invites fatigue and errors.
+                    \setlength{\itemsep}{1.5pt}
+                    \item Asynchronous quarterly filing dates create lagging comparative peer sets.
                 \end{itemize}
             \end{quantcard}
 
-            \vspace{0.1cm}
+            \vspace{0.15cm}
 
-            \begin{quantcard}[height=2.75cm]{2. Gaussian Mean Distortion}
-                \fontsize{6.5pt}{8.3pt}\selectfont
-                Classical $Z$-score collapses on fat-tailed financial distributions:
-                \begin{equation*}
-                    Z_i = \frac{x_i - \bar{\mu}}{\hat{\sigma}}, \quad \text{Breakdown Point } = 0.0\%
-                \end{equation*}
+            \begin{quantcard}[height=2.65cm]{2. Manual Screening Scalability Limits}
+                \fontsize{6.6pt}{8.6pt}\selectfont
+                \textbf{\color{deepemerald}Audit Fatigue \& Operational Risk}
                 \begin{itemize}
-                    \setlength{\itemsep}{1pt}
-                    \item A single distressed entity inflates sample variance $\hat{\sigma}^2$ and pulls sample mean $\bar{\mu}$.
-                    \item \textbf{Masking Effect:} Moderate peer distress appears artificially "normal".
+                    \setlength{\itemsep}{2pt}
+                    \item Manual financial auditing across 2,000+ listed NSE equities is computationally prohibitive and prone to transcription error.
+                    \item Analyst fatigue during quarterly earnings surges delays critical credit downgrades and risk warnings.
+                \end{itemize}
+                \textbf{\color{deepemerald}Spreadsheet Inefficiencies}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Brittle spreadsheet models break on missing rows or divide-by-zero fields.
                 \end{itemize}
             \end{quantcard}
         \end{column}
 
-        % Column 2: TikZ Visual Demonstration of Mean Skew vs Robust Median
+        % Column 2: Systemic Consequences & Quantitative Objectives
         \begin{column}{0.485\textwidth}
-            \begin{tcolorbox}[
-                enhanced,
-                colback=white,
-                colframe=mintborder,
-                boxrule=0.7pt,
-                arc=3pt,
-                height=5.3cm,
-                left=4pt, right=4pt, top=4pt, bottom=4pt
-            ]
-                \centering
-                {\fontsize{7pt}{8.5pt}\selectfont\bfseries\color{deepemerald}Empirical Mean Distortion vs.\ Robust Median}\par
-                \vspace{2pt}
-                \begin{tikzpicture}[scale=0.76, every node/.style={transform shape}]
-                    % Coordinate axes
-                    \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (-3.0, 0) -- (3.3, 0) node[right, font=\fontsize{5pt}{6pt}\selectfont] {Ratio ($x$)};
-                    \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (0, 0) -- (0, 2.5);
+            \begin{quantcard}[height=2.65cm]{3. Latent Insolvency Detection Lag}
+                \fontsize{6.6pt}{8.6pt}\selectfont
+                \textbf{\color{deepemerald}Silent Credit Health Erosion}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item Working capital deficits and cash-flow decay often precede formal credit rating agency downgrades by 2 to 3 quarters.
+                    \item Conventional heuristics fail to correlate high accounting margins with deteriorating operating cash conversion.
+                \end{itemize}
+                \textbf{\color{deepemerald}Information Asymmetry}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Retail and institutional desks lack immediate peer-relative ranking signals.
+                \end{itemize}
+            \end{quantcard}
 
-                    % True Peer Distribution (Uncorrupted) - Bell Curve
-                    \draw[line width=1.1pt, color=forestgreen!60!white, domain=-2.8:2.8, samples=50] 
-                        plot (\x, {2.2 * exp(-\x*\x / 0.8)});
+            \vspace{0.15cm}
 
-                    % Outlier Distribution (Displaced Tail)
-                    \draw[line width=1.2pt, color=deepemerald, domain=-2.8:3.2, samples=60] 
-                        plot (\x, {1.7 * exp(-(\x-0.45)*(\x-0.45) / 1.1)});
-
-                    % Ground Truth Median Line
-                    \draw[line width=1pt, dashed, color=forestgreen] (0, 0) -- (0, 2.3)
-                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {Median ($50\%$ BP)};
-
-                    % Skewed Sample Mean Line
-                    \draw[line width=1pt, dash dot, color=jade] (0.85, 0) -- (0.85, 2.0)
-                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries] {Skewed $\bar{\mu}$};
-
-                    % Outlier point cluster
-                    \node[circle, fill=jade, inner sep=1.8pt] at (2.8, 0.15) {};
-                    \node[circle, fill=jade, inner sep=1.8pt] at (3.1, 0.08) {};
-                    \node[above, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (2.95, 0.3) {Outliers};
-
-                    % Masking Zone annotation
-                    \draw[<->, >=Stealth, line width=0.6pt, color=slatygray] (0.1, 0.8) -- (0.8, 0.8)
-                        node[midway, above, font=\fontsize{4.8pt}{5.8pt}\selectfont\color{deepemerald}] {$\Delta \bar{\mu}$ Shift};
-
-                    % Annotation Box
-                    \node[fill=lightsage, draw=mintborder, rounded corners=2pt, inner sep=2.5pt, text width=4.8cm, align=left] at (0.2, -0.75) {
-                        \fontsize{5.2pt}{6.5pt}\selectfont
-                        \textbf{\color{deepemerald}The Masking Hazard:}
-                        Extreme positive/negative filings displace standard mean $\bar{\mu}$, causing vulnerable peer ratios to fall within $[\bar{\mu} \pm 2\hat{\sigma}]$ false-safety bracket.
-                    };
-                \end{tikzpicture}
-            \end{tcolorbox}
+            \begin{quantcard}[height=2.65cm]{4. Production Engineering Objectives}
+                \fontsize{6.6pt}{8.6pt}\selectfont
+                \textbf{\color{deepemerald}The FinMetrics Suite Mandate}
+                \begin{itemize}
+                    \setlength{\itemsep}{2pt}
+                    \item \textbf{Autonomous Ingestion:} Real-time retrieval and caching of multi-year balance sheets and cash flow statements.
+                    \item \textbf{Deterministic Normalization:} Unify diverse schema aliases into 16 standardized fundamental financial ratios.
+                    \item \textbf{Sub-2-Second SLA:} Deliver instantaneous cross-sectional peer diagnostics without manual spreadsheet intervention.
+                \end{itemize}
+            \end{quantcard}
         \end{column}
     \end{columns}
-
-    \vspace{0.1cm}
-    \hfill \sourcepill{README.md \& SYSTEM\_LOGICS\_AND\_BLUEPRINT.md}
 \end{frame}

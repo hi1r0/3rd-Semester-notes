@@ -1,0 +1,96 @@
+% ==============================================================================
+% Slide 06: Ratio Engine Architecture
+% ==============================================================================
+\begin{frame}{Ratio Engine Architecture}{Sixteen Core Metrics Span Five Weighted Analytical Pillars with Singularity Guards}
+    \vspace{-0.1cm}
+    \begin{columns}[T,onlytextwidth]
+        % Column 1: TikZ 5-Pillar Segmented Hierarchy
+        \begin{column}{0.485\textwidth}
+            \begin{tcolorbox}[
+                enhanced,
+                colback=cardbg,
+                colframe=mintborder,
+                boxrule=0.7pt,
+                arc=3pt,
+                height=5.45cm,
+                left=4pt, right=4pt, top=4pt, bottom=4pt
+            ]
+                {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Five-Pillar Weighted Framework}\par
+                \vspace{3pt}
+                \begin{tikzpicture}[
+                    pillar/.style={
+                        draw=mintborder,
+                        fill=cardinner,
+                        rounded corners=2pt,
+                        text width=5.65cm,
+                        minimum height=0.72cm,
+                        inner sep=3pt,
+                        align=left,
+                        font=\fontsize{5.8pt}{7.2pt}\selectfont
+                    }
+                ]
+                    \node[pillar] (p1) at (0, 0) {
+                        \textbf{\color{deepemerald}1. Profitability (30\% Weight):} \\
+                        Gross Margin, Operating Margin, Net Margin, $\text{ROE}, \text{ROA}$
+                    };
+                    \node[pillar, below=0.12cm of p1] (p2) {
+                        \textbf{\color{deepemerald}2. Solvency \& Capital Structure (25\% Weight):} \\
+                        $\frac{\text{Debt}}{\text{Equity}}$, Debt Ratio, Interest Coverage $\left(\frac{\text{EBIT}}{\text{Interest}}\right)$
+                    };
+                    \node[pillar, below=0.12cm of p2] (p3) {
+                        \textbf{\color{deepemerald}3. Growth Trajectory (15\% Weight):} \\
+                        YoY Revenue Growth, Net Income Growth, OCF Growth
+                    };
+                    \node[pillar, below=0.12cm of p3] (p4) {
+                        \textbf{\color{deepemerald}4. Liquidity Coverage (15\% Weight):} \\
+                        Current Ratio $\left(\frac{\text{CA}}{\text{CL}}\right)$, Quick Ratio, Cash Ratio
+                    };
+                    \node[pillar, below=0.12cm of p4] (p5) {
+                        \textbf{\color{deepemerald}5. Operating Efficiency (15\% Weight):} \\
+                        Asset Turnover $\left(\frac{\text{Sales}}{\text{Assets}}\right)$, Inventory Turnover
+                    };
+                \end{tikzpicture}
+                \vfill
+                \badge[jade]{16 Standardized Ratios Mapped Across 12 NSE Industry Sectors}
+            \end{tcolorbox}
+        \end{column}
+
+        % Column 2: Mathematical Guardrails & Edge Cases
+        \begin{column}{0.485\textwidth}
+            \begin{mathcard}[height=2.65cm]{Mathematical Guardrail: safe\_divide}
+                \fontsize{6.3pt}{8.2pt}\selectfont
+                Eliminates catastrophic division-by-zero singularities:
+                \begin{equation*}
+                    \safedivide(a, b, \epsilon) = 
+                    \begin{cases} 
+                        \dfrac{a}{b} & \text{if } |b| > \epsilon \\[3pt]
+                        \text{NaN} & \text{if } |b| \le \epsilon \text{ or } b = \text{NaN}
+                    \end{cases}
+                \end{equation*}
+                \textbf{\color{deepemerald}Numerical Stability Invariant:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Setting machine threshold $\epsilon = 10^{-9}$ protects against zero interest expense in debt-free firms without halting batch execution.
+                    \item Missing line items gracefully yield typed IEEE NaNs for downstream dynamic weight redistribution.
+                \end{itemize}
+            \end{mathcard}
+
+            \vspace{0.15cm}
+
+            \begin{quantcard}[height=2.65cm]{Pathological Balance Sheet Handling}
+                \fontsize{6.3pt}{8.2pt}\selectfont
+                \textbf{\color{deepemerald}1. Negative Book Equity Inversion}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item When accumulated losses exceed capital, $D/E < 0$ appears falsely "low" to linear ranking models.
+                    \item The engine intercepts negative equity and assigns maximum solvency penalty directly.
+                \end{itemize}
+                \textbf{\color{deepemerald}2. Cash-Flow Singularity Protection}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Negative Operating Cash Flow (OCF) in growth firms is evaluated via sign-aware ratio transformation.
+                \end{itemize}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+\end{frame}

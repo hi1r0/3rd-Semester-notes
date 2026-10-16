@@ -1,0 +1,73 @@
+% ==============================================================================
+% Slide 16: Empirical Results & Research Roadmap
+% ==============================================================================
+\begin{frame}{Empirical Results \& Research Roadmap}{Cross-Sectional NSE Validation and Next-Generation Quantitative Architecture}
+    \vspace{-0.1cm}
+    \begin{columns}[T,onlytextwidth]
+        % Column 1: Empirical Testing & Comparative Matrix
+        \begin{column}{0.50\textwidth}
+            \begin{quantcard}[height=5.45cm]{Cross-Sectional Model Validation}
+                \fontsize{5.7pt}{7.2pt}\selectfont
+                Tested across 150+ NSE equities (Automobile, IT, FMCG, Banking):
+                \vspace{2pt}
+
+                \renewcommand{\arraystretch}{1.2}
+                \begin{tabularx}{\linewidth}{>{\bfseries}l c c >{\raggedright\arraybackslash}X}
+                    \toprule
+                    \textbf{\color{deepemerald}Model} & \textbf{\color{deepemerald}Breakdown} & \textbf{\color{deepemerald}Yield} & \textbf{\color{deepemerald}Sector Resilience} \\
+                    \midrule
+                    Gaussian $Z$ & $0.0\%$ & $2.1\%$ & Masked 8 troubled mid-caps via $+32.4\%$ mean displacement. \\
+                    \rowcolor{cardinner}
+                    Tukey IQR & $50.0\%$ & $4.8\%$ & Resisted extreme fat tails; isolated univariate spikes. \\
+                    Modified MAD & $50.0\%$ & $5.2\%$ & Stable baseline ($\Delta \text{Med} < 1.2\%$) across peers. \\
+                    \rowcolor{cardinner}
+                    IsoForest & N/A & $8.4\%$ & Flagged multivariate cash-flow/margin decoupling. \\
+                    \bottomrule
+                \end{tabularx}
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}Production Engineering Benchmarks:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{88.5\% Cache Hit Rate:} Multi-tier Parquet avoids yfinance API rate limits.
+                    \item \textbf{$< 1.8\,\text{s}$ Processing SLA:} 50 stocks evaluated across 16 ratios in sub-two seconds.
+                    \item \textbf{Zero Singularity Failures:} 100\% mathematical safety across 10,000+ metrics.
+                \end{itemize}
+                \vfill
+                \badge[jade]{Empirical NSE Sector Testing}
+            \end{quantcard}
+        \end{column}
+
+        % Column 2: Next-Gen Quantitative Roadmap (Full Height - No Thank You Banner)
+        \begin{column}{0.485\textwidth}
+            \begin{quantcard}[height=5.45cm]{Future Quantitative Research Roadmap}
+                \fontsize{6.3pt}{8.2pt}\selectfont
+                \textbf{\color{deepemerald}1. Dynamic Concept Drift Modeling}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Adaptive percentile drift tracking across RBI monetary tightening/easing cycles and macroeconomic rate shifts.
+                \end{itemize}
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}2. Systemic Graph Contagion Networks}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Graph Neural Networks (GNNs) modeling inter-firm supplier, customer, and banking debt contagion propagation paths.
+                \end{itemize}
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}3. Alternative Textual ESG Auditing}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item Fine-tuned FinBERT sentiment and risk extraction on NSE annual report management MD\&A sections and auditor notes.
+                \end{itemize}
+
+                \vspace{3pt}
+                \textbf{\color{deepemerald}Production Impact:}
+                Automates credit risk intelligence and unlocks quantitative alpha from raw filings.
+                \vfill
+                \badge[jade]{Next-Generation Quantitative Architecture}
+            \end{quantcard}
+        \end{column}
+    \end{columns}
+\end{frame}

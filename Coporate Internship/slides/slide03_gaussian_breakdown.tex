@@ -1,0 +1,96 @@
+% ==============================================================================
+% Slide 03: Gaussian Breakdown & Outlier Masking
+% ==============================================================================
+\begin{frame}{Gaussian Breakdown \& Outlier Masking}{Parametric Mean Collapse Under Heavy-Tailed Financial Distributions}
+    \vspace{-0.1cm}
+    \begin{columns}[T,onlytextwidth]
+        % Column 1: Theoretical Breakdown & Proof of Masking
+        \begin{column}{0.485\textwidth}
+            \begin{mathcard}[height=2.65cm]{Parametric Gaussian Vulnerability}
+                \fontsize{6.3pt}{8.2pt}\selectfont
+                Classical $Z$-score collapses on fat-tailed financial distributions:
+                \begin{equation*}
+                    Z_i = \frac{x_i - \bar{\mu}}{\hat{\sigma}}, \quad \text{Breakdown Point } \varepsilon^* = 0.0\%
+                \end{equation*}
+                \textbf{\color{deepemerald}Zero Breakdown Invariant:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item $\varepsilon^* = \min\{m/n : \sup_{\mathcal{X}'} |T(\mathcal{X}')| = \infty\}$. A single outlier $x_0 \to \infty$ pulls sample mean $\bar{\mu} \to \infty$ and inflates sample variance $\hat{\sigma}^2 \to \infty$.
+                    \item Financial ratios exhibit Pareto-like power tails that invalidate Gaussian assumptions.
+                \end{itemize}
+            \end{mathcard}
+
+            \vspace{0.15cm}
+
+            \begin{mathcard}[height=2.65cm]{Mathematical Proof: Masking \& Swamping}
+                \fontsize{6.2pt}{8.0pt}\selectfont
+                Consider sample $\{x_1, \dots, x_{n-1}\}$ with single severe anomaly $x_0 \gg 0$:
+                \begin{equation*}
+                    \bar{\mu} \approx \frac{x_0}{n}, \quad \hat{\sigma} \approx \frac{x_0}{\sqrt{n}} \implies Z_k = \frac{x_k - \bar{\mu}}{\hat{\sigma}} \approx -\frac{1}{\sqrt{n}}
+                \end{equation*}
+                \textbf{\color{deepemerald}Systemic Failure Modes:}
+                \begin{itemize}
+                    \setlength{\itemsep}{1.5pt}
+                    \item \textbf{Masking Effect:} As $n$ grows, $Z_k \to 0$. Truly distressed firms remain nestled safely within $[-2, +2]$, evading detection.
+                    \item \textbf{Swamping Effect:} Inflated $\hat{\sigma}$ falsely misclassifies healthy borderline peers as volatile anomalies.
+                \end{itemize}
+            \end{mathcard}
+        \end{column}
+
+        % Column 2: TikZ Visualization of Mean Displacement vs Median
+        \begin{column}{0.485\textwidth}
+            \begin{tcolorbox}[
+                enhanced,
+                colback=cardbg,
+                colframe=mintborder,
+                boxrule=0.7pt,
+                arc=3pt,
+                height=5.45cm,
+                left=4pt, right=4pt, top=4pt, bottom=4pt
+            ]
+                \centering
+                {\fontsize{7.5pt}{9pt}\selectfont\bfseries\color{deepemerald}Empirical Mean Distortion vs.\ Robust Median}\par
+                \vspace{4pt}
+                \begin{tikzpicture}[scale=0.76, every node/.style={transform shape}]
+                    % Coordinate axes
+                    \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (-3.0, 0) -- (3.3, 0) node[right, font=\fontsize{5pt}{6pt}\selectfont] {Ratio ($x$)};
+                    \draw[->, >=Stealth, line width=0.6pt, color=slatygray] (0, 0) -- (0, 2.5);
+
+                    % True Peer Distribution (Uncorrupted) - Bell Curve
+                    \draw[line width=1.1pt, color=forestgreen!80!white, domain=-2.8:2.8, samples=50] 
+                        plot (\x, {2.2 * exp(-\x*\x / 0.8)});
+
+                    % Outlier Distribution (Displaced Tail)
+                    \draw[line width=1.2pt, color=deepemerald, domain=-2.8:3.2, samples=60] 
+                        plot (\x, {1.7 * exp(-(\x-0.45)*(\x-0.45) / 1.1)});
+
+                    % Ground Truth Median Line
+                    \draw[line width=1pt, dashed, color=forestgreen] (0, 0) -- (0, 2.3)
+                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries\color{forestgreen}] {Median ($50\%$ BP)};
+
+                    % Skewed Sample Mean Line
+                    \draw[line width=1pt, dash dot, color=jade] (0.85, 0) -- (0.85, 2.0)
+                        node[above, font=\fontsize{5.5pt}{6.5pt}\selectfont\bfseries\color{deepemerald}] {Skewed $\bar{\mu}$};
+
+                    % Outlier point cluster
+                    \node[circle, fill=jade, inner sep=1.8pt] at (2.8, 0.15) {};
+                    \node[circle, fill=jade, inner sep=1.8pt] at (3.1, 0.08) {};
+                    \node[above, font=\fontsize{5pt}{6pt}\selectfont\color{deepemerald}] at (2.95, 0.3) {Outliers};
+
+                    % Masking Zone annotation
+                    \draw[<->, >=Stealth, line width=0.6pt, color=slatygray] (0.1, 0.8) -- (0.8, 0.8)
+                        node[midway, above, font=\fontsize{4.8pt}{5.8pt}\selectfont\color{deepemerald}] {$\Delta \bar{\mu}$ Shift};
+
+                    % Annotation Box
+                    \node[fill=cardinner, draw=mintborder, rounded corners=2pt, inner sep=3.5pt, text width=4.9cm, align=left] at (0.2, -0.75) {
+                        \fontsize{5.2pt}{6.5pt}\selectfont
+                        \textbf{\color{deepemerald}The Masking Hazard:}
+                        Extreme positive or negative outliers displace the sample mean $\bar{\mu}$, causing vulnerable peer ratios to fall within the $[\bar{\mu} \pm 2\hat{\sigma}]$ false-safety bracket.
+                    };
+                \end{tikzpicture}
+                \vfill
+                \badge[jade]{Classical Models: $0.0\%$ Breakdown Point}
+            \end{tcolorbox}
+        \end{column}
+    \end{columns}
+\end{frame}
