@@ -3,6 +3,14 @@ theme: default
 aspectRatio: 16/9
 canvasWidth: 980
 layout: default
+title: FinMetrics Suite - Executive Presentation
+info: Automated Cross-Sectional Fundamental Diagnostics & Robust Anomaly Intelligence
+transition: slide-left
+highlighter: shiki
+lineNumbers: false
+drawings:
+  persist: false
+mdc: true
 ---
 
 <TitleHero />
@@ -99,9 +107,9 @@ layout: default
 layout: default
 ---
 
-# Multi-Dimensional Anomaly Isolation
+# Machine Learning Outlier Detection
 <div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
-  Ensemble Path-Length Expectation and Recursive Hyperplane Trees in ℝ¹⁶
+  Multivariate Isolation Trees Detect High-Dimensional Ratio Discrepancies
 </div>
 
 <IsolationForestTree />
@@ -110,13 +118,12 @@ layout: default
 layout: default
 ---
 
-# Recursive Subspace Partitioning
+# iForest Geometry & Subspace Partitioning
 <div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
-  Hyperplane Slicing Mechanics: Why Outliers Isolate in 2 Cuts vs 8+ Cuts for Nominal Peers
+  Recursive Hyperplane Cuts Isolate Anomalies at Shallow Tree Depths
 </div>
 
 <SubspacePartitioning />
-
 
 ---
 layout: default
@@ -172,4 +179,3 @@ layout: default
 </div>
 
 <EmpiricalRoadmap />
-
