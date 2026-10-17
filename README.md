@@ -7,7 +7,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 ## 📚 Repository Structure
 
 ```text
-├── Coporate Internship/           # FinMetrics Suite Executive Beamer Presentation (16 slides, Executive Dark Mode, main.pdf)
+├── Coporate Internship/           # FinMetrics Suite: Beamer Deck (main.pdf) & Slidev Web App (html/)
 ├── Financial Mathematics/
 │   ├── Assignment/                # FMCG Equity Valuation Assignment (Monochrome LaTeX, 8 pages, main.pdf)
 │   ├── latex/                     # Modular LaTeX lecture notes (Unit I & Chapter 2, main.pdf)
@@ -76,19 +76,28 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Institutional context: Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University. Candidate: N Rohit Vedhanandh (25MSQUFPY0002), Faculty Guidance: Dr. Kiruthika.
    - Algorithms: Tukey IQR fences, Modified MAD Z-scores ($0.6745$ scaling consistency), and multivariate Isolation Forest ($c(n)$ and $s(x,n)$).
    - Architecture: 4-stage pipeline (SectorLoader, FinancialParser, RatioEngine with safe-divide guards, ReportGenerator with Gemini AI rotation and 6-tab Excel workbooks).
-   - **Executive Slide Deck (`Coporate Internship/main.pdf`):** 16-slide Beamer presentation with custom TikZ architecture diagrams, custom glowing jade micro-dots, and an Executive Dark Mode palette (0 overfull warnings).
+   - **Dual Production Deliverables:**
+     - **Executive LaTeX Beamer Deck (`Coporate Internship/main.pdf`):** 16-slide Beamer presentation with custom TikZ architecture diagrams, custom glowing jade micro-dots, and an Executive Dark Mode palette (0 overfull warnings).
+     - **Interactive Web Presentation Deck (`Coporate Internship/html/`):** 16-slide animated Slidev presentation powered by Vue 3, UnoCSS, and 16 custom interactive components with Apple Keynote obsidian & jade aesthetics.
 
 ---
 
-## 🛠️ Building LaTeX Documents
+## 🛠️ Building & Running Presentations & Documents
 
-### 1. Compile Presentation Slides
-To compile the Corporate Internship Beamer slide deck:
+### 1. Presentation Slides
 
+#### LaTeX Beamer Deck:
 ```bash
 cd "Coporate Internship"
 pdflatex -interaction=nonstopmode main.tex
 pdflatex -interaction=nonstopmode main.tex  # Second run resolves slide counters and cross-references
+```
+
+#### Slidev Interactive Web Presentation:
+```bash
+cd "Coporate Internship/html"
+npm run dev     # Starts live reload development server at http://localhost:3030
+npm run build   # Compiles production static single-page app into dist/
 ```
 
 ### 2. Compile Lecture Notes
