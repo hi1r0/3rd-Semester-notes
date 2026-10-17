@@ -73,3 +73,25 @@ layout: default
 
 <DuPontDecomposition />
 
+---
+layout: default
+---
+
+# Non-Parametric Anomaly Detection
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Tukey IQR Cutoff Fences Resist Heavy-Tailed Financial Distributions
+</div>
+
+<TukeyBoxplot />
+
+---
+layout: default
+---
+
+# Modified MAD Dispersion Engine
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Median Absolute Deviation with Standard Gaussian Consistency and 50% Breakdown
+</div>
+
+<MadDispersion />
+
