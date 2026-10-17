@@ -21,6 +21,7 @@ export default defineConfig({
       hyper: '#00E599',
       platinum: '#F8FAFC',
       slate: {
+        DEFAULT: '#94A3B8',
         sub: '#94A3B8',
         dim: '#64748B',
       },
