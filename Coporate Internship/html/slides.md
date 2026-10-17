@@ -95,3 +95,25 @@ layout: default
 
 <MadDispersion />
 
+---
+layout: default
+---
+
+# Multi-Dimensional Anomaly Isolation
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Ensemble Path-Length Expectation and Recursive Hyperplane Trees in ℝ¹⁶
+</div>
+
+<IsolationForestTree />
+
+---
+layout: default
+---
+
+# Recursive Subspace Partitioning
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Hyperplane Slicing Mechanics: Why Outliers Isolate in 2 Cuts vs 8+ Cuts for Nominal Peers
+</div>
+
+<SubspacePartitioning />
+
