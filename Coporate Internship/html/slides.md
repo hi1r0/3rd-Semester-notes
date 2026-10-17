@@ -117,3 +117,36 @@ layout: default
 
 <SubspacePartitioning />
 
+
+---
+layout: default
+---
+
+# Peer Benchmarking & Sigmoid Normalization
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Non-Linear Scaling Transforms Heavy Tails into Fair 0–100 Performance Scores
+</div>
+
+<SigmoidCurve />
+
+---
+layout: default
+---
+
+# 5-Tier Health Classification Matrix
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Translating Normalized Pillar Distributions into Investment-Grade Health Labels
+</div>
+
+<HealthGauge />
+
+---
+layout: default
+---
+
+# Portfolio Factor Attribution & Strategy
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Factor Delta Decomposition Quantifies Metric Alpha Drivers and Risk Overhangs
+</div>
+
+<FactorAttribution />
