@@ -1,0 +1,19 @@
+{
+  "name": "finmetrics-slidev-deck",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --port 3030 --open=false",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^51.6.0",
+    "@slidev/theme-default": "latest",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@unocss/reset": "latest",
+    "unocss": "latest"
+  }
+}

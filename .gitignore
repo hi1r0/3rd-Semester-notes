@@ -28,3 +28,8 @@ scratch/
 # Word lock files
 ~$*
 
+# Node / Slidev build artifacts
+node_modules/
+.slidev/
+dist/
+
