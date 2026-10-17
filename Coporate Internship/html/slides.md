@@ -150,3 +150,26 @@ layout: default
 </div>
 
 <FactorAttribution />
+
+---
+layout: default
+---
+
+# AI Narration & Multi-Format Delivery
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Round-Robin LLM Synthesis Powers Executive Briefings and Automated Multi-Sheet Exports
+</div>
+
+<DeliveryPipeline />
+
+---
+layout: default
+---
+
+# Empirical Results & Research Roadmap
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Cross-Sectional NSE Validation and Next-Generation Quantitative Architecture
+</div>
+
+<EmpiricalRoadmap />
+
