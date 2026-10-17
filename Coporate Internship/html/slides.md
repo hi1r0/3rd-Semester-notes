@@ -50,3 +50,26 @@ layout: default
 </div>
 
 <CacheHarmonizer />
+
+---
+layout: default
+---
+
+# Ratio Engine Architecture
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Sixteen Core Metrics Span Five Weighted Analytical Pillars with Singularity Guards
+</div>
+
+<RatioEnginePillars />
+
+---
+layout: default
+---
+
+# Financial Decomposition & DuPont Analysis
+<div class="text-xs text-slate-400 -mt-2 mb-2 font-mono">
+  Deconstructing Equity Returns into Orthogonal Operational and Financial Drivers
+</div>
+
+<DuPontDecomposition />
+
