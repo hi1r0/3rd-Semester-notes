@@ -9,7 +9,7 @@ const activeTab = ref<'latency' | 'schema' | 'throughput'>('latency')
 const manualStageText = ref('Stalled on fiscal period asynchrony (Hour 14)')
 const finmetricsStageText = ref('Completed 150+ NSE Equities in 1.74s')
 
-let timerInterval: any = null
+let timerInterval: ReturnType<typeof setInterval> | null = null
 
 function runSimulation() {
   if (isRunning.value) return
