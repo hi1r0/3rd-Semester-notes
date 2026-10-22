@@ -84,7 +84,7 @@ $\ES_\alpha$ is subadditive, convex, and coherent under all underlying return di
 \begin{tikzpicture}
     \begin{axis}[
         no markers,
-        domain=-4:4,
+        domain=-4.5:4.5,
         samples=200,
         axis lines=left,
         xlabel={Portfolio P\&L ($\Delta \Pi$)},
@@ -92,7 +92,8 @@ $\ES_\alpha$ is subadditive, convex, and coherent under all underlying return di
         every axis x label/.style={at={(current axis.right of origin)},anchor=west},
         every axis y label/.style={at={(current axis.above origin)},anchor=south},
         height=6.2cm,
-        width=13.0cm,
+        width=12.2cm,
+        xmin=-4.5, xmax=4.5,
         xtick={-2.326, 0},
         xticklabels={$-\VaR_{99\%}$, $0$},
         ytick=\empty,
@@ -103,20 +104,20 @@ $\ES_\alpha$ is subadditive, convex, and coherent under all underlying return di
         \addplot [thick, navyblue, line width=1.5pt] {exp(-x^2/2) / sqrt(2*pi)};
 
         % Shaded 99% Tail Region
-        \addplot [domain=-4:-2.326, fill=crimson!25, draw=none] {exp(-x^2/2) / sqrt(2*pi)} \closedcycle;
+        \addplot [domain=-4.5:-2.326, fill=crimson!25, draw=none] {exp(-x^2/2) / sqrt(2*pi)} \closedcycle;
 
         % VaR vertical threshold line
         \draw [dashed, line width=1.3pt, crimson] (axis cs:-2.326, 0) -- (axis cs:-2.326, 0.35);
 
-        % Annotations
+        % Annotations placed safely within plot bounds
         \node [above right, font=\bfseries\sffamily\footnotesize, color=navyblue] at (axis cs:0.2, 0.32) {Confidence Region $(1-\alpha) = 99\%$};
         
-        \node [above left, font=\bfseries\sffamily\footnotesize, color=crimson, align=center] at (axis cs:-2.326, 0.36) {
+        \node [right, font=\bfseries\sffamily\footnotesize, color=crimson, align=left] at (axis cs:-2.2, 0.34) {
             $\VaR_{99\%}$ Cutoff Threshold\\$\Prob(\Delta \Pi \le -\VaR) = 1\%$
         };
 
-        \draw [line width=1.2pt, crimson, -{Stealth[length=2.5mm]}] (axis cs:-3.2, 0.12) -- (axis cs:-2.8, 0.02);
-        \node [above left, font=\bfseries\sffamily\scriptsize, color=crimson, align=center] at (axis cs:-3.0, 0.12) {
+        \draw [line width=1.2pt, crimson, -{Stealth[length=2.5mm]}] (axis cs:-3.6, 0.14) -- (axis cs:-2.8, 0.02);
+        \node [above, font=\bfseries\sffamily\scriptsize, color=crimson, align=center] at (axis cs:-3.6, 0.14) {
             Catastrophic Tail\\Expected Shortfall ($\ES_{99\%}$)\\Mean of Shaded Tail Loss
         };
     \end{axis}
@@ -138,20 +139,22 @@ A proprietary equity trading desk at an Indian investment bank manages a \inr 20
 \textbf{Solution:}
 \begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
     \item \textbf{1-Day VaR Calculation:}
-    \[
-    \VaR_{95\%, 1\text{-day}} = V_0 \times z_{0.95} \times \sigma_{\text{daily}} = \inr 20,00,00,000 \times 1.645 \times 0.0125 = \inr 41,12,500 \quad (\approx \inr 41.13 \text{ Lakhs})
-    \]
-    \[
-    \VaR_{99\%, 1\text{-day}} = V_0 \times z_{0.99} \times \sigma_{\text{daily}} = \inr 20,00,00,000 \times 2.326 \times 0.0125 = \inr 58,15,000 \quad (\approx \inr 58.15 \text{ Lakhs})
-    \]
+    \begin{align*}
+    \VaR_{95\%, 1\text{-day}} &= V_0 \times z_{0.95} \times \sigma_{\text{daily}} \\
+    &= \inr 20,00,00,000 \times 1.645 \times 0.0125 = \inr 41,12,500 \quad (\approx \inr 41.13 \text{ Lakhs}) \\[0.15cm]
+    \VaR_{99\%, 1\text{-day}} &= V_0 \times z_{0.99} \times \sigma_{\text{daily}} \\
+    &= \inr 20,00,00,000 \times 2.326 \times 0.0125 = \inr 58,15,000 \quad (\approx \inr 58.15 \text{ Lakhs})
+    \end{align*}
     \item \textbf{10-Day 99\% Regulatory VaR:}
-    \[
-    \VaR_{99\%, 10\text{-day}} = \VaR_{99\%, 1\text{-day}} \times \sqrt{10} = \inr 58,15,000 \times 3.162278 = \inr 1,83,88,645 \quad (\approx \inr 1.84 \text{ Crores})
-    \]
+    \begin{align*}
+    \VaR_{99\%, 10\text{-day}} &= \VaR_{99\%, 1\text{-day}} \times \sqrt{10} \\
+    &= \inr 58,15,000 \times 3.162278 = \inr 1,83,88,645 \quad (\approx \inr 1.84 \text{ Crores})
+    \end{align*}
     \item \textbf{1-Day 99\% Expected Shortfall:}
-    \[
-    \ES_{99\%, 1\text{-day}} = V_0 \times 2.665 \times \sigma_{\text{daily}} = \inr 20,00,00,000 \times 2.665 \times 0.0125 = \inr 66,62,500 \quad (\approx \inr 66.63 \text{ Lakhs})
-    \]
+    \begin{align*}
+    \ES_{99\%, 1\text{-day}} &= V_0 \times 2.665 \times \sigma_{\text{daily}} \\
+    &= \inr 20,00,00,000 \times 2.665 \times 0.0125 = \inr 66,62,500 \quad (\approx \inr 66.63 \text{ Lakhs})
+    \end{align*}
     When losses breach the $99\%$ threshold of \inr 58.15 Lakhs, the conditional average loss is \inr 66.63 Lakhs.
 \end{enumerate}
 \end{example}
@@ -163,39 +166,37 @@ A proprietary equity trading desk at an Indian investment bank manages a \inr 20
 VaR estimation approaches are fundamentally bifurcated into \textbf{Local Valuation} and \textbf{Full Valuation} paradigms.
 
 \vspace{0.3cm}
-% TikZ Figure 2.2: VaR Valuation Methodologies Flowchart
+% TikZ Figure 2.2: VaR Valuation Methodologies Flowchart (Symmetrical Architecture)
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
     \tikzset{
-        nodebox/.style={
-            draw=navyblue,
-            fill=lightgraybg,
-            line width=1.2pt,
-            rounded corners=2mm,
-            text width=3.8cm,
-            minimum height=1.3cm,
-            align=center,
-            font=\bfseries\sffamily\footnotesize
-        },
         banner/.style={
             draw=navyblue,
             fill=navyblue,
             text=white,
-            line width=1.4pt,
+            line width=1.3pt,
             rounded corners=2mm,
-            text width=7.5cm,
-            minimum height=1.2cm,
+            text width=13.6cm,
+            minimum height=1.0cm,
             align=center,
             font=\bfseries\sffamily\small
+        },
+        nodebox/.style={
+            draw=navyblue,
+            line width=1.1pt,
+            rounded corners=2mm,
+            minimum height=1.1cm,
+            align=center,
+            font=\bfseries\sffamily\footnotesize
         },
         methodcard/.style={
             draw=navyblue,
             fill=white,
             line width=1.1pt,
             rounded corners=2mm,
-            text width=3.9cm,
-            minimum height=4.2cm,
+            text width=4.1cm,
+            minimum height=4.5cm,
             inner sep=2.5mm,
             align=left
         },
@@ -205,67 +206,67 @@ VaR estimation approaches are fundamentally bifurcated into \textbf{Local Valuat
             align=center,
             rounded corners=1.2mm,
             inner sep=1.5mm,
-            text width=3.5cm
+            text width=3.7cm
         },
         flowarrow/.style={
             line width=1.3pt,
             navyblue,
-            -{Stealth[length=3mm, width=2.0mm]}
+            -{Stealth[length=2.8mm, width=1.8mm]}
         }
     }
 
-    % Root Node
-    \node[banner] (root) at (0,0) {Portfolio Positions \& Risk Factors ($\mathbf{w}, \mathbf{S}$)};
+    % Root Top Banner
+    \node[banner] (root) at (0, 3.8) {Portfolio Positions \& Risk Factors ($\mathbf{w}, \mathbf{S}$)};
 
-    % Intermediate Branching Nodes (Clearance = 0.8cm)
-    \node[nodebox, fill=softblue!60, below left=0.8cm and 1.8cm of root.south] (local) {
+    % Level 2: Valuation Paradigms
+    \node[nodebox, fill=softblue!70, text width=4.1cm] (local) at (-4.8, 2.1) {
         Local Valuation\\(Linear Taylor Approx.)
     };
-    \node[nodebox, fill=softgreen!60, below right=0.8cm and 1.8cm of root.south] (full) {
-        Full Valuation\\(Complete Repricing)
+    \node[nodebox, fill=softgreen!70, text width=8.9cm] (full) at (2.4, 2.1) {
+        Full Valuation\\(Complete Repricing Across Empirical / Stochastic Scenarios)
     };
 
-    % Connectors from Root
+    % Connectors from Root to Level 2
     \draw[flowarrow] (root.south -| local.north) -- (local.north);
     \draw[flowarrow] (root.south -| full.north) -- (full.north);
 
-    % Three Leaf Method Cards (Uniform geometry: 3.9cm width, 4.2cm height, 0.8cm clearance)
-    \node[methodcard, below=0.8cm of local] (m1) {
+    % Level 3: Three Uniform Method Cards (Exact Coordinates, Zero Overlap)
+    \node[methodcard] (m1) at (-4.8, -1.5) {
         \begin{tikzpicture}[baseline=(h1.base)]
             \node[cardhead, fill=navyblue] (h1) {1. Delta-Normal};
         \end{tikzpicture}\\[0.2cm]
         \scriptsize
         \textbf{Type:} Parametric.\\
-        \textbf{Inputs:} Volatilities ($\boldsymbol{\sigma}$) and correlation matrix ($\boldsymbol{\rho}$).\\
-        \textbf{Pros:} Analytical closed-form, instantaneous computation.\\
-        \textbf{Cons:} Normality assumption fails; poor for options with gamma.
+        \textbf{Inputs:} Asset volatilities ($\boldsymbol{\sigma}$) and correlation matrix ($\boldsymbol{\rho}$).\\
+        \textbf{Pros:} Analytical closed-form, instantaneous calculation.\\
+        \textbf{Cons:} Normality assumption fails; ignores option gamma.
     };
 
-    \node[methodcard, below left=0.8cm and -0.8cm of full.south] (m2) {
+    \node[methodcard] (m2) at (0, -1.5) {
         \begin{tikzpicture}[baseline=(h2.base)]
             \node[cardhead, fill=darkteal] (h2) {2. Historical Simulation};
         \end{tikzpicture}\\[0.2cm]
         \scriptsize
         \textbf{Type:} Non-Parametric.\\
-        \textbf{Inputs:} Historical P\&L scenarios over last $N$ days.\\
-        \textbf{Pros:} Preserves fat tails, no distributional assumption.\\
-        \textbf{Cons:} Backward-looking, sensitive to sample period, ghost effects.
+        \textbf{Inputs:} Empirical P\&L returns over previous $M$ days.\\
+        \textbf{Pros:} Preserves fat tails; no distributional assumptions.\\
+        \textbf{Cons:} Backward-looking, sensitive to historical window.
     };
 
-    \node[methodcard, right=0.8cm of m2] (m3) {
+    \node[methodcard] (m3) at (4.8, -1.5) {
         \begin{tikzpicture}[baseline=(h3.base)]
-            \node[cardhead, fill=amber] (h3) {3. Monte Carlo};
+            \node[cardhead, fill=amber] (h3) {3. Monte Carlo Simulation};
         \end{tikzpicture}\\[0.2cm]
         \scriptsize
         \textbf{Type:} Stochastic Simulation.\\
-        \textbf{Inputs:} Stochastic differential equations \& Cholesky $\mathbf{L}\mathbf{L}^T$.\\
-        \textbf{Pros:} Captures path dependency \& extreme complex options.\\
-        \textbf{Cons:} Severe computational burden, model risk.
+        \textbf{Inputs:} Calibrated SDEs and Cholesky matrix $\mathbf{L}\mathbf{L}^T$.\\
+        \textbf{Pros:} Handles path dependency and complex optionality.\\
+        \textbf{Cons:} High compute latency, model specification risk.
     };
 
-    % Connectors from Local and Full to Methods
+    % Connectors from Level 2 to Level 3 Cards
     \draw[flowarrow] (local.south) -- (m1.north);
-    \draw[flowarrow] (full.south) -- (m2.north);
+    \draw[flowarrow] (full.south -| m2.north) -- (m2.north);
     \draw[flowarrow] (full.south -| m3.north) -- (m3.north);
 \end{tikzpicture}
 \caption{VaR Estimation Methodologies Architecture (Rule 4 Clearance and Symmetry Standards).}
@@ -319,13 +320,15 @@ An asset management firm holds a two-asset portfolio valued at \inr 10,00,00,000
     &= 0.00007056 + 0.00000576 - 0.000008064 = 0.000068256 \\
     \sigma_P &= \sqrt{0.000068256} = 0.0082617 \quad (0.8262\%)
     \end{align*}
-    \[
-    \VaR_{\text{diversified}} = 2.326 \times \sigma_P \times V_0 = 2.326 \times 0.0082617 \times \inr 10,00,00,000 = \inr 19,21,672 \quad (\approx \inr 19.22 \text{ Lakhs})
-    \]
+    \begin{align*}
+    \VaR_{\text{diversified}} &= 2.326 \times \sigma_P \times V_0 \\
+    &= 2.326 \times 0.0082617 \times \inr 10,00,00,000 = \inr 19,21,672 \quad (\approx \inr 19.22 \text{ Lakhs})
+    \end{align*}
     \item \textbf{Diversification Benefit:}
-    \[
-    \text{Benefit} = \text{Undiversified VaR} - \text{Diversified VaR} = \inr 25,12,080 - \inr 19,21,672 = \inr 5,90,408 \quad (\approx \inr 5.90 \text{ Lakhs})
-    \]
+    \begin{align*}
+    \text{Benefit} &= \text{Undiversified VaR} - \text{Diversified VaR} \\
+    &= \inr 25,12,080 - \inr 19,21,672 = \inr 5,90,408 \quad (\approx \inr 5.90 \text{ Lakhs})
+    \end{align*}
     Negative correlation ($\rho = -0.20$) generates a $23.5\%$ risk reduction.
 \end{enumerate}
 \end{example}
@@ -351,12 +354,13 @@ A risk manager uses $M = 500$ daily historical return scenarios to compute the 1
     \item Identify which ranked observation index corresponds to the $99\%$ VaR.
     \item Given the 8 worst simulated P\&L results (\inr):
     \begin{center}
-    \small
+    \footnotesize
+    \setlength{\tabcolsep}{4.5pt}
     \begin{tabular}{lcccccccc}
     \toprule
     \textbf{Rank ($k$)} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
     \midrule
-    \textbf{P\&L (\inr)} & $-18.5 \text{ L}$ & $-15.2 \text{ L}$ & $-13.8 \text{ L}$ & $-12.4 \text{ L}$ & $-11.5 \text{ L}$ & $-10.9 \text{ L}$ & $-9.8 \text{ L}$ & $-9.2 \text{ L}$ \\
+    \textbf{P\&L (Rs. Lakhs)} & $-18.5$ & $-15.2$ & $-13.8$ & $-12.4$ & $-11.5$ & $-10.9$ & $-9.8$ & $-9.2$ \\
     \bottomrule
     \end{tabular}
     \end{center}
@@ -376,9 +380,10 @@ A risk manager uses $M = 500$ daily historical return scenarios to compute the 1
     \]
     \item \textbf{Empirical Expected Shortfall ($\ES_{99\%}$):}
     The arithmetic mean of all losses equal to or exceeding the 5th worst loss (Ranks 1 to 5):
-    \[
-    \ES_{99\%} = \frac{1}{5} \sum_{k=1}^5 (-\Delta \Pi_{(k)}) = \frac{18.5 + 15.2 + 13.8 + 12.4 + 11.5}{5} = \frac{71.4}{5} = \inr 14,28,000 \quad (\inr 14.28 \text{ Lakhs})
-    \]
+    \begin{align*}
+    \ES_{99\%} &= \frac{1}{5} \sum_{k=1}^5 (-\Delta \Pi_{(k)}) = \frac{18.5 + 15.2 + 13.8 + 12.4 + 11.5}{5} \\
+    &= \frac{71.4}{5} = \inr 14,28,000 \quad (\inr 14.28 \text{ Lakhs})
+    \end{align*}
 \end{enumerate}
 \end{example}
 
@@ -559,13 +564,15 @@ A mutual fund holds an Indian equity portfolio valued at \inr 25,00,00,000 (\inr
 \textbf{Solution:}
 \begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
     \item \textbf{Complete Hedge ($\beta \rightarrow 0$):}
-    \[
-    N^* = \beta_P \frac{V_P}{V_F} = 1.20 \times \frac{\inr 25,00,00,000}{\inr 6,12,500} = 1.20 \times 408.163 = 489.79 \approx 490 \text{ Contracts (Short)}
-    \]
+    \begin{align*}
+    N^* &= \beta_P \frac{V_P}{V_F} = 1.20 \times \frac{\inr 25,00,00,000}{\inr 6,12,500} \\
+    &= 1.20 \times 408.163 = 489.79 \approx 490 \text{ Contracts (Short)}
+    \end{align*}
     \item \textbf{Target Beta Reduction ($\beta_P \rightarrow \beta^* = 0.40$):}
-    \[
-    N^* = (\beta_P - \beta^*) \frac{V_P}{V_F} = (1.20 - 0.40) \times \frac{\inr 25,00,00,000}{\inr 6,12,500} = 0.80 \times 408.163 = 326.53 \approx 327 \text{ Contracts (Short)}
-    \]
+    \begin{align*}
+    N^* &= (\beta_P - \beta^*) \frac{V_P}{V_F} = (1.20 - 0.40) \times \frac{\inr 25,00,00,000}{\inr 6,12,500} \\
+    &= 0.80 \times 408.163 = 326.53 \approx 327 \text{ Contracts (Short)}
+    \end{align*}
     \item \textbf{Verification for Complete Hedge under a $-5\%$ Index Fall:}
     \begin{itemize}[leftmargin=1.2em, noitemsep]
         \item Unhedged Equity Drop: $\Delta V_P = \beta_P \times \Delta R_m \times V_P = 1.20 \times (-0.05) \times \inr 25 \text{ Cr} = -\inr 1.50 \text{ Crores}$
@@ -576,9 +583,10 @@ A mutual fund holds an Indian equity portfolio valued at \inr 25,00,00,000 (\inr
         \[
         \text{Gain per Contract} = 1,225 \times 25 = \inr 30,625
         \]
-        \[
-        \text{Total Futures Profit} = 490 \times \inr 30,625 = +\inr 1,50,06,250 \quad (\approx +\inr 1.5006 \text{ Crores})
-        \]
+        \begin{align*}
+        \text{Total Futures Profit} &= 490 \times \inr 30,625 \\
+        &= +\inr 1,50,06,250 \quad (\approx +\inr 1.5006 \text{ Crores})
+        \end{align*}
         \item Net Position: $-\inr 1.5000 \text{ Cr} + \inr 1.5006 \text{ Cr} \approx +\inr 6,250$ (Market loss successfully neutralized).
     \end{itemize}
 \end{enumerate}
@@ -612,8 +620,8 @@ The change in option value $\Delta V$ over small changes in underlying price $\D
         ylabel={Option Portfolio Value ($V$)},
         every axis x label/.style={at={(current axis.right of origin)},anchor=west},
         every axis y label/.style={at={(current axis.above origin)},anchor=south},
-        height=6.5cm,
-        width=12.0cm,
+        height=6.2cm,
+        width=10.5cm,
         xmin=60, xmax=140,
         ymin=-5, ymax=45,
         xtick={100},
@@ -636,15 +644,15 @@ The change in option value $\Delta V$ over small changes in underlying price $\D
 
         % Annotations
         \node[above left, font=\bfseries\sffamily\footnotesize, color=navyblue] at (axis cs:135, 40) {
-            Actual Non-Linear Option Curve ($V(S)$)
+            Actual Option Curve ($V(S)$)
         };
-        \node[below right, font=\bfseries\sffamily\footnotesize, color=crimson] at (axis cs:125, 18) {
+        \node[above left, font=\bfseries\sffamily\footnotesize, color=crimson] at (axis cs:124, 16.5) {
             First-Order Delta Tangent ($\Delta \cdot \Delta S$)
         };
-        \node[above, font=\bfseries\sffamily\scriptsize, color=darkteal, align=center] at (axis cs:125, 27) {
+        \node[above, font=\bfseries\sffamily\scriptsize, color=darkteal, align=center] at (axis cs:126, 26) {
             Convexity Error\\$\frac{1}{2} \Gamma (\Delta S)^2$
         };
-        \draw[line width=1.2pt, darkteal, Stealth-Stealth] (axis cs:125, 19.5) -- (axis cs:125, 30.5);
+        \draw[line width=1.2pt, darkteal, Stealth-Stealth] (axis cs:126, 19.5) -- (axis cs:126, 30.5);
     \end{axis}
 \end{tikzpicture}
 \caption{Non-Linear Option Price Curvature, First-Order Delta Tangency, and Gamma Error.}

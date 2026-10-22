@@ -129,75 +129,114 @@ The total variance of an asset's return $\sigma_i^2$ under the Single Index Mode
 Modern financial risk management categorizes exposures into five major interrelated domains:
 
 \vspace{0.3cm}
-% TikZ Figure 1.2: Hierarchy Tree with Invariant Clearance
+% TikZ Figure 1.2: 4-Column Structured Architecture (Zero Overlap, Even Sizing)
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-    level 1/.style={sibling distance=3.2cm, level distance=2.2cm},
-    level 2/.style={sibling distance=1.6cm, level distance=2.0cm},
-    box/.style={
-        draw=navyblue,
-        fill=lightgraybg,
-        line width=1.2pt,
-        rounded corners=2mm,
-        text width=2.6cm,
-        minimum height=1.1cm,
-        align=center,
-        font=\bfseries\sffamily\footnotesize
-    },
-    root/.style={
+    headerbox/.style={
         draw=navyblue,
         fill=navyblue,
         text=white,
-        line width=1.4pt,
+        line width=1.3pt,
         rounded corners=2mm,
-        text width=5.0cm,
-        minimum height=1.3cm,
+        text width=13.6cm,
+        minimum height=1.0cm,
         align=center,
         font=\bfseries\sffamily\small
     },
-    leaf/.style={
+    pillarhead/.style={
+        draw=navyblue,
+        fill=softblue!80,
+        text=navyblue,
+        line width=1.1pt,
+        rounded corners=1.5mm,
+        text width=3.1cm,
+        minimum height=0.85cm,
+        align=center,
+        font=\bfseries\sffamily\scriptsize
+    },
+    leafbox/.style={
         draw=darkteal,
         fill=white,
-        line width=1.0pt,
-        rounded corners=1.5mm,
-        text width=2.4cm,
-        minimum height=0.9cm,
+        line width=0.9pt,
+        rounded corners=1.2mm,
+        text width=3.1cm,
+        minimum height=0.72cm,
         align=center,
         font=\sffamily\scriptsize
     },
-    edge from parent/.style={
-        draw=navyblue,
+    connector/.style={
         line width=1.3pt,
+        navyblue,
         -{Stealth[length=2.5mm, width=1.8mm]}
+    },
+    subconnector/.style={
+        line width=1.0pt,
+        darkteal,
+        -{Stealth[length=2.2mm, width=1.5mm]}
     }
 ]
 
-\node[root] {Enterprise Financial Risk Taxonomy}
-    child {node[box] {Market Risk}
-        child {node[leaf] {Equity Risk}}
-        child {node[leaf] {Interest Rate Risk}}
-        child {node[leaf] {Currency Risk}}
-        child {node[leaf] {Commodity Risk}}
-    }
-    child {node[box] {Credit Risk}
-        child {node[leaf] {Default Risk}}
-        child {node[leaf] {Downgrade Risk}}
-        child {node[leaf] {Counterparty Risk}}
-        child {node[leaf] {Settlement Risk}}
-    }
-    child {node[box] {Liquidity Risk}
-        child {node[leaf] {Market / Asset Liquidity}}
-        child {node[leaf] {Funding Liquidity}}
-    }
-    child {node[box] {Operational Risk}
-        child {node[leaf] {Internal Fraud / People}}
-        child {node[leaf] {System Failure / Cyber}}
-        child {node[leaf] {Process Execution}}
-        child {node[leaf] {External Events}}
-    };
+    % Top Root Banner
+    \node[headerbox] (root) at (0,0) {Enterprise Financial Risk Taxonomy};
+
+    % 4 Evenly Spaced Category Pillars
+    \node[pillarhead] (p1) at (-5.1, -1.4) {1. Market Risk};
+    \node[pillarhead] (p2) at (-1.7, -1.4) {2. Credit Risk};
+    \node[pillarhead] (p3) at (1.7, -1.4) {3. Liquidity Risk};
+    \node[pillarhead] (p4) at (5.1, -1.4) {4. Operational Risk};
+
+    % Connectors from Root to 4 Pillars
+    \draw[connector] (root.south -| p1.north) -- (p1.north);
+    \draw[connector] (root.south -| p2.north) -- (p2.north);
+    \draw[connector] (root.south -| p3.north) -- (p3.north);
+    \draw[connector] (root.south -| p4.north) -- (p4.north);
+
+    % Column 1: Market Risk Leaves (Stacked Vertically)
+    \node[leafbox] (m1) at (-5.1, -2.45) {Equity Price Risk};
+    \node[leafbox] (m2) at (-5.1, -3.35) {Interest Rate Risk};
+    \node[leafbox] (m3) at (-5.1, -4.25) {Currency (FX) Risk};
+    \node[leafbox] (m4) at (-5.1, -5.15) {Commodity Price Risk};
+
+    \draw[subconnector] (p1.south) -- (m1.north);
+    \draw[subconnector] (m1.south) -- (m2.north);
+    \draw[subconnector] (m2.south) -- (m3.north);
+    \draw[subconnector] (m3.south) -- (m4.north);
+
+    % Column 2: Credit Risk Leaves (Stacked Vertically)
+    \node[leafbox] (c1) at (-1.7, -2.45) {Default / Insolvency};
+    \node[leafbox] (c2) at (-1.7, -3.35) {Downgrade / Migration};
+    \node[leafbox] (c3) at (-1.7, -4.25) {Counterparty Exposure};
+    \node[leafbox] (c4) at (-1.7, -5.15) {Settlement / Herstatt};
+
+    \draw[subconnector] (p2.south) -- (c1.north);
+    \draw[subconnector] (c1.south) -- (c2.north);
+    \draw[subconnector] (c2.south) -- (c3.north);
+    \draw[subconnector] (c3.south) -- (c4.north);
+
+    % Column 3: Liquidity Risk Leaves (Stacked Vertically)
+    \node[leafbox] (l1) at (1.7, -2.45) {Market / Asset Liquidity};
+    \node[leafbox] (l2) at (1.7, -3.35) {Funding Liquidity Risk};
+    \node[leafbox] (l3) at (1.7, -4.25) {Roll-over / Refinancing};
+    \node[leafbox] (l4) at (1.7, -5.15) {Cash Flow Mismatch};
+
+    \draw[subconnector] (p3.south) -- (l1.north);
+    \draw[subconnector] (l1.south) -- (l2.north);
+    \draw[subconnector] (l2.south) -- (l3.north);
+    \draw[subconnector] (l3.south) -- (l4.north);
+
+    % Column 4: Operational Risk Leaves (Stacked Vertically)
+    \node[leafbox] (o1) at (5.1, -2.45) {Internal Fraud / People};
+    \node[leafbox] (o2) at (5.1, -3.35) {System Failure / Cyber};
+    \node[leafbox] (o3) at (5.1, -4.25) {Process Execution Error};
+    \node[leafbox] (o4) at (5.1, -5.15) {External Events / Legal};
+
+    \draw[subconnector] (p4.south) -- (o1.north);
+    \draw[subconnector] (o1.south) -- (o2.north);
+    \draw[subconnector] (o2.south) -- (o3.north);
+    \draw[subconnector] (o3.south) -- (o4.north);
 \end{tikzpicture}
-\caption{Comprehensive Enterprise Financial Risk Taxonomy Tree.}
+\caption{Comprehensive Enterprise Financial Risk Taxonomy (4-Column Symmetrical Architecture).}
 \label{fig:risk_taxonomy}
 \end{figure}
 
@@ -266,13 +305,13 @@ Regulatory authorities worldwide (including the Reserve Bank of India, Federal R
     }
 
     % Top Governance Banner
-    \node[topbanner] (board) at (0,0) {
+    \node[topbanner] (board) at (0, 4.0) {
         BOARD OF DIRECTORS \& RISK POLICY COMMITTEE\\
         \footnotesize Overall Risk Appetite, Capital Adequacy Strategy, and Ultimate Governance Accountability
     };
 
-    % Three Symmetrical Child Pillars (Clear inter-node spacing = 0.8cm, drop stem = 0.8cm)
-    \node[pillar, below left=0.8cm and 0.4cm of board.south] (line1) {
+    % Three Symmetrical Child Pillars (Explicit Non-Overlapping Grid Coordinates)
+    \node[pillar] (line1) at (-4.9, 0) {
         \begin{tikzpicture}[baseline=(h1.base)]
             \node[pillarheader, fill=darkteal] (h1) {1st Line: Business Units};
         \end{tikzpicture}\\[0.25cm]
@@ -288,7 +327,7 @@ Regulatory authorities worldwide (including the Reserve Bank of India, Federal R
         \end{itemize}
     };
 
-    \node[pillar, below=0.8cm of board.south] (line2) {
+    \node[pillar] (line2) at (0, 0) {
         \begin{tikzpicture}[baseline=(h2.base)]
             \node[pillarheader, fill=navyblue] (h2) {2nd Line: Risk \& Compliance};
         \end{tikzpicture}\\[0.25cm]
@@ -304,7 +343,7 @@ Regulatory authorities worldwide (including the Reserve Bank of India, Federal R
         \end{itemize}
     };
 
-    \node[pillar, below right=0.8cm and 0.4cm of board.south] (line3) {
+    \node[pillar] (line3) at (4.9, 0) {
         \begin{tikzpicture}[baseline=(h3.base)]
             \node[pillarheader, fill=amber] (h3) {3rd Line: Internal Audit};
         \end{tikzpicture}\\[0.25cm]
@@ -506,15 +545,15 @@ Equity investments represent residual ownership in a firm. Key risk dimensions i
 An institutional portfolio manager holds an equity portfolio valued at \inr 50,00,00,000 distributed across three sectors:
 \begin{center}
 \small
-\begin{tabular}{lccc}
+\begin{tabularx}{\linewidth}{X c c c}
 \toprule
-\textbf{Sector Allocation} & \textbf{Portfolio Weight ($w_i$)} & \textbf{Value (\inr Crores)} & \textbf{Sector Beta ($\beta_i$)} \\
+\textbf{Sector Allocation} & \textbf{Weight ($w_i$)} & \textbf{Value} & \textbf{Beta ($\beta_i$)} \\
 \midrule
 Banking \& Financial Services & $40\%$ & \inr 20.0 Cr & $1.35$ \\
 Information Technology (IT)   & $35\%$ & \inr 17.5 Cr & $0.90$ \\
-Fast Moving Consumer Goods (FMCG) & $25\%$ & \inr 12.5 Cr & $0.60$ \\
+Fast Moving Consumer Goods    & $25\%$ & \inr 12.5 Cr & $0.60$ \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{center}
 
 \textbf{Task:}
@@ -526,9 +565,10 @@ Fast Moving Consumer Goods (FMCG) & $25\%$ & \inr 12.5 Cr & $0.60$ \\
 \textbf{Solution:}
 \begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
     \item \textbf{Portfolio Beta Calculation:}
-    \[
-    \beta_P = \sum_{i=1}^3 w_i \beta_i = (0.40 \times 1.35) + (0.35 \times 0.90) + (0.25 \times 0.60) = 0.540 + 0.315 + 0.150 = 1.005
-    \]
+    \begin{align*}
+    \beta_P &= \sum_{i=1}^3 w_i \beta_i = (0.40 \times 1.35) + (0.35 \times 0.90) + (0.25 \times 0.60) \\
+    &= 0.540 + 0.315 + 0.150 = 1.005
+    \end{align*}
     \item \textbf{Expected Portfolio Percentage Decline:}
     \[
     \Delta R_P \approx \beta_P \times \Delta R_m = 1.005 \times (-4.5\%) = -4.5225\%
@@ -581,26 +621,22 @@ The Reserve Bank of India (RBI) unexpectedly hikes the policy repo rate by $75 \
 \textbf{Solution:}
 \begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
     \item \textbf{DV01 Calculation:}
-    \[
-    \DV = D^* \times P \times 0.0001 = 6.40 \times \inr 1,00,00,00,000 \times 0.0001 = \inr 6,40,000 \text{ per basis point}
-    \]
+    \begin{align*}
+    \DV &= D^* \times P \times 0.0001 \\
+    &= 6.40 \times \inr 1,00,00,00,000 \times 0.0001 = \inr 6,40,000 \text{ per bp}
+    \end{align*}
     \item \textbf{First-Order Duration Approximation ($\Delta y = +75 \text{ bps}$):}
-    \[
-    \frac{\Delta P}{P} \approx -D^* \Delta y = -6.40 \times 0.0075 = -0.0480 \quad (-4.80\%)
-    \]
-    \[
-    \Delta P = \inr 100 \text{ Cr} \times (-0.0480) = -\inr 4.80 \text{ Crores}
-    \]
+    \begin{align*}
+    \frac{\Delta P}{P} &\approx -D^* \Delta y = -6.40 \times 0.0075 = -0.0480 \quad (-4.80\%) \\[0.15cm]
+    \Delta P &= \inr 100 \text{ Cr} \times (-0.0480) = -\inr 4.80 \text{ Crores}
+    \end{align*}
     \item \textbf{Second-Order Convexity Refinement:}
-    \[
-    \text{Convexity Adjustment} = \frac{1}{2} C (\Delta y)^2 = \frac{1}{2} \times 58.0 \times (0.0075)^2 = 0.5 \times 58.0 \times 0.00005625 = +0.001631 \quad (+0.1631\%)
-    \]
-    \[
-    \frac{\Delta P_{\text{total}}}{P} \approx -4.80\% + 0.1631\% = -4.6369\%
-    \]
-    \[
-    \Delta P_{\text{refined}} = \inr 100 \text{ Cr} \times (-0.046369) = -\inr 4.6369 \text{ Crores}
-    \]
+    \begin{align*}
+    \text{Convexity Adjustment} &= \frac{1}{2} C (\Delta y)^2 = \frac{1}{2} \times 58.0 \times (0.0075)^2 \\
+    &= 29.0 \times 0.00005625 = +0.001631 \quad (+0.1631\%) \\[0.15cm]
+    \frac{\Delta P_{\text{total}}}{P} &\approx -4.80\% + 0.1631\% = -4.6369\% \\[0.15cm]
+    \Delta P_{\text{refined}} &= \inr 100 \text{ Cr} \times (-0.046369) = -\inr 4.6369 \text{ Crores}
+    \end{align*}
     The positive convexity softens the portfolio loss by $\approx \inr 16.31 \text{ Lakhs}$.
 \end{enumerate}
 \end{example}
@@ -636,16 +672,15 @@ An Indian IT services firm expects to receive an export receivable of $\text{USD
 \textbf{Solution:}
 \begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
     \item \textbf{Theoretical Forward Rate (CIP):}
-    \[
-    F = S_0 \times \left[\frac{1 + r_{\text{INR}} \times 0.5}{1 + r_{\text{USD}} \times 0.5}\right] = 83.50 \times \left[\frac{1 + (0.065 \times 0.5)}{1 + (0.050 \times 0.5)}\right] = 83.50 \times \left[\frac{1.0325}{1.0250}\right]
-    \]
-    \[
-    F = 83.50 \times 1.007317 = \inr 84.1109 \text{ per USD}
-    \]
+    \begin{align*}
+    F &= S_0 \times \left[\frac{1 + r_{\text{INR}} \times 0.5}{1 + r_{\text{USD}} \times 0.5}\right] = 83.50 \times \left[\frac{1 + 0.0325}{1 + 0.0250}\right] \\
+    &= 83.50 \times 1.007317 = \inr 84.1109 \text{ per USD}
+    \end{align*}
     \item \textbf{Forward Hedge Rupee Realization:}
-    \[
-    \text{Rupee Cash Flow} = \text{USD } 10,000,000 \times \inr 84.1109 = \inr 84,11,09,000 \quad (\inr 84.11 \text{ Crores})
-    \]
+    \begin{align*}
+    \text{Rupee Cash Flow} &= \text{USD } 10,000,000 \times \inr 84.1109 \\
+    &= \inr 84,11,09,000 \quad (\inr 84.11 \text{ Crores})
+    \end{align*}
     By locking in the forward contract, the exporter fully eliminates the downside risk of USD depreciation against the Indian Rupee over the 6-month interval.
 \end{enumerate}
 \end{example}
