@@ -1,0 +1,232 @@
+% ==============================================================================
+% Comprehensive Multi-Chapter Formula Reference Sheet
+% MSQF 533: Financial Risk Management
+% Placed strictly at the end of the entire monograph
+% Strictly formula-only presentation with mandatory "Where:" parameter definitions
+% ==============================================================================
+
+\chapter*{Comprehensive Formula Reference Sheet}
+\addcontentsline{toc}{chapter}{Comprehensive Formula Reference Sheet}
+
+% ------------------------------------------------------------------------------
+\section*{Chapter 1: Introduction to Risk Management}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[Log Return and Volatility Annualization]
+\begin{equation}
+r_t = \ln\left(\frac{P_t}{P_{t-1}}\right), \qquad \sigma_{\text{ann}} = \sigma_{\text{daily}} \times \sqrt{252}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $P_t = \text{Asset price at time } t$
+    \item $P_{t-1} = \text{Asset price at time } t-1$
+    \item $r_t = \text{Continuously compounded log-return over period } t-1 \text{ to } t$
+    \item $\sigma_{\text{daily}} = \text{Sample standard deviation of daily log-returns}$
+    \item $\sigma_{\text{ann}} = \text{Annualized return volatility assuming 252 trading days}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Single Index Systematic and Unsystematic Risk Decomposition]
+\begin{equation}
+\sigma_i^2 = \beta_i^2 \sigma_m^2 + \sigma_{\epsilon_i}^2, \qquad \beta_i = \frac{\Cov(R_i, R_m)}{\Var(R_m)} = \rho_{im} \frac{\sigma_i}{\sigma_m}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\sigma_i^2 = \text{Total variance of asset } i$
+    \item $\beta_i = \text{Systematic risk sensitivity coefficient (Beta) of asset } i$
+    \item $\sigma_m^2 = \text{Variance of benchmark market index returns}$
+    \item $\beta_i^2 \sigma_m^2 = \text{Systematic (market-wide, non-diversifiable) risk component}$
+    \item $\sigma_{\epsilon_i}^2 = \text{Unsystematic (idiosyncratic, diversifiable) residual variance}$
+    \item $\rho_{im} = \text{Correlation coefficient between asset } i \text{ and market } m$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Commodity Cost of Carry Forward Price]
+\begin{equation}
+F_0 = S_0 e^{(r + u - y)T}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $F_0 = \text{Theoretical forward / futures price at inception } t = 0$
+    \item $S_0 = \text{Spot price of physical commodity at } t = 0$
+    \item $r = \text{Continuously compounded risk-free rate per annum}$
+    \item $u = \text{Continuous storage and insurance carrying cost per annum (percentage of spot)}$
+    \item $y = \text{Continuous convenience yield per annum}$
+    \item $T = \text{Time to maturity of the forward contract in years}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Macaulay and Modified Duration]
+\begin{equation}
+D = \frac{1}{P} \sum_{t=1}^n \frac{t \cdot C_t}{(1 + y)^t}, \qquad D^* = \frac{D}{1 + y} = -\frac{1}{P} \diff{P}{y}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $D = \text{Macaulay duration in years}$
+    \item $D^* = \text{Modified duration measuring percentage price sensitivity}$
+    \item $P = \text{Current dirty price of the bond}$
+    \item $C_t = \text{Cash flow (coupon or principal repayment) at time } t$
+    \item $y = \text{Periodic yield to maturity (YTM)}$
+    \item $n = \text{Total number of cash flow periods to maturity}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Bond Convexity and Second-Order Price Approximation]
+\begin{equation}
+C = \frac{1}{P (1 + y)^2} \sum_{t=1}^n \frac{(t^2 + t) C_t}{(1 + y)^t}, \qquad \frac{\Delta P}{P} \approx -D^* \Delta y + \frac{1}{2} C (\Delta y)^2
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $C = \text{Convexity measure of the bond in years}^2$
+    \item $\Delta P = \text{Estimated absolute change in bond price}$
+    \item $\Delta y = \text{Parallel shift in the yield to maturity}$
+    \item $-D^* \Delta y = \text{First-order linear duration contribution}$
+    \item $\frac{1}{2} C (\Delta y)^2 = \text{Second-order non-linear convexity correction}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Dollar Value of an 01 (DV01 / PVBP)]
+\begin{equation}
+\DV = D^* \times P \times 0.0001
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\DV = \text{Monetary loss resulting from a 1 basis point (0.01\%) increase in yield}$
+    \item $D^* = \text{Modified duration of the bond or portfolio}$
+    \item $P = \text{Total current market value of the fixed income position}$
+    \item $0.0001 = \text{Decimal equivalent of 1 basis point (1 bp)}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Covered Interest Parity (CIP) Forward Exchange Rate]
+\begin{equation}
+F = S \times \left[\frac{1 + r_d \cdot T}{1 + r_f \cdot T}\right]
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $F = \text{Theoretical forward exchange rate (Domestic currency per unit of Foreign currency)}$
+    \item $S = \text{Spot exchange rate (Domestic per Foreign)}$
+    \item $r_d = \text{Domestic annualized nominal risk-free interest rate}$
+    \item $r_f = \text{Foreign annualized nominal risk-free interest rate}$
+    \item $T = \text{Tenor of the forward contract in years}$
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\section*{Chapter 2: Value at Risk (VaR) Methods and Hedging}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[Value at Risk and Square-Root-of-Time Scaling]
+\begin{equation}
+\Prob(L > \VaR_\alpha) = 1 - \alpha, \qquad \VaR_{\alpha, T} = \VaR_{\alpha, 1} \times \sqrt{T}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $L = \text{Portfolio loss variable over holding period } T$ ($L = -\Delta \Pi$)
+    \item $\VaR_\alpha = \text{Value at Risk at confidence level } \alpha \in (0, 1)$
+    \item $\alpha = \text{Target statistical confidence level (e.g., 0.95 or 0.99)}$
+    \item $\VaR_{\alpha, 1} = \text{1-day Value at Risk}$
+    \item $\VaR_{\alpha, T} = \text{Scaled } T\text{-day Value at Risk under i.i.d. return assumption}$
+    \item $T = \text{Regulatory or holding horizon in days}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Expected Shortfall (Conditional VaR)]
+\begin{equation}
+\ES_\alpha = \E[L \mid L \ge \VaR_\alpha] = \frac{1}{1 - \alpha} \int_{\alpha}^1 \VaR_u \, \dd u
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\ES_\alpha = \text{Expected Shortfall (Conditional VaR) at confidence level } \alpha$
+    \item $L = \text{Portfolio loss variable}$
+    \item $\VaR_\alpha = \text{Value at Risk cutoff threshold at confidence level } \alpha$
+    \item $\VaR_u = \text{Quantile loss corresponding to probability level } u$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Delta-Normal Parametric Portfolio VaR]
+\begin{equation}
+\sigma_P^2 = \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}, \qquad \VaR_\alpha = z_\alpha \cdot \sigma_P \cdot V_0
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\mathbf{w} = n \times 1 \text{ Vector of asset portfolio weights } (w_1, \dots, w_n)^T$
+    \item $\boldsymbol{\Sigma} = n \times n \text{ Variance-covariance matrix of asset returns}$
+    \item $\sigma_P = \text{Portfolio standard deviation (volatility) per period}$
+    \item $z_\alpha = \text{Standard normal critical quantile value (1.645 for 95\%, 2.326 for 99\%)}$
+    \item $V_0 = \text{Current baseline market value of the portfolio}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Two-Asset Portfolio Volatility]
+\begin{equation}
+\sigma_P = \sqrt{w_1^2 \sigma_1^2 + w_2^2 \sigma_2^2 + 2 w_1 w_2 \rho_{12} \sigma_1 \sigma_2}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $w_1, w_2 = \text{Weights invested in Asset 1 and Asset 2 ($w_1 + w_2 = 1$)}$
+    \item $\sigma_1, \sigma_2 = \text{Return standard deviations of Asset 1 and Asset 2}$
+    \item $\rho_{12} = \text{Correlation coefficient between returns of Asset 1 and Asset 2}$
+    \item $\sigma_P = \text{Diversified two-asset portfolio standard deviation}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Optimal Minimum-Variance Hedge Ratio]
+\begin{equation}
+h^* = \frac{\Cov(\Delta S, \Delta F)}{\sigma_F^2} = \rho_{SF} \frac{\sigma_S}{\sigma_F}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $h^* = \text{Optimal minimum-variance hedge ratio}$
+    \item $\Delta S = \text{Change in spot price of hedged asset over the holding period}$
+    \item $\Delta F = \text{Change in futures price of hedging instrument over the holding period}$
+    \item $\sigma_S = \text{Standard deviation of spot price changes } \Delta S$
+    \item $\sigma_F = \text{Standard deviation of futures price changes } \Delta F$
+    \item $\rho_{SF} = \text{Correlation coefficient between } \Delta S \text{ and } \Delta F$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Optimal Number of Hedging Futures Contracts]
+\begin{equation}
+N^* = h^* \frac{Q_A}{Q_F}, \qquad N^* = (\beta_P - \beta^*) \frac{V_P}{V_F}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $N^* = \text{Optimal number of futures contracts to trade}$
+    \item $Q_A = \text{Total quantity / units of the spot asset being hedged}$
+    \item $Q_F = \text{Contract size / units covered by one futures contract}$
+    \item $\beta_P = \text{Current systematic beta of the equity portfolio}$
+    \item $\beta^* = \text{Target post-hedge systematic beta ($\beta^* = 0$ for complete immunization)}$
+    \item $V_P = \text{Current market value of the equity portfolio}$
+    \item $V_F = \text{Market notional value of one index futures contract } (I \times M)$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Second-Order Taylor Series Greeks Price Approximation]
+\begin{equation}
+\Delta V \approx \Delta \cdot \Delta S + \frac{1}{2} \Gamma (\Delta S)^2 + \Theta \Delta t + \mathcal{V} \Delta \sigma
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\Delta V = \text{Change in option value}$
+    \item $\Delta = \pdiff{V}{S} = \text{Option Delta (first-order price sensitivity)}$
+    \item $\Gamma = \frac{\partial^2 V}{\partial S^2} = \text{Option Gamma (curvature sensitivity)}$
+    \item $\Theta = \pdiff{V}{t} = \text{Option Theta (time decay sensitivity)}$
+    \item $\mathcal{V} = \pdiff{V}{\sigma} = \text{Option Vega (implied volatility sensitivity)}$
+    \item $\Delta S = \text{Change in underlying asset price}$
+    \item $\Delta t = \text{Passage of time interval}$
+    \item $\Delta \sigma = \text{Change in implied volatility}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Gamma Neutral Hedging Condition]
+\begin{equation}
+w_T = -\frac{\Gamma_P}{\Gamma_T}
+\end{equation}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $w_T = \text{Number of traded hedging option contracts to acquire or sell}$
+    \item $\Gamma_P = \text{Total initial unhedged gamma of the primary option portfolio}$
+    \item $\Gamma_T = \text{Gamma of one unit of the traded hedging option contract}$
+\end{itemize}
+\end{formulabox}

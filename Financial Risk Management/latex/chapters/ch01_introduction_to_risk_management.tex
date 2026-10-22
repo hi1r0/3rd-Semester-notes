@@ -1,0 +1,662 @@
+% ==============================================================================
+% Chapter 1: Introduction to Risk Management (Unit I)
+% MSQF 533: Financial Risk Management
+% ==============================================================================
+
+\chapter{Introduction to Risk Management}
+\lecturedate{14/08/2026}
+
+Financial risk management lies at the core of quantitative finance and modern capital allocation. Investors, financial institutions, and multinational corporations operate in an environment characterized by rapid price fluctuations, interconnected global liquidity, and regulatory transformations. This chapter establishes the fundamental concepts, taxonomy, governance frameworks, and asset-class specific risks that form the bedrock of the subject.
+
+% ------------------------------------------------------------------------------
+\section{Foundations of Risk and Uncertainty}
+% ------------------------------------------------------------------------------
+
+\begin{definition}{Financial Risk and Knightian Uncertainty}{risk_uncertainty}
+\textbf{Financial Risk} describes a decision environment in which future outcomes are uncertain, but the possible payoff states and their corresponding probability distribution can be mathematically modeled or estimated from historical data and market prices.
+
+In contrast, \textbf{Knightian Uncertainty} (formulated by Frank Knight in 1921) refers to situations where future events or outcomes cannot be defined, enumerated, or assigned objective or subjective probability distributions.
+\end{definition}
+
+In financial markets, risk has a dual character:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Downside Exposure:} The potential for financial loss, bankruptcy, capital impairment, or underperformance relative to a target benchmark.
+    \item \textbf{Upside Volatility:} The potential for unexpected surplus returns, representing the compensation (risk premium) demanded by rational, risk-averse investors for bearing uncertainty.
+\end{itemize}
+
+\begin{formulabox}[Statistical Measures of Return and Dispersion]
+Let $P_t$ denote the price of a financial asset at time $t$. The simple discrete return $R_t$ and continuously compounded log-return $r_t$ over period $\Delta t$ are defined as:
+\begin{equation}
+R_t = \frac{P_t - P_{t-1}}{P_{t-1}}, \qquad r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(1 + R_t)
+\end{equation}
+The expected return $\mu$, variance $\sigma^2$, and standard deviation (volatility) $\sigma$ are given by:
+\begin{equation}
+\mu = \E[r_t], \qquad \sigma^2 = \Var(r_t) = \E\left[(r_t - \mu)^2\right], \qquad \sigma = \sqrt{\Var(r_t)}
+\end{equation}
+When returns are measured at daily intervals, the annualized volatility $\sigma_{\text{ann}}$ assuming $N = 252$ trading days is:
+\begin{equation}
+\sigma_{\text{ann}} = \sigma_{\text{daily}} \times \sqrt{252}
+\end{equation}
+\end{formulabox}
+
+Financial asset returns routinely exhibit non-normal empirical characteristics, specifically \textbf{excess kurtosis} (fat tails or leptokurtosis) and \textbf{negative skewness} (asymmetric crash risk). Relying exclusively on variance ($\sigma^2$) severely underestimates the likelihood of extreme catastrophic market events.
+
+% ------------------------------------------------------------------------------
+\section{Taxonomy and Classification of Financial Risks}
+% ------------------------------------------------------------------------------
+
+Total risk in any financial portfolio can be categorized through two fundamental analytical lenses: by its diversifiability within capital markets, and by its underlying structural origin.
+
+\subsection{Systematic vs Unsystematic Risk}
+
+The total variance of an asset's return $\sigma_i^2$ under the Single Index Model (Capital Asset Pricing Model framework) is decomposed into two orthogonal components:
+\begin{equation}
+\sigma_i^2 = \underbrace{\beta_i^2 \sigma_m^2}_{\text{Systematic Risk}} + \underbrace{\sigma_{\epsilon_i}^2}_{\text{Unsystematic (Idiosyncratic) Risk}}
+\end{equation}
+
+\vspace{0.3cm}
+% TikZ Figure 1.1: Symmetrical Two-Column Card Decomposition
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    % Style definitions strictly adhering to Rule 4 invariants
+    \tikzset{
+        card/.style={
+            draw=navyblue,
+            fill=lightgraybg,
+            line width=1.2pt,
+            rounded corners=3mm,
+            text width=6.8cm,
+            minimum height=6.2cm,
+            inner sep=4mm,
+            align=left
+        },
+        header/.style={
+            font=\bfseries\sffamily\large,
+            text=white,
+            align=center,
+            rounded corners=1.5mm,
+            inner sep=2mm,
+            text width=6.4cm
+        },
+        connector/.style={
+            line width=1.4pt,
+            navyblue,
+            -{Stealth[length=3mm, width=2.2mm]}
+        }
+    }
+
+    % Left Card: Systematic Risk
+    \node[card] (sys) at (0,0) {
+        \begin{tikzpicture}[baseline=(top.base)]
+            \node[header, fill=navyblue] (top) {Systematic Risk (Market-Wide)};
+        \end{tikzpicture}\\[0.3cm]
+        \small
+        \textbf{Nature:} Pervasive, non-diversifiable risk stemming from macro-environmental forces.\\
+        \textbf{Key Drivers:}
+        \begin{itemize}[leftmargin=1.2em, itemsep=1pt, topsep=2pt]
+            \item Inflationary spikes \& monetary policy
+            \item GDP contractions \& business cycles
+            \item Geopolitical conflicts \& war
+            \item Global liquidity shocks \& FX volatility
+        \end{itemize}
+        \textbf{Mitigation:} Cannot be eliminated by diversification; managed via index hedging, asset allocation, and macro overlay strategies.
+    };
+
+    % Right Card: Unsystematic Risk (Identical Geometry & Clearance = 1.0cm)
+    \node[card, right=1.0cm of sys] (unsys) {
+        \begin{tikzpicture}[baseline=(top2.base)]
+            \node[header, fill=darkteal] (top2) {Unsystematic Risk (Specific)};
+        \end{tikzpicture}\\[0.3cm]
+        \small
+        \textbf{Nature:} Idiosyncratic, diversifiable risk unique to a specific firm or narrow sector.\\
+        \textbf{Key Drivers:}
+        \begin{itemize}[leftmargin=1.2em, itemsep=1pt, topsep=2pt]
+            \item Corporate governance failures / fraud
+            \item Operational disruption \& labour strikes
+            \item Regulatory penalties \& patent expirations
+            \item Unexpected earnings downgrades
+        \end{itemize}
+        \textbf{Mitigation:} Substantially eradicated in large portfolios ($N \ge 30$) through uncorrelated cross-sector diversification.
+    };
+\end{tikzpicture}
+\caption{Systematic vs Unsystematic Risk Decomposition (Symmetrical Dual-Pillar Architecture).}
+\label{fig:sys_vs_unsys}
+\end{figure}
+
+\subsection{Comprehensive Risk Taxonomy}
+
+Modern financial risk management categorizes exposures into five major interrelated domains:
+
+\vspace{0.3cm}
+% TikZ Figure 1.2: Hierarchy Tree with Invariant Clearance
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=3.2cm, level distance=2.2cm},
+    level 2/.style={sibling distance=1.6cm, level distance=2.0cm},
+    box/.style={
+        draw=navyblue,
+        fill=lightgraybg,
+        line width=1.2pt,
+        rounded corners=2mm,
+        text width=2.6cm,
+        minimum height=1.1cm,
+        align=center,
+        font=\bfseries\sffamily\footnotesize
+    },
+    root/.style={
+        draw=navyblue,
+        fill=navyblue,
+        text=white,
+        line width=1.4pt,
+        rounded corners=2mm,
+        text width=5.0cm,
+        minimum height=1.3cm,
+        align=center,
+        font=\bfseries\sffamily\small
+    },
+    leaf/.style={
+        draw=darkteal,
+        fill=white,
+        line width=1.0pt,
+        rounded corners=1.5mm,
+        text width=2.4cm,
+        minimum height=0.9cm,
+        align=center,
+        font=\sffamily\scriptsize
+    },
+    edge from parent/.style={
+        draw=navyblue,
+        line width=1.3pt,
+        -{Stealth[length=2.5mm, width=1.8mm]}
+    }
+]
+
+\node[root] {Enterprise Financial Risk Taxonomy}
+    child {node[box] {Market Risk}
+        child {node[leaf] {Equity Risk}}
+        child {node[leaf] {Interest Rate Risk}}
+        child {node[leaf] {Currency Risk}}
+        child {node[leaf] {Commodity Risk}}
+    }
+    child {node[box] {Credit Risk}
+        child {node[leaf] {Default Risk}}
+        child {node[leaf] {Downgrade Risk}}
+        child {node[leaf] {Counterparty Risk}}
+        child {node[leaf] {Settlement Risk}}
+    }
+    child {node[box] {Liquidity Risk}
+        child {node[leaf] {Market / Asset Liquidity}}
+        child {node[leaf] {Funding Liquidity}}
+    }
+    child {node[box] {Operational Risk}
+        child {node[leaf] {Internal Fraud / People}}
+        child {node[leaf] {System Failure / Cyber}}
+        child {node[leaf] {Process Execution}}
+        child {node[leaf] {External Events}}
+    };
+\end{tikzpicture}
+\caption{Comprehensive Enterprise Financial Risk Taxonomy Tree.}
+\label{fig:risk_taxonomy}
+\end{figure}
+
+\begin{enumerate}[leftmargin=1.5em, itemsep=4pt]
+    \item \textbf{Market Risk:} The risk of portfolio losses arising from adverse movements in observable financial market prices and parameters (equity prices, benchmark yield curves, foreign exchange rates, commodity prices, and implied volatilities).
+    \item \textbf{Credit Risk:} The economic loss suffered when an obligor, borrower, or swap counterparty fails to fulfill contractual debt obligations on time, or undergoes credit rating deterioration.
+    \item \textbf{Liquidity Risk:} Comprises two distinct dimensions:
+    \begin{itemize}
+        \item \textit{Market (Asset) Liquidity Risk:} The inability to liquidate large asset positions rapidly without incurring substantial price concessions or bid-ask slippage.
+        \item \textit{Funding (Cash-Flow) Liquidity Risk:} The inability of an institution to meet immediate cash payment obligations, margin calls, or debt roll-overs, leading to insolvency.
+    \end{itemize}
+    \item \textbf{Operational Risk:} As defined by the Basel Committee on Banking Supervision (BCBS), the risk of loss resulting from inadequate or failed internal processes, people, and systems, or from external events (including legal risk, cyber threats, and compliance sanctions, but excluding strategic and reputational risk).
+    \item \textbf{Sovereign and Systemic Risk:} The risk that a national government defaults on sovereign debt, institutes foreign exchange controls, or triggers a systemic contagion cascade that threatens the stability of the entire financial system.
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Enterprise Risk Management and Governance Architecture}
+% ------------------------------------------------------------------------------
+
+Traditional risk management operated in organizational ``silos'', where market risk, credit risk, insurance, and operational hazards were analyzed in isolation by disconnected departments. Modern financial institutions have transitioned to \textbf{Enterprise Risk Management (ERM)}, an integrated, holistic framework designed to evaluate firm-wide risk aggregation, capital allocation, and strategic risk-reward optimization.
+
+\subsection{The Three Lines of Defence Framework}
+
+Regulatory authorities worldwide (including the Reserve Bank of India, Federal Reserve, and European Central Bank) mandate the \textbf{Three Lines of Defence} governance structure to prevent conflicts of interest and ensure independent oversight.
+
+\vspace{0.3cm}
+% TikZ Figure 1.3: Three Lines of Defence Architecture
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \tikzset{
+        topbanner/.style={
+            draw=navyblue,
+            fill=navyblue,
+            text=white,
+            line width=1.3pt,
+            rounded corners=2mm,
+            text width=14.4cm,
+            minimum height=1.3cm,
+            align=center,
+            font=\bfseries\sffamily\small
+        },
+        pillar/.style={
+            draw=navyblue,
+            fill=lightgraybg,
+            line width=1.2pt,
+            rounded corners=2mm,
+            text width=4.3cm,
+            minimum height=6.2cm,
+            inner sep=3mm,
+            align=left
+        },
+        pillarheader/.style={
+            font=\bfseries\sffamily\footnotesize,
+            text=white,
+            align=center,
+            rounded corners=1.5mm,
+            inner sep=1.8mm,
+            text width=3.9cm
+        },
+        stem/.style={
+            line width=1.4pt,
+            navyblue,
+            -{Stealth[length=3mm, width=2.2mm]}
+        }
+    }
+
+    % Top Governance Banner
+    \node[topbanner] (board) at (0,0) {
+        BOARD OF DIRECTORS \& RISK POLICY COMMITTEE\\
+        \footnotesize Overall Risk Appetite, Capital Adequacy Strategy, and Ultimate Governance Accountability
+    };
+
+    % Three Symmetrical Child Pillars (Clear inter-node spacing = 0.8cm, drop stem = 0.8cm)
+    \node[pillar, below left=0.8cm and 0.4cm of board.south] (line1) {
+        \begin{tikzpicture}[baseline=(h1.base)]
+            \node[pillarheader, fill=darkteal] (h1) {1st Line: Business Units};
+        \end{tikzpicture}\\[0.25cm]
+        \scriptsize
+        \textbf{Role:} Risk Ownership \& Front-Line Execution.\\
+        \textbf{Units:} Trading desks, lending officers, branch operations, product managers.\\
+        \textbf{Mandate:}
+        \begin{itemize}[leftmargin=1.1em, itemsep=1pt, topsep=1pt]
+            \item Originates and prices risks
+            \item Adheres to trader limit mandates
+            \item Implements primary internal controls
+            \item Executes day-to-day transaction processing
+        \end{itemize}
+    };
+
+    \node[pillar, below=0.8cm of board.south] (line2) {
+        \begin{tikzpicture}[baseline=(h2.base)]
+            \node[pillarheader, fill=navyblue] (h2) {2nd Line: Risk \& Compliance};
+        \end{tikzpicture}\\[0.25cm]
+        \scriptsize
+        \textbf{Role:} Independent Oversight \& Monitoring.\\
+        \textbf{Units:} Chief Risk Officer (CRO), Credit Risk, Market Risk, AML/Compliance.\\
+        \textbf{Mandate:}
+        \begin{itemize}[leftmargin=1.1em, itemsep=1pt, topsep=1pt]
+            \item Formulates risk policy \& metrics
+            \item Calculates firm-wide VaR \& stress tests
+            \item Establishes \& enforces stop-loss limits
+            \item Validates pricing models independently
+        \end{itemize}
+    };
+
+    \node[pillar, below right=0.8cm and 0.4cm of board.south] (line3) {
+        \begin{tikzpicture}[baseline=(h3.base)]
+            \node[pillarheader, fill=amber] (h3) {3rd Line: Internal Audit};
+        \end{tikzpicture}\\[0.25cm]
+        \scriptsize
+        \textbf{Role:} Independent Assurance to Board.\\
+        \textbf{Units:} Internal Audit Directorate, External Regulatory Reviewers.\\
+        \textbf{Mandate:}
+        \begin{itemize}[leftmargin=1.1em, itemsep=1pt, topsep=1pt]
+            \item Reports directly to Board Audit Comm.
+            \item Evaluates efficacy of 1st \& 2nd lines
+            \item Conducts comprehensive control audits
+            \item Assesses regulatory compliance integrity
+        \end{itemize}
+    };
+
+    % Symmetrical Balanced Connector Arrows from Banner to all 3 Pillars
+    \draw[stem] (board.south -| line1.north) -- (line1.north);
+    \draw[stem] (board.south) -- (line2.north);
+    \draw[stem] (board.south -| line3.north) -- (line3.north);
+\end{tikzpicture}
+\caption{The Three Lines of Defence Governance Architecture (Rule 4 Symmetrical Connectors).}
+\label{fig:three_lines}
+\end{figure}
+
+\subsection{The Enterprise Risk Management (ERM) Process Cycle}
+
+In accordance with international risk management standards (ISO 31000 and the COSO ERM Framework), effective enterprise risk management follows a continuous, closed-loop feedback architecture:
+
+\begin{enumerate}[leftmargin=1.5em, itemsep=3pt]
+    \item \textbf{Context Establishment \& Risk Appetite Definition:} Determining the organization's overarching risk tolerance, return objectives, and regulatory capital boundaries.
+    \item \textbf{Risk Identification:} Uncovering emerging exposures across all business lines through risk registers, process mapping, and Delphi expert panels.
+    \item \textbf{Risk Measurement \& Assessment:} Quantifying probability distributions, Value at Risk, scenario analyses, and severity matrices.
+    \item \textbf{Risk Treatment \& Mitigation:} Selecting suitable strategies: risk retention (capital reserves), risk transfer (insurance/derivatives), risk avoidance (exiting volatile business segments), or risk reduction (enhanced internal controls).
+    \item \textbf{Risk Monitoring \& Escalation:} Continuous real-time limit monitoring, exception reporting to executive committees, and regulatory disclosures.
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Asset-Class Specific Risk Profiles}
+% ------------------------------------------------------------------------------
+
+Different financial asset classes exhibit fundamentally distinct cash flow dynamics, payoff functions, and risk sensitivities. Investors and portfolio managers must understand these characteristics to construct balanced portfolios and robust hedging strategies.
+
+\vspace{0.3cm}
+% TikZ Figure 1.4: 4-Pillar Asset Class Comparison Grid
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \tikzset{
+        assetcard/.style={
+            draw=navyblue,
+            fill=lightgraybg,
+            line width=1.2pt,
+            rounded corners=2.5mm,
+            text width=6.6cm,
+            minimum height=5.5cm,
+            inner sep=3.5mm,
+            align=left
+        },
+        cardtitle/.style={
+            font=\bfseries\sffamily\small,
+            text=white,
+            align=center,
+            rounded corners=1.5mm,
+            inner sep=1.8mm,
+            text width=6.1cm
+        }
+    }
+
+    % Top-Left: Commodity Risk
+    \node[assetcard] (c1) at (0,0) {
+        \begin{tikzpicture}[baseline=(t1.base)]
+            \node[cardtitle, fill=amber] (t1) {1. Commodity Investment Risk};
+        \end{tikzpicture}\\[0.2cm]
+        \scriptsize
+        \textbf{Core Drivers:} Physical supply-demand disruptions, weather, geopolitical conflict, storage capacity.\\
+        \textbf{Key Structural Traits:}
+        \begin{itemize}[leftmargin=1.1em, itemsep=1pt, topsep=1pt]
+            \item Carrying costs ($u$), storage, spoilage, insurance
+            \item Convenience yield ($y$) from physical ownership
+            \item Term structure: Contango vs Backwardation
+            \item Rolling basis risk ($b_t = S_t - F_t$) on futures
+        \end{itemize}
+    };
+
+    % Top-Right: Equity Risk (Horizontal clearance = 0.8cm)
+    \node[assetcard, right=0.8cm of c1] (c2) {
+        \begin{tikzpicture}[baseline=(t2.base)]
+            \node[cardtitle, fill=navyblue] (t2) {2. Equity Investment Risk};
+        \end{tikzpicture}\\[0.2cm]
+        \scriptsize
+        \textbf{Core Drivers:} Corporate profitability, macroeconomic growth, competitive disruption, equity valuation multiples.\\
+        \textbf{Key Structural Traits:}
+        \begin{itemize}[leftmargin=1.1em, itemsep=1pt, topsep=1pt]
+            \item Systematic market sensitivity ($\beta$) vs idiosyncratic shock
+            \item Subordinated residual claim in corporate bankruptcy
+            \item Dividend uncertainty \& management agency cost
+            \item Asymmetric volatility (leverage effect)
+        \end{itemize}
+    };
+
+    % Bottom-Left: Fixed Income Risk (Vertical clearance = 0.8cm)
+    \node[assetcard, below=0.8cm of c1] (c3) {
+        \begin{tikzpicture}[baseline=(t3.base)]
+            \node[cardtitle, fill=darkteal] (t3) {3. Fixed Income Investment Risk};
+        \end{tikzpicture}\\[0.2cm]
+        \scriptsize
+        \textbf{Core Drivers:} Central bank policy rates, inflation trajectory, credit quality migration, yield curve slope.\\
+        \textbf{Key Structural Traits:}
+        \begin{itemize}[leftmargin=1.1em, itemsep=1pt, topsep=1pt]
+            \item Interest rate sensitivity: Duration ($D^*$) \& Convexity ($C$)
+            \item Credit spread widening \& issuer default risk
+            \item Reinvestment risk on periodic coupon payments
+            \item Call / prepayment risk in declining rate environments
+        \end{itemize}
+    };
+
+    % Bottom-Right: Currency Risk (Horizontal clearance = 0.8cm)
+    \node[assetcard, right=0.8cm of c3] (c4) {
+        \begin{tikzpicture}[baseline=(t4.base)]
+            \node[cardtitle, fill=charcoal] (t4) {4. Currency (FX) Investment Risk};
+        \end{tikzpicture}\\[0.2cm]
+        \scriptsize
+        \textbf{Core Drivers:} Interest rate differentials, terms of trade, current account deficits, central bank FX intervention.\\
+        \textbf{Key Structural Traits:}
+        \begin{itemize}[leftmargin=1.1em, itemsep=1pt, topsep=1pt]
+            \item Transaction exposure on contractual cash flows
+            \item Translation exposure on overseas consolidated balances
+            \item Operating (economic) exposure on competitive pricing
+            \item Sovereign capital controls \& convertibility barriers
+        \end{itemize}
+    };
+\end{tikzpicture}
+\caption{Four-Pillar Asset Class Risk Comparison Grid (Rule 4 Symmetrical Dimensions).}
+\label{fig:asset_class_grid}
+\end{figure}
+
+\subsection{Risks of Commodity Investment}
+
+Unlike financial assets, commodities are consumption goods with physical delivery, storage, and decay constraints:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Cost of Carry Model:} Under continuous compounding, the theoretical forward price $F_0$ for a commodity with spot price $S_0$, risk-free rate $r$, storage cost percentage $u$, and convenience yield $y$ is:
+    \begin{equation}
+    F_0 = S_0 e^{(r + u - y)T}
+    \end{equation}
+    \item \textbf{Convenience Yield ($y$):} The implicit benefit or embedded economic value of physically possessing an inventory of the commodity during an unexpected supply crunch.
+    \item \textbf{Contango:} A market condition where futures prices trade higher than the spot price ($F_0 > S_0$), occurring when carrying costs exceed convenience yield ($r + u > y$). An investor rolling long futures contracts suffers a \textbf{negative roll yield} as the futures price converges downward to the spot price at expiration.
+    \item \textbf{Backwardation (Normal Backwardation):} A market condition where futures prices trade at a discount to the spot price ($F_0 < S_0$), occurring when convenience yield is exceptionally high ($y > r + u$). Long futures holders earn a \textbf{positive roll yield} as futures prices converge upward toward spot.
+    \item \textbf{Basis Risk:} The risk that the basis $b_t = S_t - F_t$ fluctuates unpredictably between hedge initiation and contract unwinding.
+\end{itemize}
+
+\begin{example}{Basis Risk and Roll Yield in Crude Oil Futures}{basis_crude}
+An Indian airline requires 100,000 barrels of aviation turbine fuel (ATF) in three months. Because no liquid ATF contract exists on the Multi Commodity Exchange (MCX), the treasury hedges using MCX Crude Oil futures contracts (100 barrels per contract; 1,000 contracts total).
+
+\textbf{Market Data at $t = 0$:}
+\begin{itemize}[leftmargin=1.5em, noitemsep]
+    \item Current Spot Crude ($S_0$): \inr 6,200 per barrel
+    \item 3-Month Futures Contract ($F_{0,T}$): \inr 6,450 per barrel
+    \item Initial Basis: $b_0 = S_0 - F_0 = 6,200 - 6,450 = -\inr 250$ (Market in Contango)
+\end{itemize}
+
+\textbf{Market Data at $t = T$ (3 Months later):}
+\begin{itemize}[leftmargin=1.5em, noitemsep]
+    \item Spot Crude ($S_T$): \inr 7,100 per barrel
+    \item Actual ATF Spot Price Paid by Airline: \inr 7,400 per barrel
+    \item Futures Price at Maturity ($F_{T,T} = S_T$): \inr 7,100 per barrel
+\end{itemize}
+
+\textbf{Solution \& Risk Breakdown:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Futures Gain per barrel:}
+    \[
+    \Delta F = F_T - F_0 = 7,100 - 6,450 = +\inr 650 \text{ per barrel}
+    \]
+    \item \textbf{Spot Price Increase for Crude:}
+    \[
+    \Delta S = S_T - S_0 = 7,100 - 6,200 = +\inr 900 \text{ per barrel}
+    \]
+    \item \textbf{Roll Cost (Contango Drag):} The futures appreciated by \inr 650, while spot rose by \inr 900. The \inr 250 drag reflects the initial contango penalty:
+    \[
+    \text{Drag} = \Delta S - \Delta F = 900 - 650 = \inr 250
+    \]
+    \item \textbf{Cross-Commodity Basis Slippage:} The actual price paid for ATF rose from an initial equivalent of \inr 6,400 to \inr 7,400 (an increase of \inr 1,000), leaving the airline exposed to an unhedged cross-commodity basis difference of $\inr 1,000 - \inr 650 = \inr 350$ per barrel.
+\end{enumerate}
+\end{example}
+
+\subsection{Risks of Equity Investment}
+
+Equity investments represent residual ownership in a firm. Key risk dimensions include:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Market Beta Risk ($\beta_i$):} The sensitivity of the stock's return relative to changes in the broader benchmark index:
+    \begin{equation}
+    \beta_i = \frac{\Cov(R_i, R_m)}{\Var(R_m)} = \rho_{im} \frac{\sigma_i}{\sigma_m}
+    \end{equation}
+    \item \textbf{Asymmetric Leverage Effect:} When equity prices decline, financial leverage (Debt/Equity ratio) mechanically increases, making the company riskier and amplifying subsequent volatility.
+    \item \textbf{Valuation and Multiple Compression Risk:} The vulnerability of stock prices to contractions in price-to-earnings (P/E) or enterprise value multiples caused by rising risk-free rates or macroeconomic slowdowns.
+\end{itemize}
+
+\begin{example}{Portfolio Beta and Factor Exposure on NSE Nifty 50}{equity_beta}
+An institutional portfolio manager holds an equity portfolio valued at \inr 50,00,00,000 distributed across three sectors:
+\begin{center}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Sector Allocation} & \textbf{Portfolio Weight ($w_i$)} & \textbf{Value (\inr Crores)} & \textbf{Sector Beta ($\beta_i$)} \\
+\midrule
+Banking \& Financial Services & $40\%$ & \inr 20.0 Cr & $1.35$ \\
+Information Technology (IT)   & $35\%$ & \inr 17.5 Cr & $0.90$ \\
+Fast Moving Consumer Goods (FMCG) & $25\%$ & \inr 12.5 Cr & $0.60$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Calculate the overall portfolio beta ($\beta_P$).
+    \item Estimate the expected portfolio value drop if the benchmark Nifty 50 Index falls by $4.5\%$ due to unexpected geopolitical tensions.
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Portfolio Beta Calculation:}
+    \[
+    \beta_P = \sum_{i=1}^3 w_i \beta_i = (0.40 \times 1.35) + (0.35 \times 0.90) + (0.25 \times 0.60) = 0.540 + 0.315 + 0.150 = 1.005
+    \]
+    \item \textbf{Expected Portfolio Percentage Decline:}
+    \[
+    \Delta R_P \approx \beta_P \times \Delta R_m = 1.005 \times (-4.5\%) = -4.5225\%
+    \]
+    \item \textbf{Expected Value Loss:}
+    \[
+    \text{Loss} = \inr 50,00,00,000 \times 0.045225 = \inr 2,26,12,500 \quad (\approx \inr 2.261 \text{ Crores})
+    \]
+\end{enumerate}
+\end{example}
+
+\subsection{Risks of Fixed Income Investment}
+
+Fixed income risk is driven by changes in the yield curve and issuer creditworthiness:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Macaulay Duration ($D$):} The weighted average maturity of the bond's cash flows, where the weights are the present values of each cash flow:
+    \begin{equation}
+    D = \frac{1}{P} \sum_{t=1}^n \frac{t \cdot C_t}{(1 + y)^t}
+    \end{equation}
+    \item \textbf{Modified Duration ($D^*$):} Measures the percentage price sensitivity with respect to a change in yield:
+    \begin{equation}
+    D^* = \frac{D}{1 + y} = -\frac{1}{P} \diff{P}{y}
+    \end{equation}
+    \item \textbf{Convexity ($C$):} The second derivative of price with respect to yield, capturing curvature:
+    \begin{equation}
+    C = \frac{1}{P} \frac{\dd^2 P}{\dd y^2} = \frac{1}{P (1 + y)^2} \sum_{t=1}^n \frac{(t^2 + t) C_t}{(1 + y)^t}
+    \end{equation}
+    \item \textbf{Second-Order Price Approximation:} Combining modified duration and convexity:
+    \begin{equation}
+    \frac{\Delta P}{P} \approx -D^* \Delta y + \frac{1}{2} C (\Delta y)^2
+    \end{equation}
+    \item \textbf{DV01 (Dollar Value of an 01 / PVBP):} The absolute monetary loss resulting from a 1 basis point ($0.01\% = 0.0001$) increase in yield:
+    \begin{equation}
+    \DV = D^* \times P \times 0.0001
+    \end{equation}
+\end{itemize}
+
+\begin{example}{Bond Duration, Convexity, and RBI Repo Rate Shock}{bond_duration}
+A commercial bank's treasury holds an Indian Government Bond (G-Sec) portfolio with a total market value of \inr 100 Crores (\inr 1,00,00,00,000). The portfolio has a weighted modified duration of $D^* = 6.40$ years and a convexity of $C = 58.0 \text{ years}^2$.
+
+The Reserve Bank of India (RBI) unexpectedly hikes the policy repo rate by $75 \text{ bps}$ ($\Delta y = +0.0075$).
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Compute the portfolio $\DV$.
+    \item Estimate the percentage and total rupee value change using first-order duration alone.
+    \item Refine the calculation incorporating the second-order convexity correction.
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{DV01 Calculation:}
+    \[
+    \DV = D^* \times P \times 0.0001 = 6.40 \times \inr 1,00,00,00,000 \times 0.0001 = \inr 6,40,000 \text{ per basis point}
+    \]
+    \item \textbf{First-Order Duration Approximation ($\Delta y = +75 \text{ bps}$):}
+    \[
+    \frac{\Delta P}{P} \approx -D^* \Delta y = -6.40 \times 0.0075 = -0.0480 \quad (-4.80\%)
+    \]
+    \[
+    \Delta P = \inr 100 \text{ Cr} \times (-0.0480) = -\inr 4.80 \text{ Crores}
+    \]
+    \item \textbf{Second-Order Convexity Refinement:}
+    \[
+    \text{Convexity Adjustment} = \frac{1}{2} C (\Delta y)^2 = \frac{1}{2} \times 58.0 \times (0.0075)^2 = 0.5 \times 58.0 \times 0.00005625 = +0.001631 \quad (+0.1631\%)
+    \]
+    \[
+    \frac{\Delta P_{\text{total}}}{P} \approx -4.80\% + 0.1631\% = -4.6369\%
+    \]
+    \[
+    \Delta P_{\text{refined}} = \inr 100 \text{ Cr} \times (-0.046369) = -\inr 4.6369 \text{ Crores}
+    \]
+    The positive convexity softens the portfolio loss by $\approx \inr 16.31 \text{ Lakhs}$.
+\end{enumerate}
+\end{example}
+
+\subsection{Risks of Currency Investment}
+
+Multinational corporations and foreign investors face foreign exchange (FX) volatility driven by interest rate differentials, inflation, and cross-border trade balances:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Transaction Risk:} The risk of exchange rate fluctuations between entering into a cross-border contract and settling the cash flows.
+    \item \textbf{Translation Risk:} Accounting gains or losses when consolidating financial statements of foreign subsidiaries into the domestic reporting currency.
+    \item \textbf{Economic (Operating) Risk:} The structural impact of permanent currency depreciations or appreciations on a firm's long-term export competitiveness, supply chain costs, and future cash flows.
+    \item \textbf{Covered Interest Parity (CIP):} Prevents arbitrage between spot and forward currency markets:
+    \begin{equation}
+    F = S \times \frac{1 + r_d}{1 + r_f}
+    \end{equation}
+    where $S$ is the spot rate ($\text{Domestic}/\text{Foreign}$), $F$ is the forward rate, $r_d$ is the domestic risk-free rate, and $r_f$ is the foreign risk-free rate.
+\end{itemize}
+
+\begin{example}{Covered Interest Parity and FX Forward Hedging}{cip_hedging}
+An Indian IT services firm expects to receive an export receivable of $\text{USD } 10,000,000$ in 6 months ($T = 0.5$ years).
+\begin{itemize}[leftmargin=1.5em, noitemsep]
+    \item Current Spot Rate ($S_0$): \inr 83.50 per USD
+    \item Indian 6-month risk-free rate ($r_{\text{INR}}$): $6.50\%$ p.a.
+    \item US 6-month risk-free rate ($r_{\text{USD}}$): $5.00\%$ p.a.
+\end{itemize}
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Compute the theoretical 6-month forward rate $F_{0, 0.5}$ under Covered Interest Parity.
+    \item Determine the locked-in rupee cash flow if the firm executes a forward contract to eliminate currency risk.
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Theoretical Forward Rate (CIP):}
+    \[
+    F = S_0 \times \left[\frac{1 + r_{\text{INR}} \times 0.5}{1 + r_{\text{USD}} \times 0.5}\right] = 83.50 \times \left[\frac{1 + (0.065 \times 0.5)}{1 + (0.050 \times 0.5)}\right] = 83.50 \times \left[\frac{1.0325}{1.0250}\right]
+    \]
+    \[
+    F = 83.50 \times 1.007317 = \inr 84.1109 \text{ per USD}
+    \]
+    \item \textbf{Forward Hedge Rupee Realization:}
+    \[
+    \text{Rupee Cash Flow} = \text{USD } 10,000,000 \times \inr 84.1109 = \inr 84,11,09,000 \quad (\inr 84.11 \text{ Crores})
+    \]
+    By locking in the forward contract, the exporter fully eliminates the downside risk of USD depreciation against the Indian Rupee over the 6-month interval.
+\end{enumerate}
+\end{example}
+
+% ------------------------------------------------------------------------------
+\section{Market Risk Measurement Framework}
+% ------------------------------------------------------------------------------
+
+Systematic market risk measurement requires aggregate risk metrics that translate multidimensional market exposures into a single, actionable capital reserve figure. The evolution of market risk measurement spans three eras:
+\begin{enumerate}[leftmargin=1.5em, itemsep=3pt]
+    \item \textbf{Sensitivity Metrics (The Greeks, Beta, Duration):} Measures first- and second-order price changes with respect to isolated risk factors ($\Delta, \Gamma, \mathcal{V}, D^*, \beta$). While computationally transparent, they cannot be directly aggregated across asset classes (e.g., adding bond duration to option gamma).
+    \item \textbf{Value at Risk (VaR):} Introduced in the mid-1990s (J.P. Morgan RiskMetrics), VaR unified portfolio risk into a single statistical currency loss metric at a specified confidence level over a defined holding period.
+    \item \textbf{Coherent Risk Measures \& Expected Shortfall (ES):} Developed to overcome the mathematical deficiencies of VaR (specifically its failure to satisfy subadditivity and its tail blindness beyond the confidence percentile), leading to the Basel Committee's Fundamental Review of the Trading Book (FRTB) reforms.
+\end{enumerate}

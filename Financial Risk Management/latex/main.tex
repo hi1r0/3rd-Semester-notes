@@ -1,0 +1,39 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% Input Preamble Configurations
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. University Title / Cover Page
+% ------------------------------------------------------------------------------
+\input{preamble/titlepage.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Official Course Syllabus & CO-PO Mapping
+% ------------------------------------------------------------------------------
+\pagenumbering{roman}
+\input{preamble/syllabus.tex}
+
+% ------------------------------------------------------------------------------
+% 3. Table of Contents
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% 4. Course Chapters (Continuous Notes Flow)
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\input{chapters/ch01_introduction_to_risk_management.tex}
+\input{chapters/ch02_var_methods_and_hedging.tex}
+
+% ------------------------------------------------------------------------------
+% 5. Comprehensive Multi-Chapter Formula Reference Section
+% ------------------------------------------------------------------------------
+\input{chapters/formula_reference.tex}
+
+\end{document}

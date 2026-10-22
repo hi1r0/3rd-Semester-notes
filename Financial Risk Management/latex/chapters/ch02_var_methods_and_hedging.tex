@@ -1,0 +1,705 @@
+% ==============================================================================
+% Chapter 2: Value at Risk (VaR) Methods and Hedging (Unit II)
+% MSQF 533: Financial Risk Management
+% ==============================================================================
+
+\chapter{Value at Risk (VaR) Methods and Hedging}
+\lecturedate{21/08/2026}
+
+While sensitivity metrics (such as duration, convexity, and the option Greeks) capture localized price responses to isolated market factors, institutional portfolio managers require a unified statistical framework to quantify aggregate downside exposure. This chapter examines the theoretical foundations, computational methodologies, and practical applications of \textbf{Value at Risk (VaR)} and \textbf{Expected Shortfall (ES)}, followed by linear and non-linear risk hedging strategies.
+
+% ------------------------------------------------------------------------------
+\section{Overview of Value at Risk (VaR)}
+% ------------------------------------------------------------------------------
+
+\begin{definition}{Value at Risk (VaR)}{var_def}
+For a given portfolio, time horizon $T$, and confidence level $\alpha \in (0, 1)$, the \textbf{Value at Risk} ($\VaR_\alpha$) represents the maximum expected loss that will not be exceeded with probability $\alpha$ over the horizon $T$.
+
+Formally, letting $L = -\Delta \Pi$ denote the loss variable (where $\Delta \Pi = \Pi_T - \Pi_0$ is the change in portfolio value), $\VaR_\alpha$ is the $(1-\alpha)$ upper quantile of the loss distribution:
+\begin{equation}
+\Prob(L > \VaR_\alpha) = 1 - \alpha \quad \iff \quad \Prob(\Delta \Pi \le -\VaR_\alpha) = 1 - \alpha
+\end{equation}
+Equivalently, in terms of the cumulative distribution function (CDF) of portfolio returns $F_R(r)$:
+\begin{equation}
+\VaR_\alpha = - V_0 \cdot F_R^{-1}(1 - \alpha)
+\end{equation}
+where $V_0$ is the current portfolio market value.
+\end{definition}
+
+In banking and trading desk operations, typical parameters are:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Internal Risk Management:} $\alpha = 95\%$ or $99\%$ over a 1-day holding period ($T = 1$).
+    \item \textbf{Basel Regulatory Market Risk Capital:} $\alpha = 99\%$ over a 10-day holding period ($T = 10$).
+    \item \textbf{Credit / Economic Capital:} $\alpha = 99.9\%$ over a 1-year horizon ($T = 252$).
+\end{itemize}
+
+\subsection{Time Horizon Scaling: The Square-Root-of-Time Rule}
+
+Under the assumption that daily portfolio returns are independent and identically distributed (i.i.d.) normal random variables with constant mean and volatility, the $T$-day volatility scales as $\sigma_T = \sigma_1 \sqrt{T}$. Consequently, the $T$-day VaR scales according to:
+\begin{equation}
+\VaR_{\alpha, T} = \VaR_{\alpha, 1} \times \sqrt{T}
+\end{equation}
+
+\begin{remarkbox}[Limitations of the $\sqrt{T}$ Scaling Rule]
+The square-root-of-time rule strictly requires:
+\begin{enumerate*}[label=(\roman*)]
+    \item zero serial autocorrelation in returns, and
+    \item stability of the underlying distribution.
+\end{enumerate*}
+When returns exhibit volatility clustering (GARCH effects) or mean reversion, the $\sqrt{T}$ rule either understates or overstates long-horizon risk.
+\end{remarkbox}
+
+\subsection{Deficiencies of VaR and Coherent Risk Measures}
+
+Despite its widespread regulatory adoption, VaR suffers from two mathematical and practical limitations:
+\begin{enumerate}[leftmargin=1.5em, itemsep=3pt]
+    \item \textbf{Non-Subadditivity:} A risk measure $\rho(\cdot)$ is subadditive if $\rho(A + B) \le \rho(A) + \rho(B)$, reflecting the principle that diversification reduces risk. For non-normal return distributions (e.g., portfolios with short option positions or credit default risk), VaR can violate subadditivity:
+    \begin{equation}
+    \VaR_\alpha(A + B) > \VaR_\alpha(A) + \VaR_\alpha(B)
+    \end{equation}
+    Consequently, VaR is \textbf{not} a coherent risk measure in the axiomatic sense of Artzner, Delbaen, Eber, and Heath (1999).
+    \item \textbf{Tail Blindness:} VaR only defines the boundary quantile threshold. It reveals nothing about the magnitude or severity of losses in the catastrophic $(1-\alpha)$ tail beyond the cutoff.
+\end{enumerate}
+
+\subsection{Expected Shortfall (ES / Conditional VaR)}
+
+To remedy these deficiencies, the Basel III framework (under the Fundamental Review of the Trading Book - FRTB) replaced the $99\%$ 10-day VaR with the $97.5\%$ Expected Shortfall.
+
+\begin{definition}{Expected Shortfall (Conditional VaR)}{expected_shortfall}
+The \textbf{Expected Shortfall} ($\ES_\alpha$) at confidence level $\alpha$ is the conditional expectation of loss given that the loss exceeds $\VaR_\alpha$:
+\begin{equation}
+\ES_\alpha = \E\left[L \;\middle|\; L \ge \VaR_\alpha\right] = \frac{1}{1 - \alpha} \int_{\alpha}^{1} \VaR_u \, \dd u
+\end{equation}
+For a continuous distribution with loss probability density function $f_L(x)$:
+\begin{equation}
+\ES_\alpha = \frac{1}{1 - \alpha} \int_{\VaR_\alpha}^{\infty} x \cdot f_L(x) \, \dd x
+\end{equation}
+$\ES_\alpha$ is subadditive, convex, and coherent under all underlying return distributions.
+\end{definition}
+
+\vspace{0.3cm}
+% TikZ Figure 2.1: VaR and Expected Shortfall Tail Cutoff
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        no markers,
+        domain=-4:4,
+        samples=200,
+        axis lines=left,
+        xlabel={Portfolio P\&L ($\Delta \Pi$)},
+        ylabel={Probability Density $f(\Delta \Pi)$},
+        every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+        every axis y label/.style={at={(current axis.above origin)},anchor=south},
+        height=6.2cm,
+        width=13.0cm,
+        xtick={-2.326, 0},
+        xticklabels={$-\VaR_{99\%}$, $0$},
+        ytick=\empty,
+        enlargelimits=false,
+        clip=false
+    ]
+        % Normal distribution curve
+        \addplot [thick, navyblue, line width=1.5pt] {exp(-x^2/2) / sqrt(2*pi)};
+
+        % Shaded 99% Tail Region
+        \addplot [domain=-4:-2.326, fill=crimson!25, draw=none] {exp(-x^2/2) / sqrt(2*pi)} \closedcycle;
+
+        % VaR vertical threshold line
+        \draw [dashed, line width=1.3pt, crimson] (axis cs:-2.326, 0) -- (axis cs:-2.326, 0.35);
+
+        % Annotations
+        \node [above right, font=\bfseries\sffamily\footnotesize, color=navyblue] at (axis cs:0.2, 0.32) {Confidence Region $(1-\alpha) = 99\%$};
+        
+        \node [above left, font=\bfseries\sffamily\footnotesize, color=crimson, align=center] at (axis cs:-2.326, 0.36) {
+            $\VaR_{99\%}$ Cutoff Threshold\\$\Prob(\Delta \Pi \le -\VaR) = 1\%$
+        };
+
+        \draw [line width=1.2pt, crimson, -{Stealth[length=2.5mm]}] (axis cs:-3.2, 0.12) -- (axis cs:-2.8, 0.02);
+        \node [above left, font=\bfseries\sffamily\scriptsize, color=crimson, align=center] at (axis cs:-3.0, 0.12) {
+            Catastrophic Tail\\Expected Shortfall ($\ES_{99\%}$)\\Mean of Shaded Tail Loss
+        };
+    \end{axis}
+\end{tikzpicture}
+\caption{Portfolio Return Distribution: $\VaR_\alpha$ Threshold and Shaded Expected Shortfall Tail.}
+\label{fig:var_distribution}
+\end{figure}
+
+\begin{example}{VaR Horizon Scaling and Confidence Level Conversion}{var_scaling}
+A proprietary equity trading desk at an Indian investment bank manages a \inr 20,00,00,000 (\inr 20 Crores) portfolio tracking the BSE Sensex. The estimated daily return standard deviation is $\sigma_{\text{daily}} = 1.25\%$. Assume daily returns are normally distributed with zero mean ($\mu = 0$).
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Compute the 1-day $95\%$ VaR ($z_{0.95} = 1.645$) and 1-day $99\%$ VaR ($z_{0.99} = 2.326$).
+    \item Compute the 10-day $99\%$ regulatory capital VaR using the square-root-of-time rule.
+    \item For a standard normal distribution, $\ES_{99\%} = \frac{\phi(z_{0.99})}{1 - 0.99} \sigma = \frac{\phi(2.326)}{0.01} \sigma \approx 2.665 \times \sigma$. Calculate the 1-day $99\%$ Expected Shortfall.
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{1-Day VaR Calculation:}
+    \[
+    \VaR_{95\%, 1\text{-day}} = V_0 \times z_{0.95} \times \sigma_{\text{daily}} = \inr 20,00,00,000 \times 1.645 \times 0.0125 = \inr 41,12,500 \quad (\approx \inr 41.13 \text{ Lakhs})
+    \]
+    \[
+    \VaR_{99\%, 1\text{-day}} = V_0 \times z_{0.99} \times \sigma_{\text{daily}} = \inr 20,00,00,000 \times 2.326 \times 0.0125 = \inr 58,15,000 \quad (\approx \inr 58.15 \text{ Lakhs})
+    \]
+    \item \textbf{10-Day 99\% Regulatory VaR:}
+    \[
+    \VaR_{99\%, 10\text{-day}} = \VaR_{99\%, 1\text{-day}} \times \sqrt{10} = \inr 58,15,000 \times 3.162278 = \inr 1,83,88,645 \quad (\approx \inr 1.84 \text{ Crores})
+    \]
+    \item \textbf{1-Day 99\% Expected Shortfall:}
+    \[
+    \ES_{99\%, 1\text{-day}} = V_0 \times 2.665 \times \sigma_{\text{daily}} = \inr 20,00,00,000 \times 2.665 \times 0.0125 = \inr 66,62,500 \quad (\approx \inr 66.63 \text{ Lakhs})
+    \]
+    When losses breach the $99\%$ threshold of \inr 58.15 Lakhs, the conditional average loss is \inr 66.63 Lakhs.
+\end{enumerate}
+\end{example}
+
+% ------------------------------------------------------------------------------
+\section{VaR Estimation Methodologies}
+% ------------------------------------------------------------------------------
+
+VaR estimation approaches are fundamentally bifurcated into \textbf{Local Valuation} and \textbf{Full Valuation} paradigms.
+
+\vspace{0.3cm}
+% TikZ Figure 2.2: VaR Valuation Methodologies Flowchart
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \tikzset{
+        nodebox/.style={
+            draw=navyblue,
+            fill=lightgraybg,
+            line width=1.2pt,
+            rounded corners=2mm,
+            text width=3.8cm,
+            minimum height=1.3cm,
+            align=center,
+            font=\bfseries\sffamily\footnotesize
+        },
+        banner/.style={
+            draw=navyblue,
+            fill=navyblue,
+            text=white,
+            line width=1.4pt,
+            rounded corners=2mm,
+            text width=7.5cm,
+            minimum height=1.2cm,
+            align=center,
+            font=\bfseries\sffamily\small
+        },
+        methodcard/.style={
+            draw=navyblue,
+            fill=white,
+            line width=1.1pt,
+            rounded corners=2mm,
+            text width=3.9cm,
+            minimum height=4.2cm,
+            inner sep=2.5mm,
+            align=left
+        },
+        cardhead/.style={
+            font=\bfseries\sffamily\scriptsize,
+            text=white,
+            align=center,
+            rounded corners=1.2mm,
+            inner sep=1.5mm,
+            text width=3.5cm
+        },
+        flowarrow/.style={
+            line width=1.3pt,
+            navyblue,
+            -{Stealth[length=3mm, width=2.0mm]}
+        }
+    }
+
+    % Root Node
+    \node[banner] (root) at (0,0) {Portfolio Positions \& Risk Factors ($\mathbf{w}, \mathbf{S}$)};
+
+    % Intermediate Branching Nodes (Clearance = 0.8cm)
+    \node[nodebox, fill=softblue!60, below left=0.8cm and 1.8cm of root.south] (local) {
+        Local Valuation\\(Linear Taylor Approx.)
+    };
+    \node[nodebox, fill=softgreen!60, below right=0.8cm and 1.8cm of root.south] (full) {
+        Full Valuation\\(Complete Repricing)
+    };
+
+    % Connectors from Root
+    \draw[flowarrow] (root.south -| local.north) -- (local.north);
+    \draw[flowarrow] (root.south -| full.north) -- (full.north);
+
+    % Three Leaf Method Cards (Uniform geometry: 3.9cm width, 4.2cm height, 0.8cm clearance)
+    \node[methodcard, below=0.8cm of local] (m1) {
+        \begin{tikzpicture}[baseline=(h1.base)]
+            \node[cardhead, fill=navyblue] (h1) {1. Delta-Normal};
+        \end{tikzpicture}\\[0.2cm]
+        \scriptsize
+        \textbf{Type:} Parametric.\\
+        \textbf{Inputs:} Volatilities ($\boldsymbol{\sigma}$) and correlation matrix ($\boldsymbol{\rho}$).\\
+        \textbf{Pros:} Analytical closed-form, instantaneous computation.\\
+        \textbf{Cons:} Normality assumption fails; poor for options with gamma.
+    };
+
+    \node[methodcard, below left=0.8cm and -0.8cm of full.south] (m2) {
+        \begin{tikzpicture}[baseline=(h2.base)]
+            \node[cardhead, fill=darkteal] (h2) {2. Historical Simulation};
+        \end{tikzpicture}\\[0.2cm]
+        \scriptsize
+        \textbf{Type:} Non-Parametric.\\
+        \textbf{Inputs:} Historical P\&L scenarios over last $N$ days.\\
+        \textbf{Pros:} Preserves fat tails, no distributional assumption.\\
+        \textbf{Cons:} Backward-looking, sensitive to sample period, ghost effects.
+    };
+
+    \node[methodcard, right=0.8cm of m2] (m3) {
+        \begin{tikzpicture}[baseline=(h3.base)]
+            \node[cardhead, fill=amber] (h3) {3. Monte Carlo};
+        \end{tikzpicture}\\[0.2cm]
+        \scriptsize
+        \textbf{Type:} Stochastic Simulation.\\
+        \textbf{Inputs:} Stochastic differential equations \& Cholesky $\mathbf{L}\mathbf{L}^T$.\\
+        \textbf{Pros:} Captures path dependency \& extreme complex options.\\
+        \textbf{Cons:} Severe computational burden, model risk.
+    };
+
+    % Connectors from Local and Full to Methods
+    \draw[flowarrow] (local.south) -- (m1.north);
+    \draw[flowarrow] (full.south) -- (m2.north);
+    \draw[flowarrow] (full.south -| m3.north) -- (m3.north);
+\end{tikzpicture}
+\caption{VaR Estimation Methodologies Architecture (Rule 4 Clearance and Symmetry Standards).}
+\label{fig:var_pipeline}
+\end{figure}
+
+\subsection{1. Delta-Normal (Parametric / Variance-Covariance) Method}
+
+The Delta-Normal approach assumes that the underlying risk factors follow a multivariate normal distribution. For an $n$-asset linear portfolio with value $V_0$, weight vector $\mathbf{w} = (w_1, w_2, \dots, w_n)^T$, and variance-covariance matrix $\boldsymbol{\Sigma}$:
+\begin{equation}
+\sigma_P^2 = \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w} = \sum_{i=1}^n \sum_{j=1}^n w_i w_j \sigma_{ij} = \sum_{i=1}^n w_i^2 \sigma_i^2 + 2 \sum_{i=1}^n \sum_{j < i} w_i w_j \rho_{ij} \sigma_i \sigma_j
+\end{equation}
+The parametric VaR is:
+\begin{equation}
+\VaR_\alpha = z_\alpha \cdot \sigma_P \cdot V_0
+\end{equation}
+where $z_\alpha$ is the standard normal critical value ($z_{0.95} = 1.645$, $z_{0.99} = 2.326$).
+
+\begin{example}{Two-Asset Portfolio Parametric VaR and Diversification Benefit}{two_asset_var}
+An asset management firm holds a two-asset portfolio valued at \inr 10,00,00,000 (\inr 10 Crores):
+\begin{itemize}[leftmargin=1.5em, noitemsep]
+    \item Asset 1: Large-cap Equity ETF ($w_1 = 0.60$, $V_1 = \inr 6 \text{ Cr}$), Daily $\sigma_1 = 1.40\%$
+    \item Asset 2: Long-Term G-Sec Bond ETF ($w_2 = 0.40$, $V_2 = \inr 4 \text{ Cr}$), Daily $\sigma_2 = 0.60\%$
+    \item Correlation Coefficient: $\rho_{12} = -0.20$
+\end{itemize}
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Calculate the individual 1-day 99\% VaR of Asset 1 and Asset 2 independently.
+    \item Calculate the diversified portfolio daily volatility $\sigma_P$ and diversified 1-day 99\% VaR ($z_{0.99} = 2.326$).
+    \item Quantify the diversification benefit (\inr savings).
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Individual VaR Figures:}
+    \[
+    \VaR_{1} = 2.326 \times 0.0140 \times \inr 6,00,00,000 = \inr 19,53,840 \quad (\approx \inr 19.54 \text{ Lakhs})
+    \]
+    \[
+    \VaR_{2} = 2.326 \times 0.0060 \times \inr 4,00,00,000 = \inr 5,58,240 \quad (\approx \inr 5.58 \text{ Lakhs})
+    \]
+    \[
+    \text{Undiversified Total VaR} = \VaR_1 + \VaR_2 = 19,53,840 + 5,58,240 = \inr 25,12,080 \quad (\inr 25.12 \text{ Lakhs})
+    \]
+    \item \textbf{Portfolio Volatility $\sigma_P$:}
+    \begin{align*}
+    \sigma_P^2 &= w_1^2 \sigma_1^2 + w_2^2 \sigma_2^2 + 2 w_1 w_2 \rho_{12} \sigma_1 \sigma_2 \\
+    &= (0.6)^2(0.014)^2 + (0.4)^2(0.006)^2 + 2(0.6)(0.4)(-0.20)(0.014)(0.006) \\
+    &= (0.36)(0.000196) + (0.16)(0.000036) - 0.096(0.000084) \\
+    &= 0.00007056 + 0.00000576 - 0.000008064 = 0.000068256 \\
+    \sigma_P &= \sqrt{0.000068256} = 0.0082617 \quad (0.8262\%)
+    \end{align*}
+    \[
+    \VaR_{\text{diversified}} = 2.326 \times \sigma_P \times V_0 = 2.326 \times 0.0082617 \times \inr 10,00,00,000 = \inr 19,21,672 \quad (\approx \inr 19.22 \text{ Lakhs})
+    \]
+    \item \textbf{Diversification Benefit:}
+    \[
+    \text{Benefit} = \text{Undiversified VaR} - \text{Diversified VaR} = \inr 25,12,080 - \inr 19,21,672 = \inr 5,90,408 \quad (\approx \inr 5.90 \text{ Lakhs})
+    \]
+    Negative correlation ($\rho = -0.20$) generates a $23.5\%$ risk reduction.
+\end{enumerate}
+\end{example}
+
+\subsection{2. Historical Simulation Method}
+
+Historical Simulation is a non-parametric full-valuation technique. Given $M$ historical trading days:
+\begin{enumerate}[leftmargin=1.5em, itemsep=3pt]
+    \item Identify current market risk factor prices $\mathbf{S}_0 = (S_{1,0}, S_{2,0}, \dots, S_{k,0})$.
+    \item Collect past daily returns $\mathbf{r}_t$ for $t = 1, 2, \dots, M$.
+    \item Generate $M$ hypothetical scenario prices: $S_{i,t}^* = S_{i,0} \times (1 + r_{i,t})$.
+    \item Fully revalue the portfolio under each scenario: $\Pi_t^* = V(\mathbf{S}_t^*)$.
+    \item Compute simulated P\&L values: $\Delta \Pi_t = \Pi_t^* - \Pi_0$.
+    \item Sort the P\&L array from most severe loss to largest gain: $\Delta \Pi_{(1)} \le \Delta \Pi_{(2)} \le \dots \le \Delta \Pi_{(M)}$.
+    \item The $\alpha$-confidence VaR is the $(1 - \alpha) \times M$-th worst loss.
+\end{enumerate}
+
+\begin{example}{Historical Simulation Quantile Extraction}{hist_sim}
+A risk manager uses $M = 500$ daily historical return scenarios to compute the 1-day $99\%$ VaR for an option portfolio.
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Identify which ranked observation index corresponds to the $99\%$ VaR.
+    \item Given the 8 worst simulated P\&L results (\inr):
+    \begin{center}
+    \small
+    \begin{tabular}{lcccccccc}
+    \toprule
+    \textbf{Rank ($k$)} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+    \midrule
+    \textbf{P\&L (\inr)} & $-18.5 \text{ L}$ & $-15.2 \text{ L}$ & $-13.8 \text{ L}$ & $-12.4 \text{ L}$ & $-11.5 \text{ L}$ & $-10.9 \text{ L}$ & $-9.8 \text{ L}$ & $-9.2 \text{ L}$ \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    Determine the $99\%$ 1-day VaR and the empirical Expected Shortfall $\ES_{99\%}$.
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Quantile Observation Index:}
+    \[
+    k = (1 - \alpha) \times M = (1 - 0.99) \times 500 = 5
+    \]
+    The 5th worst loss defines the $99\%$ VaR threshold.
+    \item \textbf{Empirical VaR:}
+    \[
+    \VaR_{99\%} = -\Delta \Pi_{(5)} = \inr 11,50,000 \quad (\inr 11.50 \text{ Lakhs})
+    \]
+    \item \textbf{Empirical Expected Shortfall ($\ES_{99\%}$):}
+    The arithmetic mean of all losses equal to or exceeding the 5th worst loss (Ranks 1 to 5):
+    \[
+    \ES_{99\%} = \frac{1}{5} \sum_{k=1}^5 (-\Delta \Pi_{(k)}) = \frac{18.5 + 15.2 + 13.8 + 12.4 + 11.5}{5} = \frac{71.4}{5} = \inr 14,28,000 \quad (\inr 14.28 \text{ Lakhs})
+    \]
+\end{enumerate}
+\end{example}
+
+\subsection{3. Monte Carlo Simulation Method}
+
+Monte Carlo simulation models future market evolutions by generating thousands of pseudo-random sample paths based on continuous-time stochastic processes. For $k$ correlated risk factors driven by Geometric Brownian Motion:
+\begin{equation}
+\dd S_{i,t} = \mu_i S_{i,t} \, \dd t + \sigma_i S_{i,t} \, \dd W_{i,t}
+\end{equation}
+where $\E[\dd W_{i,t} \dd W_{j,t}] = \rho_{ij} \dd t$.
+
+To simulate correlated Wiener increments, the covariance matrix $\boldsymbol{\Sigma}$ is factored via \textbf{Cholesky decomposition}:
+\begin{equation}
+\boldsymbol{\Sigma} = \mathbf{L} \mathbf{L}^T
+\end{equation}
+where $\mathbf{L}$ is a lower triangular matrix. Given independent standard normal variates $\mathbf{Z} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$, correlated shocks are generated as:
+\begin{equation}
+\boldsymbol{\epsilon} = \mathbf{L} \mathbf{Z}
+\end{equation}
+Each path produces terminal prices $\mathbf{S}_T^{(j)}$, the portfolio is fully repriced, and VaR is extracted from the simulated empirical distribution.
+
+\subsection{Methodological Comparison Matrix}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lXXX}
+\toprule
+\textbf{Evaluation Dimension} & \textbf{Delta-Normal (Parametric)} & \textbf{Historical Simulation} & \textbf{Monte Carlo Simulation} \\
+\midrule
+\textbf{Valuation Paradigm}   & Local Valuation (Linear)          & Full Valuation (Exact)         & Full Valuation (Exact) \\
+\textbf{Distributional Bias}  & Assumes Multivariate Normal       & Empirical (Distribution-Free)  & Explicit Stochastic Model \\
+\textbf{Non-Linear Options}   & Inaccurate (Ignores Gamma)        & Accurate                       & Highly Accurate \\
+\textbf{Fat-Tail Capture}     & Poor                              & Excellent                      & Depends on Specified SDE \\
+\textbf{Computational Cost}   & Negligible (Analytical closed)    & Moderate                       & Very High (CPU/GPU Heavy) \\
+\textbf{Primary Vulnerability}& Model risk (Normality failure)    & Ghost features \& past bias    & Model calibration risk \\
+\bottomrule
+\end{tabularx}
+\caption{Comparative Synthesis of Value at Risk Estimation Methodologies.}
+\label{tab:var_method_comparison}
+\end{table}
+
+% ------------------------------------------------------------------------------
+\section{Stress Testing and Scenario Analysis}
+% ------------------------------------------------------------------------------
+
+Because VaR calibrates to ``normal'' market fluctuations, regulatory standards require institutions to execute comprehensive stress testing programs to evaluate solvency during extreme systemic shocks:
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item \textbf{Historical Scenario Testing:} Simulates the exact risk factor price trajectories observed during historical crises:
+    \begin{itemize}
+        \item \textit{1987 Black Monday:} S\&P 500 plunged $22.6\%$ in a single day.
+        \item \textit{1998 Russian Default / LTCM Collapse:} Sovereign default and extreme flight-to-liquidity.
+        \item \textit{2008 Global Financial Crisis:} Lehman bankruptcy, interbank liquidity freeze, credit spread blowout.
+        \item \textit{March 2020 COVID Shock:} Global equities collapsed $35\%$; oil traded briefly at negative prices.
+    \end{itemize}
+    \item \textbf{Hypothetical Scenario Testing:} Simulates forward-looking structural breaks without historical precedent (e.g., severe emerging market sovereign debt default, major cyber disruption of global payments, regional military escalations).
+    \item \textbf{Reverse Stress Testing:} Identifies specific combinations of adverse market shocks that would completely exhaust an institution's regulatory capital buffer, causing failure.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Hedging Strategies: Linear Risk}
+% ------------------------------------------------------------------------------
+
+Hedging linear risk involves utilizing futures, forwards, or swaps whose payoff is a linear function of the underlying asset price.
+
+\subsection{Basis Risk in Futures Hedging}
+
+Let $S_1, F_1$ denote spot and futures prices at hedge inception ($t_1$), and $S_2, F_2$ denote prices at hedge termination ($t_2$). The \textbf{basis} at any time $t$ is defined as:
+\begin{equation}
+b_t = S_t - F_t
+\end{equation}
+For a short hedger (holding long spot asset and selling futures), the effective price realized per unit at $t_2$ is:
+\begin{equation}
+P_{\text{eff}} = S_2 + (F_1 - F_2) = F_1 + (S_2 - F_2) = F_1 + b_2
+\end{equation}
+If basis $b_2 = S_2 - F_2$ is known with certainty at inception (e.g., when closing at contract maturity where $b_T = 0$), the hedge is perfect. If $b_2$ fluctuates unpredictably, the hedger faces \textbf{basis risk}.
+
+\subsection{Optimal Hedging and Minimum-Variance Hedge Ratio}
+
+Let $h$ denote the hedge ratio (units of futures per unit of spot asset). The change in the value of the hedged portfolio $\Delta \Pi$ over time interval $\Delta t$ is:
+\begin{equation}
+\Delta \Pi = \Delta S - h \, \Delta F
+\end{equation}
+The variance of the hedged position is:
+\begin{equation}
+\Var(\Delta \Pi) = \sigma_S^2 + h^2 \sigma_F^2 - 2 h \Cov(\Delta S, \Delta F)
+\end{equation}
+To determine the \textbf{minimum-variance hedge ratio} $h^*$, take the first derivative with respect to $h$ and set it to zero:
+\begin{equation}
+\diff{\Var(\Delta \Pi)}{h} = 2 h \sigma_F^2 - 2 \Cov(\Delta S, \Delta F) = 0
+\end{equation}
+Solving for $h^*$ yields:
+\begin{equation}
+h^* = \frac{\Cov(\Delta S, \Delta F)}{\sigma_F^2} = \rho_{SF} \frac{\sigma_S}{\sigma_F}
+\end{equation}
+
+\vspace{0.3cm}
+% TikZ Figure 2.3: OLS Minimum Variance Regression Slope
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={Futures Price Change ($\Delta F$)},
+        ylabel={Spot Price Change ($\Delta S$)},
+        every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+        every axis y label/.style={at={(current axis.above origin)},anchor=south},
+        height=6.2cm,
+        width=11.5cm,
+        xmin=-3, xmax=3,
+        ymin=-2.5, ymax=2.5,
+        ticks=none,
+        enlargelimits=false
+    ]
+        % Scatter points
+        \addplot[only marks, mark=*, mark size=2pt, color=navyblue!60] coordinates {
+            (-2.2,-1.8) (-1.8,-1.2) (-1.5,-1.4) (-1.1,-0.7) (-0.8,-0.9)
+            (-0.4,-0.2) (-0.1,-0.3) (0.2,0.1) (0.5,0.6) (0.9,0.5)
+            (1.2,1.1) (1.6,1.2) (1.9,1.7) (2.3,1.6) (2.6,2.2)
+        };
+
+        % OLS Best-fit line
+        \addplot[thick, crimson, line width=1.6pt, domain=-2.8:2.8] {0.80*x};
+
+        % Regression Equation Annotation
+        \node[above left, font=\bfseries\sffamily\small, color=crimson] at (axis cs:2.2, 1.8) {
+            Regression Line: $\Delta S = \alpha + h^* \Delta F + \epsilon$
+        };
+        \node[below right, font=\bfseries\sffamily\footnotesize, color=navyblue] at (axis cs:0.5, 0.2) {
+            Slope $h^* = \rho \frac{\sigma_S}{\sigma_F}$
+        };
+        \node[above right, font=\sffamily\footnotesize, color=darkteal] at (axis cs:-2.8, 1.8) {
+            Hedging Effectiveness $R^2 = \rho^2$
+        };
+    \end{axis}
+\end{tikzpicture}
+\caption{Ordinary Least Squares (OLS) Minimum-Variance Hedge Ratio Regression Diagram.}
+\label{fig:ols_hedge_ratio}
+\end{figure}
+
+\begin{conceptbox}[Hedge Ratio as an OLS Regression Coefficient]
+The optimal hedge ratio $h^*$ is mathematically identical to the Ordinary Least Squares (OLS) regression slope coefficient obtained by regressing historical changes in spot prices ($\Delta S$) on changes in futures prices ($\Delta F$):
+\begin{equation}
+\Delta S_t = \alpha + h^* \Delta F_t + \epsilon_t
+\end{equation}
+The proportion of risk eliminated by the optimal hedge is measured by the coefficient of determination $R^2$:
+\begin{equation}
+\text{Hedging Effectiveness} = 1 - \frac{\Var(\Delta \Pi)}{\Var(\Delta S)} = \rho_{SF}^2 = R^2
+\end{equation}
+\end{conceptbox}
+
+The optimal number of futures contracts $N^*$ required to hedge an exposure of size $Q_A$ using futures contracts with unit size $Q_F$ is:
+\begin{equation}
+N^* = h^* \frac{Q_A}{Q_F}
+\end{equation}
+For an equity portfolio of value $V_P$ hedged using index futures with index level $I$ and multiplier $M$ (so futures contract value $V_F = I \times M$):
+\begin{equation}
+N^* = \beta_P \frac{V_P}{V_F}
+\end{equation}
+
+\begin{example}{Optimal Hedge Ratio and Index Futures Contract Sizing}{optimal_hedging_ex}
+A mutual fund holds an Indian equity portfolio valued at \inr 25,00,00,000 (\inr 25 Crores) with a portfolio beta of $\beta_P = 1.20$. The manager expects a near-term market correction and decides to hedge the portfolio over the next 2 months using NSE Nifty 50 Index Futures contracts.
+
+\textbf{Market Parameters:}
+\begin{itemize}[leftmargin=1.5em, noitemsep]
+    \item Current Nifty 50 Futures Index Level ($I$): $24,500$
+    \item Nifty 50 Futures Market Lot Size ($M$): $25$ shares per contract
+    \item Contract Notional Value: $V_F = 24,500 \times 25 = \inr 6,12,500$
+\end{itemize}
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Calculate the number of Nifty futures contracts required to completely neutralize market risk ($\beta \rightarrow 0$).
+    \item Determine the number of contracts required if the manager wishes to reduce portfolio beta from $1.20$ to a defensive target of $\beta^* = 0.40$.
+    \item If the Nifty Index drops by $5\%$ while the hedge is active, verify the net portfolio performance.
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Complete Hedge ($\beta \rightarrow 0$):}
+    \[
+    N^* = \beta_P \frac{V_P}{V_F} = 1.20 \times \frac{\inr 25,00,00,000}{\inr 6,12,500} = 1.20 \times 408.163 = 489.79 \approx 490 \text{ Contracts (Short)}
+    \]
+    \item \textbf{Target Beta Reduction ($\beta_P \rightarrow \beta^* = 0.40$):}
+    \[
+    N^* = (\beta_P - \beta^*) \frac{V_P}{V_F} = (1.20 - 0.40) \times \frac{\inr 25,00,00,000}{\inr 6,12,500} = 0.80 \times 408.163 = 326.53 \approx 327 \text{ Contracts (Short)}
+    \]
+    \item \textbf{Verification for Complete Hedge under a $-5\%$ Index Fall:}
+    \begin{itemize}[leftmargin=1.2em, noitemsep]
+        \item Unhedged Equity Drop: $\Delta V_P = \beta_P \times \Delta R_m \times V_P = 1.20 \times (-0.05) \times \inr 25 \text{ Cr} = -\inr 1.50 \text{ Crores}$
+        \item Futures Gain ($490$ short contracts):
+        \[
+        \text{Points Drop per Contract} = 24,500 \times 0.05 = 1,225 \text{ points}
+        \]
+        \[
+        \text{Gain per Contract} = 1,225 \times 25 = \inr 30,625
+        \]
+        \[
+        \text{Total Futures Profit} = 490 \times \inr 30,625 = +\inr 1,50,06,250 \quad (\approx +\inr 1.5006 \text{ Crores})
+        \]
+        \item Net Position: $-\inr 1.5000 \text{ Cr} + \inr 1.5006 \text{ Cr} \approx +\inr 6,250$ (Market loss successfully neutralized).
+    \end{itemize}
+\end{enumerate}
+\end{example}
+
+% ------------------------------------------------------------------------------
+\section{Hedging Strategies: Non-Linear Risk}
+% ------------------------------------------------------------------------------
+
+Options possess non-linear, asymmetric payoff profiles. Consequently, their price sensitivity varies continuously with underlying price movements, time decay, and implied volatility.
+
+\subsection{The Greeks and Second-Order Taylor Expansion}
+
+Let $V(S, t, \sigma)$ represent the theoretical price of an option. The fundamental Greeks are:
+\begin{equation}
+\Delta = \pdiff{V}{S}, \qquad \Gamma = \frac{\partial^2 V}{\partial S^2}, \qquad \mathcal{V} = \pdiff{V}{\sigma}, \qquad \Theta = \pdiff{V}{t}
+\end{equation}
+The change in option value $\Delta V$ over small changes in underlying price $\Delta S$, time $\Delta t$, and volatility $\Delta \sigma$ is approximated via a second-order Taylor series expansion:
+\begin{equation}
+\Delta V \approx \Delta \cdot \Delta S + \frac{1}{2} \Gamma (\Delta S)^2 + \Theta \Delta t + \mathcal{V} \Delta \sigma
+\end{equation}
+
+\vspace{0.3cm}
+% TikZ Figure 2.4: Linear vs Non-Linear Payoffs & Tangent Delta
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=left,
+        xlabel={Underlying Spot Price ($S$)},
+        ylabel={Option Portfolio Value ($V$)},
+        every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+        every axis y label/.style={at={(current axis.above origin)},anchor=south},
+        height=6.5cm,
+        width=12.0cm,
+        xmin=60, xmax=140,
+        ymin=-5, ymax=45,
+        xtick={100},
+        xticklabels={$S_0 = 100$},
+        ytick=\empty,
+        clip=false
+    ]
+        % Non-linear Call Option curve (Convex)
+        \addplot[thick, navyblue, line width=1.6pt, domain=60:140, samples=100] {
+            0.5 * (x - 100 + sqrt((x - 100)^2 + 25)) + 4
+        };
+
+        % Tangent Delta line at S0 = 100 (slope = 0.5)
+        \addplot[dashed, crimson, line width=1.4pt, domain=70:130] {
+            6.5 + 0.5 * (x - 100)
+        };
+
+        % Tangent point
+        \addplot[only marks, mark=*, mark size=3pt, color=navyblue] coordinates {(100, 6.5)};
+
+        % Annotations
+        \node[above left, font=\bfseries\sffamily\footnotesize, color=navyblue] at (axis cs:135, 40) {
+            Actual Non-Linear Option Curve ($V(S)$)
+        };
+        \node[below right, font=\bfseries\sffamily\footnotesize, color=crimson] at (axis cs:125, 18) {
+            First-Order Delta Tangent ($\Delta \cdot \Delta S$)
+        };
+        \node[above, font=\bfseries\sffamily\scriptsize, color=darkteal, align=center] at (axis cs:125, 27) {
+            Convexity Error\\$\frac{1}{2} \Gamma (\Delta S)^2$
+        };
+        \draw[line width=1.2pt, darkteal, Stealth-Stealth] (axis cs:125, 19.5) -- (axis cs:125, 30.5);
+    \end{axis}
+\end{tikzpicture}
+\caption{Non-Linear Option Price Curvature, First-Order Delta Tangency, and Gamma Error.}
+\label{fig:nonlinear_payoff}
+\end{figure}
+
+\subsection{Delta and Gamma Hedging Mechanics}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=3pt]
+    \item \textbf{Delta Neutrality:} A portfolio $\Pi$ is delta-neutral if $\Delta_P = \pdiff{\Pi}{S} = 0$. For a portfolio containing an option position with total delta $\Delta_V$, delta neutrality is achieved by shorting $\Delta_V$ units of the underlying asset:
+    \begin{equation}
+    \Pi = V - \Delta_V \cdot S \implies \Delta_\Pi = \Delta_V - \Delta_V = 0
+    \end{equation}
+    Because $\Delta$ changes as $S$ moves, delta hedging requires continuous dynamic rebalancing.
+    \item \textbf{Gamma Neutrality:} Gamma measures the rate of change of Delta ($\Gamma = \diff{\Delta}{S}$). A high absolute gamma implies rapid delta slippage. Because the underlying asset has zero gamma ($\Gamma_{\text{asset}} \equiv 0$), gamma neutrality requires trading another option contract ($V_T$):
+    \begin{equation}
+    \Gamma_P + w_T \Gamma_T = 0 \implies w_T = -\frac{\Gamma_P}{\Gamma_T}
+    \end{equation}
+    Once gamma is neutralized using the hedging option, the underlying asset is traded to restore delta neutrality.
+\end{itemize}
+
+\begin{example}{Delta-Gamma Hedging and Dynamic Portfolio Immunization}{delta_gamma_ex}
+A market maker's option book is delta-neutral but possesses significant short gamma exposure:
+\begin{itemize}[leftmargin=1.5em, noitemsep]
+    \item Portfolio Delta: $\Delta_P = 0$
+    \item Portfolio Gamma: $\Gamma_P = -4,000$
+    \item Traded Call Option 1 Gamma ($\Gamma_1$): $+1.60$
+    \item Traded Call Option 1 Delta ($\Delta_1$): $+0.55$
+\end{itemize}
+
+\textbf{Task:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item Determine the number of Option 1 contracts ($w_1$) needed to render the overall portfolio gamma-neutral.
+    \item Determine the quantity of underlying shares ($\Delta S$) required to restore delta neutrality after the gamma hedge is executed.
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
+    \item \textbf{Gamma Neutralization:}
+    \[
+    \Gamma_{\text{new}} = \Gamma_P + w_1 \Gamma_1 = 0 \implies -4,000 + w_1 (1.60) = 0
+    \]
+    \[
+    w_1 = \frac{4,000}{1.60} = +2,500 \text{ Option 1 Contracts (Long)}
+    \]
+    \item \textbf{Delta Restoration:}
+    Purchasing $2,500$ contracts of Option 1 introduces positive delta into the book:
+    \[
+    \Delta_{\text{introduced}} = w_1 \times \Delta_1 = 2,500 \times 0.55 = +1,375
+    \]
+    Total portfolio delta is now $\Delta_{\text{current}} = 0 + 1,375 = +1,375$.
+    To restore complete delta neutrality ($\Delta_{\text{target}} = 0$), the desk must sell $1,375$ units of the underlying stock:
+    \[
+    \text{Stock Trade} = -1,375 \text{ shares (Short)}
+    \]
+    The combined portfolio is now simultaneously Delta-neutral ($\Delta = 0$) and Gamma-neutral ($\Gamma = 0$).
+\end{enumerate}
+\end{example}

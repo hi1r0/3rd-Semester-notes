@@ -13,8 +13,10 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 │   ├── notes.docx                 # Comprehensive course notes Word document
 │   └── README.md                  # Subject overview and directory index
 ├── Financial Risk Management/
-│   ├── MSQF-Introduction_to_Risk_Management-Class.pptx # Risk management introductory lecture slides
-│   └── README.md                  # Risk taxonomy and course overview
+│   ├── latex/                     # Modular LaTeX lecture notes (Units I & II, TikZ architectures, 29-page main.pdf)
+│   ├── MSQF_533_Unit_I_Financial_Risk_Management.pdf # Unit I lecture slides (Dr. Kamalakkannan Adhisekar)
+│   ├── MSQF-Introduction_to_Risk_Management-Class.pptx # 150-slide class deck grounded in Indian markets (Prof. D. Lazar)
+│   └── README.md                  # Comprehensive curriculum roadmap and lecture index
 ├── Global Financial Management/
 │   ├── assignment/                # Swiss FDI Empirical Analysis (13-page monochrome monograph, main.pdf)
 │   │   └── swiss_fdi_data/        # Official Swiss National Bank (SNB) data cubes (2015–2024) & Python fetcher
@@ -50,9 +52,13 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Equity valuation frameworks: Going concern vs. liquidation book value floor, Dividend Discount Models (Gordon Model under growth, normal, and declining regimes), Walter's Model, and Modigliani-Miller (MM) dividend irrelevance theorem.
    - Empirical Course Assignment: Comprehensive Tri-Partite Equity Valuation on the Indian FMCG sector (10 firms, sensitivity analysis, break-even growth $g^*$).
 
-2. **Financial Risk Management**
-   - Taxonomy of financial risks: Market risk, credit risk, operational risk, and liquidity risk.
-   - Value at Risk ($\VaR$), Expected Shortfall ($\ES$), Basel regulatory accords (Basel I, II, III), and financial derivative hedging strategies.
+2. **Financial Risk Management (MSQF 533)**
+   - Foundations of risk and uncertainty (Knightian uncertainty vs. financial risk), systematic vs. unsystematic decomposition ($\sigma_i^2 = \beta_i^2 \sigma_m^2 + \sigma_{\epsilon_i}^2$), enterprise risk taxonomy, and the Three Lines of Defence governance architecture.
+   - Asset-class specific risk profiles: Commodity cost of carry ($F_0 = S_0 e^{(r + u - y)T}$), contango vs. backwardation, equity portfolio beta on NSE Nifty 50, fixed income duration ($D^*$) and convexity ($C$) under RBI repo shocks, and Covered Interest Parity (CIP) currency hedging.
+   - Value at Risk ($\VaR$) and Expected Shortfall ($\ES$ / CVaR): Formal definitions, horizon scaling ($\sqrt{T}$ rule), subadditivity violations, and tail blindness.
+   - Estimation methodologies: Local valuation (Delta-Normal parametric covariance matrix $\sigma_P^2 = \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}$) vs. Full valuation (Historical Simulation empirical percentiles and Monte Carlo Cholesky decomposition $\boldsymbol{\Sigma} = \mathbf{L}\mathbf{L}^T$).
+   - Hedging strategies: Linear risk hedging, basis risk ($b_t = S_t - F_t$), optimal minimum-variance hedge ratio derivation ($h^* = \rho \frac{\sigma_S}{\sigma_F}$) via OLS regression, contract sizing ($N^*$), and non-linear option Delta-Gamma dynamic immunization.
+   - **Modular LaTeX Monograph (`Financial Risk Management/latex/main.pdf`):** 29-page publication-grade reference with full front matter, 8 high-density TikZ architectures, 9 worked numerical examples, and a consolidated multi-chapter formula sheet.
 
 3. **Global Financial Management (MSQF 535)**
    - International financial architecture: World Bank Group, IMF, Balance of Payments (BOP) disequilibrium, Special Drawing Rights (SDR) valuation basket, and ADB.
