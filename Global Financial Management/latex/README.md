@@ -113,10 +113,20 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - Textbook Pro-Forma Formats: Standardized FEDAI computation templates (Format 9.1 for Forward Buying Rate; Format 9.2 for Forward Selling Rate).
   - Solved Example 2.10.1: Forward purchase of export bill in Singapore Dollars for SGD 1,00,000 with 4-month 5-day sight and 25-day transit (5 months total; USD/INR July leg covered in Mumbai and USD/SGD 5-month leg covered in Singapore; formatted in standard accounting ledger table).
   - *Lecture Date:* `14/10/2026`.
+- **2.11 Theories of Foreign Exchange Rate Determination (Completes Unit-II)**
+  - Law of One Price (LOOP) and commodity basket arbitrage (classroom orange basket illustration).
+  - Absolute vs. Relative Purchasing Power Parity (PPP) formulation.
+  - TikZ Architecture 2.10: Macroeconomic Parity Architecture (5-node International Parity Web linking Money Supply, Inflation, Interest Rates, Exchange Rates, and Forward Margins).
+  - The Fisher Effect and nominal interest rate decomposition ($1+r = (1+R)(1+i)$).
+  - Solved Example 2.11.1: One-year and two-year exchange rate forecasting via Relative PPP (INR/USD, 5% vs 3% inflation).
+  - Solved Example 2.11.2: Multi-year term-structure GBP/USD exchange rate projection under Relative PPP with annual compounding ratios.
+  - Interest Rate Parity (IRP) benchmark spot/forward outright quotes and Covered Interest Arbitrage mechanics.
+  - Solved Example 2.11.3: Four-stage Covered Interest Arbitrage execution and cash flow ledger ($1M USD borrowed at 5% in US, converted to GBP at 1.50 spot, invested at 8% in UK, forward sold at 1.48, generating $15,600 net riskless profit) with theoretical CIP benchmark verification.
+  - *Lecture Dates:* `21/10/2026`, `22/10/2026`, & `26/10/2026`.
 
 ### **Consolidated Formula Reference Sheet (Rule 5)**
 - Placed at document end (`chapters/formula_reference.tex`).
-- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, FEDAI Rule 7 delivery horizons, forward merchant bill rates with transit/usance tenors, FEDAI option delivery margin selection rules, and cross-rate forward conversion identities with explicit structured `Where:` parameter definitions and unnumbered equations.
+- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, FEDAI Rule 7 delivery horizons, forward merchant bill rates with transit/usance tenors, FEDAI option delivery margin selection rules, cross-rate forward conversion identities, Relative Purchasing Power Parity (PPP), the Fisher Effect nominal rate decomposition, and Covered Interest Rate Parity (CIP) with explicit structured `Where:` parameter definitions and unnumbered equations.
 
 ---
 
@@ -133,7 +143,7 @@ latex/
 │   └── syllabus.tex                                   # Official MSQF 535 syllabus & CO-PO matrix
 ├── chapters/
 │   ├── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 07/09/2026)
-│   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 14/10/2026)
+│   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 26/10/2026)
 │   └── formula_reference.tex                          # Consolidated Multi-Chapter Formula Reference Sheet (Rule 5)
 ├── figures/                                           # Department & University logos
 └── README.md                                          # Documentation & compilation instructions

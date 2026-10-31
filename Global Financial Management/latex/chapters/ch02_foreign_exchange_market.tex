@@ -1695,3 +1695,333 @@ The bank covers the USD/INR leg in the Mumbai market for July (premium $= 0.4600
 The customer receives $\mathbf{\inr 67{,}66{,}250}$ upon realization of the Singapore Dollar export bill.
 \end{example}
 
+\clearpage
+
+\section{Theories of Foreign Exchange Rate Determination}
+\lecturedate{21/10/2026}
+
+Understanding the macroeconomic forces that dictate exchange rate movements is essential for corporate treasury operations, cross-border pricing, and international investment strategy. Exchange rate determination models formalize the fundamental relationships linking money supply growth, price level inflation, interest rate differentials, and forward foreign exchange margins.
+
+\subsection{The Law of One Price and Purchasing Power Parity (PPP)}
+The foundational premise of foreign exchange valuation is the \textbf{Law of One Price (LOOP)}. It postulates that in frictionless international markets---absent transportation costs, import tariffs, and trade barriers---an identical basket of tradable goods must sell for the exact same price across different countries when converted into a common currency:
+\begin{equation}
+    P_d = \Spot \times P_f \quad \Longleftrightarrow \quad \Spot = \frac{P_d}{P_f}
+\end{equation}
+where $P_d$ represents the domestic currency price, $P_f$ is the foreign currency price, and $\Spot$ is the spot exchange rate quoted in direct terms (domestic currency units per unit of foreign currency).
+
+\subsubsection{Classroom Commodity Basket Illustration}
+Consider a standardized consumer commodity (e.g., $1\,\text{kg}$ of oranges) whose market price is observed in India and the United States:
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item At baseline $t=0$, $1\,\text{kg}$ of oranges costs $\inr 60$ in India and $\$1.00$ in the US.
+    \item Under the Law of One Price, the implied equilibrium exchange rate is:
+    \begin{equation*}
+        \inr 60 = 1\,\text{kg orange} = \$1.00 \implies \Spot_0 = \inr 60\,/\$
+    \end{equation*}
+\end{itemize}
+
+When inflation rates diverge between the two economies, the purchasing power of money erodes unevenly. Suppose an extended consumption basket initially costs $\inr 9{,}000$ in India and $\$100$ in the United States, establishing the spot rate $\Spot_0 = \frac{9{,}000}{100} = \inr 90\,/\$$. Over an annual period, the annual rate of inflation is $8\%$ in India and $5\%$ in the United States:
+\begin{align*}
+    P_{d, 1} &= \inr 9{,}000 \times (1 + 0.08) = \inr 9{,}720 \\
+    P_{f, 1} &= \$100 \times (1 + 0.05) = \$105
+\end{align*}
+To restore purchasing power equivalence, the revised exchange rate $\Spot_1$ must adjust to:
+\begin{equation*}
+    \Spot_1 = \frac{\inr 9{,}720}{\$105} = \mathbf{\inr 92.57\,/\$}
+\end{equation*}
+The Indian Rupee depreciates by $\inr 92.57 - \inr 90.00 = \inr 2.57\,/\$$, exactly offsetting the $3\%$ inflation differential ($8\% - 5\%$) between the two trading partners.
+
+\subsubsection{Absolute vs. Relative Purchasing Power Parity}
+Economists distinguish between two formal variants of PPP:
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item \textbf{Absolute Purchasing Power Parity:} Requires that the spot exchange rate directly equals the ratio of the overall national price level indexes:
+    \begin{equation}
+        \Spot_t = \frac{P_{d, t}}{P_{f, t}}
+    \end{equation}
+    Absolute PPP rarely holds strictly in empirical reality due to transport costs, tariffs, non-traded services, and differing consumer preferences across countries.
+    \item \textbf{Relative Purchasing Power Parity:} Relaxes the requirement of identical absolute price levels and instead asserts that the \textit{percentage change} in the spot exchange rate over any time horizon $t$ is determined by the inflation differential between the domestic and foreign economies:
+    \begin{equation}
+        \Spot_t = \Spot_0 \left( \frac{1 + i_L}{1 + i_F} \right)^t
+    \end{equation}
+    where $i_L$ is the domestic (local) inflation rate, $i_F$ is the foreign inflation rate, and $t$ is the time horizon in years. If the domestic country experiences higher inflation than the foreign partner ($i_L > i_F$), the domestic currency must depreciate relative to the foreign currency to preserve export competitiveness.
+\end{enumerate}
+
+\subsection{Macroeconomic Parity Architecture}
+\lecturedate{22/10/2026}
+The interaction between the money supply, price inflation, nominal interest rates, and foreign exchange rates forms a closed, mutually reinforcing equilibrium system often called the \textbf{International Parity Web}.
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[
+        box/.style={
+            rectangle, rounded corners=6pt, line width=1.1pt,
+            font=\sffamily, align=center, inner sep=5pt,
+            minimum height=2.0cm, text width=3.2cm
+        },
+        flowline/.style={
+            -{Stealth[length=6pt, width=4pt]}, line width=1.3pt
+        },
+        bidir/.style={
+            {Stealth[length=6pt, width=4pt]}-{Stealth[length=6pt, width=4pt]}, line width=1.3pt
+        }
+    ]
+        % Node 1: Money Supply (Leftmost)
+        \node[box, draw=charcoal, fill=lightgraybg] (ms) at (0, 0) {
+            {\color{charcoal}\textbf{\normalsize Money Supply}}\\[0.2em]
+            \scriptsize Relative Excess Growth\\
+            \scriptsize $\Delta M^s_d - \Delta M^s_f$
+        };
+
+        % Node 2: Inflation Rates (Center Left)
+        \node[box, draw=amber!90!black, fill=softamber] (inf) at (5.0, 0) {
+            {\color{amber!90!black}\textbf{\normalsize Relative Inflation}}\\[0.2em]
+            \scriptsize Inflation Differential\\
+            \scriptsize $i_L - i_F \quad (\pi_d - \pi_f)$
+        };
+
+        % Node 3: Exchange Rate Change (Top Center)
+        \node[box, draw=navyblue, fill=softblue] (fx) at (10.0, 2.7) {
+            {\color{navyblue}\textbf{\normalsize Exchange Rate}}\\[0.2em]
+            \scriptsize Expected Rate Change\\
+            \scriptsize $\frac{S_t - S_0}{S_0}$
+        };
+
+        % Node 4: Relative Interest Rates (Bottom Center)
+        \node[box, draw=darkteal, fill=softgreen] (ir) at (10.0, -2.7) {
+            {\color{darkteal}\textbf{\normalsize Relative Interest}}\\[0.2em]
+            \scriptsize Nominal Yield Spread\\
+            \scriptsize $i_d - i_f$
+        };
+
+        % Node 5: Forward Premium / Discount (Rightmost)
+        \node[box, draw=navyblue!80!black, fill=softblue] (fwd) at (15.0, 0) {
+            {\color{navyblue!80!black}\textbf{\normalsize Forward Margin}}\\[0.2em]
+            \scriptsize Premium / Discount\\
+            \scriptsize $\frac{F - S}{S}$
+        };
+
+        % 1. Money Supply -> Relative Inflation
+        \draw[flowline, draw=charcoal] (ms.east) -- node[midway, above, font=\scriptsize\sffamily, align=center] {Monetary\\Theory} (inf.west);
+
+        % 2. Relative Inflation -> Exchange Rate (PPP)
+        \draw[flowline, draw=navyblue] (inf.north east) -- node[pos=0.45, above left, font=\scriptsize\sffamily, align=center] {Purchasing Power\\Parity (PPP)} (fx.south west);
+
+        % 3. Relative Inflation -> Relative Interest (Fisher Effect)
+        \draw[bidir, draw=amber!90!black] (inf.south east) -- node[pos=0.45, below left, font=\scriptsize\sffamily, align=center] {The Fisher\\Effect} (ir.north west);
+
+        % 4. Exchange Rate <-> Relative Interest (International Fisher Effect / UIP)
+        \draw[bidir, draw=darkteal] (fx.south) -- node[midway, fill=white, inner sep=2pt, font=\scriptsize\sffamily, align=center] {International\\Fisher Effect} (ir.north);
+
+        % 5. Exchange Rate -> Forward Margin (Unbiased Forward Rate)
+        \draw[flowline, draw=navyblue] (fx.south east) -- node[pos=0.45, above right, font=\scriptsize\sffamily, align=center] {Forward Rate\\Unbiasedness} (fwd.north west);
+
+        % 6. Relative Interest <-> Forward Margin (Covered Interest Parity)
+        \draw[bidir, draw=darkteal] (ir.north east) -- node[pos=0.45, below right, font=\scriptsize\sffamily, align=center] {Covered Interest\\Parity (CIP)} (fwd.south west);
+
+    \end{tikzpicture}%
+    }
+    \caption{Macroeconomic Parity Architecture: Interrelationships between Money, Inflation, Interest Rates, and Exchange Rates}
+    \label{fig:macroeconomic_parity_architecture}
+\end{figure}
+
+As mapped in \Cref{fig:macroeconomic_parity_architecture}, the international transmission chain proceeds as follows:
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item \textbf{Monetary Theory of Inflation:} When the domestic supply of money expands at a rate faster than real output demand, the purchasing power of the currency declines, generating generalized price inflation ($\Delta M^s \to \Delta \pi$).
+    \item \textbf{Purchasing Power Parity (PPP):} Cross-border goods arbitrage translates higher relative inflation into an expected currency depreciation ($\Delta \pi \to \Delta S$).
+    \item \textbf{The Fisher Effect:} Lenders demand higher nominal interest rates to compensate for anticipated inflation, driving the domestic nominal yield above foreign yields ($\Delta \pi \leftrightarrow \Delta i$).
+    \item \textbf{International Fisher Effect (IFE):} Capital flows equalize expected returns across borders, ensuring that nominal interest rate differentials reflect expected exchange rate movements ($\Delta S \leftrightarrow \Delta i$).
+    \item \textbf{Forward Rate Unbiasedness:} Under market efficiency, the forward exchange rate serves as an unbiased predictor of the future spot rate ($\Delta S \to \frac{F-S}{S}$).
+    \item \textbf{Covered Interest Parity (CIP):} Covered interest arbitrage eliminates riskless arbitrage between money market rate differentials and forward exchange rate swap points ($\Delta i \leftrightarrow \frac{F-S}{S}$).
+\end{enumerate}
+
+\subsection{The Fisher Effect and Monetary Inflation Dynamics}
+The \textbf{Fisher Effect} establishes that nominal interest rates in any economy encompass two distinct components: a real rate of return and an inflation compensation premium:
+\begin{equation}
+    1 + r_{\text{nominal}} = (1 + r_{\text{real}})(1 + i_{\text{inflation}})
+\end{equation}
+Expanding this identity yields:
+\begin{equation*}
+    r_{\text{nominal}} = r_{\text{real}} + i_{\text{inflation}} + (r_{\text{real}} \times i_{\text{inflation}})
+\end{equation*}
+Because the product term $(r_{\text{real}} \times i_{\text{inflation}})$ is negligible under moderate inflation environments, the classical linear Fisher approximation is widely applied:
+\begin{equation}
+    r_{\text{nominal}} \approx r_{\text{real}} + i_{\text{inflation}}
+\end{equation}
+Under integrated global capital markets with free financial mobility, real rates of return tend toward international convergence ($r_{\text{real}, d} \approx r_{\text{real}, f}$). Consequently, the nominal interest rate differential between two countries directly reflects their expected inflation differential:
+\begin{equation}
+    r_d - r_f \approx \pi_d - \pi_f
+\end{equation}
+
+\clearpage
+\subsection{Worked Examples on Purchasing Power Parity}
+
+\begin{example}{One-Year and Two-Year Exchange Rate Forecasting via Relative PPP}{ex_ppp_inr_usd}
+\textbf{Problem Statement:}\\
+The expected annual rate of inflation in India is $5\%$ and in the United States is $3\%$. If the initial spot exchange rate is $\inr 97\,/\$$, calculate the expected exchange rate:
+\begin{enumerate}[label=(\alph*), noitemsep]
+    \item After one year ($t=1$), and
+    \item After two years ($t=2$).
+\end{enumerate}
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Theoretical Formulation:}\\
+Under the Relative Purchasing Power Parity framework:
+\begin{equation*}
+    \Spot_t = \Spot_0 \left( \frac{1 + i_L}{1 + i_F} \right)^t
+\end{equation*}
+Given:
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item Base Spot Rate $\Spot_0 = \inr 97.00\,/\$$
+    \item Domestic (India) Inflation $i_L = 5\% = 0.05$
+    \item Foreign (USA) Inflation $i_F = 3\% = 0.03$
+    \item Relative Inflation Factor $= \frac{1 + 0.05}{1 + 0.03} = \frac{1.05}{1.03} \approx 1.019417$
+\end{itemize}
+
+\noindent\textbf{2. Step-by-Step Forecast Calculation:}
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item \textbf{Exchange Rate after One Year ($t=1$):}
+    \begin{align*}
+        \Spot_1 &= 97.00 \times \left( \frac{1.05}{1.03} \right)^1 = 97.00 \times 1.019417 \\
+                &= \mathbf{\inr 98.88\,/\$}
+    \end{align*}
+    The Indian Rupee depreciates against the US Dollar to $\inr 98.88\,/\$$.
+
+    \item \textbf{Exchange Rate after Two Years ($t=2$):}
+    \begin{align*}
+        \Spot_2 &= 97.00 \times \left( \frac{1.05}{1.03} \right)^2 = 97.00 \times (1.019417)^2 \\
+                &= 97.00 \times 1.039212 = \mathbf{\inr 100.80\,/\$}
+    \end{align*}
+    Alternatively, compounding from year 1: $\Spot_2 = 98.8835 \times 1.019417 = \mathbf{\inr 100.80\,/\$}$.
+\end{enumerate}
+\end{example}
+
+\clearpage
+\begin{example}{Multi-Year Term-Structure Exchange Rate Projection under Relative PPP}{ex_ppp_multi_year_gbp}
+\textbf{Problem Statement:}\\
+The prevailing spot exchange rate is $\$1.65\,/\text{GBP}$. The projected inflation rates in the United Kingdom and the United States for the next three years are structured as follows:
+\begin{center}
+\small
+\begin{tabular}{ccc}
+    \toprule
+    \textbf{Year} & \textbf{UK Expected Inflation ($i_{\text{UK}}$)} & \textbf{US Expected Inflation ($i_{\text{US}}$)} \\
+    \midrule
+    $1$ & $3.0\%$ & $2.0\%$ \\
+    $2$ & $3.5\%$ & $2.5\%$ \\
+    $3$ & $3.0\%$ & $2.0\%$ \\
+    \bottomrule
+\end{tabular}
+\end{center}
+Calculate the expected spot exchange rate ($\$/\text{GBP}$) at the end of Year 1, Year 2, and Year 3.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Model Specification:}\\
+Here, the quote is expressed in American terms (US Dollars per unit of British Pound, $\$\,/\text{GBP}$). The British Pound ($\text{GBP}$) is the base currency and the US Dollar ($\text{USD}$) is the terms (pricing) currency. According to Relative PPP:
+\begin{equation*}
+    \Spot_t = \Spot_{t-1} \times \left( \frac{1 + i_{\text{US}, t}}{1 + i_{\text{UK}, t}} \right)
+\end{equation*}
+
+\noindent\textbf{2. Sequential Year-by-Year Compounding:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{End of Year 1:}
+    \begin{equation*}
+        \Spot_1 = 1.6500 \times \frac{1 + 0.020}{1 + 0.030} = 1.6500 \times \frac{1.020}{1.030} = 1.6500 \times 0.990291 = \mathbf{\$1.6340\,/\text{GBP}}
+    \end{equation*}
+    \item \textbf{End of Year 2:}
+    \begin{equation*}
+        \Spot_2 = 1.63398 \times \frac{1 + 0.025}{1 + 0.035} = 1.63398 \times \frac{1.025}{1.035} = 1.63398 \times 0.990338 = \mathbf{\$1.6182\,/\text{GBP}}
+    \end{equation*}
+    \item \textbf{End of Year 3:}
+    \begin{equation*}
+        \Spot_3 = 1.61819 \times \frac{1 + 0.020}{1 + 0.030} = 1.61819 \times \frac{1.020}{1.030} = 1.61819 \times 0.990291 = \mathbf{\$1.6025\,/\text{GBP}}
+    \end{equation*}
+\end{itemize}
+
+\noindent\textbf{3. Cumulative Term-Structure Projection Ledger:}
+\begin{center}
+\small
+\begin{tabular}{ccccc}
+    \toprule
+    \textbf{Year} & \textbf{UK Inflation} & \textbf{US Inflation} & \textbf{PPP Multiplier} & \textbf{Projected Spot Rate} \\
+    $(t)$ & $(i_{\text{UK}})$ & $(i_{\text{US}})$ & $\left(\frac{1+i_{\text{US}}}{1+i_{\text{UK}}}\right)$ & $(S_t)$ \\
+    \midrule
+    $0$ & --- & --- & Baseline Spot & $\$1.6500\,/\text{GBP}$ \\
+    $1$ & $3.0\%$ & $2.0\%$ & $\frac{1.020}{1.030} \approx 0.990291$ & $\mathbf{\$1.6340\,/\text{GBP}}$ \\
+    $2$ & $3.5\%$ & $2.5\%$ & $\frac{1.025}{1.035} \approx 0.990338$ & $\mathbf{\$1.6182\,/\text{GBP}}$ \\
+    $3$ & $3.0\%$ & $2.0\%$ & $\frac{1.020}{1.030} \approx 0.990291$ & $\mathbf{\$1.6025\,/\text{GBP}}$ \\
+    \bottomrule
+\end{tabular}
+\end{center}
+Because the United Kingdom consistently exhibits higher inflation than the United States in all three years, the British Pound depreciates monotonically from $\$1.6500\,/\text{GBP}$ to $\$1.6025\,/\text{GBP}$.
+\end{example}
+
+\clearpage
+\subsection{Interest Rate Parity (IRP) and Covered Interest Arbitrage}
+\lecturedate{26/10/2026}
+While Purchasing Power Parity connects goods markets through commodity arbitrage over medium-to-long horizons, \textbf{Interest Rate Parity (IRP)} governs financial markets through money market arbitrage over short-to-medium horizons.
+
+\subsubsection{Benchmark Spot and Forward Outright Quotations}
+In foreign exchange operations:
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Spot Rate ($\Spot$):} The outright benchmark rate for immediate delivery ($T+2$ business days).
+    \item \textbf{Forward Rate ($\Forward$):} The contracted rate established today for delivery and settlement at a designated future maturity date ($T > 2$).
+\end{itemize}
+Under market equilibrium, the percentage forward premium or discount on a foreign currency equals the nominal interest rate differential between the domestic and foreign financial centers:
+\begin{equation}
+    \Forward = \Spot \times \left( \frac{1 + i_d}{1 + i_f} \right)
+\end{equation}
+where $i_d$ is the domestic interest rate and $i_f$ is the foreign interest rate for the matching tenor. Subtracting $\Spot$ from both sides yields the classical forward premium relationship:
+\begin{equation}
+    \frac{\Forward - \Spot}{\Spot} = \frac{i_d - i_f}{1 + i_f} \approx i_d - i_f
+\end{equation}
+The currency associated with the higher nominal interest rate trades at a forward discount, while the currency with the lower nominal interest rate trades at a forward premium.
+
+\subsubsection{Covered Interest Arbitrage Mechanics}
+When market forward rates deviate from the theoretical parity condition defined by \Cref{fig:macroeconomic_parity_architecture}, an arbitrageur can execute a four-stage riskless transaction sequence without bearing foreign exchange risk:
+
+\clearpage
+\begin{example}{Covered Interest Arbitrage Execution and CIP Verification}{ex_covered_interest_arbitrage}
+\textbf{Problem Statement:}\\
+An arbitrageur observes 1-year US interest rate $i_{\text{US}} = 5.0\%$, UK interest rate $i_{\text{UK}} = 8.0\%$, spot rate $\Spot = \$1.50\,/\text{GBP}$, and 1-year forward rate $\Forward = \$1.48\,/\text{GBP}$. Demonstrate how borrowing $\$1{,}000{,}000$ in the US to execute covered interest arbitrage yields a net riskless arbitrage profit, and contrast the market forward rate against the theoretical Covered Interest Parity (CIP) benchmark.
+
+\tcblower
+\textbf{Solution:}\\
+\noindent\textbf{1. Four-Stage Covered Interest Arbitrage Sequence:}
+\begin{itemize}[leftmargin=*, itemsep=1.5pt, topsep=1.5pt]
+    \item \textbf{Stage 1 (Domestic Borrowing \& Spot Conversion, $t=0$):} Borrow $\$1{,}000{,}000$ in the US at $5\%$ and convert to Sterling at $\Spot = \$1.50\,/\text{GBP} \implies \text{Sterling Proceeds} = \frac{\$1{,}000{,}000}{1.50} = \mathbf{\gbp 666{,}666.67}$.
+    \item \textbf{Stage 2 (Foreign Money Market Investment, $t=0$ to $t=1$):} Invest $\gbp 666{,}666.67$ in the UK at $8\% \implies \text{Maturity Value} = \gbp 666{,}666.67 \times 1.08 = \mathbf{\gbp 720{,}000.00}$.
+    \item \textbf{Stage 3 (Forward Exchange Cover, $t=0$ locked):} Simultaneously sell $\gbp 720{,}000$ forward at $\Forward = \$1.48\,/\text{GBP} \implies \text{Forward Inflow} = \gbp 720{,}000 \times 1.48 = \mathbf{\$1{,}065{,}600.00}$.
+    \item \textbf{Stage 4 (Loan Repayment \& Profit Extraction, $t=1$):} Repay US debt: $\$1{,}000{,}000 \times 1.05 = \mathbf{\$1{,}050{,}000.00}$. Net riskless profit: $\$1{,}065{,}600 - \$1{,}050{,}000 = \mathbf{\$15{,}600.00}$.
+\end{itemize}
+
+\vspace{-0.3em}
+\noindent\textbf{2. Arbitrage Cash Flow Ledger:}
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{0.92}
+\begin{tabularx}{0.96\linewidth}{Xrr}
+    \toprule
+    \textbf{Operational Stage} & \textbf{Cash Flow (USD)} & \textbf{Cash Flow (GBP)} \\
+    \midrule
+    \textbf{Time $t=0$ Cash Flows:} & & \\
+    Borrow in US money market ($1$ year @ $5\%$) & $+\$1{,}000{,}000.00$ & --- \\
+    Spot conversion to Sterling (@ $\$1.50\,/\text{GBP}$) & $-\$1{,}000{,}000.00$ & $+\gbp 666{,}666.67$ \\
+    Invest in UK money market ($1$ year @ $8\%$) & --- & $-\gbp 666{,}666.67$ \\
+    \midrule
+    \textbf{Net Cash Flow at Time $t=0$} & $\mathbf{\$0.00}$ & $\mathbf{\gbp 0.00}$ \\
+    \midrule
+    \textbf{Time $t=1$ Cash Flows:} & & \\
+    UK investment maturity proceeds ($\gbp 666{,}666.67 \times 1.08$) & --- & $+\gbp 720{,}000.00$ \\
+    Deliver GBP under forward contract (@ $\$1.48\,/\text{GBP}$) & $+\$1{,}065{,}600.00$ & $-\gbp 720{,}000.00$ \\
+    Repay US loan principal plus interest ($\$1\text{M} \times 1.05$) & $-\$1{,}050{,}000.00$ & --- \\
+    \midrule
+    \textbf{Net Riskless Arbitrage Profit at Time $t=1$} & $\mathbf{+\$15{,}600.00}$ & $\mathbf{\gbp 0.00}$ \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{-0.3em}
+\noindent\textbf{3. Theoretical Parity Benchmark Comparison:}\\
+Under theoretical CIP, no-arbitrage forward rate $\Forward^\ast = \Spot \left(\frac{1+i_{\text{US}}}{1+i_{\text{UK}}}\right) = 1.50 \left(\frac{1.05}{1.08}\right) = \mathbf{\$1.4583\,/\text{GBP}}$. Because the actual market quote $\Forward = \$1.4800 > \$1.4583$, the forward pound is overvalued relative to parity (trading at a smaller discount of $-1.33\%$ versus $-2.78\%$). This pricing misalignment creates the riskless arbitrage opportunity that yields $\mathbf{\$15{,}600.00}$ without initial equity commitment.
+\end{example}

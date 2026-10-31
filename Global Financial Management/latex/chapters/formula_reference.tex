@@ -227,3 +227,49 @@ This section consolidates all mathematical formulas, pricing relationships, valu
 \end{itemize}
 \end{formulabox}
 
+
+\begin{formulabox}[Relative Purchasing Power Parity (PPP) \& Multi-Period Compounding]
+\begin{align*}
+    \Spot_t &= \Spot_0 \left( \frac{1 + i_L}{1 + i_F} \right)^t \\[0.5em]
+    \Spot_t &= \Spot_0 \prod_{k=1}^t \left( \frac{1 + i_{L,k}}{1 + i_{F,k}} \right)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\Spot_0$: Initial spot exchange rate expressed as domestic currency per unit of foreign currency.
+    \item $\Spot_t$: Expected spot exchange rate at future time horizon $t$.
+    \item $i_L$: Expected inflation rate in the local (domestic/terms) country.
+    \item $i_F$: Expected inflation rate in the foreign (base) country.
+    \item $i_{L,k}, i_{F,k}$: Term-structure inflation rates prevailing during specific annual period $k$.
+    \item $t$: Time horizon in years.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[The Fisher Effect \& Nominal Rate Decomposition]
+\begin{align*}
+    1 + r_{\text{nominal}} &= (1 + r_{\text{real}})(1 + i_{\text{inflation}}) \\[0.4em]
+    r_{\text{nominal}} &\approx r_{\text{real}} + i_{\text{inflation}}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $r_{\text{nominal}}$: Nominal market interest rate quoted on debt contracts.
+    \item $r_{\text{real}}$: Real rate of return required by investors in the absence of inflation.
+    \item $i_{\text{inflation}}$: Anticipated or expected inflation rate over the contractual period.
+    \item $\text{International Link}$: Real rates equalize across open capital markets ($r_{\text{real}, d} \approx r_{\text{real}, f}$), implying nominal interest differentials reflect relative inflation expectations ($i_d - i_f \approx \pi_d - \pi_f$).
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Covered Interest Rate Parity (CIP) \& Forward Margin Condition]
+\begin{align*}
+    \Forward &= \Spot \times \left( \frac{1 + i_d}{1 + i_f} \right) \\[0.5em]
+    \frac{\Forward - \Spot}{\Spot} &\approx i_d - i_f
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\Forward$: Contractual forward exchange rate quoted outright.
+    \item $\Spot$: Current spot exchange rate (direct quote: domestic currency per unit of foreign currency).
+    \item $i_d$: Nominal interest rate prevailing in the domestic money market for tenor matching $\Forward$.
+    \item $i_f$: Nominal interest rate prevailing in the foreign money market for tenor matching $\Forward$.
+    \item $\frac{\Forward - \Spot}{\Spot}$: Annualized percentage forward premium ($>0$) or discount ($<0$) on the foreign currency.
+    \item $\text{Arbitrage Condition}$: When $\Forward \neq \Spot \times \frac{1+i_d}{1+i_f}$, covered interest arbitrage generates riskless profit until market equilibrium is restored.
+\end{itemize}
+\end{formulabox}
