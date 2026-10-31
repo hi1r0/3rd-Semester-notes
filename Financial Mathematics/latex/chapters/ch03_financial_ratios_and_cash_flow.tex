@@ -456,3 +456,728 @@ From the above information, compute:
     \item Creditors Turnover Ratio = $\mathbf{3.00 \text{ times}}$ ($\mathbf{4.00 \text{ months}}$ or $\mathbf{122 \text{ days}}$)
 \end{itemize}
 \end{example}
+
+
+% ==============================================================================
+% 3.3 Solvency Ratios: Liquidity & Financial Gearing
+% ==============================================================================
+\newpage
+\section{Solvency Ratios: Liquidity \& Financial Gearing}
+\lecturedate{15/10/2026}
+
+\begin{definition}{Solvency and Liquidity Diagnostic Framework}{def_solvency_liquidity}
+\textbf{Solvency} denotes the overarching capacity of a business enterprise to fulfill its financial debt commitments as they mature. Solvency diagnostics operate across two interrelated temporal horizons:
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=2pt]
+    \item \textbf{Short-Term Solvency (Liquidity):} Assesses the immediate and near-term ability of a firm to settle its current debt commitments, trade obligations, and operating expenses without impairing ongoing business operations.
+    \item \textbf{Long-Term Solvency (Financial Leverage):} Examines the structural adequacy of the firm's capital architecture to service long-term funded debt, periodic debenture interest charges, and preference dividend commitments over a multi-year horizon.
+\end{enumerate}
+\end{definition}
+
+\begin{formulabox}[Short-Term Liquidity Ratios \& Regulatory Norms]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Current Ratio (Working Capital Ratio):}
+    \begin{equation}
+        \text{Current Ratio} = \frac{\text{Current Assets } (\text{CA})}{\text{Current Liabilities } (\text{CL})}
+    \end{equation}
+    where $\text{CA}$ denotes short-term resources (Inventories, Debtors, Cash, Bank, Bills Receivable, Prepaids, Marketable Securities), and $\text{CL}$ denotes short-term obligations (Creditors, Bills Payable, Bank Overdraft, Outstanding Expenses, Short-Term Provisions).
+    \begin{equation*}
+        \textbf{Conventional Ideal Benchmark Norm: } 2 : 1
+    \end{equation*}
+
+    \item \textbf{Quick Ratio / Liquid Ratio / Acid-Test Ratio:}
+    Reflects the capacity to meet instant obligations without relying on inventory liquidations:
+    \begin{equation}
+        \text{Quick Ratio} = \frac{\text{Quick Assets } (\text{QA})}{\text{CL}} = \frac{\text{CA} - \text{Inventories} - \text{Prepaid Expenses}}{\text{Current Liabilities}}
+    \end{equation}
+    \begin{equation*}
+        \textbf{Conventional Ideal Benchmark Norm: } 1 : 1
+    \end{equation*}
+
+    \item \textbf{Cash Position Ratio (Absolute Liquid Ratio):}
+    The most rigorous measure of immediate cash liquidity, considering exclusively cash and near-cash balances:
+    \begin{equation}
+        \text{Cash Position Ratio} = \frac{\text{Cash} + \text{Bank} + \text{Current Marketable Investments}}{\text{Current Liabilities}}
+    \end{equation}
+    \begin{equation*}
+        \textbf{Conventional Ideal Benchmark Norm: } 0.75 : 1 \quad (\text{or } 0.5 : 1)
+    \end{equation*}
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{15/10/2026}
+\begin{example}{Comprehensive Evaluation of Liquidity and Short-Term Solvency}{ex_liquidity_ratios}
+\textbf{Problem:} \\
+The Balance Sheet and Profit and Loss Account of a manufacturing corporation as on 31/12/1997 disclose the following financial records:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X r >{\raggedright\arraybackslash}X r}
+\toprule
+\multicolumn{2}{c}{\textbf{Balance Sheet as on 31/12/1997}} & \multicolumn{2}{c}{} \\
+\midrule
+\textbf{Liabilities} & \textbf{Amount (\inr)} & \textbf{Assets} & \textbf{Amount (\inr)} \\
+\midrule
+Issued Capital (40,000 shares of \inr 100 each) & 40,00,000 & Land and Building & 30,00,000 \\
+Reserves & 18,00,000 & Plant and Machinery & 16,00,000 \\
+Profit and Loss Account & 6,00,000 & Stock & 29,60,000 \\
+6\% Debentures & 6,00,000 & Debtors & 14,20,000 \\
+Creditors & 26,00,000 & Cash at Bank & 6,20,000 \\
+\midrule
+\textbf{Total} & \textbf{96,00,000} & \textbf{Total} & \textbf{96,00,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+You are required to evaluate:
+\begin{enumerate*}[label=(\alph*), itemjoin=\qquad]
+    \item Current Ratio,
+    \item Quick Ratio (Acid-Test Ratio), and
+    \item Cash Position Ratio.
+\end{enumerate*}
+Interpret the liquidity standing of the company against standard corporate norms.
+
+\tcbline
+\textbf{Step 1: Itemized Aggregation of Balance Sheet Components:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Current Assets (CA):}
+    \begin{align*}
+        \text{Current Assets} &= \text{Stock} + \text{Debtors} + \text{Cash at Bank} \\
+                              &= 29{,}60{,}000 + 14{,}20{,}000 + 6{,}20{,}000 = \mathbf{\inr 50{,}00{,}000}
+    \end{align*}
+
+    \item \textbf{Current Liabilities (CL):}
+    \begin{equation*}
+        \text{Current Liabilities} = \text{Creditors} = \mathbf{\inr 26{,}00{,}000}
+    \end{equation*}
+
+    \item \textbf{Quick Assets (QA):}
+    \begin{align*}
+        \text{Quick Assets} &= \text{Current Assets} - \text{Stock} \\
+                            &= 50{,}00{,}000 - 29{,}60{,}000 = \mathbf{\inr 20{,}40{,}000} \\
+        \text{Alternatively:} \quad \text{QA} &= \text{Debtors} + \text{Cash at Bank} \\
+                            &= 14{,}20{,}000 + 6{,}20{,}000 = \mathbf{\inr 20{,}40{,}000}
+    \end{align*}
+
+    \item \textbf{Absolute Cash Assets:}
+    \begin{equation*}
+        \text{Cash Assets} = \text{Cash at Bank} = \mathbf{\inr 6{,}20{,}000}
+    \end{equation*}
+\end{enumerate}
+
+\tcbline
+\textbf{Step 2: Computation of Liquidity Ratios:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Current Ratio:}
+    \begin{equation*}
+        \text{Current Ratio} = \frac{\text{Current Assets}}{\text{Current Liabilities}} = \frac{50{,}00{,}000}{26{,}00{,}000} = \mathbf{1.92 : 1}
+    \end{equation*}
+
+    \item \textbf{Quick Ratio (Acid-Test Ratio):}
+    \begin{equation*}
+        \text{Quick Ratio} = \frac{\text{Quick Assets}}{\text{Current Liabilities}} = \frac{20{,}40{,}000}{26{,}00{,}000} = \mathbf{0.78 : 1}
+    \end{equation*}
+
+    \item \textbf{Cash Position Ratio:}
+    \begin{equation*}
+        \text{Cash Position Ratio} = \frac{\text{Cash at Bank}}{\text{Current Liabilities}} = \frac{6{,}20{,}000}{26{,}00{,}000} = \mathbf{0.24 : 1}
+    \end{equation*}
+\end{enumerate}
+
+\tcbline
+\textbf{Managerial Interpretation \& Diagnostic Summary:}
+\begin{itemize}[leftmargin=*, topsep=2pt, itemsep=2pt]
+    \item \textbf{Current Ratio ($1.92:1$ vs Norm $2.00:1$):} The enterprise maintains $\inr 1.92$ of short-term assets for every $\inr 1.00$ of current debt. While superficially close to the traditional $2:1$ rule of thumb, it conceals underlying compositional risk.
+    \item \textbf{Quick Ratio ($0.78:1$ vs Norm $1.00:1$):} Liquid asset cover falls significantly below the $1:1$ benchmark. Specifically, inventories account for $\frac{29{,}60{,}000}{50{,}00{,}000} = 59.2\%$ of total current assets.
+    \item \textbf{Cash Position Ratio ($0.24:1$ vs Norm $0.75:1$):} Immediate cash coverage of $0.24$ signals vulnerability to sudden supplier payment calls or working capital shocks if stock realization slows down.
+\end{itemize}
+\end{example}
+
+% ==============================================================================
+% 3.4 Fund Flow & Cash Flow Statement Analysis
+% ==============================================================================
+\section{Fund Flow \& Cash Flow Statement Analysis}
+\lecturedate{20/10/2026}
+
+\begin{definition}{Financial Flow Statements: Funds Flow vs. Cash Flow}{def_financial_flow_statements}
+Financial statement flow analysis examines the dynamic transmission of financial resources across consecutive accounting periods:
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=2pt]
+    \item \textbf{Funds Flow Statement:} A diagnostic statement portraying movements in the firm's \textbf{Net Working Capital} ($\NWC = \text{Current Assets} - \text{Current Liabilities}$). It explains how long-term resources (capital, debt borrowings, operational profits) were generated (Sources) and deployed into fixed capital or debt retirement (Applications).
+    \item \textbf{Cash Flow Statement:} A specialized report portraying the gross inflows and outflows of \textbf{Cash and Cash Equivalents} (currency, demand deposits, short-term marketable instruments) arising from Operating, Investing, and Financing activities.
+\end{enumerate}
+\end{definition}
+
+\subsection{Principles Governing Working Capital and Cash Movements}
+The operational mechanics of working capital and cash adjustments follow complementary accounting principles:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X >{\centering\arraybackslash}p{4.2cm} >{\centering\arraybackslash}p{4.2cm}}
+\toprule
+\textbf{Accounting Transaction / Movement} & \textbf{Impact on Working Capital} & \textbf{Impact on Cash Position} \\
+\midrule
+Increase in Current Asset ($\uparrow \text{CA}$) & Increase in Working Capital ($+$) & Cash Outflow / Applied ($-$) \\
+Decrease in Current Asset ($\downarrow \text{CA}$) & Decrease in Working Capital ($-$) & Cash Inflow / Released ($+$) \\
+Increase in Current Liability ($\uparrow \text{CL}$) & Decrease in Working Capital ($-$) & Cash Inflow / Source ($+$) \\
+Decrease in Current Liability ($\downarrow \text{CL}$) & Increase in Working Capital ($+$) & Cash Outflow / Applied ($-$) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{formulabox}[Operational Cash Flow \& Funds Flow Identities]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Funds from Operations (FFO):}
+    \begin{align}
+        \FFO &= \text{Net Profit} + \text{Non-Cash Expenses (Depreciation, Amortization)} \notag \\
+             &\quad + \text{Non-Operating Losses} - \text{Non-Operating Incomes}
+    \end{align}
+
+    \item \textbf{Cash Flow from Operations (CFO):}
+    \begin{align}
+        \CFO &= \FFO + \sum (\uparrow \text{CL}) + \sum (\downarrow \text{CA}) - \sum (\downarrow \text{CL}) - \sum (\uparrow \text{CA})
+    \end{align}
+
+    \item \textbf{Net Working Capital Identity:}
+    \begin{equation}
+        \Delta \NWC = \Delta \text{Current Assets} - \Delta \text{Current Liabilities}
+    \end{equation}
+
+    \item \textbf{Funds Flow Fundamental Balance Equation:}
+    \begin{equation}
+        \text{Total Sources of Funds} - \text{Total Applications of Funds} = \Delta \NWC
+    \end{equation}
+\end{itemize}
+\end{formulabox}
+
+\lecturedate{20/10/2026}
+\begin{example}{Computation of Cash Flow from Operations}{ex_cash_from_operations}
+\textbf{Problem:} \\
+The records of an industrial enterprise disclose that the \textbf{Funds from Operations} for the financial year ended 31/12/1998 amounted to $\inr 84{,}000$. The balances of Current Assets and Current Liabilities on 01/01/1998 and 31/12/1998 were as follows:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{0.85\linewidth}{>{\raggedright\arraybackslash}X r r}
+\toprule
+\textbf{Balance Sheet Item} & \textbf{01/01/1998 (\inr)} & \textbf{31/12/1998 (\inr)} \\
+\midrule
+Trade Creditors & 1,82,000 & 1,94,000 \\
+Trade Debtors & 2,75,000 & 3,15,000 \\
+Bills Receivable & 40,000 & 35,000 \\
+Bills Payable & 27,000 & 31,000 \\
+Inventories & 1,85,000 & 1,70,000 \\
+Trade Investments (Short-term) & 40,000 & 70,000 \\
+Outstanding Expenses & 20,000 & 25,000 \\
+Prepaid Expenses & 5,000 & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+You are required to prepare a formal Statement of Cash Flow from Operating Activities.
+
+\tcbline
+\textbf{Statement of Cash from Operating Activities for the Year Ended 31/12/1998:}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X r r}
+\toprule
+\textbf{Particulars} & \textbf{Inner (\inr)} & \textbf{Amount (\inr)} \\
+\midrule
+\textbf{Funds from Operations (as given)} & & \textbf{84,000} \\
+\addlinespace[3pt]
+\textit{Add: Increases in Current Liabilities \& Decreases in Current Assets:} & & \\
+\quad Increase in Trade Creditors ($1{,}94{,}000 - 1{,}82{,}000$) & 12,000 & \\
+\quad Increase in Bills Payable ($31{,}000 - 27{,}000$) & 4,000 & \\
+\quad Increase in Outstanding Expenses ($25{,}000 - 20{,}000$) & 5,000 & \\
+\quad Decrease in Bills Receivable ($40{,}000 - 35{,}000$) & 5,000 & \\
+\quad Decrease in Inventories ($1{,}85{,}000 - 1{,}70{,}000$) & 15,000 & 41,000 \\
+\midrule
+\textbf{Subtotal} & & \textbf{1,25,000} \\
+\addlinespace[3pt]
+\textit{Less: Decreases in Current Liabilities \& Increases in Current Assets:} & & \\
+\quad Increase in Trade Debtors ($3{,}15{,}000 - 2{,}75{,}000$) & (40,000) & \\
+\quad Increase in Trade Investments ($70{,}000 - 40{,}000$) & (30,000) & \\
+\quad Increase in Prepaid Expenses ($8{,}000 - 5{,}000$) & (3,000) & (73,000) \\
+\midrule
+\textbf{Net Cash Flow Generated from Operations (CFO)} & & \textbf{\inr 52,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Analytical Interpretation:} \\
+Although the enterprise generated $\inr 84{,}000$ of operational surplus before working capital movements, $\inr 73{,}000$ of liquidity was absorbed into expanded customer receivables, short-term trade investments, and prepaid costs. Offsetting inflows of $\inr 41{,}000$ from supplier credit expansion and inventory liquidation resulted in a net operational cash generation of $\mathbf{\inr 52{,}000}$.
+\end{example}
+
+\lecturedate{20/10/2026}
+\begin{example}{Comprehensive Funds Flow Statement Formulation}{ex_funds_flow_comprehensive}
+\textbf{Problem:} \\
+The following comparative Balance Sheets relate to the business concern of Mr.~Rajan (Sole Trader) for the years 1997 and 1998:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X r r >{\raggedright\arraybackslash}X r r}
+\toprule
+\textbf{Liabilities} & \textbf{1997 (\inr)} & \textbf{1998 (\inr)} & \textbf{Assets} & \textbf{1997 (\inr)} & \textbf{1998 (\inr)} \\
+\midrule
+Creditors & 18,000 & 20,500 & Cash & 2,000 & 1,800 \\
+Bank Loan (Long-term) & 15,000 & 22,500 & Debtors & 17,500 & 19,200 \\
+Rajan's Capital & 74,000 & 74,500 & Stock & 12,500 & 11,000 \\
+& & & Land & 10,000 & 15,000 \\
+& & & Building & 25,000 & 27,500 \\
+& & & Machinery & 40,000 & 43,000 \\
+\midrule
+\textbf{Total} & \textbf{1,07,000} & \textbf{1,17,500} & \textbf{Total} & \textbf{1,07,000} & \textbf{1,17,500} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\textbf{Additional Financial Information for 1998:}
+\begin{enumerate*}[label=(\roman*), itemjoin=\qquad]
+    \item Drawings by the proprietor Mr.~Rajan for personal use amounted to $\inr 13{,}000$.
+    \item Provision for depreciation on machinery stood at $\inr 13{,}500$ on 01/01/1998 and at $\inr 18{,}000$ on 31/12/1998.
+\end{enumerate*}
+You are required to prepare:
+\begin{enumerate*}[label=(\alph*), itemjoin=\qquad]
+    \item Schedule of Changes in Working Capital,
+    \item Supporting Working Notes, and
+    \item Funds Flow Statement for 1998.
+\end{enumerate*}
+
+\tcbline
+\textbf{Step 1: Statement of Changes in Working Capital:}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X r r >{\raggedleft\arraybackslash}p{2.5cm} >{\raggedleft\arraybackslash}p{2.5cm}}
+\toprule
+\textbf{Particulars} & \textbf{1997 (\inr)} & \textbf{1998 (\inr)} & \textbf{Increase in WC} & \textbf{Decrease in WC} \\
+\midrule
+\textbf{Current Assets (CA):} & & & & \\
+Cash & 2,000 & 1,800 & --- & 200 \\
+Debtors & 17,500 & 19,200 & 1,700 & --- \\
+Stock & 12,500 & 11,000 & --- & 1,500 \\
+\midrule
+\textbf{Total Current Assets (A)} & \textbf{32,000} & \textbf{32,000} & & \\
+\midrule
+\textbf{Current Liabilities (CL):} & & & & \\
+Creditors & 18,000 & 20,500 & --- & 2,500 \\
+\midrule
+\textbf{Total Current Liabilities (B)} & \textbf{18,000} & \textbf{20,500} & & \\
+\midrule
+\textbf{Net Working Capital (A $-$ B)} & \textbf{14,000} & \textbf{11,500} & & \\
+\textbf{Net Decrease in Working Capital} & & \textbf{2,500} & 2,500 & --- \\
+\midrule
+\textbf{Total} & \textbf{14,000} & \textbf{14,000} & \textbf{4,200} & \textbf{4,200} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+\tcbline
+\textbf{Step 2: Supporting Accounting Working Notes:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Working Note 1: Computation of Net Profit \& Funds from Operations (FFO):}
+    \begin{align*}
+        \text{Closing Capital (31/12/1998)} &= \inr 74{,}500 \\
+        \text{Add: Drawings during the year} &= \inr 13{,}000 \\
+        \text{Adjusted Capital Total} &= \inr 87{,}500 \\
+        \text{Less: Opening Capital (01/01/1998)} &= (\inr 74{,}000) \\
+        \midrule
+        \textbf{Net Profit for the Year} &= \mathbf{\inr 13{,}500} \\
+        \text{Add: Non-Cash Depreciation on Machinery } (18{,}000 - 13{,}500) &= \inr 4{,}500 \\
+        \midrule
+        \textbf{Funds from Operations (FFO)} &= \mathbf{\inr 18{,}000}
+    \end{align*}
+
+    \item \textbf{Working Note 2: Machinery Ledger Account (at Cost):}
+    \begin{center}
+    \small
+    \begin{tabularx}{0.9\linewidth}{>{\raggedright\arraybackslash}X r >{\raggedright\arraybackslash}X r}
+    \toprule
+    \textbf{Dr. Particulars} & \textbf{Amount (\inr)} & \textbf{Cr. Particulars} & \textbf{Amount (\inr)} \\
+    \midrule
+    To Balance b/d & 40,000 & By Depreciation for year & 4,500 \\
+    To Bank (Purchases balancing figure) & \textbf{7,500} & By Balance c/d & 43,000 \\
+    \midrule
+    \textbf{Total} & \textbf{47,500} & \textbf{Total} & \textbf{47,500} \\
+    \bottomrule
+    \end{tabularx}
+    \end{center}
+\end{enumerate}
+
+\tcbline
+\textbf{Step 3: Statement of Sources and Applications of Funds (Funds Flow Statement):}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X r >{\raggedright\arraybackslash}X r}
+\toprule
+\textbf{Sources of Funds} & \textbf{Amount (\inr)} & \textbf{Applications of Funds} & \textbf{Amount (\inr)} \\
+\midrule
+Funds from Operations (WN 1) & 18,000 & Purchase of Land ($15{,}000 - 10{,}000$) & 5,000 \\
+Long-term Bank Loan Raised & 7,500 & Purchase of Building ($27{,}500 - 25{,}000$) & 2,500 \\
+\quad ($22{,}500 - 15{,}000$) & & Purchase of Machinery (WN 2) & 7,500 \\
+& & Drawings of Proprietor & 13,000 \\
+\midrule
+\textbf{Total Sources (A)} & \textbf{25,500} & \textbf{Total Applications (B)} & \textbf{28,000} \\
+\midrule
+\multicolumn{3}{l}{\textbf{Net Decrease in Working Capital (B $-$ A)}} & \textbf{\inr 2,500} \\
+\midrule
+\textbf{Reconciled Total} & \textbf{28,000} & \textbf{Total} & \textbf{28,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{example}
+
+% ==============================================================================
+% 3.5 Cost-Volume-Profit (CVP) and Break-Even Analysis
+% ==============================================================================
+\newpage
+\section{Cost-Volume-Profit (CVP) and Break-Even Analysis}
+\lecturedate{26/10/2026}
+
+\begin{definition}{Cost-Volume-Profit Analysis \& Marginal Costing}{def_cvp_analysis}
+\textbf{Cost-Volume-Profit (CVP) Analysis} is a quantitative managerial economics technique that evaluates how dynamic variations in operating costs (both fixed and variable components) and production/sales volume interact to determine operational profit and economic feasibility.
+\end{definition}
+
+\subsection{Cost Architecture: Fixed vs. Variable Elements}
+\begin{itemize}[leftmargin=*, topsep=2pt, itemsep=2pt]
+    \item \textbf{Fixed Costs (Period Costs / Time Costs):} Operating expenditures that remain structurally invariant in total sum regardless of production volume fluctuations within the relevant operating capacity (e.g. factory rent, executive salaries, property taxes, straight-line depreciation). On a per-unit basis, fixed cost declines asymptotically as volume increases.
+    \item \textbf{Variable Costs (Product Costs / Marginal Costs):} Operational expenditures that vary in direct linear proportion to aggregate output volume (e.g. direct raw materials, piece-rate direct labor, sales commissions, direct power). On a per-unit basis, variable cost remains constant.
+\end{itemize}
+
+\subsection{Fundamental CVP Formulations \& Identity Mechanics}
+\begin{formulabox}[Comprehensive CVP and Break-Even Formulas]
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item \textbf{Contribution Margin ($C$):}
+    \begin{align}
+        C &= \text{Sales Revenue } (S) - \text{Variable Cost } (V) \\[2pt]
+        C &= \text{Fixed Cost } (F) + \text{Profit } (P) \\[2pt]
+        C_{\text{unit}} &= s - v = \text{Selling Price per Unit} - \text{Variable Cost per Unit}
+    \end{align}
+
+    \item \textbf{Profit-Volume Ratio (P/V Ratio):}
+    Expresses the percentage of sales revenue remaining after variable cost coverage:
+    \begin{equation}
+        \text{P/V Ratio} = \frac{C}{S} \times 100 = \frac{S - V}{S} \times 100 = \frac{F + P}{S} \times 100 = \frac{\Delta \text{Profit}}{\Delta \text{Sales}} \times 100
+    \end{equation}
+
+    \item \textbf{Break-Even Point (BEP):}
+    The unique operational equilibrium volume where total sales revenue equals total operating costs ($\text{Total Profit} = 0$):
+    \begin{align}
+        \text{BEP (in Output Units)} &= \frac{\text{Fixed Cost } (F)}{\text{Contribution per Unit } (s - v)} = \frac{F}{C_{\text{unit}}} \\[4pt]
+        \text{BEP (in Sales Value)} &= \frac{\text{Fixed Cost } (F)}{\text{P/V Ratio}} = \text{BEP (Units)} \times s
+    \end{align}
+
+    \item \textbf{Break-Even Ratio:}
+    \begin{equation}
+        \text{Break-Even Ratio} = \frac{\text{Break-Even Sales}}{\text{Actual / Budgeted Sales}} \times 100
+    \end{equation}
+
+    \item \textbf{Margin of Safety (MOS):}
+    The cushion of actual sales volume exceeding the break-even threshold:
+    \begin{align}
+        \MOS &= \text{Actual Sales} - \text{Break-Even Sales} = \frac{\text{Profit}}{\text{P/V Ratio}} \\[3pt]
+        \text{MOS Ratio} &= \frac{\MOS}{\text{Actual Sales}} \times 100 = 100\% - \text{Break-Even Ratio}
+    \end{align}
+
+    \item \textbf{Angle of Incidence ($\theta$):}
+    The geometric angle formed at the intersection of the Total Revenue line ($y = s \cdot x$) and Total Cost line ($y = F + v \cdot x$) on the Break-Even Chart. A wider angle indicates a superior P/V ratio and accelerated profit growth beyond the BEP.
+\end{itemize}
+\end{formulabox}
+
+\subsection{Managerial Advantages and Analytical Limitations}
+\subsubsection{Strategic Advantages of Break-Even Analysis}
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=2pt]
+    \item \textbf{Cost Structure Delineation:} Precisely delineates total operating expenditure into fixed overheads and marginal components.
+    \item \textbf{Threshold Volume Ascertainment:} Identifies the critical minimum sales output (in units and rupees) required to avert operational losses.
+    \item \textbf{Decision-Making Optimization:} Facilitates pricing strategy, make-or-buy evaluations, and tender quoting through CVP simulation.
+    \item \textbf{Inter-Firm Competitiveness Benchmarking:} Evaluates operating leverage and resilience against peer entities across business cycles.
+    \item \textbf{Profit Forecasting \& Financial Planning:} Models target sales volume needed to generate pre-determined profit objectives: $S_{\text{target}} = \frac{F + P_{\text{target}}}{\text{P/V Ratio}}$.
+    \item \textbf{Product Portfolio Optimization:} Evaluates multi-division product mixes to maximize aggregate contribution margins.
+    \item \textbf{Cost Control \& Budgetary Benchmarking:} Establishes rigorous cost-absorption variance thresholds.
+    \item \textbf{Corporate Surplus Aggregation:} Synthesizes divisional contributions to establish corporate earnings after central fixed overhead deduction.
+\end{enumerate}
+
+\subsubsection{Critical Theoretical \& Practical Limitations}
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=2pt]
+    \item \textbf{Imperfect Cost Segregation:} In practice, semi-variable and stepped-fixed costs fluctuate non-linearly, particularly beyond $100\%$ operating capacity.
+    \item \textbf{Price Elasticity Violations:} Assumes a constant unit selling price regardless of volume, ignoring commercial price discounts and downward-sloping demand curves.
+    \item \textbf{Detailed Cost Masking:} Aggregated break-even models obscure granular departmental efficiency variations.
+    \item \textbf{Inventory Valuation Distortion:} Marginal costing ignores the absorption of fixed overheads into opening and closing stock reserves.
+    \item \textbf{Multi-Product Mix Instability:} Assumes a rigid, constant product sales mix; shifts in relative consumer demand distort composite break-even coordinates.
+    \item \textbf{Exclusion of Capital Structure Dynamics:} Fails to account for return on invested capital, debt leverage charges, and working capital carrying costs.
+    \item \textbf{Static Environmental Assumptions:} Becomes highly unreliable under volatile macroeconomic conditions, input inflation, or technological disruption.
+\end{enumerate}
+
+\newpage
+\lecturedate{26/10/2026}
+\begin{example}{Break-Even Formulation and Visual Graphic Modeling for A Ltd}{ex_bep_a_ltd}
+\textbf{Problem:} \\
+A Ltd.~has furnished the following operating data:
+\begin{itemize}[noitemsep]
+    \item Fixed Cost ($F$) = $\inr 80{,}000$
+    \item Variable Cost per unit ($v$) = $\inr 4$
+    \item Estimated Sales Value ($S$) = $\inr 2{,}00{,}000$
+    \item Selling Price per unit ($s$) = $\inr 20$
+\end{itemize}
+You are required to:
+\begin{enumerate*}[label=(\alph*), itemjoin=\quad]
+    \item Determine Contribution per unit and total,
+    \item Calculate the P/V Ratio,
+    \item Determine Break-Even Point in output units and monetary sales value,
+    \item Calculate the Margin of Safety,
+    \item Analyze the Angle of Incidence, and
+    \item Construct the formal Break-Even Chart.
+\end{enumerate*}
+
+\tcbline
+\textbf{Step 1: Intermediate Operational Calculations:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Estimated Output Volume:}
+    \begin{equation*}
+        \text{Output Units } (Q) = \frac{\text{Estimated Sales Value}}{\text{Selling Price per Unit}} = \frac{2{,}00{,}000}{20} = \mathbf{10{,}000 \text{ units}}
+    \end{equation*}
+
+    \item \textbf{Contribution Margin:}
+    \begin{align*}
+        C_{\text{unit}} &= s - v = 20 - 4 = \mathbf{\inr 16 \text{ per unit}} \\
+        \text{Total Contribution} &= Q \times C_{\text{unit}} = 10{,}000 \times 16 = \mathbf{\inr 1{,}60{,}000}
+    \end{align*}
+
+    \item \textbf{Profit-Volume Ratio (P/V Ratio):}
+    \begin{equation*}
+        \text{P/V Ratio} = \frac{C_{\text{unit}}}{s} \times 100 = \frac{16}{20} \times 100 = \mathbf{80\%}
+    \end{equation*}
+
+    \item \textbf{Break-Even Point (BEP):}
+    \begin{align*}
+        \text{BEP (in Units)} &= \frac{\text{Fixed Cost}}{C_{\text{unit}}} = \frac{80{,}000}{16} = \mathbf{5{,}000 \text{ units}} \\[0.3em]
+        \text{BEP (in Sales Value)} &= \frac{\text{Fixed Cost}}{\text{P/V Ratio}} = \frac{80{,}000}{0.80} = \mathbf{\inr 1{,}00{,}000} \\
+        \text{Alternatively:} \quad \text{BEP (Value)} &= 5{,}000 \times 20 = \mathbf{\inr 1{,}00{,}000}
+    \end{align*}
+
+    \item \textbf{Margin of Safety (MOS):}
+    \begin{align*}
+        \MOS (\text{Value}) &= \text{Actual Sales} - \text{BEP (Sales)} \\
+                            &= 2{,}00{,}000 - 1{,}00{,}000 = \mathbf{\inr 1{,}00{,}000} \\[0.3em]
+        \MOS (\text{Units}) &= 10{,}000 - 5{,}000 = \mathbf{5{,}000 \text{ units}} \\[0.3em]
+        \text{MOS Ratio} &= \frac{1{,}00{,}000}{2{,}00{,}000} \times 100 = \mathbf{50\%}
+    \end{align*}
+
+    \item \textbf{Angle of Incidence Analysis:}
+    At the BEP ($5{,}000$ units, $\inr 1{,}00{,}000$), the sales revenue curve ($m_S = 20$) intersects the total cost curve ($m_{\text{TC}} = 4$). The slope differential $\Delta m = 20 - 4 = 16$ creates a steep angle of incidence ($\theta = \arctan(16)$), indicating aggressive profit expansion once operations cross $5{,}000$ units.
+\end{enumerate}
+
+\newpage
+\tcbline
+\textbf{Step 2: Graphic Vector Break-Even Chart Representation:}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13.0cm,
+    height=7.2cm,
+    xlabel={\textbf{Output / Sales Volume (Units)}},
+    ylabel={\textbf{Cost and Revenue (\inr)}},
+    xmin=0, xmax=10800,
+    ymin=0, ymax=220000,
+    xtick={0, 2500, 5000, 7500, 10000},
+    xticklabels={0, {2,500}, {5,000}, {7,500}, {10,000}},
+    ytick={0, 50000, 80000, 100000, 150000, 200000},
+    yticklabels={0, {50,000}, {80,000}, {1,00,000}, {1,50,000}, {2,00,000}},
+    grid=major,
+    grid style={dashed, gray!30},
+    axis lines=left,
+    legend pos=north west,
+    legend cell align=left,
+    legend style={font=\footnotesize, fill=white, fill opacity=0.9, draw=boxborder}
+]
+
+% Shaded Loss Area (0 to 5000 units)
+\fill[red!15, opacity=0.6] (axis cs:0, 80000) -- (axis cs:5000, 100000) -- (axis cs:0, 0) -- cycle;
+\node[font=\footnotesize\bfseries, text=red!80!black] at (axis cs:2200, 60000) {LOSS AREA};
+
+% Shaded Profit Area (5000 to 10000 units)
+\fill[darkteal!15, opacity=0.6] (axis cs:5000, 100000) -- (axis cs:10000, 200000) -- (axis cs:10000, 120000) -- cycle;
+\node[font=\footnotesize\bfseries, text=darkteal] at (axis cs:8000, 150000) {PROFIT AREA};
+
+% Fixed Cost Line (y = 80000)
+\addplot[darkteal, line width=1.3pt, dashed, domain=0:10000] {80000};
+\addlegendentry{Fixed Cost (\inr 80,000)}
+
+% Total Cost Line (y = 80000 + 4*x)
+\addplot[amber!90!black, line width=1.5pt, domain=0:10000] {80000 + 4*x};
+\addlegendentry{Total Cost ($y = 80{,}000 + 4x$)}
+
+% Sales Revenue Line (y = 20*x)
+\addplot[navyblue, line width=1.5pt, domain=0:10000] {20*x};
+\addlegendentry{Sales Revenue ($y = 20x$)}
+
+% Drop lines from BEP to axes
+\draw[dashed, charcoal!80, line width=0.8pt] (axis cs:5000, 0) -- (axis cs:5000, 100000);
+\draw[dashed, charcoal!80, line width=0.8pt] (axis cs:0, 100000) -- (axis cs:5000, 100000);
+
+% Break-Even Point Marker
+\node[circle, draw=navyblue, fill=white, line width=1.5pt, inner sep=2.5pt] at (axis cs:5000, 100000) {};
+\node[above left=3pt, font=\bfseries\footnotesize, text=navyblue] at (axis cs:5000, 100000) {BEP (5,000 units, \inr 1,00,000)};
+
+% Margin of Safety Dimension Line
+\draw[<->, thick, navyblue] (axis cs:5000, 20000) -- (axis cs:10000, 20000) 
+    node[midway, above, font=\scriptsize\bfseries] {Margin of Safety (5,000 units / \inr 1,00,000)};
+
+% Angle of incidence indicator
+\node[right=8pt, font=\scriptsize\bfseries, text=amber!90!black] at (axis cs:5400, 108000) {Angle of Incidence ($\theta$)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\tcbline
+\textbf{Step 3: Managerial Synthesis and Operational Diagnostics:}
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=3pt]
+    \item \textbf{High Contribution Velocity ($\mathbf{80\%}$ P/V Ratio):}
+    With a variable cost ratio of only $20\%$ ($v/s = 4/20$), every incremental rupee of sales beyond the break-even threshold contributes $\inr 0.80$ directly toward operating net profit, reflecting powerful operating leverage.
+
+    \item \textbf{Robust Safety Buffer ($\mathbf{50\%}$ Margin of Safety):}
+    The enterprise can absorb up to a $50\%$ contraction in sales demand (from $10{,}000$ units down to $5{,}000$ units, or a decline of $\inr 1{,}00{,}000$ in turnover) before incurring an operational net loss.
+
+    \item \textbf{Steep Angle of Incidence ($\theta$):}
+    The wide slope divergence between the sales revenue curve ($y = 20x$) and the total cost curve ($y = 80{,}000 + 4x$) confirms that profitability accelerates aggressively once fixed overheads ($\inr 80{,}000$) are fully amortized.
+
+    \item \textbf{Downside Risk Mitigation:}
+    Because fixed overhead represents only $40\%$ of budgeted revenue ($80{,}000 / 2{,}00{,}000$), the enterprise maintains substantial operational agility during cyclical market downturns.
+\end{enumerate}
+\end{example}
+
+\newpage
+\lecturedate{27/10/2026}
+\begin{example}{Contribution Break-Even Modeling and Sensitivity Analysis}{ex_contribution_bep}
+\textbf{Problem:} \\
+A manufacturing enterprise provides the following budgeted operational estimates:
+\begin{itemize}[noitemsep]
+    \item Budgeted Output Capacity = $80{,}000$ units
+    \item Fixed Operating Expenses = $\inr 4{,}00{,}000$
+    \item Variable Expenses per unit = $\inr 10$
+    \item Selling Price per unit = $\inr 20$
+\end{itemize}
+You are required to:
+\begin{enumerate*}[label=(\alph*), itemjoin=\quad]
+    \item Calculate Contribution per unit and P/V Ratio,
+    \item Determine Break-Even Point in units and in sales value,
+    \item Compute Operating Profit at budgeted capacity,
+    \item Construct the Contribution Break-Even Chart, and
+    \item Conduct a Sensitivity Analysis for input cost and price fluctuations.
+\end{enumerate*}
+
+\tcbline
+\textbf{Step 1: Fundamental Mathematical Computations:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Unit Contribution \& P/V Ratio:}
+    \begin{align*}
+        C_{\text{unit}} &= s - v = 20 - 10 = \mathbf{\inr 10 \text{ per unit}} \\
+        \text{P/V Ratio} &= \frac{C_{\text{unit}}}{s} \times 100 = \frac{10}{20} \times 100 = \mathbf{50\%}
+    \end{align*}
+
+    \item \textbf{Break-Even Point (BEP):}
+    \begin{align*}
+        \text{BEP (in Units)} &= \frac{\text{Fixed Expenses}}{C_{\text{unit}}} = \frac{4{,}00{,}000}{10} = \mathbf{40{,}000 \text{ units}} \\[0.3em]
+        \text{BEP (in Sales Value)} &= \frac{\text{Fixed Expenses}}{\text{P/V Ratio}} = \frac{4{,}00{,}000}{0.50} = \mathbf{\inr 8{,}00{,}000}
+    \end{align*}
+
+    \item \textbf{Operating Performance at Budgeted Output ($80{,}000$ units):}
+    \begin{align*}
+        \text{Gross Revenue } (80{,}000 \times \inr 20) &= \inr 16{,}00{,}000 \\
+        \text{Less: Variable Expenses } (80{,}000 \times \inr 10) &= (\inr 8{,}00{,}000) \\
+        \text{Total Contribution Margin} &= \inr 8{,}00{,}000 \\
+        \text{Less: Fixed Operating Expenses} &= (\inr 4{,}00{,}000) \\
+        \midrule
+        \textbf{Budgeted Operating Profit} &= \mathbf{\inr 4{,}00{,}000}
+    \end{align*}
+
+    \item \textbf{Margin of Safety at Budgeted Output:}
+    \begin{align*}
+        \MOS (\text{Value}) &= 16{,}00{,}000 - 8{,}00{,}000 = \mathbf{\inr 8{,}00{,}000} \quad (40{,}000 \text{ units}) \\
+        \text{MOS Ratio} &= \frac{8{,}00{,}000}{16{,}00{,}000} \times 100 = \mathbf{50\%}
+    \end{align*}
+\end{enumerate}
+
+\newpage
+\tcbline
+\textbf{Step 2: Graphic Vector Contribution Break-Even Chart:}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13.0cm,
+    height=6.2cm,
+    xlabel={\textbf{Output / Sales Volume (Units)}},
+    ylabel={\textbf{Cost and Revenue (\inr)}},
+    xmin=0, xmax=85000,
+    ymin=0, ymax=1750000,
+    xtick={0, 20000, 40000, 60000, 80000},
+    xticklabels={0, {20,000}, {40,000}, {60,000}, {80,000}},
+    ytick={0, 400000, 800000, 1200000, 1600000},
+    yticklabels={0, {4,00,000}, {8,00,000}, {12,00,000}, {16,00,000}},
+    grid=major,
+    grid style={dashed, gray!30},
+    axis lines=left,
+    legend pos=north west,
+    legend cell align=left,
+    legend style={font=\footnotesize, fill=white, fill opacity=0.9, draw=boxborder}
+]
+
+% Shaded Loss Area (0 to 40000 units)
+\fill[red!15, opacity=0.6] (axis cs:0, 400000) -- (axis cs:40000, 800000) -- (axis cs:0, 0) -- cycle;
+\node[font=\footnotesize\bfseries, text=red!80!black] at (axis cs:16000, 450000) {LOSS AREA};
+
+% Shaded Profit Area (40000 to 80000 units)
+\fill[darkteal!15, opacity=0.6] (axis cs:40000, 800000) -- (axis cs:80000, 1600000) -- (axis cs:80000, 1200000) -- cycle;
+\node[font=\footnotesize\bfseries, text=darkteal] at (axis cs:63000, 1220000) {PROFIT AREA (\inr 4,00,000)};
+
+% Fixed Cost Line (y = 400000)
+\addplot[darkteal, line width=1.3pt, dashed, domain=0:80000] {400000};
+\addlegendentry{Fixed Cost (\inr 4,00,000)}
+
+% Total Cost Line (y = 400000 + 10*x)
+\addplot[amber!90!black, line width=1.5pt, domain=0:80000] {400000 + 10*x};
+\addlegendentry{Total Cost ($y = 4{,}00{,}000 + 10x$)}
+
+% Sales Revenue Line (y = 20*x)
+\addplot[navyblue, line width=1.5pt, domain=0:80000] {20*x};
+\addlegendentry{Sales Revenue ($y = 20x$)}
+
+% Drop lines from BEP to axes
+\draw[dashed, charcoal!80, line width=0.8pt] (axis cs:40000, 0) -- (axis cs:40000, 800000);
+\draw[dashed, charcoal!80, line width=0.8pt] (axis cs:0, 800000) -- (axis cs:40000, 800000);
+
+% Break-Even Point Marker
+\node[circle, draw=navyblue, fill=white, line width=1.5pt, inner sep=2.5pt] at (axis cs:40000, 800000) {};
+\node[above left=3pt, font=\bfseries\footnotesize, text=navyblue] at (axis cs:40000, 800000) {BEP (40,000 units, \inr 8,00,000)};
+
+% Margin of Safety Indicator
+\draw[<->, thick, navyblue] (axis cs:40000, 150000) -- (axis cs:80000, 150000) 
+    node[midway, above, font=\scriptsize\bfseries] {Margin of Safety (40,000 units / \inr 8,00,000)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\tcbline
+\textbf{Step 3: Sensitivity Analysis of Operational Variables:} \\
+\textbf{Sensitivity Analysis} evaluates the quantitative responsiveness of profitability and break-even equilibrium to independent shifts in key operational parameters:
+\begin{enumerate}[leftmargin=*, noitemsep, topsep=2pt]
+    \item \textbf{Scenario A: 10\% Increase in Selling Price ($s \to \inr 22$):} \\
+    $C_{\text{unit}} = 22 - 10 = \inr 12 \implies \text{BEP} = \frac{4{,}00{,}000}{12} = \mathbf{33{,}333 \text{ units}}$ ($\downarrow 16.7\%$). \\
+    Operating profit at $80{,}000$ units surges to $(80{,}000 \times 12) - 4{,}00{,}000 = \mathbf{\inr 5{,}60{,}000}$ ($\uparrow 40\%$).
+
+    \item \textbf{Scenario B: 10\% Increase in Variable Cost ($v \to \inr 11$):} \\
+    $C_{\text{unit}} = 20 - 11 = \inr 9 \implies \text{BEP} = \frac{4{,}00{,}000}{9} = \mathbf{44{,}444 \text{ units}}$ ($\uparrow 11.1\%$). \\
+    Operating profit at $80{,}000$ units declines to $(80{,}000 \times 9) - 4{,}00{,}000 = \mathbf{\inr 3{,}20{,}000}$ ($\downarrow 20\%$).
+
+    \item \textbf{Scenario C: 10\% Increase in Fixed Overhead ($F \to \inr 4{,}40{,}000$):} \\
+    $\text{BEP} = \frac{4{,}40{,}000}{10} = \mathbf{44{,}000 \text{ units}}$ ($\uparrow 10\%$). \\
+    Operating profit declines to $8{,}00{,}000 - 4{,}40{,}000 = \mathbf{\inr 3{,}60{,}000}$ ($\downarrow 10\%$).
+\end{enumerate}
+\vspace{2pt}
+\textit{Conclusion:} Profitability is most elastic with respect to unit selling price adjustments, followed by variable input cost control.
+\end{example}

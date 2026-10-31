@@ -103,9 +103,44 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
   - Formulations: Stock / Inventory Turnover Ratio ($\text{ITR} = \COGS / \text{Average Stock}$), Debtors / Receivables Turnover Ratio ($\text{DTR} = \text{Credit Sales} / \text{Average Receivables}$), Creditors / Payables Turnover Ratio ($\text{CTR} = \text{Credit Purchases} / \text{Average Payables}$), Working Capital Turnover, and Fixed Assets Turnover (on Cost of Sales and Net Sales bases).
   - Conversion Velocity Periods: Inventory holding period ($365 / \text{ITR}$ days), Debtors collection velocity ($365 / \text{DTR}$ days or $12 / \text{DTR}$ months), and Creditors payment velocity ($365 / \text{CTR}$ days or $12 / \text{CTR}$ months).
   - *Solved Example:* `3.2.1` Comprehensive operational turnover analysis, intermediate aggregate reconciliation, and velocity period evaluation (*Lecture: 13/10/2026*).
+- **3.3 Solvency Ratios: Liquidity & Financial Gearing:**
+  - Solvency and Liquidity Diagnostic Framework: Temporal horizons of Short-Term Solvency (Liquidity) vs. Long-Term Solvency (Capital Gearing).
+  - Short-Term Liquidity Ratios with conventional benchmark norms:
+    - Current Ratio / Working Capital Ratio ($\text{CA} / \text{CL}$, Ideal Norm $2:1$).
+    - Quick / Acid-Test Ratio ($\text{QA} / \text{CL} = (\text{CA} - \text{Stock} - \text{Prepaids}) / \text{CL}$, Ideal Norm $1:1$).
+    - Cash Position Ratio / Absolute Liquid Ratio ($(\text{Cash} + \text{Bank} + \text{Marketable Securities}) / \text{CL}$, Norm $0.75:1$ or $0.5:1$).
+  - Long-Term Gearing Ratios: Debt-to-Equity Ratio and Proprietary Ratio.
+  - *Solved Example:* `3.3.1` Comprehensive evaluation of liquidity, working capital components, inventory distortion, and acid-test solvency (*Lecture: 15/10/2026*).
+- **3.4 Fund Flow & Cash Flow Statement Analysis:**
+  - Financial Flow Statement Framework: Funds Flow Statement (movements in Net Working Capital, $\NWC = \text{CA} - \text{CL}$) vs. Cash Flow Statement (movements in Cash and Cash Equivalents across Operating, Investing, and Financing activities).
+  - Principles Governing Working Capital and Cash Movements: Comparative adjustment matrix for Current Assets and Current Liabilities.
+  - Mathematical identities and formulas:
+    - Funds from Operations ($\FFO = \text{Net Operating Profit} + \text{Depreciation} + \text{Amortization} + \text{Losses} - \text{Gains}$).
+    - Cash Flow from Operations ($\CFO = \FFO + \sum \uparrow\text{CL} + \sum \downarrow\text{CA} - \sum \downarrow\text{CL} - \sum \uparrow\text{CA}$).
+    - Funds Flow Balance Identity ($\text{Total Sources} - \text{Total Applications} = \Delta \NWC$).
+  - *Solved Examples:*
+    - `3.4.1` Computation of Cash Flow from Operations ($\CFO$) with multi-step non-cash and working capital adjustments (*Lecture: 20/10/2026*).
+    - `3.4.2` Comprehensive Funds Flow Statement formulation for Mr. Rajan, including Schedule of Changes in Working Capital, Working Note 1 (Adjusted Net Profit & $\FFO$), Working Note 2 (Machinery Ledger Account at cost), and balanced Sources vs. Applications statement (*Lecture: 20/10/2026*).
+- **3.5 Cost-Volume-Profit (CVP) and Break-Even Analysis:**
+  - Theoretical Foundations: CVP Analysis and Marginal Costing.
+  - Cost Architecture: Fixed Costs (Period/Time costs) vs. Variable Costs (Product/Marginal costs).
+  - Mathematical formulations & identity mechanics:
+    - Contribution Margin: $C = S - V = F + P$, Unit Contribution: $C_{\text{unit}} = s - v$.
+    - Profit-Volume Ratio: $\text{P/V} = \frac{C}{S} \times 100 = \frac{s - v}{s} \times 100 = \frac{\Delta P}{\Delta S} \times 100$.
+    - Break-Even Point: $\BEP_{\text{units}} = \frac{F}{s - v}$, $\BEP_{\text{sales}} = \frac{F}{\text{P/V}} = \BEP_{\text{units}} \times s$.
+    - Break-Even Ratio: $\text{BE Ratio} = \frac{\BEP_{\text{sales}}}{\text{Actual Sales}} \times 100$.
+    - Margin of Safety: $\MOS = \text{Actual Sales} - \BEP_{\text{sales}} = \frac{P}{\text{P/V Ratio}}$.
+    - Margin of Safety Ratio: $\text{MOS Ratio} = \frac{\MOS}{\text{Actual Sales}} \times 100 = 100\% - \text{BE Ratio}$.
+    - Target Volume for Profit $P_{\text{target}}$: $S_{\text{target}} = \frac{F + P_{\text{target}}}{\text{P/V Ratio}}$.
+    - Angle of Incidence: $\theta = \arctan(m_S - m_{\text{TC}})$.
+  - 8 Strategic Managerial Advantages and 7 Critical Analytical Limitations of Break-Even Analysis.
+  - Research-grade native TikZ/pgfplots Break-Even vector graphics (Fixed Cost dashed line, Total Cost line, Sales Revenue line, shaded Loss and Profit areas, Angle of Incidence, and Margin of Safety dimension lines).
+  - *Solved Examples:*
+    - `3.5.1` Break-Even formulation, intermediate computations, native vector graphic chart, and 4-point managerial operational diagnostics for A Ltd (*Lecture: 26/10/2026*).
+    - `3.5.2` Contribution Break-Even modeling, budgeted capacity analysis, native vector contribution chart, and 3-scenario Sensitivity Analysis for selling price, variable cost, and fixed overhead shifts (*Lecture: 27/10/2026*).
 
 - **Comprehensive Multi-Chapter Formula Reference Sheet:**
-  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1, Chapter 2, and Chapter 3 (17 formula cards).
+  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1, Chapter 2, and Chapter 3 (20 formula cards).
   - High-density mathematical formula boxes with explicit itemized `Where:` parameter definitions, validity conditions, and policy decision matrices.
   - Zero awkward splits: Every formula box is completely self-contained.
 
@@ -125,8 +160,8 @@ latex/
 ├── chapters/
 │   ├── ch01_interest_theory.tex                   # Chapter 1: Interest Theory (Lectures: 13/08 – 03/09/2026)
 │   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 08/10/2026)
-│   ├── ch03_financial_ratios_and_cash_flow.tex     # Chapter 3: Financial Ratios & Cash Flow (Lectures: 12/10 – 13/10/2026)
-│   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions
+│   ├── ch03_financial_ratios_and_cash_flow.tex     # Chapter 3: Financial Ratios & Cash Flow (Lectures: 12/10 – 27/10/2026)
+│   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions (Boxes 1-20)
 ├── figures/                                       # Department & University logos
 └── README.md                                      # Documentation & compilation instructions
 ```

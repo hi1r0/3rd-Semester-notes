@@ -9,7 +9,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 ```text
 ├── Financial Mathematics/
 │   ├── Assignment/                # FMCG Equity Valuation Assignment (Monochrome LaTeX, 8 pages, main.pdf)
-│   ├── latex/                     # Modular LaTeX lecture notes (Unit I & Chapter 2, main.pdf)
+│   ├── latex/                     # Modular LaTeX lecture notes (Units I, II, & III, 83 pages, main.pdf)
 │   ├── notes.docx                 # Comprehensive course notes Word document
 │   └── README.md                  # Subject overview and directory index
 ├── Financial Risk Management/
@@ -49,7 +49,10 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 
 1. **Financial Mathematics (MSQF 532)**
    - Simple and compound interest, effective interest rates, doubling periods (Rule of 72, Rule of 69), present value schedules, growing annuities, and perpetuities.
-   - Equity valuation frameworks: Going concern vs. liquidation book value floor, Dividend Discount Models (Gordon Model under growth, normal, and declining regimes), Walter's Model, and Modigliani-Miller (MM) dividend irrelevance theorem.
+   - Equity valuation frameworks: Going concern vs. liquidation book value floor, Dividend Discount Models (Gordon Model under growth, normal, and declining regimes), Walter's Model, Modigliani-Miller (MM) dividend irrelevance theorem, Bond YTC, and Loan Amortization.
+   - Financial ratio analysis: Profitability margins and fundamental invariance identity, operational asset turnover velocity cycles, short-term liquidity & solvency ratios (Current, Quick, Cash Position).
+   - Dynamic flow statements: Funds Flow Statement (Net Working Capital) vs. Cash Flow Statement (Cash & Cash Equivalents), Funds from Operations ($\FFO$), Cash from Operations ($\CFO$).
+   - Cost-Volume-Profit (CVP) and Break-Even Analysis: Contribution margin, P/V ratio, Break-Even Point (units and sales value), Margin of Safety ($\MOS$), Angle of Incidence ($\theta$), Sensitivity Analysis, and native vector TikZ/pgfplots Break-Even charts.
    - Empirical Course Assignment: Comprehensive Tri-Partite Equity Valuation on the Indian FMCG sector (10 firms, sensitivity analysis, break-even growth $g^*$).
 
 2. **Financial Risk Management (MSQF 533)**

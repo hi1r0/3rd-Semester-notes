@@ -12,7 +12,7 @@
 | Directory / File | Description |
 | :--- | :--- |
 | [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I (Interest Theory), Unit II (Valuation of Financial Instruments), and Unit III (Financial Ratios and Cash Flow Analysis), with unified Formula Reference Sheet and compiled [`main.pdf`](./latex/main.pdf). |
-| [`latex/README.md`](./latex/README.md) | Detailed syllabus roadmap, lecture date logs (`13/08/2026` to `13/10/2026`), solved problem sets, and compilation guides. |
+| [`latex/README.md`](./latex/README.md) | Detailed syllabus roadmap, lecture date logs (`13/08/2026` to `27/10/2026`), solved problem sets, and compilation guides. |
 | [`Assignment/`](./Assignment/) | Monochromatic LaTeX research report on FMCG Sector Equity Valuation using a Tri-Partite valuation architecture, with compiled [`main.pdf`](./Assignment/main.pdf). |
 | [`Assignment/README.md`](./Assignment/README.md) | Assignment summary, valuation models, consolidated decision matrix, and empirical takeaways. |
 | [`notes.docx`](./notes.docx) | Comprehensive Word document of course notes. |
@@ -40,6 +40,11 @@
    - Profitability margin identities: Gross Profit Ratio, Operating Profit Ratio, Operating Ratio, Fundamental Invariance Identity ($85.63\% + 14.38\% = 100\%$), Net Profit Ratio, and ROI.
    - Turnover / Activity Ratios: Inventory turnover ($\text{ITR}$), Debtors turnover ($\text{DTR}$), Creditors turnover ($\text{CTR}$), Working Capital turnover, and Fixed Assets turnover.
    - Operational velocity conversion cycles (holding period, collection period, and payment period in days and months).
-4. **FMCG Equity Valuation Assignment**
+   - Solvency Ratios & Liquidity Diagnostics: Current Ratio ($2:1$ norm), Quick / Acid-Test Ratio ($1:1$ norm), Cash Position Ratio ($0.75:1$ norm), Debt-to-Equity, and Proprietary Ratio.
+   - Flow Analysis: Funds Flow Statement (Net Working Capital) vs. Cash Flow Statement (Cash & Cash Equivalents); Funds from Operations ($\FFO$), Cash from Operations ($\CFO$), and full source/application balancing.
+   - Cost-Volume-Profit (CVP) and Break-Even Analysis: Contribution margin, P/V ratio, Break-Even Point (units and sales value), Margin of Safety ($\MOS$), Angle of Incidence ($\theta$), and Sensitivity Analysis. Native vector TikZ/pgfplots Break-Even charts.
+4. **Comprehensive Multi-Chapter Formula Reference Sheet**
+   - Single consolidated reference section at document end, partitioned into 20 self-contained formula cards across Chapters 1, 2, and 3 with mandatory structured `Where:` parameter lists.
+5. **FMCG Equity Valuation Assignment**
    - Rigorous empirical valuation across ten major Indian FMCG corporations (HUL, ITC, Nestle, Varun Beverages, Britannia, Marico, Tata Consumer, Godrej Consumer, Dabur, Colgate-Palmolive).
    - Liquidation Value floor, Market-Implied growth ($g^*$), and Dividend Discount Model consensus synthesis.
