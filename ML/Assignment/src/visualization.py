@@ -4,7 +4,7 @@ visualization.py
 Publication-Grade Visualizations for ML Pair Trading Strategies.
 
 Generates high-contrast, publication-quality graphics for:
-- Simulated asset price and spread dynamics across market regimes
+- Historical asset price and spread dynamics across real equity & ETF pairs
 - Standardized Z-scores with entry triggers and barrier exits
 - Model ROC curves & AUC comparisons across the 7 MSQF classifiers
 - Random Forest feature importance distributions
@@ -26,44 +26,49 @@ plt.rcParams["axes.linewidth"] = 0.8
 
 
 def plot_market_regimes(universe: Dict[str, pd.DataFrame], save_path: Optional[str] = None):
-    """Plots the 5 simulated pair archetypes and their spread dynamics."""
-    fig, axes = plt.subplots(5, 2, figsize=(14, 15), sharex=True)
-    fig.suptitle("Multi-Regime Pair Trading Simulation Universe", fontsize=16, weight="bold", y=0.99)
+    """Plots the historical asset prices and spread dynamics across the multi-pair universe."""
+    fig, axes = plt.subplots(len(universe), 2, figsize=(14, 15), sharex=True)
+    fig.suptitle("Multi-Asset Pair Trading Universe: Historical Price & Spread Dynamics (2015–2024)", fontsize=16, weight="bold", y=0.99)
     
     pair_labels = {
-        "strong": "Strong Mean-Reversion (Fast Half-Life)",
-        "moderate": "Moderate Mean-Reversion (Institutional Baseline)",
-        "weak": "Weak / Slow Mean-Reversion (High Persistence)",
-        "structural_break": "Structural Break / Regime Shift (Breakdown at T/2)",
-        "spurious": "Spurious Correlation (Non-Cointegrated Random Walk)",
+        "KO_PEP": "KO vs. PEP (Coca-Cola vs. PepsiCo — Consumer Staples)",
+        "XOM_CVX": "XOM vs. CVX (ExxonMobil vs. Chevron — Energy)",
+        "JPM_BAC": "JPM vs. BAC (JPMorgan Chase vs. Bank of America — Financials)",
+        "BP_SHEL": "BP vs. SHEL (BP vs. Shell — Integrated Oil)",
+        "GLD_SPY": "GLD vs. SPY (SPDR Gold vs. S&P 500 ETF — Macro Asset Pair)",
+        "strong": "Strong Mean-Reversion Benchmark (Fast Half-Life)",
+        "moderate": "Moderate Mean-Reversion Benchmark (Institutional)",
+        "weak": "Weak / Slow Mean-Reversion Benchmark",
+        "structural_break": "Structural Break / Regime Shift Benchmark",
+        "spurious": "Macro / Spurious Non-Cointegrated Pair",
     }
     
     colors = ["#1f77b4", "#2ca02c", "#ff7f0e", "#d62728", "#9467bd"]
     
     for idx, (p_type, df) in enumerate(universe.items()):
         color = colors[idx % len(colors)]
+        title_label = pair_labels.get(p_type, df.get("pair_name", pd.Series([p_type])).iloc[0] if "pair_name" in df else p_type)
+        tx = df["ticker_x"].iloc[0] if "ticker_x" in df.columns else "Asset X"
+        ty = df["ticker_y"].iloc[0] if "ticker_y" in df.columns else "Asset Y"
         
         # Left: Asset prices
         ax_p = axes[idx, 0]
-        ax_p.plot(df["time"], df["price_x"], label="Asset X (Base)", color="#7f7f7f", alpha=0.75, lw=1.2)
-        ax_p.plot(df["time"], df["price_y"], label="Asset Y (Paired)", color=color, lw=1.4)
-        ax_p.set_title(f"Prices: {pair_labels.get(p_type, p_type)}", fontsize=11, weight="bold")
+        ax_p.plot(df["time"], df["price_x"], label=f"{tx} (Base)", color="#7f7f7f", alpha=0.75, lw=1.2)
+        ax_p.plot(df["time"], df["price_y"], label=f"{ty} (Paired)", color=color, lw=1.4)
+        ax_p.set_title(f"Prices: {title_label}", fontsize=11, weight="bold")
         ax_p.set_ylabel("Price ($)")
         ax_p.legend(loc="upper left", frameon=True, fontsize=9)
         
-        # Right: True Spread
+        # Right: Spread
         ax_s = axes[idx, 1]
-        ax_s.plot(df["time"], df["true_spread"], color=color, lw=1.2, label="True Spread S_t")
+        ax_s.plot(df["time"], df["true_spread"], color=color, lw=1.2, label="Estimated Spread S_t")
         ax_s.axhline(0, color="black", linestyle="--", alpha=0.6, lw=0.8)
-        if p_type == "structural_break":
-            half = len(df) // 2
-            ax_s.axvline(half, color="#d62728", linestyle=":", lw=1.5, label="Regime Breakdown (T/2)")
-        ax_s.set_title(f"Spread: {p_type.replace('_', ' ').title()}", fontsize=11, weight="bold")
+        ax_s.set_title(f"Spread: {tx} - {ty}", fontsize=11, weight="bold")
         ax_s.set_ylabel("Spread")
         ax_s.legend(loc="upper left", frameon=True, fontsize=9)
         
-    axes[-1, 0].set_xlabel("Time (Trading Bars)")
-    axes[-1, 1].set_xlabel("Time (Trading Bars)")
+    axes[-1, 0].set_xlabel("Time (Trading Days)")
+    axes[-1, 1].set_xlabel("Time (Trading Days)")
     plt.tight_layout()
     
     if save_path:

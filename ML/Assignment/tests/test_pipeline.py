@@ -25,11 +25,10 @@ class TestPairTradingMLPipeline(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        # Generate small dataset for fast unit test execution
-        cls.n_steps = 1500
-        cls.universe = simulate_multi_pair_universe(n_steps=cls.n_steps, base_seed=123)
-        cls.moderate_df = cls.universe["moderate"]
-        cls.cointeg_df = compute_spread_and_zscore(cls.moderate_df, ols_window=60, z_window=30)
+        # Load real market dataset across pairs
+        cls.universe = simulate_multi_pair_universe()
+        cls.test_df = cls.universe["XOM_CVX"]
+        cls.cointeg_df = compute_spread_and_zscore(cls.test_df, ols_window=60, z_window=30)
         cls.feat_df = extract_signal_features(cls.cointeg_df, lookback=40)
         cls.labeled_df = apply_triple_barrier_labeling(
             df=cls.cointeg_df,
@@ -40,11 +39,14 @@ class TestPairTradingMLPipeline(unittest.TestCase):
             transaction_cost=0.0010,
         )
 
-    def test_simulation(self):
-        """Verify simulation generates all 5 regimes without NaNs."""
+    def test_market_data(self):
+        """Verify real market data loads all 5 equity and ETF pairs without NaNs."""
         self.assertEqual(len(self.universe), 5)
-        for p_type, df in self.universe.items():
-            self.assertEqual(len(df), self.n_steps)
+        expected_pairs = ["KO_PEP", "XOM_CVX", "JPM_BAC", "BP_SHEL", "GLD_SPY"]
+        for p_id in expected_pairs:
+            self.assertIn(p_id, self.universe)
+            df = self.universe[p_id]
+            self.assertGreater(len(df), 1000)
             self.assertTrue((df["price_x"] > 0).all())
             self.assertTrue((df["price_y"] > 0).all())
             self.assertFalse(df["true_spread"].isna().any())

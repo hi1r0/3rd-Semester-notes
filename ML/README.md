@@ -11,8 +11,11 @@
 ```
 ML/
 ├── Assignment/
+│   ├── data/
+│   │   └── market_data.csv                # Real daily market prices (2015-2024: 10 liquid tickers)
 │   ├── src/                               # Modular quantitative pair trading & ML package
-│   │   ├── simulation.py                  # Multi-regime OU + market factor asset generator
+│   │   ├── market_data.py                 # Real market data ingestion & pair definition pipeline
+│   │   ├── simulation.py                  # Backward-compatible pair loader bridge
 │   │   ├── cointegration.py               # Rolling OLS hedge ratio & standardized Z-score engine
 │   │   ├── features.py                    # 12-dimensional statistical quant feature extraction
 │   │   ├── labeling.py                    # Triple-barrier meta-labeling with 10 bps friction
@@ -22,7 +25,7 @@ ML/
 │   ├── tests/
 │   │   └── test_pipeline.py               # Automated unit tests (7 passing tests)
 │   ├── build_notebook.py                  # Programmatic master notebook builder
-│   ├── pair_trading_ml_assignment.ipynb   # Master executed Jupyter Notebook (1.8 MB)
+│   ├── pair_trading_ml_assignment.ipynb   # Master executed Jupyter Notebook (1.74 MB)
 │   ├── requirements.txt                   # Assignment dependencies
 │   └── README.md                          # Comprehensive assignment documentation & benchmark results
 ├── Data Preprocessing/
@@ -85,9 +88,9 @@ ML/
 7. **Support Vector Machines (SVM)**
    - Hard vs. soft margin optimization, slack variables ($C$), primal and dual formulations, kernel trick (Linear, Polynomial, RBF).
 8. **End-to-End Capstone Project: Statistical Arbitrage & Pair Trading with Supervised ML (`Assignment/`)**
-   - Multi-regime Ornstein-Uhlenbeck (OU) stochastic simulation across 5 pair archetypes.
-   - Rolling cointegration, dynamic OLS hedge ratio estimation, and standardized spread $Z$-score triggers.
-   - 12-dimensional quantitative feature engineering (Hurst exponent, half-life, ADF $p$-value, serial autocorrelations).
+   - Historical daily market prices (2015–2024, 2,264 bars) across 10 liquid US equities and ETFs (`KO`, `PEP`, `XOM`, `CVX`, `JPM`, `BAC`, `BP`, `SHEL`, `GLD`, `SPY`).
+   - Dynamic rolling cointegration, OLS hedge ratio estimation, and standardized spread $Z$-score triggers ($|Z| \ge 2.0$).
+   - 12-dimensional quantitative feature engineering (Hurst exponent, OU half-life, ADF $p$-value, serial autocorrelations).
    - Triple-barrier meta-labeling with realistic transaction frictions (10 bps round-trip).
    - Purged Walk-Forward Time-Series Cross-Validation with horizon embargo buffers.
    - Comprehensive comparative benchmark across the full 7-model curriculum spectrum (Logistic Regression, Naive Bayes, KNN, Decision Tree, Random Forest, SVM RBF, MLP).
