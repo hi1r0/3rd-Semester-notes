@@ -10,6 +10,21 @@
 
 ```
 ML/
+├── Assignment/
+│   ├── src/                               # Modular quantitative pair trading & ML package
+│   │   ├── simulation.py                  # Multi-regime OU + market factor asset generator
+│   │   ├── cointegration.py               # Rolling OLS hedge ratio & standardized Z-score engine
+│   │   ├── features.py                    # 12-dimensional statistical quant feature extraction
+│   │   ├── labeling.py                    # Triple-barrier meta-labeling with 10 bps friction
+│   │   ├── models.py                      # 7 MSQF classifiers & Purged Walk-Forward CV
+│   │   ├── backtest.py                    # Event-driven backtesting & financial risk engine
+│   │   └── visualization.py               # Publication-grade plotting routines
+│   ├── tests/
+│   │   └── test_pipeline.py               # Automated unit tests (7 passing tests)
+│   ├── build_notebook.py                  # Programmatic master notebook builder
+│   ├── pair_trading_ml_assignment.ipynb   # Master executed Jupyter Notebook (1.8 MB)
+│   ├── requirements.txt                   # Assignment dependencies
+│   └── README.md                          # Comprehensive assignment documentation & benchmark results
 ├── Data Preprocessing/
 │   ├── QF_ML_U1E1.pdf                     # Unit 1 Exercise 1 problem description
 │   ├── QFS3U1 Note.pdf                    # Data preprocessing theoretical lecture notes
@@ -69,3 +84,11 @@ ML/
    - Information Gain, Entropy, Gini Impurity, tree pruning, classification and regression trees (CART).
 7. **Support Vector Machines (SVM)**
    - Hard vs. soft margin optimization, slack variables ($C$), primal and dual formulations, kernel trick (Linear, Polynomial, RBF).
+8. **End-to-End Capstone Project: Statistical Arbitrage & Pair Trading with Supervised ML (`Assignment/`)**
+   - Multi-regime Ornstein-Uhlenbeck (OU) stochastic simulation across 5 pair archetypes.
+   - Rolling cointegration, dynamic OLS hedge ratio estimation, and standardized spread $Z$-score triggers.
+   - 12-dimensional quantitative feature engineering (Hurst exponent, half-life, ADF $p$-value, serial autocorrelations).
+   - Triple-barrier meta-labeling with realistic transaction frictions (10 bps round-trip).
+   - Purged Walk-Forward Time-Series Cross-Validation with horizon embargo buffers.
+   - Comprehensive comparative benchmark across the full 7-model curriculum spectrum (Logistic Regression, Naive Bayes, KNN, Decision Tree, Random Forest, SVM RBF, MLP).
+   - Event-driven backtesting contrasting Traditional vs. ML-Filtered statistical arbitrage strategies.

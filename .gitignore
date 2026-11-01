@@ -33,3 +33,10 @@ node_modules/
 .slidev/
 dist/
 
+# Python compiled files & environments
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+
