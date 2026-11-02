@@ -11,8 +11,8 @@
 
 | Directory / File | Description |
 | :--- | :--- |
-| [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I (International Financial Architecture & Balance of Payments) and Unit II (Foreign Exchange Market), with compiled [`main.pdf`](./latex/main.pdf). |
-| [`latex/README.md`](./latex/README.md) | Detailed syllabus coverage, chronological lecture dates (`18/08/2026` to `26/10/2026`), FEDAI Rules, and LaTeX build instructions. |
+| [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I, Unit II, Unit III (Syllabus Scope), and Unit IV (Multinational Financial Management), with compiled 72-page [`main.pdf`](./latex/main.pdf). |
+| [`latex/README.md`](./latex/README.md) | Detailed syllabus coverage, chronological lecture dates (`18/08/2026` to `02/11/2026`), FEDAI Rules, and LaTeX build instructions. |
 | [`assignment/`](./assignment/) | Empirical research monograph on Foreign Direct Investment (FDI) in Switzerland (2015–2024) with compiled 13-page [`main.pdf`](./assignment/main.pdf). |
 | [`assignment/README.md`](./assignment/README.md) | Monograph summary, empirical findings, SNB data synthesis, and compilation commands. |
 | [`assignment/swiss_fdi_data/`](./assignment/swiss_fdi_data/) | Official Swiss National Bank (SNB) data cubes (2015–2024) and automated API extraction script ([`fetch_swiss_fdi.py`](./assignment/swiss_fdi_data/fetch_swiss_fdi.py)). |
@@ -39,6 +39,18 @@
    - Forward merchant rates with transit & usance tenors, fractional margin rounding conventions, and option forward contracts under the FEDAI "Worst-Of" principle.
    - Forward cross-rate synthesis and dual-leg wholesale covering (Mumbai USD/INR + Overseas USD/FC) with standard pro-forma accounting templates.
    - Theories of Foreign Exchange Rate: Law of One Price, Absolute & Relative PPP, the Fisher Effect, Macroeconomic Parity Web architecture, and Covered Interest Arbitrage mechanics.
-3. **Swiss FDI Empirical Monograph (2015–2024)**
+3. **Unit III: Foreign Exchange Exposure and Management (Syllabus Scope)**
+   - Taxonomy of exposure: Translation (accounting), Transaction (contractual), and Economic (operating).
+   - Translation methods (Current Rate vs. Temporal method under FASB 52/IAS 21) and balance sheet hedging.
+   - Transaction hedging: Multilateral netting, matching, leading/lagging, forward contracts, synthetic money market hedges, and currency options.
+   - Economic exposure sensitivity regression ($\\beta = \\operatorname{Cov}(\\text{CF}_t, S_t) / \\operatorname{Var}(S_t)$) and strategic operational diversification.
+4. **Unit IV: Financial Management of the Multinational Firm**
+   - The Multinational Corporation (MNC): Corporate definition, global footprint, wealth maximization goal, and multi-jurisdictional agency challenges.
+   - Centralized vs. decentralized treasury governance and the four parent-controlled functions (Cash Management, Inventory & Receivables, Financing, and Capital Expenditure).
+   - Symmetrical TikZ architecture for Centralized Multinational Financial Management (Parent HQ $\\leftrightarrow$ Subsidiaries A & B).
+   - MNC cash management in international trade: Dual-currency structure and the four operating cash flows (Domestic customer sales, foreign export sales, domestic vendor payments, foreign import component payments).
+   - Centralized internal multilateral netting mechanics to eliminate bank foreign exchange conversion spreads.
+   - 4-Tier publication-grade TikZ architecture of MNC Operating Cash Flows in International Trade.
+5. **Swiss FDI Empirical Monograph (2015–2024)**
    - Analysis of SNB capital stocks, flows, investment income, and Ultimate Beneficial Owner (UBO) conduit dynamics.
    - Sectoral allocations, global labor multipliers of Swiss multinational enterprises, and econometric determinants.

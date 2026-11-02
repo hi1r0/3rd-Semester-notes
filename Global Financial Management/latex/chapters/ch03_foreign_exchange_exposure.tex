@@ -1,0 +1,143 @@
+\chapter{Foreign Exchange Exposure and Management}
+\label{ch:foreign_exchange_exposure}
+
+% ==============================================================================
+% Curriculum Architecture & Statutory Scope (Unit-III)
+% ==============================================================================
+\begin{tcolorbox}[
+    enhanced,
+    colback=softblue!40,
+    colframe=navyblue,
+    arc=2mm,
+    boxrule=1pt,
+    title={\sffamily\bfseries\color{white}Curriculum Scope \& Course Sequencing Note (Unit-III)},
+    attach boxed title to top left={yshift=-2mm, xshift=5mm},
+    boxed title style={colback=navyblue, arc=1.5mm}
+]
+\small\sffamily
+This chapter establishes the statutory syllabus architecture for \textbf{Unit-III: Foreign Exchange Exposure and Management} of the MSQF 535 curriculum. 
+
+In the chronological sequence of classroom instruction, the course transitioned from \textit{Theories of Foreign Exchange Rate Parity} (Unit-II, Lecture dated 26/10/2026) directly into the \textit{Financial Management of the Multinational Firm} (Unit-IV, Lecture dated 02/11/2026). To maintain strict fidelity with the institutional syllabus while preserving continuous document flow, this chapter establishes the analytical taxonomy, measurement frameworks, and hedging methodologies for foreign exchange exposure prior to the examination of multinational operational governance in Chapter~\ref{ch:multinational_financial_management}.
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ==============================================================================
+% 3.1 Taxonomy of Foreign Exchange Risk Exposure
+% ==============================================================================
+\section{Taxonomy of Foreign Exchange Risk Exposure}
+\label{sec:fx_exposure_taxonomy}
+
+Foreign exchange exposure measures the degree to which the monetary value of a firm's assets, liabilities, operating revenues, or cash flows is susceptible to unanticipated fluctuations in currency exchange rates. In international financial management, foreign exchange risk is partitioned into three distinct theoretical dimensions:
+
+\begin{enumerate}[leftmargin=1.8em, label=\textbf{\arabic*.}]
+    \item \textbf{Translation Exposure (Accounting Exposure):} The balance sheet risk arising from the necessity of consolidating financial statements of foreign subsidiaries into the parent company's functional reporting currency in accordance with international accounting standards. It reflects paper gains or losses on net foreign assets rather than direct cash flow movements.
+    \item \textbf{Transaction Exposure (Contractual Cash Flow Exposure):} The sensitivity of realized home-currency contractual cash flows to exchange rate fluctuations occurring between the inception of a commercial contract and its subsequent monetary settlement. It arises from cross-border receivables, payables, and foreign-denominated debt debt service obligations.
+    \item \textbf{Economic Exposure (Operating / Strategic Exposure):} The degree to which the present value of future long-term operating cash flows of a multinational corporation changes due to unanticipated movements in real exchange rates. It encompasses competitive positioning, input-output price elasticities, and global market share dynamics.
+\end{enumerate}
+
+\vspace{0.3em}
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\textwidth}{l p{3.0cm} p{4.2cm} X}
+\toprule
+\textbf{Exposure Dimension} & \textbf{Time Horizon} & \textbf{Primary Impact Channel} & \textbf{Core Hedging Orientation} \\
+\midrule
+\textbf{Translation} & Periodic (Quarterly / Annual reporting) & Balance sheet equity reserves and consolidated earnings statements & Balance sheet asset-liability matching; forward accounting hedges. \\
+\textbf{Transaction} & Short-to-medium term (Contractual tenure) & Contractual cash inflows and outflows (receivables and payables) & Forward contracts, money market hedges, options, leading/lagging, and netting. \\
+\textbf{Economic} & Long-term (Strategic operational horizon) & Enterprise valuation, operating profit margins, and sales volume & Production facility relocation, sourcing diversification, and financing in sales currency. \\
+\bottomrule
+\end{tabularx}
+\caption{Comparative Taxonomy of Foreign Exchange Risk Dimensions}
+\label{tab:fx_exposure_comparison}
+\end{table}
+
+\vspace{0.5em}
+
+% ==============================================================================
+% 3.2 Management of Translation Exposure
+% ==============================================================================
+\section{Management of Translation (Accounting) Exposure}
+\label{sec:translation_exposure}
+
+Translation exposure arises when an MNC restates the book values of foreign subsidiary assets and liabilities denominated in foreign currencies into the parent's reporting currency (e.g., USD or INR).
+
+\subsection{Standard Translation Methodologies}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Current Rate Method (FASB 52 / IAS 21):}
+    \begin{itemize}[noitemsep]
+        \item All foreign currency balance sheet assets and liabilities are translated at the current spot exchange rate prevailing on the balance sheet date.
+        \item Equity items (common stock and paid-in capital) are translated at historical exchange rates prevailing at the acquisition date.
+        \item Cumulative translation adjustments (CTA) are bypassed from the net income statement and reported directly in consolidated equity reserves.
+    \end{itemize}
+    \item \textbf{Temporal Method (Monetary/Non-Monetary Method):}
+    \begin{itemize}[noitemsep]
+        \item Monetary assets and liabilities (cash, receivables, accounts payable, long-term debt) are translated at current exchange rates.
+        \item Non-monetary assets (inventory, fixed property, plant, equipment) and associated income statement expenses (depreciation) are translated at historical rates.
+        \item Translation gains and losses are recognized immediately in the consolidated net income statement, resulting in increased earnings volatility.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Translation Hedging Strategies}
+The primary internal defense against translation exposure is \textbf{Balance Sheet Hedging}. The multinational treasury adjusts subsidiary asset-liability structures such that exposed foreign currency assets equal exposed foreign currency liabilities:
+\begin{equation}
+\text{Net Accounting Exposure} = \text{Exposed Assets} - \text{Exposed Liabilities} = 0
+\end{equation}
+When net exposure is zero, any percentage change in the exchange rate produces equal and offsetting revaluation effects on assets and liabilities, eliminating translation gains or losses.
+
+\vspace{0.5em}
+
+% ==============================================================================
+% 3.3 Management of Transaction Exposure
+% ==============================================================================
+\section{Management of Transaction Exposure}
+\label{sec:transaction_exposure}
+
+Transaction exposure represents direct contractual exchange risk. If a firm enters an export contract in foreign currency, any adverse exchange rate movement between contract execution and cash collection erodes the realized domestic profit margin.
+
+\subsection{Internal Operational Hedging Techniques}
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Multilateral Netting:} Centralizing affiliate receivables and payables across international subsidiaries to offset mutual payment obligations, settling only the net balance through banking channels.
+    \item \textbf{Matching:} Pairing foreign currency cash inflows directly with foreign currency cash outflows of the same maturity and denomination (e.g., using export euro revenues to pay euro raw material suppliers).
+    \item \textbf{Leading and Lagging:} Strategically altering the timing of intra-company or external payments by accelerating payments (\textit{leading}) in an appreciating currency or delaying payments (\textit{lagging}) in a depreciating currency.
+    \item \textbf{Currency Invoicing:} Shifting transaction exposure to foreign counterparties by invoicing exports in the home currency, or sharing risk via currency basket invoicing.
+\end{enumerate}
+
+\subsection{External Derivative and Financial Hedging Instruments}
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Forward Market Hedge:} Entering an irrevocable forward contract with a commercial bank to sell anticipated foreign receivables or buy foreign payables at a locked-in forward rate $\Forward$, locking the domestic cash flow with certainty.
+    \item \textbf{Money Market Hedge:} Creating synthetic forward contracts via concurrent borrowing, spot conversion, and money market investment:
+    \begin{itemize}[noitemsep]
+        \item \textit{To hedge foreign currency receivables:} Borrow foreign currency at interest rate $\ifor$, convert immediately at spot rate $\Spot$ to domestic currency, and invest in domestic money markets at rate $\ih$. The loan is fully extinguished by the foreign receivable proceeds at maturity.
+        \item \textit{To hedge foreign currency payables:} Borrow domestic currency at $\ih$, convert to foreign currency at spot rate $\Spot$, and invest in foreign money markets at rate $\ifor$ to generate the required foreign payout at maturity.
+    \end{itemize}
+    \item \textbf{Currency Options Hedge:} Purchasing call options (for foreign payables) or put options (for foreign receivables) to establish an exchange rate ceiling or floor while preserving upside participation if favorable currency movements occur.
+\end{enumerate}
+
+\vspace{0.5em}
+
+% ==============================================================================
+% 3.4 Management of Economic (Operating) Exposure
+% ==============================================================================
+\section{Management of Economic (Operating) Exposure}
+\label{sec:economic_exposure}
+
+Economic exposure addresses long-term strategic resilience. While short-term derivative hedges protect existing contracts, a sustained real currency appreciation can permanently erode an exporter's price competitiveness against foreign rivals.
+
+\subsection{Measurement Framework}
+Economic exposure measures the regression sensitivity coefficient $\beta$ of the firm's market value $V$ or operating cash flows $\CF_t$ to exchange rate changes $S_t$:
+\begin{equation}
+\CF_t = \alpha + \beta \cdot S_t + \epsilon_t, \quad \text{where} \quad \beta = \frac{\Cov(\CF_t, S_t)}{\Var(S_t)}
+\end{equation}
+
+\subsection{Strategic Operational Diversification}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Production Site Diversification:} Distributing manufacturing facilities across multiple foreign currency zones to ensure that cost structures shift in tandem with competitive revenues.
+    \item \textbf{Flexible Sourcing Strategies:} Maintaining multinational supplier networks to substitute components from countries experiencing currency depreciation.
+    \item \textbf{Market and Sales Diversification:} Expanding marketing channels across non-correlated geographical markets, mitigating vulnerability to any single sovereign economic downturn.
+    \item \textbf{Financial Sourcing Structure:} Matching foreign asset cash flows with long-term debt denominated in the same foreign currency, providing an automatic operating hedge.
+\end{itemize}

@@ -273,3 +273,73 @@ This section consolidates all mathematical formulas, pricing relationships, valu
     \item $\text{Arbitrage Condition}$: When $\Forward \neq \Spot \times \frac{1+i_d}{1+i_f}$, covered interest arbitrage generates riskless profit until market equilibrium is restored.
 \end{itemize}
 \end{formulabox}
+
+
+% ==============================================================================
+\section*{Chapter 3: Foreign Exchange Exposure and Management}
+% ==============================================================================
+
+\begin{formulabox}[Net Translation (Accounting) Exposure]
+\begin{align*}
+    \text{Net Accounting Exposure} &= \sum \text{Exposed Assets} - \sum \text{Exposed Liabilities} \\[0.4em]
+    \Delta \text{CTA} &= \text{Net Accounting Exposure} \times (\Spot_t - \Spot_0)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\text{Exposed Assets}$: Balance sheet assets restated at current spot rate $\Spot_t$ under accounting standards (all assets under Current Rate Method; monetary assets under Temporal Method).
+    \item $\text{Exposed Liabilities}$: Balance sheet liabilities restated at current spot rate $\Spot_t$.
+    \item $\Delta \text{CTA}$: Change in Cumulative Translation Adjustment reported in equity reserves or net income.
+    \item $\Spot_0, \Spot_t$: Historical/opening spot exchange rate and closing balance sheet spot exchange rate.
+    \item \textbf{Balance Sheet Hedge}: Achieved when $\sum \text{Exposed Assets} = \sum \text{Exposed Liabilities} \implies \text{Net Exposure} = 0$.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Money Market Synthetic Forward Hedge]
+\begin{align*}
+    \text{Receivable Hedge Proceeds ($t=0$)} &= \Spot \times \left[ \frac{A_f}{1 + i_f \times \frac{d}{365}} \right] \\[0.5em]
+    \text{Payable Required Deposit ($t=0$)} &= \Spot \times \left[ \frac{L_f}{1 + i_f \times \frac{d}{365}} \right]
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $A_f$: Foreign currency receivable maturing at day $d$.
+    \item $L_f$: Foreign currency payable maturing at day $d$.
+    \item $i_f$: Annualized money market borrowing or deposit rate in the foreign currency.
+    \item $\Spot$: Current spot exchange rate (home currency per unit of foreign currency).
+    \item $d$: Transaction maturity horizon in days.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Economic (Operating) Exchange Rate Sensitivity]
+\begin{equation*}
+    \beta = \frac{\Cov(\CF_t, \Spot_t)}{\Var(\Spot_t)}
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\beta$: Regression slope measuring the elasticity of operating cash flows to exchange rate movements.
+    \item $\CF_t$: Realized operating cash flow of the enterprise in home currency at period $t$.
+    \item $\Spot_t$: Nominal or real exchange rate prevailing at period $t$.
+    \item $\Cov(\CF_t, \Spot_t)$: Covariance between operating cash flows and exchange rate fluctuations.
+    \item $\Var(\Spot_t)$: Variance of exchange rate fluctuations.
+\end{itemize}
+\end{formulabox}
+
+% ==============================================================================
+\section*{Chapter 4: Financial Management of the Multinational Firm}
+% ==============================================================================
+
+\begin{formulabox}[Multinational Operating Trade Cash Flow Aggregation]
+\begin{align*}
+    \Delta \CF_{\text{Domestic}} &= \CF_{\text{Inflow}}^{\text{US Customers}} - \CF_{\text{Outflow}}^{\text{US Suppliers}} \\[0.5em]
+    \Delta \CF_{\text{Foreign}, j} &= \CF_{\text{Inflow}, j}^{\text{Export}} - \CF_{\text{Outflow}, j}^{\text{Import}}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\Delta \CF_{\text{Domestic}}$: Net operating cash flow denominated in domestic currency (USD), carrying zero foreign exchange risk.
+    \item $\CF_{\text{Inflow}}^{\text{US Customers}}$: Operating revenue collected from domestic customer sales in US Dollars.
+    \item $\CF_{\text{Outflow}}^{\text{US Suppliers}}$: Operating disbursements paid to domestic suppliers and vendors in US Dollars.
+    \item $\Delta \CF_{\text{Foreign}, j}$: Net exposed operating cash flow in foreign currency $j$ prior to external market hedging.
+    \item $\CF_{\text{Inflow}, j}^{\text{Export}}$: Export sales proceeds collected from foreign importers in currency $j$.
+    \item $\CF_{\text{Outflow}, j}^{\text{Import}}$: Import component procurement payments owed to foreign exporters in currency $j$.
+    \item \textbf{Internal Multilateral Netting}: The volume $\min(\CF_{\text{Inflow}, j}^{\text{Export}}, \CF_{\text{Outflow}, j}^{\text{Import}})$ is settled internally without bank currency conversion, saving bid-ask spreads and transaction fees.
+\end{itemize}
+\end{formulabox}

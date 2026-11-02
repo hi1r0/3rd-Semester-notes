@@ -124,9 +124,47 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - Solved Example 2.11.3: Four-stage Covered Interest Arbitrage execution and cash flow ledger ($1M USD borrowed at 5% in US, converted to GBP at 1.50 spot, invested at 8% in UK, forward sold at 1.48, generating $15,600 net riskless profit) with theoretical CIP benchmark verification.
   - *Lecture Dates:* `21/10/2026`, `22/10/2026`, & `26/10/2026`.
 
+### **Unit III: Foreign Exchange Exposure and Management (Syllabus Scope)**
+- **3.1 Taxonomy of Foreign Exchange Risk Exposure**
+  - Conceptual definitions and comparative matrix across Translation (Accounting), Transaction (Contractual), and Economic (Operating) exposure dimensions.
+  - Analytical comparison of time horizons, balance sheet / cash flow impact channels, and core hedging orientations.
+- **3.2 Management of Translation (Accounting) Exposure**
+  - Current Rate Method (FASB 52 / IAS 21) vs. Temporal Method balance sheet translation rules.
+  - Cumulative Translation Adjustment (CTA) accounting treatment and balance sheet hedging ($\\text{Net Accounting Exposure} = 0$).
+- **3.3 Management of Transaction Exposure**
+  - Contractual exchange risk mechanics between commitment and settlement.
+  - Internal Operational Techniques: Multilateral netting, matching, leading and lagging, currency invoicing.
+  - External Derivative Instruments: Forward contracts, money market synthetic hedges (receivables vs. payables), and currency options.
+- **3.4 Management of Economic (Operating) Exposure**
+  - Cash flow elasticity regression framework ($\\beta = \\operatorname{Cov}(\\text{CF}_t, S_t) / \\operatorname{Var}(S_t)$).
+  - Strategic operational diversification: Production facility relocation, global component sourcing flexibility, market diversification, and debt currency matching.
+
+### **Unit IV: Financial Management of the Multinational Firm**
+- **4.1 The Multinational Corporation (MNC) and Governance Architecture**
+  - Definition, home-host country architecture, and core financial objective (maximizing consolidated shareholder wealth).
+  - Transnational strategic balance (global efficiency vs. local responsiveness) and multi-jurisdictional agency challenges (geographic separation, cultural divergence, disparate regulatory/tax codes).
+  - Centralized vs. Decentralized Treasury Governance comparative analysis.
+  - Four Core Centralized Treasury Functions:
+    1. *Multinational Cash Management*: Centralized pooling, zero-balance subsidiary accounts, and multilateral netting.
+    2. *Inventory and Receivables Management*: Global credit policy enforcement and supply chain buffer stock coordination.
+    3. *Financing Decisions*: Subsidiary debt vs. equity optimization, accessing Eurocurrency markets, parent guarantees, and global tax shields.
+    4. *Capital Expenditure (CapEx)*: Cross-border DCF evaluation, sovereign and currency risk-adjusted hurdle rates, and centralized capital rationing.
+  - **TikZ Architecture 4.1**: Symmetrical Centralized Multinational Financial Management Architecture (Parent HQ Treasury supervising Subsidiary A and Subsidiary B across all 4 operational functions).
+  - *Lecture Date:* `02/11/2026`.
+- **4.2 Multinational Cash Management and Trade Cash Flows**
+  - International cash flow dynamics: Dual-currency structure (domestic vs. foreign currency flows).
+  - Four Fundamental Operating Trade Cash Flows (verbatim from classroom whiteboard):
+    1. *Domestic Operating Inflows*: Payments for finished products from domestic US customers (USD).
+    2. *Export Operating Inflows*: Payments for exported goods from foreign importers (Foreign Currency / USD).
+    3. *Domestic Operating Outflows*: Disbursements to domestic suppliers and vendors for raw materials and overhead (USD).
+    4. *Import Operating Outflows*: Disbursements to overseas component exporters for imported manufacturing inputs (Foreign Currency).
+  - Treasury Mathematical Aggregation and Internal Netting: Formulation of $\\Delta \\text{CF}_{\\text{Domestic}}$ and $\\Delta \\text{CF}_{\\text{Foreign}, j}$; offsetting export receipts against import payables to minimize bank conversion spreads.
+  - **TikZ Architecture 4.2**: Publication-grade 4-tier MNC Operating Cash Flow Architecture in International Trade with green inflow badges, amber outflow badges, and strategic centralized netting summary banner.
+  - *Lecture Date:* `02/11/2026`.
+
 ### **Consolidated Formula Reference Sheet (Rule 5)**
 - Placed at document end (`chapters/formula_reference.tex`).
-- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, FEDAI Rule 7 delivery horizons, forward merchant bill rates with transit/usance tenors, FEDAI option delivery margin selection rules, cross-rate forward conversion identities, Relative Purchasing Power Parity (PPP), the Fisher Effect nominal rate decomposition, and Covered Interest Rate Parity (CIP) with explicit structured `Where:` parameter definitions and unnumbered equations.
+- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, FEDAI Rule 7 delivery horizons, forward merchant bill rates with transit/usance tenors, FEDAI option delivery margin selection rules, cross-rate forward conversion identities, Relative Purchasing Power Parity (PPP), the Fisher Effect nominal rate decomposition, Covered Interest Rate Parity (CIP), Net Translation Exposure, Money Market Synthetic Forward Hedge, Economic Exposure Beta Sensitivity, and Multinational Trade Cash Flow Netting with explicit structured `Where:` parameter definitions and unnumbered equations.
 
 ---
 
@@ -144,6 +182,8 @@ latex/
 ├── chapters/
 │   ├── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 07/09/2026)
 │   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 26/10/2026)
+│   ├── ch03_foreign_exchange_exposure.tex             # Chapter 3: Foreign Exchange Exposure and Management (Unit-III Scope)
+│   ├── ch04_multinational_financial_management.tex    # Chapter 4: Financial Management of the Multinational Firm (Lecture: 02/11/2026)
 │   └── formula_reference.tex                          # Consolidated Multi-Chapter Formula Reference Sheet (Rule 5)
 ├── figures/                                           # Department & University logos
 └── README.md                                          # Documentation & compilation instructions
