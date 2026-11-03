@@ -2,10 +2,12 @@
 
 **Course:** MSQF 533: Financial Risk Management  
 **Credits:** 4  
+**Nature of Course:** Hard Core (Compulsory)  
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
 **Student:** N Rohit Vedhanandh (Reg. No.: 25MSQUFPY0002)  
 **Date:** October 2026  
+**Official Syllabus Reference:** [`./syllabus.md`](./syllabus.md) | Master Curriculum: [`../SYLLABUS.md`](../SYLLABUS.md) | Official PDF: [`../Semester_III_Syllabus.pdf`](../Semester_III_Syllabus.pdf) (Page 4)
 
 ---
 
@@ -13,6 +15,7 @@
 
 | File / Folder | Description |
 | :--- | :--- |
+| [`syllabus.md`](./syllabus.md) | Official verbatim course syllabus, course objectives, outcomes (CO1–CO5), unit breakdowns (Units I–V), references, and CO-PO matrix. |
 | [`latex/`](./latex/) | Master LaTeX project containing complete, modular, publication-grade notes for Unit I and Unit II. |
 | ├── [`main.pdf`](./latex/main.pdf) | Compiled master lecture monograph with cover page, official syllabus, TOC, high-resolution TikZ diagrams, worked numerical examples, and consolidated formula sheet. |
 | ├── [`main.tex`](./latex/main.tex) | Master document entry point. |

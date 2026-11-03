@@ -1,10 +1,13 @@
-# Machine Learning in Quantitative Finance — LaTeX Lecture Notes
+# Machine Learning Techniques (MSQF 536) — LaTeX Lecture Notes
 
-**Course:** Machine Learning in Quantitative Finance  
+**Course:** MSQF 536: Machine Learning Techniques  
+**Credits:** 4  
+**Nature of Course:** Hard Core (Compulsory)  
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
-**Document:** `main.pdf` (62 pages, publication-grade compiled book)  
+**Document:** main.pdf (63 pages, publication-grade compiled book with official syllabus)  
 **Author / Scribe:** N Rohit Vedhanandh (Reg. No.: 25MSQUFPY0002)  
+**Official Syllabus Reference:** [../syllabus.md](../syllabus.md) | Master Curriculum: [../../SYLLABUS.md](../../SYLLABUS.md) | Official PDF: [../../Semester_III_Syllabus.pdf](../../Semester_III_Syllabus.pdf) (Page 7)  
 
 ---
 
@@ -26,7 +29,8 @@ ML/latex/
 │   ├── packages.tex                        # Font, math, TikZ, caption, and geometry setup
 │   ├── environments.tex                    # Custom tcolorboxes (definition, example, formulabox, etc.)
 │   ├── macros.tex                          # Mathematical operators and notation shortcuts
-│   └── titlepage.tex                       # Formal university front cover page
+│   ├── titlepage.tex                       # Formal university front cover page
+│   └── syllabus.tex                        # Official course syllabus (Roman numeral page i)
 ├── chapters/
 │   ├── ch01_ml_foundations_and_preprocessing.tex  # Chapter 1 (pp. 44–51 of scans; Figs 1.1–1.2)
 │   ├── ch02_knn.tex                               # Chapter 2 (pp. 1–10 of scans; Fig 2.1)
@@ -36,7 +40,7 @@ ML/latex/
 │   ├── ch06_svm.tex                               # Chapter 6 (pp. 31–43 of scans; Figs 6.1–6.3)
 │   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet
 ├── main.tex                                # Root master document
-└── main.pdf                                # 62-page compiled PDF book
+└── main.pdf                                # 63-page compiled PDF book
 ```
 
 ---

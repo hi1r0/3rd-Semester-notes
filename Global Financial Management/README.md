@@ -4,6 +4,8 @@
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
 **Credits:** 4  
+**Nature of Course:** Hard Core (Compulsory)  
+**Official Syllabus Reference:** [`./syllabus.md`](./syllabus.md) | Master Curriculum: [`../SYLLABUS.md`](../SYLLABUS.md) | Official PDF: [`../Semester_III_Syllabus.pdf`](../Semester_III_Syllabus.pdf) (Page 6)
 
 ---
 
@@ -11,6 +13,7 @@
 
 | Directory / File | Description |
 | :--- | :--- |
+| [`syllabus.md`](./syllabus.md) | Official verbatim course syllabus, course objectives, outcomes (CO1–CO5), unit breakdowns (Units I–V), references, and CO-PO matrix. |
 | [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I, Unit II, Unit III (Syllabus Scope), and Unit IV (Multinational Financial Management), with compiled 72-page [`main.pdf`](./latex/main.pdf). |
 | [`latex/README.md`](./latex/README.md) | Detailed syllabus coverage, chronological lecture dates (`18/08/2026` to `02/11/2026`), FEDAI Rules, and LaTeX build instructions. |
 | [`assignment/`](./assignment/) | Empirical research monograph on Foreign Direct Investment (FDI) in Switzerland (2015–2024) with compiled 13-page [`main.pdf`](./assignment/main.pdf). |
@@ -43,11 +46,11 @@
    - Taxonomy of exposure: Translation (accounting), Transaction (contractual), and Economic (operating).
    - Translation methods (Current Rate vs. Temporal method under FASB 52/IAS 21) and balance sheet hedging.
    - Transaction hedging: Multilateral netting, matching, leading/lagging, forward contracts, synthetic money market hedges, and currency options.
-   - Economic exposure sensitivity regression ($\\beta = \\operatorname{Cov}(\\text{CF}_t, S_t) / \\operatorname{Var}(S_t)$) and strategic operational diversification.
+   - Economic exposure sensitivity regression ($\beta = \operatorname{Cov}(\text{CF}_t, S_t) / \operatorname{Var}(S_t)$) and strategic operational diversification.
 4. **Unit IV: Financial Management of the Multinational Firm**
    - The Multinational Corporation (MNC): Corporate definition, global footprint, wealth maximization goal, and multi-jurisdictional agency challenges.
    - Centralized vs. decentralized treasury governance and the four parent-controlled functions (Cash Management, Inventory & Receivables, Financing, and Capital Expenditure).
-   - Symmetrical TikZ architecture for Centralized Multinational Financial Management (Parent HQ $\\leftrightarrow$ Subsidiaries A & B).
+   - Symmetrical TikZ architecture for Centralized Multinational Financial Management (Parent HQ $\leftrightarrow$ Subsidiaries A & B).
    - MNC cash management in international trade: Dual-currency structure and the four operating cash flows (Domestic customer sales, foreign export sales, domestic vendor payments, foreign import component payments).
    - Centralized internal multilateral netting mechanics to eliminate bank foreign exchange conversion spreads.
    - 4-Tier publication-grade TikZ architecture of MNC Operating Cash Flows in International Trade.

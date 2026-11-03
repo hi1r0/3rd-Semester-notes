@@ -4,6 +4,8 @@
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
 **Credits:** 4  
+**Nature of Course:** Hard Core (Compulsory)  
+**Official Syllabus Reference:** [`./syllabus.md`](./syllabus.md) | Master Curriculum: [`../SYLLABUS.md`](../SYLLABUS.md) | Official PDF: [`../Semester_III_Syllabus.pdf`](../Semester_III_Syllabus.pdf) (Page 3)
 
 ---
 
@@ -11,6 +13,7 @@
 
 | Directory / File | Description |
 | :--- | :--- |
+| [`syllabus.md`](./syllabus.md) | Official verbatim syllabus, course objectives, outcomes (CO1–CO5), unit breakdowns, and CO-PO matrix. |
 | [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I (Interest Theory), Unit II (Valuation of Financial Instruments), Unit III (Financial Ratios and Cash Flow Analysis), and Unit IV (Risk, Return, and Portfolio Mathematics), with unified Formula Reference Sheet and compiled [`main.pdf`](./latex/main.pdf) (104 pages). |
 | [`latex/README.md`](./latex/README.md) | Detailed syllabus roadmap, lecture date logs (`13/08/2026` to `30/10/2026`), solved problem sets, and compilation guides. |
 | [`Assignment/`](./Assignment/) | Monochromatic LaTeX research report on FMCG Sector Equity Valuation using a Tri-Partite valuation architecture, with compiled [`main.pdf`](./Assignment/main.pdf). |

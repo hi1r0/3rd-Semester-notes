@@ -1,8 +1,11 @@
-# Machine Learning for Quantitative Finance (MSQF)
+# Machine Learning Techniques (MSQF 536)
 
-**Course:** Machine Learning in Quantitative Finance  
+**Course:** MSQF 536: Machine Learning Techniques  
+**Credits:** 4  
+**Nature of Course:** Hard Core (Compulsory)  
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
+**Official Syllabus Reference:** [\./syllabus.md\](./syllabus.md) | Master Curriculum: [\../SYLLABUS.md\](../SYLLABUS.md) | Official PDF: [\../Semester_III_Syllabus.pdf\](../Semester_III_Syllabus.pdf) (Page 7)
 
 ---
 
@@ -10,6 +13,7 @@
 
 ```
 ML/
+├── syllabus.md                     # Verbatim course syllabus, objectives & CO-PO matrix
 ├── Assignment/
 │   ├── data/
 │   │   └── market_data.csv                # Real daily market prices (2015-2024: 10 liquid tickers)
@@ -53,12 +57,12 @@ ML/
 ├── Supervised Learning/
 │   ├── QF_sem_3_ML_U1P1.pdf               # Unit 1 Part 1 Lecture Slides (Supervised Learning fundamentals)
 │   └── QF_sem_3_ML_U2_PPT1.pdf            # Unit 2 Presentation Slides (Model selection & evaluation)
-├── latex/                                 # Comprehensive LaTeX lecture notes book (62 pages, main.pdf)
+├── latex/                                 # Comprehensive LaTeX lecture notes book (63 pages with syllabus, main.pdf)
 │   ├── figures/                           # Institutional crest & graphics
 │   ├── preamble/                          # Typography, packages, custom tcolorboxes & macros
 │   ├── chapters/                          # Modular chapters 1–6 & comprehensive formula reference
 │   ├── main.tex                           # Root master LaTeX file
-│   ├── main.pdf                           # Publication-grade compiled PDF book (62 pages)
+│   ├── main.pdf                           # Publication-grade compiled PDF book (63 pages with syllabus)
 │   └── README.md                          # Detailed chapter overview & compilation guide
 └── SVM/
     ├── QF_ML_SVM.pdf                      # Support Vector Machines, maximum margin hyperplanes

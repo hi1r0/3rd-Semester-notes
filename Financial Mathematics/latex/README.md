@@ -1,6 +1,9 @@
 # Financial Mathematics — LaTeX Notes (MSQF Semester III)
 
-This directory contains the modular LaTeX sources, custom styling, problem sets, and compiled notes for the **Financial Mathematics** course (M.Sc. Quantitative Finance, Semester III).
+This directory contains the modular LaTeX sources, custom styling, problem sets, and compiled notes for **MSQF 532: Financial Mathematics** (M.Sc. Quantitative Finance, Semester III).
+
+- **Official Syllabus Reference:** [`../syllabus.md`](../syllabus.md) | Master Curriculum: [`../../SYLLABUS.md`](../../SYLLABUS.md) | Official PDF: [`../../Semester_III_Syllabus.pdf`](../../Semester_III_Syllabus.pdf) (Page 3)
+- **LaTeX Syllabus Page:** Included via [`preamble/syllabus.tex`](./preamble/syllabus.tex) as Roman-numeral page i in [`main.pdf`](./main.pdf).
 
 ---
 

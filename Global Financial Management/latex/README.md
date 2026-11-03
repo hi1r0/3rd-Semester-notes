@@ -1,6 +1,9 @@
 # Global Financial Management — LaTeX Notes (MSQF Semester III)
 
-This directory contains the modular LaTeX sources, custom TikZ flowcharts, institutional profiles, and compiled notes for the **Global Financial Management** course (M.Sc. Quantitative Finance, Semester III).
+This directory contains the modular LaTeX sources, custom TikZ flowcharts, institutional profiles, and compiled notes for **MSQF 535: Global Financial Management** (M.Sc. Quantitative Finance, Semester III).
+
+- **Official Syllabus Reference:** [\../syllabus.md\](../syllabus.md) | Master Curriculum: [\../../SYLLABUS.md\](../../SYLLABUS.md) | Official PDF: [\../../Semester_III_Syllabus.pdf\](../../Semester_III_Syllabus.pdf) (Page 6)
+- **LaTeX Syllabus Page:** Included via [\preamble/syllabus.tex\](./preamble/syllabus.tex) as Roman-numeral page i in [\main.pdf\](./main.pdf).
 
 ---
 

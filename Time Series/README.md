@@ -4,6 +4,8 @@
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
 **Credits:** 4  
+**Nature of Course:** Hard Core (Compulsory)  
+**Official Syllabus Reference:** [`./syllabus.md`](./syllabus.md) | Master Curriculum: [`../SYLLABUS.md`](../SYLLABUS.md) | Official PDF: [`../Semester_III_Syllabus.pdf`](../Semester_III_Syllabus.pdf) (Page 2)
 
 ---
 
@@ -11,6 +13,7 @@
 
 | Directory / File | Description |
 | :--- | :--- |
+| [`syllabus.md`](./syllabus.md) | Official verbatim course syllabus, course objectives, outcomes (CO1–CO5), unit breakdowns (Units I–V), reference bibliography, and CO-PO matrix. |
 | [`latex/`](./latex/) | Modular LaTeX source code, custom theorems/macros, and compiled publication PDF ([`main.pdf`](./latex/main.pdf)). |
 | [`latex/README.md`](./latex/README.md) | Comprehensive syllabus breakdown, lecture coverage dates, and build instructions. |
 | [`notes/`](./notes/) | Scanned and handwritten lecture note archives (`18-09-2026`, `25-09-2026`). |

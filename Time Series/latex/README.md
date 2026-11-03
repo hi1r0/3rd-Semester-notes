@@ -1,6 +1,9 @@
 # Applied Time Series Analysis and Forecasting — LaTeX Notes (MSQF Semester III)
 
-This directory contains the modular LaTeX sources, custom styling, mathematical macros, and compiled lecture notes for **Applied Time Series Analysis and Forecasting** (M.Sc. Quantitative Finance, Semester III).
+This directory contains the modular LaTeX sources, custom styling, mathematical macros, and compiled lecture notes for **MSQF 531: Applied Time Series Analysis and Forecasting** (M.Sc. Quantitative Finance, Semester III).
+
+- **Official Syllabus Reference:** [\../syllabus.md\](../syllabus.md) | Master Curriculum: [\../../SYLLABUS.md\](../../SYLLABUS.md) | Official PDF: [\../../Semester_III_Syllabus.pdf\](../../Semester_III_Syllabus.pdf) (Page 2)
+- **LaTeX Syllabus Page:** Included via [\preamble/syllabus.tex\](./preamble/syllabus.tex) as Roman-numeral page i in [\main.pdf\](./main.pdf).
 
 ---
 
