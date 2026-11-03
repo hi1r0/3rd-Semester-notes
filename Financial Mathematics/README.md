@@ -11,7 +11,7 @@
 
 | Directory / File | Description |
 | :--- | :--- |
-| [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I (Interest Theory), Unit II (Valuation of Financial Instruments), Unit III (Financial Ratios and Cash Flow Analysis), and Unit IV (Risk, Return, and Portfolio Mathematics), with unified Formula Reference Sheet and compiled [`main.pdf`](./latex/main.pdf) (97 pages). |
+| [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I (Interest Theory), Unit II (Valuation of Financial Instruments), Unit III (Financial Ratios and Cash Flow Analysis), and Unit IV (Risk, Return, and Portfolio Mathematics), with unified Formula Reference Sheet and compiled [`main.pdf`](./latex/main.pdf) (104 pages). |
 | [`latex/README.md`](./latex/README.md) | Detailed syllabus roadmap, lecture date logs (`13/08/2026` to `30/10/2026`), solved problem sets, and compilation guides. |
 | [`Assignment/`](./Assignment/) | Monochromatic LaTeX research report on FMCG Sector Equity Valuation using a Tri-Partite valuation architecture, with compiled [`main.pdf`](./Assignment/main.pdf). |
 | [`Assignment/README.md`](./Assignment/README.md) | Assignment summary, valuation models, consolidated decision matrix, and empirical takeaways. |
@@ -49,9 +49,10 @@
    - Portfolio diversification mathematics: Linear additivity of portfolio expected return ($E[R_p]$) vs. non-linear sub-additivity of portfolio risk ($\sigma_p^2 < \sum w_i \sigma_i$ when $\rho_{ij} < 1$).
    - Measures of Dispersion & Security Stability: Population vs. sample variance/SD ($N$ vs. $n-1$ degrees of freedom), Assumed Mean Shortcut ($d_i = X_i - A$), Shift of Origin and Scaling ($u_i = (X_i - A)/h$), and Coefficient of Variation ($\CV = \frac{\sigma}{\bar{X}} \times 100$) for cross-sectional stability profiling.
    - Bivariate Risk & Co-movement: Covariance ($\Cov(X, Y)$), Karl Pearson Correlation Coefficient ($r_{XY}$) direct raw-score formula, systematic market beta exposure, and coefficient of determination ($R^2$).
+   - Sharpe's Single-Index Optimal Portfolio Selection: Single-Index Model risk decomposition ($\sigma_i^2 = \beta_i^2 \sigma_m^2 + \sigma_{ei}^2$), Sharpe ratio maximization ($\theta_p$), Treynor excess return-to-beta ranking ratio ($Z_i = \frac{R_i - R_f}{\beta_i}$), cumulative cut-off rate ($C_i$), optimal acceptance threshold ($C^*$), unscaled weights ($Y_i$), normalized capital allocations ($w_i$), and comprehensive post-optimization synthesis ($E[R_p], \beta_p, \sigma_p^2, \theta_p$).
    - Foreign Exchange Exposure and Currency Risk: Structural regression sensitivity ($\beta_{\text{FX}}$) vs. firm valuation variance ($\Var(R_i)$), and tripartite exposure classification (Transaction, Translation, Operating/Economic exposure).
 5. **Comprehensive Multi-Chapter Formula Reference Sheet**
-   - Single consolidated reference section at document end, partitioned into 22 self-contained formula cards across Chapters 1, 2, 3, and 4 with mandatory structured `Where:` parameter lists.
+   - Single consolidated reference section at document end, partitioned into 23 self-contained formula cards across Chapters 1, 2, 3, and 4 with mandatory structured `Where:` parameter lists.
 6. **FMCG Equity Valuation Assignment**
    - Rigorous empirical valuation across ten major Indian FMCG corporations (HUL, ITC, Nestle, Varun Beverages, Britannia, Marico, Tata Consumer, Godrej Consumer, Dabur, Colgate-Palmolive).
    - Liquidation Value floor, Market-Implied growth ($g^*$), and Dividend Discount Model consensus synthesis.

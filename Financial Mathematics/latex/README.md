@@ -140,7 +140,7 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
     - `3.5.2` Contribution Break-Even modeling, budgeted capacity analysis, native vector contribution chart, and 3-scenario Sensitivity Analysis for selling price, variable cost, and fixed overhead shifts (*Lecture: 27/10/2026*).
 
 - **Comprehensive Multi-Chapter Formula Reference Sheet:**
-  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1, Chapter 2, Chapter 3, and Chapter 4 (22 formula cards).
+  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1, Chapter 2, Chapter 3, and Chapter 4 (23 formula cards).
   - High-density mathematical formula boxes with explicit itemized `Where:` parameter definitions, validity conditions, and policy decision matrices.
   - Zero awkward splits: Every formula box is completely self-contained.
 
@@ -170,7 +170,14 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
   - Financial econometric interpretation: Linear association strength, systematic market beta exposure, and coefficient of determination ($R^2 = r^2$).
   - *Solved Example:*
     - `4.3.1` Bivariate co-movement analysis of DLF Stock Returns vs. BSE National Index over 12 consecutive calendar months: 6-column product-moment calculation table, direct formula substitution, and systemic market beta diagnostics ($r \approx +0.9352, R^2 \approx 87.5\%$) (*Lecture: 30/10/2026*).
-- **4.4 Foreign Exchange Exposure and Currency Risk Foundations:**
+- **4.4 Sharpe's Single-Index Optimal Portfolio Construction:**
+  - Single-Index Model (SIM) linear return and risk decomposition: Systematic risk ($\beta_i^2 \sigma_m^2$) vs. unsystematic / residual risk ($\sigma_{ei}^2$), reducing parameter estimation from $O(N^2)$ to $3N+2$.
+  - Objective function: Tangent portfolio Sharpe ratio maximization ($\theta_p = \frac{E[R_p] - R_f}{\sigma_p}$).
+  - Systematic 4-Stage Algorithmic Architecture (Research-Grade TikZ Process Flowchart): Stage 1 (Ranking by Treynor Ratio $Z_i = \frac{R_i - R_f}{\beta_i}$) $\to$ Stage 2 (Variance Factors $A_i, B_i$) $\to$ Stage 3 (Cumulative Cut-off Rate $C_i = \frac{\sigma_m^2 \sum A_i}{1 + \sigma_m^2 \sum B_i}$) $\to$ Stage 4 (Unscaled Weights $Y_i \to$ Normalized Percentage Capital Allocations $w_i$).
+  - Acceptance stopping rule: Include candidate assets while $Z_i > C_i$; identify optimal acceptance threshold $C^* = \max C_i$.
+  - *Solved Example:*
+    - `4.4.1` Optimal portfolio selection for Jagan across 5 candidate stocks ($\sigma_m^2 = 10\%, R_f = 5\%$): Initial Given Inputs Table, Step 1 Excess Return-to-Beta Ranking Schedule, Step 2 Cumulative Cut-off Schedule ($C^* = C_4 = 9.057$, Company 5 excluded), Step 3 Optimum Capital Allocations ($w_1 = 42.54\%, w_2 = 48.87\%, w_3 = 2.25\%, w_4 = 6.34\%$), and Step 4 Post-Optimization Portfolio Synthesis ($E[R_p] = 21.01\%, \beta_p = 1.30, \sigma_p^2 = 22.91, \theta_p = 3.34$) (*Lecture: 30/10/2026*).
+- **4.5 Foreign Exchange Exposure and Currency Risk Foundations:**
   - Distinction between currency exposure (structural regression sensitivity $\beta_{\text{FX}}$) and foreign exchange risk (variance of value $\Var(R_i) = \beta_{\text{FX}}^2 \sigma_{\text{FX}}^2 + \sigma_\epsilon^2$).
   - Tripartite taxonomy of foreign exchange exposure:
     - Transaction Exposure (short-term contracted cash flows; hedged via forward/futures/money market hedges).
@@ -196,7 +203,7 @@ latex/
 │   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 08/10/2026)
 │   ├── ch03_financial_ratios_and_cash_flow.tex     # Chapter 3: Financial Ratios & Cash Flow (Lectures: 12/10 – 27/10/2026)
 │   ├── ch04_risk_return_portfolio_mathematics.tex # Chapter 4: Risk, Return & Portfolio Mathematics (Lectures: 28/10 – 30/10/2026)
-│   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions (Boxes 1-22)
+│   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions (Boxes 1-23)
 ├── figures/                                       # Department & University logos
 └── README.md                                      # Documentation & compilation instructions
 ```

@@ -553,7 +553,336 @@ Computing the correlation coefficient $r_{XY}$:
 \end{example}
 
 % ==============================================================================
-% 4.4 Foreign Exchange Exposure and Currency Risk Foundations
+% 4.4 Sharpe's Single-Index Optimal Portfolio Construction
+% ==============================================================================
+\newpage
+\section{Sharpe's Single-Index Optimal Portfolio Construction}
+\lecturedate{30/10/2026}
+
+\subsection{Theoretical Foundations of the Single-Index Model}
+In Harry Markowitz's classical mean-variance portfolio theory, optimizing an $N$-asset portfolio requires estimating $N$ expected returns, $N$ asset variances, and $N(N-1)/2$ pairwise covariances—creating severe computational intractability and parameter error for large investment universes ($N = 100 \implies 4{,}950$ covariances). 
+
+To overcome this curse of dimensionality, William Sharpe (1963) developed the \textbf{Single-Index Model (SIM)}. The SIM posits that the co-movement between individual securities arises entirely from a common macroeconomic factor—represented by the broad market index return ($R_m$):
+\begin{equation}
+    R_i = \alpha_i + \beta_i R_m + e_i
+\end{equation}
+subject to the standard Gauss--Markov linear index assumptions:
+\begin{align}
+    E[e_i] &= 0 \quad \text{for all } i, \\[0.3em]
+    \Var(e_i) &= \sigma_{ei}^2 \quad (\text{constant unsystematic / residual variance}), \\[0.3em]
+    \Cov(e_i, e_j) &= 0 \quad \text{for all } i \neq j \quad (\text{zero residual cross-correlation}), \\[0.3em]
+    \Cov(e_i, R_m) &= 0 \quad \text{for all } i \quad (\text{residuals orthogonal to market return}).
+\end{align}
+
+Under these assumptions, the total risk of any security $i$ decomposes into two mutually independent, orthogonal components:
+\begin{equation}
+    \sigma_i^2 = \underbrace{\beta_i^2 \sigma_m^2}_{\text{Systematic Risk}} + \underbrace{\sigma_{ei}^2}_{\text{Unsystematic (Firm-Specific) Risk}}
+\end{equation}
+and the covariance between any two distinct assets $i$ and $j$ ($i \neq j$) depends solely on their joint systematic exposure to the market index:
+\begin{equation}
+    \Cov(R_i, R_j) = \beta_i \beta_j \sigma_m^2
+\end{equation}
+
+\subsection{Sharpe Ratio Maximization and Optimal Cut-off Rate \texorpdfstring{$C^*$}{C*}}
+The investor's objective is to construct an optimal tangent portfolio of risky assets that maximizes the \textbf{Sharpe ratio} ($\theta_p$), defined as the slope of the Capital Allocation Line (CAL):
+\begin{equation}
+    \max_{\{w_i\}} \theta_p = \frac{E[R_p] - R_f}{\sigma_p} \quad \text{subject to} \quad \sum_{i=1}^N w_i = 1, \quad w_i \ge 0 \quad (\text{no short sales})
+\end{equation}
+
+Elton, Gruber, and Padberg (1976) proved that maximizing $\theta_p$ under the Single-Index Model yields a unique optimal cut-off acceptance threshold, denoted by $C^*$. A security qualifies for inclusion in the optimal portfolio if and only if its excess return-to-beta ratio exceeds this critical cut-off rate:
+\begin{equation}
+    Z_i > C^* \iff \text{Include Security } i \text{ in the Optimal Portfolio}
+\end{equation}
+Securities with $Z_i \le C^*$ are rejected because their inclusion would dilute the portfolio's Sharpe ratio.
+
+\subsection{Algorithmic Optimization Pipeline}
+The mathematical process of constructing Sharpe's optimal portfolio follows a four-stage systematic pipeline, illustrated in Figure~\ref{fig:sharpe_pipeline}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[>=stealth, font=\small]
+    \tikzset{
+        stagecard/.style={
+            draw=navyblue!80!black,
+            fill=navyblue!4,
+            rounded corners=4pt,
+            line width=1.1pt,
+            text width=3.2cm,
+            minimum height=3.8cm,
+            align=center,
+            inner sep=4pt
+        },
+        transarrow/.style={
+            ->,
+            line width=1.3pt,
+            navyblue,
+            shorten >=2pt,
+            shorten <=2pt
+        }
+    }
+
+    % Stage 1 Card
+    \node[stagecard] (card1) at (0, 0) {
+        {\bfseries\color{navyblue} Stage 1: Security Ranking}\\[0.35em]
+        \scriptsize Compute excess return to beta ratio:\\[0.25em]
+        $Z_i = \dfrac{R_i - R_f}{\beta_i}$\\[0.4em]
+        Rank all candidate assets in strictly descending order:\\[0.2em]
+        $Z_1 \ge Z_2 \ge \dots \ge Z_N$
+    };
+
+    % Stage 2 Card
+    \node[stagecard] (card2) at (3.9, 0) {
+        {\bfseries\color{teal!80!black} Stage 2: Variance Factors}\\[0.35em]
+        \scriptsize Compute variance-weighted factors:\\[0.2em]
+        $A_i = \dfrac{(R_i - R_f)\beta_i}{\sigma_{ei}^2}$\\[0.3em]
+        $B_i = \dfrac{\beta_i^2}{\sigma_{ei}^2}$\\[0.3em]
+        Accumulate sums $\sum A_i, \sum B_i$
+    };
+
+    % Stage 3 Card
+    \node[stagecard] (card3) at (7.8, 0) {
+        {\bfseries\color{forestgreen!80!black} Stage 3: Cut-off Rate $C^*$}\\[0.35em]
+        \scriptsize Evaluate cumulative cut-off rate:\\[0.2em]
+        $C_i = \dfrac{\sigma_m^2 \sum A_i}{1 + \sigma_m^2 \sum B_i}$\\[0.35em]
+        Identify acceptance boundary:\\[0.2em]
+        $Z_i > C_i \implies C^* = \max C_i$
+    };
+
+    % Stage 4 Card
+    \node[stagecard] (card4) at (11.7, 0) {
+        {\bfseries\color{crimson!80!black} Stage 4: Capital Weights}\\[0.35em]
+        \scriptsize Compute relative unscaled weights:\\[0.2em]
+        $Y_i = \dfrac{\beta_i}{\sigma_{ei}^2}(Z_i - C^*)$\\[0.35em]
+        Normalize to percentage capital allocations:\\[0.2em]
+        $w_i = \dfrac{Y_i}{\sum Y_i}$
+    };
+
+    % Transition Connectors with ample clearance
+    \draw[transarrow] (card1) -- (card2);
+    \draw[transarrow] (card2) -- (card3);
+    \draw[transarrow] (card3) -- (card4);
+\end{tikzpicture}
+\caption{Systematic Four-Stage Architecture of Sharpe's Single-Index Optimal Portfolio Selection.}
+\label{fig:sharpe_pipeline}
+\end{figure}
+
+\begin{definition}{Sharpe's Optimal Portfolio Selection Formulations}{def_sharpe_sim_opt}
+Let $R_f$ denote the riskless rate of return and $\sigma_m^2$ represent the variance of the macroeconomic market index. For an investment universe of $N$ candidate risky securities:
+\begin{enumerate}[leftmargin=*, topsep=2pt, itemsep=3pt]
+    \item \textbf{Excess Return-to-Beta Ratio (Ranking Metric):}
+    \begin{equation}
+        Z_i = \frac{R_i - R_f}{\beta_i}
+    \end{equation}
+    Securities are ranked from highest to lowest: $Z_1 \ge Z_2 \ge \dots \ge Z_N$.
+
+    \item \textbf{Individual Variance-Weighted Factors:}
+    \begin{equation}
+        A_i = \frac{(R_i - R_f)\beta_i}{\sigma_{ei}^2}, \qquad B_i = \frac{\beta_i^2}{\sigma_{ei}^2}
+    \end{equation}
+
+    \item \textbf{Cumulative Cut-off Rate ($C_i$):}
+    For a portfolio containing the top $i$ ranked securities:
+    \begin{equation}
+        C_i = \frac{\sigma_m^2 \sum_{j=1}^i A_j}{1 + \sigma_m^2 \sum_{j=1}^i B_j} = \frac{\sigma_m^2 \sum_{j=1}^i \frac{(R_j - R_f)\beta_j}{\sigma_{ej}^2}}{1 + \sigma_m^2 \sum_{j=1}^i \frac{\beta_j^2}{\sigma_{ej}^2}}
+    \end{equation}
+
+    \item \textbf{Asset Selection Condition and Optimal Cut-off Point ($C^*$):}
+    A security $i$ is included in the optimal portfolio if and only if:
+    \begin{equation}
+        Z_i > C_i
+    \end{equation}
+    The optimal cut-off threshold is $C^* = C_k$, where $k$ is the last asset index satisfying $Z_k > C_k$. At asset $k+1$, $Z_{k+1} \le C_k$, terminating the search.
+
+    \item \textbf{Unscaled Weights and Normalized Portfolio Allocations:}
+    For each selected security $i \in \{1, 2, \dots, k\}$:
+    \begin{equation}
+        Y_i = \frac{\beta_i}{\sigma_{ei}^2} (Z_i - C^*), \qquad w_i = \frac{Y_i}{\sum_{j=1}^k Y_j} \quad \text{such that} \quad \sum_{i=1}^k w_i = 1
+    \end{equation}
+\end{enumerate}
+\end{definition}
+
+\begin{tcolorbox}[colback=lightgray!15, colframe=navyblue!60, title=\textbf{Pedagogical Note on Notation Conventions}]
+\small
+In the classroom lecture notes, the symbol $Z_i$ denotes the excess return-to-beta ranking ratio ($\frac{R_i - R_f}{\beta_i}$) and $Y_i$ denotes the unscaled relative asset weights. In standard textbook literature (e.g., Elton, Gruber, Brown, and Goetzmann, \textit{Modern Portfolio Theory and Investment Analysis}), the excess return-to-beta ratio is written directly as $\frac{R_i - R_f}{\beta_i}$, while the unscaled weights are denoted by $z_i$. Both mathematical systems are identical in logic, intermediate values, and final capital allocations ($w_i$).
+\end{tcolorbox}
+
+\begin{example}{Optimal Portfolio Construction via Single-Index Model (Jagan's Portfolio)}{ex_jagan_sharpe_opt}
+\lecturedate{30/10/2026}
+\textbf{Problem:}\\[0.2em]
+Jagan is constructing an optimal investment portfolio from a candidate universe of five corporate stocks. The market variance is $\sigma_m^2 = 10\%$, and the prevailing riskless rate of return is $R_f = 5\%$. The expected returns, beta coefficients, and unsystematic residual risk levels of the five companies are presented in the initial portfolio data table below.
+\begin{enumerate}[leftmargin=*, noitemsep]
+    \item Rank the candidate stocks by their excess return-to-beta ratio ($Z_i$).
+    \item Construct the cumulative cut-off schedule ($C_i$) and determine the optimal cut-off point ($C^*$).
+    \item Identify the specific companies selected for inclusion in the optimum portfolio.
+    \item Calculate the relative unscaled weights ($Y_i$) and final percentage capital allocations ($w_i$).
+    \item Perform a post-optimization portfolio synthesis check: compute the portfolio's expected return $E[R_p]$, systematic beta $\beta_p$, unsystematic risk $\sigma_{ep}^2$, total variance $\sigma_p^2$, and Sharpe ratio $\theta_p$.
+\end{enumerate}
+
+\begin{center}
+\small
+\begin{minipage}{0.88\linewidth}
+\centering
+\textbf{Table 1: Given Initial Portfolio Inputs}\\[0.4em]
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\textbf{Company ($i$)} & \textbf{Return ($R_i, \%$)} & \textbf{Beta ($\beta_i$)} & \textbf{Unsystematic Risk ($\sigma_{ei}^2$)} \\
+\midrule
+1 & 20 & 1.0 & 20 \\
+2 & 22 & 1.5 & 10 \\
+3 & 10 & 0.5 & 30 \\
+4 & 24 & 2.0 & 20 \\
+5 & 12 & 1.0 & 30 \\
+\bottomrule
+\end{tabularx}
+\end{minipage}
+\end{center}
+
+\tcbline
+\textbf{Solution:}
+
+\textbf{Step 1: Calculation of Excess Return to Beta ($Z_i$) and Security Ranking:}
+Using the formula $Z_i = \frac{R_i - R_f}{\beta_i}$ with $R_f = 5\%$:
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item Company 1: $Z_1 = \frac{20 - 5}{1.0} = \frac{15}{1.0} = 15.00$
+    \item Company 2: $Z_2 = \frac{22 - 5}{1.5} = \frac{17}{1.5} = 11.33$
+    \item Company 3: $Z_3 = \frac{10 - 5}{0.5} = \frac{5}{0.5} = 10.00$
+    \item Company 4: $Z_4 = \frac{24 - 5}{2.0} = \frac{19}{2.0} = 9.50$
+    \item Company 5: $Z_5 = \frac{12 - 5}{1.0} = \frac{7}{1.0} = 7.00$
+\end{itemize}
+
+\begin{center}
+\small
+\begin{minipage}{0.92\linewidth}
+\centering
+\textbf{Table 2: Step 1 --- Excess Return to Beta ($Z_i$) Ranking Schedule}\\[0.4em]
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}p{2.0cm} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}p{1.8cm}}
+\toprule
+\textbf{Company} & \textbf{Return ($R_i$)} & \textbf{$R_i - R_f$} & \textbf{Beta ($\beta_i$)} & \textbf{$Z_i$ Ratio} & \textbf{Rank} \\
+\midrule
+1 & 20 & 15 & 1.0 & \textbf{15.00} & \textbf{1} \\
+2 & 22 & 17 & 1.5 & \textbf{11.33} & \textbf{2} \\
+3 & 10 & 5  & 0.5 & \textbf{10.00} & \textbf{3} \\
+4 & 24 & 19 & 2.0 & \textbf{9.50}  & \textbf{4} \\
+5 & 12 & 7  & 1.0 & \textbf{7.00}  & \textbf{5} \\
+\bottomrule
+\end{tabularx}
+\end{minipage}
+\end{center}
+
+\tcbline
+\textbf{Step 2: Calculation of the Cumulative Cut-off Schedule ($C_i$):}
+For each ranked company, evaluate:
+\begin{equation*}
+    A_i = \frac{(R_i - R_f)\beta_i}{\sigma_{ei}^2}, \qquad B_i = \frac{\beta_i^2}{\sigma_{ei}^2}, \qquad C_i = \frac{\sigma_m^2 \sum_{j=1}^i A_j}{1 + \sigma_m^2 \sum_{j=1}^i B_j} \quad (\text{with } \sigma_m^2 = 10)
+\end{equation*}
+
+\begin{center}
+\footnotesize
+\begin{minipage}{\linewidth}
+\centering
+\textbf{Table 3: Step 2 --- Cumulative Cut-off Rate ($C_i$) Computation Schedule}\\[0.4em]
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}p{0.9cm} >{\centering\arraybackslash}p{0.6cm} >{\centering\arraybackslash}p{0.8cm} >{\centering\arraybackslash}p{1.7cm} >{\centering\arraybackslash}p{0.8cm} >{\centering\arraybackslash}p{1.4cm} >{\centering\arraybackslash}p{0.8cm} >{\centering\arraybackslash}X >{\centering\arraybackslash}p{1.0cm}}
+\toprule
+\textbf{Rank} & \textbf{Co.} & \textbf{$Z_i$} & \textbf{$A_i = \frac{(R_i - R_f)\beta_i}{\sigma_{ei}^2}$} & \textbf{$\sum A_i$} & \textbf{$B_i = \frac{\beta_i^2}{\sigma_{ei}^2}$} & \textbf{$\sum B_i$} & \textbf{$C_i$ Calculation} & \textbf{$C_i$} \\
+\midrule
+1 & 1 & 15.00 & $\frac{15 \times 1.0}{20} = 0.750$ & 0.750 & $\frac{1.0^2}{20} = 0.050$ & 0.050 & $\frac{10 \times 0.750}{1 + 10 \times 0.050} = \frac{7.500}{1.500}$ & \textbf{5.000} \\[0.4em]
+2 & 2 & 11.33 & $\frac{17 \times 1.5}{10} = 2.550$ & 3.300 & $\frac{1.5^2}{10} = 0.225$ & 0.275 & $\frac{10 \times 3.300}{1 + 10 \times 0.275} = \frac{33.000}{3.750}$ & \textbf{8.800} \\[0.4em]
+3 & 3 & 10.00 & $\frac{5 \times 0.5}{30} = 0.083$  & 3.383 & $\frac{0.5^2}{30} = 0.008$ & 0.283 & $\frac{10 \times 3.383}{1 + 10 \times 0.283} = \frac{33.833}{3.833}$ & \textbf{8.826} \\[0.4em]
+4 & 4 & 9.50  & $\frac{19 \times 2.0}{20} = 1.900$ & 5.283 & $\frac{2.0^2}{20} = 0.200$ & 0.483 & $\frac{10 \times 5.283}{1 + 10 \times 0.483} = \frac{52.833}{5.833}$ & \textbf{9.057} \\[0.4em]
+5 & 5 & 7.00  & $\frac{7 \times 1.0}{30} = 0.233$  & 5.516 & $\frac{1.0^2}{30} = 0.033$ & 0.516 & $\frac{10 \times 5.516}{1 + 10 \times 0.516} = \frac{55.167}{6.167}$ & \textit{8.946} \\
+\bottomrule
+\end{tabularx}
+\end{minipage}
+\end{center}
+
+\textbf{Determining the Optimal Cut-off Point ($C^*$):}
+A security is included in the portfolio as long as its excess return-to-beta ratio exceeds the cumulative cut-off rate ($Z_i > C_i$):
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item Company 1: $Z_1 (15.00) > C_1 (5.000) \implies$ Include
+    \item Company 2: $Z_2 (11.33) > C_2 (8.800) \implies$ Include
+    \item Company 3: $Z_3 (10.00) > C_3 (8.826) \implies$ Include
+    \item Company 4: $Z_4 (9.50) > C_4 (9.057) \implies$ Include
+    \item Company 5: $Z_5 (7.00) < C_4 (9.057) \implies$ \textbf{Exclude / Stop}
+\end{itemize}
+Because $Z_5 = 7.00$ falls below the prevailing cut-off rate $C_4 = 9.057$, Company 5 is excluded, and the optimization process terminates.
+
+\textbf{Conclusion on Security Selection:}
+\begin{equation*}
+    \text{Optimal Cut-off Point: } \mathbf{C^* = 9.057}
+\end{equation*}
+The optimum portfolio consists strictly of \textbf{Companies 1, 2, 3, and 4}.
+
+\tcbline
+\textbf{Step 3: Calculation of Optimum Portfolio Weights ($w_i$):}
+For each selected asset $i \in \{1, 2, 3, 4\}$, the unscaled relative weight $Y_i$ is computed as:
+\begin{equation*}
+    Y_i = \frac{\beta_i}{\sigma_{ei}^2} (Z_i - C^*) = \frac{\beta_i}{\sigma_{ei}^2} (Z_i - 9.057)
+\end{equation*}
+and the final percentage capital allocation is obtained via normalization: $w_i = \frac{Y_i}{\sum_{j=1}^4 Y_j}$.
+
+\begin{center}
+\small
+\begin{minipage}{\linewidth}
+\centering
+\textbf{Table 4: Step 3 --- Optimum Asset Weights and Percentage Capital Allocation}\\[0.4em]
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}p{1.7cm} >{\centering\arraybackslash}p{0.9cm} >{\centering\arraybackslash}p{1.0cm} >{\centering\arraybackslash}p{0.9cm} >{\centering\arraybackslash}p{1.6cm} >{\raggedleft\arraybackslash}X >{\centering\arraybackslash}p{2.2cm}}
+\toprule
+\textbf{Company} & \textbf{Beta ($\beta_i$)} & \textbf{$\sigma_{ei}^2$} & \textbf{$Z_i$} & \textbf{$Z_i - C^*$} & \textbf{Relative Weight ($Y_i$)} & \textbf{Final Weight ($w_i$)} \\
+\midrule
+1 & 1.0 & 20 & 15.00 & $15.00 - 9.057 = 5.943$ & $\frac{1.0}{20} \times 5.943 = 0.29715$ & $\frac{0.29715}{0.69857} \approx \mathbf{42.54\%}$ \\[0.3em]
+2 & 1.5 & 10 & 11.33 & $11.33 - 9.057 = 2.276$ & $\frac{1.5}{10} \times 2.276 = 0.34140$ & $\frac{0.34140}{0.69857} \approx \mathbf{48.87\%}$ \\[0.3em]
+3 & 0.5 & 30 & 10.00 & $10.00 - 9.057 = 0.943$ & $\frac{0.5}{30} \times 0.943 = 0.01572$ & $\frac{0.01572}{0.69857} \approx \mathbf{2.25\%}$ \\[0.3em]
+4 & 2.0 & 20 & 9.50  & $9.50 - 9.057 = 0.443$  & $\frac{2.0}{20} \times 0.443 = 0.04430$ & $\frac{0.04430}{0.69857} \approx \mathbf{6.34\%}$ \\
+\midrule
+\textbf{Total} & — & — & — & — & $\sum Y_i = \mathbf{0.69857}$ & $\mathbf{100.00\%}$ \\
+\bottomrule
+\end{tabularx}
+\end{minipage}
+\end{center}
+
+\tcbline
+\textbf{Step 4: Post-Optimization Portfolio Synthesis Check:}
+\begin{enumerate}[leftmargin=*, itemsep=3pt]
+    \item \textbf{Expected Portfolio Return ($E[R_p]$):}
+    \begin{align*}
+        E[R_p] &= \sum_{i=1}^4 w_i R_i = 0.4254(20) + 0.4887(22) + 0.0225(10) + 0.0634(24) \\
+               &= 8.508\% + 10.751\% + 0.225\% + 1.522\% = \mathbf{21.01\%}
+    \end{align*}
+
+    \item \textbf{Portfolio Beta Sensitivity ($\beta_p$):}
+    \begin{align*}
+        \beta_p &= \sum_{i=1}^4 w_i \beta_i = 0.4254(1.0) + 0.4887(1.5) + 0.0225(0.5) + 0.0634(2.0) \\
+                &= 0.4254 + 0.7331 + 0.0113 + 0.1268 = \mathbf{1.2966} \approx \mathbf{1.30}
+    \end{align*}
+
+    \item \textbf{Portfolio Unsystematic Variance ($\sigma_{ep}^2$):}
+    \begin{align*}
+        \sigma_{ep}^2 &= \sum_{i=1}^4 w_i^2 \sigma_{ei}^2 = (0.4254)^2(20) + (0.4887)^2(10) + (0.0225)^2(30) + (0.0634)^2(20) \\
+                      &= 3.6193 + 2.3883 + 0.0152 + 0.0804 = \mathbf{6.1032}
+    \end{align*}
+
+    \item \textbf{Total Optimal Portfolio Variance and Standard Deviation ($\sigma_p^2, \sigma_p$):}
+    \begin{align*}
+        \sigma_p^2 &= \beta_p^2 \sigma_m^2 + \sigma_{ep}^2 = (1.2966)^2(10) + 6.1032 = 16.8117 + 6.1032 = \mathbf{22.9149} \\[0.3em]
+        \sigma_p   &= \sqrt{22.9149} \approx \mathbf{4.787\%}
+    \end{align*}
+
+    \item \textbf{Optimal Tangency Portfolio Sharpe Ratio ($\theta_p$):}
+    \begin{equation*}
+        \theta_p = \frac{E[R_p] - R_f}{\sigma_p} = \frac{21.006\% - 5.000\%}{4.787\%} = \frac{16.006}{4.787} \approx \mathbf{3.3436}
+    \end{equation*}
+    The assembled portfolio achieves a high Sharpe ratio of $3.34$, demonstrating that Sharpe's single-index cut-off methodology successfully balances high expected return against systematic and residual risk.
+\end{enumerate}
+\end{example}
+
+% ==============================================================================
+% 4.5 Foreign Exchange Exposure and Currency Risk Foundations
 % ==============================================================================
 \newpage
 \section{Foreign Exchange Exposure and Currency Risk Foundations}

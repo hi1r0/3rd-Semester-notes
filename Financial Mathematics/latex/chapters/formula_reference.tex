@@ -539,3 +539,27 @@
     \item $\beta_{\text{FX}}$ = Foreign exchange exposure sensitivity coefficient via market regression
 \end{itemize}
 \end{formulabox}
+
+\newpage
+\begin{formulabox}[{23. Sharpe's Single-Index Optimal Portfolio Selection and Asset Weighting}]
+\begin{align*}
+    \text{Excess Return-to-Beta Ratio:} \quad Z_i &= \frac{R_i - R_f}{\beta_i} \qquad [Z_1 \ge Z_2 \ge \dots \ge Z_N] \\[4pt]
+    \text{Individual Variance Factors:} \quad A_i &= \frac{(R_i - R_f)\beta_i}{\sigma_{ei}^2}, \qquad B_i = \frac{\beta_i^2}{\sigma_{ei}^2} \\[4pt]
+    \text{Cumulative Cut-off Rate:} \quad C_i &= \frac{\sigma_m^2 \sum_{j=1}^i A_j}{1 + \sigma_m^2 \sum_{j=1}^i B_j} = \frac{\sigma_m^2 \sum_{j=1}^i \frac{(R_j - R_f)\beta_j}{\sigma_{ej}^2}}{1 + \sigma_m^2 \sum_{j=1}^i \frac{\beta_j^2}{\sigma_{ej}^2}} \\[4pt]
+    \text{Asset Inclusion Condition:} &\quad \text{Include Security } i \iff Z_i > C^* \quad \left[C^* = \max_{k} C_k\right] \\[4pt]
+    \text{Relative Unscaled Weights:} \quad Y_i &= \frac{\beta_i}{\sigma_{ei}^2}(Z_i - C^*) \qquad (\text{for all } i \in S^*) \\[4pt]
+    \text{Normalized Capital Allocation:} \quad w_i &= \frac{Y_i}{\sum_{k \in S^*} Y_k} \qquad \left[\sum_{k \in S^*} w_k = 1\right] \\[4pt]
+    \text{Optimal Portfolio Variance:} \quad \sigma_p^2 &= \beta_p^2 \sigma_m^2 + \sum_{i \in S^*} w_i^2 \sigma_{ei}^2 \qquad \left[\beta_p = \sum_{i \in S^*} w_i \beta_i\right]
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $R_i, R_f$ = Expected rate of return on security $i$ and riskless interest rate
+    \item $\beta_i, \sigma_{ei}^2$ = Systematic market beta sensitivity and residual unsystematic variance of asset $i$
+    \item $\sigma_m^2$ = Expected macroeconomic variance of the broad market index
+    \item $Z_i$ = Excess return-to-beta ratio (Treynor ranking metric)
+    \item $A_i, B_i$ = Cumulative excess return and beta scaling factors weighted by unique residual risk
+    \item $C_i, C^*$ = Cumulative acceptance rate and optimal cut-off threshold ($C^* = \max C_i$)
+    \item $Y_i, w_i$ = Unscaled relative weight factor and final normalized percentage portfolio allocation
+    \item $S^*, \beta_p, \sigma_p^2$ = Set of selected assets satisfying $Z_i > C^*$, optimal portfolio beta, and total portfolio variance
+\end{itemize}
+\end{formulabox}
