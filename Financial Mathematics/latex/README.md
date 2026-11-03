@@ -140,9 +140,43 @@ This directory contains the modular LaTeX sources, custom styling, problem sets,
     - `3.5.2` Contribution Break-Even modeling, budgeted capacity analysis, native vector contribution chart, and 3-scenario Sensitivity Analysis for selling price, variable cost, and fixed overhead shifts (*Lecture: 27/10/2026*).
 
 - **Comprehensive Multi-Chapter Formula Reference Sheet:**
-  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1, Chapter 2, and Chapter 3 (20 formula cards).
+  - Dedicated multi-page formula section at the end of the document, partitioned by Chapter 1, Chapter 2, Chapter 3, and Chapter 4 (22 formula cards).
   - High-density mathematical formula boxes with explicit itemized `Where:` parameter definitions, validity conditions, and policy decision matrices.
   - Zero awkward splits: Every formula box is completely self-contained.
+
+### Chapter 4: Risk, Return, and Portfolio Mathematics (Unit IV)
+- **4.1 Financial Risk and Return Axioms & Measures of Central Tendency:**
+  - Foundational economic trade-off between financial risk (variance/dispersion) and financial return.
+  - Central tendency measures: Simple Arithmetic Mean ($\bar{X}$), Weighted Arithmetic Mean ($\bar{X}_w$), Mode ($\text{arg}\max f(x)$), Geometric Mean ($\GM$, multi-period compounding / CAGR), and Harmonic Mean ($\HM$, average rates, $P/E$ multiples, and rupee-cost averaging SIPs).
+  - Classical Mean Inequality: $\AM \ge \GM \ge \HM$ (equality holds if and only if observations are identical).
+  - Theoretical foundations of portfolio diversification: Linear additivity of portfolio expected return ($E[R_p] = \sum w_i E[R_i]$) vs. non-linear sub-additivity of portfolio risk ($\sigma_p^2 < \sum w_i \sigma_i$ when $\rho_{ij} < 1$).
+  - *Solved Examples:*
+    - `4.1.1` Simple arithmetic mean computation of monthly employee incomes ($\bar{X} = \text{Rs. } 22{,}265$) (*Lecture: 28/10/2026*).
+    - `4.1.2` Modal frequency determination ($\text{Mode} = 5$) and Harmonic Mean evaluation ($\HM = 11.233$) with classical inequality verification (*Lecture: 28/10/2026*).
+- **4.2 Measures of Dispersion & Security Stability:**
+  - Absolute dispersion (Variance $\sigma^2, s^2$ and Standard Deviation $\sigma, s$) vs. relative dispersion (Coefficient of Variation $\CV$).
+  - Sample Bessel degrees-of-freedom correction ($n-1$) vs. population ($N$).
+  - Shortcut computation methods:
+    - Assumed Mean Method ($d_i = X_i - A$, $\sigma = \sqrt{\frac{\sum d_i^2}{n} - \left(\frac{\sum d_i}{n}\right)^2}$).
+    - Shift of Origin and Scale Transformation ($u_i = (X_i - A)/h$, $\sigma_X = h \cdot \sigma_u$).
+  - Coefficient of Variation ($\CV = \frac{\sigma}{\bar{X}} \times 100$) as the standardized relative metric for cross-sectional risk and stability comparisons.
+  - *Solved Examples:*
+    - `4.2.1` Standard deviation computation via Assumed Mean ($A = 260$, $\sigma = 16.40, s = 17.29\,\text{mg/dL}$) and decimal stock quote dispersion via Shift of Origin ($y = X - 240$, $\bar{X} = 240.163, \sigma = 0.0329$) (*Lecture: 29/10/2026*).
+    - `4.2.2` Comparative stability and risk profiling of Reliance vs. JIO shares via $\CV$ (Reliance: $\bar{X} = 53, \sigma = 2.646, \CV = 4.99\%$; JIO: $\bar{Y} = 105, \sigma = 2.000, \CV = 1.90\%$; JIO is $2.6\times$ more stable in value) (*Lecture: 29/10/2026*).
+- **4.3 Bivariate Risk, Market Co-movement, and Correlation Mechanics:**
+  - Covariance ($\Cov(X, Y)$): Definition, direction of joint deviation, and sensitivity to measurement units.
+  - Karl Pearson Correlation Coefficient ($r_{XY}$): Standardized dimensionless linear association measure bounded strictly within $[-1, +1]$.
+  - Direct raw-score product-moment formula: $r_{XY} = \frac{n \sum XY - (\sum X)(\sum Y)}{\sqrt{[n \sum X^2 - (\sum X)^2][n \sum Y^2 - (\sum Y)^2]}}$.
+  - Financial econometric interpretation: Linear association strength, systematic market beta exposure, and coefficient of determination ($R^2 = r^2$).
+  - *Solved Example:*
+    - `4.3.1` Bivariate co-movement analysis of DLF Stock Returns vs. BSE National Index over 12 consecutive calendar months: 6-column product-moment calculation table, direct formula substitution, and systemic market beta diagnostics ($r \approx +0.9352, R^2 \approx 87.5\%$) (*Lecture: 30/10/2026*).
+- **4.4 Foreign Exchange Exposure and Currency Risk Foundations:**
+  - Distinction between currency exposure (structural regression sensitivity $\beta_{\text{FX}}$) and foreign exchange risk (variance of value $\Var(R_i) = \beta_{\text{FX}}^2 \sigma_{\text{FX}}^2 + \sigma_\epsilon^2$).
+  - Tripartite taxonomy of foreign exchange exposure:
+    - Transaction Exposure (short-term contracted cash flows; hedged via forward/futures/money market hedges).
+    - Translation Exposure (periodic accounting balance sheet consolidation; hedged via balance sheet matching).
+    - Operating / Economic Exposure (long-term strategic cash flows and market power; hedged via operational diversification and multi-currency financing).
+  - *Lecture Date:* `30/10/2026`.
 
 ---
 
@@ -161,7 +195,8 @@ latex/
 │   ├── ch01_interest_theory.tex                   # Chapter 1: Interest Theory (Lectures: 13/08 – 03/09/2026)
 │   ├── ch02_valuation_of_financial_instruments.tex # Chapter 2: Valuation of Instruments (Lectures: 07/09 – 08/10/2026)
 │   ├── ch03_financial_ratios_and_cash_flow.tex     # Chapter 3: Financial Ratios & Cash Flow (Lectures: 12/10 – 27/10/2026)
-│   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions (Boxes 1-20)
+│   ├── ch04_risk_return_portfolio_mathematics.tex # Chapter 4: Risk, Return & Portfolio Mathematics (Lectures: 28/10 – 30/10/2026)
+│   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet with "Where:" definitions (Boxes 1-22)
 ├── figures/                                       # Department & University logos
 └── README.md                                      # Documentation & compilation instructions
 ```

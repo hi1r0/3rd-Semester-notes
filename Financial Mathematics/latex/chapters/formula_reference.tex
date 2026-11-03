@@ -487,3 +487,55 @@
     \item $S_{\text{target}}$ = Required sales turnover to achieve a designated profit milestone
 \end{itemize}
 \end{formulabox}
+
+% ==============================================================================
+% Chapter 4: Risk, Return, and Portfolio Mathematics
+% ==============================================================================
+\newpage
+\section*{Chapter 4: Risk, Return, and Portfolio Mathematics}
+\addcontentsline{toc}{section}{Chapter 4: Risk, Return, and Portfolio Mathematics}
+
+\begin{formulabox}[{21. Statistical Measures of Central Tendency and Financial Return}]
+\begin{align*}
+    \text{Simple Arithmetic Mean:} \quad \bar{X} &= \frac{1}{N}\sum_{i=1}^{N} X_i \\[4pt]
+    \text{Weighted Arithmetic Mean:} \quad \bar{X}_w &= \frac{\sum_{i=1}^{N} w_i X_i}{\sum_{i=1}^{N} w_i} = \sum_{i=1}^{N} w_i X_i \qquad \left[\sum w_i = 1\right] \\[4pt]
+    \text{Geometric Mean (Compounding):} \quad \GM &= \sqrt[n]{\prod_{i=1}^{n} X_i} = \exp\left(\frac{1}{n}\sum_{i=1}^{n} \ln X_i\right) \\[4pt]
+    \text{Harmonic Mean (Rates / Multiples):} \quad \HM &= \frac{n}{\sum_{i=1}^{n} \frac{1}{X_i}} = \frac{n}{\frac{1}{X_1} + \frac{1}{X_2} + \cdots + \frac{1}{X_n}} \\[4pt]
+    \text{Classical Mean Inequality:} &\quad \AM \ge \GM \ge \HM \qquad (\text{for all } X_i > 0) \\[4pt]
+    \text{Portfolio Expected Return:} \quad E[R_p] &= \sum_{i=1}^{N} w_i E[R_i]
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $X_i, N, n$ = Asset observations, discrete return realizations, and sample size
+    \item $w_i$ = Portfolio capital allocation weights ($\sum_{i=1}^N w_i = 1$)
+    \item $\bar{X}, \bar{X}_w$ = Simple and capitalization-weighted arithmetic mean returns
+    \item $\GM$ = Multi-period geometric growth rate / Compound Annual Growth Rate (CAGR)
+    \item $\HM$ = Harmonic mean asset multiple (appropriate for $P/E$ and rupee-cost averaging)
+    \item $E[R_p], E[R_i]$ = Expected return of the composite portfolio and asset $i$
+\end{itemize}
+\end{formulabox}
+
+\newpage
+\begin{formulabox}[{22. Measures of Absolute Risk, Relative Dispersion, and Bivariate Co-movement}]
+\begin{align*}
+    \text{Population Variance \& SD:} \quad \sigma^2 &= \frac{\sum (X_i - \bar{X})^2}{N}, \qquad \sigma = \sqrt{\sigma^2} \\[4pt]
+    \text{Sample Variance \& SD:} \quad s^2 &= \frac{\sum (X_i - \bar{X})^2}{n - 1}, \qquad s = \sqrt{s^2} \\[4pt]
+    \text{Assumed Mean Shortcut:} \quad \sigma &= \sqrt{\frac{\sum d_i^2}{n} - \left(\frac{\sum d_i}{n}\right)^2} \qquad [d_i = X_i - A] \\[4pt]
+    \text{Origin / Scale Transformation:} \quad \sigma_X &= h \cdot \sigma_u \qquad \left[u_i = \frac{X_i - A}{h}\right] \\[4pt]
+    \text{Coefficient of Variation:} \quad \CV &= \frac{\sigma}{\bar{X}} \times 100 \qquad [\text{Lower } \CV \implies \text{More Stable}] \\[4pt]
+    \text{Covariance:} \quad \Cov(X, Y) &= \frac{\sum (X_i - \bar{X})(Y_i - \bar{Y})}{n} = \frac{\sum X_i Y_i}{n} - \bar{X}\bar{Y} \\[4pt]
+    \text{Karl Pearson Correlation:} \quad r_{XY} &= \frac{\Cov(X, Y)}{\sigma_X \sigma_Y} \\[4pt]
+        &= \frac{n\sum XY - (\sum X)(\sum Y)}{\sqrt{[n\sum X^2 - (\sum X)^2][n\sum Y^2 - (\sum Y)^2]}} \\[4pt]
+    \text{FOREX Exposure Coefficient:} \quad \beta_{\text{FX}} &= \frac{\Cov(R_i, \Delta S/S)}{\Var(\Delta S/S)}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item $\sigma^2, \sigma$ = Population variance and standard deviation (total absolute risk)
+    \item $s^2, s$ = Unbiased sample variance and sample standard deviation (Bessel corrected)
+    \item $A, d_i, h, u_i$ = Assumed mean origin, deviations ($X_i - A$), class width, and scaled scores
+    \item $\CV$ = Coefficient of Variation (percentage relative risk per unit of expected return)
+    \item $\Cov(X, Y)$ = Covariance measuring joint directional co-movement between assets $X$ and $Y$
+    \item $r_{XY}$ = Standardized Karl Pearson correlation coefficient ($-1 \le r_{XY} \le +1$)
+    \item $\beta_{\text{FX}}$ = Foreign exchange exposure sensitivity coefficient via market regression
+\end{itemize}
+\end{formulabox}

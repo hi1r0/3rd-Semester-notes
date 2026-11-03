@@ -9,7 +9,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 ```text
 ├── Financial Mathematics/
 │   ├── Assignment/                # FMCG Equity Valuation Assignment (Monochrome LaTeX, 8 pages, main.pdf)
-│   ├── latex/                     # Modular LaTeX lecture notes (Units I, II, & III, 83 pages, main.pdf)
+│   ├── latex/                     # Modular LaTeX lecture notes (Units I, II, III & IV, 97 pages, main.pdf)
 │   ├── notes.docx                 # Comprehensive course notes Word document
 │   └── README.md                  # Subject overview and directory index
 ├── Financial Risk Management/
@@ -53,6 +53,8 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Financial ratio analysis: Profitability margins and fundamental invariance identity, operational asset turnover velocity cycles, short-term liquidity & solvency ratios (Current, Quick, Cash Position).
    - Dynamic flow statements: Funds Flow Statement (Net Working Capital) vs. Cash Flow Statement (Cash & Cash Equivalents), Funds from Operations ($\FFO$), Cash from Operations ($\CFO$).
    - Cost-Volume-Profit (CVP) and Break-Even Analysis: Contribution margin, P/V ratio, Break-Even Point (units and sales value), Margin of Safety ($\MOS$), Angle of Incidence ($\theta$), Sensitivity Analysis, and native vector TikZ/pgfplots Break-Even charts.
+   - Risk, Return, and Portfolio Mathematics (Unit IV): Axiomatic risk-return foundations, measures of central tendency ($\AM, \GM, \HM$), classical mean inequality ($\AM \ge \GM \ge \HM$), portfolio expected return linear additivity vs. non-linear risk subadditivity, dispersion & Coefficient of Variation ($\CV$), Karl Pearson bivariate correlation ($r_{XY}$), and foreign exchange exposure sensitivity ($\beta_{\text{FX}}$).
+   - Unified Multi-Chapter Formula Reference Sheet: 22 high-density self-contained formula cards across Chapters 1 to 4 with structured parameter definitions.
    - Empirical Course Assignment: Comprehensive Tri-Partite Equity Valuation on the Indian FMCG sector (10 firms, sensitivity analysis, break-even growth $g^*$).
 
 2. **Financial Risk Management (MSQF 533)**
