@@ -480,12 +480,12 @@ Under the Foreign Exchange Management Act (FEMA), 1999 and the Consolidated FDI 
         cardbox1/.style={
             rectangle, rounded corners=5pt, line width=1.1pt,
             font=\sffamily, align=left, inner sep=7pt,
-            text width=6.8cm, minimum height=3.2cm
+            text width=6.8cm, minimum height=3.6cm
         },
         cardbox2/.style={
             rectangle, rounded corners=5pt, line width=1.1pt,
             font=\sffamily, align=left, inner sep=7pt,
-            text width=6.8cm, minimum height=4.2cm
+            text width=6.8cm, minimum height=5.0cm
         },
         spinearrow/.style={
             line width=1.3pt, draw=navyblue, -{Stealth[length=6pt, width=4pt]}
@@ -518,8 +518,8 @@ Under the Foreign Exchange Management Act (FEMA), 1999 and the Consolidated FDI 
             $\bullet$ \textbf{Strategic Asset-Seeking}: Acquiring foreign R\&D and brands.
         };
 
-        % Row 2 Cards (Top aligned at y = -7.0 via anchor=north)
-        \node[cardbox2, draw=charcoal!70, fill=white, anchor=north] (cardChain) at (-4.4, -7.0) {
+        % Row 2 Cards (Top aligned at y = -7.3 via anchor=north, 1.2cm clear gap below Row 1)
+        \node[cardbox2, draw=charcoal!70, fill=white, anchor=north] (cardChain) at (-4.4, -7.3) {
             \textbf{\color{charcoal}3. Value Chain Integration}\\[0.25em]
             $\bullet$ \textbf{Horizontal FDI}: Duplicating home production abroad (e.g., Toyota assembling motor vehicles in USA and India).\\[0.2em]
             $\bullet$ \textbf{Vertical FDI}: Disintegrating production stages:\\[0.15em]
@@ -527,7 +527,7 @@ Under the Foreign Exchange Management Act (FEMA), 1999 and the Consolidated FDI 
             \quad $\circ$ \textit{Forward (Downstream)}: Acquiring overseas dealerships.
         };
 
-        \node[cardbox2, draw=amber, fill=white, anchor=north] (cardEntry) at (4.4, -7.0) {
+        \node[cardbox2, draw=amber, fill=white, anchor=north] (cardEntry) at (4.4, -7.3) {
             \textbf{\color{amber}4. Corporate Entry Mode}\\[0.25em]
             $\bullet$ \textbf{Greenfield Investment}: Building brand-new manufacturing plants, facilities, and offices from the ground up.\\[0.2em]
             $\bullet$ \textbf{Cross-Border Mergers}: Combining two sovereign enterprises into a unified corporate structure.\\[0.2em]
@@ -535,22 +535,26 @@ Under the Foreign Exchange Management Act (FEMA), 1999 and the Consolidated FDI 
         };
 
         % Symmetrical Central Tree Spine
-        \coordinate (junc1) at (0, -4.1);
-        \coordinate (junc2) at (0, -9.1);
+        \coordinate (junc1) at (0, -4.3);
+        \coordinate (junc2) at (0, -9.8);
 
         \draw[line width=1.4pt, draw=navyblue] (root.south) -- (junc1) -- (junc2);
 
-        % Branch arrows from spine to cards with exact 1.0cm clear length
-        \draw[spinearrow] (junc1) -- (-1.0, -4.1);
-        \draw[line width=1.3pt, draw=darkteal, -{Stealth[length=6pt, width=4pt]}] (junc1) -- (1.0, -4.1);
+        % Branch arrows from spine to cards: strictly horizontal hitting exact card perimeters
+        \draw[spinearrow] (junc1) -- (cardDir.east |- junc1);
+        \draw[line width=1.3pt, draw=darkteal, -{Stealth[length=6pt, width=4pt]}] (junc1) -- (cardMotive.west |- junc1);
 
-        \draw[line width=1.3pt, draw=charcoal!70, -{Stealth[length=6pt, width=4pt]}] (junc2) -- (-1.0, -9.1);
-        \draw[line width=1.3pt, draw=amber, -{Stealth[length=6pt, width=4pt]}] (junc2) -- (1.0, -9.1);
+        \draw[line width=1.3pt, draw=charcoal!70, -{Stealth[length=6pt, width=4pt]}] (junc2) -- (cardChain.east |- junc2);
+        \draw[line width=1.3pt, draw=amber, -{Stealth[length=6pt, width=4pt]}] (junc2) -- (cardEntry.west |- junc2);
 
-        % Bottom Strategic Summary Banner (1.3cm clear gap below Row 2)
-        \node[summarybanner, anchor=north] (summary) at (0, -12.5) {
+        % Bottom Strategic Summary Banner (1.2cm clear gap below Row 2)
+        \node[summarybanner, anchor=north] (summary) at (0, -13.5) {
             \textbf{Strategic Balance}: Host nations gain foreign exchange reserves, industrial employment, and technology transfer;\\MNCs achieve global scale economies, factor cost optimization, and diversified international cash flows.
         };
+
+        % Symmetrical Drop Connectors into Summary Banner
+        \draw[line width=1.1pt, draw=charcoal!70, -{Stealth[length=5pt, width=3.5pt]}] (cardChain.south) -- (cardChain.south |- summary.north);
+        \draw[line width=1.1pt, draw=amber, -{Stealth[length=5pt, width=3.5pt]}] (cardEntry.south) -- (cardEntry.south |- summary.north);
 
     \end{tikzpicture}
     }%
@@ -668,7 +672,7 @@ Under Section 9 of the Income-tax Act, 1961, income is statutorily deemed to acc
         cardbox1/.style={
             rectangle, rounded corners=5pt, line width=1.1pt,
             font=\sffamily, align=left, inner sep=7pt,
-            text width=6.8cm, minimum height=3.1cm
+            text width=6.8cm, minimum height=4.1cm
         },
         cardbox2/.style={
             rectangle, rounded corners=5pt, line width=1.1pt,
@@ -679,7 +683,7 @@ Under Section 9 of the Income-tax Act, 1961, income is statutorily deemed to acc
             rectangle, rounded corners=6pt, line width=1.3pt,
             draw=amber, fill=softamber, text=charcoal,
             font=\sffamily\bfseries\small, align=center,
-            inner sep=7pt, text width=15.0cm, minimum height=1.5cm
+            inner sep=7pt, text width=15.0cm, minimum height=1.6cm
         },
         droparrow/.style={
             line width=1.3pt, draw=navyblue, -{Stealth[length=6pt, width=4pt]}
@@ -699,13 +703,13 @@ Under Section 9 of the Income-tax Act, 1961, income is statutorily deemed to acc
 
         % 2. Tier 1: Two Fundamental Tax Principles (Row 1)
         \node[cardbox1, draw=navyblue, fill=white, anchor=north] (cardRes) at (-4.4, -2.5) {
-            \textbf{\color{navyblue}1. Residence-Based (Worldwide System)}\\[0.3em]
+            \textbf{\color{navyblue}1. Residence-Based (Worldwide)}\\[0.3em]
             $\bullet$ \textbf{Jurisdictional Scope}: Sovereign state taxes residents on aggregate worldwide income (domestic plus foreign earnings).\\[0.25em]
             $\bullet$ \textbf{Economic Rationale}: Grounded in personal allegiance, political nexus, and state protections provided by the home nation.
         };
 
         \node[cardbox1, draw=darkteal, fill=white, anchor=north] (cardSrc) at (4.4, -2.5) {
-            \textbf{\color{darkteal}2. Source-Based (Territorial System)}\\[0.3em]
+            \textbf{\color{darkteal}2. Source-Based (Territorial)}\\[0.3em]
             $\bullet$ \textbf{Jurisdictional Scope}: Sovereign state taxes income generated within its geographic borders, irrespective of residency.\\[0.25em]
             $\bullet$ \textbf{Economic Rationale}: Grounded in territorial economic infrastructure, market access, and public services enabling the income.
         };
@@ -716,8 +720,8 @@ Under Section 9 of the Income-tax Act, 1961, income is statutorily deemed to acc
         \draw[droparrow] (splitTop) -- (-4.4, -1.9) -- (cardRes.north);
         \draw[line width=1.3pt, draw=darkteal, -{Stealth[length=6pt, width=4pt]}] (splitTop) -- (4.4, -1.9) -- (cardSrc.north);
 
-        % 3. Center Tier: The Double Taxation Conflict & DTAA Conduit
-        \node[centerbox, anchor=north] (dtaa) at (0, -7.8) {
+        % 3. Center Tier: The Double Taxation Conflict \& DTAA Conduit (Clear gap of 1.1cm below Row 1)
+        \node[centerbox, anchor=north] (dtaa) at (0, -7.7) {
             \color{amber!90!black}\large Cross-Border Double Taxation Conflict \& DTAA Conduit\\[0.2em]
             \footnotesize\normalfont Arises when Home (Residence) and Host (Source) Nations levy simultaneous tax claims on identical cross-border income.\\[0.15em]
             \footnotesize Resolved via \textbf{Double Taxation Avoidance Agreements (DTAAs)} / Bilateral Sovereign Tax Treaties.
@@ -727,8 +731,8 @@ Under Section 9 of the Income-tax Act, 1961, income is statutorily deemed to acc
         \draw[line width=1.3pt, draw=navyblue, -{Stealth[length=6pt, width=4pt]}] (cardRes.south) -- (cardRes.south |- dtaa.north);
         \draw[line width=1.3pt, draw=darkteal, -{Stealth[length=6pt, width=4pt]}] (cardSrc.south) -- (cardSrc.south |- dtaa.north);
 
-        % 4. Tier 2: Relief Methods and Indian Nexus Rules (Row 2)
-        \node[cardbox2, draw=navyblue, fill=white, anchor=north] (cardRelief) at (-4.4, -10.6) {
+        % 4. Tier 2: Relief Methods and Indian Nexus Rules (Row 2) (Clear gap of 1.1cm below DTAA)
+        \node[cardbox2, draw=navyblue, fill=white, anchor=north] (cardRelief) at (-4.4, -10.4) {
             \textbf{\color{navyblue}3. DTAA Bilateral Relief Mechanisms}\\[0.3em]
             $\bullet$ \textbf{Exemption Method}: Home residence state completely exempts foreign income from domestic income taxation.\\[0.25em]
             $\bullet$ \textbf{Foreign Tax Credit (FTC) Method}: Home state taxes worldwide income but credits foreign tax paid:\\[0.15em]
@@ -736,7 +740,7 @@ Under Section 9 of the Income-tax Act, 1961, income is statutorily deemed to acc
             \quad $\circ$ $\text{Net Domestic Tax} = t_h \cdot Y - \text{Credit}$
         };
 
-        \node[cardbox2, draw=charcoal!70, fill=white, anchor=north] (cardPoem) at (4.4, -10.6) {
+        \node[cardbox2, draw=charcoal!70, fill=white, anchor=north] (cardPoem) at (4.4, -10.4) {
             \textbf{\color{charcoal}4. Indian Corporate Nexus \& POEM Rules}\\[0.3em]
             $\bullet$ \textbf{POEM Framework} [Sec 6(3)]:\\[0.15em]
             \quad $\circ$ \textit{Wholly in India}: Indian Resident (Worldwide tax).\\[0.1em]
@@ -749,8 +753,8 @@ Under Section 9 of the Income-tax Act, 1961, income is statutorily deemed to acc
         \draw[line width=1.3pt, draw=navyblue, -{Stealth[length=6pt, width=4pt]}] (dtaa.south -| cardRelief.north) -- (cardRelief.north);
         \draw[line width=1.3pt, draw=charcoal!70, -{Stealth[length=6pt, width=4pt]}] (dtaa.south -| cardPoem.north) -- (cardPoem.north);
 
-        % 5. Bottom Strategic Summary Banner
-        \node[summarybanner, anchor=north] (summary) at (0, -17.4) {
+        % 5. Bottom Strategic Summary Banner (Clear gap of 1.1cm below Row 2)
+        \node[summarybanner, anchor=north] (summary) at (0, -16.9) {
             \textbf{Central Corporate Policy}: MNCs design cross-border capital and operating structures to eliminate double taxation,\\utilizing bilateral DTAA provisions to optimize consolidated global effective tax rates while remaining fully compliant with international tax law.
         };
 
