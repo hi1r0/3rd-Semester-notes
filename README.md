@@ -46,6 +46,12 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 │   ├── notes (GFM).docx            # GFM lecture notes Word document
 │   ├── syllabus.md                 # Verbatim course syllabus, objectives & CO-PO matrix
 │   └── README.md                   # Subject roadmap and lecture index
+├── International Finance/          # MBAS120: International Finance (Elective)
+│   ├── IF Unit  2.pptx             # Unit 2 lecture deck: Forex market & currency dealing
+│   ├── Unit_III_Foreign_Exchange_Exposure_Risk.pptx # Unit 3 lecture deck: FX exposure & risk
+│   ├── International_Finance_Syllabus.pdf # Authentic 3-page curriculum document
+│   ├── syllabus.md                 # Verbatim course syllabus, objectives & CO-PO matrix
+│   └── README.md                   # Subject overview and directory index
 ├── ML/                             # MSQF 536: Machine Learning Techniques
 │   ├── latex/                      # Publication-grade LaTeX lecture notes book (63 pages with syllabus, main.pdf)
 │   ├── Assignment/                 # Machine learning pair trading assignment & pipeline
@@ -131,6 +137,15 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Reference: [`Financial Engineering & Derivatives/syllabus.md`](./Financial%20Engineering%20%26%20Derivatives/syllabus.md)
 
 ---
+
+8. **International Finance (MBAS120 — Elective, 3 Credits)**
+   - Global perspective of financial management, international monetary system, and foreign exchange markets.
+   - Currency dealing mechanics, quotation conventions, forward contracts, and currency derivatives (futures & options).
+   - Foreign exchange exposure identification and hedging strategies (economic, transaction, and translation exposure).
+   - Multinational working capital management, international cash transmission networks, and global capital markets.
+   - International capital budgeting (APV framework), interest rate & currency swaps valuation, and international accounting/taxation.
+   - Reference: [International Finance/syllabus.md](./International%20Finance/syllabus.md) | Official PDF: [International Finance/International_Finance_Syllabus.pdf](./International%20Finance/International_Finance_Syllabus.pdf)
+
 
 ## 🛠️ Building & Running Documents
 
