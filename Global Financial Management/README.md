@@ -14,8 +14,8 @@
 | Directory / File | Description |
 | :--- | :--- |
 | [`syllabus.md`](./syllabus.md) | Official verbatim course syllabus, course objectives, outcomes (CO1–CO5), unit breakdowns (Units I–V), references, and CO-PO matrix. |
-| [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I, Unit II, Unit III (Syllabus Scope), and Unit IV (Multinational Financial Management), with compiled 72-page [`main.pdf`](./latex/main.pdf). |
-| [`latex/README.md`](./latex/README.md) | Detailed syllabus coverage, chronological lecture dates (`18/08/2026` to `02/11/2026`), FEDAI Rules, and LaTeX build instructions. |
+| [`latex/`](./latex/) | Modular LaTeX lecture notes covering Unit I, Unit II, Unit III (Syllabus Scope), and Unit IV (Multinational Financial Management), with compiled 81-page [`main.pdf`](./latex/main.pdf). |
+| [`latex/README.md`](./latex/README.md) | Detailed syllabus coverage, chronological lecture dates (`18/08/2026` to `03/11/2026`), FEDAI Rules, and LaTeX build instructions. |
 | [`assignment/`](./assignment/) | Empirical research monograph on Foreign Direct Investment (FDI) in Switzerland (2015–2024) with compiled 13-page [`main.pdf`](./assignment/main.pdf). |
 | [`assignment/README.md`](./assignment/README.md) | Monograph summary, empirical findings, SNB data synthesis, and compilation commands. |
 | [`assignment/swiss_fdi_data/`](./assignment/swiss_fdi_data/) | Official Swiss National Bank (SNB) data cubes (2015–2024) and automated API extraction script ([`fetch_swiss_fdi.py`](./assignment/swiss_fdi_data/fetch_swiss_fdi.py)). |
@@ -54,6 +54,10 @@
    - MNC cash management in international trade: Dual-currency structure and the four operating cash flows (Domestic customer sales, foreign export sales, domestic vendor payments, foreign import component payments).
    - Centralized internal multilateral netting mechanics to eliminate bank foreign exchange conversion spreads.
    - 4-Tier publication-grade TikZ architecture of MNC Operating Cash Flows in International Trade.
+   - Foreign Direct Investment (FDI): Managerial control (>= 10% equity) vs. portfolio investment (FPI), Dunning's OLI paradigm (Resource-, Market-, Efficiency-, Strategic Asset-seeking), horizontal vs. vertical backward/forward value chain integration, greenfield vs. cross-border M&A, host macroeconomic benefits, and Indian entry routes (Automatic vs. Government/FIFP).
+   - Publication-grade TikZ architecture of FDI Multi-Dimensional Taxonomy and Entry Modes.
+   - International Taxation: Capital Export Neutrality (CEN) vs. Capital Import Neutrality (CIN), Worldwide (Residence-based) vs. Territorial (Source-based) systems, DTAA bilateral treaties, Exemption vs. Foreign Tax Credit (FTC) relief methods, Indian corporate tax residency via Place of Effective Management (POEM, Section 6(3)), and statutory Section 9 nexus rules.
+   - Publication-grade TikZ architecture of International Taxation, DTAA, and Corporate Nexus.
 5. **Swiss FDI Empirical Monograph (2015–2024)**
    - Analysis of SNB capital stocks, flows, investment income, and Ultimate Beneficial Owner (UBO) conduit dynamics.
    - Sectoral allocations, global labor multipliers of Swiss multinational enterprises, and econometric determinants.

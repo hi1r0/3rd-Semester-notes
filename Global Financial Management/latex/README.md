@@ -164,10 +164,39 @@ This directory contains the modular LaTeX sources, custom TikZ flowcharts, insti
   - Treasury Mathematical Aggregation and Internal Netting: Formulation of $\\Delta \\text{CF}_{\\text{Domestic}}$ and $\\Delta \\text{CF}_{\\text{Foreign}, j}$; offsetting export receipts against import payables to minimize bank conversion spreads.
   - **TikZ Architecture 4.2**: Publication-grade 4-tier MNC Operating Cash Flow Architecture in International Trade with green inflow badges, amber outflow badges, and strategic centralized netting summary banner.
   - *Lecture Date:* `02/11/2026`.
+- **4.3 Foreign Direct Investment (FDI) and Cross-Border Capital Allocation**
+  - Formal Definition: Managerial control criterion (>= 10% voting equity interest) and long-term productive commitment vs. passive volatile Foreign Portfolio Investment (FPI).
+  - Multi-Dimensional Taxonomy of FDI:
+    1. *By Direction*: Inward FDI vs. Outward FDI.
+    2. *By Strategic Motive (Dunning's OLI Framework)*: Resource-seeking, Market-seeking, Efficiency-seeking (cost-optimization), and Strategic Asset-seeking.
+    3. *By Value Chain Integration*: Horizontal FDI (replicating production abroad) vs. Vertical FDI (Backward/Upstream input sourcing vs. Forward/Downstream sales distribution) and Conglomerate FDI.
+    4. *By Corporate Entry Mode*: Greenfield Investment (building from the ground up) vs. Cross-Border Mergers & Acquisitions (M&A).
+  - Microeconomic & Macroeconomic Impacts:
+    - *Strategic Host Benefits*: Inflow of foreign exchange reserves, domestic employment generation, GDP & capital formation, technology/managerial spillovers, export competitiveness, and sovereign fiscal revenue expansion.
+    - *Costs & Disadvantages*: Loss of domestic enterprise ownership, crowding out of local MSMEs, long-term foreign exchange drain via dividend repatriation, and transfer pricing tax frictions.
+  - FDI Regulatory Framework in India:
+    - *Automatic Route*: Permits foreign equity (up to 100%) without prior approval from RBI or GOI; post-facto electronic reporting via the RBI FIRMS portal.
+    - *Government Route (Approval Route)*: Mandates prior approval from the Government of India / concerned administrative ministry via the Foreign Investment Facilitation Portal (FIFP under DPIIT).
+  - **TikZ Architecture 4.3**: Symmetrical Multi-Dimensional Taxonomy and Entry Modes of FDI (Central tree spine branching horizontally into 4 cards with uniform geometry and strategic summary banner).
+  - *Lecture Date:* `03/11/2026`.
+- **4.4 International Taxation and Cross-Border Tax Architecture**
+  - Economic Principles of Tax Neutrality: Capital Export Neutrality (CEN) vs. Capital Import Neutrality (CIN).
+  - The Two Cardinal Principles of Sovereign Taxation:
+    1. *Residence-Based Taxation (Worldwide / Global System)*: Sovereign states taxing residents on their aggregate global income (domestic + foreign).
+    2. *Source-Based Taxation (Territorial System)*: Sovereign states taxing income generated strictly within territorial geographic borders, irrespective of residency.
+  - Problem of International Double Taxation:
+    - Juridical vs. Economic double taxation.
+    - Double Taxation Avoidance Agreements (DTAAs): Bilateral tax treaties allocating taxing rights.
+    - Bilateral Relief Methods: Exemption Method vs. Foreign Tax Credit (FTC) Method (Credit = min(t_f Y, t_h Y), T_net = t_h Y - Credit).
+  - Indian Corporate Tax Residency & Nexus Rules:
+    - Place of Effective Management (POEM) under Section 6(3) of the Income-tax Act, 1961: Control wholly in India (Resident), wholly outside (Non-resident), or shared (Active Business Outside India test).
+    - Statutory Scope of Tax Liability in India (Section 9 Nexus): Income deemed to accrue or arise in India through business connections, properties/assets, capital gains on asset transfers, royalties, and Fees for Technical Services (FTS).
+  - **TikZ Architecture 4.4**: Publication-grade International Taxation, Double Tax Avoidance (DTAA), and Sovereign Corporate Nexus Architecture with symmetrical card tiers, central DTAA conduit block, and strategic policy banner.
+  - *Lecture Date:* `03/11/2026`.
 
 ### **Consolidated Formula Reference Sheet (Rule 5)**
 - Placed at document end (`chapters/formula_reference.tex`).
-- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, FEDAI Rule 7 delivery horizons, forward merchant bill rates with transit/usance tenors, FEDAI option delivery margin selection rules, cross-rate forward conversion identities, Relative Purchasing Power Parity (PPP), the Fisher Effect nominal rate decomposition, Covered Interest Rate Parity (CIP), Net Translation Exposure, Money Market Synthetic Forward Hedge, Economic Exposure Beta Sensitivity, and Multinational Trade Cash Flow Netting with explicit structured `Where:` parameter definitions and unnumbered equations.
+- Chapter-by-chapter grouping of mathematical identities, valuation models, cross-rate TT buying formulas, demand draft cancellation outcomes, FEDAI Rule 7 delivery horizons, forward merchant bill rates with transit/usance tenors, FEDAI option delivery margin selection rules, cross-rate forward conversion identities, Relative Purchasing Power Parity (PPP), the Fisher Effect nominal rate decomposition, Covered Interest Rate Parity (CIP), Net Translation Exposure, Money Market Synthetic Forward Hedge, Economic Exposure Beta Sensitivity, Multinational Trade Cash Flow Netting, Balance of Payments Net FDI Flow Identity, and Foreign Tax Credit (FTC) Relief with explicit structured `Where:` parameter definitions and unnumbered equations.
 
 ---
 
@@ -186,7 +215,7 @@ latex/
 │   ├── ch01_international_finance_overview.tex        # Chapter 1: International Finance & BOP (Lectures: 18/08 – 07/09/2026)
 │   ├── ch02_foreign_exchange_market.tex               # Chapter 2: The Foreign Exchange Market (Lectures: 07/09 – 26/10/2026)
 │   ├── ch03_foreign_exchange_exposure.tex             # Chapter 3: Foreign Exchange Exposure and Management (Unit-III Scope)
-│   ├── ch04_multinational_financial_management.tex    # Chapter 4: Financial Management of the Multinational Firm (Lecture: 02/11/2026)
+│   ├── ch04_multinational_financial_management.tex    # Chapter 4: Financial Management of the Multinational Firm (Lectures: 02/11 – 03/11/2026)
 │   └── formula_reference.tex                          # Consolidated Multi-Chapter Formula Reference Sheet (Rule 5)
 ├── figures/                                           # Department & University logos
 └── README.md                                          # Documentation & compilation instructions

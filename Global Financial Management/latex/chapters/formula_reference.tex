@@ -343,3 +343,32 @@ This section consolidates all mathematical formulas, pricing relationships, valu
     \item \textbf{Internal Multilateral Netting}: The volume $\min(\CF_{\text{Inflow}, j}^{\text{Export}}, \CF_{\text{Outflow}, j}^{\text{Import}})$ is settled internally without bank currency conversion, saving bid-ask spreads and transaction fees.
 \end{itemize}
 \end{formulabox}
+
+\begin{formulabox}[Balance of Payments Net FDI Flow Identity]
+\begin{align*}
+    \text{Net FDI Flow} &= \text{Equity Capital Inflows} + \text{Reinvested Earnings} \\
+    &\quad + \text{Other Capital (Inter-Company Debt)}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $\text{Net FDI Flow}$: Net foreign direct investment balance recorded on the sovereign capital account of the Balance of Payments (BoP).
+    \item $\text{Equity Capital Inflows}$: Direct cross-border cash remittances for initial equity shares, greenfield expansions, or acquisition of voting shares ($\ge 10\%$).
+    \item $\text{Reinvested Earnings}$: Operating profits retained by the foreign affiliate and directly reinvested into host facilities rather than distributed as dividends to the parent.
+    \item $\text{Other Capital / Inter-Company Debt}$: Net short- and long-term borrowing and lending of funds between parent headquarters and foreign operating affiliates.
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Foreign Tax Credit (FTC) \& Net Corporate Tax Liability]
+\begin{align*}
+    \text{Statutory Tax Credit} &= \min\left( t_f \cdot Y, \; t_h \cdot Y \right) \\[0.4em]
+    T_{\text{net Domestic}} &= t_h \cdot Y - \text{Statutory Tax Credit}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=*, noitemsep]
+    \item $Y$: Foreign-sourced pre-tax corporate taxable income earned by the overseas subsidiary or foreign branch.
+    \item $t_f$: Statutory effective corporate income tax rate levied by the host (source) foreign jurisdiction.
+    \item $t_h$: Statutory corporate income tax rate levied by the home (residence) domestic jurisdiction on worldwide income.
+    \item $\text{Statutory Tax Credit}$: Maximum credit granted by the home tax authority to relieve double taxation under bilateral DTAA provisions.
+    \item $T_{\text{net Domestic}}$: Residual net corporate tax payable to the home country treasury on foreign earnings ($T_{\text{net Domestic}} = 0$ if $t_f \ge t_h$).
+\end{itemize}
+\end{formulabox}

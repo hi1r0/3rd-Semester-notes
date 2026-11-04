@@ -42,7 +42,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 ├── Global Financial Management/    # MSQF 535: Global Financial Management
 │   ├── assignment/                 # Swiss FDI Empirical Analysis (13-page monochrome monograph, main.pdf)
 │   │   └── swiss_fdi_data/         # Official Swiss National Bank (SNB) data cubes (2015–2024) & Python fetcher
-│   ├── latex/                      # Modular LaTeX lecture notes (Units I, II, III & IV, TikZ architectures, 72-page main.pdf)
+│   ├── latex/                      # Modular LaTeX lecture notes (Units I, II, III & IV, TikZ architectures, 81-page main.pdf)
 │   ├── notes (GFM).docx            # GFM lecture notes Word document
 │   ├── syllabus.md                 # Verbatim course syllabus, objectives & CO-PO matrix
 │   └── README.md                   # Subject roadmap and lecture index
@@ -112,8 +112,8 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Cross-rate quotation mechanics, draft cancellations, forward cross rates with dual-leg covering, and FEDAI Rule 7 forward contract delivery horizons.
    - Theories of Foreign Exchange Rate: Law of One Price, Absolute & Relative PPP, the Fisher Effect, Macroeconomic Parity Web architecture, and Covered Interest Arbitrage mechanics.
    - Foreign Exchange Exposure and Management (Unit-III Scope): Translation exposure (Current Rate vs. Temporal method), Transaction exposure (Multilateral netting, matching, forward/money market hedges), and Economic exposure sensitivity.
-   - Financial Management of the Multinational Firm (Unit-IV): MNC definitions, wealth maximization, agency challenges, centralized treasury governance, and international trade cash flows.
-   - **Modular LaTeX Monograph (`Global Financial Management/latex/main.pdf`):** 72-page publication-grade reference with 4 units, 12 high-density TikZ architectures, worked FEDAI merchant rate problems, and a consolidated multi-chapter formula sheet.
+   - Financial Management of the Multinational Firm (Unit-IV): MNC definitions, wealth maximization, agency challenges, centralized treasury governance, international trade cash flows, Foreign Direct Investment (FDI) taxonomy & entry modes, and International Taxation (Worldwide vs. Territorial, DTAA, POEM, Section 9 nexus).
+   - **Modular LaTeX Monograph (`Global Financial Management/latex/main.pdf`):** 81-page publication-grade reference with 4 units, 14 high-density TikZ architectures, worked FEDAI merchant rate problems, and a consolidated multi-chapter formula sheet.
    - Empirical Monograph: Swiss Foreign Direct Investment (2015–2024) analyzing SNB capital stocks, flows, UBO conduit tracing, and MNE global labor multipliers.
    - Reference: [`Global Financial Management/syllabus.md`](./Global%20Financial%20Management/syllabus.md) | LaTeX: [`Global Financial Management/latex/main.pdf`](./Global%20Financial%20Management/latex/main.pdf)
 
