@@ -6,7 +6,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 
 ## 📜 Official Curriculum & Syllabus References
 
-- **Master Standalone PDF:** [`Semester_III_Syllabus.pdf`](./Semester_III_Syllabus.pdf) — Direct 8-page lossless page extraction from the official Pondicherry University M.Sc. Quantitative Finance curriculum (AY 2025–26 onwards), comprising the CBCS Semester III Scheme Matrix (p. 6), 6 Hard Core courses (pp. 27–32), and registered Soft Core Elective MSQF 542 (p. 46).
+- **Master Standalone PDF:** [`Semester_III_Syllabus.pdf`](./Semester_III_Syllabus.pdf) — Complete 11-page master syllabus PDF comprising the CBCS Semester III Scheme Matrix (p. 1), 6 Hard Core courses (pp. 2–7), Soft Core Elective MSQF 542 (p. 8), and International Finance MBAS120 (pp. 9–11).
 - **Master Markdown Syllabus:** [`SYLLABUS.md`](./SYLLABUS.md) — Comprehensive, verbatim markdown reference documenting Course Objectives, Course Outcomes (CO1–CO5), unit-by-unit syllabus outlines, complete reference book bibliographies, and CO-PO mapping matrices for all 7 active courses, with an appendix of all CBCS soft-core electives.
 - **Subject-Specific Syllabus Files:** Individual `syllabus.md` files are maintained in each course folder.
 
@@ -15,7 +15,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 ## 📚 Repository Structure
 
 ```text
-├── Semester_III_Syllabus.pdf       # Official extracted 8-page university syllabus PDF
+├── Semester_III_Syllabus.pdf       # Official extracted 11-page university syllabus PDF
 ├── SYLLABUS.md                     # Comprehensive master syllabus markdown reference
 ├── Corporate Internship/           # MSQF 534: Summer corporate internship guidelines & viva
 │   └── syllabus.md                 # Verbatim 6-week internship regulations & CO-PO matrix

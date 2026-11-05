@@ -6,7 +6,7 @@
 **Nature of Course:** Elective (Core / Elective: Elective)  
 **Total Lecture Hours:** 45 Hours (5 Units × 9 Hours)  
 **Institution:** Pondicherry University  
-**Official Syllabus Reference:** [`./syllabus.md`](./syllabus.md) | Official PDF: [`./International_Finance_Syllabus.pdf`](./International_Finance_Syllabus.pdf) | Master Curriculum: [`../SYLLABUS.md`](../SYLLABUS.md)
+**Official Syllabus Reference:** [./syllabus.md](./syllabus.md) | Master PDF: [../Semester_III_Syllabus.pdf](../Semester_III_Syllabus.pdf) (Pages 9–11) | Subject PDF: [./International_Finance_Syllabus.pdf](./International_Finance_Syllabus.pdf) | Master Curriculum: [../SYLLABUS.md](../SYLLABUS.md)
 
 ---
 

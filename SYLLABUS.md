@@ -2,7 +2,7 @@
 ## Curriculum & Detailed Syllabus: Semester III (Academic Year 2025–26 Onwards)
 
 > **Official Document Reference:** Ramanujan School of Mathematical Sciences, Department of Statistics, Pondicherry University.
-> **Master Standalone PDF:** [`Semester_III_Syllabus.pdf`](./Semester_III_Syllabus.pdf) (Exact 8-page lossless page extraction from university curriculum).
+> **Master Standalone PDF:** [`Semester_III_Syllabus.pdf`](./Semester_III_Syllabus.pdf) (Complete 11-page master syllabus PDF including all 6 Hard Core courses, MSQF 542, and International Finance MBAS120).
 
 ---
 
@@ -348,7 +348,7 @@
 - **Structure (L T P C):** 3 0 0 3
 - **Nature of Course:** Elective (Core / Elective: Elective)
 - **Total Lecture Hours:** 45 Hours (5 Units × 9 Hours)
-- **Local Directory:** [\International Finance/\](./International%20Finance/) | [Subject Syllabus](./International%20Finance/syllabus.md) | [Official PDF](./International%20Finance/International_Finance_Syllabus.pdf)
+- **Local Directory:** [International Finance/](./International%20Finance/) | [Subject Syllabus](./International%20Finance/syllabus.md) | [Master PDF](./Semester_III_Syllabus.pdf) (Pages 9–11) | [Subject PDF](./International%20Finance/International_Finance_Syllabus.pdf)
 
 ### Course Objectives:
 - To have exposure on international aspects of Financial Management.

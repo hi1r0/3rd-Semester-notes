@@ -6,7 +6,7 @@
 - **Total Lecture Hours:** 45 Hours (5 Units × 9 Hours)
 - **Degree / Department:** Management / Quantitative Finance (Elective Course)
 - **Institution:** Pondicherry University
-- **Master Curriculum Reference:** [`./International_Finance_Syllabus.pdf`](./International_Finance_Syllabus.pdf)
+- **Master Curriculum Reference:** [../Semester_III_Syllabus.pdf](../Semester_III_Syllabus.pdf) (Pages 9–11) | [./International_Finance_Syllabus.pdf](./International_Finance_Syllabus.pdf)
 
 ---
 
