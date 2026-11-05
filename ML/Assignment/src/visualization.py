@@ -16,7 +16,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import roc_curve, auc
+from sklearn.metrics import roc_curve, auc, confusion_matrix
+from sklearn.tree import plot_tree
 
 # Clean financial styling
 sns.set_theme(style="whitegrid", palette="deep")
@@ -136,26 +137,89 @@ def plot_roc_curves(detailed_outputs: Dict[str, Dict[str, Any]], save_path: Opti
     return fig
 
 
-def plot_feature_importance(feature_names: List[str], importances: np.ndarray, model_name: str = "Random Forest", save_path: Optional[str] = None):
+def plot_feature_importance(feature_names: List[str], importances: np.ndarray, model_name: str = "Random Forest", ax: Optional[plt.Axes] = None, save_path: Optional[str] = None):
     """Plots feature importance bar chart."""
     feat_df = pd.DataFrame({
         "Feature": feature_names,
         "Importance": importances
     }).sort_values(by="Importance", ascending=True)
     
-    fig, ax = plt.subplots(figsize=(10, 6))
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(10, 6))
+    else:
+        fig = ax.get_figure()
+        
     bars = ax.barh(feat_df["Feature"], feat_df["Importance"], color="#1f77b4", edgecolor="#0e4d77", alpha=0.85)
     
-    ax.set_title(f"Feature Importance Distribution ({model_name})", fontsize=13, weight="bold")
-    ax.set_xlabel("Relative Importance Score", fontsize=11)
+    ax.set_title(f"Feature Importance Distribution ({model_name})", fontsize=11, weight="bold")
+    ax.set_xlabel("Relative Importance Score", fontsize=10)
     
     for bar in bars:
         width = bar.get_width()
-        ax.text(width + 0.003, bar.get_y() + bar.get_height() / 2, f"{width:.3f}", va="center", fontsize=9)
+        ax.text(width + 0.003, bar.get_y() + bar.get_height() / 2, f"{width:.3f}", va="center", fontsize=8)
         
-    plt.tight_layout()
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches="tight")
+    return fig
+
+
+def plot_model_confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray, model_name: str, ax: Optional[plt.Axes] = None):
+    """Plots a formatted confusion matrix heatmap for an ML model."""
+    cm = confusion_matrix(y_true, y_pred)
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(5, 4))
+    else:
+        fig = ax.get_figure()
+        
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False, ax=ax,
+                xticklabels=["Loss/Flat (0)", "Profitable (1)"],
+                yticklabels=["Loss/Flat (0)", "Profitable (1)"],
+                annot_kws={"size": 11, "weight": "bold"})
+    ax.set_title(f"Confusion Matrix: {model_name}", fontsize=11, weight="bold")
+    ax.set_xlabel("Predicted Signal Label", fontsize=10)
+    ax.set_ylabel("Actual Realized Outcome", fontsize=10)
+    return fig
+
+
+def plot_logistic_coefficients(feature_names: List[str], coefs: np.ndarray, ax: Optional[plt.Axes] = None):
+    """Plots horizontal bar chart of Logistic Regression weights with positive/negative color coding."""
+    df_c = pd.DataFrame({"Feature": feature_names, "Coefficient": coefs}).sort_values(by="Coefficient")
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(8, 5))
+    else:
+        fig = ax.get_figure()
+        
+    colors = ["#2ca02c" if c > 0 else "#d62728" for c in df_c["Coefficient"]]
+    bars = ax.barh(df_c["Feature"], df_c["Coefficient"], color=colors, alpha=0.85, edgecolor="#333333")
+    ax.axvline(0, color="black", linestyle="--", lw=0.8)
+    ax.set_title("Logistic Regression Coefficients (Feature Impact on P(Profit))", fontsize=11, weight="bold")
+    ax.set_xlabel("Coefficient Weight (Log-Odds Impact)", fontsize=10)
+    for bar in bars:
+        w = bar.get_width()
+        offset = 0.02 if w >= 0 else -0.06
+        ax.text(w + offset, bar.get_y() + bar.get_height() / 2, f"{w:.2f}", va="center", fontsize=8)
+    return fig
+
+
+def plot_decision_tree_diagram(dt_model, feature_names: List[str], max_depth: int = 3, ax: Optional[plt.Axes] = None):
+    """Plots a high-resolution Decision Tree diagram."""
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(16, 8))
+    else:
+        fig = ax.get_figure()
+        
+    plot_tree(
+        dt_model,
+        feature_names=feature_names,
+        class_names=["Loss/Flat", "Profitable"],
+        filled=True,
+        rounded=True,
+        max_depth=max_depth,
+        fontsize=8,
+        ax=ax,
+        precision=2,
+    )
+    ax.set_title(f"Trained Decision Tree Architecture (Pruned Depth <= {max_depth})", fontsize=13, weight="bold")
     return fig
 
 
@@ -169,7 +233,6 @@ def plot_equity_and_drawdown(equity_curves: Dict[str, np.ndarray], save_path: Op
         "ML: Gradient Boosting": "#1f77b4",
         "ML: Logistic Regression": "#ff7f0e",
         "ML: SVM (RBF)": "#9467bd",
-        "ML: MLP (Neural Net)": "#d62728",
         "ML: KNN": "#8c564b",
         "ML: Decision Tree": "#e377c2",
         "ML: Naive Bayes": "#17becf",

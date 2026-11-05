@@ -74,7 +74,7 @@ class PurgedTimeSeriesSplit:
 
 
 def get_msqf_model_suite() -> Dict[str, BaseEstimator]:
-    """Instantiates the 7 supervised learning classifiers from the MSQF syllabus.
+    """Instantiates the 6 core supervised learning classifiers from the MSQF syllabus.
     
     Returns
     -------
@@ -111,11 +111,6 @@ def get_msqf_model_suite() -> Dict[str, BaseEstimator]:
             ("imputer", SimpleImputer(strategy="median")),
             ("scaler", StandardScaler()),
             ("clf", SVC(kernel="rbf", C=1.0, gamma="scale", probability=True, random_state=42)),
-        ]),
-        "MLP (Neural Net)": Pipeline([
-            ("imputer", SimpleImputer(strategy="median")),
-            ("scaler", StandardScaler()),
-            ("clf", MLPClassifier(hidden_layer_sizes=(64, 32), activation="relu", max_iter=500, random_state=42)),
         ]),
     }
     return models

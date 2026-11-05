@@ -82,12 +82,12 @@ class TestPairTradingMLPipeline(unittest.TestCase):
         self.assertTrue((self.labeled_df["holding_period"] <= 12).all())
 
     def test_msqf_model_suite(self):
-        """Verify all 7 MSQF curriculum models instantiate and train."""
+        """Verify the 6 core MSQF curriculum models instantiate and train."""
         models = get_msqf_model_suite()
-        self.assertEqual(len(models), 7)
+        self.assertEqual(len(models), 6)
         expected_names = [
             "Logistic Regression", "Naive Bayes", "KNN", "Decision Tree",
-            "Random Forest", "SVM (RBF)", "MLP (Neural Net)"
+            "Random Forest", "SVM (RBF)"
         ]
         for name in expected_names:
             self.assertIn(name, models)
@@ -104,7 +104,7 @@ class TestPairTradingMLPipeline(unittest.TestCase):
         
         # Test Purged split
         summary_df, detailed_outputs = evaluate_models_walk_forward(X, y, n_splits=3, embargo_pct=0.03)
-        self.assertEqual(len(summary_df), 7)
+        self.assertEqual(len(summary_df), 6)
         self.assertIn("F1-Score", summary_df.columns)
         self.assertIn("ROC-AUC", summary_df.columns)
         
@@ -124,6 +124,9 @@ class TestPairTradingMLPipeline(unittest.TestCase):
             plot_roc_curves,
             plot_feature_importance,
             plot_equity_and_drawdown,
+            plot_model_confusion_matrix,
+            plot_logistic_coefficients,
+            plot_decision_tree_diagram,
         )
         
         fig1 = plot_market_regimes(self.universe)
@@ -157,6 +160,21 @@ class TestPairTradingMLPipeline(unittest.TestCase):
         fig5 = plot_equity_and_drawdown(equity_curves)
         self.assertIsNotNone(fig5)
         plt.close(fig5)
+
+        # Test Confusion Matrix, Logistic Coefs, and Decision Tree plots
+        fig6 = plot_model_confusion_matrix(np.array([0, 1, 0, 1]), np.array([0, 1, 1, 1]), "Test Model")
+        self.assertIsNotNone(fig6)
+        plt.close(fig6)
+
+        fig7 = plot_logistic_coefficients(feature_cols, np.linspace(-0.5, 0.5, len(feature_cols)))
+        self.assertIsNotNone(fig7)
+        plt.close(fig7)
+
+        from sklearn.tree import DecisionTreeClassifier
+        dt_test = DecisionTreeClassifier(max_depth=2).fit(X, y)
+        fig8 = plot_decision_tree_diagram(dt_test, feature_cols, max_depth=2)
+        self.assertIsNotNone(fig8)
+        plt.close(fig8)
 
 
 if __name__ == "__main__":

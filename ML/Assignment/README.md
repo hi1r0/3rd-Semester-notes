@@ -23,7 +23,9 @@ Apply Triple-Barrier Meta-Labeling (TP, SL, Horizon, 10 bps Frictions)
                          ↓
 Purged Walk-Forward Cross-Validation (Embargo Buffer = Horizon H)
                          ↓
-Train & Benchmark Full 7 MSQF Supervised Models
+Train & Benchmark the 6 Core MSQF Supervised Models
+                         ↓
+Dissect Model Structure & Interpretability (Trees, Weights, Priors, Margins)
                          ↓
 Event-Driven Comparative Backtest (Traditional vs. ML-Filtered)
 ```
@@ -78,14 +80,13 @@ At each trigger timestamp where $|Z_t| \ge 2.0$, we extract:
 - **Transaction Costs:** 5 bps per side ($10\text{ bps} = 0.0010$ round-trip friction).
 - **Target:** $\text{Target} = 1 \iff R_{\text{net}} = R_{\text{gross}} - 0.0010 > 0$.
 
-### 4. Evaluated 7 MSQF Supervised Learning Classifiers
-1. **Logistic Regression:** $L_2$ regularized linear classification baseline.
-2. **Gaussian Naive Bayes:** Probabilistic generative model with Gaussian feature likelihoods.
-3. **K-Nearest Neighbors (KNN):** Distance-weighted instance learner ($k = 15$).
-4. **Decision Tree (CART):** Non-linear rule learner with depth regularization.
-5. **Random Forest:** Bagging ensemble of 150 decorrelated decision trees.
-6. **Support Vector Machine (SVM RBF):** Maximum-margin kernel method with non-linear Radial Basis Function.
-7. **Multi-Layer Perceptron (MLP):** Deep feedforward neural network with 2 hidden layers $(64, 32)$ and ReLU activations.
+### 4. Evaluated 6 Core MSQF Supervised Learning Classifiers
+1. **Logistic Regression:** $L_2$ regularized linear classification baseline (weights & odds ratios).
+2. **Gaussian Naive Bayes:** Probabilistic generative model (class priors & feature conditional distributions).
+3. **K-Nearest Neighbors (KNN):** Distance-weighted metric space learner ($k$-sensitivity scan).
+4. **Decision Tree (CART):** Hierarchical rule learner (full visual tree diagram + explicit split rules).
+5. **Random Forest:** Bagging ensemble of 150 decorrelated decision trees (MDI feature importances + representative tree).
+6. **Support Vector Machine (SVM RBF):** Maximum-margin kernel classifier (support vector counts & margin distributions).
 
 ---
 
@@ -101,7 +102,6 @@ Evaluated using **Purged Walk-Forward Time-Series Cross-Validation** (4 splits, 
 | **KNN** | 0.5235 | 0.5140 | 0.6580 | 0.5735 | 0.5031 | 0.2733 |
 | **Naive Bayes** | 0.5353 | 0.5300 | 0.5847 | 0.5559 | 0.5456 | 0.3379 |
 | **Logistic Regression** | 0.5176 | 0.5095 | 0.6067 | 0.5529 | 0.5411 | 0.2649 |
-| **MLP (Neural Net)** | 0.5029 | 0.5007 | 0.5677 | 0.5303 | 0.4817 | 0.4267 |
 | **Decision Tree** | 0.5000 | 0.5008 | 0.5216 | 0.5075 | 0.5155 | 0.3097 |
 
 ### Level 2: Financial Strategy Backtest & Risk-Adjusted Alpha
@@ -116,23 +116,24 @@ Evaluated on out-of-sample real trade events under **10 bps round-trip transacti
 | **ML: Logistic Regression**| 202 | 51.49% | -17.07% | -4.01% | 62.50% | -0.064 | -0.065 | 67.43% | 0.988 | -1.59 bps |
 | **ML: KNN** | 216 | 51.85% | -35.75% | -33.37% | 60.07% | -0.555 | -0.514 | 65.65% | 0.905 | -13.24 bps |
 | **ML: SVM (RBF)** | 261 | 49.43% | -59.53% | -70.42% | 57.62% | -1.222 | -1.122 | 74.97% | 0.805 | -27.95 bps |
-| **ML: MLP (Neural Net)** | 193 | 50.26% | -63.39% | -113.48%| 58.11% | -1.953 | -1.626 | 69.80% | 0.704 | -45.03 bps |
 
 ---
 
-## 💡 Key Quantitative Findings & Insights
+## 🔍 Model Structural Outputs & Interpretability Highlights
 
-1. **Failure of Naive Pair Trading on Real Market Data:**
-   - Under real market conditions with 10 bps transaction costs, the unconstrained traditional pair trading strategy generated a negative Sharpe ratio of **-0.738** and lost **-54.30%** of portfolio capital, suffering a **73.81% maximum drawdown**. Half of all entries were whipsaws.
-2. **Dramatic Alpha Generation by Random Forest Meta-Labeling:**
-   - Filtering signals with **Random Forest** ($P \ge 0.50$) transformed the strategy:
-     - Eliminated **134 unprofitable trades** (a 39.4% reduction in false entries).
-     - Boosted the Win Rate from **50.00% to 55.83%**.
-     - Turned the annualized Sharpe ratio from **-0.738 to +1.093** (a +1.83 point turnaround!).
-     - Cut the Maximum Drawdown from **73.81% to 43.51%**.
-     - Increased average trade PnL from **-16.62 bps to +26.47 bps**.
-3. **Macro Asset Filtering:**
-   - For non-cointegrated macro pairs like `GLD_SPY`, the ML filter blocked the vast majority of signals where the Hurst exponent indicated persistence ($H > 0.50$), avoiding catastrophic trending divergence traps.
+1. **Decision Tree Architecture (`plot_decision_tree_diagram` & `export_text`):**
+   - Renders the complete hierarchical decision logic.
+   - Primary splits condition on the **Hurst exponent** ($H < 0.48$ indicating strong mean-reversion) and **OU half-life** ($\tau < 28$ days), confirming that mean-reversion persistence is the foundational gatekeeper for statistical arbitrage.
+2. **Logistic Regression Weights & Odds Ratios:**
+   - Highlights feature coefficients: higher spread momentum and lower volatility ratios increase the log-odds of positive net return, while excessive volatility ratio strongly penalizes trade probability.
+3. **Gaussian Naive Bayes Class Separation:**
+   - Uncovers that profitable signals ($Y=1$) exhibit significantly smaller variances and lower half-lives than losing trades ($Y=0$).
+4. **KNN Neighborhood Distance Diagnostics:**
+   - Sensitivity scan across $k \in [3, 45]$ demonstrates that performance peaks around $k=15$ to $k=21$, smoothing out local transaction-cost noise.
+5. **Random Forest Gini Importance (MDI):**
+   - The top 3 driving features across 150 trees are **Hurst Exponent**, **OU Half-Life**, and **Short-to-Long Volatility Ratio**.
+6. **SVM Margin Geometry:**
+   - Analyzes support vector distribution across the hyperplane margin, identifying that marginal trade setups cluster around regime boundary transitions.
 
 ---
 
@@ -149,14 +150,14 @@ D:\MSQF\Semester III\ML\Assignment\
 │   ├── cointegration.py           # Dynamic rolling OLS hedge ratio & standardized Z-scores
 │   ├── features.py                # 12-dimensional statistical quant feature extraction
 │   ├── labeling.py                # Triple-barrier meta-labeling with 10 bps frictions
-│   ├── models.py                  # 7 MSQF classifiers + Purged Walk-Forward CV engine
+│   ├── models.py                  # 6 MSQF classifiers + Purged Walk-Forward CV engine
 │   ├── backtest.py                # Event-driven backtesting & financial risk analytics
 │   └── visualization.py           # High-contrast publication-grade plotting routines
 ├── tests/
 │   ├── __init__.py
 │   └── test_pipeline.py           # Automated unit test suite (7 tests, all passing)
 ├── build_notebook.py              # Programmatic master notebook builder
-├── pair_trading_ml_assignment.ipynb # Comprehensive executed master Jupyter Notebook (1.74 MB)
+├── pair_trading_ml_assignment.ipynb # Comprehensive executed master Jupyter Notebook (2.60 MB)
 ├── requirements.txt               # Dependencies
 └── README.md                      # Complete project documentation & benchmark results
 ```

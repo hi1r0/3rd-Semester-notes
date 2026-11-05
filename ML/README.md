@@ -97,5 +97,5 @@ ML/
    - 12-dimensional quantitative feature engineering (Hurst exponent, OU half-life, ADF $p$-value, serial autocorrelations).
    - Triple-barrier meta-labeling with realistic transaction frictions (10 bps round-trip).
    - Purged Walk-Forward Time-Series Cross-Validation with horizon embargo buffers.
-   - Comprehensive comparative benchmark across the full 7-model curriculum spectrum (Logistic Regression, Naive Bayes, KNN, Decision Tree, Random Forest, SVM RBF, MLP).
+   - Comprehensive comparative benchmark across the 6 core MSQF curriculum models (Logistic Regression, Naive Bayes, KNN, Decision Tree, Random Forest, SVM RBF) with individual model outputs, decision tree visualizations, and interpretability diagnostics.
    - Event-driven backtesting contrasting Traditional vs. ML-Filtered statistical arbitrage strategies.
