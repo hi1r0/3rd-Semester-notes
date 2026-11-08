@@ -1,0 +1,38 @@
+% ==============================================================================
+% Section 4: Peer Benchmarking, Risk Classification, and Reporting
+% ==============================================================================
+
+\section{Peer Benchmarking, Risk Classification, and Reporting}
+
+\subsection{Sigmoid Normalization and Dynamic Weight Redistribution (\texttt{benchmark\_core.py})}
+Financial ratios exhibit vastly different scales (margins as percentages, turnovers as multipliers, debt as leverage ratios). To map heterogeneous metrics onto an equitable 0--100 scale without distortion from extreme peer outliers, raw ratios are transformed using a tuned sigmoid function anchored directly to the sector median and $\IQR$:
+\begin{equation}
+    S(x) = \frac{100}{1 + \exp\left(-k\,\frac{x - \median(X)}{\IQR}\right)}
+\end{equation}
+where $k$ governs sensitivity around the sector median. For leverage and debt metrics where higher values indicate elevated financial vulnerability, the \textbf{Inverted Metric Transformation} is enforced:
+\begin{equation}
+    S_{\text{inv}}(x) = 100 - S(x)
+\end{equation}
+When specific accounting line items are unavailable or structurally inapplicable for a sector (e.g., inventory turnover in technology services), \textbf{Dynamic Weight Redistribution} re-allocates missing weights proportionally across all available metrics within that pillar:
+\begin{equation}
+    w'_i = \frac{w_i}{\sum_{j \in \mathcal{A}} w_j}, \qquad \text{where } \mathcal{A} = \{j : \text{Ratio } j \text{ is reported}\}
+\end{equation}
+This mathematical guarantee preserves total pillar integrity without falsely penalizing non-reporting firms.
+
+\subsection{Composite Health Score, 5-Tier Risk Classification \& Explainable Diagnostics}
+Normalized metrics are aggregated across the five domain pillars into a \textbf{Composite Health Score (CHS)} ($0 \le \text{CHS} \le 100$) and mapped onto a rigorous 5-Tier Risk Framework:
+\begin{itemize}
+    \item \textbf{Tier 1 (Exceptional, $\text{CHS} \ge 80$):} Industry-leading margins, pristine solvency buffers, and elite operating cash flows.
+    \item \textbf{Tier 2 (Strong, $65 \le \text{CHS} < 80$):} Robust peer standing with healthy fundamentals across majority pillars.
+    \item \textbf{Tier 3 (Moderate, $50 \le \text{CHS} < 65$):} Balanced median-tracking profile with selective operational trade-offs.
+    \item \textbf{Tier 4 (Vulnerable, $35 \le \text{CHS} < 50$):} Sub-par liquidity or deteriorating margins requiring credit surveillance.
+    \item \textbf{Tier 5 (Distress, $\text{CHS} < 35$):} Severe capital depletion, structural leverage anomalies, or critical insolvency flags.
+\end{itemize}
+Rather than an opaque rating, the system generates \textbf{Explainable Attribution Diagnostics} that decompose total score deltas relative to the sector median into \textbf{Opportunity ($+$)}, \textbf{Neutral ($\sim$)}, and \textbf{Risk ($-$)} drivers (e.g., \textit{Liquidity Outperformance: $+4.2\text{ pts}$; Operating Margin Drag: $-8.5\text{ pts}$}).
+
+\subsection{Multichannel Output Interfaces}
+FinMetrics Suite provides two complementary enterprise interfaces:
+\begin{enumerate}
+    \item \textbf{Interactive Web Dashboard (\texttt{app.py}, \texttt{viz.py}):} A Streamlit and Plotly application providing real-time ticker lookup, interactive sector peer distribution curves, pillar radar charts, and anomaly inspection tables.
+    \item \textbf{Automated 6-Tab Excel Diagnostics Workbook (\texttt{report\_generator.py}):} Generates a client-ready multi-tab financial audit report comprising: \textit{1. Executive Summary}, \textit{2. Raw Ratio Matrix}, \textit{3. Sigmoid Normalized Scores}, \textit{4. Peer Percentile Rankings}, \textit{5. Anomaly Audit Log}, and \textit{6. Pillar Weight Distribution}.
+\end{enumerate}

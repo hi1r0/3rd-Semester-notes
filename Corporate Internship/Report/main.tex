@@ -1,0 +1,50 @@
+\documentclass[10pt,a4paper,oneside]{article}
+
+% ==============================================================================
+% Input Preamble Configurations (Greyscale & Monochrome Edition)
+% ==============================================================================
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PAGE 1: Official Pondicherry University Cover / Title Page
+% ------------------------------------------------------------------------------
+\pagenumbering{gobble}
+\input{preamble/titlepage.tex}
+\clearpage
+
+% ------------------------------------------------------------------------------
+% PAGE 2: Contents, Introduction, Organizational Context & Architecture
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\setcounter{page}{2}
+
+% Compact Integrated Table of Contents (Section-level overview)
+\vspace*{-0.4cm}
+{
+  \hypersetup{linkcolor=pureblack}
+  \setcounter{tocdepth}{1}
+  \tableofcontents
+}
+\vspace{0.25cm}
+
+\input{sections/sec01_intro_org_context.tex}
+\input{sections/sec02_system_architecture.tex}
+\clearpage
+
+% ------------------------------------------------------------------------------
+% PAGE 3: Analytical & Statistical Methodology
+% ------------------------------------------------------------------------------
+\input{sections/sec03_statistical_methodology.tex}
+\clearpage
+
+% ------------------------------------------------------------------------------
+% PAGE 4: Benchmarking, Risk Classification, Reporting & Conclusion
+% ------------------------------------------------------------------------------
+\input{sections/sec04_benchmarking_risk.tex}
+\input{sections/sec05_conclusion.tex}
+
+\end{document}

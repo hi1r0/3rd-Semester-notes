@@ -1,0 +1,61 @@
+% ==============================================================================
+% Section 3: Analytical and Statistical Methodology
+% ==============================================================================
+
+\section{Analytical and Statistical Methodology}
+
+\subsection{Weighted Financial Ratio Engine (\texttt{ratio\_engine.py})}
+To evaluate corporate stability comprehensively, FinMetrics Suite implements 16 standardized fundamental metrics structured across five domain-weighted fundamental pillars:
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{pureblack}}l c X}
+\toprule
+\rowcolor{tableheadbg}
+\textbf{Fundamental Pillar} & \textbf{Base Weight} & \textbf{Component Financial Ratios} \\
+\midrule
+Profitability & 30\% & Gross Profit Margin, Operating Margin, Net Profit Margin, Return on Equity (ROE), Return on Assets (ROA) \\
+\rowcolor{tablerowbg}
+Solvency & 20\% & Debt-to-Equity Ratio ($D/E$), Total Debt Ratio ($D/A$), Interest Coverage Ratio ($\text{EBIT}/\text{Interest}$) \\
+Growth & 20\% & YoY Revenue Growth, Net Income Growth, Operating Cash Flow (OCF) Growth \\
+\rowcolor{tablerowbg}
+Liquidity & 15\% & Current Ratio ($\text{CA}/\text{CL}$), Quick Ratio ($(\text{Cash}+\text{Rec})/\text{CL}$), Cash Ratio ($\text{Cash}/\text{CL}$) \\
+Efficiency & 15\% & Total Asset Turnover ($\text{Rev}/\text{Assets}$), Inventory Turnover ($\text{COGS}/\text{Inv}$), Receivables Turnover \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Non-Parametric Univariate Outlier Detection (\texttt{outlier\_engine.py})}
+Financial distributions in equity markets exhibit significant skewness and heavy fat tails. Classical parametric estimators (sample mean $\bar{x}$ and standard deviation $s$) possess a \textbf{0\% breakdown point}---a single corrupted or extreme corporate disclosure can artificially inflate sample variance, producing \textit{outlier masking} where moderate anomalies remain undetected. FinMetrics Suite utilizes two non-parametric estimators possessing a \textbf{50\% breakdown point}:
+
+\begin{itemize}
+    \item \textbf{Tukey Interquartile Range (IQR) Outer Bounds:} Non-outlier boundaries are derived from the 25th percentile ($Q_1$) and 75th percentile ($Q_3$):
+    \begin{equation}
+        \IQR = Q_3 - Q_1, \qquad \text{Fences} = \left[Q_1 - 1.5\,\IQR,\;\; Q_3 + 1.5\,\IQR\right]
+    \end{equation}
+    
+    \item \textbf{Robust Z-Score via Median Absolute Deviation (MAD):} Deviations are scaled relative to the sector median $\tilde{x} = \median(X)$ using the Gaussian consistency factor $0.6745 \approx 1/\Phi^{-1}(0.75)$:
+    \begin{equation}
+        \MAD = \median\left(|X_i - \median(X)|\right), \qquad \Zrob = 0.6745 \times \frac{X_i - \median(X)}{\MAD}
+    \end{equation}
+\end{itemize}
+
+\begin{decisionrule}[Univariate Decision Criterion]
+A ratio is flagged as an individual statistical outlier if $| \Zrob | > 3.5$ or if it lies strictly outside the Tukey outer fences $[Q_1 - 1.5\,\IQR, Q_3 + 1.5\,\IQR]$, preventing extreme market distortions from biasing benchmark baselines.
+\end{decisionrule}
+
+\subsection{Multivariate Anomaly Detection via Isolation Forest}
+While univariate detectors identify isolated metric spikes, corporate stress frequently manifests as structural discrepancies across multiple ratios (e.g., accelerating revenue growth coupled with deteriorating operating cash flow and surging leverage). To uncover hidden joint anomalies, \texttt{outlier\_engine.py} applies an unsupervised \textbf{Isolation Forest} across the 16-dimensional ratio space:
+\begin{itemize}
+    \item \textbf{Recursive Hyperplane Partitioning:} An ensemble of $T$ isolation trees recursively partitions peer points using random axis-aligned cuts. Anomalous points occupy sparse regions and are isolated at significantly shallower tree depths $h(x)$.
+    \item \textbf{Normalized Anomaly Formulation:} Using the average path length of unsuccessful searches in a Binary Search Tree $c(n) = 2\left(\ln(n - 1) + 0.5772156649\right) - \frac{2(n - 1)}{n}$ for peer size $n$, the ensemble anomaly score $s(x, n)$ is:
+    \begin{equation}
+        s(x, n) = 2^{-\frac{\E[h(x)]}{c(n)}}
+    \end{equation}
+\end{itemize}
+
+\begin{decisionrule}[Multivariate Anomaly Decision Threshold]
+A firm is classified as a multi-ratio structural anomaly when $s(x, n) \ge 0.60$. If $s(x, n) < 0.50$, the firm's overall financial posture is confirmed to be structurally concordant with its sector peer universe.
+\end{decisionrule}

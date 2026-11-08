@@ -1,0 +1,95 @@
+% ==============================================================================
+% Packages Configuration - FinMetrics Suite Internship Report (Greyscale Edition)
+% ==============================================================================
+
+% Encoding and Typography
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{textcomp}
+
+% Mathematical Typesetting
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{bm}
+
+% Layout & Page Geometry (Strict 4-Page Budget)
+\usepackage[a4paper, top=1.5cm, bottom=1.5cm, left=1.8cm, right=1.8cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+% Monochrome & Grayscale Color Definitions
+\usepackage{xcolor}
+\definecolor{pureblack}{gray}{0.00}
+\definecolor{darkgraytext}{gray}{0.20}
+\definecolor{midgray}{gray}{0.45}
+\definecolor{lightgrayborder}{gray}{0.70}
+\definecolor{tableheadbg}{gray}{0.88}
+\definecolor{tablerowbg}{gray}{0.96}
+\definecolor{boxfill}{gray}{0.96}
+\definecolor{darkboxfill}{gray}{0.92}
+
+% Graphics & TikZ
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+
+% TColorBox Environments
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% Tables and Formatting (Academic Standard)
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{float}
+
+% Compact Lists
+\setlist[itemize]{noitemsep, topsep=1pt, partopsep=0pt, parsep=0pt, leftmargin=1.2em}
+\setlist[enumerate]{noitemsep, topsep=1pt, partopsep=0pt, parsep=0pt, leftmargin=1.3em}
+
+% Section Heading Formatting (Crisp Monochrome with Rules)
+\titleformat{\section}
+  {\large\bfseries\color{pureblack}}
+  {\thesection.}{0.4em}{}[\vspace{-0.4em}\rule{\textwidth}{0.6pt}]
+\titlespacing*{\section}{0pt}{4pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{pureblack}}
+  {\thesubsection}{0.4em}{}
+\titlespacing*{\subsection}{0pt}{3pt plus 1pt minus 1pt}{1.5pt plus 1pt minus 1pt}
+
+\titleformat{\subsubsection}
+  {\small\bfseries\color{darkgraytext}}
+  {\thesubsubsection}{0.4em}{}
+\titlespacing*{\subsubsection}{0pt}{3pt plus 1pt minus 1pt}{1.5pt plus 1pt minus 1pt}
+
+% Running Headers & Footers
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{12pt}
+\setlength{\headsep}{10pt}
+\fancyhead[L]{\small\color{darkgraytext}FinMetrics Suite --- Internship Project Report}
+\fancyhead[R]{\small\color{pureblack}\textbf{MSQF 534: Corporate Internship and Viva}}
+\fancyfoot[C]{\small\color{darkgraytext}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Table of Contents Formatting (Compact & Elegant)
+\usepackage{titletoc}
+\renewcommand{\contentsname}{\normalsize\bfseries\color{pureblack}Contents}
+\titlecontents{section}[1.6em]{\vspace{1pt}\small\bfseries\color{pureblack}}{\contentslabel{1.6em}}{}{\titlerule*[0.5pc]{.}\contentspage}
+\titlecontents{subsection}[3.4em]{\vspace{0.5pt}\footnotesize\color{darkgraytext}}{\contentslabel{1.8em}}{}{\titlerule*[0.5pc]{.}\contentspage}
+
+% Hyperlinks & Cross-Referencing (Pure Monochrome)
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=pureblack,
+    citecolor=darkgraytext,
+    urlcolor=pureblack,
+    pdfauthor={N Rohit Vedhanandh (25MSQUFPY0002)},
+    pdftitle={FinMetrics Suite: Corporate Internship Report (MSQF 534)}
+}

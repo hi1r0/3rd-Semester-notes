@@ -1,0 +1,30 @@
+% ==============================================================================
+% Section 2: End-to-End System Architecture
+% ==============================================================================
+
+\section{End-to-End System Architecture}
+
+FinMetrics Suite is architected as a modular four-stage analytical pipeline that decouples financial data ingestion, schema harmonization, dual statistical modeling engines, and multichannel reporting interfaces:
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{pureblack}}l >{\ttfamily\footnotesize}l X}
+\toprule
+\rowcolor{tableheadbg}
+\textbf{Pipeline Stage} & \textbf{Core Module(s)} & \textbf{Functional Responsibility} \\
+\midrule
+Stage 1: Data Ingestion & ingestion\_layer.py & Queries exchange data for the target NSE ticker, dynamically extracts the sector peer universe, and ingests financial statements. \\
+\rowcolor{tablerowbg}
+Stage 2: Schema Standardization & preprocessing.py & Resolves reporting discrepancies, aligns divergent accounting taxonomies across peers, and imputes or flags missing disclosures. \\
+Stage 3: Dual Analytical Engines & ratio\_engine.py & Computes 16 fundamental ratios across Profitability, Solvency, Growth, Liquidity, and Efficiency pillars. \\
+\rowcolor{tablerowbg}
+ & outlier\_engine.py & Executes Tukey IQR fences, MAD-based Robust Z-Scores, and a 16-D Isolation Forest for univariate and joint anomaly detection. \\
+ & benchmark\_core.py & Normalizes ratios via median-anchored sigmoids, dynamically redistributes missing weights, and computes the Composite Health Score. \\
+\rowcolor{tablerowbg}
+Stage 4: Multichannel Output & app.py, viz.py & Serves an interactive Streamlit dashboard with Plotly distribution curves, radar charts, and peer percentile rankings. \\
+ & report\_generator.py & Synthesizes analytics into an automated, formatted 6-tab Excel financial workbook for offline advisory audits. \\
+\bottomrule
+\end{tabularx}
+\end{table}

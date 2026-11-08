@@ -14,6 +14,23 @@
 | File / Folder | Description |
 | :--- | :--- |
 | [`syllabus.md`](./syllabus.md) | Verbatim course syllabus, regulatory guidelines, objectives, course outcomes (CO1–CO5), schedule, and CO-PO mapping matrix. |
+| [`Report/`](./Report/) | Comprehensive 4-page executive greyscale LaTeX internship report on **FinMetrics Suite** (`main.tex`, compiled `main.pdf`, modular preambles, and sections). |
+
+---
+
+## 🏢 Internship Project: FinMetrics Suite
+
+- **Project Title:** FinMetrics Suite: Automated Peer Benchmarking, Statistical Outlier Detection, and Multi-Ratio Financial Anomaly Engine for NSE Equities
+- **Host Organization:** IQ Business Advisors (Founders: Mr. Naga Arjun & Mr. Rajesh Kanan)
+- **Academic Supervisor:** Dr. Kiruthika (Assistant Professor, Department of Statistics, Pondicherry University)
+- **Candidate:** N Rohit Vedhanandh (Reg. No.: 25MSQUFPY0002)
+- **Project Repository:** [`https://github.com/hi1r0/finmetrics-PU`](https://github.com/hi1r0/finmetrics-PU)
+- **Deliverables:**
+  - Strict 4-page executive report in Pondicherry University monochrome/greyscale academic style.
+  - Page 1: Official cover page with university crest, supervisory committee, and student registration.
+  - Page 2: Integrated Table of Contents, company profile, and modular 4-stage system architecture table.
+  - Page 3: Analytical methodology covering 16 ratios in 5 pillars, non-parametric univariate outlier detection (Tukey IQR, MAD-based Robust Z-Scores), and multivariate Isolation Forest.
+  - Page 4: Sigmoid peer normalization, dynamic weight redistribution, 5-tier risk taxonomy, explainable diagnostics, multichannel reporting, and professional conclusion.
 
 ---
 
