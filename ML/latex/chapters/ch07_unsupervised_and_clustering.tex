@@ -478,51 +478,59 @@ where $\epsilon$ denotes the neighborhood radius and $\text{MinPts}$ denotes the
 \begin{tikzpicture}[scale=1.1,
     card/.style={
         rounded corners=3pt, align=center, font=\sffamily,
-        minimum width=3.3cm, minimum height=1.1cm, inner sep=4pt
+        minimum height=1.3cm, inner sep=4pt
     }
 ]
-    % Top Symmetrical Cards with clear 0.6cm gaps
-    \node[card, draw=navyblue, fill=navyblue!6, text=navyblue] (c_core) at (-2.2, 2.7) {
+    % Top Symmetrical Cards with clear gaps and balanced 3 lines
+    \node[card, text width=3.2cm, draw=navyblue, fill=navyblue!6, text=navyblue] (c_core) at (-2.3, 2.9) {
         \textbf{Core Point $\mathbf{p}$}\\[2pt]
-        \scriptsize $|N_\epsilon(\mathbf{p})| \ge \text{MinPts} = 5$
+        \scriptsize $|N_\epsilon(\mathbf{p})| = 6 \ge \text{MinPts} = 5$\\[1pt]
+        \scriptsize (Dense Cluster Core)
     };
-    \node[card, draw=darkteal, fill=darkteal!6, text=darkteal] (c_border) at (1.5, 2.7) {
+    \node[card, text width=3.2cm, draw=darkteal, fill=darkteal!6, text=darkteal] (c_border) at (1.4, 2.9) {
         \textbf{Border Point $\mathbf{b}$}\\[2pt]
-        \scriptsize $|N_\epsilon(\mathbf{b})| < 5$, but $\mathbf{b} \in N_\epsilon(\mathbf{p})$
+        \scriptsize $|N_\epsilon(\mathbf{b})| = 3 < \text{MinPts}$\\[1pt]
+        \scriptsize but $\mathbf{b} \in N_\epsilon(\mathbf{p})$
     };
-    \node[card, draw=crimson, fill=crimson!6, text=crimson] (c_noise) at (5.2, 2.7) {
+    \node[card, text width=3.2cm, draw=crimson, fill=crimson!6, text=crimson] (c_noise) at (5.2, 2.9) {
         \textbf{Noise / Outlier $\mathbf{z}$}\\[2pt]
-        \scriptsize $|N_\epsilon(\mathbf{z})| = 1 < 5$ (Unassigned)
+        \scriptsize $|N_\epsilon(\mathbf{z})| = 1 < \text{MinPts}$\\[1pt]
+        \scriptsize (Unassigned Outlier)
     };
 
-    % Coordinates for points
+    % Coordinates for points (all centers on identical baseline y = 0.0)
     \coordinate (Core) at (-2.0, 0.0);
-    \coordinate (Border) at (-0.8, 0.1);
+    \coordinate (Border) at (-0.7, 0.0);
     \coordinate (Noise) at (5.2, 0.0);
 
-    % Epsilon neighborhoods (shaded disks, r=1.5cm)
-    \draw[dashed, navyblue, thick, fill=navyblue!6] (Core) circle (1.5cm);
-    \draw[dashed, darkteal, thick, fill=darkteal!6] (Border) circle (1.5cm);
-    \draw[dashed, crimson, thick, fill=crimson!6] (Noise) circle (1.5cm);
+    % 1. Shaded backgrounds first (both transparent/light fills)
+    \fill[navyblue!8] (Core) circle (1.6cm);
+    \fill[darkteal!8] (Border) circle (1.6cm);
+    \fill[crimson!8] (Noise) circle (1.6cm);
 
-    % Core point and its dense neighborhood
-    \filldraw[navyblue] (Core) circle (3pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{p}$};
-    \filldraw[navyblue] (-3.0, 0.6) circle (2.2pt);
-    \filldraw[navyblue] (-2.7, -0.6) circle (2.2pt);
-    \filldraw[navyblue] (-1.9, 0.9) circle (2.2pt);
-    \filldraw[navyblue] (-1.7, -0.8) circle (2.2pt);
+    % 2. Dashed boundaries drawn ON TOP so neither circle obscures the other
+    \draw[dashed, navyblue, thick] (Core) circle (1.6cm);
+    \draw[dashed, darkteal, thick] (Border) circle (1.6cm);
+    \draw[dashed, crimson, thick] (Noise) circle (1.6cm);
 
-    % Border point (reachable from p, within 1.5cm of Core since |-2.0 - (-0.8)| = 1.2 < 1.5)
-    \filldraw[darkteal] (Border) circle (3pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{b}$};
-    \filldraw[darkteal] (0.2, 0.6) circle (2.2pt);
+    % Core point and its dense neighborhood (5 core cluster points + border point = 6)
+    \filldraw[navyblue] (Core) circle (3.2pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{p}$};
+    \filldraw[navyblue] (-3.0, 0.7) circle (2.2pt);
+    \filldraw[navyblue] (-2.8, -0.7) circle (2.2pt);
+    \filldraw[navyblue] (-2.2, 1.0) circle (2.2pt);
+    \filldraw[navyblue] (-2.1, -1.0) circle (2.2pt);
 
-    % Noise point (completely isolated outlier)
-    \filldraw[crimson] (Noise) circle (3pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{z}$};
+    % Border point (reachable from p, has only 3 points in its neighborhood: p, b, b1)
+    \filldraw[darkteal] (Border) circle (3.2pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{b}$};
+    \filldraw[darkteal] (0.3, 0.5) circle (2.2pt);
+
+    % Noise point (completely isolated outlier with no cluster points within epsilon)
+    \filldraw[crimson] (Noise) circle (3.2pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{z}$};
 
     % Radius annotations
-    \draw[->, >=stealth, navyblue, thick] (Core) -- ++(140:1.5cm) node[midway, above left, font=\scriptsize\bfseries] {$\epsilon$};
-    \draw[->, >=stealth, darkteal, thick] (Border) -- ++(35:1.5cm) node[midway, above right, font=\scriptsize\bfseries] {$\epsilon$};
-    \draw[->, >=stealth, crimson, thick] (Noise) -- ++(45:1.5cm) node[midway, above right, font=\scriptsize\bfseries] {$\epsilon$};
+    \draw[->, >=stealth, navyblue, thick] (Core) -- ++(140:1.6cm) node[midway, above left, font=\scriptsize\bfseries] {$\epsilon$};
+    \draw[->, >=stealth, darkteal, thick] (Border) -- ++(35:1.6cm) node[midway, above right, font=\scriptsize\bfseries] {$\epsilon$};
+    \draw[->, >=stealth, crimson, thick] (Noise) -- ++(45:1.6cm) node[midway, above right, font=\scriptsize\bfseries] {$\epsilon$};
 \end{tikzpicture}
 \caption{DBSCAN point classification into Core, Border, and Noise points ($\text{MinPts} = 5$).}
 \label{fig:dbscan_points}
