@@ -65,7 +65,7 @@ where $\gamma \in [0, 1]$ represents the \textbf{discount factor}:
     \item As $\gamma \to 1$, the agent becomes far-sighted, weighting distant future payoffs nearly equally with immediate returns.
 \end{itemize}
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Foundational Reinforcement Learning Terminology and Operational Roles}
 \label{tab:rl_terms}
@@ -83,8 +83,8 @@ Reward ($r \in \mathbb{R}$) & A scalar evaluative numerical feedback signal emit
 Policy ($\pi$) & The behavioral strategy of the agent: a mapping from environmental states to action choices, $\pi(s) \to a$. \\
 Value Function $V(s)$ & The expected cumulative discounted future reward starting from state $s$: $V(s) = \mathbb{E}_\pi [G_t \mid s_t = s]$. \\
 Action-Value $Q(s, a)$ & The expected cumulative return after taking action $a$ in state $s$: $Q(s, a) = \mathbb{E}_\pi [G_t \mid s_t = s, a_t = a]$. \\
-\textbf{Discount Factor ($\gamma$)} & Relative valuation parameter $\gamma \in [0, 1]$ weighting immediate versus future rewards. \\
-\textbf{Episode} & One complete, contiguous run of interactions from an initial state to a terminal state. \\
+Discount Factor ($\gamma$) & Relative valuation parameter $\gamma \in [0, 1]$ weighting immediate versus future rewards. \\
+Episode & One complete, contiguous run of interactions from an initial state to a terminal state. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -131,7 +131,7 @@ The continuous action output $F_t \in [-1, 1]$ maps directly to financial market
     \end{cases}
 \end{equation}
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}[
     auto,
@@ -148,7 +148,7 @@ The continuous action output $F_t \in [-1, 1]$ maps directly to financial market
     arr/.style={->, >=stealth, very thick, navyblue}
 ]
     \node[proc, text width=2.4cm] (input) at (-0.5, 0) {Market Inputs\\$\mathbf{x}_t$ (Returns)};
-    \node[proc, text width=4.2cm] (policy) at (3.8, 0) {Recurrent Policy\\$F_t = \tanh(\mathbf{w}^T\mathbf{x}_t + uF_{t-1} + b)$};
+    \node[proc, text width=4.3cm] (policy) at (4.0, 0) {Recurrent Policy\\$F_t = \tanh(\mathbf{w}^T\mathbf{x}_t + uF_{t-1} + b)$};
     \node[rew, text width=3.8cm] (reward) at (10.8, 0) {Utility Evaluation $U$\\Profit / Sharpe Ratio $S_T$};
 
     % Forward path with ample clearance for Position label
@@ -159,10 +159,12 @@ The continuous action output $F_t \in [-1, 1]$ maps directly to financial market
     \draw[arr, crimson] ([xshift=0.8cm]policy.north) -- ++(0, 0.7cm) -| 
         node[pos=0.25, above, font=\scriptsize\bfseries\sffamily, text=crimson] {Memory $F_{t-1}$} ([xshift=-0.8cm]policy.north);
 
-    % Gradient Ascent Update loop (explicitly centered on bottom segment)
-    \draw[arr, dashed, darkteal] (reward.south) -- ++(0, -0.9cm) 
+    % Gradient Ascent Update loop - perfectly level horizontal connector
+    \coordinate (r_drop) at (reward.south |- 0, -1.6);
+    \coordinate (p_drop) at (policy.south |- 0, -1.6);
+    \draw[arr, dashed, darkteal] (reward.south) -- (r_drop) 
         -- node[midway, below=3pt, font=\scriptsize\bfseries\sffamily, text=darkteal] {Gradient Update: $\mathbf{w} \leftarrow \mathbf{w} + \rho \frac{\partial U}{\partial \mathbf{w}}$} 
-        ([yshift=-0.9cm]policy.south) -- (policy.south);
+        (p_drop) -- (policy.south);
 \end{tikzpicture}
 \caption{Recurrent Reinforcement Learning (RRL) trading architecture with recurrent memory and utility optimization.}
 \label{fig:rrl_architecture}
@@ -241,13 +243,13 @@ Iterating across sufficient episodes ensures that $Q(s, a)$ converges to the opt
 % ------------------------------------------------------------------------------
 \section{Comparative Synthesis Across Learning Paradigms}
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Systematic Comparison of Supervised, Unsupervised, and Reinforcement Learning}
 \label{tab:three_paradigms}
 \vspace{0.2em}
 \renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{>{\bfseries}p{2.4cm}XXX}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{2.6cm}XXX}
 \toprule
 Dimension & Supervised Learning & Unsupervised Learning & Reinforcement Learning \\
 \midrule
@@ -259,13 +261,13 @@ Archetypal Application & Credit default classification, pricing. & Market regime
 \end{tabularx}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Structural Comparison: \texorpdfstring{$Q$-Learning}{Q-Learning} (Value-Based) versus RRL (Direct Policy Optimization)}
 \label{tab:qlearning_vs_rrl}
 \vspace{0.2em}
 \renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{>{\bfseries}p{2.6cm}XX}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{3.4cm}XX}
 \toprule
 Attribute & \texorpdfstring{$Q$-Learning}{Q-Learning} (Value-Based) & Recurrent Reinforcement Learning (RRL) \\
 \midrule

@@ -65,20 +65,20 @@ x_{n1} & x_{n2} & \cdots & x_{np}
 
 Selecting a mathematically rigorous proximity measure requires classifying features according to their scale of measurement:
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Taxonomy of Data Types, Empirical Properties, and Proximity Measures}
 \label{tab:cluster_variable_types}
 \vspace{0.2em}
 \renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{>{\bfseries}l>{\raggedright\arraybackslash}p{2.6cm}XX}
+\begin{tabularx}{\textwidth}{>{\bfseries}l>{\raggedright\arraybackslash}p{2.8cm}XX}
 \toprule
 Type & Mathematical Meaning & Quantitative Finance Example & Typical Proximity Metric \\
 \midrule
 Nominal & Categorical states with no inherent natural ordering. & Industrial sector: Banking, IT, Energy, Healthcare. & Matching coefficient (Simple coincidence: same vs. different). \\
 Binary & Two-state indicator variable taking values in $\{0, 1\}$. & Loan default event ($\text{Yes} = 1, \text{No} = 0$). & Simple Matching Coefficient (SMC), Jaccard similarity. \\
 Ordinal & Categorical states possessing a distinct hierarchical order. & Credit rating: $\text{AAA} > \text{AA} > \text{A} > \text{BBB} > \dots$ & Normalized ranks mapped to the unit interval $[0, 1]$. \\
-Interval & Equal incremental steps with an arbitrary (non-true) zero point. & Temperature in $^\circ\text{C}$, calendar calendar dates. & Euclidean distance ($L_2$), Manhattan distance ($L_1$). \\
+Interval & Equal incremental steps with an arbitrary (non-true) zero point. & Temperature in $^\circ\text{C}$, calendar dates. & Euclidean distance ($L_2$), Manhattan distance ($L_1$). \\
 Ratio & Equal incremental steps anchored by an absolute, non-arbitrary zero. & Asset price, trading volume, portfolio return, leverage ratio. & Euclidean distance ($L_2$), Manhattan distance ($L_1$). \\
 \bottomrule
 \end{tabularx}
@@ -200,53 +200,52 @@ When evaluating binary indicator vectors, co-occurrence contingency frequencies 
 
 Clustering algorithms are systematically categorized into four foundational methodological families:
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}[
-    level 1/.style={sibling distance=3.6cm, level distance=1.8cm},
-    level 2/.style={sibling distance=2.2cm, level distance=1.8cm},
     root/.style={
         rectangle, draw=navyblue, fill=navyblue!10, rounded corners=3pt,
-        line width=1.2pt, minimum width=3.2cm, minimum height=1.0cm, align=center,
+        line width=1.2pt, minimum width=3.4cm, minimum height=0.9cm, align=center,
         font=\bfseries\sffamily\small, text=navyblue
     },
     branch/.style={
         rectangle, draw=navyblue, fill=lightgraybg, rounded corners=2pt,
-        thick, minimum width=2.6cm, minimum height=0.9cm, align=center,
+        thick, minimum width=2.7cm, minimum height=1.0cm, align=center,
         font=\bfseries\sffamily\footnotesize, text=navyblue
     },
     leaf/.style={
-        rectangle, draw=darkteal, fill=darkteal!10, rounded corners=2pt,
-        thick, minimum width=2.3cm, minimum height=0.8cm, align=center,
-        font=\sffamily\footnotesize, text=darkteal
+        rectangle, draw=darkteal, fill=darkteal!8, rounded corners=2pt,
+        thick, minimum width=2.4cm, minimum height=0.9cm, align=center,
+        font=\bfseries\sffamily\scriptsize, text=darkteal
     },
-    edge/.style={draw=navyblue, thick, -{Stealth[length=2.2mm]}}
+    edge/.style={draw=navyblue, thick, -{Stealth[length=2.2mm]}},
+    fork/.style={draw=darkteal, thick, -{Stealth[length=2.0mm]}}
 ]
-    \node[root] {Clustering\\Methods}
-        child {
-            node[branch] {Partition-Based\\(e.g., $K$-Means)}
-            edge from parent[edge]
-        }
-        child {
-            node[branch] {Hierarchical\\Clustering}
-            child {
-                node[leaf] {Agglomerative\\(Bottom-Up)}
-                edge from parent[edge]
-            }
-            child {
-                node[leaf] {Divisive\\(Top-Down)}
-                edge from parent[edge]
-            }
-            edge from parent[edge]
-        }
-        child {
-            node[branch] {Density-Based\\(e.g., DBSCAN)}
-            edge from parent[edge]
-        }
-        child {
-            node[branch] {Model / Graph\\Based (e.g., GMM)}
-            edge from parent[edge]
-        };
+    % Root
+    \node[root] (root) at (0, 2.2) {Clustering Methods};
+
+    % 4 Branches
+    \node[branch] (b1) at (-5.1, 0.5) {Partition-Based\\(e.g., $K$-Means)};
+    \node[branch] (b2) at (-1.7, 0.5) {Hierarchical\\Clustering};
+    \node[branch] (b3) at (1.7, 0.5) {Density-Based\\(e.g., DBSCAN)};
+    \node[branch] (b4) at (5.1, 0.5) {Model / Graph\\Based (e.g., GMM)};
+
+    % Connect root to 4 branches with clean tree fork
+    \coordinate (rfork) at (0, 1.35);
+    \draw[navyblue, thick] (root.south) -- (rfork);
+    \draw[edge] (rfork) -| (b1.north);
+    \draw[edge] (rfork) -| (b2.north);
+    \draw[edge] (rfork) -| (b3.north);
+    \draw[edge] (rfork) -| (b4.north);
+
+    % Leaves under Hierarchical with clear 0.6cm clearance and drop-stems
+    \node[leaf] (l1) at (-3.2, -1.3) {Agglomerative\\(Bottom-Up)};
+    \node[leaf] (l2) at (-0.2, -1.3) {Divisive\\(Top-Down)};
+
+    \coordinate (hfork) at (-1.7, -0.4);
+    \draw[darkteal, thick] (b2.south) -- (hfork);
+    \draw[fork] (hfork) -| (l1.north);
+    \draw[fork] (hfork) -| (l2.north);
 \end{tikzpicture}
 \caption{Taxonomy of major unsupervised clustering paradigms.}
 \label{fig:clustering_taxonomy}
@@ -322,13 +321,13 @@ The procedural steps for agglomerative clustering are formalized as follows:
 \subsection{Inter-Cluster Linkage Criteria}
 The metric defining the distance between two multi-point clusters $A$ and $B$ governs dendrogram topology:
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Mathematical Definitions and Geometric Properties of Linkage Rules}
 \label{tab:linkage_rules}
 \vspace{0.2em}
 \renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{>{\bfseries}p{2.6cm}>{\raggedright\arraybackslash}p{4.0cm}X}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{4.0cm}X}
 \toprule
 Linkage Rule & Mathematical Definition & Geometric Characteristics \& Failure Modes \\
 \midrule
@@ -341,10 +340,11 @@ Ward's Minimum Variance & $\Delta \text{ESS} = \frac{|A||B|}{|A| + |B|} \|\bolds
 \end{tabularx}
 \end{table}
 
+\clearpage
 \subsection{Divisive Splitting Strategies: Monothetic versus Polythetic}
 Divisive hierarchical methods decompose clusters according to either single or multiple attributes:
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Monothetic versus Polythetic Divisive Clustering Characteristics}
 \label{tab:monothetic_vs_polythetic}
@@ -473,53 +473,56 @@ where $\epsilon$ denotes the neighborhood radius and $\text{MinPts}$ denotes the
     \item \textbf{Noise Points (Outliers):} Any point that is neither a core point nor a border point. Noise points inhabit sparse background regions and are discarded from cluster assignments.
 \end{enumerate}
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}[scale=1.15]
-    % Coordinates
-    \coordinate (Core) at (0, 0);
-    \coordinate (Border) at (1.3, 0.1);
+\begin{tikzpicture}[scale=1.1,
+    card/.style={
+        rounded corners=3pt, align=center, font=\sffamily,
+        minimum width=3.3cm, minimum height=1.1cm, inner sep=4pt
+    }
+]
+    % Top Symmetrical Cards with clear 0.6cm gaps
+    \node[card, draw=navyblue, fill=navyblue!6, text=navyblue] (c_core) at (-2.2, 2.7) {
+        \textbf{Core Point $\mathbf{p}$}\\[2pt]
+        \scriptsize $|N_\epsilon(\mathbf{p})| \ge \text{MinPts} = 5$
+    };
+    \node[card, draw=darkteal, fill=darkteal!6, text=darkteal] (c_border) at (1.5, 2.7) {
+        \textbf{Border Point $\mathbf{b}$}\\[2pt]
+        \scriptsize $|N_\epsilon(\mathbf{b})| < 5$, but $\mathbf{b} \in N_\epsilon(\mathbf{p})$
+    };
+    \node[card, draw=crimson, fill=crimson!6, text=crimson] (c_noise) at (5.2, 2.7) {
+        \textbf{Noise / Outlier $\mathbf{z}$}\\[2pt]
+        \scriptsize $|N_\epsilon(\mathbf{z})| = 1 < 5$ (Unassigned)
+    };
+
+    % Coordinates for points
+    \coordinate (Core) at (-2.0, 0.0);
+    \coordinate (Border) at (-0.8, 0.1);
     \coordinate (Noise) at (5.2, 0.0);
 
-    % Epsilon neighborhoods (shaded disks)
-    \draw[dashed, navyblue, thick, fill=navyblue!6] (Core) circle (1.7cm);
-    \draw[dashed, darkteal, thick, fill=darkteal!6] (Border) circle (1.7cm);
-    \draw[dashed, crimson, thick, fill=crimson!6] (Noise) circle (1.7cm);
+    % Epsilon neighborhoods (shaded disks, r=1.5cm)
+    \draw[dashed, navyblue, thick, fill=navyblue!6] (Core) circle (1.5cm);
+    \draw[dashed, darkteal, thick, fill=darkteal!6] (Border) circle (1.5cm);
+    \draw[dashed, crimson, thick, fill=crimson!6] (Noise) circle (1.5cm);
 
-    % Core point and its dense neighborhood (MinPts = 5)
-    \filldraw[navyblue] (Core) circle (3pt) node[below=4pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{p}$ (Core)};
-    \filldraw[navyblue] (-0.8, 0.7) circle (2pt);
-    \filldraw[navyblue] (-0.6, -0.8) circle (2pt);
-    \filldraw[navyblue] (0.5, 0.9) circle (2pt);
-    \filldraw[navyblue] (0.8, -0.7) circle (2pt);
-    \filldraw[navyblue] (-1.1, -0.2) circle (2pt);
+    % Core point and its dense neighborhood
+    \filldraw[navyblue] (Core) circle (3pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{p}$};
+    \filldraw[navyblue] (-3.0, 0.6) circle (2.2pt);
+    \filldraw[navyblue] (-2.7, -0.6) circle (2.2pt);
+    \filldraw[navyblue] (-1.9, 0.9) circle (2.2pt);
+    \filldraw[navyblue] (-1.7, -0.8) circle (2.2pt);
 
-    % Border point (reachable from p, but has < MinPts neighbors)
-    \filldraw[darkteal] (Border) circle (3pt) node[below right=2pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{b}$ (Border)};
-    \filldraw[darkteal] (2.2, 0.8) circle (2pt);
+    % Border point (reachable from p, within 1.5cm of Core since |-2.0 - (-0.8)| = 1.2 < 1.5)
+    \filldraw[darkteal] (Border) circle (3pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{b}$};
+    \filldraw[darkteal] (0.2, 0.6) circle (2.2pt);
 
-    % Noise point (isolated outlier)
-    \filldraw[crimson] (Noise) circle (3pt) node[below=4pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{z}$ (Noise)};
+    % Noise point (completely isolated outlier)
+    \filldraw[crimson] (Noise) circle (3pt) node[below=5pt, font=\footnotesize\bfseries\sffamily] {$\mathbf{z}$};
 
-    % Radii annotations
-    \draw[->, >=stealth, navyblue, thick] (Core) -- ++(140:1.7cm) node[midway, above left, font=\scriptsize\bfseries] {$\epsilon$};
-    \draw[->, >=stealth, crimson, thick] (Noise) -- ++(40:1.7cm) node[midway, above left, font=\scriptsize\bfseries] {$\epsilon$};
-
-    % Structured Informational Badges (above circles, avoiding collisions)
-    \node[align=center, font=\small\sffamily, text=navyblue] at (0, 2.2) {
-        \textbf{Core Point $\mathbf{p}$}\\[1pt]
-        \footnotesize $|N_\epsilon(\mathbf{p})| \ge \text{MinPts} = 5$
-    };
-    \node[align=center, font=\small\sffamily, text=darkteal] at (1.8, -2.2) {
-        \textbf{Border Point $\mathbf{b}$}\\[1pt]
-        \footnotesize $|N_\epsilon(\mathbf{b})| < \text{MinPts}$, but $\mathbf{b} \in N_\epsilon(\mathbf{p})$
-    };
-    \draw[->, >=stealth, thin, darkteal] (1.8, -1.8) -- (Border);
-
-    \node[align=center, font=\small\sffamily, text=crimson] at (5.2, 2.2) {
-        \textbf{Noise / Outlier $\mathbf{z}$}\\[1pt]
-        \footnotesize $|N_\epsilon(\mathbf{z})| < \text{MinPts}$ (Unassigned)
-    };
+    % Radius annotations
+    \draw[->, >=stealth, navyblue, thick] (Core) -- ++(140:1.5cm) node[midway, above left, font=\scriptsize\bfseries] {$\epsilon$};
+    \draw[->, >=stealth, darkteal, thick] (Border) -- ++(35:1.5cm) node[midway, above right, font=\scriptsize\bfseries] {$\epsilon$};
+    \draw[->, >=stealth, crimson, thick] (Noise) -- ++(45:1.5cm) node[midway, above right, font=\scriptsize\bfseries] {$\epsilon$};
 \end{tikzpicture}
 \caption{DBSCAN point classification into Core, Border, and Noise points ($\text{MinPts} = 5$).}
 \label{fig:dbscan_points}

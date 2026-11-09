@@ -5,7 +5,7 @@
 **Nature of Course:** Hard Core (Compulsory)  
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
-**Document:** main.pdf (102 pages, publication-grade compiled book with official syllabus)  
+**Document:** main.pdf (101 pages, publication-grade compiled book with official syllabus)  
 **Author / Scribe:** N Rohit Vedhanandh (Reg. No.: 25MSQUFPY0002)  
 **Official Syllabus Reference:** [../syllabus.md](../syllabus.md) | Master Curriculum: [../../SYLLABUS.md](../../SYLLABUS.md) | Official PDF: [../../Semester_III_Syllabus.pdf](../../Semester_III_Syllabus.pdf) (Page 7)  
 
@@ -44,7 +44,7 @@ ML/latex/
 │   ├── ch10_ensemble_learning.tex                 # Chapter 10: Ensemble Learning & XGBoost (Figs 10.1–10.2)
 │   └── formula_reference.tex                      # Combined Multi-Chapter Formula Reference Sheet (Ch 1–10)
 ├── main.tex                                # Root master document
-└── main.pdf                                # 102-page compiled PDF book
+└── main.pdf                                # 101-page compiled PDF book
 ```
 
 ---

@@ -367,7 +367,7 @@ The diagonal singular value matrix evaluates to:
 \subsection{Comparative Synthesis: PCA versus SVD}
 The fundamental mathematical and structural differences between PCA and SVD are contrasted in Table~\ref{tab:pca_vs_svd}.
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Systematic Comparison Between PCA and SVD}
 \label{tab:pca_vs_svd}
@@ -380,7 +380,7 @@ Attribute & Principal Component Analysis (PCA) & Singular Value Decomposition (S
 Input Matrix & Requires a square, symmetric $p \times p$ sample covariance or correlation matrix $\mathbf{S}$. & Directly decomposes any rectangular $m \times n$ matrix $\mathbf{A} \in \mathbb{R}^{m \times n}$. \\
 Core Mathematical Tool & Spectral eigendecomposition ($\mathbf{S}\mathbf{e} = \lambda \mathbf{e}$). & Singular value matrix factorization ($\mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T$). \\
 Mean Centering & \textbf{Mandatory:} Data must be zero-mean centered ($\tilde{\mathbf{X}} = \mathbf{X} - \bar{\mathbf{x}}$) to represent true variance. & \textbf{Not strictly required} for mathematical factorization; required only if mimicking PCA. \\
-Equivalence Relation & \multicolumn{2}{X}{When applied to mean-centered data $\tilde{\mathbf{X}} \in \mathbb{R}^{n \times p}$, PCA and SVD are algebraically equivalent: the right singular vectors $\mathbf{V}$ equal the principal direction eigenvectors ($\mathbf{W} = \mathbf{V}$), and the singular values satisfy $\lambda_i = \frac{\sigma_i^2}{n - 1}$.} \\
+Equivalence Relation & Right singular vectors $\mathbf{V}$ equal the principal direction eigenvectors ($\mathbf{W} = \mathbf{V}$) on mean-centered data $\tilde{\mathbf{X}}$. & Singular values relate to covariance eigenvalues via $\lambda_i = \frac{\sigma_i^2}{n - 1}$ on mean-centered data $\tilde{\mathbf{X}}$. \\
 \bottomrule
 \end{tabularx}
 \end{table}

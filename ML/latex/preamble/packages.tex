@@ -69,6 +69,21 @@
     pdftitle={Machine Learning in Quantitative Finance - Lecture Notes}
 }
 
+% Float Placement Control & Top-Aligned Float Pages
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{14pt plus 2pt minus 2pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+\renewcommand{\topfraction}{0.90}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\floatpagefraction}{0.80}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{6}
+
 % Header & Footer styling
 \pagestyle{fancy}
 \fancyhf{}

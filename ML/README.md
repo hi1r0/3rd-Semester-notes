@@ -57,12 +57,12 @@ ML/
 ├── Supervised Learning/
 │   ├── QF_sem_3_ML_U1P1.pdf               # Unit 1 Part 1 Lecture Slides (Supervised Learning fundamentals)
 │   └── QF_sem_3_ML_U2_PPT1.pdf            # Unit 2 Presentation Slides (Model selection & evaluation)
-├── latex/                                 # Comprehensive LaTeX lecture notes book (102 pages with syllabus, main.pdf)
+├── latex/                                 # Comprehensive LaTeX lecture notes book (101 pages with syllabus, main.pdf)
 │   ├── figures/                           # Institutional crest & graphics
 │   ├── preamble/                          # Typography, packages, custom tcolorboxes & macros
 │   ├── chapters/                          # Modular chapters 1–10 & comprehensive formula reference
 │   ├── main.tex                           # Root master LaTeX file
-│   ├── main.pdf                           # Publication-grade compiled PDF book (102 pages with syllabus)
+│   ├── main.pdf                           # Publication-grade compiled PDF book (101 pages with syllabus)
 │   └── README.md                          # Detailed chapter overview & compilation guide
 └── SVM/
     ├── QF_ML_SVM.pdf                      # Support Vector Machines, maximum margin hyperplanes
