@@ -1,0 +1,279 @@
+% ==============================================================================
+% Chapter 9: Reinforcement Learning & Financial Trading
+% ==============================================================================
+\chapter{Reinforcement Learning \& Financial Trading}
+\label{ch:reinforcement_learning}
+
+\section{Principles of Reinforcement Learning}
+
+\subsection{The Trial-and-Error Paradigm}
+\textbf{Reinforcement Learning (RL)} represents a distinct computational learning paradigm wherein an autonomous decision-maker, termed the \textbf{agent}, learns an optimal behavioral strategy through continuous trial-and-error interaction with a dynamic \textbf{environment}.
+
+Unlike supervised learning (which relies on static, labeled input-output pairs) and unsupervised learning (which explores latent unlabeled feature geometry), reinforcement learning is characterized by:
+\begin{itemize}
+    \item \textbf{No Pre-Existing Labeled Answers:} The agent receives no explicit supervisor instructing it on the best action; instead, it evaluates the consequences of its choices via scalar feedback.
+    \item \textbf{Reward Signals:} The environment provides evaluative numerical feedback in the form of \textbf{rewards} ($r > 0$) or \textbf{penalties} ($r < 0$).
+    \item \textbf{Delayed Consequences:} Actions executed at time $t$ may not yield immediate feedback; instead, rewards are frequently delayed, requiring the agent to trade off immediate gratification against long-term cumulative gain.
+    \item \textbf{Sequential Decision Optimization:} The objective is to discover a behavioral policy $\pi^*$ that maximizes the total expected cumulative return over extended operational horizons.
+\end{itemize}
+
+\subsection{The Agent--Environment Interaction Cycle}
+The fundamental discrete-time interaction loop between the agent and its environment proceeds sequentially through state transitions and action choices:
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=2.2cm and 4.0cm,
+    block/.style={
+        rectangle, draw=navyblue, fill=navyblue!8, rounded corners=3pt,
+        line width=1.2pt, minimum width=3.4cm, minimum height=1.3cm, align=center,
+        font=\sffamily\bfseries\small, text=navyblue
+    },
+    arr/.style={->, >=stealth, line width=1.3pt}
+]
+    \node[block] (agent) {Agent\\(Learner / Decision-Maker)};
+    \node[block, right=4.5cm of agent] (env) {Environment\\(Financial Market / World)};
+
+    % Top arrow: Action
+    \draw[arr, crimson] (agent.north) to[bend left=30] 
+        node[above=3pt, font=\small\bfseries\sffamily, text=crimson] {Action $a_t$} (env.north);
+
+    % Bottom arrow: State and Reward
+    \draw[arr, darkteal] (env.south) to[bend left=30] 
+        node[below=3pt, font=\small\bfseries\sffamily, text=darkteal] {State $s_{t+1}$, Reward $r_{t+1}$} (agent.south);
+\end{tikzpicture}
+\caption{The classical Agent--Environment reinforcement learning interaction loop.}
+\label{fig:rl_loop}
+\end{figure}
+
+At discrete time step $t$:
+\begin{enumerate}
+    \item The agent observes the current environmental state $s_t \in \mathcal{S}$.
+    \item Guided by its internal policy $\pi(a \mid s)$, the agent selects and executes an action $a_t \in \mathcal{A}$.
+    \item The environment transitions to a new state $s_{t+1} \in \mathcal{S}$ and emits a scalar feedback reward $r_{t+1} \in \mathbb{R}$.
+    \item The agent incorporates $(s_t, a_t, r_{t+1}, s_{t+1})$ to update its policy or value function.
+\end{enumerate}
+
+\subsection{Discounted Returns and Core Formal Terminology}
+The cumulative total return $G_t$ received by the agent following time step $t$ is formulated as a discounted infinite-horizon sum of future rewards:
+\begin{equation}
+    G_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots + \gamma^k r_{t+k+1} + \dots = \sum_{k=0}^\infty \gamma^k r_{t+k+1}
+\end{equation}
+where $\gamma \in [0, 1]$ represents the \textbf{discount factor}:
+\begin{itemize}
+    \item As $\gamma \to 0$, the agent becomes purely myopic (``short-sighted''), optimizing strictly for immediate next-step reward $r_{t+1}$.
+    \item As $\gamma \to 1$, the agent becomes far-sighted, weighting distant future payoffs nearly equally with immediate returns.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\caption{Foundational Reinforcement Learning Terminology and Operational Roles}
+\label{tab:rl_terms}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}lX}
+\toprule
+Term & Formal Mathematical Meaning \& Operational Function \\
+\midrule
+Agent & The learning entity and autonomous decision-maker responsible for executing actions. \\
+Environment & The external world and dynamical system with which the agent interacts. \\
+State ($s \in \mathcal{S}$) & A complete, sufficient representation of the current situation of the environment. \\
+Action ($a \in \mathcal{A}$) & A valid physical or financial move available to the agent in state $s$. \\
+Reward ($r \in \mathbb{R}$) & A scalar evaluative numerical feedback signal emitted by the environment following action execution. \\
+Policy ($\pi$) & The behavioral strategy of the agent: a mapping from environmental states to action choices, $\pi(s) \to a$. \\
+Value Function $V(s)$ & The expected cumulative discounted future reward starting from state $s$: $V(s) = \mathbb{E}_\pi [G_t \mid s_t = s]$. \\
+Action-Value $Q(s, a)$ & The expected cumulative return after taking action $a$ in state $s$: $Q(s, a) = \mathbb{E}_\pi [G_t \mid s_t = s, a_t = a]$. \\
+\textbf{Discount Factor ($\gamma$)} & Relative valuation parameter $\gamma \in [0, 1]$ weighting immediate versus future rewards. \\
+\textbf{Episode} & One complete, contiguous run of interactions from an initial state to a terminal state. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Prominent Real-World Application Domains}
+Reinforcement learning excels in dynamic environments requiring multi-step strategic planning:
+\begin{itemize}
+    \item \textbf{Game Playing:} Mastering complex adversarial games with massive state spaces (e.g., Chess, Go).
+    \item \textbf{Robotics:} Locomotion, robotic arm manipulation, and balance control.
+    \item \textbf{Autonomous Navigation:} Trajectory tracking and obstacle avoidance in self-driving vehicles.
+    \item \textbf{Algorithmic Trading \& Finance:} Dynamic portfolio rebalancing, market making, order execution, and statistical arbitrage.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Recurrent Reinforcement Learning (RRL) in Financial Trading}
+
+\subsection{Direct Policy Optimization versus Value-Function Methods}
+In algorithmic trading, traditional value-based RL methods (e.g., $Q$-learning) suffer from two distinct failure modes:
+\begin{enumerate}
+    \item \textbf{Bellman Discretization Error:} Approximating high-dimensional continuous market price densities via discrete value tables induces severe estimation noise.
+    \item \textbf{Absence of Friction Memory:} Portfolio rebalancing generates transaction costs (bid-ask spread crossing, broker commissions, and market impact). Because transaction costs depend directly on the \textbf{difference between the current position and the previous position} ($|F_t - F_{t-1}|$), trading decisions cannot be formulated as memoryless Markov states.
+\end{enumerate}
+
+\textbf{Recurrent Reinforcement Learning (RRL)} resolves this challenge by parameterizing the trading policy directly with a recurrent neural feedback connection, optimizing portfolio utility without constructing an intermediate value function.
+
+\subsection{The Recurrent Trading Policy Model}
+At each discrete trading period $t$, the trading position $F_t$ is generated via a nonlinear recurrent hyperbolic tangent activation:
+\begin{equation}
+    F_t = \tanh(\mathbf{w}^T \mathbf{x}_t + u F_{t-1} + b)
+\end{equation}
+where:
+\begin{itemize}
+    \item $\mathbf{x}_t \in \mathbb{R}^p$ represents the vector of current market input features (e.g., recent fractional price returns, moving average spreads, order flow imbalances).
+    \item $F_{t-1} \in [-1, 1]$ is the previous trading position fed back via the recurrent parameter $u$ (providing structural memory of existing asset exposure).
+    \item $\mathbf{w} \in \mathbb{R}^p$, $u \in \mathbb{R}$, and $b \in \mathbb{R}$ constitute the learnable parameter set $\boldsymbol{\theta} = \{\mathbf{w}, u, b\}$.
+\end{itemize}
+
+The continuous action output $F_t \in [-1, 1]$ maps directly to financial market allocations:
+\begin{equation}
+    F_t = \begin{cases}
+    +1, & \text{Maximum Long Position (Buy / Asset Accumulation)} \\
+    0,  & \text{Neutral Exposure (Cash / Risk-Off Position)} \\
+    -1, & \text{Maximum Short Position (Sell / Short Sale)}
+    \end{cases}
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    auto,
+    proc/.style={
+        rectangle, draw=navyblue, fill=navyblue!6, rounded corners=3pt,
+        line width=1.1pt, minimum height=1.2cm, align=center,
+        font=\sffamily\bfseries\small, text=navyblue
+    },
+    rew/.style={
+        rectangle, draw=darkteal, fill=darkteal!8, rounded corners=3pt,
+        line width=1.2pt, minimum height=1.2cm, align=center,
+        font=\sffamily\bfseries\small, text=darkteal
+    },
+    arr/.style={->, >=stealth, very thick, navyblue}
+]
+    \node[proc, text width=2.4cm] (input) at (-0.5, 0) {Market Inputs\\$\mathbf{x}_t$ (Returns)};
+    \node[proc, text width=4.2cm] (policy) at (3.8, 0) {Recurrent Policy\\$F_t = \tanh(\mathbf{w}^T\mathbf{x}_t + uF_{t-1} + b)$};
+    \node[rew, text width=3.8cm] (reward) at (10.8, 0) {Utility Evaluation $U$\\Profit / Sharpe Ratio $S_T$};
+
+    % Forward path with ample clearance for Position label
+    \draw[arr] (input) -- (policy);
+    \draw[arr] (policy) -- node[above=2pt, font=\footnotesize\bfseries, text=navyblue] {Position $F_t$} (reward);
+
+    % Recurrent feedback connection (symmetric arch)
+    \draw[arr, crimson] ([xshift=0.8cm]policy.north) -- ++(0, 0.7cm) -| 
+        node[pos=0.25, above, font=\scriptsize\bfseries\sffamily, text=crimson] {Memory $F_{t-1}$} ([xshift=-0.8cm]policy.north);
+
+    % Gradient Ascent Update loop (explicitly centered on bottom segment)
+    \draw[arr, dashed, darkteal] (reward.south) -- ++(0, -0.9cm) 
+        -- node[midway, below=3pt, font=\scriptsize\bfseries\sffamily, text=darkteal] {Gradient Update: $\mathbf{w} \leftarrow \mathbf{w} + \rho \frac{\partial U}{\partial \mathbf{w}}$} 
+        ([yshift=-0.9cm]policy.south) -- (policy.south);
+\end{tikzpicture}
+\caption{Recurrent Reinforcement Learning (RRL) trading architecture with recurrent memory and utility optimization.}
+\label{fig:rrl_architecture}
+\end{figure}
+
+\subsection{Objective Utilities and Gradient Ascent Optimization}
+The single-period financial return $R_t$ accounting for proportional transaction costs $\delta$ is given by:
+\begin{equation}
+    R_t = F_{t-1} r_t - \delta |F_t - F_{t-1}|
+\end{equation}
+where $r_t = \frac{P_t - P_{t-1}}{P_{t-1}}$ represents the raw asset return.
+
+Rather than maximizing unadjusted cumulative wealth, the agent optimizes risk-adjusted performance over an investment horizon $T$ via the \textbf{Sharpe Ratio} utility $U = S_T$:
+\begin{equation}
+    S_T = \frac{\text{Mean Return}}{\text{Standard Deviation of Returns}} = \frac{A}{\sqrt{B - A^2}}
+\end{equation}
+where $A = \frac{1}{T}\sum_{t=1}^T R_t$ and $B = \frac{1}{T}\sum_{t=1}^T R_t^2$.
+
+\textbf{The RRL Training Protocol:}
+\begin{enumerate}
+    \item Generate the complete sequence of sequential positions $\{F_1, F_2, \dots, F_T\}$ over the historical training window using the recurrent policy.
+    \item Evaluate the realized sequence of net returns $\{R_1, \dots, R_T\}$ and compute global utility $U$ (e.g., the Sharpe ratio $S_T$).
+    \item Compute parameter gradients via Backpropagation Through Time (BPTT), utilizing the recursive chain rule:
+    \begin{equation}
+        \frac{d F_t}{d \mathbf{w}} = (1 - F_t^2)\left( \mathbf{x}_t + u \frac{d F_{t-1}}{d \mathbf{w}} \right)
+    \end{equation}
+    \item Update parameters via gradient ascent:
+    \begin{equation}
+        \mathbf{w} \leftarrow \mathbf{w} + \rho \frac{\partial U}{\partial \mathbf{w}}, \quad u \leftarrow u + \rho \frac{\partial U}{\partial u}, \quad b \leftarrow b + \rho \frac{\partial U}{\partial b}
+    \end{equation}
+    where $\rho > 0$ represents the learning rate.
+    \item Repeat iterative updates until the portfolio Sharpe ratio converges.
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Action Selection: Exploration versus Exploitation}
+
+In reinforcement learning, the agent faces a fundamental operational dilemma:
+\begin{itemize}
+    \item \textbf{Exploration:} Gathering new experiential information by taking untried actions to discover potentially superior long-term policies.
+    \item \textbf{Exploitation:} Maximizing immediate expected reward by executing the best-performing action known under current estimates.
+\end{itemize}
+
+\subsection{The \texorpdfstring{$\epsilon$-Greedy}{epsilon-Greedy} Action Selection Policy}
+The standard stochastic compromise balancing exploration and exploitation is the \textbf{$\epsilon$-greedy mechanism}:
+\begin{equation}
+    a_t = \begin{cases}
+    \arg\max_{a \in \mathcal{A}} Q(s_t, a), & \text{with probability } 1 - \epsilon \quad (\text{Exploitation}) \\
+    \text{random action from } \mathcal{A}, & \text{with probability } \epsilon \quad (\text{Exploration})
+    \end{cases}
+\end{equation}
+Typically, $\epsilon$ is initialized high (e.g., $\epsilon_0 = 1.0$) to promote wide initial exploration and annealed decay over training episodes ($\epsilon \to 0$) toward greedy exploitation.
+
+% ------------------------------------------------------------------------------
+\section{\texorpdfstring{$Q$-Learning}{Q-Learning}: Tabular Temporal-Difference Control}
+
+\subsection{The \texorpdfstring{$Q$-Table}{Q-Table} and the Bellman Update Rule}
+\textbf{$Q$-Learning} is an off-policy, model-free temporal difference algorithm that learns the optimal action-value function $Q^*(s, a)$ independent of the agent's exploratory behavioral policy.
+
+The agent maintains an explicit $Q$-table whose rows correspond to discrete states $s \in \mathcal{S}$ and whose columns correspond to discrete actions $a \in \mathcal{A}$. Following execution of action $a$ in state $s$, observing reward $r$ and transitioning to next state $s'$, the $Q$-value is updated via the Bellman optimality equation:
+\begin{equation}
+    Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]
+\end{equation}
+where:
+\begin{itemize}
+    \item $\alpha \in (0, 1]$ is the empirical \textbf{learning rate},
+    \item $r + \gamma \max_{a'} Q(s', a')$ represents the \textbf{TD Target},
+    \item $\delta_t = \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]$ represents the \textbf{Temporal-Difference (TD) Error}.
+\end{itemize}
+
+Iterating across sufficient episodes ensures that $Q(s, a)$ converges to the optimal action-values $Q^*(s, a)$. The optimal deterministic policy is extracted as:
+\begin{equation}
+    \pi^*(s) = \arg\max_{a \in \mathcal{A}} Q^*(s, a)
+\end{equation}
+
+% ------------------------------------------------------------------------------
+\section{Comparative Synthesis Across Learning Paradigms}
+
+\begin{table}[htbp]
+\centering
+\caption{Systematic Comparison of Supervised, Unsupervised, and Reinforcement Learning}
+\label{tab:three_paradigms}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{2.4cm}XXX}
+\toprule
+Dimension & Supervised Learning & Unsupervised Learning & Reinforcement Learning \\
+\midrule
+Data Nature & Explicit labeled pairs $(\mathbf{x}_i, y_i)$. & Unlabeled feature vectors $\mathbf{x}_i$. & Dynamic sequential interactions $(s, a, r, s')$. \\
+Feedback Mechanism & Immediate correct label signal ($y$). & Entirely absent (autonomous structure). & Evaluative scalar reward/penalty ($r$), often delayed. \\
+Core Objective & Minimize supervised prediction error. & Discover latent clusters / manifolds. & Maximize cumulative discounted returns. \\
+Archetypal Application & Credit default classification, pricing. & Market regime clustering, PCA. & Dynamic trading, algorithmic market making. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Structural Comparison: \texorpdfstring{$Q$-Learning}{Q-Learning} (Value-Based) versus RRL (Direct Policy Optimization)}
+\label{tab:qlearning_vs_rrl}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{2.6cm}XX}
+\toprule
+Attribute & \texorpdfstring{$Q$-Learning}{Q-Learning} (Value-Based) & Recurrent Reinforcement Learning (RRL) \\
+\midrule
+Learned Entity & Approximates value table $Q(s, a)$ or network. & Parameterizes behavioral policy $F_t$ directly. \\
+Action Space & Restricted to discrete action candidates. & Naturally accommodates continuous position sizing $F_t \in [-1, 1]$. \\
+Internal Memory & Purely Markovian (relies strictly on state $s_t$). & Recurrent feedback connection of prior position $F_{t-1}$. \\
+Target Objective & Expected cumulative discounted reward $G_t$. & Any differentiable non-additive utility (e.g., Sharpe ratio $S_T$). \\
+Transaction Costs & Difficult to incorporate (breaks Markovianity). & Naturally handled via penalty on position change $|F_t - F_{t-1}|$. \\
+\bottomrule
+\end{tabularx}
+\end{table}

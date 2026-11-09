@@ -5,7 +5,7 @@
 **Nature of Course:** Hard Core (Compulsory)  
 **Degree:** M.Sc. Quantitative Finance (Semester III)  
 **Institution:** Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University  
-**Official Syllabus Reference:** [\./syllabus.md\](./syllabus.md) | Master Curriculum: [\../SYLLABUS.md\](../SYLLABUS.md) | Official PDF: [\../Semester_III_Syllabus.pdf\](../Semester_III_Syllabus.pdf) (Page 7)
+**Official Syllabus Reference:** [./syllabus.md](./syllabus.md) | Master Curriculum: [../SYLLABUS.md](../SYLLABUS.md) | Official PDF: [../Semester_III_Syllabus.pdf](../Semester_III_Syllabus.pdf) (Page 7)
 
 ---
 
@@ -57,12 +57,12 @@ ML/
 ├── Supervised Learning/
 │   ├── QF_sem_3_ML_U1P1.pdf               # Unit 1 Part 1 Lecture Slides (Supervised Learning fundamentals)
 │   └── QF_sem_3_ML_U2_PPT1.pdf            # Unit 2 Presentation Slides (Model selection & evaluation)
-├── latex/                                 # Comprehensive LaTeX lecture notes book (63 pages with syllabus, main.pdf)
+├── latex/                                 # Comprehensive LaTeX lecture notes book (102 pages with syllabus, main.pdf)
 │   ├── figures/                           # Institutional crest & graphics
 │   ├── preamble/                          # Typography, packages, custom tcolorboxes & macros
-│   ├── chapters/                          # Modular chapters 1–6 & comprehensive formula reference
+│   ├── chapters/                          # Modular chapters 1–10 & comprehensive formula reference
 │   ├── main.tex                           # Root master LaTeX file
-│   ├── main.pdf                           # Publication-grade compiled PDF book (63 pages with syllabus)
+│   ├── main.pdf                           # Publication-grade compiled PDF book (102 pages with syllabus)
 │   └── README.md                          # Detailed chapter overview & compilation guide
 └── SVM/
     ├── QF_ML_SVM.pdf                      # Support Vector Machines, maximum margin hyperplanes
@@ -87,15 +87,36 @@ ML/
    - Prior, likelihood, posterior calculation; conditional independence assumptions; Gaussian, Multinomial, and Bernoulli Naive Bayes.
 5. **Linear & Logistic Regression**
    - Maximum likelihood estimation, log-odds transformation, decision boundaries, and regularization ($L_1$ Lasso, $L_2$ Ridge).
-6. **Decision Trees & Ensemble Methods**
+6. **Decision Trees**
    - Information Gain, Entropy, Gini Impurity, tree pruning, classification and regression trees (CART).
 7. **Support Vector Machines (SVM)**
    - Hard vs. soft margin optimization, slack variables ($C$), primal and dual formulations, kernel trick (Linear, Polynomial, RBF).
-8. **End-to-End Capstone Project: Statistical Arbitrage & Pair Trading with Supervised ML (`Assignment/`)**
-   - Historical daily market prices (2015–2024, 2,264 bars) across 10 liquid US equities and ETFs (`KO`, `PEP`, `XOM`, `CVX`, `JPM`, `BAC`, `BP`, `SHEL`, `GLD`, `SPY`).
-   - Dynamic rolling cointegration, OLS hedge ratio estimation, and standardized spread $Z$-score triggers ($|Z| \ge 2.0$).
-   - 12-dimensional quantitative feature engineering (Hurst exponent, OU half-life, ADF $p$-value, serial autocorrelations).
-   - Triple-barrier meta-labeling with realistic transaction frictions (10 bps round-trip).
-   - Purged Walk-Forward Time-Series Cross-Validation with horizon embargo buffers.
-   - Comprehensive comparative benchmark across the 6 core MSQF curriculum models (Logistic Regression, Naive Bayes, KNN, Decision Tree, Random Forest, SVM RBF) with individual model outputs, decision tree visualizations, and interpretability diagnostics.
-   - Event-driven backtesting contrasting Traditional vs. ML-Filtered statistical arbitrage strategies.
+8. **Unsupervised Learning & Cluster Analysis**
+   - Variable types, metric axioms, continuous and binary proximity measures (Euclidean, Manhattan, SMC, Jaccard).
+   - Hierarchical clustering, dendrogram horizontal thresholds, agglomerative linkage rules, and divisive splitting.
+   - Non-hierarchical partitioning ($K$-Means Lloyd-Forgy iterative optimization, assignment/update cycle, WCSS objective).
+   - Density-based methods (DBSCAN Core, Border, and Noise point typology, reachability, HDBSCAN, OPTICS).
+9. **Dimensionality Reduction: PCA & SVD**
+   - Curse of Dimensionality: Volume explosion, spatial sparsity, distance convergence.
+   - Feature selection (Filter, Wrapper, Embedded) vs. Feature extraction (PCA, LDA, Kernel PCA, QDA).
+   - Principal Component Analysis (PCA): Maximum variance projection, sample covariance matrix eigendecomposition, worked 4-point bivariate example.
+   - Singular Value Decomposition (SVD): Factorization $\mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T$, Gram matrix connection $\sigma_i = \sqrt{\lambda_i}$, Eckart-Young optimal low-rank approximation, worked $2 \times 2$ example.
+   - Systematic comparison and algebraic equivalence between PCA and SVD.
+10. **Reinforcement Learning & Financial Trading**
+    - Trial-and-error paradigm, agent-environment interaction cycle, discounted cumulative returns $G_t$, discount factor $\gamma$.
+    - Recurrent Reinforcement Learning (RRL) in finance: Direct policy optimization, structural memory of friction $|F_t - F_{t-1}|$, recurrent position policy $F_t = \tanh(\mathbf{w}^T\mathbf{x}_t + u F_{t-1} + b)$, Sharpe ratio utility gradient ascent.
+    - Action selection: Exploration vs. Exploitation ($\epsilon$-greedy policy).
+    - Tabular $Q$-Learning: $Q$-table Bellman optimality update, TD Target, and TD Error.
+11. **Ensemble Learning: Bagging, Boosting, & XGBoost**
+    - Wisdom of the crowd, bias-variance decomposition and ensemble targeting.
+    - Bagging: Bootstrap resampling ($63.2\%$ in-bag, $36.8\%$ out-of-bag validation), majority voting/averaging, Random Forests random feature subsampling ($m = \lfloor\sqrt{p}\rfloor$, $m = \lfloor p/3 \rfloor$).
+    - Boosting: Sequential error-weighting philosophy, weak learners, AdaBoost sample weight updates and learner importance $\alpha_m$, Gradient Boosting pseudo-residuals and shrinkage $\eta$.
+    - XGBoost: Regularized objective $\operatorname{Obj}^{(t)} = \sum l(y_i, \hat{y}_i) + \gamma T + \frac{1}{2}\lambda \sum w_j^2$, sparsity awareness, parallel tree growth, pruning via depth/$\gamma$, early stopping.
+12. **End-to-End Capstone Project: Statistical Arbitrage & Pair Trading with Supervised ML (`Assignment/`)**
+    - Historical daily market prices (2015–2024, 2,264 bars) across 10 liquid US equities and ETFs (`KO`, `PEP`, `XOM`, `CVX`, `JPM`, `BAC`, `BP`, `SHEL`, `GLD`, `SPY`).
+    - Dynamic rolling cointegration, OLS hedge ratio estimation, and standardized spread $Z$-score triggers ($|Z| \ge 2.0$).
+    - 12-dimensional quantitative feature engineering (Hurst exponent, OU half-life, ADF $p$-value, serial autocorrelations).
+    - Triple-barrier meta-labeling with realistic transaction frictions (10 bps round-trip).
+    - Purged Walk-Forward Time-Series Cross-Validation with horizon embargo buffers.
+    - Comprehensive comparative benchmark across the 6 core MSQF curriculum models (Logistic Regression, Naive Bayes, KNN, Decision Tree, Random Forest, SVM RBF) with individual model outputs, decision tree visualizations, and interpretability diagnostics.
+    - Event-driven backtesting contrasting Traditional vs. ML-Filtered statistical arbitrage strategies.

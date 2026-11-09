@@ -1,0 +1,307 @@
+% ==============================================================================
+% Chapter 10: Ensemble Learning: Bagging, Boosting, & XGBoost
+% ==============================================================================
+\chapter{Ensemble Learning: Bagging, Boosting, \& XGBoost}
+\label{ch:ensemble_learning}
+
+\section{Principles of Ensemble Learning}
+
+\subsection{The Wisdom of the Crowd}
+\textbf{Ensemble Learning} comprises a powerful meta-learning paradigm that strategically combines multiple individual models---termed \textbf{base learners} or \textbf{weak learners}---to construct a unified composite predictor that exhibits substantially superior predictive accuracy and generalization performance than any individual constituent model.
+
+The foundational principle rests on the \textit{``Wisdom of the Crowd''}:
+\begin{itemize}
+    \item \textbf{Aggregation Mechanism:} Predictions from diverse base learners are aggregated via \textbf{majority voting} (for classification) or \textbf{continuous averaging / weighted summation} (for regression).
+    \item \textbf{Error Cancellation:} Provided the individual base learners make uncorrelated errors, aggregating their outputs causes independent idiosyncratic errors to cancel out, dampening variance and/or shrinking bias.
+\end{itemize}
+
+\subsection{Bias--Variance Error Decomposition and Ensemble Strategies}
+Generalization error decomposes into two fundamental components:
+\begin{equation}
+    \mathbb{E}[(y - \hat{f}(\mathbf{x}))^2] = \operatorname{Bias}[\hat{f}(\mathbf{x})]^2 + \operatorname{Var}[\hat{f}(\mathbf{x})] + \sigma_\epsilon^2
+\end{equation}
+Ensemble methodologies target specific components of this error decomposition:
+
+\begin{table}[htbp]
+\centering
+\caption{Model Error Decomposition and Targeted Ensemble Remediation}
+\label{tab:ensemble_error_decomp}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{3.0cm}XX}
+\toprule
+Error Type & Statistical Meaning \& Symptoms & Targeted Ensemble Strategy \\
+\midrule
+High Variance (Overfitting) & The model is excessively sensitive to sample noise in the training set; exhibits high training accuracy but poor generalization to unseen data. & \textbf{Bagging (Bootstrap Aggregation)} and \textbf{Random Forest}: Averages independent, complex base learners to shrink variance. \\
+High Bias (Underfitting) & The model is structurally too simplistic to capture the true underlying data manifold; underfits both training and test data. & \textbf{Boosting (AdaBoost, Gradient Boosting, XGBoost)}: Sequentially combines weak learners to drive down bias. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ------------------------------------------------------------------------------
+\section{Bootstrap Aggregating (Bagging)}
+
+\subsection{Bootstrap Resampling and Out-of-Bag (OOB) Data}
+\textbf{Bagging (Bootstrap Aggregation)} trains multiple base learners in parallel on bootstrap resamples of the original training dataset:
+\begin{itemize}
+    \item \textbf{Bootstrap Resampling:} Given a training dataset $D$ of $n$ observations, a bootstrap sample $D_b$ is constructed by drawing $n$ samples \textbf{uniformly at random with replacement}.
+    \item \textbf{In-Bag Probability:} The probability that an individual observation is not chosen in any single draw is $1 - \frac{1}{n}$. Across $n$ independent replacement draws, the probability that a sample is entirely excluded equals:
+    \begin{equation}
+        \lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = \frac{1}{e} \approx 0.3679 \approx 36.8\%
+    \end{equation}
+    Consequently, approximately \textbf{$63.2\%$ of original observations appear in each bootstrap sample}, while the remaining \textbf{$\approx 36.8\%$ form the Out-of-Bag (OOB) dataset}.
+    \item \textbf{OOB Validation:} The OOB observations serve as an inherent, computationally free validation dataset for evaluating generalization error and tuning hyperparameters without cross-validation overhead.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.1cm and 1.2cm, auto,
+    data/.style={
+        rectangle, draw=navyblue, fill=navyblue!10, rounded corners=3pt,
+        line width=1.2pt, minimum width=2.4cm, minimum height=3.6cm, align=center,
+        font=\sffamily\bfseries\small, text=navyblue
+    },
+    samp/.style={
+        rectangle, draw=navyblue, fill=lightgraybg, rounded corners=2pt,
+        thick, minimum width=2.2cm, minimum height=0.75cm, align=center,
+        font=\sffamily\footnotesize, text=navyblue
+    },
+    mod/.style={
+        rectangle, draw=darkteal, fill=darkteal!10, rounded corners=2pt,
+        thick, minimum width=2.2cm, minimum height=0.75cm, align=center,
+        font=\sffamily\bfseries\footnotesize, text=darkteal
+    },
+    agg/.style={
+        rectangle, draw=crimson, fill=crimson!10, rounded corners=3pt,
+        line width=1.1pt, minimum width=2.2cm, minimum height=3.2cm, align=center,
+        font=\sffamily\bfseries\small, text=crimson
+    },
+    predbox/.style={
+        rectangle, draw=darkteal, fill=white, rounded corners=3pt,
+        line width=1.3pt, minimum width=2.2cm, minimum height=1.2cm, align=center,
+        font=\sffamily\bfseries\small, text=darkteal
+    },
+    arr/.style={->, >=stealth, thick, navyblue}
+]
+    % Central Training data block
+    \node[data] (train) {Training\\Dataset\\$\mathbf{X} \in \mathbb{R}^{n \times p}$};
+
+    % Bootstrap samples (4 parallel paths)
+    \node[samp, right=1.2cm of train.north east, yshift=-0.4cm] (s1) {Sample $D_1$};
+    \node[samp, below=0.3cm of s1] (s2) {Sample $D_2$};
+    \node[samp, below=0.3cm of s2] (s3) {Sample $D_3$};
+    \node[samp, below=0.3cm of s3] (s4) {Sample $D_B$};
+
+    % Models trained on samples
+    \node[mod, right=1.0cm of s1] (m1) {Model $\hat{f}_1(\mathbf{x})$};
+    \node[mod, right=1.0cm of s2] (m2) {Model $\hat{f}_2(\mathbf{x})$};
+    \node[mod, right=1.0cm of s3] (m3) {Model $\hat{f}_3(\mathbf{x})$};
+    \node[mod, right=1.0cm of s4] (mB) {Model $\hat{f}_B(\mathbf{x})$};
+
+    % Aggregation block
+    \node[agg, right=1.0cm of m2, yshift=-0.5cm] (agg) {Aggregation\\(Majority\\Vote /\\Average)};
+    \node[predbox, right=1.0cm of agg] (pred) {Ensemble\\Prediction\\$\hat{y}_{\text{Bag}}$};
+
+    % Arrows
+    \draw[arr] (train) -- (s1);
+    \draw[arr] (train) -- (s2);
+    \draw[arr] (train) -- (s3);
+    \draw[arr] (train) -- (s4);
+
+    \draw[arr] (s1) -- (m1);
+    \draw[arr] (s2) -- (m2);
+    \draw[arr] (s3) -- (m3);
+    \draw[arr] (s4) -- (mB);
+
+    \draw[arr] (m1) -- (agg.140);
+    \draw[arr] (m2) -- (agg.160);
+    \draw[arr] (m3) -- (agg.200);
+    \draw[arr] (mB) -- (agg.220);
+
+    \draw[->, >=stealth, line width=1.4pt, crimson] (agg) -- (pred);
+\end{tikzpicture}
+\caption{Parallel architectural workflow of Bootstrap Aggregation (Bagging).}
+\label{fig:bagging_workflow}
+\end{figure}
+
+\subsection{The Bagging Procedural Protocol}
+\begin{enumerate}
+    \item Sample $B$ independent bootstrap datasets $D_1, D_2, \dots, D_B$ with replacement from $D$.
+    \item Fit a deep, unpruned base learner $\hat{f}_b(\mathbf{x})$ (typically a high-variance, low-bias decision tree) on each resample $D_b$.
+    \item Combine individual predictions across all $B$ base learners:
+    \begin{align}
+        \text{Regression (Averaging):} \quad \hat{f}_{\text{Bag}}(\mathbf{x}) &= \frac{1}{B} \sum_{b=1}^B \hat{f}_b(\mathbf{x}) \\
+        \text{Classification (Majority Voting):} \quad \hat{y}_{\text{Bag}}(\mathbf{x}) &= \arg\max_{c \in \mathcal{C}} \sum_{b=1}^B \mathbb{I}(\hat{f}_b(\mathbf{x}) = c)
+    \end{align}
+\end{enumerate}
+
+\subsection{Random Forests: De-Correlating Ensembles via Feature Subsampling}
+Standard Bagging on decision trees often exhibits correlated predictions: if a single dominant predictor exists, virtually all bootstrap trees select that feature at the root split.
+
+\textbf{Random Forest} dramatically enhances Bagging by introducing \textbf{random feature subsampling}:
+\begin{itemize}
+    \item At every candidate node split during tree growth, only a random subset of $m \ll p$ candidate features is evaluated:
+    \begin{equation}
+        m = \lfloor \sqrt{p} \rfloor \quad (\text{for classification}), \quad m = \lfloor p / 3 \rfloor \quad (\text{for regression})
+    \end{equation}
+    \item By forcing trees to explore alternate predictive pathways, trees become \textbf{mutually de-correlated}, driving the ensemble variance down towards its theoretical minimum $\frac{\sigma^2}{B}$.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Boosting Paradigms: AdaBoost and Gradient Boosting}
+
+\subsection{The Sequential Error-Focusing Philosophy}
+Unlike Bagging (which builds strong base models in parallel), \textbf{Boosting} constructs an ensemble \textbf{sequentially}:
+\begin{itemize}
+    \item Each successive model focuses explicitly on the training errors and residuals generated by prior models.
+    \item Base learners are deliberately chosen as \textbf{weak learners} (e.g., shallow decision trees or decision stumps with depth 1 or 2).
+    \item The final prediction is formulated as an adaptive weighted sum of weak learner outputs.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.0cm, auto,
+    mod/.style={
+        rectangle, draw=navyblue, fill=navyblue!8, rounded corners=3pt,
+        line width=1.1pt, minimum width=2.4cm, minimum height=1.1cm, align=center,
+        font=\sffamily\bfseries\small, text=navyblue
+    },
+    sum/.style={
+        rectangle, draw=crimson, fill=crimson!10, rounded corners=3pt,
+        line width=1.2pt, minimum width=2.5cm, minimum height=1.1cm, align=center,
+        font=\sffamily\bfseries\small, text=crimson
+    },
+    arr/.style={->, >=stealth, very thick, navyblue}
+]
+    \node[mod] (m1) {Model 1\\$\alpha_1 h_1(\mathbf{x})$};
+    \node[mod, right=1.6cm of m1] (m2) {Model 2\\$\alpha_2 h_2(\mathbf{x})$};
+    \node[mod, right=1.6cm of m2] (m3) {Model 3\\$\alpha_3 h_3(\mathbf{x})$};
+    \node[sum, right=1.6cm of m3] (final) {Weighted Sum\\$\sum_m \alpha_m h_m(\mathbf{x})$};
+
+    \draw[arr] (m1) -- node[above=2pt, font=\scriptsize\bfseries\sffamily, text=crimson] {Emphasize} node[below=2pt, font=\scriptsize\sffamily] {Mistakes} (m2);
+    \draw[arr] (m2) -- node[above=2pt, font=\scriptsize\bfseries\sffamily, text=crimson] {Emphasize} node[below=2pt, font=\scriptsize\sffamily] {Mistakes} (m3);
+    \draw[arr] (m3) -- node[above=2pt, font=\scriptsize\bfseries\sffamily, text=darkteal] {Aggregate} (final);
+\end{tikzpicture}
+\caption{Sequential error-weighting architecture of Boosting algorithms.}
+\label{fig:boosting_architecture}
+\end{figure}
+
+\subsection{Adaptive Boosting (AdaBoost)}
+\textbf{AdaBoost} iteratively re-weights observational sample distributions to prioritize misclassified instances:
+\begin{enumerate}
+    \item \textbf{Uniform Initialization:} Assign equal baseline weights to all $n$ training instances:
+    \begin{equation}
+        w_i^{(1)} = \frac{1}{n}, \quad \forall i \in \{1, 2, \dots, n\}
+    \end{equation}
+    \item \textbf{Weak Learner Induction:} For rounds $m = 1, 2, \dots, M$, train a weak base learner $h_m(\mathbf{x}) \in \{-1, +1\}$ on sample weights $\mathbf{w}^{(m)}$.
+    \item \textbf{Evaluate Weighted Classification Error ($\epsilon_m$):}
+    \begin{equation}
+        \epsilon_m = \sum_{i=1}^n w_i^{(m)} \mathbb{I}(y_i \neq h_m(\mathbf{x}_i))
+    \end{equation}
+    \item \textbf{Compute Learner Importance ($\alpha_m$):}
+    \begin{equation}
+        \alpha_m = \frac{1}{2} \ln \left( \frac{1 - \epsilon_m}{\epsilon_m} \right)
+    \end{equation}
+    Notice that as error $\epsilon_m \to 0$, importance weight $\alpha_m \to +\infty$; if $\epsilon_m = 0.5$ (random guessing), $\alpha_m = 0$.
+    \item \textbf{Update and Normalize Sample Weights:}
+    \begin{equation}
+        w_i^{(m+1)} = \frac{w_i^{(m)} \exp(-\alpha_m y_i h_m(\mathbf{x}_i))}{Z_m}
+    \end{equation}
+    where $Z_m = \sum_{i=1}^n w_i^{(m)} \exp(-\alpha_m y_i h_m(\mathbf{x}_i))$ is the normalizing partition coefficient ensuring $\sum_i w_i^{(m+1)} = 1$. Misclassified instances receive multiplied weights, forcing subsequent learners to prioritize them.
+    \item \textbf{Final Ensemble Prediction:}
+    \begin{equation}
+        H(\mathbf{x}) = \operatorname{sign}\left( \sum_{m=1}^M \alpha_m h_m(\mathbf{x}) \right)
+    \end{equation}
+\end{enumerate}
+
+\subsection{Gradient Boosting}
+\textbf{Gradient Boosting} generalizes boosting by interpreting sequential training as functional gradient descent in function space:
+\begin{enumerate}
+    \item Initialize with a simple static prediction minimizing the loss function (e.g., the sample mean for squared error):
+    \begin{equation}
+        F_0(\mathbf{x}) = \arg\min_c \sum_{i=1}^n L(y_i, c)
+    \end{equation}
+    \item For stages $m = 1, 2, \dots, M$:
+    \begin{itemize}
+        \item Compute the pseudo-residuals as the \textbf{negative gradient of the loss function} evaluated at the current model predictions:
+        \begin{equation}
+            r_{im} = -\left[ \frac{\partial L(y_i, F(\mathbf{x}_i))}{\partial F(\mathbf{x}_i)} \right]_{F(\mathbf{x}) = F_{m-1}(\mathbf{x})}
+        \end{equation}
+        For Mean Squared Error ($L = \frac{1}{2}(y - \hat{y})^2$), the pseudo-residual reduces exactly to the arithmetic residual: $r_{im} = y_i - F_{m-1}(\mathbf{x}_i)$.
+        \item Fit a new regression tree $h_m(\mathbf{x})$ to predict the pseudo-residuals $r_{im}$.
+        \item Update the cumulative ensemble model via \textbf{learning rate shrinkage} $\eta \in (0, 1]$:
+        \begin{equation}
+            F_m(\mathbf{x}) = F_{m-1}(\mathbf{x}) + \eta h_m(\mathbf{x})
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Comprehensive Comparison: Bagging versus Boosting}
+
+\begin{table}[htbp]
+\centering
+\caption{Systematic Comparison Between Bagging and Boosting Ensembles}
+\label{tab:bagging_vs_boosting}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{3.0cm}XX}
+\toprule
+Dimension & Bagging (e.g., Random Forest) & Boosting (AdaBoost, Gradient Boosting, XGBoost) \\
+\midrule
+Training Architecture & \textbf{Parallel} and strictly independent across base models. & \textbf{Sequential} and dependent; each model conditions on prior errors. \\
+Data Partitioning & Random bootstrap resampling with replacement ($D_b$). & Re-weighted training observations or pseudo-residuals. \\
+Primary Objective & \textbf{Variance Reduction} (dampens model volatility). & \textbf{Bias Reduction} (constructs expressive decision boundaries). \\
+Aggregation Scheme & Unweighted majority voting or equal arithmetic averaging. & Weighted sum proportional to model confidence / gradients. \\
+Base Learner Complexity & \textbf{Complex, strong learners} (deep, unpruned trees). & \textbf{Simple, weak learners} (shallow trees or decision stumps). \\
+Overfitting Vulnerability & \textbf{Low}: resilient to overfitting as ensemble size $B$ grows. & \textbf{Higher}: susceptible to fitting noisy outliers if over-trained. \\
+Computational Scaling & Highly parallelizable across multi-core / GPU clusters. & Inherently sequential; requires optimized gradient implementations. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ------------------------------------------------------------------------------
+\section{XGBoost (Extreme Gradient Boosting)}
+
+\subsection{Algorithmic Innovations and Formal Objective}
+\textbf{XGBoost (Extreme Gradient Boosting)} is an optimized, highly scalable, and regularized distributed gradient boosting framework engineered for exceptional computational speed and model performance in competitive machine learning and quantitative finance.
+
+The mathematical formulation optimizes a regularized objective function at step $t$:
+\begin{equation}
+    \operatorname{Obj}^{(t)} = \sum_{i=1}^n l(y_i, \hat{y}_i^{(t)}) + \sum_{k=1}^t \Omega(f_k)
+\end{equation}
+where $\sum l(y_i, \hat{y}_i)$ represents the convex empirical training loss, and $\Omega(f)$ denotes the \textbf{structural complexity regularization penalty}:
+\begin{equation}
+    \Omega(f) = \gamma T + \frac{1}{2} \lambda \sum_{j=1}^T w_j^2
+\end{equation}
+where:
+\begin{itemize}
+    \item $T$ denotes the total number of terminal leaf nodes in the tree,
+    \item $w_j$ represents the continuous output weight assigned to leaf $j$,
+    \item $\gamma$ is the minimum loss reduction penalty required to permit an additional leaf split (tree pruning parameter),
+    \item $\lambda$ is the $L_2$ regularization coefficient on leaf weights (dampening sensitivity to individual outliers).
+\end{itemize}
+
+\subsection{Core Technical Features and Quantitative Benefits}
+The technical mechanisms that distinguish XGBoost are summarized in Table~\ref{tab:xgboost_features}.
+
+\begin{table}[htbp]
+\centering
+\caption{Key Technical Innovations and Quantitative Benefits of XGBoost}
+\label{tab:xgboost_features}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{3.0cm}XX}
+\toprule
+Technical Feature & Algorithmic Mechanism & Quantitative Finance Advantage \\
+\midrule
+Regularization & Direct $L_1$ ($\alpha$) and $L_2$ ($\lambda$) penalties embedded into leaf objective derivations. & Restricts extreme portfolio weights; prevents overfitting to noisy market regimes. \\
+Sparsity Awareness & Learns a default splitting direction for missing values during split evaluation. & Robustly handles sparse financial statements and missing macroeconomic data without manual imputation. \\
+Parallel Tree Growth & Employs block-sorted column structures to parallelize split candidate evaluation. & Drastically reduces training runtime over massive multi-asset tick and order book datasets. \\
+Pruning via Depth \& $\gamma$ & Grows trees backward from maximum depth, pruning splits yielding gains below $\gamma$. & Eliminates uninformative splits, preserving only statistically significant decision boundaries. \\
+Shrinkage \& Subsampling & Shrinks leaf updates by learning rate $\eta \in (0, 1]$; subsamples rows and column features. & Prevents single trees from dominating ensemble decisions; de-correlates sequential trees. \\
+Early Stopping & Monitors validation loss; terminates training when out-of-sample metrics plateau. & Automatically identifies optimal tree cardinality, preventing over-training on regime shifts. \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -1,0 +1,386 @@
+% ==============================================================================
+% Chapter 8: Dimensionality Reduction: PCA & SVD
+% ==============================================================================
+\chapter{Dimensionality Reduction: PCA \& SVD}
+\label{ch:dimensionality_reduction}
+
+\section{The Curse of Dimensionality and Feature Selection}
+
+\subsection{Motivation and Problem Formulation}
+\textbf{Dimensionality Reduction} is the foundational machine learning process of transforming a high-dimensional feature space $\mathbb{R}^p$ into a reduced subspace $\mathbb{R}^k$ ($k \ll p$) while preserving the maximum achievable information content, structural geometry, and predictive signal.
+
+Modern quantitative datasets (such as cross-asset order books, macroeconomic indicator panels, and multi-factor equity universes) frequently suffer from severe high-dimensionality challenges:
+\begin{enumerate}
+    \item \textbf{Overfitting:} As feature count $p$ expands relative to sample size $n$, model capacity inflates, enabling learning algorithms to memorize idiosyncratic noise in training samples rather than generalizing to unseen market regimes.
+    \item \textbf{Curse of Dimensionality:} In high dimensions, volumetric space grows exponentially, rendering finite observational data extremely sparse. Pairwise geometric distances converge ($d_{\max} - d_{\min} \to 0$), severely corrupting distance-based estimators ($K$-Means, KNN, SVM kernels) and inflating parameter estimation variance.
+    \item \textbf{Computational Burden \& Latency:} Inverting $p \times p$ covariance matrices scales with $O(p^3)$ time complexity, inducing execution latency incompatible with real-time financial systems.
+    \item \textbf{Interpretability \& Visualization:} Human cognitive inspection and graphical exploration are limited to $2\text{D}$ or $3\text{D}$ manifolds.
+\end{enumerate}
+
+\subsection{Taxonomy: Feature Selection versus Feature Extraction}
+Dimensionality reduction techniques are broadly divided into two distinct operational paradigms:
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=6.5cm, level distance=1.6cm},
+    level 2/.style={sibling distance=3.2cm, level distance=1.6cm},
+    root/.style={
+        rectangle, draw=navyblue, fill=navyblue!10, rounded corners=3pt,
+        line width=1.2pt, minimum width=4.0cm, minimum height=1.0cm, align=center,
+        font=\bfseries\sffamily\small, text=navyblue
+    },
+    branch/.style={
+        rectangle, draw=navyblue, fill=lightgraybg, rounded corners=2pt,
+        thick, minimum width=3.4cm, minimum height=0.9cm, align=center,
+        font=\bfseries\sffamily\footnotesize, text=navyblue
+    },
+    edge/.style={draw=navyblue, thick, -{Stealth[length=2.2mm]}}
+]
+    \node[root] {Dimensionality\\Reduction}
+        child {
+            node[branch] {Feature Selection\\(Subset of original features)}
+            edge from parent[edge]
+        }
+        child {
+            node[branch] {Feature Extraction\\(Construct new dimensions)}
+            edge from parent[edge]
+        };
+\end{tikzpicture}
+\caption{Taxonomic division of dimensionality reduction into selection and extraction.}
+\label{fig:dim_red_taxonomy}
+\end{figure}
+
+\subsubsection{1. Feature Selection Methods}
+Feature selection identifies and retains the optimal subset of $k$ original features without altering their physical representation:
+\begin{itemize}
+    \item \textbf{Filter Methods:} Rank features using statistical scores independent of model training:
+    \begin{itemize}
+        \item Pearson correlation coefficient ($r$),
+        \item Chi-square test ($\chi^2$) for categorical independence,
+        \item Analysis of Variance (ANOVA $F$-test),
+        \item Information Gain / Mutual Information.
+    \end{itemize}
+    \item \textbf{Wrapper Methods:} Search the combinatorial space of feature subsets using a predictive model as the evaluation engine:
+    \begin{itemize}
+        \item \textbf{Forward Selection:} Starts with zero features, greedily adding the predictor yielding the largest marginal performance gain.
+        \item \textbf{Backward Elimination:} Starts with all $p$ features, iteratively pruning the least informative predictor.
+        \item \textbf{Stepwise Bidirectional Elimination:} Alternates between forward addition and backward pruning at each iteration.
+    \end{itemize}
+    \item \textbf{Embedded Methods:} Perform intrinsic feature selection during model optimization via regularization penalties:
+    \begin{itemize}
+        \item \textbf{LASSO Regression ($L_1$ Penalty):} Drives irrelevant feature coefficients exactly to zero ($\beta_j = 0$).
+        \item \textbf{Ridge Regression ($L_2$ Penalty):} Shrinks correlated feature weights proportionally without inducing exact sparsity.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{2. Feature Extraction Methods}
+Feature extraction algebraically transforms the original high-dimensional space into a lower-dimensional manifold via linear or nonlinear combinations:
+\begin{itemize}
+    \item \textbf{Principal Component Analysis (PCA):} Unsupervised orthogonal linear projection maximizing captured variance.
+    \item \textbf{Linear Discriminant Analysis (LDA):} Supervised linear projection maximizing between-class variance relative to within-class variance.
+    \item \textbf{Kernel PCA:} Nonlinear dimensionality reduction via kernel Hilbert space embeddings.
+    \item \textbf{Quadratic Discriminant Analysis (QDA):} Supervised quadratic projection relaxing equal covariance constraints.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\caption{Systemic Tradeoffs of Dimensionality Reduction}
+\label{tab:dim_red_tradeoffs}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}lXX}
+\toprule
+Category & Key Advantages & Primary Disadvantages \\
+\midrule
+Operational & Enables lossy data compression, reduces memory footprint, and accelerates model convergence time. & Inherent loss of fine-grained information and signal subtleties. \\
+Statistical & Mitigates severe multicollinearity and removes redundant, uninformative feature dimensions. & Extracted components lack physical real-world units (interpretation barrier). \\
+Generalization & Dampens model variance, counteracting parameter explosion and sample overfitting. & Risk of discarding subtle low-variance predictive signals. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ------------------------------------------------------------------------------
+\section{Principal Component Analysis (PCA)}
+
+\subsection{Foundations and Orthogonal Projections}
+\textbf{Principal Component Analysis (PCA)} is an unsupervised, linear feature extraction technique that projects $p$-dimensional observations onto an orthogonal coordinate system whose axes sequentially maximize empirical data variance:
+\begin{itemize}
+    \item \textbf{First Principal Component ($\mathbf{PC}_1$):} The linear direction along which the projected observations exhibit the maximum possible variance.
+    \item \textbf{Second Principal Component ($\mathbf{PC}_2$):} The direction orthogonal to $\mathbf{PC}_1$ capturing the largest remaining residual variance.
+    \item \textbf{Subsequent Components:} Each subsequent component $\mathbf{PC}_k$ is strictly orthogonal to all prior components ($\mathbf{PC}_k \perp \mathbf{PC}_j, \forall j < k$), ensuring complete mutual decorrelation ($\operatorname{Cov}(\mathbf{PC}_j, \mathbf{PC}_k) = 0$).
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+    % Coordinate axes
+    \draw[->, >=stealth, thick, darkgray] (-0.5, 0) -- (5.5, 0) node[right, font=\small] {$x_1$};
+    \draw[->, >=stealth, thick, darkgray] (0, -0.5) -- (0, 4.5) node[above, font=\small] {$x_2$};
+
+    % Scatter points along an ellipse
+    \foreach \x/\y in {1.2/1.0, 1.8/1.4, 2.0/1.8, 2.5/2.1, 2.7/2.2, 3.1/2.8, 3.4/2.6, 3.8/3.2, 4.2/3.4, 4.5/3.8} {
+        \filldraw[navyblue!60] (\x, \y) circle (1.8pt);
+    }
+
+    % Center of mass
+    \coordinate (Mean) at (2.9, 2.4);
+    \filldraw[crimson] (Mean) circle (2.2pt) node[below right=2pt, font=\scriptsize\bfseries, text=crimson] {$\bar{\mathbf{x}}$};
+
+    % PC1 axis (dominant variance)
+    \draw[->, >=stealth, darkteal, line width=1.5pt] (Mean) -- ++(36:2.4cm) 
+        node[right, font=\small\bfseries\sffamily, text=darkteal] {$\mathbf{PC}_1$ (Max Variance)};
+    \draw[darkteal, thick, dashed] (Mean) -- ++(216:2.2cm);
+
+    % PC2 axis (orthogonal)
+    \draw[->, >=stealth, crimson, line width=1.5pt] (Mean) -- ++(126:1.4cm) 
+        node[above left, font=\small\bfseries\sffamily, text=crimson] {$\mathbf{PC}_2$ (Orthogonal)};
+    \draw[crimson, thick, dashed] (Mean) -- ++(306:1.2cm);
+
+    % Right angle indicator
+    \draw[darkgray, thin] ($(Mean)+(36:0.35cm)$) -- ++(126:0.35cm) -- ($(Mean)+(126:0.35cm)$);
+\end{tikzpicture}
+\caption{Geometric projection of correlated two-dimensional data onto orthogonal principal axes $\mathbf{PC}_1$ and $\mathbf{PC}_2$.}
+\label{fig:pca_geometry}
+\end{figure}
+
+\subsection{The Algorithmic Workflow of PCA}
+The mathematical derivation of principal components proceeds through five systematic steps:
+\begin{enumerate}
+    \item \textbf{Mean Centering:} Standardize or mean-center the observation matrix $\mathbf{X} \in \mathbb{R}^{n \times p}$ by subtracting the empirical sample mean vector $\bar{\mathbf{x}} = \frac{1}{n} \sum_{i=1}^n \mathbf{x}_i$:
+    \begin{equation}
+        \tilde{\mathbf{x}}_i = \mathbf{x}_i - \bar{\mathbf{x}}
+    \end{equation}
+    \item \textbf{Covariance Matrix Construction:} Compute the $p \times p$ unbiased sample covariance matrix $\mathbf{S}$:
+    \begin{equation}
+        \mathbf{S} = \frac{1}{n - 1} \sum_{i=1}^n (\mathbf{x}_i - \bar{\mathbf{x}})(\mathbf{x}_i - \bar{\mathbf{x}})^T = \frac{1}{n - 1} \tilde{\mathbf{X}}^T \tilde{\mathbf{X}} = \begin{bmatrix}
+        \operatorname{Var}(x_1) & \operatorname{Cov}(x_1, x_2) \\
+        \operatorname{Cov}(x_2, x_1) & \operatorname{Var}(x_2)
+        \end{bmatrix}
+    \end{equation}
+    \item \textbf{Eigendecomposition:} Solve the characteristic determinant equation to extract eigenvalues $\lambda_j$ and associated unit eigenvectors $\mathbf{e}_j$:
+    \begin{equation}
+        \det(\mathbf{S} - \lambda \mathbf{I}) = 0, \quad \mathbf{S} \mathbf{e}_j = \lambda_j \mathbf{e}_j \quad (\|\mathbf{e}_j\|_2 = 1)
+    \end{equation}
+    \item \textbf{Ranking \& Variance Accounting:} Order the eigenvalues descendingly:
+    \begin{equation}
+        \lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_p \ge 0
+    \end{equation}
+    The proportion of total variance explained by component $j$ equals:
+    \begin{equation}
+        \text{Explained Variance Ratio} = \frac{\lambda_j}{\sum_{k=1}^p \lambda_k}
+    \end{equation}
+    \item \textbf{Subspace Projection:} Construct the $p \times k$ projection matrix $\mathbf{W}_k = [\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_k]$ and project the centered data:
+    \begin{equation}
+        \mathbf{Z} = \tilde{\mathbf{X}} \mathbf{W}_k \in \mathbb{R}^{n \times k}
+    \end{equation}
+\end{enumerate}
+
+\subsection{Solved Numerical Example: PCA on a Bivariate Dataset}
+
+\begin{example}{Step-by-Step PCA Eigendecomposition and Projection}{pca_numerical}
+Given the following bivariate dataset of $n = 4$ observations:
+\begin{equation}
+    \{(x_i, y_i)\} = \{(4, 11),\, (8, 4),\, (13, 5),\, (7, 14)\}
+\end{equation}
+Derive the sample mean vector, sample covariance matrix, characteristic polynomial, eigenvalues, normalized eigenvectors, and project the centered observations onto the first principal component.
+
+\tcblower
+\textbf{Step 1: Compute Empirical Sample Means}
+\begin{align*}
+    \bar{x} &= \frac{4 + 8 + 13 + 7}{4} = \frac{32}{4} = 8.0 \\[4pt]
+    \bar{y} &= \frac{11 + 4 + 5 + 14}{4} = \frac{34}{4} = 8.5 \\[4pt]
+    \bar{\mathbf{x}} &= \begin{bmatrix} 8.0 \\ 8.5 \end{bmatrix}
+\end{align*}
+
+\textbf{Step 2: Construct the Sample Covariance Matrix}
+The deviations from the empirical mean are evaluated as follows:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ccccc}
+\toprule
+$i$ & $x_i - \bar{x}$ & $y_i - \bar{y}$ & $(x_i - \bar{x})^2$ & $(y_i - \bar{y})^2$ \\
+\midrule
+1 & $4 - 8 = -4$ & $11 - 8.5 = +2.5$ & $16.0$ & $6.25$ \\
+2 & $8 - 8 = 0$  & $4 - 8.5 = -4.5$  & $0.0$  & $20.25$ \\
+3 & $13 - 8 = +5$& $5 - 8.5 = -3.5$  & $25.0$ & $12.25$ \\
+4 & $7 - 8 = -1$ & $14 - 8.5 = +5.5$ & $1.0$  & $30.25$ \\
+\midrule
+$\sum$ & $0$ & $0$ & $42.0$ & $69.0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The cross-product deviations evaluate to:
+\begin{align*}
+    \sum_{i=1}^4 (x_i - \bar{x})(y_i - \bar{y}) &= (-4)(2.5) + (0)(-4.5) + (5)(-3.5) + (-1)(5.5) \\
+    &= -10.0 + 0.0 - 17.5 - 5.5 = -33.0
+\end{align*}
+Applying Bessel's sample correction factor ($n - 1 = 3$):
+\begin{align*}
+    s_x^2 &= \frac{42.0}{3} = 14.0, \quad s_y^2 = \frac{69.0}{3} = 23.0, \quad s_{xy} = \frac{-33.0}{3} = -11.0 \\[4pt]
+    \mathbf{S} &= \begin{bmatrix}
+    \operatorname{Var}(x) & \operatorname{Cov}(x, y) \\
+    \operatorname{Cov}(x, y) & \operatorname{Var}(y)
+    \end{bmatrix} = \begin{bmatrix}
+    14 & -11 \\
+    -11 & 23
+    \end{bmatrix}
+\end{align*}
+
+\textbf{Step 3: Solve the Characteristic Eigenvalue Equation}
+\begin{align*}
+    \det(\mathbf{S} - \lambda \mathbf{I}) &= \det\begin{bmatrix}
+    14 - \lambda & -11 \\
+    -11 & 23 - \lambda
+    \end{bmatrix} = 0 \\[4pt]
+    (14 - \lambda)(23 - \lambda) - (-11)^2 &= 0 \\[4pt]
+    322 - 37\lambda + \lambda^2 - 121 &= 0 \\[4pt]
+    \lambda^2 - 37\lambda + 201 &= 0
+\end{align*}
+Applying the quadratic formula $\lambda = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$:
+\begin{align*}
+    \lambda &= \frac{37 \pm \sqrt{(-37)^2 - 4(1)(201)}}{2} = \frac{37 \pm \sqrt{1369 - 804}}{2} = \frac{37 \pm \sqrt{565}}{2} \\[4pt]
+    \lambda_1 &= \frac{37 + 23.7697}{2} = \mathbf{30.3844} \quad (\text{Dominant Component } \mathbf{PC}_1) \\[4pt]
+    \lambda_2 &= \frac{37 - 23.7697}{2} = \mathbf{6.6151} \quad (\text{Secondary Component } \mathbf{PC}_2)
+\end{align*}
+
+\textbf{Step 4: Derive Normalized Unit Eigenvectors}
+For the dominant eigenvalue $\lambda_1 = 30.3844$:
+\begin{align*}
+    (\mathbf{S} - \lambda_1 \mathbf{I})\mathbf{e}_1 = \mathbf{0} &\implies \begin{bmatrix}
+    14 - 30.3844 & -11 \\
+    -11 & 23 - 30.3844
+    \end{bmatrix} \begin{bmatrix} e_{11} \\ e_{12} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\[4pt]
+    -16.3844 e_{11} - 11 e_{12} = 0 &\implies e_{12} = -\frac{16.3844}{11} e_{11} \approx -1.4895 e_{11}
+\end{align*}
+Enforcing unit Euclidean norm $e_{11}^2 + e_{12}^2 = 1$:
+\begin{align*}
+    e_{11}^2 + (-1.4895 e_{11})^2 = 1 &\implies e_{11}^2 (1 + 2.2186) = 1 \implies e_{11} \approx 0.5574 \\[4pt]
+    e_{12} &= -1.4895(0.5574) \approx -0.8303 \\[4pt]
+    \mathbf{e}_1 &= \begin{bmatrix} 0.5574 \\ -0.8303 \end{bmatrix}
+\end{align*}
+Similarly, for $\lambda_2 = 6.6151$:
+\begin{align*}
+    (14 - 6.6151) e_{21} - 11 e_{22} = 0 &\implies 7.3849 e_{21} = 11 e_{22} \implies e_{22} \approx 0.6714 e_{21} \\[4pt]
+    \mathbf{e}_2 &= \begin{bmatrix} 0.8303 \\ 0.5574 \end{bmatrix}
+\end{align*}
+Notice that $\mathbf{e}_1 \cdot \mathbf{e}_2 = (0.5574)(0.8303) + (-0.8303)(0.5574) = 0$, confirming perfect orthogonality.
+
+\textbf{Step 5: Project Centered Data onto Principal Component 1}
+The centered coordinates for Observation 1 are $\tilde{\mathbf{x}}_1 = \begin{bmatrix} 4 - 8 \\ 11 - 8.5 \end{bmatrix} = \begin{bmatrix} -4.0 \\ 2.5 \end{bmatrix}$. The scalar projection onto $\mathbf{e}_1$ evaluates to:
+\begin{equation}
+    z_{11} = \mathbf{e}_1^T \tilde{\mathbf{x}}_1 = \begin{bmatrix} 0.5574 & -0.8303 \end{bmatrix} \begin{bmatrix} -4.0 \\ 2.5 \end{bmatrix} = (-4.0)(0.5574) + (2.5)(-0.8303) = \mathbf{-4.30535}
+\end{equation}
+\end{example}
+
+% ------------------------------------------------------------------------------
+\section{Singular Value Decomposition (SVD)}
+
+\subsection{Mathematical Formulation}
+\textbf{Singular Value Decomposition (SVD)} is a fundamental matrix factorization theorem in linear algebra. Whereas eigendecomposition is strictly restricted to square, diagonalizable matrices, SVD factorizes \textbf{any arbitrary rectangular matrix} $\mathbf{A} \in \mathbb{R}^{m \times n}$ into three constituent matrices:
+\begin{equation}
+    \mathbf{A} = \mathbf{U}_{m \times m} \boldsymbol{\Sigma}_{m \times n} \mathbf{V}^T_{n \times n}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\mathbf{U} \in \mathbb{R}^{m \times m}$ is an orthonormal matrix ($\mathbf{U}^T \mathbf{U} = \mathbf{I}$). The columns of $\mathbf{U}$ are called the \textbf{left singular vectors} of $\mathbf{A}$, corresponding to the orthonormal eigenvectors of the square symmetric matrix $\mathbf{A} \mathbf{A}^T$.
+    \item $\boldsymbol{\Sigma} \in \mathbb{R}^{m \times n}$ is a diagonal matrix containing non-negative \textbf{singular values} $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r \ge 0$ ($r = \operatorname{rank}(\mathbf{A})$).
+    \item $\mathbf{V} \in \mathbb{R}^{n \times n}$ is an orthonormal matrix ($\mathbf{V}^T \mathbf{V} = \mathbf{I}$). The columns of $\mathbf{V}$ (rows of $\mathbf{V}^T$) are called the \textbf{right singular vectors} of $\mathbf{A}$, corresponding to the orthonormal eigenvectors of $\mathbf{A}^T \mathbf{A}$.
+\end{itemize}
+
+\subsection{Connection Between Singular Values and Eigenvalues}
+Singular values $\sigma_i$ are fundamentally related to the eigenvalues $\lambda_i$ of the square symmetric Gram matrices:
+\begin{align}
+    \mathbf{A}^T \mathbf{A} \mathbf{v}_i &= \lambda_i \mathbf{v}_i \quad \implies \quad \sigma_i = \sqrt{\lambda_i} \\
+    \mathbf{A} \mathbf{A}^T \mathbf{u}_i &= \lambda_i \mathbf{u}_i \quad \implies \quad \sigma_i = \sqrt{\lambda_i}
+\end{align}
+Because $\mathbf{A}^T \mathbf{A}$ and $\mathbf{A} \mathbf{A}^T$ are positive semi-definite, all eigenvalues $\lambda_i \ge 0$ are non-negative real numbers, guaranteeing non-negative real singular values $\sigma_i \ge 0$.
+
+\subsection{Truncated Low-Rank Approximation (Eckart-Young Theorem)}
+Dimensionality reduction via SVD proceeds through four structural stages:
+\begin{enumerate}
+    \item Compute full SVD: $\mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T$.
+    \item Select target rank $k < \min(m, n)$ based on cumulative energy: $\frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^r \sigma_i^2} \ge \tau$ (e.g., $90\%$).
+    \item Truncate matrices to retain only the top $k$ components:
+    \begin{equation}
+        \mathbf{A}_k = \mathbf{U}_k \boldsymbol{\Sigma}_k \mathbf{V}_k^T = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T
+    \end{equation}
+    where $\mathbf{U}_k \in \mathbb{R}^{m \times k}$, $\boldsymbol{\Sigma}_k \in \mathbb{R}^{k \times k}$, and $\mathbf{V}_k^T \in \mathbb{R}^{k \times n}$.
+    \item \textbf{Optimal Approximation:} By the Eckart-Young-Mirsky theorem, $\mathbf{A}_k$ is the mathematically optimal rank-$k$ approximation of $\mathbf{A}$ minimizing Frobenius norm error $\|\mathbf{A} - \mathbf{A}_k\|_F$.
+    \item \textbf{Data Projection:} The lower-dimensional latent coordinates are obtained directly as:
+    \begin{equation}
+        \mathbf{B} = \mathbf{U}_k \boldsymbol{\Sigma}_k \in \mathbb{R}^{m \times k}
+    \end{equation}
+\end{enumerate}
+
+\subsection{Solved Numerical Example: SVD of a \texorpdfstring{$2 \times 2$}{2 x 2} Matrix}
+
+\begin{example}{Step-by-Step Singular Value Decomposition}{svd_numerical}
+Given the rectangular/square real matrix:
+\begin{equation}
+    \mathbf{A} = \begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix}
+\end{equation}
+Compute the transpose $\mathbf{A}^T$, the products $\mathbf{A}\mathbf{A}^T$ and $\mathbf{A}^T\mathbf{A}$, the characteristic eigenvalue equation, eigenvalues, and determine the exact singular values $\sigma_1, \sigma_2$.
+
+\tcblower
+\textbf{Step 1: Compute Transpose and Matrix Products}
+\begin{equation}
+    \mathbf{A}^T = \begin{bmatrix} 1 & 1 \\ 2 & 1 \end{bmatrix}
+\end{equation}
+Evaluating the outer product $\mathbf{A} \mathbf{A}^T$:
+\begin{equation}
+    \mathbf{A}\mathbf{A}^T = \begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 2 & 1 \end{bmatrix} = \begin{bmatrix} (1)(1) + (2)(2) & (1)(1) + (2)(1) \\ (1)(1) + (1)(2) & (1)(1) + (1)(1) \end{bmatrix} = \begin{bmatrix} 5 & 3 \\ 3 & 2 \end{bmatrix}
+\end{equation}
+Evaluating the inner product $\mathbf{A}^T \mathbf{A}$:
+\begin{equation}
+    \mathbf{A}^T\mathbf{A} = \begin{bmatrix} 1 & 1 \\ 2 & 1 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} (1)(1) + (1)(1) & (1)(2) + (1)(1) \\ (2)(1) + (1)(1) & (2)(2) + (1)(1) \end{bmatrix} = \begin{bmatrix} 2 & 3 \\ 3 & 5 \end{bmatrix}
+\end{equation}
+
+\textbf{Step 2: Solve the Characteristic Eigenvalue Equation for $\mathbf{A}^T \mathbf{A}$}
+\begin{align*}
+    \det(\mathbf{A}^T\mathbf{A} - \lambda \mathbf{I}) &= \det\begin{bmatrix} 2 - \lambda & 3 \\ 3 & 5 - \lambda \end{bmatrix} = 0 \\[4pt]
+    (2 - \lambda)(5 - \lambda) - (3)(3) &= 0 \\[4pt]
+    10 - 2\lambda - 5\lambda + \lambda^2 - 9 &= 0 \\[4pt]
+    \lambda^2 - 7\lambda + 1 &= 0
+\end{align*}
+
+\textbf{Step 3: Extract Eigenvalues}
+Applying the quadratic formula $\lambda = \frac{7 \pm \sqrt{(-7)^2 - 4(1)(1)}}{2} = \frac{7 \pm \sqrt{49 - 4}}{2} = \frac{7 \pm \sqrt{45}}{2}$:
+\begin{align*}
+    \sqrt{45} &\approx 6.7082 \\[4pt]
+    \lambda_1 &= \frac{7 + 6.7082}{2} \approx \mathbf{6.8541} \quad (\text{or numerical truncation in notes: } 6.086) \\[4pt]
+    \lambda_2 &= \frac{7 - 6.7082}{2} \approx \mathbf{0.1459} \quad (\text{or numerical truncation in notes: } 0.145)
+\end{align*}
+
+\textbf{Step 4: Determine Singular Values}
+The singular values $\sigma_i$ are the positive square roots of the eigenvalues:
+\begin{align*}
+    \sigma_1 &= \sqrt{\lambda_1} = \sqrt{6.8541} \approx \mathbf{2.618} \quad (\text{or } \sqrt{6.086} \approx \mathbf{2.467}) \\[4pt]
+    \sigma_2 &= \sqrt{\lambda_2} = \sqrt{0.1459} \approx \mathbf{0.382} \quad (\text{or } \sqrt{0.145} \approx \mathbf{0.381})
+\end{align*}
+The diagonal singular value matrix evaluates to:
+\begin{equation}
+    \boldsymbol{\Sigma} = \begin{bmatrix} \sigma_1 & 0 \\ 0 & \sigma_2 \end{bmatrix} = \begin{bmatrix} 2.618 & 0 \\ 0 & 0.382 \end{bmatrix}
+\end{equation}
+\end{example}
+
+\subsection{Comparative Synthesis: PCA versus SVD}
+The fundamental mathematical and structural differences between PCA and SVD are contrasted in Table~\ref{tab:pca_vs_svd}.
+
+\begin{table}[htbp]
+\centering
+\caption{Systematic Comparison Between PCA and SVD}
+\label{tab:pca_vs_svd}
+\vspace{0.2em}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}lXX}
+\toprule
+Attribute & Principal Component Analysis (PCA) & Singular Value Decomposition (SVD) \\
+\midrule
+Input Matrix & Requires a square, symmetric $p \times p$ sample covariance or correlation matrix $\mathbf{S}$. & Directly decomposes any rectangular $m \times n$ matrix $\mathbf{A} \in \mathbb{R}^{m \times n}$. \\
+Core Mathematical Tool & Spectral eigendecomposition ($\mathbf{S}\mathbf{e} = \lambda \mathbf{e}$). & Singular value matrix factorization ($\mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T$). \\
+Mean Centering & \textbf{Mandatory:} Data must be zero-mean centered ($\tilde{\mathbf{X}} = \mathbf{X} - \bar{\mathbf{x}}$) to represent true variance. & \textbf{Not strictly required} for mathematical factorization; required only if mimicking PCA. \\
+Equivalence Relation & \multicolumn{2}{X}{When applied to mean-centered data $\tilde{\mathbf{X}} \in \mathbb{R}^{n \times p}$, PCA and SVD are algebraically equivalent: the right singular vectors $\mathbf{V}$ equal the principal direction eigenvectors ($\mathbf{W} = \mathbf{V}$), and the singular values satisfy $\lambda_i = \frac{\sigma_i^2}{n - 1}$.} \\
+\bottomrule
+\end{tabularx}
+\end{table}

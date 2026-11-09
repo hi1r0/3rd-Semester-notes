@@ -399,3 +399,230 @@
 \end{itemize}
 \end{formulabox}
 
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 7: Unsupervised Learning and Cluster Analysis}
+\addcontentsline{toc}{section}{Chapter 7: Unsupervised Learning and Cluster Analysis}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Metric Proximity and Continuous Distance Norms}]
+\begin{align*}
+    \text{Euclidean ($L_2$):} \quad & d(\mathbf{p}, \mathbf{q}) = \sqrt{\sum_{k=1}^p (p_k - q_k)^2} \\[3pt]
+    \text{Manhattan ($L_1$):} \quad & d(\mathbf{p}, \mathbf{q}) = \sum_{k=1}^p |p_k - q_k| \\[3pt]
+    \text{Minkowski ($L_r$):} \quad & d_r(\mathbf{p}, \mathbf{q}) = \left(\sum_{k=1}^p |p_k - q_k|^r \right)^{1/r} \\[3pt]
+    \text{Mahalanobis:} \quad & d_M(\mathbf{p}, \mathbf{q}) = \sqrt{(\mathbf{p} - \mathbf{q})^T \boldsymbol{\Sigma}^{-1} (\mathbf{p} - \mathbf{q})}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{p}, \mathbf{q} \in \mathbb{R}^p$ = Observation vectors in $p$-dimensional feature space
+    \item $p_k, q_k$ = Coordinate values of feature $k$ for points $\mathbf{p}$ and $\mathbf{q}$
+    \item $r \ge 1$ = Minkowski metric order ($r=1$ yields Manhattan, $r=2$ yields Euclidean)
+    \item $\boldsymbol{\Sigma} \in \mathbb{R}^{p \times p}$ = Sample covariance matrix accounting for scale and correlation
+    \item $d(\mathbf{p}, \mathbf{q})$ = Evaluated distance metric between observations
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Binary Co-occurrence Proximity Coefficients}]
+\begin{align*}
+    \text{Simple Matching Coefficient (SMC):} \quad & \text{SMC} = \frac{a + d}{a + b + c + d} \\[4pt]
+    \text{Jaccard Similarity Coefficient ($J$):} \quad & J = \frac{a}{a + b + c}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $a$ = Count of attributes present in both objects ($\{1, 1\}$ matches)
+    \item $b$ = Count of attributes present in object $i$ but absent in object $j$ ($\{1, 0\}$ mismatches)
+    \item $c$ = Count of attributes absent in object $i$ but present in object $j$ ($\{0, 1\}$ mismatches)
+    \item $d$ = Count of attributes absent in both objects ($\{0, 0\}$ matches)
+    \item $\text{SMC}, J \in [0, 1]$ = Normalized binary proximity metrics
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Inter-Cluster Linkage Criteria and Ward's Objective}]
+\begin{align*}
+    \text{Single Linkage:} \quad & d(A, B) = \min_{\mathbf{x} \in A, \mathbf{y} \in B} d(\mathbf{x}, \mathbf{y}) \\[2pt]
+    \text{Complete Linkage:} \quad & d(A, B) = \max_{\mathbf{x} \in A, \mathbf{y} \in B} d(\mathbf{x}, \mathbf{y}) \\[2pt]
+    \text{Average Linkage:} \quad & d(A, B) = \frac{1}{|A||B|} \sum_{\mathbf{x} \in A} \sum_{\mathbf{y} \in B} d(\mathbf{x}, \mathbf{y}) \\[2pt]
+    \text{Centroid Linkage:} \quad & d(A, B) = \|\boldsymbol{\mu}_A - \boldsymbol{\mu}_B\|_2 \\[2pt]
+    \text{Ward's Increase in Variance:} \quad & \Delta \text{ESS} = \frac{|A||B|}{|A| + |B|} \|\boldsymbol{\mu}_A - \boldsymbol{\mu}_B\|^2
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $A, B$ = Candidate clusters evaluated for agglomerative merging
+    \item $|A|, |B|$ = Cardinality (number of constituent sample points) of clusters $A$ and $B$
+    \item $\boldsymbol{\mu}_A, \boldsymbol{\mu}_B$ = Empirical centroid mean vectors of clusters $A$ and $B$
+    \item $\Delta \text{ESS}$ = Net increase in total within-cluster sum of squared errors
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{4. $K$-Means Centroid Update and Convergence Criteria}]
+\begin{align*}
+    \boldsymbol{\mu}_j &= \frac{1}{n_j} \sum_{\mathbf{x}_i \in C_j} \mathbf{x}_i, \quad \text{WCSS} = \sum_{j=1}^K \sum_{\mathbf{x}_i \in C_j} \|\mathbf{x}_i - \boldsymbol{\mu}_j\|^2
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $C_j$ = Set of observational instances assigned to cluster $j$
+    \item $n_j = |C_j|$ = Total number of observations belonging to cluster $C_j$
+    \item $\mathbf{x}_i \in \mathbb{R}^p$ = Feature coordinate vector of observation $i$
+    \item $\boldsymbol{\mu}_j \in \mathbb{R}^p$ = Updated empirical centroid of cluster $j$
+    \item $\text{WCSS}$ = Within-Cluster Sum of Squares objective function minimized by $K$-Means
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 8: Dimensionality Reduction: PCA and SVD}
+\addcontentsline{toc}{section}{Chapter 8: Dimensionality Reduction: PCA and SVD}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Sample Covariance Matrix and Eigendecomposition}]
+\begin{align*}
+    \mathbf{S} &= \frac{1}{n - 1} \sum_{i=1}^n (\mathbf{x}_i - \bar{\mathbf{x}})(\mathbf{x}_i - \bar{\mathbf{x}})^T = \frac{1}{n - 1} \tilde{\mathbf{X}}^T \tilde{\mathbf{X}} \\[3pt]
+    \det(\mathbf{S} - \lambda \mathbf{I}) &= 0 \quad \implies \quad \mathbf{S} \mathbf{e}_j = \lambda_j \mathbf{e}_j \quad (\|\mathbf{e}_j\|_2 = 1)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{x}_i \in \mathbb{R}^p$ = Observation vector $i$ across $p$ original dimensions
+    \item $\bar{\mathbf{x}} = \frac{1}{n}\sum_{i=1}^n \mathbf{x}_i$ = Empirical sample mean vector
+    \item $\tilde{\mathbf{X}} \in \mathbb{R}^{n \times p}$ = Mean-centered observation matrix ($\tilde{\mathbf{x}}_i = \mathbf{x}_i - \bar{\mathbf{x}}$)
+    \item $\mathbf{S} \in \mathbb{R}^{p \times p}$ = Unbiased sample covariance matrix
+    \item $\lambda_j$ = Eigenvalue quantifying variance along principal axis $j$
+    \item $\mathbf{e}_j \in \mathbb{R}^p$ = Unit-length eigenvector defining principal direction $j$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. PCA Subspace Projection and Explained Variance}]
+\begin{align*}
+    \mathbf{Z} &= \tilde{\mathbf{X}} \mathbf{W}_k, \quad \text{EVR}_j = \frac{\lambda_j}{\sum_{m=1}^p \lambda_m}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\tilde{\mathbf{X}} \in \mathbb{R}^{n \times p}$ = Mean-centered data matrix
+    \item $\mathbf{W}_k = [\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_k] \in \mathbb{R}^{p \times k}$ = Orthogonal projection matrix containing top $k$ eigenvectors
+    \item $\mathbf{Z} \in \mathbb{R}^{n \times k}$ = Transformed lower-dimensional latent representation ($k \ll p$)
+    \item $\text{EVR}_j$ = Explained Variance Ratio captured by principal component $j$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Singular Value Decomposition (SVD) and Low-Rank Form}]
+\begin{align*}
+    \mathbf{A} &= \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T = \sum_{i=1}^r \sigma_i \mathbf{u}_i \mathbf{v}_i^T, \quad \sigma_i = \sqrt{\lambda_i(\mathbf{A}^T\mathbf{A})} \\[3pt]
+    \mathbf{A}_k &= \mathbf{U}_k \boldsymbol{\Sigma}_k \mathbf{V}_k^T = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\mathbf{A} \in \mathbb{R}^{m \times n}$ = Arbitrary rectangular real input matrix
+    \item $\mathbf{U} \in \mathbb{R}^{m \times m}$ = Orthonormal matrix of left singular vectors (eigenvectors of $\mathbf{A}\mathbf{A}^T$)
+    \item $\boldsymbol{\Sigma} \in \mathbb{R}^{m \times n}$ = Diagonal matrix of sorted non-negative singular values $\sigma_1 \ge \sigma_2 \ge \dots \ge 0$
+    \item $\mathbf{V} \in \mathbb{R}^{n \times n}$ = Orthonormal matrix of right singular vectors (eigenvectors of $\mathbf{A}^T\mathbf{A}$)
+    \item $\mathbf{A}_k$ = Optimal rank-$k$ truncated matrix approximation minimizing Frobenius error
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 9: Reinforcement Learning and Financial Trading}
+\addcontentsline{toc}{section}{Chapter 9: Reinforcement Learning and Financial Trading}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Infinite-Horizon Discounted Return and RRL Trading Policy}]
+\begin{align*}
+    G_t &= \sum_{k=0}^\infty \gamma^k r_{t+k+1}, \quad F_t = \tanh(\mathbf{w}^T \mathbf{x}_t + u F_{t-1} + b)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $G_t$ = Cumulative discounted return accumulated following decision step $t$
+    \item $\gamma \in [0, 1]$ = Temporal discount factor ($\gamma \to 0$: myopic; $\gamma \to 1$: far-sighted)
+    \item $r_{t+k+1}$ = Scalar environmental reward emitted at time step $t+k+1$
+    \item $F_t \in [-1, 1]$ = Continuous trading position ($-1$: Short, $0$: Neutral, $+1$: Long)
+    \item $\mathbf{x}_t \in \mathbb{R}^p$ = Vector of current market features and historical price returns
+    \item $F_{t-1}$ = Prior trading position fed back through recurrent memory parameter $u$
+    \item $\mathbf{w}, u, b$ = Learnable policy parameters optimized via gradient ascent
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. Portfolio Single-Period Net Return and Sharpe Ratio Utility}]
+\begin{align*}
+    R_t &= F_{t-1} r_t - \delta |F_t - F_{t-1}|, \quad S_T = \frac{A}{\sqrt{B - A^2}}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $R_t$ = Net realized single-period financial return accounting for trading frictions
+    \item $r_t = \frac{P_t - P_{t-1}}{P_{t-1}}$ = Fractional raw market return of the underlying asset
+    \item $\delta \ge 0$ = Transaction cost coefficient (brokerage fee and bid-ask spread friction)
+    \item $|F_t - F_{t-1}|$ = Turnover volume indicating magnitude of portfolio position adjustment
+    \item $A = \frac{1}{T}\sum_{t=1}^T R_t, B = \frac{1}{T}\sum_{t=1}^T R_t^2$ = First and second moments of returns
+    \item $S_T$ = Empirical Sharpe ratio utility maximized via policy gradient ascent
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. $\epsilon$-Greedy Policy and Tabular $Q$-Learning Bellman Update}]
+\begin{align*}
+    a_t &= \begin{cases}
+    \arg\max_{a} Q(s_t, a), & \text{prob } 1 - \epsilon \\[2pt]
+    \text{random } a \in \mathcal{A}, & \text{prob } \epsilon
+    \end{cases} \\[4pt]
+    Q(s, a) &\leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\epsilon \in [0, 1]$ = Exploration probability balancing exploratory vs. greedy actions
+    \item $Q(s, a)$ = Estimated expected return of executing action $a$ in environmental state $s$
+    \item $\alpha \in (0, 1]$ = Step-size learning rate parameter
+    \item $r + \gamma \max_{a'} Q(s', a')$ = Temporal-difference (TD) Bellman target
+    \item $\delta_t = r + \gamma \max_{a'} Q(s', a') - Q(s, a)$ = Temporal-difference prediction error
+\end{itemize}
+\end{formulabox}
+
+% ------------------------------------------------------------------------------
+\phantomsection
+\section*{Chapter 10: Ensemble Learning: Bagging, Boosting, and XGBoost}
+\addcontentsline{toc}{section}{Chapter 10: Ensemble Learning: Bagging, Boosting, and XGBoost}
+% ------------------------------------------------------------------------------
+
+\begin{formulabox}[{1. Asymptotic Out-of-Bag (OOB) Resampling Rate}]
+\begin{align*}
+    P(\text{Excluded}) &= \lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = \frac{1}{e} \approx 0.3679 \approx 36.8\%
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $n$ = Total sample size of the original training dataset
+    \item $1 - \frac{1}{n}$ = Probability of an individual observation escaping selection in a single random draw
+    \item $P(\text{Excluded}) \approx 36.8\%$ = Fraction of training observations forming the Out-of-Bag validation set
+    \item $P(\text{Included}) \approx 63.2\%$ = Expected fraction of unique observations appearing in each bootstrap sample
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{2. AdaBoost Learner Importance and Weight Recalibration}]
+\begin{align*}
+    \alpha_m &= \frac{1}{2} \ln \left( \frac{1 - \epsilon_m}{\epsilon_m} \right), \quad w_i^{(m+1)} = \frac{w_i^{(m)} \exp(-\alpha_m y_i h_m(\mathbf{x}_i))}{Z_m}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $\epsilon_m = \sum_{i=1}^n w_i^{(m)} \mathbb{I}(y_i \neq h_m(\mathbf{x}_i))$ = Weighted training classification error of learner $m$
+    \item $\alpha_m$ = Voting importance weight assigned to weak learner $h_m(\mathbf{x})$
+    \item $w_i^{(m)}$ = Normalized observational sample weight of training instance $i$ at round $m$
+    \item $y_i \in \{-1, +1\}$ = Ground-truth binary class label
+    \item $h_m(\mathbf{x}_i) \in \{-1, +1\}$ = Discrete prediction rendered by weak learner $m$
+    \item $Z_m$ = Normalizing partition constant ensuring $\sum_{i=1}^n w_i^{(m+1)} = 1$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[{3. Gradient Boosting Residual Step and XGBoost Objective}]
+\begin{align*}
+    F_m(\mathbf{x}) &= F_{m-1}(\mathbf{x}) + \eta h_m(\mathbf{x}), \quad r_{im} = -\left[ \frac{\partial L(y_i, F(\mathbf{x}_i))}{\partial F(\mathbf{x}_i)} \right]_{F=F_{m-1}} \\[4pt]
+    \operatorname{Obj}^{(t)} &= \sum_{i=1}^n l(y_i, \hat{y}_i^{(t)}) + \sum_{k=1}^t \left( \gamma T_k + \frac{1}{2} \lambda \sum_{j=1}^{T_k} w_{jk}^2 \right)
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[noitemsep, topsep=1pt]
+    \item $F_m(\mathbf{x})$ = Cumulative ensemble prediction model at iteration stage $m$
+    \item $\eta \in (0, 1]$ = Learning rate shrinkage parameter dampening each tree's contribution
+    \item $r_{im}$ = Pseudo-residual evaluated as the negative loss gradient
+    \item $h_m(\mathbf{x})$ = Weak regression base tree fitted to predict pseudo-residuals $r_{im}$
+    \item $l(y_i, \hat{y}_i)$ = Differentiable convex empirical training loss
+    \item $T_k$ = Total number of terminal leaf nodes in tree $k$
+    \item $w_{jk}$ = Continuous prediction score weight on terminal leaf $j$
+    \item $\gamma$ = Minimum loss reduction penalty required to permit an additional leaf split
+    \item $\lambda$ = $L_2$ regularization penalty on leaf weight magnitudes
+\end{itemize}
+\end{formulabox}
+
