@@ -1,33 +1,10 @@
 % ==============================================================================
-% Section 1: Institutional Header, Abstract & Introduction
+% Section 1: Introduction & Problem Formulation
 % ==============================================================================
-
-\begin{center}
-    % Pondicherry University Greyscale Crest
-    \includegraphics[width=2.4cm]{figures/pondicherry_university_logo_grayscale.png}\\[8pt]
-
-    {\large\textbf{DEPARTMENT OF STATISTICS \quad$\vert$\quad RAMANUJAN SCHOOL OF MATHEMATICAL SCIENCES}}\\[2pt]
-    {\large\textbf{PONDICHERRY UNIVERSITY (A CENTRAL UNIVERSITY)}}\\[2pt]
-    {\small Puducherry -- 605 014, India}\\[10pt]
-
-    {\Large\bfseries DOWNSIDE RISK QUANTIFICATION AND DERIVATIVE HEDGING EFFICIENCY}\\[4pt]
-    {\large\bfseries An Empirical Application of Value at Risk (VaR) and the Black--Scholes Model on ITC Limited}\\[8pt]
-
-    {\small\textbf{Course:} MSQF 533 -- Financial Risk Management (Semester III) \quad$\vert$\quad \textbf{Academic Year:} 2026--2027}\\[2pt]
-    {\small\textbf{Author:} N. Rohit Vedhanandh \quad$\vert$\quad \textbf{Reg. No.:} 25MSQUFPY0002 \quad$\vert$\quad \textbf{Date:} November 2026}\\[6pt]
-    \rule{\linewidth}{0.8pt}
-\end{center}
-
-\begin{abstract}
-\noindent
-This study establishes a unified quantitative risk framework that links downside market risk quantification via Value at Risk ($\VaR$) and Expected Shortfall ($\CVaR$) directly to derivative hedging under the Black--Scholes--Merton option pricing model. Calibrating the framework to 246 daily trading sessions of \textbf{ITC Limited (NSE: ITC)} over a trailing 1-year sample period (November 2025 to November 2026) for 1 standard NSE F\&O market lot ($1,725$ shares at spot $S_0 = \text{\rupee}285.00$, total capital commitment $V_0 = \text{\rupee}4,91,625.00$), we reveal three primary empirical insights: First, daily log returns exhibit severe leptokurtosis ($\hat{K}_{\text{excess}} = +9.82$) and negative skewness ($\hat{S} = -0.92$), leading to overwhelming rejection of normality ($JB = 979.34, p < 10^{-10}$). Second, Gaussian models severely underestimate extreme tail risk: the 10-day $99\%$ Historical Simulation $\VaR$ reaches \textbf{\rupee 61,487.02} ($12.51\%$ of capital), producing an \textbf{11.70\% fat-tail wedge} over Parametric $\VaR$ (\rupee 55,048.61), while both pass Kupiec POF backtests within the Basel Green Zone. Third, neglecting ITC's $5.09\%$ trailing dividend yield introduces up to a $+9.76\%$ pricing error in standard Black--Scholes call options. Deploying an \textbf{ATM Protective Put} eliminates $75.14\%$ of extreme 10-day tail risk, while a \textbf{Zero-Cost Collar} delivers a $78.96\%$ tail risk reduction at an upfront net debit of only \rupee 2.50/share ($0.88\%$ of portfolio value).
-\end{abstract}
-
-\vspace{4pt}
-\noindent\textbf{Keywords:} Value at Risk ($\VaR$), Expected Shortfall ($\CVaR$), Kupiec Backtest, Black--Scholes--Merton, Continuous Dividend Yield, Protective Put, Zero-Cost Collar, ITC Limited.
 
 \section{Introduction and the Dual Problem}
 \label{sec:introduction}
+\thispagestyle{plain}
 
 In institutional portfolio management, market risk quantification and derivative financial engineering are frequently treated as isolated quantitative workflows. Risk managers estimate Value at Risk ($\VaR$) to comply with statutory capital adequacy requirements (such as the Basel II/III market risk frameworks) without translating statistical loss thresholds into concrete derivative hedging positions. Conversely, options traders price derivative contracts using continuous-time arbitrage models without anchoring strike selections to empirical tail loss quantiles.
 

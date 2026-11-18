@@ -24,8 +24,8 @@
 | └── [`figures/`](./latex/figures/) | University crest and graphics. |
 | [`project_report/`](./project_report/) | **Empirical Term Project:** *Downside Risk Quantification and Derivative Hedging Efficiency: An Empirical Application of Value at Risk (VaR) and the Black–Scholes Model on ITC Limited* (MSQF 533 Unit II & Case Study CO3/CO5). |
 | ├── [`main.pdf`](./project_report/main.pdf) | **Compiled 40-Page Strict Greyscale Research Monograph** complete with Pondicherry University title page, Roman-numeral front matter, 6 analytical chapters, 7 high-contrast figures, and end-of-document Formula Reference Sheet. |
-| ├── [`condensed_paper/`](./project_report/condensed_paper/) | **Condensed 11-Page Academic Research Paper** in strict monochrome format, optimized for journal submission and term evaluation with 3 consolidated multi-panel figures and compact formula sheet. |
-| │   └── [`main.pdf`](./project_report/condensed_paper/main.pdf) | **Compiled 11-Page Clean PDF** (strictly $<15$ pages). |
+| ├── [`condensed_paper/`](./project_report/condensed_paper/) | **Joint Empirical Research Paper (MSQF 533 & MSQF 542):** *VaR and Black–Scholes Valuation of ITC Limited* in strict monochrome format, featuring official Pondicherry University title page layout, continuous flow (abstract & formula sheet removed), 3 consolidated multi-panel figures, and complete 10-reference bibliography. |
+| │   └── [`main.pdf`](./project_report/condensed_paper/main.pdf) | **Compiled 9-Page Clean PDF** (strictly $<15$ pages; evaluated under Course Instructor Dr. Kamalakkannan Adhisekar). |
 | ├── [`data/`](./project_report/data/) | 1-year daily historical price dataset (`itc_historical_1y.csv`) and quantitative metrics output (`itc_analysis_metrics.json`). |
 | ├── [`scripts/`](./project_report/scripts/) | Quantitative Python engines (`run_analysis.py` & `generate_condensed_figures.py`) computing return diagnostics, VaR, Kupiec backtesting, Black-Scholes/Merton pricing, Greeks, and rendering all greyscale visualizations. |
 | ├── [`figures/`](./project_report/figures/) | High-resolution publication-quality greyscale figures (PDF & PNG). |

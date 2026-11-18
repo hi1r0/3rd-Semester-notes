@@ -10,8 +10,18 @@
 \begin{document}
 
 % ------------------------------------------------------------------------------
-% 1. Title Block, Abstract, Introduction & Problem Formulation
+% 0. Pondicherry University Title Page (Pure Monochrome)
 % ------------------------------------------------------------------------------
+\pagenumbering{gobble}
+\input{preamble/titlepage.tex}
+\clearpage
+
+% ------------------------------------------------------------------------------
+% 1. Introduction & Problem Formulation
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 \input{sections/sec01_introduction.tex}
 
 % ------------------------------------------------------------------------------
@@ -45,13 +55,9 @@
 \input{sections/sec07_conclusions.tex}
 
 % ------------------------------------------------------------------------------
-% 8. Comprehensive Formula Reference Sheet (Mandatory Invariant Rule #5)
+% 8. References & Academic Bibliography
 % ------------------------------------------------------------------------------
-\input{sections/formula_reference.tex}
-
-% ------------------------------------------------------------------------------
-% 9. References & Academic Bibliography
-% ------------------------------------------------------------------------------
+\clearpage
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}

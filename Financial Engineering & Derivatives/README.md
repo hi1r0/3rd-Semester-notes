@@ -13,6 +13,7 @@
 
 | File / Folder | Description |
 | :--- | :--- |
+| [`ITC_VaR_and_Black_Scholes_Hedging_Report.pdf`](./ITC_VaR_and_Black_Scholes_Hedging_Report.pdf) | **Joint Empirical Research Report (MSQF 533 & MSQF 542):** *VaR and Black–Scholes Valuation of ITC Limited* (9-page condensed paper in strict greyscale). Cross-referenced from [`../Financial Risk Management/project_report/condensed_paper/`](../Financial%20Risk%20Management/project_report/condensed_paper/). |
 | [`syllabus.md`](./syllabus.md) | Verbatim course syllabus, course objectives, course outcomes (CO1–CO5), unit breakdowns (Units I–V), reference bibliography, and CO-PO mapping matrix. |
 | [`MSQF_542_Financial_Engineering_Derivatives_Unit1.pdf`](./MSQF_542_Financial_Engineering_Derivatives_Unit1.pdf) | Unit 1 lecture slides: Financial engineering concept, scope, tools, process, and financial analysis. |
 | [`Unit_2_Derivatives_and_Market_Instruments-2-23.pdf`](./Unit_2_Derivatives_and_Market_Instruments-2-23.pdf) | Unit 2 course material: Financial derivatives definitions, types, Indian and international OTC markets. |
