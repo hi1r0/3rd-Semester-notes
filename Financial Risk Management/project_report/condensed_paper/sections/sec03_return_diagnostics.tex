@@ -16,21 +16,31 @@ Table~\ref{tab:descriptive_stats} presents the summary statistics alongside annu
 \begin{table}[htbp]
 \centering
 \small
+\renewcommand{\arraystretch}{1.30}
+\setlength{\tabcolsep}{6pt}
 \caption{Descriptive Statistics for Daily Log Returns of ITC Limited ($N = 246$)}
 \label{tab:descriptive_stats}
-\begin{tabularx}{0.92\linewidth}{lXrr}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{4.5cm} >{\raggedleft\arraybackslash}p{2.4cm} >{\raggedleft\arraybackslash}X}
 \toprule
-\textbf{Statistic Metric} & \textbf{Notation / Formula} & \textbf{Daily Value} & \textbf{Annualized Value} \\
+\textbf{Statistic Metric} & \textbf{Notation / Estimator} & \textbf{Daily Value} & \textbf{Annualized Metric} \\
 \midrule
-Sample Size ($N$) & Clean trading sessions & $246$ & -- \\
-Sample Period & Historical window & 17-Nov-2025 to 16-Nov-2026 & 1.0 Year \\
-Reference Spot Price & $S_0$ (NSE Close) & \rupee 285.00 & -- \\
-Position Lot Exposure & $V_0 = 1,725 \times S_0$ & \rupee 4,91,625.00 & -- \\
-Mean Log Return & $\hat{\mu} = \frac{1}{N}\sum R_t$ & $-0.001114$ & $-28.0811\%$ \\
-Sample Volatility & $\hat{\sigma} = \sqrt{\frac{1}{N-1}\sum (R_t - \hat{\mu})^2}$ & $0.014742$ & $23.4019\%$ \\
-Sample Skewness & $\hat{S} = \frac{1}{N}\sum (R_t - \hat{\mu})^3 / \hat{\sigma}^3$ & $-0.9243$ & -- \\
-Excess Kurtosis & $\hat{K}_{\text{excess}} = \frac{1}{N}\sum (R_t - \hat{\mu})^4 / \hat{\sigma}^4 - 3$ & $+9.8233$ & Raw: $12.8233$ \\
-Jarque--Bera Statistic & $JB = \frac{N}{6}\left(S^2 + \frac{K_{\text{excess}}^2}{4}\right)$ & $979.34$ & $p = 2.18 \times 10^{-213}$ \\
+\multicolumn{4}{l}{\textit{\textbf{Panel A: Sample Parameters \& Position Exposure}}} \\
+\addlinespace[2pt]
+Sample Size ($N$) & Clean trading sessions & $246$ & $252$ Trading Days \\
+Sample Period & Historical trading window & \multicolumn{2}{c}{17-Nov-2025 to 16-Nov-2026 (1.0 Year)} \\
+Reference Spot Price & $S_0$ (NSE Closing Price) & \rupee 285.00 & Baseline Valuation \\
+Position Lot Exposure & $V_0 = 1,725 \times S_0$ & \rupee 4,91,625.00 & 1 NSE F\&O Lot \\
+\addlinespace[5pt]
+\multicolumn{4}{l}{\textit{\textbf{Panel B: Empirical Return Distribution Moments}}} \\
+\addlinespace[2pt]
+Mean Log Return & $\hat{\mu} = \frac{1}{N}\sum_{t=1}^N R_t$ & $-0.001114$ & $-28.0811\%$ \\
+Sample Volatility & $\hat{\sigma} = \sqrt{\frac{1}{N-1}\sum_{t=1}^N (R_t - \hat{\mu})^2}$ & $0.014742$ & $23.4019\%$ \\
+Sample Skewness & $\hat{S} = \frac{1}{N}\sum_{t=1}^N (R_t - \hat{\mu})^3 \,/\, \hat{\sigma}^3$ & $-0.9243$ & Negative Crash Skew \\
+Excess Kurtosis & $\hat{K}_{\text{excess}} = \frac{1}{N}\sum_{t=1}^N (R_t - \hat{\mu})^4 \,/\, \hat{\sigma}^4 - 3$ & $+9.8233$ & Raw Kurtosis: $12.82$ \\
+\addlinespace[5pt]
+\multicolumn{4}{l}{\textit{\textbf{Panel C: Normality Specification Test}}} \\
+\addlinespace[2pt]
+Jarque--Bera Statistic & $JB = \frac{N}{6}\left(\hat{S}^2 + \frac{\hat{K}_{\text{excess}}^2}{4}\right)$ & $979.34$ & $p = 2.18 \times 10^{-213}$ \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -49,5 +59,3 @@ Under the null hypothesis of Gaussian normality ($H_0: S = 0 \text{ and } K_{\te
 \footnotesize\textbf{Note:} (a) Empirical daily log return distribution vs. fitted normal density ($\sigma_{\text{ann}} = 23.40\%$) showing $95\%$ and $99\%$ $\VaR$ cutoffs. (b) Kupiec backtesting timeline showing daily returns and tail violation events ($x = 9$ breaches at $95\%$; $x = 4$ breaches at $99\%$).
 \end{minipage}
 \end{figure}
-
-As visually documented in Figure~\ref{fig:diagnostics_backtest}(a), the empirical distribution is characterized by severe central peakedness and an extended negative crash tail. This confirms that classical parametric models assuming Gaussian bell curves will systematically underpredict tail loss severity during adverse market conditions.
