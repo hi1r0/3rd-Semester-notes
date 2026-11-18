@@ -1,0 +1,70 @@
+% ==============================================================================
+% Packages Configuration: Strict Greyscale Research Monograph
+% Financial Risk Management (MSQF 533) - Project Report
+% Department of Statistics, Ramanujan School of Mathematical Sciences, Pondicherry University
+% ==============================================================================
+
+% Encoding and Typography
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{textcomp}
+
+% Math packages
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{bm}
+
+% Layout & Page Geometry
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=22pt]{geometry}
+\usepackage{fancyhdr}
+\setlength{\headheight}{22pt}
+\usepackage{titlesec}
+\usepackage[inline]{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Graphics and TikZ
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, shapes.geometric, decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% TColorBox Setup
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, theorems, breakable}
+
+% Strict Greyscale Color Definitions
+\usepackage{xcolor}
+\definecolor{pureblack}{RGB}{0, 0, 0}
+\definecolor{graydark}{RGB}{40, 40, 40}
+\definecolor{graymed}{RGB}{90, 90, 90}
+\definecolor{graylight}{RGB}{180, 180, 180}
+\definecolor{grayfaint}{RGB}{245, 245, 245}
+\definecolor{grayborder}{RGB}{120, 120, 120}
+
+% Tables and Formatting
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Hyperlinks & Cross-Referencing (Strictly Greyscale / Hidelinks)
+\usepackage{hyperref}
+\hypersetup{
+    hidelinks,
+    pdfauthor={Department of Statistics, Pondicherry University},
+    pdftitle={Downside Risk Quantification and Derivative Hedging Efficiency: An Empirical Application on ITC Limited},
+    pdfsubject={MSQF 533: Financial Risk Management Term Project}
+}
+\usepackage{cleveref}
+
+% Header & Footer Styling (Strict Greyscale)
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{graydark}\nouppercase{\leftmark}}
+\fancyhead[R]{\small\color{pureblack}\textbf{MSQF 533: Empirical Project Report}}
+\fancyfoot[C]{\color{graydark}\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{pureblack}\leaders\hrule height \headrulewidth\hfill}}

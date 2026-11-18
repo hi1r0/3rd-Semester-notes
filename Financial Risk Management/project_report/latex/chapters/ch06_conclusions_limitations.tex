@@ -1,0 +1,53 @@
+% ==============================================================================
+% Chapter 6: Conclusion, Model Limitations & Practical Takeaways
+% ==============================================================================
+
+\chapter{Conclusions \& Model Limitations}
+\label{ch:conclusions}
+
+\section{Synthesis of Core Empirical Findings}
+\label{sec:findings_synthesis}
+
+This empirical study has integrated two traditionally isolated pillars of quantitative finance---downside market risk measurement via Value at Risk ($\VaR$) and derivative valuation via the Black--Scholes Option Pricing Model---into a unified, actionable risk management framework applied to an equity position in \textbf{ITC Limited (NSE: ITC)}. 
+
+Calibrating models to 246 daily trading sessions over the trailing 1-year sample period (November 2025 to November 2026) for 1 standard NSE F\&O market lot ($1,725$ shares at spot $S_0 = \text{\rupee}285.00$, baseline exposure $V_0 = \text{\rupee}4,91,625.00$) yields four central quantitative findings:
+
+\begin{enumerate}
+    \item \textbf{Significant Deviation from Return Normality:} Empirical daily log returns exhibit pronounced negative skewness ($\hat{S} = -0.9243$) and extreme leptokurtosis ($\hat{K}_{\text{excess}} = +9.8233$, raw kurtosis $= 12.8233$). The Jarque--Bera test decisively rejects the Gaussian normality hypothesis ($JB = 979.34$, $p = 2.18 \times 10^{-213}$).
+    \item \textbf{Underestimation of Extreme Tail Risk by Gaussian Models:} At the $95\%$ confidence level, the parametric Gaussian model slightly overstates loss due to central peakedness. However, at the extreme $99\%$ tail, the relationship inverts: the 10-day $99\%$ Historical Simulation $\VaR$ reaches \textbf{\rupee 61,487.02} ($12.51\%$ of capital), exceeding the Parametric $\VaR$ (\rupee 55,048.61) by \textbf{+\rupee 6,438.41 (+11.70\%)}. Furthermore, 10-day Expected Shortfall ($\CVaR$) reaches \textbf{\rupee 95,130.94} ($19.35\%$ of capital).
+    \item \textbf{Model Validation via Kupiec Backtesting:} Both Parametric ($x = 4$ breaches) and Historical ($x = 3$ breaches) $99\%$ 1-day $\VaR$ models pass the Kupiec Likelihood Ratio test ($\LR_{\POF} = 0.819$ and $0.112$, with $p$-values of $0.366$ and $0.738$) and reside firmly within the Basel Committee's \textbf{Green Zone}.
+    \item \textbf{Critical Necessity of Dividend Adjustment in Option Pricing:} Neglecting ITC's $5.09\%$ trailing dividend yield under Standard Black--Scholes introduces severe structural pricing errors, overpricing calls by up to $+9.76\%$ (+\rupee 0.90/share at ATM \rupee 285) and underpricing puts by $-8.84\%$ (-\rupee 0.77/share). Merton's dividend adjustment eliminates this error, bringing theoretical valuations into alignment with actual NSE option chain prices.
+    \item \textbf{Demonstrated Hedging Superiority of Protective Structures:} While the unhedged portfolio faces an empirical 10-day tail loss of \rupee 61,487.02, an \textbf{ATM Protective Put} caps maximum capital loss at \rupee 15,283.50 (delivering a \textbf{75.14\% VaR reduction}). For cost-conscious institutional mandates, a \textbf{Zero-Cost Collar} (Long \rupee 280 Put / Short \rupee 295 Call) achieves a \textbf{78.96\% VaR reduction} at a negligible net upfront cash outflow of \rupee 4,312.50 ($0.88\%$ of portfolio value).
+\end{enumerate}
+
+\section{Practical Decision Rules for Institutional Portfolio Managers}
+\label{sec:decision_rules}
+
+Based on these empirical findings, we formulate three actionable risk governance rules for institutional equity desks managing defensive, dividend-bearing equities in the Indian market:
+\begin{itemize}
+    \item \textbf{Rule 1 (The Pre-Budget / Policy Shock Protocol):} Ahead of scheduled fiscal policy events (e.g., Union Budget announcements regarding tobacco excise taxes or NCCD revisions), portfolio managers must transition capital risk measurement from Parametric $\VaR$ to Historical Simulation or Extreme Value Theory ($\text{EVT}$) to avoid underestimating tail risk by double-digit percentages.
+    \item \textbf{Rule 2 (Mandatory Dividend Calibration):} When evaluating covered call overwriting or protective put procurement on equities with dividend yields exceeding $2.5\%$, risk management systems must enforce Merton's dividend-adjusted formula ($q > 0$). Relying on unadjusted Black--Scholes results in systematic under-hedging and misallocated insurance budgets.
+    \item \textbf{Rule 3 (The Collar Deployment Standard):} In low-growth or sideways market regimes, institutional managers should prefer the Zero-Cost Collar over outright protective puts. Selling out-of-the-money upside calls (at strikes reflecting the upper bound of dividend growth expectations) provides complete downside insurance with minimal cash drag on portfolio yield.
+\end{itemize}
+
+\section{Econometric and Model Limitations}
+\label{sec:limitations}
+
+While the integrated methodology provides significant analytical clarity, several econometric and operational limitations must be acknowledged:
+
+\begin{enumerate}
+    \item \textbf{Constant Volatility Assumption in Black--Scholes:} The Black--Scholes--Merton model assumes that asset volatility $\sigma$ remains constant over the life of the derivative contract. In reality, as demonstrated by the empirical volatility skew (Section~\ref{sec:iv_smile}), implied volatility varies systematically across strikes ($25.51\%$ for OTM puts vs. $20.99\%$ for OTM calls). A rigorous extension requires stochastic volatility models (such as Heston, 1993) or local volatility surfaces (Dupire, 1994).
+    \item \textbf{Square-Root of Time Scaling Frictions:} The standard $\sqrt{T_h}$ rule used to scale 1-day $\VaR$ to 10-day horizons assumes that returns are independent and identically distributed ($\text{i.i.d.}$). In actual financial time series, volatility clustering (GARCH phenomena) and mean reversion introduce temporal dependence, which can cause multi-day quantile scaling to deviate from $\sqrt{T_h}$.
+    \item \textbf{Continuous Dividend Flow vs. Discrete Payouts:} Merton's model treats dividends as a continuous yield $q$. However, ITC distributes dividends as discrete lump sums in February and May. While our numerical analysis confirmed that continuous and discrete models converge within sub-paisa bounds for short 42-day contracts, for longer-dated options (e.g., 6-month or 1-year contracts spanning actual ex-dividend dates), discrete dividend models are structurally necessary.
+    \item \textbf{Transaction Frictions and Liquidity in Indian F\&O:} The theoretical hedging payoffs assume frictionless trading at mid-market quotes. In practical market operations on the NSE, bid-ask spreads on out-of-the-money strikes, Securities Transaction Tax (STT), clearing brokerage charges, and margin financing requirements reduce net hedging efficiency.
+\end{enumerate}
+
+\section{Recommendations for Future Quantitative Research}
+\label{sec:future_research}
+
+To advance this line of inquiry, future research should explore:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Jump-Diffusion Modeling:} Formulating Merton's (1976) jump-diffusion or Kou's (2002) double-exponential jump models to analytically capture Poisson-driven regulatory tax shocks in ITC equity dynamics.
+    \item \textbf{Filtered Historical Simulation (FHS):} Combining GARCH(1,1) conditional volatility filtering with non-parametric bootstrap resampling (Barone-Adesi et al., 1999) to produce dynamic, volatility-updating $\VaR$ forecasts.
+    \item \textbf{Extreme Value Theory (EVT):} Applying the Peaks-Over-Threshold ($\text{POT}$) approach with Generalized Pareto Distributions ($\text{GPD}$) to model asymptotic tail quantiles beyond the empirical sample boundary.
+\end{enumerate}

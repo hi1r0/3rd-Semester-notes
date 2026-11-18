@@ -1,0 +1,91 @@
+% ==============================================================================
+% Chapter 1: Executive Summary & Company Profile
+% ==============================================================================
+
+\chapter{Executive Summary \& Corporate Profile}
+\label{ch:executive_summary}
+
+\section{Project Motivation and the Dual Problem}
+\label{sec:project_motivation}
+
+In modern portfolio risk management, market risk quantification and derivative hedging are frequently examined as two separate, isolated quantitative domains. Financial analysts compute Value at Risk ($\VaR$) metrics to satisfy regulatory capital adequacy benchmarks (such as the Basel II/III market risk frameworks) without translating those statistical loss forecasts into actionable hedging positions. Conversely, equity derivatives traders price option contracts using the Black--Scholes--Merton framework under theoretical continuous-time assumptions without calibrating their protective strike selections to empirical tail loss quantiles.
+
+This project bridges this gap by formulating an integrated, unified risk management framework for an equity position in \textbf{ITC Limited (NSE: ITC)}. Specifically, this study addresses the \textit{Dual Quantitative Problem}:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Downside Market Risk Quantification:} Quantifying the maximum expected dollar/rupee capital loss over 1-day and 10-day holding periods for a standard National Stock Exchange (NSE) Futures \& Options (F\&O) market lot ($1,725$ shares) using both Parametric (Variance-Covariance) $\VaR$ and Non-Parametric Historical Simulation $\VaR$, backed by rigorous Kupiec Proportion of Failures ($\POF$) backtesting.
+    \item \textbf{Derivative Hedging Optimization:} Evaluating whether theoretical option pricing models---contrasting Standard Black--Scholes against Merton's Continuous Dividend-Adjusted Model and Discrete Dividend adjustments---accurately price the derivative instruments required to insulate the shareholder against that quantified tail loss.
+\end{enumerate}
+
+\begin{definition}{Downside Tail Risk and Derivative Hedging Duality}{tail_risk_duality}
+Let $V_0 = N \cdot S_0$ represent the initial market value of an equity portfolio consisting of $N$ shares at spot price $S_0$. The downside market risk at confidence level $1 - \alpha$ over horizon $T_h$ is defined by the Value at Risk metric $\VaR_{\alpha, T_h}$, representing the threshold capital loss such that:
+\begin{equation}
+\Prob\left(\Delta V \le -\VaR_{\alpha, T_h}\right) = \alpha
+\end{equation}
+The derivative hedging problem consists of constructing a non-linear payoff structure $\Phi(S_T)$ via European options such that the total portfolio value at horizon $T$, given by $\Pi_T = N \cdot S_T + M \cdot \Phi(S_T)$, satisfies a guaranteed minimum capital floor:
+\begin{equation}
+\Pi_T \ge V_0 - \mathcal{L}_{\max}, \quad \forall S_T \in [0, \infty)
+\end{equation}
+where $\mathcal{L}_{\max}$ represents the maximum permissible portfolio loss.
+\end{definition}
+
+This empirical inquiry is aligned with the academic curriculum of \textbf{MSQF 533: Financial Risk Management} (Unit II: VAR Methods and Hedging), directly satisfying Course Outcomes CO3 (\textit{Evaluate hedging strategies using forwards, futures, options and swaps}) and CO5 (\textit{Evaluate the outcomes of strategies to manage Risk with the help of case studies}).
+
+\section{Corporate Profile and Fundamental Health of ITC Limited}
+\label{sec:itc_profile}
+
+ITC Limited is one of India's foremost private sector conglomerates, with a diversified operational footprint spanning Fast-Moving Consumer Goods (FMCG), Cigarettes, Agri-Business, Paperboards \& Packaging, and Information Technology. Historically known as the Imperial Tobacco Company of India, the firm has systematically transformed its revenue mix over the past two decades into a resilient consumer goods and agricultural powerhouse.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Segmental Revenue Mix and Operating Profile of ITC Limited}
+\label{tab:itc_segments}
+\begin{tabularx}{\linewidth}{lXrr}
+\toprule
+\textbf{Business Segment} & \textbf{Core Products / Activities} & \textbf{EBIT Share (\%)} & \textbf{Strategic Role} \\
+\midrule
+Cigarettes & Classic, Gold Flake, Navy Cut, Wills & $\approx 76.5\%$ & Core Cash Cow \& High Margin \\
+FMCG -- Others & Aashirvaad, Sunfeast, Bingo!, YiPPee! & $\approx 8.5\%$ & High-Growth Engine \\
+Agri-Business & Soya, Wheat, Spices, Coffee, Leaf Tobacco & $\approx 6.8\%$ & Supply Chain Integration \\
+Paperboards \& Packaging & Value-added paperboards, specialty papers & $\approx 6.2\%$ & Industrial B2B Synergy \\
+Others / Investments & Brand capital, technology holdings & $\approx 2.0\%$ & Diversified Support \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The fundamental architecture of ITC Limited exhibits three distinct financial properties that make it a compelling subject for empirical quantitative risk research:
+\begin{enumerate}
+    \item \textbf{Debt-Free Balance Sheet and Free Cash Flow Generation:} ITC maintains a virtually debt-free balance sheet with negligible long-term borrowings and massive operating cash reserves ($\approx \text{\rupee}18,000\text{--}\text{\rupee}20,000\text{ crore}$ in annual operating cash flows). Consequently, the firm's equity displays near-zero financial leverage risk, ensuring that equity volatility is driven almost entirely by operational performance, macroeconomic factors, and regulatory policy shifts.
+    \item \textbf{High and Predictable Dividend Yield:} ITC operates under a formalized dividend distribution policy that returns $80\%\text{--}85\%$ of consolidated net profits to equity holders. Over the trailing financial year, the company distributed an aggregate dividend of \rupee 14.50 per share (comprising a \rupee 6.50 interim dividend in February and an \rupee 8.00 final dividend in May/June). Against an underlying spot price of $S_0 = \text{\rupee}285.00$, this generates a substantial trailing dividend yield of:
+    \begin{equation}
+    q = \frac{\text{\rupee}14.50}{\text{\rupee}285.00} \approx 5.088\% \approx 5.09\%
+    \end{equation}
+    Ignoring this substantial dividend yield introduces severe structural mispricing in European derivative models, as demonstrated in Chapter~\ref{ch:black_scholes}.
+    \item \textbf{Asymmetric Regulatory and Fiscal Vulnerability:} Despite its defensive consumer staples positioning, ITC's core earnings engine (Cigarettes) remains subject to abrupt regulatory shocks, including National Calamity Contingent Duty (NCCD) hikes, Goods and Services Tax (GST) compensation cess revisions, and Union Budget tobacco excise rate adjustments. These episodic announcements introduce distinct negative tail jumps into the empirical return distribution, leading to pronounced leptokurtosis and volatility skew in option pricing.
+\end{enumerate}
+
+\section{Architecture of the Integrated Risk and Hedging Pipeline}
+\label{sec:architecture_pipeline}
+
+The end-to-end analytical framework developed in this project is synthesized in Figure~\ref{fig:tikz_architecture}. The architecture operates across four sequential, interconnected quantitative stages:
+
+\begin{figure}[htbp]
+\centering
+\caption{Integrated Downside Risk Quantification and Derivative Hedging Architecture}
+\label{fig:tikz_architecture}
+\vspace{4pt}
+\resizebox{0.98\linewidth}{!}{
+    \input{figures/fig7_risk_hedging_flowchart.tex}
+}
+\vspace{4pt}
+\begin{minipage}{0.96\linewidth}
+\footnotesize\textbf{Note:} Flowchart depicts the four-stage analytical progression from equity asset exposure definition ($1\text{ NSE Lot} = 1,725\text{ shares}$ at \rupee 285.00) through return distribution diagnostics, Value at Risk ($\VaR$) estimation, Kupiec backtesting, Black--Scholes option pricing (Standard vs. Merton), and final downstream protective derivative structuring.
+\end{minipage}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Stage 1: Asset Exposure Definition:} Calibrating the physical exposure of holding exactly 1 standard NSE F\&O market lot ($1,725$ shares) at spot price $S_0 = \text{\rupee}285.00$, corresponding to a baseline capital commitment of $V_0 = \text{\rupee}4,91,625.00$.
+    \item \textbf{Stage 2: Empirical Return Diagnostics:} Processing 246 consecutive daily log returns over the trailing 1-year window (November 2025 to November 2026), computing higher moments (skewness and excess kurtosis), and conducting formal Jarque--Bera hypothesis testing for normality.
+    \item \textbf{Stage 3: Market Risk Quantification via $\VaR$ and Backtesting:} Estimating 1-day and 10-day $\VaR$ at $95\%$ and $99\%$ confidence horizons under Parametric (Delta-Normal) and Historical Simulation models, followed by Kupiec Likelihood Ratio backtesting to verify tail adequacy.
+    \item \textbf{Stage 4: Derivative Valuation and Hedging Execution:} Pricing 5 strikes ($\text{\rupee}275$ to $\text{\rupee}295$) under Standard and Merton Black--Scholes models, mapping the Implied Volatility (IV) smile, evaluating Option Greeks, and comparing terminal downside payoffs across Protective Puts and Zero-Cost Collars.
+\end{itemize}

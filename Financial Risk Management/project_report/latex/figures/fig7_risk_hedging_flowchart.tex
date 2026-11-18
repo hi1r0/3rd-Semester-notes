@@ -1,0 +1,141 @@
+% TikZ Visual Diagram: Integrated Market Risk Measurement and Derivative Hedging Architecture
+% Strict Greyscale Palette: black, black!85, black!60, black!20, black!8, white
+% Designed with balanced symmetry, uniform card dimensions, and ample arrowhead clearance >= 0.8cm
+
+\begin{tikzpicture}[
+    >=stealth,
+    node distance=1.0cm and 0.8cm,
+    font=\small,
+    % Process Card Style (Uniform Dimensions)
+    stagecard/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=black!80,
+        fill=black!5,
+        line width=1.2pt,
+        text width=3.3cm,
+        minimum height=3.6cm,
+        align=center,
+        inner sep=6pt
+    },
+    % Banner Title Style
+    topbanner/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=black!90,
+        fill=black!15,
+        line width=1.4pt,
+        text width=15.2cm,
+        minimum height=1.0cm,
+        align=center,
+        font=\bfseries\normalsize,
+        inner sep=5pt
+    },
+    % Summary Block Style
+    bottomsummary/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=black!90,
+        fill=black!10,
+        line width=1.3pt,
+        text width=15.2cm,
+        minimum height=1.3cm,
+        align=center,
+        font=\small,
+        inner sep=6pt
+    },
+    % Connector Styling (Bold high-contrast grayscale)
+    flowline/.style={
+        ->,
+        line width=1.4pt,
+        draw=black!85
+    },
+    branchline/.style={
+        line width=1.3pt,
+        draw=black!80
+    }
+]
+
+    % Top Master Workflow Banner
+    \node[topbanner] (banner) {
+        INTEGRATED MARKET RISK QUANTIFICATION \& DERIVATIVE HEDGING PIPELINE
+    };
+
+    % 4 Symmetrical Stage Cards Arranged Horizontally
+    % Stage 1: Market Exposure
+    \node[stagecard, below=1.1cm of banner.south west, anchor=north west] (c1) {
+        \textbf{Stage 1: Asset Exposure}\\[3pt]
+        \rule{3.0cm}{0.6pt}\\[4pt]
+        \raggedright
+        $\bullet$ \textbf{Asset:} ITC Limited\\
+        $\bullet$ \textbf{Lot Size:} 1,725 shares\\
+        $\bullet$ \textbf{Spot ($S_0$):} \rupee 285.00\\
+        $\bullet$ \textbf{Exposure ($V_0$):} \rupee 4.92 L\\
+        $\bullet$ \textbf{Yield ($q$):} 5.09\% p.a.
+    };
+
+    % Stage 2: Return Diagnostics
+    \node[stagecard, right=0.7cm of c1] (c2) {
+        \textbf{Stage 2: Diagnostics}\\[3pt]
+        \rule{3.0cm}{0.6pt}\\[4pt]
+        \raggedright
+        $\bullet$ \textbf{Log Returns:} 246 days\\
+        $\bullet$ \textbf{Hist. Vol ($\sigma$):} 23.40\%\\
+        $\bullet$ \textbf{Skewness:} $-0.924$\\
+        $\bullet$ \textbf{Excess Kurt.:} $+9.82$\\
+        $\bullet$ \textbf{JB Stat:} 979 ($p < 10^{-10}$)
+    };
+
+    % Stage 3: VaR & Backtesting
+    \node[stagecard, right=0.7cm of c2] (c3) {
+        \textbf{Stage 3: VaR Modeling}\\[3pt]
+        \rule{3.0cm}{0.6pt}\\[4pt]
+        \raggedright
+        $\bullet$ \textbf{10d 99\% Param.:} \rupee 55,049\\
+        $\bullet$ \textbf{10d 99\% Hist.:} \rupee 61,487\\
+        $\bullet$ \textbf{Fat-Tail Wedge:} $+11.7\%$\\
+        $\bullet$ \textbf{Kupiec 99\%:} $LR=0.11$\\
+        $\bullet$ \textbf{Tail Backtest:} Accepted
+    };
+
+    % Stage 4: Derivative Hedging
+    \node[stagecard, right=0.7cm of c3] (c4) {
+        \textbf{Stage 4: Hedging Engine}\\[3pt]
+        \rule{3.0cm}{0.6pt}\\[4pt]
+        \raggedright
+        $\bullet$ \textbf{Model:} Merton ($q=5.09\%$)\\
+        $\bullet$ \textbf{ATM Put (285):} 75.1\% VaR $\downarrow$\\
+        $\bullet$ \textbf{OTM Put (280):} 66.8\% VaR $\downarrow$\\
+        $\bullet$ \textbf{Collar (280/295):} 79.0\% VaR $\downarrow$\\
+        $\bullet$ \textbf{Net Cost:} \rupee 2.50/share
+    };
+
+    % Balanced Symmetrical Branch Lines from Top Banner into All 4 Stage Cards
+    \coordinate (splitpt) at ($(banner.south)+(0,-0.45cm)$);
+    \draw[branchline] (banner.south) -- (splitpt);
+    \draw[branchline] ($(c1.north |- splitpt)$) -- ($(c4.north |- splitpt)$);
+    
+    \draw[flowline] ($(c1.north |- splitpt)$) -- (c1.north);
+    \draw[flowline] ($(c2.north |- splitpt)$) -- (c2.north);
+    \draw[flowline] ($(c3.north |- splitpt)$) -- (c3.north);
+    \draw[flowline] ($(c4.north |- splitpt)$) -- (c4.north);
+
+    % Horizontal Inter-Card Flow Arrows (Clearance = 0.7cm between cards)
+    \draw[flowline] (c1.east) -- (c2.west);
+    \draw[flowline] (c2.east) -- (c3.west);
+    \draw[flowline] (c3.east) -- (c4.west);
+
+    % Bottom Synthesis Card
+    \node[bottomsummary, below=1.0cm of $(c2.south)!0.5!(c3.south)$] (bottom) {
+        \textbf{Empirical Synthesis \& Risk Governance Decision Rule}\\[2pt]
+        Unhedged 10-day downside tail risk (\rupee 61,487) is mitigated by 75.1\% via ATM Protective Put and by 79.0\% via Zero-Cost Collar.\\
+        Dividend adjustment ($q=5.09\%$) eliminates an empirical pricing misstatement of \rupee 0.90/call and \rupee 0.77/put on NSE contracts.
+    };
+
+    % Balanced Drop Connectors into Bottom Summary Box
+    \draw[flowline] (c1.south) |- ($(bottom.north west)+(0.8cm,0.4cm)$) -- ($(bottom.north west)+(0.8cm,0)$);
+    \draw[flowline] (c2.south) |- ($(bottom.north west)+(4.4cm,0.4cm)$) -- ($(bottom.north west)+(4.4cm,0)$);
+    \draw[flowline] (c3.south) |- ($(bottom.north east)+(-4.4cm,0.4cm)$) -- ($(bottom.north east)+(-4.4cm,0)$);
+    \draw[flowline] (c4.south) |- ($(bottom.north east)+(-0.8cm,0.4cm)$) -- ($(bottom.north east)+(-0.8cm,0)$);
+
+\end{tikzpicture}

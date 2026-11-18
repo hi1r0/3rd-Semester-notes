@@ -1,0 +1,51 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% ==============================================================================
+% Preamble Configurations (Strict Greyscale Research Monograph)
+% ==============================================================================
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. Official Pondicherry University Cover / Title Page
+% ------------------------------------------------------------------------------
+\input{preamble/titlepage.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Front Matter (Roman Numeral Pagination)
+% ------------------------------------------------------------------------------
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+% ------------------------------------------------------------------------------
+% 3. Core Analytical Chapters (Arabic Pagination)
+% ------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\input{chapters/ch01_executive_summary_profile.tex}
+\input{chapters/ch02_return_diagnostics.tex}
+\input{chapters/ch03_market_risk_var.tex}
+\input{chapters/ch04_black_scholes_valuation.tex}
+\input{chapters/ch05_integrated_hedging.tex}
+\input{chapters/ch06_conclusions_limitations.tex}
+
+% ------------------------------------------------------------------------------
+% 4. Comprehensive Multi-Chapter Formula Reference Sheet (Mandatory Rule #5)
+% ------------------------------------------------------------------------------
+\input{chapters/formula_reference.tex}
+
+% ------------------------------------------------------------------------------
+% 5. References & Academic Bibliography
+% ------------------------------------------------------------------------------
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

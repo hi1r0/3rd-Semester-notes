@@ -22,6 +22,12 @@
 | ├── [`preamble/`](./latex/preamble/) | Typography, tcolorbox environments, math macros, title page, and Roman-numeral syllabus. |
 | ├── [`chapters/`](./latex/chapters/) | Chapter source files: `ch01_introduction_to_risk_management.tex`, `ch02_var_methods_and_hedging.tex`, and `formula_reference.tex`. |
 | └── [`figures/`](./latex/figures/) | University crest and graphics. |
+| [`project_report/`](./project_report/) | **Empirical Term Project:** *Downside Risk Quantification and Derivative Hedging Efficiency: An Empirical Application of Value at Risk (VaR) and the Black–Scholes Model on ITC Limited* (MSQF 533 Unit II & Case Study CO3/CO5). |
+| ├── [`main.pdf`](./project_report/main.pdf) | **Compiled 40-Page Strict Greyscale Research Monograph** complete with Pondicherry University title page, Roman-numeral front matter, 6 analytical chapters, 7 high-contrast figures, and end-of-document Formula Reference Sheet. |
+| ├── [`data/`](./project_report/data/) | 1-year daily historical price dataset (`itc_historical_1y.csv`) and quantitative metrics output (`itc_analysis_metrics.json`). |
+| ├── [`scripts/`](./project_report/scripts/) | Quantitative Python engine (`run_analysis.py`) computing return diagnostics, VaR, Kupiec backtesting, Black-Scholes/Merton pricing, Greeks, and rendering all greyscale visualizations. |
+| ├── [`figures/`](./project_report/figures/) | High-resolution publication-quality greyscale figures (PDF & PNG) for price/volume, return distribution, Kupiec timeline, IV smile, Greeks, and payoff curves. |
+| └── [`latex/`](./project_report/latex/) | Full modular LaTeX project with strict greyscale configuration, custom tcolorboxes, TikZ flowchart, and chapter source files. |
 | [`MSQF_533_Unit_I_Financial_Risk_Management.pdf`](./MSQF_533_Unit_I_Financial_Risk_Management.pdf) | Faculty lecture slides (Dr. Kamalakkannan Adhisekar) covering Unit I foundations. |
 | [`MSQF-Introduction_to_Risk_Management-Class.pptx`](./MSQF-Introduction_to_Risk_Management-Class.pptx) | Core presentation deck (Prof. D. Lazar, 150 slides across 18 sections) grounded in Indian financial markets (NSE, BSE, MCX, RBI, SEBI, IRDAI). |
 
@@ -86,3 +92,24 @@ All diagrams in `latex/` adhere strictly to the repository standards:
 ## 🧮 Comprehensive Multi-Chapter Formula Reference Section
 
 Placed at the end of the monograph (`chapters/formula_reference.tex`), grouping all formulas by chapter with structured **"Where:"** parameter definition lists and zero conversational filler.
+
+---
+
+## 📈 Empirical Case Study Project Report: ITC Limited
+
+Located in [`project_report/`](./project_report/), this 40-page technical research monograph investigates downside risk quantification and derivative hedging efficiency for an equity position in **ITC Limited (NSE: ITC)** over a 1-year trailing sample period (November 2025 – November 2026), fulfilling MSQF 533 Unit II and Course Outcomes CO3, CO4, and CO5.
+
+### Key Highlights & Deliverables
+1. **Exposure Setup:** $1\text{ NSE F\&O Lot} = 1,725\text{ shares}$ at $S_0 = \text{\rupee}285.00$ ($\approx \text{\rupee}4,91,625.00$ capital commitment).
+2. **Empirical Diagnostics:** $N = 246$ daily trading sessions, annualized volatility $\sigma = 23.40\%$, negative skewness $\hat{S} = -0.9243$, extreme leptokurtosis $\hat{K}_{\text{excess}} = +9.8233$ (raw kurtosis $= 12.8233$), and decisive Jarque--Bera rejection of normality ($JB = 979.34, p = 2.18 \times 10^{-213}$).
+3. **Value at Risk & The Fat-Tail Wedge:** 
+   - 10-day $99\%$ Parametric $\VaR$: \rupee 55,048.61 ($11.20\%$).
+   - 10-day $99\%$ Historical $\VaR$: \rupee 61,487.02 ($12.51\%$), revealing an $11.7\%$ tail loss underestimation under Gaussian assumptions.
+   - 10-day $99\%$ Expected Shortfall ($\CVaR$): \rupee 95,130.94 ($19.35\%$).
+4. **Kupiec POF Backtesting:** All models pass empirical likelihood ratio tests ($\LR_{\POF} = 0.819$ and $0.112$) and reside within the Basel Committee's **Green Zone** ($\le 4$ exceptions).
+5. **Option Valuation & Dividend Adjustment:** Evaluates 5 strikes ($\text{\rupee}275$ to $\text{\rupee}295$) under Standard Black--Scholes ($q=0$), Merton Continuous Dividend-Adjusted ($q=5.09\%$), and Discrete Dividend models against NSE option chain quotes. Demonstrates that ignoring dividends introduces up to $+9.76\%$ overpricing on calls and $-8.84\%$ underpricing on puts.
+6. **Derivative Hedging Performance:**
+   - **ATM Protective Put (\rupee 285):** Insulates $75.14\%$ of extreme 10-day tail risk, capping maximum capital loss at \rupee 15,283.50 ($3.11\%$ of position value).
+   - **Zero-Cost Collar (\rupee 280 Put / \rupee 295 Call):** Delivers a $78.96\%$ tail risk reduction at an upfront net debit of only \rupee 2.50/share (\rupee 4,312.50 per lot, or $0.88\%$).
+7. **Strict Greyscale Design:** Formatted in strict monochrome throughout, incorporating a 7-figure publication-grade suite, symmetrical TikZ pipeline flowchart, and consolidated end-of-document Formula Reference Sheet.
+

@@ -1,0 +1,260 @@
+% ==============================================================================
+% Comprehensive Multi-Chapter Formula Reference Sheet (Mandatory Rule #5)
+% Placed at the document end. Strictly formula-only presentation with mandatory
+% "Where:" parameter definitions and zero narrative commentary.
+% ==============================================================================
+
+\chapter*{Comprehensive Formula Reference Sheet}
+\addcontentsline{toc}{chapter}{Comprehensive Formula Reference Sheet}
+\markboth{COMPREHENSIVE FORMULA REFERENCE SHEET}{COMPREHENSIVE FORMULA REFERENCE SHEET}
+
+% ------------------------------------------------------------------------------
+% Chapter 2 Formulas: Return Diagnostics & Distributional Moments
+% ------------------------------------------------------------------------------
+\section*{Chapter 2: Return Diagnostics \& Distributional Moments}
+
+\begin{formulabox}[Continuously Compounded Daily Log Return]
+\begin{equation*}
+R_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(P_t) - \ln(P_{t-1})
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $R_t = \text{Continuously compounded log return on trading day } t$
+    \item $P_t = \text{Adjusted closing price of the underlying asset on day } t$
+    \item $P_{t-1} = \text{Adjusted closing price of the underlying asset on day } t-1$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Sample Mean and Sample Standard Deviation]
+\begin{equation*}
+\hat{\mu} = \frac{1}{N}\sum_{t=1}^N R_t, \qquad \hat{\sigma} = \sqrt{\frac{1}{N-1}\sum_{t=1}^N (R_t - \hat{\mu})^2}
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\hat{\mu} = \text{Sample mean daily log return}$
+    \item $\hat{\sigma} = \text{Sample daily standard deviation (daily volatility)}$
+    \item $N = \text{Total number of return observations in the historical sample}$
+    \item $R_t = \text{Observed daily return on trading session } t$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Annualized Return and Annualized Volatility Scaling]
+\begin{equation*}
+\mu_{\text{annual}} = \hat{\mu} \times 252, \qquad \sigma_{\text{annual}} = \hat{\sigma} \times \sqrt{252}
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\mu_{\text{annual}} = \text{Annualized expected rate of return}$
+    \item $\sigma_{\text{annual}} = \text{Annualized historical volatility}$
+    \item $252 = \text{Standard convention for number of trading days in an Indian financial year}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Sample Skewness and Excess Kurtosis]
+\begin{equation*}
+\hat{S} = \frac{\frac{1}{N}\sum_{t=1}^N (R_t - \hat{\mu})^3}{\left[\frac{1}{N}\sum_{t=1}^N (R_t - \hat{\mu})^2\right]^{3/2}}, \qquad \hat{K}_{\text{excess}} = \frac{\frac{1}{N}\sum_{t=1}^N (R_t - \hat{\mu})^4}{\left[\frac{1}{N}\sum_{t=1}^N (R_t - \hat{\mu})^2\right]^2} - 3
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\hat{S} = \text{Sample skewness (third standardized central moment)}$
+    \item $\hat{K}_{\text{excess}} = \text{Sample excess kurtosis relative to Gaussian benchmark of } 3$
+    \item $R_t = \text{Observed daily return on trading day } t$
+    \item $\hat{\mu} = \text{Sample mean daily return}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Jarque--Bera Normality Test Statistic]
+\begin{equation*}
+JB = \frac{N}{6}\left(S^2 + \frac{(K_{\text{raw}} - 3)^2}{4}\right) \sim \chi^2(2)
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $JB = \text{Jarque--Bera test statistic for goodness of fit to Gaussian normality}$
+    \item $N = \text{Sample size (number of observations)}$
+    \item $S = \text{Sample skewness}$
+    \item $K_{\text{raw}} = \text{Sample raw fourth central moment (kurtosis)}$
+    \item $\chi^2(2) = \text{Chi-Square distribution with two degrees of freedom}$
+    \item $\text{Decision Rule: Reject null hypothesis of normality if } JB > 5.9915 \text{ at } \alpha_{\text{stat}} = 0.05$
+\end{itemize}
+\end{formulabox}
+
+\newpage
+% ------------------------------------------------------------------------------
+% Chapter 3 Formulas: Value at Risk (VaR) & Backtesting
+% ------------------------------------------------------------------------------
+\section*{Chapter 3: Value at Risk (VaR) \& Backtesting}
+
+\begin{formulabox}[Parametric (Delta-Normal) 1-Day Value at Risk]
+\begin{equation*}
+\VaR_{\text{param}, 1-\alpha}^{1\text{d}} = V_0 \times \left(Z_{\alpha} \cdot \sigma_{\text{daily}} - \mu_{\text{daily}}\right)
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\VaR_{\text{param}, 1-\alpha}^{1\text{d}} = \text{Parametric Value at Risk in currency units over a 1-day horizon}$
+    \item $V_0 = \text{Current total market value of the equity position } (N_{\text{shares}} \times S_0)$
+    \item $Z_{\alpha} = \text{Standard normal critical value } \Phi^{-1}(1 - \alpha) \text{ ($1.645$ for } 95\%, 2.326 \text{ for } 99\%)$
+    \item $\sigma_{\text{daily}} = \text{Estimated daily standard deviation of asset returns}$
+    \item $\mu_{\text{daily}} = \text{Estimated daily mean return}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Square-Root of Time Horizon Scaling]
+\begin{equation*}
+\VaR_{\alpha, T_h} = \VaR_{\alpha, 1\text{d}} \times \sqrt{T_h}
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\VaR_{\alpha, T_h} =$ Scaled Value at Risk over holding horizon $T_h$
+    \item $\VaR_{\alpha, 1\text{d}} =$ 1-day Value at Risk
+    \item $T_h =$ Number of trading days in the multi-period horizon ($T_h = 10$ for regulatory benchmark)
+    \item \textbf{Condition:} Asset returns must be mutually independent and identically distributed ($\text{i.i.d.}$)
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Historical Simulation Value at Risk and Expected Shortfall]
+\begin{equation*}
+\VaR_{\text{hist}, 1-\alpha}^{1\text{d}} = - V_0 \cdot Q_{\alpha}(\{R_t\}_{t=1}^N), \qquad \CVaR_{\text{hist}, 1-\alpha}^{1\text{d}} = - V_0 \cdot \frac{1}{\lfloor N \alpha \rfloor} \sum_{t=1}^{\lfloor N \alpha \rfloor} R_{(t)}
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\VaR_{\text{hist}, 1-\alpha}^{1\text{d}} =$ Non-parametric Historical Simulation VaR
+    \item $\CVaR_{\text{hist}, 1-\alpha}^{1\text{d}} =$ Expected Shortfall (Conditional VaR) measuring average tail loss
+    \item $Q_{\alpha} =$ Empirical $\alpha$-quantile of historical return distribution
+    \item $R_{(t)} =$ Ordered order statistics of historical returns sorted from worst to best ($R_{(1)} \le R_{(2)} \le \dots$)
+    \item $V_0 =$ Initial position capital exposure
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Kupiec Proportion of Failures (POF) Likelihood Ratio Statistic]
+\begin{equation*}
+\LR_{\POF} = -2 \ln \left[ \frac{(1 - p_0)^{N - x} p_0^x}{(1 - \hat{p})^{N - x} \hat{p}^x} \right] \sim \chi^2(1)
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\LR_{\POF} = \text{Kupiec Likelihood Ratio test statistic}$
+    \item $N = \text{Total number of backtested historical trading days}$
+    \item $x = \text{Observed count of VaR exception violations } (\sum_{t=1}^N \mathbb{I}_{\{R_t < -\VaR\}})$
+    \item $p_0 = \text{Nominal exception probability ($0.05$ for } 95\% \text{ VaR, } 0.01 \text{ for } 99\% \text{ VaR)}$
+    \item $\hat{p} = \text{Empirical sample failure rate } (x / N)$
+    \item $\text{Decision Rule: Reject risk model if } \LR_{\POF} > 3.8415 \text{ at } 5\% \text{ significance}$
+\end{itemize}
+\end{formulabox}
+
+\newpage
+% ------------------------------------------------------------------------------
+% Chapter 4 Formulas: Black--Scholes Option Pricing & Greeks
+% ------------------------------------------------------------------------------
+\section*{Chapter 4: Black--Scholes Option Pricing \& Greeks}
+
+\begin{formulabox}[Standard Black--Scholes European Option Formulas ($q = 0$)]
+\begin{align*}
+C_{\text{std}} &= S_0 N(d_1) - K e^{-r T} N(d_2) \\
+P_{\text{std}} &= K e^{-r T} N(-d_2) - S_0 N(-d_1) \\
+d_1 = \frac{\ln(S_0 / K) + \left(r + \frac{\sigma^2}{2}\right)T}{\sigma \sqrt{T}}&, \qquad d_2 = d_1 - \sigma \sqrt{T}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $C_{\text{std}}, P_{\text{std}} = \text{Theoretical European call and put option prices with zero dividends}$
+    \item $S_0 = \text{Underlying spot price of the equity}$
+    \item $K = \text{Strike price of the option contract}$
+    \item $T = \text{Time to expiration in years } (\text{Days to expiry} / 365)$
+    \item $r = \text{Continuous risk-free interest rate (annualized)}$
+    \item $\sigma = \text{Annualized volatility of underlying equity returns}$
+    \item $N(\cdot) = \text{Cumulative standard normal distribution function}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Merton's Continuous Dividend-Adjusted Option Formulas ($q > 0$)]
+\begin{align*}
+C_{\text{merton}} &= S_0 e^{-q T} N(d_1) - K e^{-r T} N(d_2) \\
+P_{\text{merton}} &= K e^{-r T} N(-d_2) - S_0 e^{-q T} N(-d_1) \\
+d_1 = \frac{\ln(S_0 / K) + \left(r - q + \frac{\sigma^2}{2}\right)T}{\sigma \sqrt{T}}&, \qquad d_2 = d_1 - \sigma \sqrt{T}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $C_{\text{merton}}, P_{\text{merton}} = \text{Theoretical dividend-adjusted European call and put option prices}$
+    \item $q = \text{Continuous annual dividend yield of the underlying asset } (\text{Annual Payout} / S_0)$
+    \item $S_0, K, T, r, \sigma = \text{Standard Black--Scholes parameters as defined above}$
+    \item $e^{-q T} = \text{Continuous dividend discount factor on the underlying share}$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Analytical Closed-Form Option Greeks (Dividend-Adjusted)]
+\begin{align*}
+\Delta_{\text{call}} &= e^{-q T} N(d_1), \qquad \Delta_{\text{put}} = -e^{-q T} N(-d_1) \\
+\Gamma_{\text{call}} = \Gamma_{\text{put}} &= \frac{e^{-q T} N'(d_1)}{S_0 \sigma \sqrt{T}} \\
+\mathcal{V}_{\text{call}} = \mathcal{V}_{\text{put}} &= \frac{S_0 e^{-q T} \sqrt{T} N'(d_1)}{100} \\
+\Theta_{\text{call}} &= \frac{1}{365} \left[ -\frac{S_0 e^{-q T} N'(d_1) \sigma}{2 \sqrt{T}} + q S_0 e^{-q T} N(d_1) - r K e^{-r T} N(d_2) \right] \\
+\Theta_{\text{put}} &= \frac{1}{365} \left[ -\frac{S_0 e^{-q T} N'(d_1) \sigma}{2 \sqrt{T}} - q S_0 e^{-q T} N(-d_1) + r K e^{-r T} N(-d_2) \right] \\
+\rho_{\text{call}} &= \frac{K T e^{-r T} N(d_2)}{100}, \qquad \rho_{\text{put}} = -\frac{K T e^{-r T} N(-d_2)}{100}
+\end{align*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\Delta = \text{Option Delta measuring sensitivity to underlying price } (\partial V / \partial S)$
+    \item $\Gamma = \text{Option Gamma measuring curvature of Delta } (\partial^2 V / \partial S^2)$
+    \item $\mathcal{V} = \text{Option Vega measuring sensitivity to a } 1\% \text{ change in volatility } (\partial V / \partial \sigma)$
+    \item $\Theta = \text{Option Theta measuring calendar time decay per calendar day } (\partial V / \partial t)$
+    \item $\rho = \text{Option Rho measuring sensitivity to a } 1\% \text{ change in risk-free rate } (\partial V / \partial r)$
+    \item $N'(x) = \text{Standard normal probability density function } \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$
+\end{itemize}
+\end{formulabox}
+
+\newpage
+% ------------------------------------------------------------------------------
+% Chapter 5 Formulas: Integrated Derivative Hedging Strategies
+% ------------------------------------------------------------------------------
+\section*{Chapter 5: Integrated Derivative Hedging Strategies}
+
+\begin{formulabox}[Protective Put Payoff and Maximum Capital Loss]
+\begin{equation*}
+\Pi_{\text{prot}}(S_T) = (S_T - S_0) + \max(K - S_T, 0) - P(K)
+\end{equation*}
+\begin{equation*}
+\mathcal{L}_{\max} = (S_0 - K) + P(K) \quad \text{for } K \le S_0
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\Pi_{\text{prot}}(S_T) = \text{Net profit or loss per share at contract expiration } T$
+    \item $S_T = \text{Terminal spot price of underlying equity at expiration}$
+    \item $S_0 = \text{Initial equity acquisition price}$
+    \item $K = \text{Strike price of the purchased protective put option}$
+    \item $P(K) = \text{Upfront market option premium paid per share for the put}$
+    \item $\mathcal{L}_{\max} = \text{Maximum possible downside capital loss per share}$
+    \item $\text{Condition: If } K = S_0 \text{ (ATM Put), the maximum downside loss is strictly } \mathcal{L}_{\max} = P(K)$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Zero-Cost Collar Piecewise Payoff Architecture]
+\begin{equation*}
+\Pi_{\text{collar}}(S_T) = (S_T - S_0) + \max(K_1 - S_T, 0) - \max(S_T - K_2, 0) - [P(K_1) - C(K_2)]
+\end{equation*}
+\begin{equation*}
+\Pi_{\text{collar}}(S_T) = \begin{cases}
+(K_1 - S_0) - \Delta_{\text{cost}}, & S_T \le K_1 \quad \text{(Guaranteed Downside Floor)} \\
+(S_T - S_0) - \Delta_{\text{cost}}, & K_1 < S_T < K_2 \quad \text{(Linear Stock Participation)} \\
+(K_2 - S_0) - \Delta_{\text{cost}}, & S_T \ge K_2 \quad \text{(Capped Upside Profit)}
+\end{cases}
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\Pi_{\text{collar}}(S_T) = \text{Net terminal profit/loss per share of collar structure}$
+    \item $K_1 = \text{Strike price of the purchased protective put option } (K_1 \le S_0)$
+    \item $K_2 = \text{Strike price of the written covered call option } (K_2 \ge S_0)$
+    \item $P(K_1) = \text{Upfront option premium paid for the put}$
+    \item $C(K_2) = \text{Upfront option premium collected from writing the call}$
+    \item $\Delta_{\text{cost}} = P(K_1) - C(K_2) = \text{Net initial debit (or credit if } < 0\text{)}$
+    \item $\text{Zero-Cost Condition: } P(K_1) \approx C(K_2) \implies \Delta_{\text{cost}} \approx 0$
+\end{itemize}
+\end{formulabox}
+
+\begin{formulabox}[Tail Risk Reduction Efficiency Metric]
+\begin{equation*}
+\text{VaR Reduction (\%)} = \left[ \frac{\mathcal{L}_{\text{unhedged}}(\VaR) - \mathcal{L}_{\text{hedged}}(\VaR)}{\mathcal{L}_{\text{unhedged}}(\VaR)} \right] \times 100\%
+\end{equation*}
+\textbf{Where:}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item $\mathcal{L}_{\text{unhedged}}(\VaR) =$ Total Rupee capital loss of unhedged equity lot at the $99\%$ 10-day VaR horizon
+    \item $\mathcal{L}_{\text{hedged}}(\VaR) =$ Total net capital loss of hedged portfolio at that exact same VaR spot price
+    \item $\text{VaR Reduction (\%)} =$ Percentage of extreme tail loss insulated by derivative positioning
+\end{itemize}
+\end{formulabox}
