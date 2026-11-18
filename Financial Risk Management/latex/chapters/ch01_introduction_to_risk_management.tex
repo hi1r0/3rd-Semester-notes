@@ -66,9 +66,9 @@ The total variance of an asset's return $\sigma_i^2$ under the Single Index Mode
             fill=lightgraybg,
             line width=1.2pt,
             rounded corners=3mm,
-            text width=6.8cm,
-            minimum height=6.2cm,
-            inner sep=4mm,
+            text width=6.5cm,
+            minimum height=6.0cm,
+            inner sep=3.5mm,
             align=left
         },
         header/.style={
@@ -77,7 +77,7 @@ The total variance of an asset's return $\sigma_i^2$ under the Single Index Mode
             align=center,
             rounded corners=1.5mm,
             inner sep=2mm,
-            text width=6.4cm
+            text width=6.1cm
         },
         connector/.style={
             line width=1.4pt,
@@ -90,7 +90,7 @@ The total variance of an asset's return $\sigma_i^2$ under the Single Index Mode
     \node[card] (sys) at (0,0) {
         \begin{tikzpicture}[baseline=(top.base)]
             \node[header, fill=navyblue] (top) {Systematic Risk (Market-Wide)};
-        \end{tikzpicture}\\[0.3cm]
+        \end{tikzpicture}\\[0.25cm]
         \small
         \textbf{Nature:} Pervasive, non-diversifiable risk stemming from macro-environmental forces.\\
         \textbf{Key Drivers:}
@@ -103,11 +103,11 @@ The total variance of an asset's return $\sigma_i^2$ under the Single Index Mode
         \textbf{Mitigation:} Cannot be eliminated by diversification; managed via index hedging, asset allocation, and macro overlay strategies.
     };
 
-    % Right Card: Unsystematic Risk (Identical Geometry & Clearance = 1.0cm)
-    \node[card, right=1.0cm of sys] (unsys) {
+    % Right Card: Unsystematic Risk (Identical Geometry & Clearance = 0.8cm)
+    \node[card, right=0.8cm of sys] (unsys) {
         \begin{tikzpicture}[baseline=(top2.base)]
             \node[header, fill=darkteal] (top2) {Unsystematic Risk (Specific)};
-        \end{tikzpicture}\\[0.3cm]
+        \end{tikzpicture}\\[0.25cm]
         \small
         \textbf{Nature:} Idiosyncratic, diversifiable risk unique to a specific firm or narrow sector.\\
         \textbf{Key Drivers:}
@@ -133,108 +133,104 @@ Modern financial risk management categorizes exposures into five major interrela
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
+    >=stealth,
     headerbox/.style={
         draw=navyblue,
         fill=navyblue,
         text=white,
         line width=1.3pt,
         rounded corners=2mm,
-        text width=13.6cm,
+        text width=14.8cm,
         minimum height=1.0cm,
         align=center,
         font=\bfseries\sffamily\small
     },
-    pillarhead/.style={
+    pillar/.style={
         draw=navyblue,
-        fill=softblue!80,
-        text=navyblue,
+        fill=lightgraybg,
         line width=1.1pt,
-        rounded corners=1.5mm,
-        text width=3.1cm,
-        minimum height=0.85cm,
-        align=center,
-        font=\bfseries\sffamily\scriptsize
+        rounded corners=2mm,
+        text width=3.2cm,
+        minimum height=4.6cm,
+        inner sep=3mm,
+        align=left
     },
-    leafbox/.style={
-        draw=darkteal,
-        fill=white,
-        line width=0.9pt,
-        rounded corners=1.2mm,
-        text width=3.1cm,
-        minimum height=0.72cm,
+    pillarhead/.style={
+        font=\bfseries\sffamily\scriptsize,
+        text=white,
         align=center,
-        font=\sffamily\scriptsize
+        rounded corners=1.2mm,
+        inner sep=1.8mm,
+        text width=2.8cm
     },
     connector/.style={
         line width=1.3pt,
         navyblue,
-        -{Stealth[length=2.5mm, width=1.8mm]}
-    },
-    subconnector/.style={
-        line width=1.0pt,
-        darkteal,
-        -{Stealth[length=2.2mm, width=1.5mm]}
+        -{Stealth[length=2.8mm, width=2.0mm]}
     }
 ]
 
     % Top Root Banner
-    \node[headerbox] (root) at (0,0) {Enterprise Financial Risk Taxonomy};
+    \node[headerbox] (root) at (0, 3.6) {Enterprise Financial Risk Taxonomy};
 
-    % 4 Evenly Spaced Category Pillars
-    \node[pillarhead] (p1) at (-5.1, -1.4) {1. Market Risk};
-    \node[pillarhead] (p2) at (-1.7, -1.4) {2. Credit Risk};
-    \node[pillarhead] (p3) at (1.7, -1.4) {3. Liquidity Risk};
-    \node[pillarhead] (p4) at (5.1, -1.4) {4. Operational Risk};
+    % 4 Evenly Spaced Category Pillars (Clearance = 0.8cm from Banner)
+    \node[pillar] (p1) at (-5.1, 0) {
+        \begin{tikzpicture}[baseline=(h1.base)]
+            \node[pillarhead, fill=navyblue] (h1) {1. Market Risk};
+        \end{tikzpicture}\\[0.25cm]
+        \scriptsize
+        \begin{itemize}[leftmargin=1.1em, itemsep=2.5pt, topsep=1pt]
+            \item \textbf{Equity Risk:} Stock beta \& multiple compression
+            \item \textbf{Interest Rate:} Yield curve duration \& convexity
+            \item \textbf{Currency (FX):} Exchange rate volatility
+            \item \textbf{Commodity:} Basis \& carrying cost shifts
+        \end{itemize}
+    };
 
-    % Connectors from Root to 4 Pillars
+    \node[pillar] (p2) at (-1.7, 0) {
+        \begin{tikzpicture}[baseline=(h2.base)]
+            \node[pillarhead, fill=darkteal] (h2) {2. Credit Risk};
+        \end{tikzpicture}\\[0.25cm]
+        \scriptsize
+        \begin{itemize}[leftmargin=1.1em, itemsep=2.5pt, topsep=1pt]
+            \item \textbf{Default Risk:} Obligor failure or insolvency
+            \item \textbf{Migration:} Credit rating downgrades
+            \item \textbf{Counterparty:} OTC derivatives replacement
+            \item \textbf{Settlement:} Herstatt cross-currency delay
+        \end{itemize}
+    };
+
+    \node[pillar] (p3) at (1.7, 0) {
+        \begin{tikzpicture}[baseline=(h3.base)]
+            \node[pillarhead, fill=amber] (h3) {3. Liquidity Risk};
+        \end{tikzpicture}\\[0.25cm]
+        \scriptsize
+        \begin{itemize}[leftmargin=1.1em, itemsep=2.5pt, topsep=1pt]
+            \item \textbf{Market / Asset:} Severe bid-ask spread widening
+            \item \textbf{Funding Risk:} Inability to roll over debt
+            \item \textbf{Cash Mismatch:} Short-term liquidity crunch
+            \item \textbf{Margin Calls:} Derivative collateral strain
+        \end{itemize}
+    };
+
+    \node[pillar] (p4) at (5.1, 0) {
+        \begin{tikzpicture}[baseline=(h4.base)]
+            \node[pillarhead, fill=charcoal] (h4) {4. Operational Risk};
+        \end{tikzpicture}\\[0.25cm]
+        \scriptsize
+        \begin{itemize}[leftmargin=1.1em, itemsep=2.5pt, topsep=1pt]
+            \item \textbf{Internal Fraud:} Rogue trading \& employee theft
+            \item \textbf{Systems / Cyber:} Infrastructure breakdown
+            \item \textbf{Execution Error:} Trade booking \& model flaws
+            \item \textbf{Legal / Sanctions:} Regulatory enforcement
+        \end{itemize}
+    };
+
+    % Connectors from Root Banner to all 4 Pillars (Clearance = 0.8cm)
     \draw[connector] (root.south -| p1.north) -- (p1.north);
     \draw[connector] (root.south -| p2.north) -- (p2.north);
     \draw[connector] (root.south -| p3.north) -- (p3.north);
     \draw[connector] (root.south -| p4.north) -- (p4.north);
-
-    % Column 1: Market Risk Leaves (Stacked Vertically)
-    \node[leafbox] (m1) at (-5.1, -2.45) {Equity Price Risk};
-    \node[leafbox] (m2) at (-5.1, -3.35) {Interest Rate Risk};
-    \node[leafbox] (m3) at (-5.1, -4.25) {Currency (FX) Risk};
-    \node[leafbox] (m4) at (-5.1, -5.15) {Commodity Price Risk};
-
-    \draw[subconnector] (p1.south) -- (m1.north);
-    \draw[subconnector] (m1.south) -- (m2.north);
-    \draw[subconnector] (m2.south) -- (m3.north);
-    \draw[subconnector] (m3.south) -- (m4.north);
-
-    % Column 2: Credit Risk Leaves (Stacked Vertically)
-    \node[leafbox] (c1) at (-1.7, -2.45) {Default / Insolvency};
-    \node[leafbox] (c2) at (-1.7, -3.35) {Downgrade / Migration};
-    \node[leafbox] (c3) at (-1.7, -4.25) {Counterparty Exposure};
-    \node[leafbox] (c4) at (-1.7, -5.15) {Settlement / Herstatt};
-
-    \draw[subconnector] (p2.south) -- (c1.north);
-    \draw[subconnector] (c1.south) -- (c2.north);
-    \draw[subconnector] (c2.south) -- (c3.north);
-    \draw[subconnector] (c3.south) -- (c4.north);
-
-    % Column 3: Liquidity Risk Leaves (Stacked Vertically)
-    \node[leafbox] (l1) at (1.7, -2.45) {Market / Asset Liquidity};
-    \node[leafbox] (l2) at (1.7, -3.35) {Funding Liquidity Risk};
-    \node[leafbox] (l3) at (1.7, -4.25) {Roll-over / Refinancing};
-    \node[leafbox] (l4) at (1.7, -5.15) {Cash Flow Mismatch};
-
-    \draw[subconnector] (p3.south) -- (l1.north);
-    \draw[subconnector] (l1.south) -- (l2.north);
-    \draw[subconnector] (l2.south) -- (l3.north);
-    \draw[subconnector] (l3.south) -- (l4.north);
-
-    % Column 4: Operational Risk Leaves (Stacked Vertically)
-    \node[leafbox] (o1) at (5.1, -2.45) {Internal Fraud / People};
-    \node[leafbox] (o2) at (5.1, -3.35) {System Failure / Cyber};
-    \node[leafbox] (o3) at (5.1, -4.25) {Process Execution Error};
-    \node[leafbox] (o4) at (5.1, -5.15) {External Events / Legal};
-
-    \draw[subconnector] (p4.south) -- (o1.north);
-    \draw[subconnector] (o1.south) -- (o2.north);
-    \draw[subconnector] (o2.south) -- (o3.north);
-    \draw[subconnector] (o3.south) -- (o4.north);
 \end{tikzpicture}
 \caption{Comprehensive Enterprise Financial Risk Taxonomy (4-Column Symmetrical Architecture).}
 \label{fig:risk_taxonomy}
@@ -285,7 +281,7 @@ Regulatory authorities worldwide (including the Reserve Bank of India, Federal R
             line width=1.2pt,
             rounded corners=2mm,
             text width=4.3cm,
-            minimum height=6.2cm,
+            minimum height=5.6cm,
             inner sep=3mm,
             align=left
         },
@@ -300,12 +296,12 @@ Regulatory authorities worldwide (including the Reserve Bank of India, Federal R
         stem/.style={
             line width=1.4pt,
             navyblue,
-            -{Stealth[length=3mm, width=2.2mm]}
+            -{Stealth[length=2.8mm, width=2.0mm]}
         }
     }
 
     % Top Governance Banner
-    \node[topbanner] (board) at (0, 4.0) {
+    \node[topbanner] (board) at (0, 4.2) {
         BOARD OF DIRECTORS \& RISK POLICY COMMITTEE\\
         \footnotesize Overall Risk Appetite, Capital Adequacy Strategy, and Ultimate Governance Accountability
     };

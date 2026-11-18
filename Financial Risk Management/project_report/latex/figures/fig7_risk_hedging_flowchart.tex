@@ -132,10 +132,10 @@
         Dividend adjustment ($q=5.09\%$) eliminates an empirical pricing misstatement of \rupee 0.90/call and \rupee 0.77/put on NSE contracts.
     };
 
-    % Balanced Drop Connectors into Bottom Summary Box
-    \draw[flowline] (c1.south) |- ($(bottom.north west)+(0.8cm,0.4cm)$) -- ($(bottom.north west)+(0.8cm,0)$);
-    \draw[flowline] (c2.south) |- ($(bottom.north west)+(4.4cm,0.4cm)$) -- ($(bottom.north west)+(4.4cm,0)$);
-    \draw[flowline] (c3.south) |- ($(bottom.north east)+(-4.4cm,0.4cm)$) -- ($(bottom.north east)+(-4.4cm,0)$);
-    \draw[flowline] (c4.south) |- ($(bottom.north east)+(-0.8cm,0.4cm)$) -- ($(bottom.north east)+(-0.8cm,0)$);
+    % Balanced Vertical Drop Connectors into Bottom Summary Box (Rule 4 Clearance = 1.0cm)
+    \draw[flowline] (c1.south) -- (c1.south |- bottom.north);
+    \draw[flowline] (c2.south) -- (c2.south |- bottom.north);
+    \draw[flowline] (c3.south) -- (c3.south |- bottom.north);
+    \draw[flowline] (c4.south) -- (c4.south |- bottom.north);
 
 \end{tikzpicture}
