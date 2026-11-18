@@ -24,10 +24,12 @@
 | └── [`figures/`](./latex/figures/) | University crest and graphics. |
 | [`project_report/`](./project_report/) | **Empirical Term Project:** *Downside Risk Quantification and Derivative Hedging Efficiency: An Empirical Application of Value at Risk (VaR) and the Black–Scholes Model on ITC Limited* (MSQF 533 Unit II & Case Study CO3/CO5). |
 | ├── [`main.pdf`](./project_report/main.pdf) | **Compiled 40-Page Strict Greyscale Research Monograph** complete with Pondicherry University title page, Roman-numeral front matter, 6 analytical chapters, 7 high-contrast figures, and end-of-document Formula Reference Sheet. |
+| ├── [`condensed_paper/`](./project_report/condensed_paper/) | **Condensed 11-Page Academic Research Paper** in strict monochrome format, optimized for journal submission and term evaluation with 3 consolidated multi-panel figures and compact formula sheet. |
+| │   └── [`main.pdf`](./project_report/condensed_paper/main.pdf) | **Compiled 11-Page Clean PDF** (strictly $<15$ pages). |
 | ├── [`data/`](./project_report/data/) | 1-year daily historical price dataset (`itc_historical_1y.csv`) and quantitative metrics output (`itc_analysis_metrics.json`). |
-| ├── [`scripts/`](./project_report/scripts/) | Quantitative Python engine (`run_analysis.py`) computing return diagnostics, VaR, Kupiec backtesting, Black-Scholes/Merton pricing, Greeks, and rendering all greyscale visualizations. |
-| ├── [`figures/`](./project_report/figures/) | High-resolution publication-quality greyscale figures (PDF & PNG) for price/volume, return distribution, Kupiec timeline, IV smile, Greeks, and payoff curves. |
-| └── [`latex/`](./project_report/latex/) | Full modular LaTeX project with strict greyscale configuration, custom tcolorboxes, TikZ flowchart, and chapter source files. |
+| ├── [`scripts/`](./project_report/scripts/) | Quantitative Python engines (`run_analysis.py` & `generate_condensed_figures.py`) computing return diagnostics, VaR, Kupiec backtesting, Black-Scholes/Merton pricing, Greeks, and rendering all greyscale visualizations. |
+| ├── [`figures/`](./project_report/figures/) | High-resolution publication-quality greyscale figures (PDF & PNG). |
+| └── [`latex/`](./project_report/latex/) | Full modular monograph LaTeX project. |
 | [`MSQF_533_Unit_I_Financial_Risk_Management.pdf`](./MSQF_533_Unit_I_Financial_Risk_Management.pdf) | Faculty lecture slides (Dr. Kamalakkannan Adhisekar) covering Unit I foundations. |
 | [`MSQF-Introduction_to_Risk_Management-Class.pptx`](./MSQF-Introduction_to_Risk_Management-Class.pptx) | Core presentation deck (Prof. D. Lazar, 150 slides across 18 sections) grounded in Indian financial markets (NSE, BSE, MCX, RBI, SEBI, IRDAI). |
 

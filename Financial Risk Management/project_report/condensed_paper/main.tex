@@ -1,0 +1,59 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==============================================================================
+% Preamble Configurations: Strict Greyscale Condensed Academic Paper
+% ==============================================================================
+\input{preamble/packages.tex}
+\input{preamble/environments.tex}
+\input{preamble/macros.tex}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% 1. Title Block, Abstract, Introduction & Problem Formulation
+% ------------------------------------------------------------------------------
+\input{sections/sec01_introduction.tex}
+
+% ------------------------------------------------------------------------------
+% 2. Corporate Profile & Asset Calibration
+% ------------------------------------------------------------------------------
+\input{sections/sec02_corporate_profile.tex}
+
+% ------------------------------------------------------------------------------
+% 3. Empirical Data Ingestion & Return Diagnostics
+% ------------------------------------------------------------------------------
+\input{sections/sec03_return_diagnostics.tex}
+
+% ------------------------------------------------------------------------------
+% 4. Market Risk Quantification via Value at Risk (VaR) & Backtesting
+% ------------------------------------------------------------------------------
+\input{sections/sec04_market_risk_var.tex}
+
+% ------------------------------------------------------------------------------
+% 5. Option Valuation via Black--Scholes--Merton & Greeks Decomposition
+% ------------------------------------------------------------------------------
+\input{sections/sec05_black_scholes_valuation.tex}
+
+% ------------------------------------------------------------------------------
+% 6. Integrated Derivative Hedging Efficiency & Strategy Comparison
+% ------------------------------------------------------------------------------
+\input{sections/sec06_integrated_hedging.tex}
+
+% ------------------------------------------------------------------------------
+% 7. Conclusions, Decision Rules & Model Limitations
+% ------------------------------------------------------------------------------
+\input{sections/sec07_conclusions.tex}
+
+% ------------------------------------------------------------------------------
+% 8. Comprehensive Formula Reference Sheet (Mandatory Invariant Rule #5)
+% ------------------------------------------------------------------------------
+\input{sections/formula_reference.tex}
+
+% ------------------------------------------------------------------------------
+% 9. References & Academic Bibliography
+% ------------------------------------------------------------------------------
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

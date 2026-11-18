@@ -35,7 +35,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 │   └── README.md                   # Subject overview and directory index
 ├── Financial Risk Management/      # MSQF 533: Financial Risk Management
 │   ├── latex/                      # Modular LaTeX lecture notes (Units I & II, TikZ architectures, 29-page main.pdf)
-│   ├── project_report/             # Empirical Research Report: Downside Risk & Option Hedging on ITC Limited (40-page main.pdf)
+│   ├── project_report/             # Empirical Research Report on ITC Limited (40-page monograph & 11-page condensed paper)
 │   ├── MSQF_533_Unit_I_Financial_Risk_Management.pdf # Unit I lecture slides (Dr. Kamalakkannan Adhisekar)
 │   ├── MSQF-Introduction_to_Risk_Management-Class.pptx # 150-slide class deck grounded in Indian markets (Prof. D. Lazar)
 │   ├── syllabus.md                 # Verbatim course syllabus, objectives & CO-PO matrix

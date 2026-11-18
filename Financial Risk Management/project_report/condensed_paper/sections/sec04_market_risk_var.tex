@@ -1,0 +1,62 @@
+% ==============================================================================
+% Section 4: Market Risk Quantification via Value at Risk (VaR) & Backtesting
+% ==============================================================================
+
+\section{Market Risk Measurement via Value at Risk (VaR)}
+\label{sec:var_modeling}
+
+Value at Risk ($\VaR$) measures the maximum expected portfolio loss over a designated holding period $T_h$ at confidence level $1 - \alpha$:
+\begin{equation}
+\VaR_{\alpha, T_h} = -\inf \left\{ \ell \in \mathbb{R} : \Prob(\Delta V \le \ell) > \alpha \right\}
+\end{equation}
+To quantify this exposure, we deploy two distinct methodologies:
+
+\begin{enumerate}[leftmargin=1.8em, noitemsep]
+    \item \textbf{Parametric (Delta-Normal) Model:} Assumes Gaussian returns $R_t \sim \mathcal{N}(\mu, \sigma^2)$, defining 1-day percentage and currency loss as:
+    \begin{equation}
+    \VaR_{\text{param}, 1-\alpha}^{1\text{d}} = V_0 \times \left(Z_{\alpha} \cdot \sigma_{\text{daily}} - \mu_{\text{daily}}\right)
+    \end{equation}
+    where $Z_{0.05} = 1.644853$ ($95\%$ confidence) and $Z_{0.01} = 2.326348$ ($99\%$ confidence). Scaling to the regulatory 10-day horizon follows the Square-Root of Time rule: $\VaR_{10\text{d}} = \VaR_{1\text{d}} \times \sqrt{10}$.
+    \item \textbf{Historical Simulation Model:} Makes zero distributional assumptions, taking the empirical $\alpha$-quantile of sorted returns:
+    \begin{equation}
+    \VaR_{\text{hist}, 1-\alpha}^{1\text{d}} = - V_0 \cdot Q_{\alpha}\left(\{R_t\}_{t=1}^N\right)
+    \end{equation}
+    Expected Shortfall ($\CVaR$), which satisfies coherent risk properties, averages all returns falling beyond the $\VaR$ cutoff: $\CVaR_{\alpha}^{1\text{d}} = - V_0 \cdot \E[R_t \mid R_t \le Q_{\alpha}]$.
+\end{enumerate}
+
+Table~\ref{tab:var_and_kupiec} details the empirical risk measurements and Kupiec backtest statistics for 1 market lot ($1,725$ shares, $V_0 = \text{\rupee}4,91,625.00$).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Empirical VaR, Expected Shortfall (CVaR), and Kupiec POF Backtesting for 1 Lot of ITC}
+\label{tab:var_and_kupiec}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+\textbf{Confidence} & \textbf{Methodology} & \textbf{1-Day (INR)} & \textbf{10-Day (INR)} & \textbf{Obs. Breaches ($x$)} & \textbf{$\LR_{\POF}$ Stat} & \textbf{$p$-value} \\
+\midrule
+$95\%$ & Parametric $\VaR$ & \rupee 12,468.81 & \rupee 39,429.84 & $9$ ($3.66\%$) & $1.0236$ & $0.3117$ \\
+$95\%$ & Historical $\VaR$ & \rupee 10,296.51 & \rupee 32,560.44 & $13$ ($5.28\%$) & $0.0412$ & $0.8391$ \\
+\midrule
+$99\%$ & Parametric $\VaR$ & \rupee 17,407.90 & \rupee 55,048.61 & $4$ ($1.63\%$) & $0.8188$ & $0.3655$ \\
+$99\%$ & Historical $\VaR$ & \rupee 19,443.90 & \textbf{\rupee 61,487.02} & $3$ ($1.22\%$) & $0.1119$ & $0.7380$ \\
+\midrule
+$95\%$ & Historical $\CVaR$ & \rupee 17,264.03 & \rupee 54,593.64 & -- & -- & -- \\
+$99\%$ & Historical $\CVaR$ & \rupee 30,083.04 & \textbf{\rupee 95,130.94} & -- & -- & -- \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{2pt}
+\begin{minipage}{\linewidth}
+\footnotesize\textbf{Note:} Position value $V_0 = \text{\rupee}4,91,625.00$ ($1,725\text{ shares} \times \text{\rupee}285.00$). Critical value for Kupiec Likelihood Ratio ($\LR_{\POF}$) at $5\%$ significance ($\chi^2_{0.05, 1}$) is $3.8415$.
+\end{minipage}
+\end{table}
+
+\begin{empiricalbox}{The Fat-Tail Wedge in Downside Risk Measurement}{fat_tail_wedge}
+At the $95\%$ level, the parametric model slightly overstates loss due to central leptokurtic peakedness. However, at the extreme $99\%$ tail, the relationship inverts:
+\begin{equation}
+\VaR_{\text{hist}, 99\%}^{10\text{d}} = \text{\textbf{\rupee 61,487.02}} \quad \text{vs.} \quad \VaR_{\text{param}, 99\%}^{10\text{d}} = \text{\textbf{\rupee 55,048.61}}
+\end{equation}
+Historical simulation produces an unhedged 10-day downside risk estimate that is \textbf{\rupee 6,438.41 higher (+11.70\%)} than the Gaussian estimate. Furthermore, 10-day Expected Shortfall reaches \textbf{\rupee 95,130.94} ($19.35\%$ of total capital). Under the Basel Committee's regulatory Traffic Light System for 250-day testing ($99\%$), both models exhibit $\le 4$ exceptions and reside securely in the \textbf{Green Zone}.
+\end{empiricalbox}

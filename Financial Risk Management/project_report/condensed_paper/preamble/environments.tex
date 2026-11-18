@@ -1,0 +1,76 @@
+% ==============================================================================
+% Greyscale TColorBox Environments for Condensed Paper
+% ==============================================================================
+
+% 1. Definition Box
+\newtcbtheorem[number within=section]{definition}{Definition}{
+    enhanced,
+    colback=grayfaint,
+    colframe=pureblack,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=pureblack, arc=1.2mm},
+    boxrule=0.9pt,
+    arc=1.5mm,
+    top=3mm,
+    bottom=2.5mm,
+    left=3.5mm,
+    right=3.5mm,
+    breakable
+}{def}
+
+% 2. Theorem Box
+\newtcbtheorem[number within=section]{theorem}{Theorem}{
+    enhanced,
+    colback=grayfaint,
+    colframe=graydark,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=graydark, arc=1.2mm},
+    boxrule=0.9pt,
+    arc=1.5mm,
+    top=3mm,
+    bottom=2.5mm,
+    left=3.5mm,
+    right=3.5mm,
+    breakable
+}{thm}
+
+% 3. Empirical Result Box
+\newtcbtheorem[number within=section]{empiricalbox}{Empirical Finding}{
+    enhanced,
+    colback=grayfaint,
+    colframe=pureblack,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily\small,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=pureblack, arc=1.2mm},
+    boxrule=1.0pt,
+    arc=1.5mm,
+    top=3mm,
+    bottom=2.5mm,
+    left=3.5mm,
+    right=3.5mm,
+    breakable
+}{emp}
+
+% 4. Formula Summary Box
+\newtcolorbox{formulabox}[1][]{
+    enhanced,
+    colback=grayfaint,
+    colframe=graydark,
+    title={#1},
+    fonttitle=\bfseries\sffamily\footnotesize,
+    coltitle=white,
+    attach boxed title to top left={yshift=-1.8mm, xshift=3.5mm},
+    boxed title style={colback=graydark, arc=1mm},
+    boxrule=0.8pt,
+    arc=1.2mm,
+    top=2.5mm,
+    bottom=2.2mm,
+    left=3mm,
+    right=3mm,
+    breakable
+}

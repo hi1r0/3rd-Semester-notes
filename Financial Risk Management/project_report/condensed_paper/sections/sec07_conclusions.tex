@@ -1,0 +1,26 @@
+% ==============================================================================
+% Section 7: Conclusions & Model Limitations
+% ==============================================================================
+
+\section{Conclusions and Model Limitations}
+\label{sec:conclusions}
+
+This study has established a quantitative bridge between downside tail risk measurement ($\VaR$ / $\CVaR$) and derivative option valuation under the Black--Scholes--Merton framework for an equity position in \textbf{ITC Limited (NSE: ITC)}. 
+
+\subsection{Key Empirical Findings}
+\begin{enumerate}[leftmargin=1.8em, noitemsep]
+    \item \textbf{Failure of Return Normality:} ITC daily log returns exhibit severe negative skewness ($\hat{S} = -0.9243$) and extreme leptokurtosis ($\hat{K}_{\text{excess}} = +9.8233$). Gaussian normality is rejected with a Jarque--Bera statistic of $JB = 979.34$ ($p = 2.18 \times 10^{-213}$).
+    \item \textbf{The Fat-Tail Wedge:} At the $99\%$ 10-day horizon, Historical Simulation $\VaR$ reaches \textbf{\rupee 61,487.02} ($12.51\%$ of capital), revealing an \textbf{11.70\% underestimation} in Gaussian models (\rupee 55,048.61), while Expected Shortfall ($\CVaR$) surges to \textbf{\rupee 95,130.94} ($19.35\%$). Both models pass Kupiec POF backtests in the Basel \textbf{Green Zone}.
+    \item \textbf{Dividend Adjustment Necessity:} Ignoring ITC's $5.09\%$ trailing dividend yield introduces up to a $+9.76\%$ pricing error in standard Black--Scholes call options and $-8.84\%$ underpricing in put options. Merton's model eliminates this structural distortion.
+    \item \textbf{Derivative Hedging Superiority:} An \textbf{ATM Protective Put} caps capital loss at \rupee 15,283.50 ($75.14\%$ VaR reduction), while a \textbf{Zero-Cost Collar} delivers a **$78.96\%$ VaR reduction** at an upfront cash outlay of only \rupee 2.50 per share ($0.88\%$ of portfolio value).
+\end{enumerate}
+
+\subsection{Actionable Risk Governance Decision Rules}
+\begin{itemize}[leftmargin=1.8em, noitemsep]
+    \item \textbf{Rule 1 (Policy Shock Protocol):} Ahead of fiscal policy events (Union Budget tobacco tax announcements), portfolio managers must transition from Parametric $\VaR$ to Historical Simulation or Extreme Value Theory ($\text{EVT}$) to capture fat-tail jump risks.
+    \item \textbf{Rule 2 (Mandatory Dividend Calibration):} When pricing or hedging equities with dividend yields exceeding $2.5\%$, risk management engines must enforce Merton's dividend-adjusted formula ($q > 0$).
+    \item \textbf{Rule 3 (Collar Deployment Standard):} In defensive equity mandates, institutional managers should prefer Zero-Cost Collars over outright puts, monetizing capped upside above dividend growth expectations to eliminate insurance cash drag.
+\end{itemize}
+
+\subsection{Model Limitations}
+Key econometric limitations include: (i) the constant volatility assumption in Black--Scholes (which fails to capture the empirical $25.51\%$ OTM put volatility smile); (ii) multi-day $\sqrt{T}$ scaling frictions in the presence of volatility clustering; (iii) continuous dividend yield approximation vs. discrete lump-sum payouts; and (iv) real-world liquidity and Securities Transaction Tax (STT) frictions on the NSE.

@@ -1,0 +1,25 @@
+% ==============================================================================
+% Section 2: Corporate Profile & Asset Calibration
+% ==============================================================================
+
+\section{Corporate Profile and Asset Calibration}
+\label{sec:corporate_profile}
+
+ITC Limited represents one of India's preeminent multi-business conglomerates, operating across Fast-Moving Consumer Goods (FMCG-Cigarettes and FMCG-Others), Agri-Business, Paperboards \& Packaging, and Information Technology. The company provides a unique empirical laboratory for quantitative risk management due to three fundamental characteristics:
+
+\begin{enumerate}[leftmargin=1.8em, noitemsep]
+    \item \textbf{Debt-Free Balance Sheet and Cash Reserves:} ITC maintains a zero-debt capital structure with negligible long-term borrowings and massive operating cash reserves ($\approx$ \rupee 18,000 to \rupee 20,000 crore in annual operating cash flows). Consequently, its equity dynamics are unpolluted by financial leverage risk, ensuring that equity volatility reflects pure operational performance and macroeconomic policy shocks.
+    \item \textbf{High and Predictable Dividend Yield ($q = 5.09\%$):} ITC distributes $80\%\text{--}85\%$ of consolidated profits as dividends. Over the trailing financial year, ITC paid \rupee 14.50 per share in aggregate dividends (\rupee 6.50 interim and \rupee 8.00 final). Against an underlying spot price of $S_0 = \text{\rupee}285.00$, this generates a substantial trailing dividend yield of:
+    \begin{equation}
+    q = \frac{\text{\rupee}14.50}{\text{\rupee}285.00} \approx 5.088\% \approx 5.09\% \text{ per annum}
+    \end{equation}
+    Ignoring this substantial dividend yield introduces severe structural mispricing into European derivative models, as demonstrated in Section~\ref{sec:black_scholes}.
+    \item \textbf{Asymmetric Regulatory and Fiscal Vulnerability:} Despite its defensive consumer staples positioning, ITC's core earnings engine (Cigarettes, contributing $>75\%$ of EBIT) is periodically subjected to sudden fiscal shocks, including National Calamity Contingent Duty (NCCD) hikes, GST cess revisions, and Union Budget tobacco excise rate adjustments. These episodic announcements introduce distinct negative tail jumps into the empirical return series, creating significant leptokurtosis and volatility skew.
+\end{enumerate}
+
+\subsection{Position Exposure Setup}
+To ground the analysis in live market mechanics, we calibrate all risk measurements and option contracts to \textbf{1 standard NSE F\&O market lot}:
+\begin{equation}
+\text{Lot Size } (L) = 1,725 \text{ shares}, \quad S_0 = \text{\rupee}285.00 \implies V_0 = 1,725 \times 285.00 = \text{\textbf{\rupee 4,91,625.00}}
+\end{equation}
+Contract expiry is set to the December 2026 monthly expiry ($T = 42/365 \approx 0.11507$ years) with a risk-free interest rate of $r = 6.65\%$ based on the Reserve Bank of India 91-day Treasury Bill cut-off yield.
