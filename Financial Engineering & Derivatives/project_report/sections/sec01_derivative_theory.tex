@@ -1,0 +1,43 @@
+% ==============================================================================
+% Section 1: Derivative Pricing Theory & Continuous-Time Arbitrage
+% Target: Page 2 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Derivative Pricing Theory and Continuous-Time Arbitrage}
+\label{sec:derivative_theory}
+
+\subsection{The Continuous-Time Valuation Paradigm}
+
+The pricing of financial derivative instruments was revolutionized by the continuous-time arbitrage framework formulated by \citet{black1973pricing} and \citet{merton1973theory}. Prior to their breakthrough, contingent claim valuation depended on subjective risk preferences, unobservable investor utility functions, and arbitrary risk premiums. 
+
+The Black--Scholes--Merton (BSM) paradigm established that in a frictionless, arbitrage-free financial market where an underlying stock and a riskless money market account trade continuously, an option can be perfectly replicated through a self-financing, dynamically rebalanced portfolio of the underlying asset and cash debt. Consequently, the fair value of any European option must equal the initial capital required to construct this replicating portfolio.
+
+\subsection{Risk-Neutral Valuation and the Equivalent Martingale Measure}
+
+The absence of arbitrage is mathematically equivalent to the existence of an **Equivalent Martingale Measure** (EMM), denoted by $\Qprob$ \citep{hull2018options}. Under $\Qprob$:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=(\roman*)]
+    \item All tradeable assets discounted by the risk-free rate of return $r$ are martingales:
+    \begin{equation}
+        S_t = e^{-r(T-t)} \E^{\Qprob} \left[ S_T \;\middle|\; \mathcal{F}_t \right]
+        \label{eq:martingale_property}
+    \end{equation}
+    \item The subjective drift of the underlying equity $\mu$ is replaced by the risk-free rate $r$. Investors require no compensation for bearing risk because the option risk can be dynamically eliminated.
+    \item The theoretical arbitrage-free value of a European contingent claim with terminal payoff $\Phi(S_T)$ at expiration $T$ is given by the discounted conditional expectation under $\Qprob$:
+    \begin{equation}
+        V(S_t, t) = e^{-r(T-t)} \E^{\Qprob} \left[ \Phi(S_T) \;\middle|\; \mathcal{F}_t \right]
+        \label{eq:risk_neutral_expectation}
+    \end{equation}
+\end{enumerate}
+
+\subsection{Relevance to Indian Equity Derivatives and Corporate Realities}
+
+On the National Stock Exchange of India (NSE), equity options are cleared through the National Securities Clearing Corporation Limited (NSCCL) under standardized margin rules. Applying continuous-time derivative pricing to large-cap single-stock equities such as ITC Limited introduces vital practical complexities:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Significant Cash Dividend Payouts:} ITC pays substantial semi-annual cash dividends (\inr 14.50 trailing payout per share), inducing predictable downward discrete jumps in the ex-dividend spot price.
+    \item \textbf{Standard Option Mispricing:} Standard textbook models that ignore dividend flows overprice calls and underprice puts, introducing systematic pricing errors on Indian option trading desks.
+    \item \textbf{Integrated Hedging Applications:} Derivative contracts serve as essential risk management tools to insulate equity portfolios against severe macro-fiscal shocks, such as Union Budget excise duty announcements.
+\end{itemize}
+
+This report rigorously calibrates continuous and discrete dividend option models to empirical NSE market quotes, evaluates Greek sensitivities, quantifies volatility skew, and designs multi-leg protective hedging architectures.
+
+\clearpage

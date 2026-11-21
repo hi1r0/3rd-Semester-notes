@@ -1,0 +1,39 @@
+% ==============================================================================
+% Section 13 & References: Econometric Limitations & Academic Bibliography
+% Target: Page 15
+% ==============================================================================
+
+\section{Econometric Limitations and Concluding Recommendations}
+\label{sec:limitations_conclusions}
+
+\subsection{Econometric Limitations of the Study}
+
+While the empirical analyses conducted in this report provide rigorous quantitative benchmarks for managing equity market risk, several econometric limitations must be acknowledged:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=(\alph*)]
+    \item \textbf{Assumption of Stationarity:} Non-parametric Historical Simulation implicitly assumes that the underlying data-generating process is strictly stationary. Structural breaks—such as the corporate demerger of ITC Hotels or major revisions in the GST compensation cess structure—alter the true distribution of future asset returns.
+    \item \textbf{Ghost Features and Sample Horizon Sensitivity:} In unweighted historical windows, a large historical shock (e.g., an $8.5\%$ Budget drawdown) abruptly enters the sample, inflates $\VaR$ estimates for exactly 246 days, and then abruptly drops out, creating an artificial ``ghost drop'' in estimated risk without any corresponding change in market fundamentals.
+    \item \textbf{Unhedged Cash Equity Horizon:} The models analyzed assume static positions over 1-day and 10-day intervals, ignoring dynamic intraday stop-loss execution, exchange circuit filters, and derivatives-based tail risk hedging.
+\end{enumerate}
+
+\subsection{Concluding Recommendations for Institutional Desks}
+
+Based on our empirical findings across the 246-session observation window of ITC Limited:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Adopt Expected Shortfall over VaR:} Given that 10-day $99\%$ Expected Shortfall (\inr 95,131) exceeds 10-day $99\%$ Historical $\VaR$ (\inr 61,488) by over $54.7\%$, institutions must anchor internal capital reserves to $\ES$ to guarantee solvency against deep tail events.
+    \item \textbf{Incorporate Policy Jump-Diffusion Processes:} Standard Gaussian Monte Carlo understates extreme tail risk. Institutional simulation desks should augment Geometric Brownian Motion with Poisson jump processes calibrated specifically to Union Budget event dates.
+    \item \textbf{Execute Derivative Tail Hedging:} Holding an unhedged single-stock exposure requires a punitive regulatory capital reserve of \inr 1,84,464 ($37.5\%$ of position value). Implementing option-based hedging structures offers substantial capital relief and tail insulation.
+\end{itemize}
+
+\vspace{-0.4em}
+
+% ==============================================================================
+% Peer-Reviewed Academic Bibliography
+% ==============================================================================
+\begingroup
+\footnotesize
+\setlength{\bibsep}{1.2pt}
+\renewcommand{\section}[2]{}% Suppress default bibliography section header
+\subsubsection*{References}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\endgroup

@@ -22,12 +22,11 @@
 | ├── [`preamble/`](./latex/preamble/) | Typography, tcolorbox environments, math macros, title page, and Roman-numeral syllabus. |
 | ├── [`chapters/`](./latex/chapters/) | Chapter source files: `ch01_introduction_to_risk_management.tex`, `ch02_var_methods_and_hedging.tex`, and `formula_reference.tex`. |
 | └── [`figures/`](./latex/figures/) | University crest and graphics. |
-| [`project_report/`](./project_report/) | **Empirical Term Project:** *Downside Risk Quantification and Derivative Hedging Efficiency: An Empirical Application of Value at Risk (VaR) and the Black–Scholes Model on ITC Limited* (MSQF 533 Unit II & Case Study CO3/CO5). |
-| ├── [`main.pdf`](./project_report/main.pdf) | **Compiled 40-Page Strict Greyscale Research Monograph** complete with Pondicherry University title page, Roman-numeral front matter, 6 analytical chapters, 7 high-contrast figures, and end-of-document Formula Reference Sheet. |
-| ├── [`condensed_paper/`](./project_report/condensed_paper/) | **Joint Empirical Research Paper (MSQF 533 & MSQF 542):** *VaR and Black–Scholes Valuation of ITC Limited* in strict monochrome format, featuring official Pondicherry University title page layout, continuous flow (abstract & formula sheet removed), 3 consolidated multi-panel figures, and complete 10-reference bibliography. |
-| │   └── [`main.pdf`](./project_report/condensed_paper/main.pdf) | **Compiled 9-Page Clean PDF** (strictly $<15$ pages; evaluated under Course Instructor Dr. Kamalakkannan Adhisekar). |
-| ├── [`data/`](./project_report/data/) | 1-year daily historical price dataset (`itc_historical_1y.csv`) and quantitative metrics output (`itc_analysis_metrics.json`). |
-| ├── [`scripts/`](./project_report/scripts/) | Quantitative Python engines (`run_analysis.py` & `generate_condensed_figures.py`) computing return diagnostics, VaR, Kupiec backtesting, Black-Scholes/Merton pricing, Greeks, and rendering all greyscale visualizations. |
+| [`project_report/`](./project_report/) | **Empirical Term Project (MSQF 533):** *Downside Risk Quantification and Value at Risk (VaR) Modeling of ITC Limited (2025–2026)* (MSQF 533 Unit II & Case Study CO3/CO5). |
+| ├── [`main.pdf`](./project_report/main.pdf) | **Dedicated 15-Page Academic Empirical Report** in strict monochrome format, featuring the official Pondicherry University Department of Statistics title page layout, continuous document flow, comprehensive empirical diagnostics, multi-model VaR, Kupiec/Christoffersen backtesting, and Basel III regulatory capital charges. Evaluated under Course Instructor Dr. Kamalakkannan Adhisekar (November 2026). Exactly 15 pages. |
+| ├── [`condensed_paper/`](./project_report/condensed_paper/) | *Legacy Joint 9-Page Paper (MSQF 533 & MSQF 542)* on VaR and Black–Scholes. |
+| ├── [`data/`](./project_report/data/) | 1-year daily historical price dataset (`itc_historical_1y.csv`) and quantitative metrics output (`itc_analysis_metrics.json`, `full_analysis_metrics.json`). |
+| ├── [`scripts/`](./project_report/scripts/) | Quantitative Python engines (`run_analysis.py`, `generate_frm_fed_data_figures.py`) computing return diagnostics, VaR, Kupiec & Christoffersen backtesting, stress testing, and rendering all greyscale visualizations. |
 | ├── [`figures/`](./project_report/figures/) | High-resolution publication-quality greyscale figures (PDF & PNG). |
 | └── [`latex/`](./project_report/latex/) | Full modular monograph LaTeX project. |
 | [`MSQF_533_Unit_I_Financial_Risk_Management.pdf`](./MSQF_533_Unit_I_Financial_Risk_Management.pdf) | Faculty lecture slides (Dr. Kamalakkannan Adhisekar) covering Unit I foundations. |
@@ -97,21 +96,22 @@ Placed at the end of the monograph (`chapters/formula_reference.tex`), grouping 
 
 ---
 
-## 📈 Empirical Case Study Project Report: ITC Limited
+## 📈 Empirical Project Report: Value at Risk (VaR) Modeling of ITC Limited
 
-Located in [`project_report/`](./project_report/), this 40-page technical research monograph investigates downside risk quantification and derivative hedging efficiency for an equity position in **ITC Limited (NSE: ITC)** over a 1-year trailing sample period (November 2025 – November 2026), fulfilling MSQF 533 Unit II and Course Outcomes CO3, CO4, and CO5.
+Located in [`project_report/`](./project_report/), this **dedicated 15-page academic empirical report** investigates downside risk quantification, coherent risk measurement, backtesting diagnostics, and regulatory capital requirements for an institutional equity commitment in **ITC Limited (NSE: ITC)** over a 1-year trailing sample period (17-Nov-2025 to 16-Nov-2026), fulfilling MSQF 533 Unit II and Course Outcomes CO3, CO4, and CO5 under Course Instructor **Dr. Kamalakkannan Adhisekar** (November 2026).
 
 ### Key Highlights & Deliverables
-1. **Exposure Setup:** $1\text{ NSE F\&O Lot} = 1,725\text{ shares}$ at $S_0 = \text{\rupee}285.00$ ($\approx \text{\rupee}4,91,625.00$ capital commitment).
-2. **Empirical Diagnostics:** $N = 246$ daily trading sessions, annualized volatility $\sigma = 23.40\%$, negative skewness $\hat{S} = -0.9243$, extreme leptokurtosis $\hat{K}_{\text{excess}} = +9.8233$ (raw kurtosis $= 12.8233$), and decisive Jarque--Bera rejection of normality ($JB = 979.34, p = 2.18 \times 10^{-213}$).
+1. **Exposure Setup:** $1\text{ NSE F\&O Lot} = 1,725\text{ shares}$ at $S_0 = \text{\rupee}285.00$ ($V_0 = \text{\rupee}4,91,625.00$ capital commitment).
+2. **Empirical Diagnostics:** $N = 246$ daily trading sessions, annualized volatility $\sigma = 23.40\%$, negative skewness $\hat{S} = -0.9243$, extreme leptokurtosis $\hat{K}_{\text{excess}} = +9.8233$, and decisive Jarque--Bera rejection of normality ($JB = 979.34, p = 2.18 \times 10^{-213}$).
 3. **Value at Risk & The Fat-Tail Wedge:** 
-   - 10-day $99\%$ Parametric $\VaR$: \rupee 55,048.61 ($11.20\%$).
-   - 10-day $99\%$ Historical $\VaR$: \rupee 61,487.02 ($12.51\%$), revealing an $11.7\%$ tail loss underestimation under Gaussian assumptions.
-   - 10-day $99\%$ Expected Shortfall ($\CVaR$): \rupee 95,130.94 ($19.35\%$).
-4. **Kupiec POF Backtesting:** All models pass empirical likelihood ratio tests ($\LR_{\POF} = 0.819$ and $0.112$) and reside within the Basel Committee's **Green Zone** ($\le 4$ exceptions).
-5. **Option Valuation & Dividend Adjustment:** Evaluates 5 strikes ($\text{\rupee}275$ to $\text{\rupee}295$) under Standard Black--Scholes ($q=0$), Merton Continuous Dividend-Adjusted ($q=5.09\%$), and Discrete Dividend models against NSE option chain quotes. Demonstrates that ignoring dividends introduces up to $+9.76\%$ overpricing on calls and $-8.84\%$ underpricing on puts.
-6. **Derivative Hedging Performance:**
-   - **ATM Protective Put (\rupee 285):** Insulates $75.14\%$ of extreme 10-day tail risk, capping maximum capital loss at \rupee 15,283.50 ($3.11\%$ of position value).
-   - **Zero-Cost Collar (\rupee 280 Put / \rupee 295 Call):** Delivers a $78.96\%$ tail risk reduction at an upfront net debit of only \rupee 2.50/share (\rupee 4,312.50 per lot, or $0.88\%$).
-7. **Strict Greyscale Design:** Formatted in strict monochrome throughout, incorporating a 7-figure publication-grade suite, symmetrical TikZ pipeline flowchart, and consolidated end-of-document Formula Reference Sheet.
+   - 1-day $95\%$ Parametric $\VaR$: \rupee 12,468.80 vs. Historical $\VaR$: \rupee 10,297.02 (Normal distribution overestimates mild loss).
+   - 1-day $99\%$ Parametric $\VaR$: \rupee 17,408.08 vs. Historical $\VaR$: \rupee 19,444.15 (Empirical fat tail dominates Gaussian curve).
+   - 10-day $99\%$ Historical $\VaR$: \rupee 61,487.89 ($12.51\%$ of lot value).
+   - 10-day $99\%$ Historical Expected Shortfall ($\CVaR$): \rupee 95,130.94 ($19.35\%$ of lot value, tail severity ratio $= 1.547$).
+4. **Statistical Backtesting & Independence:** 
+   - **Kupiec POF:** $x=4$ for 99% Parametric ($p=0.366$); $x=3$ for 99% Historical ($p=0.738$); both models lie comfortably in the Basel Committee's **Green Zone** ($k=3.0$).
+   - **Christoffersen Independence:** Historical simulation shows zero clustering ($\LR_{\text{ind}} = 0.074, p=0.785$), confirming independent exceptions. Parametric model clusters ($LR_{\text{ind}} = 4.076, p=0.0435$), failing independence.
+5. **Macro-Fiscal Stress Testing:** Evaluates historical scenarios including Union Budget Cigarette Excise Hikes ($-8.50\% \rightarrow -\text{\rupee}41,788$), March 2020 COVID Market Crash ($-12.40\% \rightarrow -\text{\rupee}60,961$), FMCG Margin Compression ($-5.00\%$), and RBI 100 bps Rate Shock ($-3.20\%$).
+6. **Basel III Regulatory Capital Requirement:** Computes baseline market risk capital charge $C_t = \max(\VaR_{t-1}, k \cdot \overline{\VaR}_{60}) = 3.0 \times \text{\rupee}61,487.89 = \text{\rupee}1,84,463.67$ ($37.52\%$ of total portfolio value).
+7. **Strict Greyscale Design:** Formatted in strict monochrome throughout, replicating the official Pondicherry University Department of Statistics cover layout, featuring high-contrast publication figures (Q-Q plot, empirical KDE, breach timeline), and compiling to **exactly 15 pages** with zero warnings.
 

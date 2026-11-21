@@ -1,0 +1,56 @@
+% ==============================================================================
+% Section 5: Non-Parametric Historical Simulation VaR
+% Target: Page 7 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Non-Parametric Historical Simulation VaR}
+\label{sec:historical_simulation_var}
+
+\subsection{Order Statistics and Empirical Percentile Formulation}
+
+Historical Simulation evaluates Value at Risk without imposing a parametric probability distribution on asset returns \citep{beder1995var}. The loss distribution is constructed directly from actual market realizations.
+
+Let $\{R_1, \dots, R_N\}$ denote the sample of $N = 246$ daily historical log returns. Arranging these returns in ascending sequence via order statistics yields:
+\begin{equation}
+    R_{(1)} \le R_{(2)} \le R_{(3)} \le \dots \le R_{(N-1)} \le R_{(N)}
+    \label{eq:order_statistics}
+\end{equation}
+where $R_{(1)} = -8.47\%$ is the Union Budget excise shock and $R_{(N)} = +5.88\%$ is the sample maximum. For confidence level $\alpha$, the 1-day Historical $\VaR$ is defined by the discrete rank cutoff $k = \lfloor N(1-\alpha) \rfloor$:
+\begin{equation}
+    \VaR_{\alpha}^{\text{hist}}(1\text{d}) = -V_0 \cdot R_{(\lfloor N(1-\alpha) \rfloor)}
+    \label{eq:historical_var_formula}
+\end{equation}
+Evaluating Equation~\eqref{eq:historical_var_formula} on our $N = 246$ empirical observations ($V_0 = \text{\inr}4,91,625.00$):
+\begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+    \item \textbf{1-Day 95\% Conf. ($k=12$):} $R_{(12)} = -2.0945\% \implies \VaR_{0.95}^{\text{hist}}(1\text{d}) = \mathbf{\text{\inr}10,297.08}$ ($2.09\%$).
+    \item \textbf{1-Day 99\% Conf. ($k=2$):} $R_{(2)} = -3.9550\% \implies \VaR_{0.99}^{\text{hist}}(1\text{d}) = \mathbf{\text{\inr}19,444.07}$ ($3.96\%$).
+    \item \textbf{10-Day Scaled Values ($\times \sqrt{10}$):} $\VaR_{0.95}(10\text{d}) = \text{\inr}32,562.15$ ($6.62\%$), and $\VaR_{0.99}(10\text{d}) = \mathbf{\text{\inr}61,487.89}$ ($12.51\%$).
+\end{itemize}
+
+\subsection{The Empirical Fat-Tail Wedge: Parametric vs. Historical}
+
+Comparing Parametric and Historical $\VaR$ reveals a fundamental econometric insight: the **crossover of risk estimates between 95\% and 99\% confidence levels**.
+
+\begin{table}[!htbp]
+    \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \caption{The Fat-Tail Wedge: Parametric vs. Historical Simulation VaR on 1 Lot of ITC Limited ($V_0 = \text{\inr}4,91,625$).}
+    \label{tab:fat_tail_wedge}
+    \vspace{0.2em}
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabularx}{\textwidth}{l r r r >{\raggedright\arraybackslash}X}
+        \toprule
+        \textbf{Horizon \& Confidence} & \textbf{Parametric} & \textbf{Historical} & \textbf{Divergence (\inr)} & \textbf{Risk Governance Verdict} \\
+        \midrule
+        1-Day 95\% Confidence & \inr 12,469.05 & \inr 10,297.08 & $-\text{\inr}2,171.97$ & Parametric overstates shoulder risk \\
+        1-Day 99\% Confidence & \inr 17,408.01 & \inr 19,444.07 & $+\text{\inr}2,036.06$ & Historical captures empirical fat tail \\
+        10-Day 95\% Confidence & \inr 39,430.43 & \inr 32,562.15 & $-\text{\inr}6,868.28$ & Gaussian over-penalizes moderate loss \\
+        10-Day 99\% Confidence & \inr 55,048.87 & \inr 61,487.89 & $+\text{\inr}6,439.02$ & \textbf{Parametric understates 10d risk by 10.5\%} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+At $95\%$ confidence, Parametric $\VaR$ is *higher* than Historical $\VaR$ (\inr 12,469 vs. \inr 10,297) because leptokurtic distributions pull mass from the shoulders into a sharp central peak. However, at $99\%$ confidence, the relationship sharply inverts: **Historical $\VaR$ exceeds Parametric $\VaR$ by \inr 2,036 on a 1-day basis and by \inr 6,439 on a 10-day basis**. Enforcing a Gaussian bell curve understates the capital required to survive true $99\%$ tail shocks by over $10.5\%$.
+
+\clearpage

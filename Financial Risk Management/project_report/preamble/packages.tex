@@ -1,0 +1,68 @@
+% ==============================================================================
+% Packages Configuration: Strict Greyscale Academic Report
+% Financial Risk Management (MSQF 533) - Department of Statistics, Pondicherry University
+% ==============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{textcomp}
+
+% Math packages
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{bm}
+
+% Geometry & Compact Academic Layout
+\usepackage[a4paper, top=2.2cm, bottom=2.2cm, left=2.2cm, right=2.2cm, headheight=20pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[inline]{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Section Heading Spacing
+\titlespacing*{\section}{0pt}{10pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 2pt minus 2pt}{3pt plus 1pt minus 1pt}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+
+% Strict Greyscale Palette
+\usepackage{xcolor}
+\definecolor{pureblack}{RGB}{0, 0, 0}
+\definecolor{graydark}{RGB}{45, 45, 45}
+\definecolor{graymed}{RGB}{95, 95, 95}
+\definecolor{graylight}{RGB}{185, 185, 185}
+\definecolor{grayfaint}{RGB}{246, 246, 246}
+
+% TColorBox Setup (Strict Monochrome)
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, theorems, breakable}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+% Hyperref (Strictly Monochrome / Hidelinks)
+\usepackage{hyperref}
+\hypersetup{
+    hidelinks,
+    pdfauthor={N. Rohit Vedhanandh (25MSQUFPY0002)},
+    pdftitle={Value at Risk (VaR) and Downside Risk Modeling of ITC Limited (2025-2026)},
+    pdfsubject={MSQF 533: Financial Risk Management - Empirical Report}
+}
+\usepackage{cleveref}
+
+% Fancyhdr Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{graydark}\nouppercase{\leftmark}}
+\fancyhead[R]{\footnotesize\color{pureblack}\textbf{MSQF 533: Financial Risk Management}}
+\fancyfoot[C]{\footnotesize\color{graydark}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}

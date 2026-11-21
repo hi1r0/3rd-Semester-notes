@@ -1,0 +1,50 @@
+% ==============================================================================
+% Section 4: Parametric (Delta-Normal) Value at Risk Modeling
+% Target: Page 6 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Parametric (Delta-Normal) Value at Risk Modeling}
+\label{sec:parametric_var}
+
+\subsection{Analytical Formulation of Delta-Normal VaR}
+
+The Parametric (Delta-Normal / Variance-Covariance) Value at Risk model assumes portfolio asset returns are jointly normally distributed \citep{jorion2006value}. For an initial inventory value $V_0 = N_{\text{shares}} \times S_0$, the 1-day mark-to-market loss is $L = -(V_1 - V_0) \approx -V_0 R$. Under $R \sim \mathcal{N}(\mu, \sigma^2)$, the portfolio loss distribution is Gaussian:
+\begin{equation}
+    L \sim \mathcal{N}\left( -V_0 \mu, \, V_0^2 \sigma^2 \right)
+    \label{eq:loss_dist}
+\end{equation}
+Value at Risk at confidence level $\alpha \in (0, 1)$ represents the $\alpha$-quantile of the loss distribution: $\Prob(L \le \VaR_{\alpha}) = \alpha$. Standardizing the loss variable $Z = \frac{L - (-V_0 \mu)}{V_0 \sigma} \sim \mathcal{N}(0, 1)$, we obtain the closed-form Parametric $\VaR$ expression:
+\begin{equation}
+    \VaR_{\alpha}^{\text{param}}(1\text{d}) = V_0 \left( Z_{\alpha} \hat{\sigma}_{\text{daily}} - \hat{\mu}_{\text{daily}} \right)
+    \label{eq:parametric_var_1d}
+\end{equation}
+where $Z_\alpha = \Phi^{-1}(\alpha)$ represents the standard normal cutoff: $Z_{0.95} = 1.64485$ at $95\%$ confidence and $Z_{0.99} = 2.32635$ at $99\%$ confidence.
+
+\subsection{Temporal Scaling and the Square-Root-of-Time Rule}
+
+Under the assumption of i.i.d. returns with negligible daily drift ($\mu \approx 0$), the regulatory 10-day market risk exposure mandated by the Basel Committee is scaled via the square-root-of-time rule:
+\begin{equation}
+    \VaR_{\alpha}(T\text{d}) = \VaR_{\alpha}(1\text{d}) \times \sqrt{T}, \quad \text{where for } T = 10 \text{ days, } \sqrt{10} \approx 3.16228
+    \label{eq:sqrt_time_rule}
+\end{equation}
+
+\begin{empiricalbox}{Parametric Risk Exposure on 1 Lot of ITC Limited}{parametric_metrics}
+Substituting our empirical baseline ($V_0 = \text{\inr}4,91,625.00$, $\hat{\mu} = -0.1114\%$, $\hat{\sigma}_{\text{daily}} = 1.4742\%$) yields:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{1-Day 95\% Parametric VaR:} \inr 12,469.05 ($2.54\%$ of portfolio inventory)
+    \item \textbf{1-Day 99\% Parametric VaR:} \inr 17,408.01 ($3.54\%$ of portfolio inventory)
+    \item \textbf{10-Day 95\% Parametric VaR:} \inr 39,430.43 ($8.02\%$ of portfolio inventory)
+    \item \textbf{10-Day 99\% Parametric VaR:} \inr 55,048.87 ($11.20\%$ of portfolio inventory)
+\end{itemize}
+\end{empiricalbox}
+
+\subsection{Structural Limitations of the Parametric Approach}
+
+While computationally straightforward, the Delta-Normal framework exhibits major vulnerabilities:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1.5pt, parsep=0pt, label=(\roman*)]
+    \item \textbf{Underestimation of Extreme Quantiles:} The normal density's exponential tail decay ($f(z) \propto e^{-z^2/2}$) fails to capture the multi-sigma drops induced by regulatory policy shocks.
+    \item \textbf{Violation of Square-Root Scaling:} In the presence of volatility clustering (ARCH/GARCH dynamics), temporal independence breaks down, causing $\sqrt{T}$ scaling to misstate multi-period tail risk.
+    \item \textbf{Imposition of Symmetry:} The Gaussian distribution forces exact symmetry around the mean, entirely ignoring the negative skewness ($\hat{S} = -0.9243$) inherent in ITC returns.
+\end{enumerate}
+
+\clearpage

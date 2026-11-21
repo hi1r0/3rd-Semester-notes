@@ -1,0 +1,47 @@
+% ==============================================================================
+% Section 10: Multi-Leg Derivative Hedging Architectures
+% Target: Page 11 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Multi-Leg Derivative Hedging Architectures}
+\label{sec:hedging_architectures}
+
+\subsection{Portfolio Tail Risk Insulation Mechanics}
+
+To protect an equity inventory of $1$ NSE market lot of ITC Limited ($1,725$ shares, $V_0 = \text{\inr}4,91,625.00$ at $S_0 = \text{\inr}285.00$), financial engineers design structured multi-leg derivative overlays \citep{hull2018options}. We formulate five institutional hedging strategies:
+
+\subsection{Mathematical Formulation of Hedging Strategies}
+
+\begin{enumerate}[leftmargin=1.5em, itemsep=1.5pt, parsep=0pt, label=\textbf{\arabic*.}]
+    \item \textbf{Strategy A: At-the-Money (ATM) Protective Put (Strike 285)}
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+        \item \textit{Structure:} Long 1,725 shares at $S_0 = \text{\inr}285.00$ $+$ Long 1 Dec 285 Put ($P = \text{\inr}8.86$).
+        \item \textit{Upfront Premium Cost:} $1,725 \times \text{\inr}8.86 = \mathbf{\text{\inr}15,283.50}$ ($3.11\%$ of inventory value).
+        \item \textit{Terminal Payoff:} $\Pi(S_T) = 1,725 \times [\max(S_T, 285) - 285 - 8.86]$. Maximum loss is capped strictly at the premium paid (\inr 15,283.50), retaining $100\%$ upside participation.
+    \end{itemize}
+    \item \textbf{Strategy B: Out-of-the-Money (OTM) Protective Put (Strike 280)}
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+        \item \textit{Structure:} Long 1,725 shares at $S_0 = \text{\inr}285.00$ $+$ Long 1 Dec 280 Put ($P = \text{\inr}6.82$).
+        \item \textit{Upfront Premium Cost:} $1,725 \times \text{\inr}6.82 = \mathbf{\text{\inr}11,764.50}$ ($2.39\%$ of inventory value).
+        \item \textit{Maximum Loss:} $1,725 \times [(285 - 280) + 6.82] = \mathbf{\text{\inr}20,389.50}$ ($4.15\%$ of inventory value).
+    \end{itemize}
+    \item \textbf{Strategy C: Covered Call (Strike 295)}
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+        \item \textit{Structure:} Long 1,725 shares at $S_0 = \text{\inr}285.00$ $+$ Short 1 Dec 295 Call ($C = \text{\inr}4.32$).
+        \item \textit{Income Collected:} $1,725 \times \text{\inr}4.32 = \mathbf{\text{\inr}7,452.00}$ (provides a $1.51\%$ downside buffer).
+        \item \textit{Upside Capped At:} $1,725 \times [(295 - 285) + 4.32] = \mathbf{\text{\inr}24,690.00}$ ($+5.02\%$ maximum return).
+    \end{itemize}
+    \item \textbf{Strategy D: Low-Cost Collar (Long 280 Put / Short 295 Call)}
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+        \item \textit{Structure:} Long 1,725 shares $+$ Long 1 Dec 280 Put ($P = \text{\inr}6.82$) $+$ Short 1 Dec 295 Call ($C = \text{\inr}4.32$).
+        \item \textit{Net Premium Debit:} $1,725 \times (6.82 - 4.32) = \mathbf{\text{\inr}4,312.50}$ ($0.88\%$ of inventory value).
+        \item \textit{Floor \& Cap:} Floor at \inr 280 (max loss \inr 12,937.50); upside capped at \inr 295 (max gain \inr 12,937.50).
+    \end{itemize}
+    \item \textbf{Strategy E: Bear Put Spread (285/270 Put Spread)}
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+        \item \textit{Structure:} Long 1 Dec 285 Put ($P_1 = \text{\inr}8.86$) $+$ Short 1 Dec 270 Put ($P_2 = \text{\inr}3.42$).
+        \item \textit{Net Outlay:} $1,725 \times (8.86 - 3.42) = \mathbf{\text{\inr}9,384.00}$; maximum payout capped at \inr 25,875.00.
+    \end{itemize}
+\end{enumerate}
+
+\clearpage

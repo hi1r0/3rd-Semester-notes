@@ -1,0 +1,65 @@
+% ==============================================================================
+% M.Sc. Quantitative Finance - Financial Engineering & Derivatives (MSQF 542)
+% Pondicherry University - Department of Statistics
+% Empirical Report: Black-Scholes Option Pricing and Derivative Hedging of ITC Limited
+% Author: N Rohit Vedhanandh (Reg. No.: 25MSQUFPY0002)
+% Course Instructor: Dr. Kamalakkannan Adhisekar
+% Strict Greyscale 15-Page Academic Edition
+% ==============================================================================
+
+\documentclass[11pt, a4paper]{article}
+
+% Preamble Configurations
+\input{preamble/packages.tex}
+\usepackage[round,authoryear]{natbib}
+\input{preamble/macros.tex}
+\input{preamble/environments.tex}
+
+\begin{document}
+
+% Page 1: Pondicherry University Title Page
+\input{preamble/titlepage.tex}
+
+% Page 2: Derivative Pricing Theory & Continuous-Time Arbitrage
+\input{sections/sec01_derivative_theory.tex}
+
+% Page 3: Mathematical Derivation of the Black-Scholes PDE
+\input{sections/sec02_black_scholes_pde.tex}
+
+% Page 4: Merton (1973) Continuous Dividend Yield Formulation
+\input{sections/sec03_merton_dividend_model.tex}
+
+% Page 5: Discrete Cash Dividends vs. Continuous Yield Modeling
+\input{sections/sec04_discrete_vs_continuous.tex}
+
+% Page 6: Market Calibration and NSE Option Chain Integration
+\input{sections/sec05_market_calibration.tex}
+
+% Page 7: Empirical Dividend Mispricing and Model Validation
+\input{sections/sec06_dividend_mispricing.tex}
+
+% Page 8: Analytical Derivation of First- and Second-Order Greeks
+\input{sections/sec07_greeks_derivation.tex}
+
+% Page 9: Empirical Greeks Decomposition and Sensitivity Profile
+\input{sections/sec08_empirical_greeks.tex}
+
+% Page 10: Implied Volatility Extraction and Smile/Skew Dynamics
+\input{sections/sec09_volatility_skew.tex}
+
+% Page 11: Multi-Leg Derivative Hedging Architectures
+\input{sections/sec10_hedging_architectures.tex}
+
+% Page 12: Hedging Efficiency and Terminal Payoff Analytics
+\input{sections/sec11_payoff_analytics.tex}
+
+% Page 13: Comprehensive Hedging Performance Comparison Matrix
+\input{sections/sec12_hedging_efficiency.tex}
+
+% Page 14: Dynamic Delta Rebalancing and Market Microstructure
+\input{sections/sec13_dynamic_rebalancing.tex}
+
+% Page 15: Implementation Realities and Concluding Recommendations + References
+\input{sections/sec14_limitations_references.tex}
+
+\end{document}

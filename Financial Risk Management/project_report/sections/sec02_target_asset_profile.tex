@@ -1,0 +1,44 @@
+% ==============================================================================
+% Section 2: Target Asset Profile & Corporate Risk Drivers
+% Target: Page 3
+% ==============================================================================
+
+\section{Target Asset Profile and Corporate Risk Drivers}
+\label{sec:asset_profile}
+
+\subsection{Corporate Profile and Revenue Diversification}
+
+ITC Limited (NSE: ITC) is one of India's largest and most diversified private-sector conglomerates, holding dominant market shares across fast-moving consumer goods (FMCG), agricultural commodities, paperboards and packaging, and hospitality. Historically anchored to its core tobacco manufacturing franchise, the firm has systematically reinvested cash flows into branded packaged foods, personal care, education and stationery products, and end-to-end supply chain infrastructure.
+
+From a credit and corporate finance perspective, ITC represents an exceptional corporate fortress:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Debt-Free Balance Sheet:} The corporation maintains negligible interest-bearing debt, insulating operating margins from interest rate tightening cycles initiated by the Reserve Bank of India.
+    \item \textbf{High Operating Cash Flow Generation:} Operating cash flows routinely exceed annual capital expenditures, generating substantial free cash flows that fund organic expansion and generous shareholder payouts.
+    \item \textbf{Defensive Dividend Yield Profile:} With trailing 12-month dividend distributions of \inr 14.50 per share (\inr 6.50 interim in February and \inr 8.00 final in May), ITC trades at an annualized dividend yield of $q \approx 5.09\%$ against a baseline spot price of $S_0 = \text{\inr}285.00$.
+\end{itemize}
+
+\subsection{Systematic and Idiosyncratic Downside Risk Drivers}
+
+Notwithstanding its defensive fundamentals, holding an equity inventory of ITC shares exposes market participants to distinct, asymmetric downside risk factors:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Fiscal and Regulatory Policy Shocks (Union Budget Risk):} The cigarette manufacturing segment is heavily taxed via basic excise duties, National Calamity Contingent Duty (NCCD), and GST compensation cesses. Annual Union Budget presentations frequently introduce sharp, non-continuous price drops when unexpected duty hikes are enacted.
+    \item \textbf{Agricultural Commodity Price Volatility:} The Agri-Business division is exposed to climate anomalies, monsoon rainfall variations, and government export restrictions on agricultural staples.
+    \item \textbf{Raw Material Inflation in Paperboards:} Fluctuations in imported pulp prices, wastepaper recycling costs, and energy inputs compress packaging margins.
+    \item \textbf{Rural Consumption Disruption:} Given that FMCG volumes rely heavily on rural purchasing power, inflationary pressures on rural disposable incomes constrain volume growth.
+\end{enumerate}
+
+\subsection{Derivatives Market Specifications and Exposure Sizing}
+
+On the National Stock Exchange of India (NSE), equity derivatives on ITC Limited trade under standardized contract specifications. To align our quantitative risk metrics with institutional clearing realities, all portfolio calculations in this study are calibrated to **one standard NSE F\&O market lot**:
+
+\begin{formulabox}[Market Position Calibration Parameters]
+\begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+    \item \textbf{Target Instrument:} Equity Shares of ITC Limited (NSE Ticker: \texttt{ITC.NS})
+    \item \textbf{Sample Horizon:} 246 Consecutive Trading Sessions (17-Nov-2025 to 16-Nov-2026)
+    \item \textbf{Benchmark Spot Closing Price ($S_0$):} \inr 285.00 per share
+    \item \textbf{NSE Derivative Lot Size ($N_{\text{shares}}$):} 1,725 equity shares
+    \item \textbf{Baseline Inventory Position Value ($V_0$):} $V_0 = 1,725 \times \text{\inr}285.00 = \mathbf{\text{\inr}4,91,625.00}$
+\end{itemize}
+\end{formulabox}
+
+This \inr 4.916 lakh nominal exposure serves as the operational portfolio baseline across all subsequent risk models.

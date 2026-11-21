@@ -1,0 +1,54 @@
+% ==============================================================================
+% Section 7: Analytical Derivation of First & Second-Order Greeks
+% Target: Page 8 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Analytical Derivation of First- and Second-Order Greeks}
+\label{sec:greeks_derivation}
+
+\subsection{Risk Sensitivities in Continuous-Time Hedging}
+
+In financial engineering and trading desk management, dynamic hedging requires decomposing contingent claim price changes into partial derivatives with respect to state variables and model parameters, collectively termed the **Option Greeks** \citep{hull2018options}. Under Merton's continuous dividend framework, these derivatives must incorporate the discount factor $e^{-qT}$.
+
+\subsection{First-Order Analytical Derivatives}
+
+Differentiating the Merton pricing formulas (Equations~\eqref{eq:merton_call} and~\eqref{eq:merton_put}) yields:
+
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=\textbf{\arabic*.}]
+    \item \textbf{Delta ($\bm{\Delta}$):} Measures the rate of change of option value with respect to the underlying spot price:
+    \begin{align}
+        \Delta_C &= \pdiff{C}{S_0} = e^{-qT} N(d_1) \in (0, \, e^{-qT}) \label{eq:delta_call} \\
+        \Delta_P &= \pdiff{P}{S_0} = -e^{-qT} N(-d_1) = e^{-qT} \left( N(d_1) - 1 \right) \in (-e^{-qT}, \, 0) \label{eq:delta_put}
+    \end{align}
+    \item \textbf{Gamma ($\bm{\Gamma}$):} Measures the curvature of option price with respect to spot price (rate of change of Delta):
+    \begin{equation}
+        \Gamma = \frac{\partial^2 C}{\partial S_0^2} = \frac{\partial^2 P}{\partial S_0^2} = \frac{e^{-qT} \phi(d_1)}{S_0 \sigma \sqrt{T}} > 0
+        \label{eq:gamma}
+    \end{equation}
+    where $\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$ is the standard normal probability density function. Gamma is identical for both calls and puts and peaks strictly at-the-money.
+    \item \textbf{Vega ($\bm{\nu}$):} Measures sensitivity to changes in annualized asset volatility $\sigma$:
+    \begin{equation}
+        \nu = \pdiff{C}{\sigma} = \pdiff{P}{\sigma} = S_0 e^{-qT} \phi(d_1) \sqrt{T} > 0
+        \label{eq:vega}
+    \end{equation}
+    \item \textbf{Theta ($\bm{\Theta}$):} Measures time decay, or rate of loss in option value as time elapses ($\dd t = -\dd T$):
+    \begin{align}
+        \Theta_C &= -\pdiff{C}{T} = -\frac{S_0 \sigma e^{-qT} \phi(d_1)}{2\sqrt{T}} + q S_0 e^{-qT} N(d_1) - r K e^{-rT} N(d_2) \label{eq:theta_call} \\
+        \Theta_P &= -\pdiff{P}{T} = -\frac{S_0 \sigma e^{-qT} \phi(d_1)}{2\sqrt{T}} - q S_0 e^{-qT} N(-d_1) + r K e^{-rT} N(-d_2) \label{eq:theta_put}
+    \end{align}
+    \item \textbf{Rho ($\bm{\rho}$):} Measures sensitivity to shifts in the risk-free interest rate $r$:
+    \begin{equation}
+        \rho_C = \pdiff{C}{r} = K T e^{-rT} N(d_2) > 0, \qquad \rho_P = \pdiff{P}{r} = -K T e^{-rT} N(-d_2) < 0
+        \label{eq:rho}
+    \end{equation}
+\end{enumerate}
+
+\subsection{Second-Order Cross-Greeks: Vanna and Volga}
+
+Institutional volatility trading desks monitor higher-order cross-sensitivities:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Vanna ($\frac{\partial \Delta}{\partial \sigma} = \frac{\partial \nu}{\partial S_0}$):} Quantifies how Delta shifts with volatility: $\text{Vanna} = -e^{-qT} \phi(d_1) \frac{d_2}{\sigma}$.
+    \item \textbf{Volga / Vomma ($\frac{\partial \nu}{\partial \sigma} = \frac{\partial^2 V}{\partial \sigma^2}$):} Measures convexity of option value with respect to volatility: $\text{Volga} = \nu \frac{d_1 d_2}{\sigma}$.
+\end{itemize}
+
+\clearpage

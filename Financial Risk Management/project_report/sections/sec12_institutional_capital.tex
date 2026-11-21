@@ -1,0 +1,42 @@
+% ==============================================================================
+% Section 12: Institutional Capital Adequacy & Model Risk Governance
+% Target: Page 14
+% ==============================================================================
+
+\section{Institutional Capital Adequacy and Model Risk Governance}
+\label{sec:institutional_capital}
+
+\subsection{Supervisory Capital Charge Determination}
+
+Under the Basel Committee's market risk framework (mandated by the Reserve Bank of India for scheduled commercial banks and primary dealers), the minimum regulatory capital requirement for a trading desk operating under the Internal Models Approach is defined as:
+\begin{equation}
+    C_t = \max \left( \VaR_{t-1}(10\text{d}, 99\%), \; k \cdot \frac{1}{60} \sum_{i=1}^{60} \VaR_{t-i}(10\text{d}, 99\%) \right) + \text{sVaR}_t
+    \label{eq:basel_capital_charge}
+\end{equation}
+where $k = 3 + s$ represents the supervisory market risk multiplier, with $s \in [0, 1]$ being the penalty factor dictated by the Basel Traffic Light backtesting zone:
+\begin{equation}
+    s = \begin{cases} 0.00, & \text{if } x \le 4 \quad \text{(Green Zone)} \\ 0.40 \text{ to } 0.85, & \text{if } 5 \le x \le 9 \quad \text{(Yellow Zone)} \\ 1.00, & \text{if } x \ge 10 \quad \text{(Red Zone / Revocation)} \end{cases}
+    \label{eq:penalty_factor}
+\end{equation}
+
+Because our empirical backtesting verified that both the Parametric model ($x = 4$) and Historical Simulation model ($x = 3$) reside safely within the **Green Zone**, the penalty surcharge is zero ($s = 0$), establishing the baseline multiplier $k = 3.0$.
+
+Applying this regulatory multiplier to our empirical 10-day $99\%$ Historical $\VaR$ (\inr 61,487.89), the minimum baseline regulatory capital charge for holding a single market lot of ITC Limited is:
+\begin{equation}
+    \text{Regulatory Capital Charge} = 3.0 \times \text{\inr}61,487.89 = \mathbf{\text{\inr}1,84,463.67}
+    \label{eq:capital_computed}
+\end{equation}
+This capital charge represents **$37.52\%$ of the total market value of the equity position** ($V_0 = \text{\inr}4,91,625.00$). This substantial capital allocation requirement illustrates how regulatory conservatism ensures institutional resilience against unhedged equity holdings.
+
+\subsection{Model Risk Management and Governance Policies}
+
+To mitigate **model risk**—the potential for financial loss resulting from decisions based on incorrect or misused model outputs—institutional risk committees enforce four mandatory operational controls:
+
+\begin{enumerate}[leftmargin=1.8em, label=(\roman*)]
+    \item \textbf{Dynamic Volatility Updating:} Rather than relying on unweighted sample standard deviations, trading desks should deploy exponentially weighted moving average (EWMA, $\lambda = 0.94$) or GARCH(1,1) architectures to capture volatility clustering and reduce exception persistence.
+    \item \textbf{Liquidity Horizon Adjustments:} Under FRTB rules, single-stock equity blocks exceeding daily trading participation limits ($>5\%$ of average daily volume) must be scaled to a 20-day or 40-day liquidity horizon.
+    \item \textbf{Independent Model Validation:} Risk algorithms must undergo annual independent validation by a quantitative audit team completely segregated from front-office trading desks.
+    \item \textbf{Integrated Hedging Requirements:} When capital charges approach institutional thresholds, trading mandates dictate the execution of formal derivative hedging programs (such as Protective Puts or Collars) to truncate tail risk and achieve capital relief.
+\end{enumerate}
+
+\clearpage

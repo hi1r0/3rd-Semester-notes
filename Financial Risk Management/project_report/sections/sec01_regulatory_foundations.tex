@@ -1,0 +1,32 @@
+% ==============================================================================
+% Section 1: Regulatory Foundations & Market Risk Governance
+% Target: Page 2
+% ==============================================================================
+
+\section{Regulatory Foundations and Market Risk Governance}
+\label{sec:regulatory_foundations}
+
+\subsection{Evolution of Basel Accords and Market Risk Capital}
+
+The quantitative measurement of market risk emerged as a central pillar of prudential banking regulation following the 1996 Market Risk Amendment to the Basel I Accord \citep{bcbs1996amendment}. Prior to this amendment, regulatory capital requirements were restricted exclusively to credit risk. The 1996 framework formalized the Internal Models Approach (IMA), permitting eligible commercial and investment banks to calculate regulatory capital charges for trading book exposures utilizing internal Value at Risk ($\VaR$) models evaluated at a $99\%$ one-tailed confidence level over a $10$-day holding period.
+
+Under the Basel II framework, market risk capital was anchored directly to the $10$-day $99\%$ $\VaR$, scaled by a supervisory multiplier $k \in [3, 4]$ determined by backtesting performance. However, the catastrophic liquidity disruptions and asset write-downs during the 2007--2008 Global Financial Crisis revealed severe procyclicality and structural weaknesses in standard $\VaR$ architectures. Because historical observation windows (typically 250 trading days) were dominated by benign pre-crisis volatility, risk metrics collapsed precisely when systemic fragility was escalating.
+
+To redress these deficiencies, the Basel Committee introduced the Basel 2.5 package in 2009, mandating Stressed $\VaR$ ($\text{sVaR}$) calibrated to a continuous 12-month period of significant financial distress, along with the Incremental Risk Charge (IRC) to capture default and migration risks in unsecuritized credit products.
+
+\subsection{The Fundamental Review of the Trading Book (FRTB)}
+
+The comprehensive overhaul of trading book capital requirements culminated in the Basel Committee's \textit{Fundamental Review of the Trading Book} (FRTB), formalized in January 2016 and revised in 2019 \citep{bcbs2019frtb}. The FRTB introduced four structural paradigm shifts:
+
+\begin{enumerate}[leftmargin=1.8em, label=(\roman*)]
+    \item \textbf{Transition from $\VaR$ to Expected Shortfall ($\ES$):} The primary quantitative measure of tail risk was shifted from $\VaR_{99\%}$ to $\ES_{97.5\%}$ (Conditional $\VaR$). This transition addresses the fundamental mathematical reality that $\VaR$ is non-subadditive and indifferent to the severity of losses occurring beyond the quantile cutoff.
+    \item \textbf{Varying Liquidity Horizons:} Recognizing that illiquid positions cannot be liquidated or hedged within a uniform 10-day period during market turmoil, the FRTB mapped risk factors into five distinct liquidity horizons ranging from 10 to 120 trading days.
+    \item \textbf{Strict Trading Desk Boundary:} Banks must enforce a rigorous boundary between the regulatory trading book (held with short-term trading intent) and the banking book (held to maturity), eliminating regulatory arbitrage across books.
+    \item \textbf{Desk-Level P\&L Attribution and Backtesting:} Trading desks seeking internal model approval must pass rigorous profit-and-loss attribution (PLA) tests alongside granular desk-level backtesting regimes.
+\end{enumerate}
+
+\subsection{Trading Book vs. Banking Book Dichotomy}
+
+For financial institutions operating in the Indian equity markets under Reserve Bank of India (RBI) guidelines, classifying equity derivatives and underlying cash shares between the Trading Book and Banking Book dictates the regulatory capital regime. Equity holdings designated as Available for Sale (AFS) or Held for Trading (HFT) are subject to mark-to-market accounting and daily market risk capital charges.
+
+When an institutional desk maintains an inventory of large-cap single-stock equities such as ITC Limited—whether to support market-making in exchange-traded derivatives, structured product issuance, or proprietary positioning—the portfolio is exposed to systematic market shifts and severe idiosyncratic tail events. Accurate quantification of downside market risk is therefore an essential operational requirement for regulatory capital compliance and capital allocation.

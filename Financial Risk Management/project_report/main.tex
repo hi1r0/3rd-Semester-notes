@@ -1,0 +1,62 @@
+% ==============================================================================
+% M.Sc. Quantitative Finance - Financial Risk Management (MSQF 533)
+% Pondicherry University - Department of Statistics
+% Empirical Report: Value at Risk (VaR) and Downside Risk Modeling of ITC Limited
+% Author: N Rohit Vedhanandh (Reg. No.: 25MSQUFPY0002)
+% Course Instructor: Dr. Kamalakkannan Adhisekar
+% Strict Greyscale 15-Page Academic Edition
+% ==============================================================================
+
+\documentclass[11pt, a4paper]{article}
+
+% Preamble Configurations
+\input{preamble/packages.tex}
+\usepackage[round,authoryear]{natbib}
+\input{preamble/macros.tex}
+\input{preamble/environments.tex}
+
+\begin{document}
+
+% Page 1: Pondicherry University Title Page
+\input{preamble/titlepage.tex}
+
+% Page 2: Regulatory Foundations & Market Risk Governance
+\input{sections/sec01_regulatory_foundations.tex}
+
+% Page 3: Target Asset Profile & Corporate Risk Drivers
+\input{sections/sec02_target_asset_profile.tex}
+
+% Pages 4-5: Empirical Return Diagnostics & Non-Normality Testing
+\input{sections/sec03_return_diagnostics.tex}
+
+% Page 6: Parametric (Delta-Normal) Value at Risk Modeling
+\input{sections/sec04_parametric_var.tex}
+
+% Page 7: Non-Parametric Historical Simulation VaR
+\input{sections/sec05_historical_simulation_var.tex}
+
+% Page 8: Monte Carlo Simulation VaR Modeling
+\input{sections/sec06_monte_carlo_var.tex}
+
+% Page 9: Coherent Risk Measurement & Conditional VaR (Expected Shortfall)
+\input{sections/sec07_coherent_risk_cvar.tex}
+
+% Page 10: Statistical Backtesting: Kupiec POF Test
+\input{sections/sec08_kupiec_backtesting.tex}
+
+% Page 11: Independence & Conditional Coverage: Christoffersen Backtesting
+\input{sections/sec09_christoffersen_independence.tex}
+
+% Page 12: Regulatory Stress Testing & Scenario Analysis
+\input{sections/sec10_stress_testing_scenarios.tex}
+
+% Page 13: Master Synthesis & Comparative Risk Capital Matrix
+\input{sections/sec11_synthesis_governance.tex}
+
+% Page 14: Institutional Capital Adequacy & Model Risk Governance
+\input{sections/sec12_institutional_capital.tex}
+
+% Page 15: Econometric Limitations & Concluding Recommendations + References
+\input{sections/sec13_limitations_references.tex}
+
+\end{document}

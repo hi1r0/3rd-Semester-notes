@@ -1,0 +1,59 @@
+% ==============================================================================
+% Section 4: Discrete Cash Dividend Modeling vs. Continuous Yield
+% Target: Page 5 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Discrete Cash Dividends vs. Continuous Yield Modeling}
+\label{sec:discrete_vs_continuous}
+
+\subsection{The Microstructure of Discrete Corporate Dividend Payouts}
+
+While the Merton (1973) continuous yield model provides exceptional mathematical tractability, real-world equity corporations do not distribute capital continuously. Instead, corporate boards declare discrete cash payouts disbursed on designated ex-dividend dates $\tau_1 < \tau_2 < \dots < \tau_m \le T$ \citep{wilmott2006paul}.
+
+On each ex-dividend date $\tau_i$, the underlying stock trades ex-dividend, causing an immediate downward discrete price jump equal to the cash dividend magnitude $D_i$ in frictionless markets:
+\begin{equation}
+    S_{\tau_i} = S_{\tau_i^-} - D_i
+    \label{eq:ex_div_drop}
+\end{equation}
+Because the option holder possesses no entitlement to the physical cash dividend, anticipating this price decline reduces call values and increases put values relative to non-dividend paying assets.
+
+\subsection{The Escrowed Dividend Valuation Methodology}
+
+The standard quantitative approach to pricing European options on equities with known discrete dividends is the **Escrowed Dividend Model** \citep{hull2018options}. The spot equity price $S_0$ is decomposed into two distinct components:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=(\alph*)]
+    \item A risk-free cash component equal to the discounted present value of all dividends promised during the option contract's lifespan:
+    \begin{equation}
+        \PV(\text{Dividends}) = \sum_{i: \tau_i \le T} D_i e^{-r \tau_i}
+        \label{eq:pv_dividends}
+    \end{equation}
+    \item A stochastic risky equity component representing the dividend-depleted asset:
+    \begin{equation}
+        S_0^* = S_0 - \PV(\text{Dividends}) = S_0 - \sum_{i: \tau_i \le T} D_i e^{-r \tau_i}
+        \label{eq:s_star}
+    \end{equation}
+\end{enumerate}
+Because $S_0^*$ follows a standard Geometric Brownian Motion with constant volatility $\sigma^*$, European options are priced by substituting $S_0^*$ into the classical Black--Scholes equations with $q = 0$:
+\begin{equation}
+    C_{\text{discrete}} = S_0^* N(d_1^*) - K e^{-rT} N(d_2^*), \quad P_{\text{discrete}} = K e^{-rT} N(-d_2^*) - S_0^* N(-d_1^*)
+    \label{eq:discrete_bs}
+\end{equation}
+where $d_1^* = \frac{\ln(S_0^* / K) + (r + \frac{1}{2}\sigma^{*2})T}{\sigma^* \sqrt{T}}$ and $d_2^* = d_1^* - \sigma^* \sqrt{T}$.
+
+\subsection{Calibration to ITC Limited Dividend Schedules}
+
+ITC Limited adheres to an institutionalized shareholder return policy consisting of two major annual cash dividends:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Interim Dividend ($D_1$):} \inr 6.50 per share (disbursed in February).
+    \item \textbf{Final Dividend ($D_2$):} \inr 8.00 per share (disbursed in May/June).
+    \item \textbf{Total Annual Cash Dividend ($D_{\text{total}}$):} \inr 14.50 per share.
+\end{itemize}
+
+Against the baseline spot quotation of $S_0 = \text{\inr}285.00$, this yields an effective annualized dividend yield of:
+\begin{equation}
+    q = \frac{D_{\text{total}}}{S_0} = \frac{\text{\inr}14.50}{\text{\inr}285.00} = 5.0877\% \approx \mathbf{5.09\%}
+    \label{eq:dividend_yield_calc}
+\end{equation}
+
+For our primary empirical calibration on December 2026 contracts ($T = 42/365 = 0.11507$ years), no ex-dividend date falls within the 42-day window prior to expiration. In this regime, the continuous cost-of-carry formulation ($q = 5.09\%$) accurately prices the forward equity carry and dividend reinvestment dynamics, while the escrowed model governs long-dated LEAPS contracts.
+
+\clearpage

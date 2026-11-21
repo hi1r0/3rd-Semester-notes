@@ -1,0 +1,38 @@
+% ==============================================================================
+% Section 14 & References: Implementation Realities & Academic Bibliography
+% Target: Page 15 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Implementation Realities and Concluding Recommendations}
+\label{sec:limitations_conclusions}
+
+\subsection{Practical Implementation Realities and Model Constraints}
+
+While continuous-time derivative engineering provides indispensable analytical pricing and hedging benchmarks, several Indian exchange realities must be factored into trading desk execution:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=(\alph*)]
+    \item \textbf{American Early Exercise vs. European Modeling:} Although Indian single-stock options settle physically upon monthly expiration, they technically permit American-style early exercise. For deep-in-the-money puts on high-dividend stocks, the early exercise premium is positive when the interest earned on strike proceeds exceeds the forward option time value.
+    \item \textbf{Non-Constant Volatility Smile:} The Black--Scholes model assumes flat volatility, whereas the empirical ITC option chain exhibits a $+402$ bps put skew, necessitating local or stochastic volatility models for exotic derivative pricing.
+    \item \textbf{Discrete Cash Flow Timing:} The Merton continuous yield formula assumes continuous dividend streaming, whereas ITC distributes lump-sum cash dividends in February and May, which causes discrete price adjustments.
+\end{enumerate}
+
+\subsection{Concluding Recommendations for Derivatives Desks}
+
+Based on our empirical analysis of the December 2026 option chain on ITC Limited:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Enforce Mandatory Dividend Adjustments:} Trading desks must deploy Merton's dividend formulation ($q = 5.09\%$). Omitting dividends misprices ATM contracts by \inr 1,553 per call and \inr 1,328 per put on standard 1,725-share market lots.
+    \item \textbf{Deploy Low-Cost Collars for Inventory Protection:} The Low-Cost Collar (Long 280 Put / Short 295 Call) achieves **$78.96\%$ tail risk mitigation** with an upfront net cash outlay of only $0.88\%$, proving far more capital-efficient than unhedged cash holdings or expensive ATM puts.
+\end{itemize}
+
+\vspace{-0.4em}
+
+% ==============================================================================
+% Peer-Reviewed Academic Bibliography
+% ==============================================================================
+\begingroup
+\footnotesize
+\setlength{\bibsep}{1.2pt}
+\renewcommand{\section}[2]{}% Suppress default bibliography section header
+\subsubsection*{References}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\endgroup

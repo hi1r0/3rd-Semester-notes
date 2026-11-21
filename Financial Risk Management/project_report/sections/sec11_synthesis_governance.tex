@@ -1,0 +1,60 @@
+% ==============================================================================
+% Section 11: Master Synthesis & Comparative Risk Capital Matrix
+% Target: Page 13 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Master Synthesis and Comparative Risk Capital Matrix}
+\label{sec:master_synthesis}
+
+\subsection{Cross-Model Risk Capital Synthesis}
+
+To deliver a consolidated evaluation of downside risk exposure for an institutional market participant holding $1$ standard NSE F\&O market lot of ITC Limited ($1,725$ shares, baseline exposure $V_0 = \text{\inr}4,91,625.00$), Table~\ref{tab:master_var_matrix} synthesizes the empirical outputs across all parametric, non-parametric, stochastic simulation, and stress testing architectures.
+
+\begin{table}[!htbp]
+    \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \caption{Master Risk Capital Comparison Matrix across All Evaluated Models on 1 Lot of ITC Limited ($V_0 = \text{\inr}4,91,625.00$, $S_0 = \text{\inr}285.00$).}
+    \label{tab:master_var_matrix}
+    \vspace{0.2em}
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r}
+        \toprule
+        \textbf{Risk Framework \& Methodology} & \textbf{Horizon} & \textbf{Conf. ($\alpha$)} & \textbf{Capital at Risk (\inr)} & \textbf{\% Exposure} \\
+        \midrule
+        \textbf{Parametric (Delta-Normal) VaR} & 1 Day & $95\%$ & \inr 12,469.05 & $2.54\%$ \\
+        Parametric (Delta-Normal) VaR & 1 Day & $99\%$ & \inr 17,408.01 & $3.54\%$ \\
+        Parametric (Delta-Normal) VaR & 10 Days & $95\%$ & \inr 39,430.43 & $8.02\%$ \\
+        Parametric (Delta-Normal) VaR & 10 Days & $99\%$ & \inr 55,048.87 & $11.20\%$ \\
+        \midrule
+        \textbf{Historical Simulation VaR} & 1 Day & $95\%$ & \inr 10,297.08 & $2.09\%$ \\
+        Historical Simulation VaR & 1 Day & $99\%$ & \inr 19,444.07 & $3.96\%$ \\
+        Historical Simulation VaR & 10 Days & $95\%$ & \inr 32,562.15 & $6.62\%$ \\
+        Historical Simulation VaR & 10 Days & $99\%$ & \inr 61,487.89 & $\mathbf{12.51\%}$ \\
+        \midrule
+        \textbf{Monte Carlo Simulation VaR (10k)} & 1 Day & $95\%$ & \inr 12,382.71 & $2.52\%$ \\
+        Monte Carlo Simulation VaR (10k) & 1 Day & $99\%$ & \inr 17,062.70 & $3.47\%$ \\
+        Monte Carlo Simulation VaR (10k) & 10 Days & $95\%$ & \inr 42,512.60 & $8.65\%$ \\
+        Monte Carlo Simulation VaR (10k) & 10 Days & $99\%$ & \inr 55,517.97 & $11.29\%$ \\
+        \midrule
+        \textbf{Conditional VaR / Expected Shortfall} & 1 Day & $95\%$ & \inr 17,737.42 & $3.61\%$ \\
+        Conditional VaR / Expected Shortfall & 1 Day & $99\%$ & \inr 30,083.25 & $6.12\%$ \\
+        Conditional VaR / Expected Shortfall & 10 Days & $99\%$ & \inr 95,131.40 & $\mathbf{19.35\%}$ \\
+        \midrule
+        \textbf{Stress: Union Budget Excise Shock} & Event & Worst & \inr 41,788.13 & $8.50\%$ \\
+        \textbf{Stress: COVID-19 Lockdown Crash} & Event & Worst & \inr 60,961.50 & $12.40\%$ \\
+        \textbf{Stress: 2008 Lehman GFC Contagion} & Event & Worst & \inr 1,07,174.25 & $\mathbf{21.80\%}$ \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{Cross-Model Diagnostics and Model Ranking}
+
+Cross-examining the quantitative metrics reveals vital principles for market risk governance:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1.5pt, parsep=0pt, label=(\roman*)]
+    \item \textbf{Historical vs. Parametric Divergence:} At the regulatory 10-day $99\%$ level, Historical $\VaR$ requires \inr 61,488 in reserve capital—over \inr 6,439 ($10.5\%$) higher than Parametric $\VaR$, reflecting empirical fat tails.
+    \item \textbf{Monte Carlo Linearity:} GBM Monte Carlo mirrors the Parametric figures (\inr 17,063 vs. \inr 17,408 at 1-day $99\%$), confirming that Gaussian increments cannot capture tail thickness without jump-diffusion augmentations.
+    \item \textbf{The Scale of Expected Shortfall:} The 10-day $99\%$ Expected Shortfall reaches \inr 95,131.40 ($19.35\%$ of position value). In the event of a breach beyond $99\%$, the portfolio loses nearly one-fifth of its capital, proving the necessity of FRTB's transition to $\ES$.
+\end{enumerate}
+
+\clearpage

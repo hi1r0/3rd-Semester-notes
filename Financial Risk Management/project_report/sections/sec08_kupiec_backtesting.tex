@@ -1,0 +1,59 @@
+% ==============================================================================
+% Section 8: Statistical Backtesting: Kupiec POF Test
+% Target: Page 10 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Statistical Backtesting: Kupiec Proportion of Failures (POF) Test}
+\label{sec:kupiec_backtesting}
+
+\subsection{Supervisory Model Validation and the Binomial Exception Process}
+
+A quantitative market risk model cannot be deployed in institutional banking practice without formal statistical validation against empirical profit-and-loss (P\&L) data \citep{kupiec1995techniques}. The Basel Committee mandates backtesting as the foundational criterion for supervisory model approval.
+
+Model validation is framed around the **exception process**. Let $L_t$ denote the realized trading loss on session $t$, and let $\VaR_t(\alpha)$ denote the ex-ante risk forecast. We define the binary exception indicator variable:
+\begin{equation}
+    I_t = \begin{cases} 1, & \text{if } L_t > \VaR_t(\alpha) \quad \text{(Tail Breach / Exception)} \\ 0, & \text{if } L_t \le \VaR_t(\alpha) \quad \text{(Model Success)} \end{cases}
+    \label{eq:indicator_breach}
+\end{equation}
+Under the null hypothesis of accurate calibration, the exception count $x = \sum_{t=1}^N I_t$ follows a binomial distribution with success parameter $p = 1 - \alpha$: $\Prob(X = x) = \binom{N}{x} p^x (1-p)^{N-x}$.
+
+\subsection{Likelihood Ratio Test Statistic Formulation and Empirical Results}
+
+To test $H_0: p = p_0 = 1 - \alpha$ against $H_1: p \ne p_0$, \citet{kupiec1995techniques} developed the **Proportion of Failures (POF)** likelihood ratio test. Evaluating the log-likelihood ratio yields:
+\begin{equation}
+    \LR_{\POF} = -2 \ln \left( \frac{L(p_0)}{L(\hat{p})} \right) = 2 \left[ x \ln \left( \frac{\hat{p}}{p_0} \right) + (N - x) \ln \left( \frac{1 - \hat{p}}{1 - p_0} \right) \right] \xrightarrow{d} \chi^2(1)
+    \label{eq:lr_pof_formula}
+\end{equation}
+where $\hat{p} = x / N$. At the $5\%$ significance level, the critical chi-square cutoff is $\chi^2_{0.05}(1) = 3.841$.
+
+\begin{table}[!htbp]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4.5pt}
+    \caption{Kupiec POF Backtesting Test Statistics and Basel Traffic Light Calibration for ITC Limited ($N = 246$).}
+    \label{tab:kupiec_backtesting}
+    \vspace{0.2em}
+    \renewcommand{\arraystretch}{1.18}
+    \begin{tabularx}{\textwidth}{l c c c c c c >{\raggedright\arraybackslash}X}
+        \toprule
+        \textbf{Model \& Confidence} & \textbf{Exp. ($N p_0$)} & \textbf{Obs. ($x$)} & \textbf{Fail Rate ($\hat{p}$)} & \textbf{LR$_{\text{POF}}$} & \textbf{$p$-value} & \textbf{Decision} & \textbf{Basel Zone} \\
+        \midrule
+        Parametric 95\% VaR & 12.30 & 9 & $3.66\%$ & 1.024 & $0.3117$ & Fail to Reject & Green Zone \\
+        Historical 95\% VaR & 12.30 & 13 & $5.28\%$ & 0.041 & $0.8391$ & Fail to Reject & Green Zone \\
+        Parametric 99\% VaR & 2.46 & 4 & $1.63\%$ & 0.819 & $0.3655$ & Fail to Reject & \textbf{Green Zone ($k=3.0$)} \\
+        Historical 99\% VaR & 2.46 & 3 & $1.22\%$ & 0.112 & $0.7380$ & Fail to Reject & \textbf{Green Zone ($k=3.0$)} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{Basel Traffic Light System Calibration}
+
+Under the Basel Committee's supervisory standards for $N \approx 250$ sessions at $99\%$ confidence ($p_0 = 0.01$):
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Green Zone ($0 \le x \le 4$ breaches):} Model accepted; baseline multiplier remains $k = 3.0$.
+    \item \textbf{Yellow Zone ($5 \le x \le 9$ breaches):} Supervisory penalty surcharge increases $k$ from $3.40$ to $3.85$.
+    \item \textbf{Red Zone ($x \ge 10$ breaches):} Model rejected outright ($p < 0.0001$); internal model approval revoked.
+\end{itemize}
+Both models reside safely within the **Basel Green Zone**, with Historical Simulation displaying superior accuracy ($p = 0.7380$ vs. $p = 0.3655$).
+
+\clearpage

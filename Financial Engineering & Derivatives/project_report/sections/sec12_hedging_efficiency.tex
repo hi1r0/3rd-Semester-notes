@@ -1,0 +1,44 @@
+% ==============================================================================
+% Section 12: Comprehensive Hedging Performance Comparison Matrix
+% Target: Page 13 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Comprehensive Hedging Performance Comparison Matrix}
+\label{sec:hedging_efficiency}
+
+\subsection{Cross-Strategy Efficiency Evaluation}
+
+To quantify the economic efficacy of derivative risk management for an institutional equity desk holding $1$ standard NSE F\&O market lot of ITC Limited ($1,725$ shares, $V_0 = \text{\inr}4,91,625.00$), Table~\ref{tab:hedging_efficiency_matrix} presents a comprehensive performance evaluation across all structured hedging overlays.
+
+\begin{table}[!htbp]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{2.5pt}
+    \caption{Multi-Strategy Hedging Performance Comparison on 1 Lot of ITC Limited ($V_0 = \text{\inr}4,91,625.00$, Benchmark Unhedged 10d 99\% Downside Risk $= \text{\inr}61,487.89$).}
+    \label{tab:hedging_efficiency_matrix}
+    \vspace{0.2em}
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l r c r c r}
+        \toprule
+        \textbf{Hedging Strategy} & \textbf{Cost (\inr)} & \textbf{Floor} & \textbf{Max Loss (\inr)} & \textbf{Breakeven} & \textbf{Mitigation} \\
+        \midrule
+        \textbf{Unhedged Stock} & \inr 0.00 ($0.00\%$) & None & $-\text{\inr}4,91,625$ & \inr 285.00 & $0.00\%$ \\
+        \textbf{ATM Protective Put (285)} & \inr 15,283.50 ($3.11\%$) & \inr 285 & $-\text{\inr}15,283.50$ & \inr 293.86 & $\mathbf{75.14\%}$ \\
+        \textbf{OTM Protective Put (280)} & \inr 11,764.50 ($2.39\%$) & \inr 280 & $-\text{\inr}20,389.50$ & \inr 291.82 & $\mathbf{66.84\%}$ \\
+        \textbf{Covered Call (295)} & $-\text{\inr}7,452.00$ (Credit) & None & $-\text{\inr}4,84,173$ & \inr 280.68 & $12.12\%$ \\
+        \textbf{Low-Cost Collar (280/295)} & \inr 4,312.50 ($0.88\%$) & \inr 280 & $-\text{\inr}12,937.50$ & \inr 287.50 & $\mathbf{78.96\%}$ \\
+        \textbf{Bear Put Spread (285/270)} & \inr 9,384.00 ($1.91\%$) & Bounded & $-\text{\inr}9,384.00$ & \inr 279.56 & $42.08\%$ \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+\subsection{Quantitative Hedging Governance Takeaways}
+
+The empirical performance matrix in Table~\ref{tab:hedging_efficiency_matrix} delivers crucial institutional insights:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1.5pt, parsep=0pt, label=(\roman*)]
+    \item \textbf{Superiority of the Collar Architecture:} The Low-Cost Collar achieves the highest overall tail risk mitigation ($\mathbf{78.96\%}$), capping maximum inventory loss at \inr 12,937.50 ($2.63\%$ of capital). By financing the put premium via call sale, the upfront cash drag is slashed from $3.11\%$ (ATM Put) down to just $\mathbf{0.88\%}$ (\inr 4,312.50).
+    \item \textbf{Cost of Absolute Downside Protection:} The ATM Protective Put eliminates $75.14\%$ of extreme tail risk, but requires an upfront outlay of \inr 15,283.50 ($3.11\%$). For corporate treasury desks with strict capital preservation mandates, this cost represents a transparent insurance premium.
+    \item \textbf{Inadequacy of Covered Calls for Tail Risk:} The Covered Call provides fee income of \inr 7,452.00, but offers zero insulation against severe market crashes (such as an $8.5\%$ Budget tax drop or $12.4\%$ COVID crash), achieving only $12.12\%$ tail mitigation.
+\end{enumerate}
+
+\clearpage

@@ -1,0 +1,34 @@
+% ==============================================================================
+% Section 13: Dynamic Delta Rebalancing & Market Microstructure
+% Target: Page 14 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Dynamic Delta Rebalancing and Market Microstructure}
+\label{sec:dynamic_rebalancing}
+
+\subsection{Discrete Hedging Error and Gamma Slippage}
+
+The foundational Black--Scholes derivation presumes continuous, frictionless portfolio rebalancing ($\Delta t \to 0$). In actual exchange trading, market participants must rebalance at discrete intervals (e.g., daily or weekly). 
+
+Over a discrete interval $\Delta t$, the tracking error of a delta-hedged portfolio is governed by the second-order **Gamma slippage** \citep{wilmott2006paul}:
+\begin{equation}
+    \Delta \Pi_{\text{hedge}} \approx \frac{1}{2} S^2 \Gamma \left[ \left( \frac{\Delta S}{S} \right)^2 - \sigma^2 \Delta t \right]
+    \label{eq:gamma_slippage}
+\end{equation}
+If realized volatility over the rebalancing interval exceeds the implied volatility used to price the hedge, the hedger incurs systematic losses. Because Gamma peaks sharply at-the-money ($\Gamma = 0.0182$), discrete delta rebalancing around the strike price generates substantial hedging slippage during turbulent trading sessions.
+
+\subsection{Indian Exchange Microstructure and Transaction Frictions}
+
+Executing dynamic hedging strategies on the National Stock Exchange of India (NSE) incurs statutory and exchange transaction costs that rapidly erode theoretical arbitrage profits:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=(\alph*)]
+    \item \textbf{Securities Transaction Tax (STT):} Imposed by the Government of India at $0.0625\%$ on option sale turnover (premium) and an aggressive $0.125\%$ on the total intrinsic settlement value when in-the-money options are exercised into physical equity delivery.
+    \item \textbf{Exchange Turnover Fees and Clearing Charges:} The NSE levies an exchange turnover fee of $0.053\%$ on option premium turnover.
+    \item \textbf{Goods and Services Tax (GST):} An $18\%$ GST is levied on brokerage commissions and exchange transaction charges.
+    \item \textbf{Bid-Ask Spread Friction and Impact Cost:} While liquid Nifty index options feature tight spreads ($<0.5\%$), single-stock equity options on ITC Limited exhibit wider bid-ask spreads ranging from $1.5\%$ to $3.5\%$ of the premium, causing substantial cash drag upon each rebalancing trade.
+\end{enumerate}
+
+\subsection{Static Derivative Overlays vs. Dynamic Rebalancing}
+
+Due to these transaction frictions, institutional asset managers holding cash equity blocks generally reject dynamic delta rebalancing in favor of **static derivative overlays** (such as the Low-Cost Collar or OTM Protective Put). Static structures establish guaranteed downside protection upon initial execution, completely eliminating ongoing rebalancing costs, gamma slippage, and operational execution risks.
+
+\clearpage

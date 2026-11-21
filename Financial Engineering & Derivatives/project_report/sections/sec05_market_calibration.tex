@@ -1,0 +1,45 @@
+% ==============================================================================
+% Section 5: Market Calibration & NSE Option Chain Integration
+% Target: Page 6 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Market Calibration and NSE Option Chain Integration}
+\label{sec:market_calibration}
+
+\subsection{Contract Specifications on the National Stock Exchange of India}
+
+Equity derivatives on ITC Limited trade on the F\&O segment of the National Stock Exchange of India (NSE) under standardized contract rules enforced by the Securities and Exchange Board of India (SEBI). To ensure full empirical fidelity, all models in this study are calibrated to **active December 2026 monthly contracts**:
+
+\begin{formulabox}[Empirical Model Calibration Parameters]
+\begin{itemize}[leftmargin=1.2em, itemsep=0.5pt, parsep=0pt]
+    \item \textbf{Underlying Equity:} ITC Limited (NSE Ticker: \texttt{ITC.NS})
+    \item \textbf{Spot Closing Price ($S_0$):} \inr 285.00 per share (November 16, 2026)
+    \item \textbf{NSE Contract Lot Size ($N_{\text{shares}}$):} 1,725 equity shares
+    \item \textbf{Inventory Portfolio Value ($V_0$):} $V_0 = 1,725 \times \text{\inr}285.00 = \mathbf{\text{\inr}4,91,625.00}$
+    \item \textbf{Contract Expiration Date:} December 31, 2026 (Monthly Expiry Cycle)
+    \item \textbf{Time to Expiration ($T$):} $\Delta \tau = 42$ calendar days $\implies T = 42 / 365 = \mathbf{0.11507 \text{ years}}$
+    \item \textbf{Risk-Free Interest Rate ($r$):} $r = 6.65\%$ per annum (RBI 91-Day Treasury Bill yield)
+    \item \textbf{Annualized Dividend Yield ($q$):} $q = 5.09\%$ per annum (\inr 14.50 trailing distribution)
+    \item \textbf{Historical Annualized Volatility ($\sigma$):} $\sigma = 23.40\%$ ($\sigma_{\text{daily}} = 1.4742\% \times \sqrt{252}$)
+\end{itemize}
+\end{formulabox}
+
+\subsection{Interest Rate and Volatility Benchmarking}
+
+The risk-free rate $r = 6.65\%$ represents the prevailing annualized cut-off yield of the 91-day Government of India Treasury Bill auctioned by the Reserve Bank of India, serving as the benchmark sovereign zero-coupon lending rate. 
+
+Historical volatility $\sigma = 23.40\%$ is estimated from the sample variance of 246 continuous daily log returns over the preceding 12-month calendar. While historical volatility anchors the fundamental pricing baseline, implied volatility ($\IV$) extracted from live market quotes reflects the market's forward-looking consensus regarding downside tail risk.
+
+\subsection{NSE Option Chain Strike Architecture}
+
+The NSE establishes strike price intervals of \inr 5.00 for ITC options. We analyze a comprehensive grid spanning eight liquid strikes from \inr 270.00 to \inr 305.00:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{Deep Out-of-the-Money Puts / In-the-Money Calls:} Strike \inr 270.00 ($K/S_0 = 0.947$) and \inr 275.00 ($K/S_0 = 0.965$).
+    \item \textbf{Near-the-Money Puts / Calls:} Strike \inr 280.00 ($K/S_0 = 0.982$).
+    \item \textbf{At-the-Money (ATM) Benchmark:} Strike \inr 285.00 ($K/S_0 = 1.000$).
+    \item \textbf{Out-of-the-Money Calls / In-the-Money Puts:} Strike \inr 290.00 ($K/S_0 = 1.018$), \inr 295.00 ($K/S_0 = 1.035$), \inr 300.00 ($K/S_0 = 1.053$), and \inr 305.00 ($K/S_0 = 1.070$).
+\end{itemize}
+
+This empirical grid allows us to rigorously test model pricing errors, extract the implied volatility smile, and evaluate multi-strike hedging strategies.
+
+\clearpage

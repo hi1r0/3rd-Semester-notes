@@ -1,0 +1,50 @@
+% ==============================================================================
+% Section 7: Coherent Risk Measurement & Conditional VaR (Expected Shortfall)
+% Target: Page 9 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Coherent Risk Measurement and Conditional VaR (CVaR)}
+\label{sec:coherent_risk_cvar}
+
+\subsection{Axiomatic Foundations of Coherent Risk Measures}
+
+\citet{artzner1999coherent} formalized an axiomatic framework defining the mathematical properties that an economically sound risk measure must satisfy. Let $\mathcal{V}$ denote the space of real-valued random loss variables on $(\Omega, \mathcal{F}, \Prob)$. A functional $\rho: \mathcal{V} \to \mathbb{R}$ is classified as a **coherent risk measure** if and only if it satisfies four fundamental axioms:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=\textbf{A\arabic*.}]
+    \item \textbf{Monotonicity:} If $X \le Y$ almost surely, then $\rho(X) \le \rho(Y)$.
+    \item \textbf{Subadditivity:} $\rho(X + Y) \le \rho(X) + \rho(Y)$ (ensures diversification reduces or preserves risk).
+    \item \textbf{Positive Homogeneity:} For any scalar $\lambda \ge 0$, $\rho(\lambda X) = \lambda \rho(X)$.
+    \item \textbf{Translation Invariance:} For any deterministic cash constant $c \in \mathbb{R}$, $\rho(X + c) = \rho(X) + c$.
+\end{enumerate}
+
+\subsection{The Subadditivity Failure of Value at Risk}
+
+The single greatest mathematical deficiency of Value at Risk is that **$\VaR$ violates subadditivity for non-elliptical distributions**, perversely penalizing portfolio diversification.
+
+\begin{theorem}{Subadditivity Failure of Value at Risk}{var_subadditivity}
+There exist loss variables $X, Y \in \mathcal{V}$ such that $\VaR_{\alpha}(X + Y) > \VaR_{\alpha}(X) + \VaR_{\alpha}(Y)$.
+\end{theorem}
+\begin{proof}
+Consider two independent digital default exposures $X$ and $Y$, where each incurs a loss of \inr 100 with probability $p = 0.04$ and \inr 0 with probability $0.96$. Evaluated at $\alpha = 0.95$, $\VaR_{0.95}(X) = \VaR_{0.95}(Y) = \text{\inr}0$, since $\Prob(L > 0) = 0.04 < 0.05$. For the combined portfolio $Z = X + Y$, $\Prob(Z = 0) = (0.96)^2 = 0.9216 \implies \Prob(Z \ge 100) = 0.0784 > 0.05$. Therefore, $\VaR_{0.95}(X + Y) = \text{\inr}100 > \VaR_{0.95}(X) + \VaR_{0.95}(Y) = \text{\inr}0$. Diversification increases calculated $\VaR$.
+\end{proof}
+
+\subsection{Expected Shortfall Formulation and Empirical Metrics}
+
+To restore coherence, the Basel Committee transitioned to **Expected Shortfall** ($\ES_\alpha$, or Conditional $\VaR$), measuring the conditional expectation of losses exceeding the $\VaR$ threshold \citep{mcneil2015quantitative}:
+\begin{equation}
+    \ES_{\alpha}(L) = \frac{1}{1-\alpha} \int_{\alpha}^1 \VaR_{u}(L) \, \dd u = \E\left[ L \;\middle|\; L > \VaR_{\alpha}(L) \right]
+    \label{eq:cvar_formula}
+\end{equation}
+Under Historical Simulation, $\CVaR$ is evaluated as the arithmetic mean of tail exceedances: $\CVaR_{\alpha}^{\text{hist}} = \frac{1}{|K_\alpha|} \sum_{i \in K_\alpha} L_i$, where $K_\alpha = \{i : L_i > \VaR_\alpha^{\text{hist}}\}$.
+
+\begin{empiricalbox}{Conditional VaR (Expected Shortfall) Metrics on 1 Lot of ITC}{cvar_metrics}
+Evaluating Equation~\eqref{eq:cvar_formula} on our empirical sample ($V_0 = \text{\inr}4,91,625.00$) yields:
+\begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
+    \item \textbf{1-Day 95\% Historical CVaR:} \inr 17,737.42 ($3.61\%$ of inventory)
+    \item \textbf{1-Day 99\% Historical CVaR:} \inr 30,083.25 ($6.12\%$ of inventory)
+    \item \textbf{10-Day 99\% Historical CVaR:} \inr 95,131.40 ($19.35\%$ of inventory)
+\end{itemize}
+\end{empiricalbox}
+
+The tail severity ratio $\frac{\CVaR_{0.99}}{\VaR_{0.99}} = \frac{\text{\inr}30,083.25}{\text{\inr}19,444.07} = \mathbf{1.547}$ indicates that conditional on breaching the 99th percentile, the expected loss is **$54.7\%$ greater than the $\VaR$ threshold itself**, validating the regulatory shift to Expected Shortfall.
+
+\clearpage

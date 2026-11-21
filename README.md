@@ -20,14 +20,16 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 ├── Corporate Internship/           # MSQF 534: Summer corporate internship guidelines & viva
 │   └── syllabus.md                 # Verbatim 6-week internship regulations & CO-PO matrix
 ├── Financial Engineering & Derivatives/ # MSQF 542: Financial Engineering & Derivatives
-│   ├── ITC_VaR_and_Black_Scholes_Hedging_Report.pdf # Joint Empirical Research Report (MSQF 533 & MSQF 542, 9 pages)
+│   ├── project_report/             # Standalone 15-Page Academic Empirical Report on Black–Scholes & Hedging (main.pdf)
+│   ├── ITC_VaR_and_Black_Scholes_Hedging_Report.pdf # Legacy Joint Empirical Report (MSQF 533 & MSQF 542, 9 pages)
 │   ├── Derivatives_Trading_FAQs.pdf
 │   ├── financial derivatives_module1.pptx
 │   ├── Hull J.C.-Options, Futures and Other Derivatives_9th edition.pdf
 │   ├── MSQF_542_Financial_Engineering_Derivatives_Unit1.pdf
 │   ├── MSQF_542_Financial_Engineering_Derivatives_UNIT 3.pdf
 │   ├── Unit_2_Derivatives_and_Market_Instruments-2-23.pdf
-│   └── syllabus.md                 # Verbatim course syllabus, objectives & CO-PO matrix
+│   ├── syllabus.md                 # Verbatim course syllabus, objectives & CO-PO matrix
+│   └── README.md                   # Subject overview and directory index
 ├── Financial Mathematics/          # MSQF 532: Financial Mathematics
 │   ├── Assignment/                 # FMCG Equity Valuation Assignment (Monochrome LaTeX, 8 pages, main.pdf)
 │   ├── latex/                      # Modular LaTeX lecture notes (Units I, II, III & IV, 104 pages, main.pdf)
@@ -36,7 +38,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
 │   └── README.md                   # Subject overview and directory index
 ├── Financial Risk Management/      # MSQF 533: Financial Risk Management
 │   ├── latex/                      # Modular LaTeX lecture notes (Units I & II, TikZ architectures, 29-page main.pdf)
-│   ├── project_report/             # Joint Empirical Research Report on ITC Limited (40-page monograph & 9-page joint paper)
+│   ├── project_report/             # Standalone 15-Page Academic Empirical Report on VaR Modeling of ITC (main.pdf)
 │   ├── MSQF_533_Unit_I_Financial_Risk_Management.pdf # Unit I lecture slides (Dr. Kamalakkannan Adhisekar)
 │   ├── MSQF-Introduction_to_Risk_Management-Class.pptx # 150-slide class deck grounded in Indian markets (Prof. D. Lazar)
 │   ├── syllabus.md                 # Verbatim course syllabus, objectives & CO-PO matrix
@@ -107,6 +109,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Estimation methodologies: Local valuation (Delta-Normal parametric covariance matrix $\sigma_P^2 = \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}$) vs. Full valuation (Historical Simulation empirical percentiles and Monte Carlo Cholesky decomposition $\boldsymbol{\Sigma} = \mathbf{L}\mathbf{L}^T$).
    - Hedging strategies: Linear risk hedging, basis risk ($b_t = S_t - F_t$), optimal minimum-variance hedge ratio derivation ($h^* = \rho \frac{\sigma_S}{\sigma_F}$) via OLS regression, contract sizing ($N^*$), and non-linear option Delta-Gamma dynamic immunization.
    - **Modular LaTeX Monograph (`Financial Risk Management/latex/main.pdf`):** 29-page publication-grade reference with full front matter, 8 high-density TikZ architectures, 9 worked numerical examples, and a consolidated multi-chapter formula sheet.
+   - **Dedicated 15-Page Academic Empirical Report (`Financial Risk Management/project_report/main.pdf`):** *Value at Risk (VaR) and Downside Risk Modeling of ITC Limited (2025–2026)* — rigorous empirical treatment of fat tails, multi-model VaR crossover, Kupiec POF & Christoffersen backtesting, and Basel III market risk capital charges. Exactly 15 pages, evaluated under Dr. Kamalakkannan Adhisekar (November 2026).
    - Reference: [`Financial Risk Management/syllabus.md`](./Financial%20Risk%20Management/syllabus.md) | LaTeX: [`Financial Risk Management/latex/main.pdf`](./Financial%20Risk%20Management/latex/main.pdf)
 
 4. **Corporate Internship and Viva (MSQF 534 — Hard Core, 6 Credits)**
@@ -136,6 +139,7 @@ Comprehensive course notes, lecture materials, presentations, empirical research
    - Pricing models: Cost of carry, Binomial trees, and Black-Scholes analytical option pricing.
    - Option trading strategies: Covered calls, protective puts, bull/bear spreads, butterfly spreads, calendar spreads, straddles, strangles, and put-call parity arbitrage.
    - Interest rate and currency swaps, valuation dynamics, and counterparty credit risk mitigation.
+   - **Dedicated 15-Page Academic Empirical Report (`Financial Engineering & Derivatives/project_report/main.pdf`):** *Black–Scholes Option Pricing, Volatility Surface Analytics, and Derivative Hedging Architectures: An Empirical Investigation of ITC Limited (2025–2026)* — rigorous continuous-time arbitrage valuation, Merton dividend PDE calibration, closed-form Greek surfaces, implied volatility skew, and multi-leg hedging efficiency (Collar achieving 78.96% tail risk mitigation). Exactly 15 pages, evaluated under Dr. Kamalakkannan Adhisekar (November 2026).
    - Reference: [`Financial Engineering & Derivatives/syllabus.md`](./Financial%20Engineering%20%26%20Derivatives/syllabus.md)
 
 ---

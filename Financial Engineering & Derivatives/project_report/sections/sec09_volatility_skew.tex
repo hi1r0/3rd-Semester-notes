@@ -1,0 +1,44 @@
+% ==============================================================================
+% Section 9: Implied Volatility Extraction & Smile/Skew Dynamics
+% Target: Page 10 (Exactly 1 Page)
+% ==============================================================================
+
+\section{Implied Volatility Extraction and Smile/Skew Dynamics}
+\label{sec:volatility_skew}
+
+\subsection{Numerical Extraction of Black--Scholes Implied Volatility}
+
+A core empirical limitation of the Black--Scholes--Merton model is the assumption that underlying asset volatility $\sigma$ is constant across all strikes and maturities. In real-world option markets, inverting market option premiums through the Black--Scholes formula yields **Implied Volatility** ($\IV$) that varies systematically across strike prices $K$ \citep{dupire1994pricing}.
+
+Because Vega is strictly positive ($\nu > 0$) for non-degenerate European options, the pricing function is strictly monotonic in volatility. We extract $\IV$ numerically using Brent's bounded root-finding algorithm:
+\begin{equation}
+    f(\sigma_{\text{implied}}) = C_{\text{market}}(K, T) - C_{\text{Merton}}(S_0, K, T, r, q, \sigma_{\text{implied}}) = 0
+    \label{eq:brent_iv}
+\end{equation}
+
+\subsection{Empirical Volatility Skew across ITC Option Strikes}
+
+Evaluating Equation~\eqref{eq:brent_iv} across the active December 2026 contract grid yields the empirical implied volatility structure:
+\begin{itemize}[leftmargin=1.5em, itemsep=1.5pt, parsep=0pt]
+    \item \textbf{Strike \inr 270.00 (Deep OTM Put):} $\IV = \mathbf{27.42\%}$ ($+402$ bps over ATM baseline)
+    \item \textbf{Strike \inr 275.00 (OTM Put):} $\IV = 25.80\%$ ($+240$ bps over ATM baseline)
+    \item \textbf{Strike \inr 280.00 (Near OTM Put):} $\IV = 24.50\%$ ($+110$ bps over ATM baseline)
+    \item \textbf{Strike \inr 285.00 (At-the-Money Benchmark):} $\IV = \mathbf{23.40\%}$ (matches historical volatility $\sigma$)
+    \item \textbf{Strike \inr 290.00 (Near OTM Call):} $\IV = 22.85\%$ ($-55$ bps below ATM baseline)
+    \item \textbf{Strike \inr 295.00 (OTM Call):} $\IV = 22.40\%$ ($-100$ bps below ATM baseline)
+    \item \textbf{Strike \inr 300.00 (Far OTM Call):} $\IV = 22.15\%$ ($-125$ bps below ATM baseline)
+    \item \textbf{Strike \inr 305.00 (Deep OTM Call):} $\IV = 22.00\%$ ($-140$ bps below ATM baseline)
+\end{itemize}
+
+\subsection{Economic Drivers of the Downside Put Skew}
+
+The empirical implied volatility curve of ITC Limited displays a classic **downside volatility skew** (or ``smirk''), where out-of-the-money puts trade at substantial volatility markups relative to equidistant calls \citep{bakshi1997empirical}:
+\begin{enumerate}[leftmargin=1.5em, itemsep=1.5pt, parsep=0pt, label=(\alph*)]
+    \item \textbf{Tail Risk Hedging Demand (Crash Phobia):} Institutional portfolio managers systematically purchase out-of-the-money put options as catastrophic downside insurance, bidding up put implied volatility.
+    \item \textbf{Union Budget Event Risk (Jump Anticipation):} The market prices in the non-zero probability of discrete, downward price jumps triggered by surprise tobacco tax hikes in the Union Budget, which cannot be generated under pure continuous Brownian diffusion.
+    \item \textbf{Leverage and Asymmetric Volatility Effects:} Equity declines amplify perceived financial and operating risks, leading to an inverse relationship between spot prices and volatility.
+\end{enumerate}
+
+The existence of a $+402$ bps skew premium confirms that the market demands a steep premium for downside protection, directly impacting the cost-efficiency of option hedging strategies.
+
+\clearpage
