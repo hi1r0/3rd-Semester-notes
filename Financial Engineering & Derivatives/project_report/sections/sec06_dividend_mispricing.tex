@@ -16,7 +16,7 @@ In standard derivative textbooks, option pricing models are frequently introduce
 
 \subsection{Empirical Pricing Comparison across the NSE Option Chain}
 
-Table~\ref{tab:dividend_pricing_errors} cross-compares live market closing quotations on the National Stock Exchange of India (December 2026 expiry, $T = 0.11507$ years) against theoretical prices computed under **Standard Black--Scholes ($q = 0$)** and **Merton's Dividend-Adjusted Model ($q = 5.09\%$)**.
+Table~\ref{tab:dividend_pricing_errors} cross-compares live market closing quotations on the National Stock Exchange of India (December 2026 expiry, $T = 0.11507$ years) against theoretical prices computed under \textbf{Standard Black--Scholes ($q = 0$)} and \textbf{Merton's Dividend-Adjusted Model ($q = 5.09\%$)}.
 
 \begin{table}[!htbp]
     \centering
@@ -49,7 +49,7 @@ Table~\ref{tab:dividend_pricing_errors} cross-compares live market closing quota
 The empirical findings in Table~\ref{tab:dividend_pricing_errors} confirm the theoretical predictions:
 \begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
     \item \textbf{At-the-Money Benchmark (Strike 285):} Standard Black--Scholes overprices the ATM Call by $+9.76\%$ (+\inr 0.90 per share) and underprices the ATM Put by $-8.84\%$ (-\inr 0.77 per share).
-    \item \textbf{Lot-Level Economic Exposure:} On 1 standard market lot ($1,725$ shares), trading with unadjusted models incurs an error of **\inr 1,552.50 per call contract** and **\inr 1,328.25 per put contract**.
+    \item \textbf{Lot-Level Economic Exposure:} On 1 standard market lot ($1,725$ shares), trading with unadjusted models incurs an error of \textbf{\inr 1,552.50 per call contract} and \textbf{\inr 1,328.25 per put contract}.
     \item \textbf{Merton Alignment:} Incorporating $q = 5.09\%$ eliminates this structural bias, aligning theoretical premiums with market quotes to within \inr 0.06 for ATM calls and \inr 0.15 for ATM puts.
 \end{itemize}
 

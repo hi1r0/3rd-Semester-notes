@@ -10,7 +10,7 @@
 
 The foundational Black--Scholes derivation presumes continuous, frictionless portfolio rebalancing ($\Delta t \to 0$). In actual exchange trading, market participants must rebalance at discrete intervals (e.g., daily or weekly). 
 
-Over a discrete interval $\Delta t$, the tracking error of a delta-hedged portfolio is governed by the second-order **Gamma slippage** \citep{wilmott2006paul}:
+Over a discrete interval $\Delta t$, the tracking error of a delta-hedged portfolio is governed by the second-order \textbf{Gamma slippage} \citep{wilmott2006paul}:
 \begin{equation}
     \Delta \Pi_{\text{hedge}} \approx \frac{1}{2} S^2 \Gamma \left[ \left( \frac{\Delta S}{S} \right)^2 - \sigma^2 \Delta t \right]
     \label{eq:gamma_slippage}
@@ -29,6 +29,6 @@ Executing dynamic hedging strategies on the National Stock Exchange of India (NS
 
 \subsection{Static Derivative Overlays vs. Dynamic Rebalancing}
 
-Due to these transaction frictions, institutional asset managers holding cash equity blocks generally reject dynamic delta rebalancing in favor of **static derivative overlays** (such as the Low-Cost Collar or OTM Protective Put). Static structures establish guaranteed downside protection upon initial execution, completely eliminating ongoing rebalancing costs, gamma slippage, and operational execution risks.
+Due to these transaction frictions, institutional asset managers holding cash equity blocks generally reject dynamic delta rebalancing in favor of \textbf{static derivative overlays} (such as the Low-Cost Collar or OTM Protective Put). Static structures establish guaranteed downside protection upon initial execution, completely eliminating ongoing rebalancing costs, gamma slippage, and operational execution risks.
 
 \clearpage

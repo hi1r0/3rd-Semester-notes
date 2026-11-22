@@ -8,7 +8,7 @@
 
 \subsection{Numerical Extraction of Black--Scholes Implied Volatility}
 
-A core empirical limitation of the Black--Scholes--Merton model is the assumption that underlying asset volatility $\sigma$ is constant across all strikes and maturities. In real-world option markets, inverting market option premiums through the Black--Scholes formula yields **Implied Volatility** ($\IV$) that varies systematically across strike prices $K$ \citep{dupire1994pricing}.
+A core empirical limitation of the Black--Scholes--Merton model is the assumption that underlying asset volatility $\sigma$ is constant across all strikes and maturities. In real-world option markets, inverting market option premiums through the Black--Scholes formula yields \textbf{Implied Volatility} ($\IV$) that varies systematically across strike prices $K$ \citep{dupire1994pricing}.
 
 Because Vega is strictly positive ($\nu > 0$) for non-degenerate European options, the pricing function is strictly monotonic in volatility. We extract $\IV$ numerically using Brent's bounded root-finding algorithm:
 \begin{equation}
@@ -32,7 +32,7 @@ Evaluating Equation~\eqref{eq:brent_iv} across the active December 2026 contract
 
 \subsection{Economic Drivers of the Downside Put Skew}
 
-The empirical implied volatility curve of ITC Limited displays a classic **downside volatility skew** (or ``smirk''), where out-of-the-money puts trade at substantial volatility markups relative to equidistant calls \citep{bakshi1997empirical}:
+The empirical implied volatility curve of ITC Limited displays a classic \textbf{downside volatility skew} (or ``smirk''), where out-of-the-money puts trade at substantial volatility markups relative to equidistant calls \citep{bakshi1997empirical}:
 \begin{enumerate}[leftmargin=1.5em, itemsep=1.5pt, parsep=0pt, label=(\alph*)]
     \item \textbf{Tail Risk Hedging Demand (Crash Phobia):} Institutional portfolio managers systematically purchase out-of-the-money put options as catastrophic downside insurance, bidding up put implied volatility.
     \item \textbf{Union Budget Event Risk (Jump Anticipation):} The market prices in the non-zero probability of discrete, downward price jumps triggered by surprise tobacco tax hikes in the Union Budget, which cannot be generated under pure continuous Brownian diffusion.

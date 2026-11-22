@@ -8,7 +8,7 @@
 
 \subsection{The Blindness of Unconditional Backtesting to Breach Clustering}
 
-The Kupiec POF test evaluates only total exceptions, remaining completely indifferent to their temporal clustering \citep{christoffersen1998evaluating}. In banking practice, consecutive breaches induce acute liquidity strain. To ensure risk models adapt dynamically, model validation requires testing for **exception independence**.
+The Kupiec POF test evaluates only total exceptions, remaining completely indifferent to their temporal clustering \citep{christoffersen1998evaluating}. In banking practice, consecutive breaches induce acute liquidity strain. To ensure risk models adapt dynamically, model validation requires testing for \textbf{exception independence}.
 
 \subsection{Markov Chain Formulation and Independence Likelihood Ratio}
 
@@ -31,7 +31,7 @@ with critical cutoffs $\chi^2_{0.05}(1) = 3.841$ and $\chi^2_{0.05}(2) = 5.991$.
 Evaluating the Christoffersen test on our 246 sessions yields critical diagnostic insights:
 \begin{itemize}[leftmargin=1.5em, itemsep=1pt, parsep=0pt]
     \item \textbf{99\% Historical Simulation VaR:} $n_{00} = 239$, $n_{01} = 3$, $n_{10} = 3$, $n_{11} = 0 \implies \hat{\pi}_{11} = 0.0$. Test yields $\LR_{\text{ind}} = 0.0744$ ($p = 0.7851$) and combined conditional coverage $\LR_{\text{cc}} = 0.1863$ ($p = 0.9111$). Fully satisfies conditional coverage with zero clustering.
-    \item \textbf{99\% Parametric VaR:} $n_{00} = 238$, $n_{01} = 3$, $n_{10} = 3$, $n_{11} = 1 \implies \hat{\pi}_{11} = 25.0\%$. Consequently, $\LR_{\text{ind}} = 4.0758$ ($p = 0.0435$), **rejecting exception independence at the 5\% level** due to a consecutive breach during the February Union Budget announcement period.
+    \item \textbf{99\% Parametric VaR:} $n_{00} = 238$, $n_{01} = 3$, $n_{10} = 3$, $n_{11} = 1 \implies \hat{\pi}_{11} = 25.0\%$. Consequently, $\LR_{\text{ind}} = 4.0758$ ($p = 0.0435$), \textbf{rejecting exception independence at the 5\% level} due to a consecutive breach during the February Union Budget announcement period.
 \end{itemize}
 
 \clearpage

@@ -10,7 +10,7 @@
 
 A quantitative market risk model cannot be deployed in institutional banking practice without formal statistical validation against empirical profit-and-loss (P\&L) data \citep{kupiec1995techniques}. The Basel Committee mandates backtesting as the foundational criterion for supervisory model approval.
 
-Model validation is framed around the **exception process**. Let $L_t$ denote the realized trading loss on session $t$, and let $\VaR_t(\alpha)$ denote the ex-ante risk forecast. We define the binary exception indicator variable:
+Model validation is framed around the \textbf{exception process}. Let $L_t$ denote the realized trading loss on session $t$, and let $\VaR_t(\alpha)$ denote the ex-ante risk forecast. We define the binary exception indicator variable:
 \begin{equation}
     I_t = \begin{cases} 1, & \text{if } L_t > \VaR_t(\alpha) \quad \text{(Tail Breach / Exception)} \\ 0, & \text{if } L_t \le \VaR_t(\alpha) \quad \text{(Model Success)} \end{cases}
     \label{eq:indicator_breach}
@@ -19,7 +19,7 @@ Under the null hypothesis of accurate calibration, the exception count $x = \sum
 
 \subsection{Likelihood Ratio Test Statistic Formulation and Empirical Results}
 
-To test $H_0: p = p_0 = 1 - \alpha$ against $H_1: p \ne p_0$, \citet{kupiec1995techniques} developed the **Proportion of Failures (POF)** likelihood ratio test. Evaluating the log-likelihood ratio yields:
+To test $H_0: p = p_0 = 1 - \alpha$ against $H_1: p \ne p_0$, \citet{kupiec1995techniques} developed the \textbf{Proportion of Failures (POF)} likelihood ratio test. Evaluating the log-likelihood ratio yields:
 \begin{equation}
     \LR_{\POF} = -2 \ln \left( \frac{L(p_0)}{L(\hat{p})} \right) = 2 \left[ x \ln \left( \frac{\hat{p}}{p_0} \right) + (N - x) \ln \left( \frac{1 - \hat{p}}{1 - p_0} \right) \right] \xrightarrow{d} \chi^2(1)
     \label{eq:lr_pof_formula}
@@ -54,6 +54,6 @@ Under the Basel Committee's supervisory standards for $N \approx 250$ sessions a
     \item \textbf{Yellow Zone ($5 \le x \le 9$ breaches):} Supervisory penalty surcharge increases $k$ from $3.40$ to $3.85$.
     \item \textbf{Red Zone ($x \ge 10$ breaches):} Model rejected outright ($p < 0.0001$); internal model approval revoked.
 \end{itemize}
-Both models reside safely within the **Basel Green Zone**, with Historical Simulation displaying superior accuracy ($p = 0.7380$ vs. $p = 0.3655$).
+Both models reside safely within the \textbf{Basel Green Zone}, with Historical Simulation displaying superior accuracy ($p = 0.7380$ vs. $p = 0.3655$).
 
 \clearpage

@@ -8,7 +8,7 @@
 
 \subsection{Axiomatic Foundations of Coherent Risk Measures}
 
-\citet{artzner1999coherent} formalized an axiomatic framework defining the mathematical properties that an economically sound risk measure must satisfy. Let $\mathcal{V}$ denote the space of real-valued random loss variables on $(\Omega, \mathcal{F}, \Prob)$. A functional $\rho: \mathcal{V} \to \mathbb{R}$ is classified as a **coherent risk measure** if and only if it satisfies four fundamental axioms:
+\citet{artzner1999coherent} formalized an axiomatic framework defining the mathematical properties that an economically sound risk measure must satisfy. Let $\mathcal{V}$ denote the space of real-valued random loss variables on $(\Omega, \mathcal{F}, \Prob)$. A functional $\rho: \mathcal{V} \to \mathbb{R}$ is classified as a \textbf{coherent risk measure} if and only if it satisfies four fundamental axioms:
 \begin{enumerate}[leftmargin=1.5em, itemsep=1pt, parsep=0pt, label=\textbf{A\arabic*.}]
     \item \textbf{Monotonicity:} If $X \le Y$ almost surely, then $\rho(X) \le \rho(Y)$.
     \item \textbf{Subadditivity:} $\rho(X + Y) \le \rho(X) + \rho(Y)$ (ensures diversification reduces or preserves risk).
@@ -18,7 +18,7 @@
 
 \subsection{The Subadditivity Failure of Value at Risk}
 
-The single greatest mathematical deficiency of Value at Risk is that **$\VaR$ violates subadditivity for non-elliptical distributions**, perversely penalizing portfolio diversification.
+The single greatest mathematical deficiency of Value at Risk is that \textbf{$\VaR$ violates subadditivity for non-elliptical distributions}, perversely penalizing portfolio diversification.
 
 \begin{theorem}{Subadditivity Failure of Value at Risk}{var_subadditivity}
 There exist loss variables $X, Y \in \mathcal{V}$ such that $\VaR_{\alpha}(X + Y) > \VaR_{\alpha}(X) + \VaR_{\alpha}(Y)$.
@@ -29,7 +29,7 @@ Consider two independent digital default exposures $X$ and $Y$, where each incur
 
 \subsection{Expected Shortfall Formulation and Empirical Metrics}
 
-To restore coherence, the Basel Committee transitioned to **Expected Shortfall** ($\ES_\alpha$, or Conditional $\VaR$), measuring the conditional expectation of losses exceeding the $\VaR$ threshold \citep{mcneil2015quantitative}:
+To restore coherence, the Basel Committee transitioned to \textbf{Expected Shortfall} ($\ES_\alpha$, or Conditional $\VaR$), measuring the conditional expectation of losses exceeding the $\VaR$ threshold \citep{mcneil2015quantitative}:
 \begin{equation}
     \ES_{\alpha}(L) = \frac{1}{1-\alpha} \int_{\alpha}^1 \VaR_{u}(L) \, \dd u = \E\left[ L \;\middle|\; L > \VaR_{\alpha}(L) \right]
     \label{eq:cvar_formula}
@@ -45,6 +45,6 @@ Evaluating Equation~\eqref{eq:cvar_formula} on our empirical sample ($V_0 = \tex
 \end{itemize}
 \end{empiricalbox}
 
-The tail severity ratio $\frac{\CVaR_{0.99}}{\VaR_{0.99}} = \frac{\text{\inr}30,083.25}{\text{\inr}19,444.07} = \mathbf{1.547}$ indicates that conditional on breaching the 99th percentile, the expected loss is **$54.7\%$ greater than the $\VaR$ threshold itself**, validating the regulatory shift to Expected Shortfall.
+The tail severity ratio $\frac{\CVaR_{0.99}}{\VaR_{0.99}} = \frac{\text{\inr}30,083.25}{\text{\inr}19,444.07} = \mathbf{1.547}$ indicates that conditional on breaching the 99th percentile, the expected loss is \textbf{$54.7\%$ greater than the $\VaR$ threshold itself}, validating the regulatory shift to Expected Shortfall.
 
 \clearpage
