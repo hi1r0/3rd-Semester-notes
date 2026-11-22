@@ -279,39 +279,41 @@ os.makedirs(os.path.join("Financial Engineering & Derivatives", "project_report"
 # ------------------------------------------------------------------------------
 # FRM FIGURE 1: Return Distribution, KDE, and Normal Q-Q Plot
 # ------------------------------------------------------------------------------
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4.2), dpi=300)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 5.0), dpi=300)
 
 # Panel A: Return Histogram & Normal Curve
-ax1.hist(returns, bins=35, density=True, color='#d0d0d0', edgecolor='#222222', linewidth=0.6, label='Empirical Returns')
+ax1.hist(returns, bins=35, density=True, color='#d0d0d0', edgecolor='#222222', linewidth=0.8, label='Empirical Returns')
 x_eval = np.linspace(-0.08, 0.06, 500)
 pdf_norm = stats.norm.pdf(x_eval, mu_daily, sigma_daily)
-ax1.plot(x_eval, pdf_norm, color='#000000', linestyle='--', linewidth=1.4, label='Normal Density (23.4%)')
+ax1.plot(x_eval, pdf_norm, color='#555555', linestyle='--', linewidth=2.2, label='Normal Curve (23.4%)')
 # KDE
 kde = stats.gaussian_kde(returns)
-ax1.plot(x_eval, kde(x_eval), color='#000000', linewidth=1.8, label='Empirical KDE')
+ax1.plot(x_eval, kde(x_eval), color='#000000', linewidth=2.5, label='Empirical KDE')
 
 # VaR Cutoffs
-ax1.axvline(cutoff_param_99, color='#444444', linestyle=':', linewidth=1.3, label=f'99% Param (-{abs(cutoff_param_99)*100:.2f}%)')
-ax1.axvline(cutoff_hist_99, color='#000000', linestyle='-', linewidth=1.3, label=f'99% Hist (-{abs(cutoff_hist_99)*100:.2f}%)')
+ax1.axvline(cutoff_param_99, color='#444444', linestyle=':', linewidth=2.0, label=f'99% Param (-{abs(cutoff_param_99)*100:.2f}%)')
+ax1.axvline(cutoff_hist_99, color='#000000', linestyle='-', linewidth=2.0, label=f'99% Hist (-{abs(cutoff_hist_99)*100:.2f}%)')
 
-ax1.set_title('(a) Empirical Return Distribution vs. Normal Density', fontsize=9.5, fontweight='bold', pad=8)
-ax1.set_xlabel('Daily Log Return', fontsize=8.5)
-ax1.set_ylabel('Probability Density', fontsize=8.5)
-ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.2, loc='upper left')
-ax1.grid(True, linestyle=':')
+ax1.set_title('(a) Return Distribution vs. Normal Density', fontsize=13.0, fontweight='bold', pad=8)
+ax1.set_xlabel('Daily Log Return', fontsize=11.5, fontweight='bold')
+ax1.set_ylabel('Probability Density', fontsize=11.5, fontweight='bold')
+ax1.tick_params(axis='both', labelsize=10.5)
+ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.2, loc='upper left')
+ax1.grid(True, linestyle=':', alpha=0.7)
 ax1.set_xlim(-0.08, 0.06)
 
 # Panel B: Normal Q-Q Plot
 osm, osr = stats.probplot(returns, dist="norm")
-ax2.scatter(osm[0], osm[1], color='#444444', s=14, alpha=0.8, edgecolors='#000000', linewidth=0.5, label='Quantile Observations')
+ax2.scatter(osm[0], osm[1], color='#444444', s=24, alpha=0.85, edgecolors='#000000', linewidth=0.6, label='Quantile Observations')
 # Fit line
 slope, intercept, r_val, p_val, std_err = stats.linregress(osm[0], osm[1])
-ax2.plot(osm[0], slope * osm[0] + intercept, color='#000000', linestyle='--', linewidth=1.4, label=f'Normal Reference ($R^2={r_val**2:.3f}$)')
-ax2.set_title('(b) Normal Q-Q Plot (Fat Left Tail Deviation)', fontsize=9.5, fontweight='bold', pad=8)
-ax2.set_xlabel('Theoretical Normal Quantiles', fontsize=8.5)
-ax2.set_ylabel('Sample Quantiles', fontsize=8.5)
-ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.5, loc='upper left')
-ax2.grid(True, linestyle=':')
+ax2.plot(osm[0], slope * osm[0] + intercept, color='#000000', linestyle='--', linewidth=2.2, label=f'Normal Fit ($R^2={r_val**2:.3f}$)')
+ax2.set_title('(b) Normal Q-Q Plot (Fat-Tail Deviation)', fontsize=13.0, fontweight='bold', pad=8)
+ax2.set_xlabel('Theoretical Normal Quantiles', fontsize=11.5, fontweight='bold')
+ax2.set_ylabel('Sample Quantiles', fontsize=11.5, fontweight='bold')
+ax2.tick_params(axis='both', labelsize=10.5)
+ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.8, loc='upper left')
+ax2.grid(True, linestyle=':', alpha=0.7)
 
 plt.tight_layout()
 frm_fig1_path = os.path.join("Financial Risk Management", "project_report", "figures", "fig1_frm_diagnostics_qq.pdf")
@@ -322,22 +324,23 @@ print("Saved:", frm_fig1_path)
 # ------------------------------------------------------------------------------
 # FRM FIGURE 2: Backtesting Exception Timeline & Rolling 60-Day VaR
 # ------------------------------------------------------------------------------
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 5.4), sharex=True, dpi=300)
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10.5, 6.0), sharex=True, dpi=300)
 
 dates = df['Date'].iloc[1:].values
 # Panel A: Return Timeline & Violations
-ax1.plot(dates, returns, color='#666666', linewidth=0.8, alpha=0.8, label='Daily Log Return')
-ax1.axhline(cutoff_param_99, color='#333333', linestyle='--', linewidth=1.2, label='99% Parametric Cutoff (-3.54%)')
-ax1.axhline(cutoff_hist_99, color='#000000', linestyle='-', linewidth=1.2, label='99% Historical Cutoff (-3.96%)')
+ax1.plot(dates, returns, color='#555555', linewidth=1.1, alpha=0.85, label='Daily Log Return')
+ax1.axhline(cutoff_param_99, color='#333333', linestyle='--', linewidth=1.8, label='99% Parametric Cutoff (-3.54%)')
+ax1.axhline(cutoff_hist_99, color='#000000', linestyle='-', linewidth=1.8, label='99% Historical Cutoff (-3.96%)')
 
 # Scatter violation markers
 mask_breach = returns < cutoff_param_99
-ax1.scatter(dates[mask_breach], returns[mask_breach], color='#000000', marker='v', s=45, zorder=5, label=f'99% VaR Breaches ($x={np.sum(mask_breach)}$)')
+ax1.scatter(dates[mask_breach], returns[mask_breach], color='#000000', marker='v', s=65, zorder=5, label=f'99% VaR Breaches ($x={np.sum(mask_breach)}$)')
 
-ax1.set_title('(a) Daily Log Return Timeline with 99% VaR Violations (Kupiec Backtest)', fontsize=9.5, fontweight='bold')
-ax1.set_ylabel('Daily Log Return', fontsize=8.5)
-ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.5, loc='lower right')
-ax1.grid(True, linestyle=':')
+ax1.set_title('(a) Daily Return Timeline & 99% VaR Exceptions (Kupiec Backtest)', fontsize=12.5, fontweight='bold', pad=6)
+ax1.set_ylabel('Daily Return', fontsize=11.0, fontweight='bold')
+ax1.tick_params(axis='both', labelsize=10.0)
+ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.2, loc='lower right')
+ax1.grid(True, linestyle=':', alpha=0.7)
 
 # Panel B: Rolling 60-Day VaR Dynamics
 window = 60
@@ -346,15 +349,16 @@ rolling_param_99 = -(df['Log_Return'].rolling(window=window).mean() - 2.3263 * d
 rolling_hist_99 = -df['Log_Return'].rolling(window=window).apply(lambda w: np.percentile(w, 1.0)) * V0
 
 roll_dates = df['Date'].values
-ax2.plot(roll_dates, rolling_hist_99, color='#000000', linestyle='-', linewidth=1.4, label='60-Day Rolling Historical 99% VaR')
-ax2.plot(roll_dates, rolling_param_99, color='#555555', linestyle='--', linewidth=1.2, label='60-Day Rolling Parametric 99% VaR')
-ax2.axhline(55048.61, color='#888888', linestyle=':', label='Full Sample Parametric (Rs. 55,049)')
+ax2.plot(roll_dates, rolling_hist_99, color='#000000', linestyle='-', linewidth=2.2, label='60-Day Rolling Historical 99% VaR')
+ax2.plot(roll_dates, rolling_param_99, color='#555555', linestyle='--', linewidth=2.0, label='60-Day Rolling Parametric 99% VaR')
+ax2.axhline(55048.61, color='#888888', linestyle=':', linewidth=1.8, label='Full-Sample Parametric (Rs. 55,049)')
 
-ax2.set_title('(b) Rolling 60-Day VaR Dynamics for 1 Lot of ITC (Budget & Tax Event Clustering)', fontsize=9.5, fontweight='bold')
-ax2.set_xlabel('Trading Session Date', fontsize=8.5)
-ax2.set_ylabel('VaR Exposure (INR)', fontsize=8.5)
-ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.5, loc='upper left')
-ax2.grid(True, linestyle=':')
+ax2.set_title('(b) Rolling 60-Day VaR Dynamics for 1 Lot of ITC (Volatility Clustering)', fontsize=12.5, fontweight='bold', pad=6)
+ax2.set_xlabel('Trading Session Date', fontsize=11.0, fontweight='bold')
+ax2.set_ylabel('VaR Exposure (INR)', fontsize=11.0, fontweight='bold')
+ax2.tick_params(axis='both', labelsize=10.0)
+ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.2, loc='upper left')
+ax2.grid(True, linestyle=':', alpha=0.7)
 
 plt.tight_layout()
 frm_fig2_path = os.path.join("Financial Risk Management", "project_report", "figures", "fig2_frm_backtest_timeline.pdf")
@@ -365,31 +369,33 @@ print("Saved:", frm_fig2_path)
 # ------------------------------------------------------------------------------
 # FED FIGURE 1: 4-Panel Option Greeks Sensitivity Profiles
 # ------------------------------------------------------------------------------
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(10, 6.2), dpi=300)
+fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(10.5, 6.2), dpi=300)
 
 spots = np.linspace(240, 330, 200)
 # Panel A: Delta
 call_deltas = [bsm_pricing_and_greeks(s, 285.0, T_expiry, rf, q, sigma_ann)["delta_call"] for s in spots]
 put_deltas = [bsm_pricing_and_greeks(s, 285.0, T_expiry, rf, q, sigma_ann)["delta_put"] for s in spots]
 
-ax1.plot(spots, call_deltas, color='#000000', linestyle='-', linewidth=1.4, label=r'Call Delta $\Delta_C$')
-ax1.plot(spots, put_deltas, color='#555555', linestyle='--', linewidth=1.4, label=r'Put Delta $\Delta_P$')
-ax1.axvline(285.0, color='#888888', linestyle=':', label='ATM Strike (285)')
-ax1.set_title(r'(a) Option Delta ($\Delta$) vs. Underlying Spot Price ($S$)', fontsize=9.0, fontweight='bold')
-ax1.set_xlabel('Spot Price S (INR)', fontsize=8.0)
-ax1.set_ylabel('Delta', fontsize=8.0)
-ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.2)
-ax1.grid(True, linestyle=':')
+ax1.plot(spots, call_deltas, color='#000000', linestyle='-', linewidth=2.4, label=r'Call Delta $\Delta_C$')
+ax1.plot(spots, put_deltas, color='#555555', linestyle='--', linewidth=2.4, label=r'Put Delta $\Delta_P$')
+ax1.axvline(285.0, color='#888888', linestyle=':', linewidth=1.8, label='ATM Strike (285)')
+ax1.set_title('(a) Option Delta vs. Spot Price (S)', fontsize=12.5, fontweight='bold', pad=6)
+ax1.set_xlabel('Spot Price S (INR)', fontsize=11.0, fontweight='bold')
+ax1.set_ylabel('Delta', fontsize=11.0, fontweight='bold')
+ax1.tick_params(axis='both', labelsize=10.0)
+ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.5, loc='center left')
+ax1.grid(True, linestyle=':', alpha=0.7)
 
 # Panel B: Gamma
 gammas = [bsm_pricing_and_greeks(s, 285.0, T_expiry, rf, q, sigma_ann)["gamma"] for s in spots]
-ax2.plot(spots, gammas, color='#000000', linestyle='-', linewidth=1.4, label=r'Option Gamma $\Gamma$')
-ax2.axvline(285.0, color='#888888', linestyle=':', label='ATM Strike (285)')
-ax2.set_title(r'(b) Option Gamma ($\Gamma$) Curvature vs. Spot Price ($S$)', fontsize=9.0, fontweight='bold')
-ax2.set_xlabel('Spot Price S (INR)', fontsize=8.0)
-ax2.set_ylabel(r'Gamma $\Gamma$ (per INR$^2$)', fontsize=8.0)
-ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.2)
-ax2.grid(True, linestyle=':')
+ax2.plot(spots, gammas, color='#000000', linestyle='-', linewidth=2.4, label=r'Option Gamma $\Gamma$')
+ax2.axvline(285.0, color='#888888', linestyle=':', linewidth=1.8, label='ATM Strike (285)')
+ax2.set_title('(b) Option Gamma vs. Spot Price (S)', fontsize=12.5, fontweight='bold', pad=6)
+ax2.set_xlabel('Spot Price S (INR)', fontsize=11.0, fontweight='bold')
+ax2.set_ylabel('Gamma (per INR$^2$)', fontsize=11.0, fontweight='bold')
+ax2.tick_params(axis='both', labelsize=10.0)
+ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.5, loc='upper right')
+ax2.grid(True, linestyle=':', alpha=0.7)
 
 # Panel C: Theta Time Decay
 days_vec = np.linspace(1, 42, 100)
@@ -397,26 +403,28 @@ t_vec = days_vec / 365.0
 theta_calls = [bsm_pricing_and_greeks(285.0, 285.0, t, rf, q, sigma_ann)["theta_call"] for t in t_vec]
 theta_puts = [bsm_pricing_and_greeks(285.0, 285.0, t, rf, q, sigma_ann)["theta_put"] for t in t_vec]
 
-ax3.plot(days_vec, theta_calls, color='#000000', linestyle='-', linewidth=1.4, label=r'Call Theta $\Theta_C$')
-ax3.plot(days_vec, theta_puts, color='#555555', linestyle='--', linewidth=1.4, label=r'Put Theta $\Theta_P$')
-ax3.set_title(r'(c) Calendar Theta ($\Theta$) Decay vs. Days to Expiry ($T$)', fontsize=9.0, fontweight='bold')
-ax3.set_xlabel('Days Remaining to Expiry (Days)', fontsize=8.0)
-ax3.set_ylabel('Theta (INR / Calendar Day)', fontsize=8.0)
-ax3.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.2)
-ax3.grid(True, linestyle=':')
+ax3.plot(days_vec, theta_calls, color='#000000', linestyle='-', linewidth=2.4, label=r'Call Theta $\Theta_C$')
+ax3.plot(days_vec, theta_puts, color='#555555', linestyle='--', linewidth=2.4, label=r'Put Theta $\Theta_P$')
+ax3.set_title('(c) Calendar Theta Decay vs. Days to Expiry (T)', fontsize=12.5, fontweight='bold', pad=6)
+ax3.set_xlabel('Days Remaining to Expiry (Days)', fontsize=11.0, fontweight='bold')
+ax3.set_ylabel('Theta (INR / Day)', fontsize=11.0, fontweight='bold')
+ax3.tick_params(axis='both', labelsize=10.0)
+ax3.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.5, loc='lower right')
+ax3.grid(True, linestyle=':', alpha=0.7)
 
-# Panel D: Vega vs Volatility
-vols = np.linspace(0.10, 0.45, 100)
-vegas = [bsm_pricing_and_greeks(285.0, 285.0, T_expiry, rf, q, v)["vega"] for v in vols]
-ax4.plot(vols * 100, vegas, color='#000000', linestyle='-', linewidth=1.4, label=r'Option Vega $\nu$ (ATM 285)')
-ax4.axvline(sigma_ann * 100, color='#888888', linestyle=':', label=f'Historical Vol ({sigma_ann*100:.1f}%)')
-ax4.set_title(r'(d) Option Vega ($\nu$) vs. Annualized Volatility ($\sigma$)', fontsize=9.0, fontweight='bold')
-ax4.set_xlabel('Annualized Volatility (%)', fontsize=8.0)
-ax4.set_ylabel('Vega (INR per +1% Vol)', fontsize=8.0)
-ax4.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.2)
-ax4.grid(True, linestyle=':')
+# Panel D: Vega vs Spot Price (S) -> Clean, wide bell curve!
+vegas_spot = [bsm_pricing_and_greeks(s, 285.0, T_expiry, rf, q, sigma_ann)["vega"] for s in spots]
+ax4.plot(spots, vegas_spot, color='#000000', linestyle='-', linewidth=2.4, label=r'Option Vega $\nu$ (ATM 285)')
+ax4.axvline(285.0, color='#888888', linestyle=':', linewidth=1.8, label='ATM Strike (285)')
+ax4.set_title('(d) Option Vega vs. Spot Price (S)', fontsize=12.5, fontweight='bold', pad=6)
+ax4.set_xlabel('Spot Price S (INR)', fontsize=11.0, fontweight='bold')
+ax4.set_ylabel('Vega (INR per +1% Vol)', fontsize=11.0, fontweight='bold')
+ax4.tick_params(axis='both', labelsize=10.0)
+ax4.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.5, loc='upper right')
+ax4.grid(True, linestyle=':', alpha=0.7)
 
 plt.tight_layout()
+fig.subplots_adjust(wspace=0.28, hspace=0.38)
 fed_fig1_path = os.path.join("Financial Engineering & Derivatives", "project_report", "figures", "fig1_fed_greeks_surface.pdf")
 plt.savefig(fed_fig1_path, bbox_inches='tight')
 plt.close()
@@ -425,20 +433,21 @@ print("Saved:", fed_fig1_path)
 # ------------------------------------------------------------------------------
 # FED FIGURE 2: Implied Volatility Smile / Skew & Multi-Strategy Payoffs
 # ------------------------------------------------------------------------------
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4.4), dpi=300)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 5.0), dpi=300)
 
 # Panel A: Implied Volatility Skew
 iv_strikes = [270.0, 275.0, 280.0, 285.0, 290.0, 295.0, 300.0, 305.0]
 iv_market = [27.42, 25.88, 24.65, 23.40, 22.35, 21.60, 21.10, 20.80]
 
-ax1.plot(iv_strikes, iv_market, color='#000000', marker='o', markersize=4.5, linestyle='-', linewidth=1.4, label='Market Implied Volatility (IV)')
-ax1.axhline(sigma_ann * 100, color='#666666', linestyle='--', linewidth=1.2, label=f'Historical Volatility ({sigma_ann*100:.2f}%)')
-ax1.axvline(285.0, color='#999999', linestyle=':', label='ATM Strike ($S_0=285$)')
-ax1.set_title('(a) Empirical Implied Volatility Skew (ITC Options)', fontsize=9.5, fontweight='bold', pad=8)
-ax1.set_xlabel('Strike Price K (INR)', fontsize=8.5)
-ax1.set_ylabel('Implied Volatility (%)', fontsize=8.5)
-ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.5)
-ax1.grid(True, linestyle=':')
+ax1.plot(iv_strikes, iv_market, color='#000000', marker='o', markersize=6.0, linestyle='-', linewidth=2.4, label='Market Implied Volatility (IV)')
+ax1.axhline(sigma_ann * 100, color='#666666', linestyle='--', linewidth=2.0, label=f'Historical Volatility ({sigma_ann*100:.2f}%)')
+ax1.axvline(285.0, color='#999999', linestyle=':', linewidth=1.8, label='ATM Strike ($S_0=285$)')
+ax1.set_title('(a) Empirical Implied Volatility Skew', fontsize=13.0, fontweight='bold', pad=8)
+ax1.set_xlabel('Strike Price K (INR)', fontsize=11.5, fontweight='bold')
+ax1.set_ylabel('Implied Volatility (%)', fontsize=11.5, fontweight='bold')
+ax1.tick_params(axis='both', labelsize=10.5)
+ax1.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.5)
+ax1.grid(True, linestyle=':', alpha=0.7)
 
 # Panel B: Terminal Expiry Net Payoff Profiles
 st_range = np.linspace(240, 330, 200)
@@ -446,28 +455,27 @@ st_range = np.linspace(240, 330, 200)
 payoff_unhedged = st_range - S0
 # ATM Protective Put (K=285, Prem=8.86)
 payoff_atm_put = (st_range - S0) + np.maximum(285.0 - st_range, 0.0) - 8.86
-# OTM Protective Put (K=280, Prem=6.82)
-payoff_otm_put = (st_range - S0) + np.maximum(280.0 - st_range, 0.0) - 6.82
 # Zero-Cost Collar (Long 280 Put Prem=6.82, Short 295 Call Prem=4.32, Net debit = 2.50)
 payoff_collar = (st_range - S0) + np.maximum(280.0 - st_range, 0.0) - np.maximum(st_range - 295.0, 0.0) - 2.50
 # Covered Call (Short 295 Call Prem=4.32)
 payoff_cov_call = (st_range - S0) - np.maximum(st_range - 295.0, 0.0) + 4.32
 
-ax2.plot(st_range, payoff_unhedged, color='#888888', linestyle=':', linewidth=1.3, label='Unhedged Equity')
-ax2.plot(st_range, payoff_atm_put, color='#000000', linestyle='-', linewidth=1.5, label='ATM Put (285) [Max Loss -8.86]')
-ax2.plot(st_range, payoff_collar, color='#222222', linestyle='-.', linewidth=1.5, label='Zero-Cost Collar (280/295)')
-ax2.plot(st_range, payoff_cov_call, color='#555555', linestyle='--', linewidth=1.3, label='Covered Call (295)')
+ax2.plot(st_range, payoff_unhedged, color='#888888', linestyle=':', linewidth=2.0, label='Unhedged Equity')
+ax2.plot(st_range, payoff_atm_put, color='#000000', linestyle='-', linewidth=2.4, label='ATM Put (285) [Floor -8.86]')
+ax2.plot(st_range, payoff_collar, color='#222222', linestyle='-.', linewidth=2.4, label='Zero-Cost Collar (280/295)')
+ax2.plot(st_range, payoff_cov_call, color='#555555', linestyle='--', linewidth=2.0, label='Covered Call (295)')
 
 # 10d 99% VaR tail line (S_T = 249.36)
-ax2.axvline(249.36, color='#000000', linestyle='-', linewidth=0.9)
-ax2.text(250.0, -32, '10d 99% VaR\n(ST=249.36)', fontsize=6.8, color='#000000')
+ax2.axvline(249.36, color='#000000', linestyle='-', linewidth=1.2)
+ax2.text(250.5, -34, '10d 99% VaR\n(ST=249.36)', fontsize=8.5, fontweight='bold', color='#000000')
 
-ax2.axhline(0, color='#aaaaaa', linewidth=0.6)
-ax2.set_title('(b) Net Profit / Loss Profiles at Expiry ($S_T$)', fontsize=9.5, fontweight='bold', pad=8)
-ax2.set_xlabel('Underlying Spot Price at Expiry (INR)', fontsize=8.5)
-ax2.set_ylabel('Net Profit / Loss per Share (INR)', fontsize=8.5)
-ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#888888', fontsize=7.2, loc='upper left')
-ax2.grid(True, linestyle=':')
+ax2.axhline(0, color='#aaaaaa', linewidth=0.8)
+ax2.set_title('(b) Net Profit / Loss Profiles at Expiry ($S_T$)', fontsize=13.0, fontweight='bold', pad=8)
+ax2.set_xlabel('Spot Price at Expiry (INR)', fontsize=11.5, fontweight='bold')
+ax2.set_ylabel('Net P&L per Share (INR)', fontsize=11.5, fontweight='bold')
+ax2.tick_params(axis='both', labelsize=10.5)
+ax2.legend(frameon=True, facecolor='#ffffff', edgecolor='#666666', fontsize=9.2, loc='upper left')
+ax2.grid(True, linestyle=':', alpha=0.7)
 
 plt.tight_layout()
 fed_fig2_path = os.path.join("Financial Engineering & Derivatives", "project_report", "figures", "fig2_fed_skew_payoffs.pdf")

@@ -16,8 +16,8 @@ Table~\ref{tab:empirical_greeks} documents the empirical Option Greeks evaluated
     \setlength{\tabcolsep}{2.2pt}
     \caption{Empirical Greeks Decomposition per Share and for 1 NSE Lot of ITC Limited ($S_0 = \text{\inr}285.00$, $r = 6.65\%$, $q = 5.09\%$, $\sigma = 23.40\%$, $T = 42/365$).}
     \label{tab:empirical_greeks}
-    \vspace{0.2em}
-    \renewcommand{\arraystretch}{1.08}
+    \vspace{0.1em}
+    \renewcommand{\arraystretch}{1.02}
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}c c r r r r r r}
         \toprule
         \textbf{Strike} & \textbf{Type} & \textbf{Premium} & \textbf{Delta ($\bm{\Delta}$)} & \textbf{Gamma ($\bm{\Gamma}$)} & \textbf{Vega ($\bm{\nu}$)} & \textbf{$\bm{\Theta}$/Day} & \textbf{Lot $\bm{\Delta}$} \\
@@ -34,12 +34,14 @@ Table~\ref{tab:empirical_greeks} documents the empirical Option Greeks evaluated
     \end{tabular*}
 \end{table}
 
+\vspace{-0.5em}
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.95\textwidth, height=5.2cm, keepaspectratio]{figures/fig1_fed_greeks_surface.pdf}
-    \caption{4-Panel Sensitivity Profile of Option Greeks for ITC Limited. (A) Delta profile across spot prices; (B) Gamma curvature peaking sharply at-the-money ($S_0 = \text{\inr}285$); (C) Theta time decay per calendar day; (D) Vega sensitivity across annualized volatility.}
+    \includegraphics[width=\textwidth, height=7.2cm, keepaspectratio]{figures/fig1_fed_greeks_surface.pdf}
+    \caption{4-Panel Sensitivity Profile of Option Greeks for ITC Limited. (A) Delta profile across spot prices; (B) Gamma curvature peaking sharply at-the-money ($S_0 = \text{\inr}285$); (C) Theta time decay per calendar day; (D) Vega sensitivity across spot prices peaking at-the-money.}
     \label{fig:fed_greeks_surface}
 \end{figure}
+\vspace{-0.5em}
 
 \subsection{Risk Sensitivity Analysis}
 
